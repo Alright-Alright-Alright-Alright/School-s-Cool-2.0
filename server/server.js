@@ -4,7 +4,6 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require('path')
 
 // MongoDB connection =====================================
 
@@ -56,7 +55,8 @@ app.use(
 
 //routes
 // ==========================================
-
+const authRoutes = require('./routes/authRoutes');
+app.use('/api', authRoutes);
 
 //Server =====================================
 const Server = app.listen(process.env.PORT, () =>

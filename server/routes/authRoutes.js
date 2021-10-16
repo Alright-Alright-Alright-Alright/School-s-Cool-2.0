@@ -8,13 +8,10 @@ const {
   logout,
 } = require("../controllers/authControllers");
 
-const {
-    isEmail,
-    isEmpty,
-  } = require("../validators/authValidators");
-
 //pass on controllers
-authRoutes.post("/register", register, isEmail, isEmpty);
+authRoutes.post("/register", register);
 authRoutes.post("/login", login);
 authRoutes.get("/loggedIn", loggedIn);
 authRoutes.get("/logout", logout);
+
+module.exports = authRoutes;
