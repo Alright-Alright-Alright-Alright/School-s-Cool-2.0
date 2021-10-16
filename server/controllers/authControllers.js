@@ -85,35 +85,27 @@ exports.login = (req, res) => {
     return;
   }
 
-  User.findOne(({ email }, err) => {
-    if (err || !email) {
-      return res.status(400).json({
-        message: "User with that email does not exist. Please register",
-      });
+  passport.authenticate("local", (err, user, failureDetails) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong authenticating user" });
+      return;
     }
 
-    passport.authenticate("local", (err, user, failureDetails) => {
+    if (!user) {
+      res.status(401).json(failureDetails);
+      return;
+    }
+
+    req.login(user, (err) => {
       if (err) {
-        res
-          .status(500)
-          .json({ message: "Something went wrong authenticating user" });
+        res.status(500).json({ message: "Session save went bad." });
         return;
       }
-
-      if (!user) {
-        res.status(401).json(failureDetails);
-        return;
-      }
-
-      req.login(user, (err) => {
-        if (err) {
-          res.status(500).json({ message: "Session save went bad." });
-          return;
-        }
-        res.status(200).json(user);
-      });
-    })(req, res);
-  });
+      res.status(200).json(user);
+    });
+  })(req, res);
 };
 
 // Keep user logged in
