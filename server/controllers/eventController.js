@@ -1,7 +1,7 @@
 const { createEvent } = require("../services/eventService");
 
+// geting info from FE
 const createNewEvent = async (req, res, next) => {
-  // geting info from FE
   const {
     eventName,
     eventDateStart,
@@ -22,7 +22,6 @@ const createNewEvent = async (req, res, next) => {
       eventLocation,
       eventBannerImage
     );
-
     res.sendStatus(201);
     next();
   } catch (e) {
