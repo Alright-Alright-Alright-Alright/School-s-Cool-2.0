@@ -1,8 +1,7 @@
-const { eventService } = require("../services/eventService");
-
-const { createEvent } = eventService;
+const { createEvent } = require("../services/eventService");
 
 const createNewEvent = async (req, res, next) => {
+  // geting info from FE
   const {
     eventName,
     eventDateStart,
@@ -12,7 +11,7 @@ const createNewEvent = async (req, res, next) => {
     eventBannerImage,
   } = req.body;
   const { _id } = req.user;
-
+// Passing info to services
   try {
     await createEvent(
       _id,
@@ -28,7 +27,7 @@ const createNewEvent = async (req, res, next) => {
     next();
   } catch (e) {
     console.log(e.message);
-    res.sendStatus(500) && next(error);
+    res.sendStatus(500) && next(e);
   }
 };
 

@@ -1,5 +1,6 @@
 const { createEventDb } = require("../db/eventDb");
 
+// getting info from controller
 const createEvent = async (
   _id,
   eventName,
@@ -9,6 +10,7 @@ const createEvent = async (
   eventLocation,
   eventBannerImage
 ) => {
+  // passing info to the DB
   try {
     return await createEventDb(
       _id,

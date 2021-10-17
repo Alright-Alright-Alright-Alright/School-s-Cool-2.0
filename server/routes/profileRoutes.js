@@ -11,8 +11,8 @@ const {
 
 //pass on controllers
 profileRoutes.get("/profile/:userid", getUser);
-profileRoutes.post("/profile/:userid", updateUser);
+profileRoutes.put("/profile/:userid", updateUser);
 profileRoutes.post("/upload", files, fileUpload);
-profileRoutes.get("/profile/:userid/delete", deleteUser);
+profileRoutes.delete("/profile/:userid/delete", deleteUser);
 
 module.exports = profileRoutes;
