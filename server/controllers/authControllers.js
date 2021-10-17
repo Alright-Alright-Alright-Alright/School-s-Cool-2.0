@@ -1,7 +1,7 @@
 const User = require("../models/User-model");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const { isEmail, isEmpty } = require("../validators/authValidators");
+const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { transporter } = require("../configs/nodemailer");
 
 // Register
