@@ -65,7 +65,8 @@ exports.register = (req, res) => {
         to: newUser.email,
         from: process.env.SCHOOLSCOOL_EMAIL,
         subject: "Succefull register!",
-        html: `<p>Welcome to School's Cool ${newUser.firstName} ${newUser.lastName}, <br><br> Please login to use the web application. <br><br> Thank you.</p>`,
+        html: `<p>Welcome to School's Cool ${newUser.firstName} ${newUser.lastName}, <br>
+        <br> Please login to use the web application. <br><br> Thank you.</p>`,
       });
     });
   });

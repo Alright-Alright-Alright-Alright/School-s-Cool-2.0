@@ -25,7 +25,7 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, nex
     }
 
     if (!foundUser) {
-      next(null, false, { message: 'Incorrect email.' });
+      next(null, false, { message: 'Email does not exists.' });
       return;
     }
 
