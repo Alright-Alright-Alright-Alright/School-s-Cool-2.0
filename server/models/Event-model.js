@@ -18,17 +18,17 @@ const eventSchema = new Schema(
       trim: true,
       required: [true, "Event name is required."],
     },
-    dateStart: {
+    eventDateStart: {
       type: Date,
       required: [true, "Date is required."],
     },
-    dateEnd: {
+    eventDateEnd: {
       type: Date,
     },
-    location: {
+    eventLocation: {
       type: String,
     },
-    description:{
+    eventDescription:{
         type: String
     },
     eventBannerImage: {
