@@ -2,7 +2,6 @@ const { getAllEventsDb, createEventDb } = require("../db/eventDb");
 
 // getting info from controller
 const getAllEventsService = async () => {
-    console.log("hello2")
   try {
     return await getAllEventsDb();
   } catch (e) {

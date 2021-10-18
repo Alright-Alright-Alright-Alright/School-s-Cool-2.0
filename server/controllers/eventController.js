@@ -1,13 +1,14 @@
-const { getAllEventsService, createEventService } = require("../services/eventService");
+const {
+  getAllEventsService,
+  createEventService,
+} = require("../services/eventService");
 
 // geting info from FE
 
 const getAllEvents = async (req, res, next) => {
-    console.log("hello")
   try {
-    await getAllEventsService();
-    res.status(201);
-    next();
+    const events = await getAllEventsService();
+    return res.status(201).json(events);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -42,6 +43,6 @@ const createNewEvent = async (req, res, next) => {
 };
 
 module.exports = {
-    getAllEvents,
+  getAllEvents,
   createNewEvent,
 };
