@@ -1,6 +1,7 @@
 const {
   getAllEventsService,
   createEventService,
+  getSingleEventService,
 } = require("../services/eventService");
 
 // geting info from FE
@@ -42,7 +43,19 @@ const createNewEvent = async (req, res, next) => {
   }
 };
 
+const getSingleEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  try {
+    const singleEvent = await getSingleEventService(eventId);
+    return res.status(201).json(singleEvent);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
 module.exports = {
   getAllEvents,
   createNewEvent,
+  getSingleEvent,
 };

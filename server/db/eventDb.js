@@ -34,7 +34,16 @@ const createEventDb = async (
   }
 };
 
+const getSingleEventDb = async (eventId) => {
+  try {
+    return await Event.find({ eventId }).populate("attendees");
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 module.exports = {
   getAllEventsDb,
   createEventDb,
+  getSingleEventDb,
 };
