@@ -1,6 +1,18 @@
-const { createEvent } = require("../services/eventService");
+const { getAllEventsService, createEventService } = require("../services/eventService");
 
 // geting info from FE
+
+const getAllEvents = async (req, res, next) => {
+    console.log("hello")
+  try {
+    await getAllEventsService();
+    res.status(201);
+    next();
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
 const createNewEvent = async (req, res, next) => {
   const {
     eventName,
@@ -11,9 +23,9 @@ const createNewEvent = async (req, res, next) => {
     eventBannerImage,
   } = req.body;
   const { _id } = req.user;
-// Passing info to services
+  // Passing info to services
   try {
-    await createEvent(
+    await createEventService(
       _id,
       eventName,
       eventDateStart,
@@ -22,14 +34,14 @@ const createNewEvent = async (req, res, next) => {
       eventLocation,
       eventBannerImage
     );
-    res.sendStatus(201);
+    res.status(201);
     next();
   } catch (e) {
-    console.log(e.message);
-    res.sendStatus(500) && next(e);
+    res.status(500).json({ message: e.message }) && next(e);
   }
 };
 
 module.exports = {
+    getAllEvents,
   createNewEvent,
 };
