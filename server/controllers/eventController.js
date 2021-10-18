@@ -4,6 +4,7 @@ const {
   getSingleEventService,
 } = require("../services/eventService");
 
+const { sendEventInviteEmailService } = require("../services/emailServices")
 // geting info from FE
 
 const getAllEvents = async (req, res, next) => {
@@ -37,7 +38,9 @@ const createNewEvent = async (req, res, next) => {
       eventBannerImage
     );
     res.status(201);
+
     next();
+
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -46,9 +49,15 @@ const createNewEvent = async (req, res, next) => {
 const getSingleEvent = async (req, res, next) => {
   const { eventId } = req.params;
 
+  const userEmail = "dirk@dozijn13.nl"
+
   try {
     const singleEvent = await getSingleEventService(eventId);
+    
+    await sendEventInviteEmailService(userEmail, singleEvent)
+
     return res.status(201).json(singleEvent);
+
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
