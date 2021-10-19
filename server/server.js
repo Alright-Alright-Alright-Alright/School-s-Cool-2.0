@@ -58,8 +58,8 @@ app.use(
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
 
-const profileRoutes = require('./routes/profileRoutes');
-app.use('/api', profileRoutes);
+const userRoutes = require('./routes/userRoutes');
+app.use('/api', userRoutes);
 
 const eventRoutes = require('./routes/eventRoutes');
 app.use('/api', eventRoutes);

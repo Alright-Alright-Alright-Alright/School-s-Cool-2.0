@@ -1,6 +1,21 @@
-const { createEvent } = require("../services/eventService");
+const {
+  getAllEventsService,
+  createEventService,
+  getSingleEventService,
+} = require("../services/eventService");
 
+const { sendEventInviteEmailService } = require("../services/emailServices")
 // geting info from FE
+
+const getAllEvents = async (req, res, next) => {
+  try {
+    const events = await getAllEventsService();
+    return res.status(201).json(events);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
 const createNewEvent = async (req, res, next) => {
   const {
     eventName,
@@ -11,9 +26,9 @@ const createNewEvent = async (req, res, next) => {
     eventBannerImage,
   } = req.body;
   const { _id } = req.user;
-// Passing info to services
+  // Passing info to services
   try {
-    await createEvent(
+    await createEventService(
       _id,
       eventName,
       eventDateStart,
@@ -22,14 +37,34 @@ const createNewEvent = async (req, res, next) => {
       eventLocation,
       eventBannerImage
     );
-    res.sendStatus(201);
+    res.status(201);
+
     next();
+
   } catch (e) {
-    console.log(e.message);
-    res.sendStatus(500) && next(e);
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const getSingleEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  const userEmail = "dirk@dozijn13.nl"
+
+  try {
+    const singleEvent = await getSingleEventService(eventId);
+    
+    await sendEventInviteEmailService(userEmail, singleEvent)
+
+    return res.status(201).json(singleEvent);
+
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
   }
 };
 
 module.exports = {
+  getAllEvents,
   createNewEvent,
+  getSingleEvent,
 };

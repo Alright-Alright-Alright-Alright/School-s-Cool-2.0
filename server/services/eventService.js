@@ -1,7 +1,15 @@
-const { createEventDb } = require("../db/eventDb");
+const { getAllEventsDb, createEventDb, getSingleEventDb } = require("../db/eventDb");
 
 // getting info from controller
-const createEvent = async (
+const getAllEventsService = async () => {
+  try {
+    return await getAllEventsDb();
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const createEventService = async (
   _id,
   eventName,
   eventDateStart,
@@ -26,6 +34,16 @@ const createEvent = async (
   }
 };
 
+const getSingleEventService = async (eventId) => {
+    try {
+        return await getSingleEventDb(eventId);
+      } catch (e) {
+        throw new Error(e.message);
+      }
+};
+
 module.exports = {
-  createEvent,
+  getAllEventsService,
+  createEventService,
+  getSingleEventService
 };
