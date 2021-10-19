@@ -34,9 +34,17 @@ const createEventDb = async (
   }
 };
 
-const getSingleEventDb = async (eventId) => {
+const getEventDb = async (eventId) => {
   try {
-    return await Event.find({ eventId }).populate("attendees");
+    return await Event.find({ _id: eventId }).populate("attendees", "firstName");
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const updateEventDb = async (eventId, data) => {
+  try {
+    return await Event.findByIdAndUpdate(eventId, data, { new: true });
   } catch (e) {
     throw new Error(e.message);
   }
@@ -45,5 +53,6 @@ const getSingleEventDb = async (eventId) => {
 module.exports = {
   getAllEventsDb,
   createEventDb,
-  getSingleEventDb,
+  getEventDb,
+  updateEventDb,
 };

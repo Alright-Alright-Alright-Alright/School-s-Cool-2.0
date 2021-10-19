@@ -1,10 +1,11 @@
 const {
   getAllEventsService,
   createEventService,
-  getSingleEventService,
+  getEventService,
+  updateEventService
 } = require("../services/eventService");
 
-const { sendEventInviteEmailService } = require("../services/emailServices")
+const { sendEventInviteEmailService } = require("../services/emailServices");
 // geting info from FE
 
 const getAllEvents = async (req, res, next) => {
@@ -40,24 +41,66 @@ const createNewEvent = async (req, res, next) => {
     res.status(201);
 
     next();
-
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
 };
 
-const getSingleEvent = async (req, res, next) => {
+const getEvent = async (req, res, next) => {
   const { eventId } = req.params;
-
-  const userEmail = "dirk@dozijn13.nl"
+  const { userEmail } = req.body;
 
   try {
-    const singleEvent = await getSingleEventService(eventId);
-    
-    await sendEventInviteEmailService(userEmail, singleEvent)
-
+    const singleEvent = await getEventService(eventId);
+    await sendEventInviteEmailService(userEmail, singleEvent);
     return res.status(201).json(singleEvent);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
 
+const updateEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  try {
+    const updatedEvent = await updateEventService(eventId, req.body);
+    return res.status(201).json(updatedEvent);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const joinEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  try {
+    await joinEventService(eventId);
+
+    return res.status(201).json();
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const leaveEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  try {
+    await leaveEventService(eventId);
+
+    return res.status(201).json();
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const deleteEvent = async (req, res, next) => {
+  const { eventId } = req.params;
+
+  try {
+    await deleteEventService(eventId);
+
+    return res.status(201).json();
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -66,5 +109,9 @@ const getSingleEvent = async (req, res, next) => {
 module.exports = {
   getAllEvents,
   createNewEvent,
-  getSingleEvent,
+  getEvent,
+  updateEvent,
+  joinEvent,
+  leaveEvent,
+  deleteEvent,
 };
