@@ -8,14 +8,13 @@ exports.newUser = async (firstName, lastName, email, password) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);
 
-    const newUser = await createNewUser(firstName, lastName, email, hashPass);
-    console.log(newUser);
+    await createNewUser(firstName, lastName, email, hashPass)
 
     transporter.sendMail({
-      to: newUser.email,
+      to: email,
       from: process.env.SCHOOLSCOOL_EMAIL,
       subject: "Succefull register!",
-      html: `<p>Welcome to School's Cool ${newUser.firstName} ${newUser.lastName}, <br>
+      html: `<p>Welcome to School's Cool ${firstName} ${lastName}, <br>
                   <br> Please login to use the web application. <br><br> Thank you.</p>`,
     });
   } catch (error) {
