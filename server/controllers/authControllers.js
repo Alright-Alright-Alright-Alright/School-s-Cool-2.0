@@ -1,11 +1,9 @@
-const User = require("../models/User-model");
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
-const { transporter } = require("../configs/nodemailer");
+const { newUser } = require("../services/authServices");
+const passport = require("passport");
 
 // Register
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (isEmpty(email)) {
@@ -28,48 +26,12 @@ exports.register = (req, res) => {
     return;
   }
 
-  User.findOne({ email }, (err, foundUser) => {
-    if (err) {
-      res.status(500).json({ message: "Username check went bad." });
-      return;
-    }
-
-    if (foundUser) {
-      res.status(400).json({ message: "This email is already taken" });
-      return;
-    }
-
-    const salt = bcrypt.genSaltSync(10);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    const newUser = new User({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: hashPass,
-    });
-
-    newUser.save((err) => {
-      if (err) {
-        console.log(err);
-        res
-          .status(500)
-          .json({ message: "Saving user to database went wrong." });
-        return;
-      }
-      res
-        .status(200)
-        .json({ message: "signup success! please login.", newUser });
-
-      transporter.sendMail({
-        to: newUser.email,
-        from: process.env.SCHOOLSCOOL_EMAIL,
-        subject: "Succefull register!",
-        html: `<p>Welcome to School's Cool ${newUser.firstName} ${newUser.lastName}, <br>
-        <br> Please login to use the web application. <br><br> Thank you.</p>`,
-      });
-    });
-  });
+  try {
+    await newUser(firstName, lastName, email, password);
+    res.status(200).json({ message: "Registration sucessfull, please login" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 // Login
