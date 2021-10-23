@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const { transporter } = require("../configs/nodemailer");
 const { createNewUser } = require("../db/authDb");
 

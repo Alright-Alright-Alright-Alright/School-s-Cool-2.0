@@ -1,5 +1,6 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
+const passport = require("passport");
 
 // Register
 exports.register = async (req, res) => {
