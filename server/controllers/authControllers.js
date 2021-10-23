@@ -26,10 +26,10 @@ exports.register = async (req, res) => {
   }
 
   try {
-    let sucess = await newUser(firstName, lastName, email, password)
-    res.status(200).json({ message: sucess});
+    let sucess = await newUser(firstName, lastName, email, password);
+    res.status(200).json({ message: sucess });
   } catch (error) {
-    res.status(500).json({message: error})
+    res.status(500).json({ message: error.message });
   }
 };
 
