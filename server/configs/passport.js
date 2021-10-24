@@ -1,7 +1,8 @@
-const User          = require('../models/User-model');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt        = require('bcryptjs'); 
-const passport      = require('passport');
+const User = require("../models/User-model");
+const LocalStrategy = require("passport-local").Strategy;
+const JwtStrategy = require("passport-jwt").Strategy;
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 passport.serializeUser((loggedInUser, cb) => {
   cb(null, loggedInUser._id);
@@ -17,23 +18,53 @@ passport.deserializeUser((userIdFromSession, cb) => {
   });
 });
 
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, next) => {
-  User.findOne({ email }, (err, foundUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
+cookieExtrator = (req) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies["access_token"];
+  }
+  return token;
+};
 
-    if (!foundUser) {
-      next(null, false, { message: 'Email does not exists.' });
-      return;
+// Authorization
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: cookieExtrator,
+      secretOrKey: process.env.JWT_SECRETORKEY,
+    },
+    (payload, done) => {
+      User.findById({ _id: payload.sub }, (err, user) => {
+        if (err) {
+          return done(err, false);
+        }
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      });
     }
+  )
+);
 
-    if (!bcrypt.compareSync(password, foundUser.password)) {
-      next(null, false, { message: 'Incorrect password.' });
-      return;
-    }
+// Authentication
+passport.use(
+  new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    User.findOne({ email }, (err, foundUser) => {
+      if (err) {
+        return done(err);
+      }
 
-    next(null, foundUser);
-  });
-}));
+      if (!foundUser) {
+        return done(null, false, { message: "Email does not exists." });
+      }
+
+      if (!bcrypt.compareSync(password, foundUser.password)) {
+        return done(null, false, { message: "Incorrect password." });
+      }
+
+      done(null, foundUser);
+    });
+  })
+);

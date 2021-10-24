@@ -2,7 +2,7 @@ const {
   getAllEventsService,
   createEventService,
   getEventService,
-  updateEventService
+  updateEventService,
 } = require("../services/eventService");
 
 const { sendEventInviteEmailService } = require("../services/emailServices");
@@ -52,7 +52,11 @@ const getEvent = async (req, res, next) => {
 
   try {
     const singleEvent = await getEventService(eventId);
-    await sendEventInviteEmailService(userEmail, singleEvent);
+    await sendEventInviteEmailService(
+      userEmail,
+      "You've been invited",
+      "Hello, <br> Please accept my invitation for this event."
+    );
     return res.status(201).json(singleEvent);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);

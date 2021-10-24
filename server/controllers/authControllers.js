@@ -1,6 +1,6 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
-const passport = require("passport");
+const { passportAuthenticate } = require("../middleware/passportMiddleware")
 
 // Register
 exports.register = async (req, res) => {
@@ -36,40 +36,20 @@ exports.register = async (req, res) => {
 
 // Login
 exports.login = (req, res) => {
-  const { email, password } = req.body;
+    const { email, password } = req.body;
 
-  if (isEmpty(email)) {
-    res.status(400).json({ message: "Email must not be empty" });
-    return;
-  }
-
-  if (isEmpty(password)) {
-    res.status(400).json({ message: "Password must not be empty" });
-    return;
-  }
-
-  passport.authenticate("local", (err, user, failureDetails) => {
-    if (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong authenticating user" });
+    if (isEmpty(email)) {
+      res.status(400).json({ message: "Email must not be empty" });
       return;
     }
 
-    if (!user) {
-      res.status(401).json(failureDetails);
+    if (isEmpty(password)) {
+      res.status(400).json({ message: "Password must not be empty" });
       return;
     }
 
-    req.login(user, (err) => {
-      if (err) {
-        res.status(500).json({ message: "Session save went bad." });
-        return;
-      }
-      res.status(200).json(user);
-    });
-  })(req, res);
-};
+    passportAuthenticate(req, res)
+  };
 
 // Keep user logged in
 exports.loggedIn = (req, res) => {
