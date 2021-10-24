@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
@@ -28,7 +28,7 @@ require("./configs/passport");
 // auth session =============================
 app.use(
   session({
-    secret: "ironducks jumping through the mountains",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
     saveUninitialized: true,
@@ -36,7 +36,7 @@ app.use(
       maxAge: 60000000,
     },
     ttl: 60 * 60 * 24,
-    rolling: true //session gets refreshed
+    rolling: true, //session gets refreshed
   })
 );
 app.set("trust proxy", 1); // trust first proxy
@@ -55,17 +55,19 @@ app.use(
 
 //routes
 // ==========================================
-const authRoutes = require('./routes/authRoutes');
-app.use('/api', authRoutes);
+const authRoutes = require("./routes/authRoutes");
+app.use("/api", authRoutes);
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/api', userRoutes);
+const userRoutes = require("./routes/userRoutes");
+app.use("/api", userRoutes);
 
-const eventRoutes = require('./routes/eventRoutes');
-app.use('/api', eventRoutes);
+const eventRoutes = require("./routes/eventRoutes");
+app.use("/api", eventRoutes);
+
+const libraryRoutes = require("./routes/libraryRoutes");
+app.use("/api", libraryRoutes);
 
 //Server =====================================
 const Server = app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)
 );
-

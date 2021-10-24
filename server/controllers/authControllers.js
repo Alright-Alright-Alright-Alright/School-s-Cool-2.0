@@ -1,6 +1,7 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
-const passport = require("passport");
+const { passportAuthenticate } = require("../middleware/passportMiddleware");
+const JWT = require("jsonwebtoken");
 
 // Register
 exports.register = async (req, res) => {
@@ -47,28 +48,10 @@ exports.login = (req, res) => {
     res.status(400).json({ message: "Password must not be empty" });
     return;
   }
+  const user = { email };
+  const accessToken = JWT.sign({user}, process.env.JWT_SECRETORKEY, { expiresIn: '1h' });
 
-  passport.authenticate("local", (err, user, failureDetails) => {
-    if (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong authenticating user" });
-      return;
-    }
-
-    if (!user) {
-      res.status(401).json(failureDetails);
-      return;
-    }
-
-    req.login(user, (err) => {
-      if (err) {
-        res.status(500).json({ message: "Session save went bad." });
-        return;
-      }
-      res.status(200).json(user);
-    });
-  })(req, res);
+  passportAuthenticate(req, res, accessToken);
 };
 
 // Keep user logged in

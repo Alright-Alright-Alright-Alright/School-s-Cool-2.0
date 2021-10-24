@@ -1,18 +1,17 @@
 const { transporter } = require("../configs/nodemailer");
 
-const sendEventInviteEmailService = async (userEmail, eventName) => {
-  console.log(eventName)
-  
+const sendEmailService = async (userEmail, subject, emailBody) => {
     try {
     transporter.sendMail({
       to: userEmail,
       from: process.env.SCHOOLSCOOL_EMAIL,
-      subject: `You've been invited to join`,
+      subject: subject,
       //   icalEvent: {
       //     filename: "invitation.ics",
       //     method: "request",
       //     content: content,
       //   },
+      html: emailBody
     });
   } catch (e) {
     throw new Error(e.message);
@@ -20,5 +19,5 @@ const sendEventInviteEmailService = async (userEmail, eventName) => {
 };
 
 module.exports = {
-  sendEventInviteEmailService,
+  sendEmailService,
 };
