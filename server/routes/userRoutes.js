@@ -1,7 +1,6 @@
 const express = require("express");
 const userRoutes = express.Router();
-const files = require("../middleware/uploadFilesMiddleware");
-const fileUpload = require("../controllers/uploadFilesController");
+const { fileUpload, files } = require("../middleware/uploadFilesMiddleware");
 
 const {
   getUser,

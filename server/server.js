@@ -64,6 +64,9 @@ app.use("/api", userRoutes);
 const eventRoutes = require("./routes/eventRoutes");
 app.use("/api", eventRoutes);
 
+const libraryRoutes = require("./routes/libraryRoutes");
+app.use("/api", libraryRoutes);
+
 //Server =====================================
 const Server = app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)

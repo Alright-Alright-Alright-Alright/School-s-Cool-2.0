@@ -5,7 +5,7 @@ exports.createNewUser = async (firstName, lastName, email, password) => {
     let foundUser = await User.findOne({ email });
 
     if (foundUser) {
-      throw new Error("This email is already taken.");
+      throw new Error("This email is already exists. Please login, or change email.");
     } else {
       const newUser = new User({
         firstName,
