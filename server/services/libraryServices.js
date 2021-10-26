@@ -1,4 +1,9 @@
-const { creatingFile, getingUserLibrary } = require("../db/libraryDb");
+const {
+  creatingFile,
+  getingUserLibrary,
+  getingLibrary,
+  fileDeleting,
+} = require("../db/libraryDb");
 
 exports.createFile = async (fileName, category, privacy, fileUrl, owner) => {
   try {
@@ -11,8 +16,24 @@ exports.createFile = async (fileName, category, privacy, fileUrl, owner) => {
 
 exports.getUserLibrary = async (owner) => {
   try {
-    return getingUserLibrary(owner)
+    return getingUserLibrary(owner);
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
+
+exports.getLibrary = async () => {
+  try {
+    return await getingLibrary();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.fileDelete = async (userId, fileToDelete) => {
+  try {
+    return fileDeleting(userId, fileToDelete);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

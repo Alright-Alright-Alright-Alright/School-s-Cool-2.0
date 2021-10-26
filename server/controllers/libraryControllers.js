@@ -1,7 +1,9 @@
-const User = require("../models/User-model");
-const File = require("../models/File-model");
-const Channel = require("../models/Channel-model");
-const { createFile, getUserLibrary } = require("../services/libraryServices");
+const {
+  createFile,
+  getUserLibrary,
+  getLibrary,
+  fileDelete,
+} = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
   const { fileName, category, privacy, fileUrl } = req.body;
@@ -16,39 +18,30 @@ exports.addFile = async (req, res) => {
 
 exports.userLibrary = async (req, res) => {
   try {
-    let userFiles = await getUserLibrary(req.user._id)
+    let userFiles = await getUserLibrary(req.user._id);
     res.status(200).json({ message: "All your files.", userFiles });
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 };
 
-exports.getLibrary = (req, res) => {
-  File.find()
-    .populate("owner")
-    .then((allFiles) => {
-      res.json({ message: "All files here", allFiles });
-    });
+exports.getLibrary = async (req, res) => {
+  try {
+    let allFiles = await getLibrary();
+    res.status(200).json({ message: "All files.", allFiles });
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 exports.deleteFile = async (req, res) => {
-  let file = await File.findByIdAndRemove(req.body.fileToDelete._id);
+  let userId = await req.user._id;
+  let fileToDelete = await req.body.fileToDelete._id;
+
   try {
-    let user = await User.findByIdAndUpdate(req.user._id, {
-      $pull: { fileUrl: file._id },
-    });
-
-    let channel = await Channel.findOneAndUpdate(
-      { name: file.category },
-      {
-        $pull: { channelFiles: file._id },
-      }
-    );
-
-    return res.json({ user, channel });
+    let file = fileDelete(userId, fileToDelete);
+    res.status(200).json({ message: "File deleted", file });
   } catch (error) {
-    res.status(500).json({
-      message: "Something went wrong when deleting this file",
-    });
+    throw new Error(error.message);
   }
 };
