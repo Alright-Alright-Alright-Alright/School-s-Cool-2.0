@@ -1,70 +1,42 @@
-const User = require("../models/User-model");
-const bcrypt = require("bcryptjs");
+const {
+  getTheUser,
+  updateTheUser,
+  deleteTheUser,
+} = require("../services/userServices");
 
-exports.getUser = (req, res) => {
+exports.getUser = async (req, res) => {
   const { userid } = req.params;
-  User.findById(userid)
-    .then((foundUser) => {
-      res.status(200).json(foundUser);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: "we can't find that user" });
+  try {
+    let user = await getTheUser(userid);
+    res.status(200).json({ message: "Here's the user", user });
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "We can not find you. Please, make sure you are registered and logged in.",
     });
+  }
 };
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
   const { userid } = req.params;
   const { firstName, lastName, email, imageUrl } = req.body;
   let password = req.body.password;
-  let newPassword = null;
-
-  User.findById(userid)
-    .then((user) => {
-      if (user.password !== password) {
-        const salt = bcrypt.genSaltSync(10);
-        newPassword = bcrypt.hashSync(password, salt);
-
-        password = newPassword;
-      }
-      return password;
-    })
-    .then((password) => {
-      User.findByIdAndUpdate(
-        userid,
-        {
-          firstName,
-          lastName,
-          email,
-          imageUrl,
-          password,
-        },
-        { new: true }
-      )
-        .then((response) => {
-          console.log("response after update", response);
-          res.status(200).json({ message: `User ${userid} has been updated` });
-        })
-        .catch((err) => {
-          console.log(err);
-          res
-            .status(500)
-            .json({ message: "Something went wrong updating the user" });
-        });
-    });
+  try {
+    await updateTheUser(userid, firstName, lastName, email, imageUrl, password);
+    res.status(200).json({ message: `User ${userid} has been updated` });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong updating the user" });
+  }
 };
 
-exports.deleteUser = (req, res) => {
+exports.deleteUser = async (req, res) => {
   const { userid } = req.params;
-
-  User.findByIdAndDelete(userid)
-    .then(() => {
-      res.status(200).json({ message: "User has been deleted" });
-    })
-    .catch((err) => {
-      console.log(err);
-      res
-        .status(500)
-        .json({ message: "Something went wrong deleting this user" });
-    });
+  try {
+    await deleteTheUser(userid);
+    res.status(200).json({ message: "User has been deleted" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong deleting this user" });
+  }
 };

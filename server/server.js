@@ -68,6 +68,6 @@ const libraryRoutes = require("./routes/libraryRoutes");
 app.use("/api", libraryRoutes);
 
 //Server =====================================
-const Server = app.listen(process.env.PORT, () =>
+app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)
 );
