@@ -9,11 +9,11 @@ const TopicsTest = ({ topics, dispatch }) => {
     dispatch(getAllTopics())
   }, [dispatch])
 
-  console.log("Inside topicTest", topics)
-
   return (
     <>
-      <h1>Hello, this is a message from the server: {topics.topics.message}</h1>
+      <h1 className="bg-grey-medium_light">
+        Hello, this is a message from the server: {topics.topics.message}
+      </h1>
     </>
   )
 }
