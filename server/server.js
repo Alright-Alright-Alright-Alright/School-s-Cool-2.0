@@ -28,7 +28,7 @@ require("./configs/passport");
 // auth session =============================
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: "process.env.SESSION_SECRET",
     saveUninitialized: true,
     resave: false,
     saveUninitialized: true,
@@ -66,6 +66,10 @@ app.use("/api", eventRoutes);
 
 const libraryRoutes = require("./routes/libraryRoutes");
 app.use("/api", libraryRoutes);
+
+const topicRoutes = require("./routes/topicRoutes");
+app.use("/api", topicRoutes);
+
 
 //Server =====================================
 const Server = app.listen(process.env.PORT, () =>
