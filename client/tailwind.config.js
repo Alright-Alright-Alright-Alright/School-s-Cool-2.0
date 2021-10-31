@@ -48,6 +48,11 @@ module.exports = {
       wider: ".1em",
       widest: ".2em",
     },
+    extend: {
+      fill: (theme) => ({
+        ...theme("colors"),
+      }),
+    },
   },
   variants: {
     extend: {},
