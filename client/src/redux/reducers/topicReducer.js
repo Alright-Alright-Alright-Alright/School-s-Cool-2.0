@@ -9,7 +9,7 @@ const topicReducer = (state = initialState, action) => {
     case SET_TOPICS:
       return {
         ...state,
-        topics: action.payload,
+        ...action.payload,
       }
     default:
       return state
