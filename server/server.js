@@ -28,7 +28,7 @@ require("./configs/passport");
 // auth session =============================
 app.use(
   session({
-    secret: "process.env.SESSION_SECRET",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
     saveUninitialized: true,
