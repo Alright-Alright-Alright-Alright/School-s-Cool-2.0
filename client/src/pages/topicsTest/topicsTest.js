@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { getAllTopics } from "../../redux/actions/topicActions"
 
 // eslint-disable-next-line react/prop-types
-const TopicsTest = ({ topics, dispatch }) => {
+const TopicsTest = () => {
+  const topics = useSelector((state) => state.topics)
+
+  const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getAllTopics())
   }, [dispatch])
@@ -18,12 +22,4 @@ const TopicsTest = ({ topics, dispatch }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  const { topics } = state
-
-  return {
-    topics,
-  }
-}
-
-export default connect(mapStateToProps)(TopicsTest)
+export default TopicsTest
