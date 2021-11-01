@@ -2,12 +2,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux"
 import thunk from "redux-thunk"
 
-import coursesReducer from "./reducers/coursesReducer"
+import coursesReducer from "./reducers/courseReducer"
 import libraryReducer from "./reducers/libraryReducer"
-import topicsReducer from "./reducers/topicsReducer"
+import topicsReducer from "./reducers/topicReducer"
 import uiReducer from "./reducers/uiReducer"
 import userReducer from "./reducers/userReducer"
-import eventsReducer from "./reducers/eventsReducer"
+import eventsReducer from "./reducers/eventReducer"
 
 const initialState = {}
 

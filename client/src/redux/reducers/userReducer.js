@@ -1,31 +1,30 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
   SET_USER,
-  SET_AUTHENTICATED,
+  // SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user"
 
 const initialState = {
-  authenticated: false,
+  loggedIn: false,
   loading: false,
-  credentials: {},
   notifications: [],
 }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_AUTHENTICATED:
-      return {
-        ...state,
-        authenticated: true,
-      }
+    // case SET_AUTHENTICATED:
+    //   return {
+    //     ...state,
+    //     authenticated: true,
+    //   }
     case SET_UNAUTHENTICATED:
       return initialState
     case SET_USER:
       return {
-        authenticated: true,
+        loggedIn: true,
         loading: false,
         ...action.payload,
       }

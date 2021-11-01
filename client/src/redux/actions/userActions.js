@@ -9,20 +9,22 @@ import {
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
+// const userData = { email: "", password: "" }
+
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   axios
-    .get("http://localhost:5000/api/login", userData)
+    .post("http://localhost:5000/api/login", userData)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response.data })
+      dispatch({ type: SET_USER, payload: response.data.user })
       history.push("/")
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: err.response,
       })
     })
 }
@@ -47,6 +49,6 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 }
 
 export const logoutUser = () => (dispatch) => {
-  axios.post("/logout")
+  axios.post("http://localhost:5000/api/logout")
   dispatch({ type: SET_UNAUTHENTICATED })
 }
