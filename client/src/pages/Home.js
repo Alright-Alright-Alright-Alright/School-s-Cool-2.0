@@ -4,7 +4,7 @@ import TopicsTest from "./topicsTest/topicsTest"
 export default function Home() {
   return (
     <div>
-      <h1 className="text-xl text-blue-500">Home</h1>
+      <h1 className="text-xl text-aqua tracking-wide font-semibold">Home</h1>
       <TopicsTest />
     </div>
   )

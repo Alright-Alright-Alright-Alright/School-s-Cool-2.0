@@ -20,6 +20,4 @@ export const getAllTopics = () => (dispatch) => {
     })
 }
 
-export const otherFunction = () => () => {
-  console.log("object")
-}
+export const otherFunction = () => () => {}
