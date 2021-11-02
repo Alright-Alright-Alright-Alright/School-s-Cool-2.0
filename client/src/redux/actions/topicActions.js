@@ -7,7 +7,7 @@ export const getAllTopics = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   axios
-    .get("http://localhost:5000/api/topics")
+    .get("http://localhost:5001/api/topics")
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_TOPICS, payload: response.data })
@@ -15,7 +15,7 @@ export const getAllTopics = () => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: err.response,
       })
     })
 }

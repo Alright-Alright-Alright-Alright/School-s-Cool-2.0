@@ -15,7 +15,7 @@ export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   axios
-    .post("http://localhost:5000/api/login", userData)
+    .post("http://localhost:5001/api/login", userData)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data.user })
