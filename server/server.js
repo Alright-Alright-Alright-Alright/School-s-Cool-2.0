@@ -60,14 +60,6 @@ app.use("/api", authRoutes);
 
 const userRoutes = require("./routes/userRoutes");
 app.use("/api", userRoutes);
-<<<<<<< HEAD
-
-const eventRoutes = require("./routes/eventRoutes");
-app.use("/api", eventRoutes);
-
-const libraryRoutes = require("./routes/libraryRoutes");
-app.use("/api", libraryRoutes);
-=======
 
 const eventRoutes = require("./routes/eventRoutes");
 app.use("/api", eventRoutes);
@@ -78,7 +70,6 @@ app.use("/api", libraryRoutes);
 const topicRoutes = require("./routes/topicRoutes");
 app.use("/api", topicRoutes);
 
->>>>>>> dev
 
 //Server =====================================
 app.listen(process.env.PORT, () =>

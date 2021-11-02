@@ -14,11 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "aws-sdk": "^2.1014.0",
-=======
-    "aws-sdk": "^2.1013.0",
->>>>>>> dev
     "bcryptjs": "^2.4.3",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
