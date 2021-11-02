@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.fill-active {
+  --color-bg: theme("colors.grey.dark");
+  --color-content: theme("colors.grey.super_light");
+  --color-counter: theme("colors.grey.dark");
+}
+
+.fill-inactive {
+  --color-bg: theme("colors.transparent");
+  --color-content: theme("colors.grey.dark");
+  --color-counter: theme("colors.grey.dark");
+}
