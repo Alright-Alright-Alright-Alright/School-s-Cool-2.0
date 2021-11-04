@@ -50,6 +50,10 @@ module.exports = {
         light: "#DEE5EA",
         super_light: "#F7F7F8",
       },
+      pink: {
+        DEFAULT: "#DE2F6E",
+        light: "#FEF2F7",
+      },
     },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
