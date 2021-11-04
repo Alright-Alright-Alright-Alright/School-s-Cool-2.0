@@ -30,6 +30,26 @@ module.exports = {
         light: "#DEE5EA",
         super_light: "#F7F7F8",
       },
+      white: {
+        DEFAULT: "#FFFFFF",
+      },
+    },
+    backgroundColor: {
+      aqua: {
+        DEFAULT: "#18C7BB",
+        light: "#E2F5F4",
+      },
+      yellow: {
+        DEFAULT: "#F5A70F",
+        light: "#FFF5DA",
+      },
+      grey: {
+        dark: "#0F2331",
+        medium: "#446176",
+        medium_light: "#A7B8C5",
+        light: "#DEE5EA",
+        super_light: "#F7F7F8",
+      },
     },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
@@ -48,6 +68,32 @@ module.exports = {
       wider: ".1em",
       widest: ".2em",
     },
+    maxWidth: {
+      dashcard: "320px",
+    },
+    minHeight: {
+      dashcard: "181px",
+      dashcardrow: "39px",
+    },
+    height: {
+      dashcard: "208px",
+      dashcardtitle: "43px",
+    },
+    borderWidth: {
+      DEFAULT: "1px",
+      0: "0",
+      2: "0.5px",
+      3: "3px",
+      4: "4px",
+      6: "6px",
+      8: "8px",
+    },
+    divideColor: (theme) => ({
+      ...theme("borderColors"),
+      primary: "#A7B8C5",
+      secondary: "#ffed4a",
+      danger: "#e3342f",
+    }),
     extend: {
       fill: (theme) => ({
         ...theme("colors"),
