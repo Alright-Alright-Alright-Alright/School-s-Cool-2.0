@@ -54,6 +54,9 @@ module.exports = {
         DEFAULT: "#DE2F6E",
         light: "#FEF2F7",
       },
+      white: {
+        DEFAULT: "#FFFFFF",
+      },
     },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
