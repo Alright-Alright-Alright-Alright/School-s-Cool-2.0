@@ -58,6 +58,24 @@ module.exports = {
         DEFAULT: "#FFFFFF",
       },
     },
+    textColor: {
+      aqua: {
+        DEFAULT: "#18C7BB",
+        light: "#E2F5F4",
+      },
+      pink: {
+        DEFAULT: "#DE2F6E",
+        light: "#FEF2F7",
+      },
+      sky: {
+        DEFAULT: "#27A8DF",
+        light: "#E2F1FC",
+      },
+      yellow: {
+        DEFAULT: "#F5A70F",
+        light: "#FFF5DA",
+      },
+    },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
     },
