@@ -1,10 +1,10 @@
-import React from "react"
-import Main from "../../layout/main"
-import DashCardsLeft from "./DashCardsLeft"
-import DashCardsRight from "./DashCardsRight"
+import React from "react";
+import Main from "../../layout/main";
+import DashCardsLeft from "./DashCardsLeft";
+import DashCardsRight from "./DashCardsRight";
 
 const mainContent = (
-  <p>
+	<p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dui mi,
     auctor ac nisi vel, interdum iaculis elit. Vivamus elit dui, tincidunt
     commodo ultrices non, tempus ut felis. Maecenas a sagittis urna, sed cursus
@@ -57,19 +57,19 @@ const mainContent = (
     amet tellus lacus. Nam eget sodales mauris. Nullam quis ante est. Duis
     luctus, quam non egestas fermentum, ligula velit dictum diam, a luctus dolor
     nunc ac elit.
-  </p>
-)
+	</p>
+);
 
 function index() {
-  return (
-    <>
-      <Main
-        main={mainContent}
-        contentLeft={<DashCardsLeft />}
-        contentRight={<DashCardsRight />}
-      />
-    </>
-  )
+	return (
+		<>
+			<Main
+				main={mainContent}
+				contentLeft={<DashCardsLeft />}
+				contentRight={<DashCardsRight />}
+			/>
+		</>
+	);
 }
 
-export default index
+export default index;
