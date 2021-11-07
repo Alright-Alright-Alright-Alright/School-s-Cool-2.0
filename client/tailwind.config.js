@@ -34,51 +34,6 @@ module.exports = {
         DEFAULT: "#FFFFFF",
       },
     },
-    backgroundColor: {
-      aqua: {
-        DEFAULT: "#18C7BB",
-        light: "#E2F5F4",
-      },
-      yellow: {
-        DEFAULT: "#F5A70F",
-        light: "#FFF5DA",
-      },
-      grey: {
-        dark: "#0F2331",
-        medium: "#446176",
-        medium_light: "#A7B8C5",
-        light: "#DEE5EA",
-        super_light: "#F7F7F8",
-      },
-      pink: {
-        DEFAULT: "#DE2F6E",
-        light: "#FEF2F7",
-      },
-      white: {
-        DEFAULT: "#FFFFFF",
-      },
-    },
-    textColor: {
-      aqua: {
-        DEFAULT: "#18C7BB",
-        light: "#E2F5F4",
-      },
-      pink: {
-        DEFAULT: "#DE2F6E",
-        light: "#FEF2F7",
-      },
-      sky: {
-        DEFAULT: "#27A8DF",
-        light: "#E2F1FC",
-      },
-      yellow: {
-        DEFAULT: "#F5A70F",
-        light: "#FFF5DA",
-      },
-      white: {
-        DEFAULT: "#FFFFFF",
-      },
-    },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
     },
@@ -122,11 +77,6 @@ module.exports = {
       secondary: "#ffed4a",
       danger: "#e3342f",
     }),
-    extend: {
-      fill: (theme) => ({
-        ...theme("colors"),
-      }),
-    },
   },
   variants: {
     extend: {},

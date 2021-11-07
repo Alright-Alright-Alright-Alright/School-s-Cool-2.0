@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .fill-active {
-  --color-bg: theme("colors.grey.dark");
+  --color-bg: currentColor;
   --color-content: theme("colors.grey.super_light");
-  --color-counter: theme("colors.grey.dark");
+  --color-counter: currentColor;
 }
 
 .fill-inactive {
   --color-bg: theme("colors.transparent");
-  --color-content: theme("colors.grey.dark");
-  --color-counter: theme("colors.grey.dark");
+  --color-content: currentColor;
+  --color-counter: currentColor;
 }
