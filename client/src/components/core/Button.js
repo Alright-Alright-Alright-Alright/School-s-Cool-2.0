@@ -13,7 +13,7 @@ function Button({ buttonName, btnPrimary, buttonSubmit, onClick }) {
       className={btnPrimary ? btnPrimaryStyle : btnSecondaryStyle}
       onClick={onClick}
     >
-      <p className="ml-5 mr-5 mt-1 mb-1 text-base">{buttonName}</p>
+      <p className="ml-5 mr-5 mt-2 mb-2 text-base">{buttonName}</p>
     </button>
   )
 }
