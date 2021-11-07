@@ -36,7 +36,7 @@ export default function Dashcard({
 
   return (
     <>
-      <div className="flex flex-col relative max-w-dashcard m-5 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+      <div className="flex flex-col relative max-w-dashcard m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
