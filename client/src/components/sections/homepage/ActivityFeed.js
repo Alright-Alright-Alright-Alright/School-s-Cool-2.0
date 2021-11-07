@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
 
 function ActivityFeed() {
@@ -23,6 +24,9 @@ function ActivityFeed() {
           />
         </div>
       </div>
+      <ActivityCard />
+      <ActivityCard />
+      <ActivityCard />
     </div>
   )
 }
