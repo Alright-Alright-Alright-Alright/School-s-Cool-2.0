@@ -23,12 +23,12 @@ export default function DashCardListItem({
         <div className="flex gap-1 w-20 grid-cols-2 pb-1 items-center">
           <div className="flex gap-1 w-20">
             <button type="button">
-              <Icon iconName="add" iconStyle="fill-inactive" />
+              <Icon iconName="add" iconStyle="fill-inactive text-grey-dark" />
             </button>
             <p>{listItemComments.length}</p>
           </div>
           <button type="button">
-            <Icon iconName="follow" iconStyle="fill-inactive" />
+            <Icon iconName="follow" iconStyle="fill-inactive text-grey-dark" />
           </button>
           <p>{listItemUsers.length}</p>
         </div>
