@@ -19,7 +19,9 @@ function ActivityCard() {
               alt="profile"
             />
             <p className="text-base">User name</p>
-            <p className="text-base text-grey pl-3">Commented on</p>
+            <p className="text-base pl-3 text-grey-medium_light">
+              Commented on
+            </p>
             <a href="/" className="text-base pl-3">
               Topic name
             </a>
