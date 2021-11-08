@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react"
-import { Route, Switch } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
 const Home = lazy(() => import("./pages/Home"))
 
@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+        </Routes>
       </Suspense>
     </div>
   )
