@@ -20,9 +20,9 @@ const TopicsTest = () => {
     dispatch(getAllTopics())
   }, [dispatch])
 
-  console.log("Inside topicTest", topics)
-  console.log("Inside topicTest user", user)
-  console.log("Inside topicTest errors", UI)
+  // console.log("Inside topicTest", topics)
+  // console.log("Inside topicTest user", user)
+  // console.log("Inside topicTest errors", UI)
 
   return (
     <>

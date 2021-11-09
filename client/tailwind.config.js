@@ -30,6 +30,9 @@ module.exports = {
         light: "#DEE5EA",
         super_light: "#F7F7F8",
       },
+      white: {
+        DEFAULT: "#FFFFFF",
+      },
     },
     fontFamily: {
       sans: ["Karla", "sans-serif"],
@@ -48,6 +51,32 @@ module.exports = {
       wider: ".1em",
       widest: ".2em",
     },
+    maxWidth: {
+      dashcard: "320px",
+    },
+    minHeight: {
+      dashcard: "181px",
+      dashcardrow: "39px",
+    },
+    height: {
+      dashcard: "208px",
+      dashcardtitle: "43px",
+    },
+    borderWidth: {
+      DEFAULT: "1px",
+      0: "0",
+      2: "0.5px",
+      3: "3px",
+      4: "4px",
+      6: "6px",
+      8: "8px",
+    },
+    divideColor: (theme) => ({
+      ...theme("borderColors"),
+      primary: "#A7B8C5",
+      secondary: "#ffed4a",
+      danger: "#e3342f",
+    }),
   },
   variants: {
     extend: {},

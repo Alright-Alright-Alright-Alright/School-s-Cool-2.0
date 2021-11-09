@@ -1,11 +1,13 @@
 import React from "react"
-import TopicsTest from "./topicsTest/topicsTest"
+import NavBar from "../components/layout/NavBar"
+import Index from "../components/sections/homepage/Index"
+// import TopicsTest from "./topicsTest/topicsTest"
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-xl text-aqua tracking-wide font-semibold">Home</h1>
-      <TopicsTest />
-    </div>
+    <>
+      <NavBar />
+      <Index />
+    </>
   )
 }
