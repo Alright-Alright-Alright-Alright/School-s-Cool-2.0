@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
+import DropDownMenu from "../DropDownMenu"
 
 export default function Dashcard({
   dashCardData,
@@ -44,9 +45,7 @@ export default function Dashcard({
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
-              <button type="button">
-                <Icon iconName="seemore" />
-              </button>
+              <DropDownMenu />
             </div>
           </div>
         </div>
