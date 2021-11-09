@@ -34,6 +34,14 @@ const userSchema = new Schema(
         ref: "File",
       },
     ],
+    followers: {
+      type: Array,
+      default: [],
+    },
+    followings: {
+      type: Array,
+      default: [],
+    },
     resetToken: String,
     expireToken: Date,
     newChannelEmailNotification: {

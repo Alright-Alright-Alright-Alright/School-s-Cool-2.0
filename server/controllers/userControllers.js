@@ -2,6 +2,7 @@ const {
   getTheUser,
   updateTheUser,
   deleteTheUser,
+  followTheUser
 } = require("../services/userServices");
 
 exports.getUser = async (req, res) => {
@@ -28,6 +29,16 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ message: "Something went wrong updating the user" });
   }
 };
+
+exports.followUser = async (req, res) => {
+  let theUser = req.body.userid
+  let userToFollow = req.params.id
+  try {
+    await followTheUser(theUser,userToFollow)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
 
 exports.deleteUser = async (req, res) => {
   const { userid } = req.params;
