@@ -44,18 +44,6 @@ const userSchema = new Schema(
     },
     resetToken: String,
     expireToken: Date,
-    newChannelEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newEventEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newPostEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,
