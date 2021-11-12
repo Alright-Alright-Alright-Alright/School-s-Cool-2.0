@@ -1,45 +1,34 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import Dashcard from "../../core/dashcard/Dashcard"
-
-const dummyData = [
-  [{ titleTest: "test", comment: ["1", "2", "3"], user: ["1", "2", "3"] }],
-  [{ titleTest: "test2", comment: ["1"], user: ["1", "2", "3"] }],
-  [
-    {
-      titleTest: "test3",
-      date: "02-01-2021",
-      comment: [["1", "2"]],
-      user: ["1", "2", "3"],
-    },
-  ],
-  [{ titleTest: "test4", comment: [["1", "2"]], user: ["1", "2", "3"] }],
-  [
-    {
-      titleTest: "test5",
-      date: "02-01-2021",
-      comment: [["1", "2"]],
-      user: ["1", "2", "3"],
-    },
-  ],
-  [{ titleTest: "test6", comment: [["1", "2"]], user: ["1", "2", "3"] }],
-]
+import { getAllTopics } from "../../../redux/actions/topicActions"
 
 function DashCardsLeft() {
+  const topics = useSelector((state) => state.topics)
+  const courses = useSelector((state) => state.courses)
+  const events = useSelector((state) => state.events)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllTopics())
+  }, [dispatch])
+
   return (
     <div>
       <Dashcard
-        dashCardData={dummyData}
-        dashCardTitle="Testing"
+        dashCardData={topics}
+        dashCardTitle="Topics"
         dashCardStyle="bg-aqua"
       />
       <Dashcard
-        dashCardData={dummyData}
-        dashCardTitle="Testing"
+        dashCardData={courses}
+        dashCardTitle="Courses"
         dashCardStyle="bg-yellow"
       />{" "}
       <Dashcard
-        dashCardData={dummyData}
-        dashCardTitle="Testing"
+        dashCardData={events}
+        dashCardTitle="Events"
         dashCardStyle="bg-grey-dark"
       />{" "}
     </div>
