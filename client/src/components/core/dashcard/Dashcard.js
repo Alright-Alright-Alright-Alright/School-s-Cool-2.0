@@ -14,7 +14,7 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item.index}
+        key={item[0].titleTest}
         listItemTitle={item[0].titleTest}
         listItemDate={item[0].date}
         listItemComments={item[0].comment}
@@ -26,7 +26,7 @@ export default function Dashcard({
     .slice(3, 6)
     .map((item) => (
       <DashCardListItem
-        key={item.index}
+        key={item[0].titleTest}
         listItemTitle={item[0].titleTest}
         listItemDate={item[0].date}
         listItemComments={item[0].comment}
@@ -76,7 +76,7 @@ export default function Dashcard({
 
 Dashcard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  dashCardData: PropTypes.object.isRequired,
+  dashCardData: PropTypes.array.isRequired,
   dashCardTitle: PropTypes.string.isRequired,
   dashCardStyle: PropTypes.string.isRequired,
 }
