@@ -4,13 +4,10 @@ const initialState = {
   events: [],
 }
 
-const eventReducer = (state = initialState, action) => {
+const eventReducer = (state = initialState.events, action) => {
   switch (action.type) {
     case SET_EVENTS:
-      return {
-        ...state,
-        ...action.payload,
-      }
+      return [...state, ...action.payload]
     default:
       return state
   }
