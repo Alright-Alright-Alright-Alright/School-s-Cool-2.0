@@ -9,18 +9,18 @@ class UserService {
     this.service = service
   }
 
-  signup = (firstName, lastName, email, password) =>
-    this.service
-      .post("/register", { firstName, lastName, email, password })
-      .then((response) => response.data)
-
-  loggedin = () =>
-    this.service.get("/loggedin").then((response) => response.data)
-
   login = (email, password) =>
     this.service
       .post("/login", { email, password })
       .then((response) => response.data)
+
+  register = (registerNewUser) =>
+    this.service
+      .post("/register", registerNewUser)
+      .then((response) => response.data)
+
+  loggedin = () =>
+    this.service.get("/loggedin").then((response) => response.data)
 
   logout = () =>
     this.service.post("/logout", {}).then((response) => response.data)

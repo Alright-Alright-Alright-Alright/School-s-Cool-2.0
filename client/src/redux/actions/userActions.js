@@ -1,4 +1,5 @@
 import axios from "axios"
+import UserService from "../services/userService"
 
 import {
   SET_USER,
@@ -9,13 +10,13 @@ import {
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-// const userData = { email: "", password: "" }
+const service = new UserService()
 
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  axios
-    .post("http://localhost:5001/api/login", userData)
+  service
+    .login(userData)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data.user })
@@ -29,15 +30,14 @@ export const loginUser = (userData, history) => (dispatch) => {
     })
 }
 
-export const signupUser = (newUserData, history) => (dispatch) => {
+export const registerUser = (registerNewUser, history) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-
   axios
-    .post("http://localhost:5000/api/register", newUserData)
+    .post("http://localhost:5000/api/register", registerNewUser)
+    // .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data })
-
       history.push("/")
     })
     .catch((err) => {
@@ -49,6 +49,6 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 }
 
 export const logoutUser = () => (dispatch) => {
-  axios.post("http://localhost:5000/api/logout")
+  axios.post("/logout")
   dispatch({ type: SET_UNAUTHENTICATED })
 }
