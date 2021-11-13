@@ -9,10 +9,8 @@ class UserService {
     this.service = service
   }
 
-  login = (email, password) =>
-    this.service
-      .post("/login", { email, password })
-      .then((response) => response.data)
+  login = (loginUser) =>
+    this.service.post("/login", loginUser).then((response) => response.data)
 
   register = (registerNewUser) =>
     this.service

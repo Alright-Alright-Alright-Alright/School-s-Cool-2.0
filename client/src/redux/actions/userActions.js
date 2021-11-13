@@ -1,4 +1,3 @@
-import axios from "axios"
 import UserService from "../services/userService"
 
 import {
@@ -12,15 +11,14 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 const service = new UserService()
 
-export const loginUser = (userData, history) => (dispatch) => {
+export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-
   service
     .login(userData)
     .then((response) => {
+      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data.user })
-      history.push("/")
     })
     .catch((err) => {
       dispatch({
@@ -47,6 +45,6 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 }
 
 export const logoutUser = () => (dispatch) => {
-  axios.post("/logout")
+  service.logout()
   dispatch({ type: SET_UNAUTHENTICATED })
 }
