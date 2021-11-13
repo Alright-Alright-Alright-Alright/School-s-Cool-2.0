@@ -28,14 +28,6 @@ const RegisterForm = () => {
     password,
   }
 
-  const chooseEmail = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const choosePassword = (e) => {
-    setPassword(e.target.value)
-  }
-
   const chooseFirstName = (e) => {
     setFirstName(e.target.value)
   }
@@ -44,9 +36,21 @@ const RegisterForm = () => {
     setLastName(e.target.value)
   }
 
+  const chooseEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const choosePassword = (e) => {
+    setPassword(e.target.value)
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault()
     dispatch(registerUser(registerNewUser))
+    setFirstName("")
+    setLastName("")
+    setEmail("")
+    setPassword("")
   }
 
   return (
@@ -92,19 +96,8 @@ const RegisterForm = () => {
             className="bg-grey-super_light rounded-full my-2"
             required
           />
-
-          {/* <input
-          type="submit"
-          value="submit"
-          className="w-60 my-5 rounded-full"
-        /> */}
-          <Button
-            buttonName="Register"
-            buttonSubmit
-            onClick={handleFormSubmit}
-          />
-
-          {UI.errors ? <p>{UI.errors.message}</p> : null}
+          <input type="submit" value="submit" className=" my-5 rounded-full" />
+          {UI.errors && <p>{UI.errors.message}</p>}
         </form>
       </div>
     </div>

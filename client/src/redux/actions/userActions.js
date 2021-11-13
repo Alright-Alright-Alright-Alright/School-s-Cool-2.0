@@ -30,19 +30,18 @@ export const loginUser = (userData, history) => (dispatch) => {
     })
 }
 
-export const registerUser = (registerNewUser, history) => (dispatch) => {
+export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI })
   service
     .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response.data })
-      history.push("/")
+      dispatch({ type: SET_USER, payload: response })
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: err.response?.data,
       })
     })
 }
