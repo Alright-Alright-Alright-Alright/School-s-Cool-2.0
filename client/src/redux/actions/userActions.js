@@ -36,7 +36,7 @@ export const registerUser = (registerNewUser) => (dispatch) => {
     .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response })
+      dispatch({ type: SET_USER, payload: response.message })
     })
     .catch((err) => {
       dispatch({

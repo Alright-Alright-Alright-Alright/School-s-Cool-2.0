@@ -15,12 +15,6 @@ const RegisterForm = () => {
 
   const dispatch = useDispatch()
 
-  //   useEffect(() => {
-  //     dispatch(loginUser())
-  //   }, [dispatch])
-
-  //   const [error, setError] = useState("");
-
   const registerNewUser = {
     firstName,
     lastName,
