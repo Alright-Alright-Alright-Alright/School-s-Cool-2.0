@@ -32,9 +32,8 @@ export const loginUser = (userData, history) => (dispatch) => {
 
 export const registerUser = (registerNewUser, history) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  axios
-    .post("http://localhost:5000/api/register", registerNewUser)
-    // .register(registerNewUser)
+  service
+    .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data })

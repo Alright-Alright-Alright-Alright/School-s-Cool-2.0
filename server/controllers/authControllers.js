@@ -7,8 +7,8 @@ const JWT = require("jsonwebtoken");
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (isEmpty(email)) {
-    res.status(400).json({ message: "Email must not be empty" });
+  if (isEmpty(email, firstName, lastName, password)) {
+    res.status(400).json({ message: "Please fill in all the required fields!" });
     return;
   }
   if (!isEmail(email)) {
@@ -16,10 +16,6 @@ exports.register = async (req, res) => {
     return;
   }
 
-  if (isEmpty(password)) {
-    res.status(400).json({ message: "Password must not be empty" });
-    return;
-  }
   if (password.length < 6) {
     res
       .status(400)
