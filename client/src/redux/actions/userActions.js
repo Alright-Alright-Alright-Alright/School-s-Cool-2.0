@@ -16,14 +16,13 @@ export const loginUser = (userData) => (dispatch) => {
   service
     .login(userData)
     .then((response) => {
-      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.data.user })
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response,
+        payload: err.response?.data,
       })
     })
 }

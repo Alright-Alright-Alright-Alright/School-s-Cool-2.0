@@ -58,7 +58,7 @@ const LoginForm = () => {
             className="bg-grey-super_light rounded-full my-2"
             required
           />
-          <input type="submit" value="submit" className=" my-5 rounded-full" />
+          <Button buttonName="Log in" buttonSubmit />
           {UI.errors && <p>{UI.errors.message}</p>}
         </form>
       </div>

@@ -20,8 +20,8 @@ function Button({ buttonName, btnPrimary, buttonSubmit, onClick }) {
 
 Button.propTypes = {
   buttonName: PropTypes.string.isRequired,
-  btnPrimary: PropTypes.string,
-  buttonSubmit: PropTypes.string,
+  btnPrimary: PropTypes.bool,
+  buttonSubmit: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 }
 
