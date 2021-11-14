@@ -2,6 +2,7 @@ import UserService from "../services/userService"
 
 import {
   SET_USER,
+  SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
@@ -16,8 +17,9 @@ export const loginUser = (userData) => (dispatch) => {
   service
     .login(userData)
     .then((response) => {
+      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response.data.user })
+      dispatch({ type: SET_AUTHENTICATED, payload: response })
     })
     .catch((err) => {
       dispatch({

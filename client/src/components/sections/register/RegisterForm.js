@@ -2,17 +2,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 
 const RegisterForm = () => {
   const UI = useSelector((state) => state.UI)
-
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const registerNewUser = {
@@ -45,6 +45,9 @@ const RegisterForm = () => {
     setLastName("")
     setEmail("")
     setPassword("")
+    setTimeout(() => {
+      navigate("/login")
+    }, 1500)
   }
 
   return (

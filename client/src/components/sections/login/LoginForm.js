@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { loginUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 
@@ -10,7 +11,7 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const userLogin = {
@@ -28,9 +29,13 @@ const LoginForm = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
+
     dispatch(loginUser(userLogin))
     setEmail("")
     setPassword("")
+    setTimeout(() => {
+      navigate("/")
+    }, 1500)
   }
 
   return (

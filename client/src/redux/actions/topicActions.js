@@ -24,7 +24,7 @@ export const getAllTopics = () => (dispatch) => {
   //   })
 
   axios
-    .get("http://localhost:5000/api/topics")
+    .get(`${process.env.REACT_APP_API_URL}/topics`)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_TOPICS, payload: response.data })
