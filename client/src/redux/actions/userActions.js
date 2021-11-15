@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable dot-notation */
+// import axios from "axios"
 import UserService from "../services/userService"
 
 import {
@@ -10,16 +13,22 @@ import {
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-const service = new UserService()
+const userService = new UserService()
+
+export const setAuthorizationHeader = (token) => {
+  const Authorization = `Bearer ${token}`
+  localStorage.setItem("Authorization", Authorization)
+}
 
 export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  service
+  userService
     .login(userData)
     .then((response) => {
       console.log(response)
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_AUTHENTICATED, payload: response })
+      setAuthorizationHeader(response.accessToken)
     })
     .catch((err) => {
       dispatch({
@@ -31,7 +40,7 @@ export const loginUser = (userData) => (dispatch) => {
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  service
+  userService
     .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
@@ -46,6 +55,7 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 }
 
 export const logoutUser = () => (dispatch) => {
-  service.logout()
+  localStorage.removeItem("Authorization")
+  userService.logout()
   dispatch({ type: SET_UNAUTHENTICATED })
 }

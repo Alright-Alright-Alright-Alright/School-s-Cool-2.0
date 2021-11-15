@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
 import axios from "axios"
 import { SET_TOPICS } from "../types/topics"
@@ -5,14 +6,16 @@ import TopicService from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-const service = new TopicService()
+const topicService = new TopicService()
+const authToken = localStorage.getItem("Authorization")
 
 export const getAllTopics = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  // service
+  // topicService
   //   .getAllTopics()
   //   .then((response) => {
+  //     console.log(response)
   //     dispatch({ type: CLEAR_ERRORS })
   //     dispatch({ type: SET_TOPICS, payload: response.data })
   //   })
@@ -24,7 +27,9 @@ export const getAllTopics = () => (dispatch) => {
   //   })
 
   axios
-    .get(`${process.env.REACT_APP_API_URL}/topics`)
+    .get(`${process.env.REACT_APP_API_URL}/topics`, {
+      headers: { Authorization: authToken },
+    })
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_TOPICS, payload: response.data })

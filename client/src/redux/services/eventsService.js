@@ -3,7 +3,7 @@ import axios from "axios"
 
 // const authToken = localStorage.getItem("Authorization")
 
-class TopicService {
+class EventService {
   constructor() {
     const service = axios.create({
       baseURL: process.env.REACT_APP_API_URL,
@@ -14,9 +14,9 @@ class TopicService {
     // service.defaults.headers.common["Authorization"] = authToken
   }
 
-  getAllTopics = () => {
-    this.service.get("/topics").then((response) => response.data)
+  getAllEvents = () => {
+    this.service.get("/events").then((response) => response.data)
   }
 }
 
-export default TopicService
+export default EventService

@@ -1,4 +1,7 @@
+/* eslint-disable dot-notation */
 import axios from "axios"
+
+const authToken = localStorage.getItem("Authorization")
 
 class UserService {
   constructor() {
@@ -7,6 +10,7 @@ class UserService {
       withCredentials: true,
     })
     this.service = service
+    service.defaults.headers.common["Authorization"] = authToken
   }
 
   login = (loginUser) =>
@@ -20,8 +24,11 @@ class UserService {
   loggedin = () =>
     this.service.get("/loggedin").then((response) => response.data)
 
-  logout = () =>
+  logout = () => {
+    localStorage.removeItem("Authorization")
+    // delete axios.defaults.headers.common["Authorization"]
     this.service.post("/logout", {}).then((response) => response.data)
+  }
 
   forgot = (email) =>
     this.service.post("/forgot", { email }).then((response) => response.data)
@@ -30,6 +37,12 @@ class UserService {
     this.service
       .post("/new-password", { password, token })
       .then((response) => response.data)
+
+  // setAuthorizationHeader = () => {
+  //   const authToken = localStorage.getItem("Authorization")
+  //   // this.service.defaults.headers.common["Authorization"] = `Bearer ${token}`
+  //   axios.defaults.headers.common["Authorization"] = authToken
+  // }
 }
 
 export default UserService
