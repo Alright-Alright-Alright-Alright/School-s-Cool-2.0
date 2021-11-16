@@ -1,10 +1,26 @@
 const express = require("express");
 const topicRoutes = express.Router();
 
-topicRoutes.get("/topics", (req, res) => {
-    res.json({message: "hello"})
-});
+const {
+    getAllTopics,
+    createNewTopic,
+    getTopic,
+    updateTopic,
+    joinTopic,
+    leaveTopic,
+    inviteForTopic,
+    deleteTopic,
+  } = require("../controllers/topicControllers");
+  const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
+topicRoutes.get("/topics", jwtAuthorization, getAllTopics);
+topicRoutes.post("/topics", jwtAuthorization, createNewTopic);
+topicRoutes.get("/topics/:topicId", getTopic);
+topicRoutes.put("/topics/:topicId", updateTopic);
+topicRoutes.put("/topics/:topicId/join", joinTopic);
+topicRoutes.put("/topics/:topicId/leave", leaveTopic);
+topicRoutes.put("/topics/:topicId/invite", inviteForTopic);
+topicRoutes.delete("/topics/:topicId", deleteTopic);
 
 module.exports = topicRoutes;
 

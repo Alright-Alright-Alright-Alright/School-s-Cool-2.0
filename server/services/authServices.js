@@ -3,6 +3,7 @@ const { sendEmailService } = require("../services/emailServices");
 const { createNewUser } = require("../db/authDb");
 
 exports.newUser = async (firstName, lastName, email, password) => {
+
   try {
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);

@@ -25,12 +25,12 @@ export default function DashCardListItem({
             <button type="button">
               <Icon iconName="add" iconStyle="fill-inactive text-grey-dark" />
             </button>
-            <p>{listItemComments.length}</p>
+            <p>{listItemComments?.length}</p>
           </div>
           <button type="button">
             <Icon iconName="follow" iconStyle="fill-inactive text-grey-dark" />
           </button>
-          <p>{listItemUsers.length}</p>
+          <p>{listItemUsers?.length}</p>
         </div>
       </div>
     </>

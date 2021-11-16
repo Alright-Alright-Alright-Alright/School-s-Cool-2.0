@@ -34,20 +34,16 @@ const userSchema = new Schema(
         ref: "File",
       },
     ],
+    followers: {
+      type: Array,
+      default: [],
+    },
+    followings: {
+      type: Array,
+      default: [],
+    },
     resetToken: String,
     expireToken: Date,
-    newChannelEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newEventEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newPostEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,

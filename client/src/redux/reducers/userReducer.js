@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
   SET_USER,
-  // SET_AUTHENTICATED,
+  SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
@@ -15,11 +15,12 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case SET_AUTHENTICATED:
-    //   return {
-    //     ...state,
-    //     authenticated: true,
-    //   }
+    case SET_AUTHENTICATED:
+      return {
+        loggedIn: true,
+        loading: false,
+        ...action.payload,
+      }
     case SET_UNAUTHENTICATED:
       return initialState
     case SET_USER:

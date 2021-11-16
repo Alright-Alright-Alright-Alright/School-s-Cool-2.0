@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
+import DropDownMenu from "../DropDownMenu"
 
 export default function Dashcard({
   dashCardData,
@@ -14,11 +15,11 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item.index}
-        listItemTitle={item[0].titleTest}
-        listItemDate={item[0].date}
-        listItemComments={item[0].comment}
-        listItemUsers={item[0].user}
+        key={item?.title}
+        listItemTitle={item?.title}
+        listItemDate={item?.date}
+        listItemComments={item?.comment}
+        listItemUsers={item?.user}
       />
     ))
 
@@ -26,11 +27,11 @@ export default function Dashcard({
     .slice(3, 6)
     .map((item) => (
       <DashCardListItem
-        key={item.index}
-        listItemTitle={item[0].titleTest}
-        listItemDate={item[0].date}
-        listItemComments={item[0].comment}
-        listItemUsers={item[0].user}
+        key={item?.titleTest}
+        listItemTitle={item?.titleTest}
+        listItemDate={item?.date}
+        listItemComments={item?.comment}
+        listItemUsers={item?.user}
       />
     ))
 
@@ -44,9 +45,7 @@ export default function Dashcard({
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
-              <button type="button">
-                <Icon iconName="seemore" />
-              </button>
+              <DropDownMenu />
             </div>
           </div>
         </div>
@@ -76,7 +75,7 @@ export default function Dashcard({
 
 Dashcard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  dashCardData: PropTypes.object.isRequired,
+  dashCardData: PropTypes.array.isRequired,
   dashCardTitle: PropTypes.string.isRequired,
   dashCardStyle: PropTypes.string.isRequired,
 }

@@ -1,16 +1,13 @@
 import { SET_COURSES } from "../types/courses"
 
 const initialState = {
-  events: [],
+  courses: [],
 }
 
-const courseReducer = (state = initialState, action) => {
+const courseReducer = (state = initialState.courses, action) => {
   switch (action.type) {
     case SET_COURSES:
-      return {
-        ...state,
-        ...action.payload,
-      }
+      return [...state, ...action.payload]
     default:
       return state
   }

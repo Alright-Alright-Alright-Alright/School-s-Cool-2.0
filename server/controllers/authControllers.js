@@ -1,14 +1,13 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
 const { passportAuthenticate } = require("../middleware/passportMiddleware");
-const JWT = require("jsonwebtoken");
 
 // Register
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (isEmpty(email)) {
-    res.status(400).json({ message: "Email must not be empty" });
+  if (isEmpty(email, firstName, lastName, password)) {
+    res.status(400).json({ message: "Please fill in all the required fields!" });
     return;
   }
   if (!isEmail(email)) {
@@ -16,10 +15,6 @@ exports.register = async (req, res) => {
     return;
   }
 
-  if (isEmpty(password)) {
-    res.status(400).json({ message: "Password must not be empty" });
-    return;
-  }
   if (password.length < 6) {
     res
       .status(400)
@@ -48,10 +43,7 @@ exports.login = (req, res) => {
     res.status(400).json({ message: "Password must not be empty" });
     return;
   }
-  const user = { email };
-  const accessToken = JWT.sign({user}, process.env.JWT_SECRETORKEY, { expiresIn: '1h' });
-
-  passportAuthenticate(req, res, accessToken);
+  passportAuthenticate(req, res);
 };
 
 // Keep user logged in
