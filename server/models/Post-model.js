@@ -7,15 +7,15 @@ require("./Comment-model")
 
 const postSchema = new Schema(
   {
-    postTitle: {
+    title: {
       type: String,
       required: true
     },
-    postBody: {
+    description: {
         type: String,
         required: true
     },
-    author: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
     },
