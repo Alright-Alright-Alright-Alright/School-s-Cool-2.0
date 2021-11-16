@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
+require("./User-model");
+require("./File-model");
+
 const topicSchema = new Schema(
     {
         title: {

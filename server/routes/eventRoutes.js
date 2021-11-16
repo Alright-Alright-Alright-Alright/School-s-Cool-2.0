@@ -10,6 +10,7 @@ const {
   leaveEvent,
   deleteEvent,
 } = require("../controllers/eventController");
+const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
 eventRoutes.get("/events", getAllEvents);
 eventRoutes.post("/events", createNewEvent);

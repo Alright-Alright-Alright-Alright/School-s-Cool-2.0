@@ -8,6 +8,7 @@ const {
   followUser,
   deleteUser,
 } = require("../controllers/userControllers");
+const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
 //pass on controllers
 userRoutes.get("/profile/:userid", getUser);

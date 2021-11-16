@@ -7,7 +7,7 @@ export const getAllCourses = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   axios
-    .get("http://localhost:5000/api/courses")
+    .get(`${process.env.REACT_APP_API_URL}/courses`)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_COURSES, payload: response.data })

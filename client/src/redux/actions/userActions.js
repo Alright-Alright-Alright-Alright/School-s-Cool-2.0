@@ -1,7 +1,11 @@
-import axios from "axios"
+/* eslint-disable prettier/prettier */
+/* eslint-disable dot-notation */
+// import axios from "axios"
+import UserService from "../services/userService"
 
 import {
   SET_USER,
+  SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
@@ -9,46 +13,49 @@ import {
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-// const userData = { email: "", password: "" }
+const userService = new UserService()
 
-export const loginUser = (userData, history) => (dispatch) => {
+export const setAuthorizationHeader = (token) => {
+  const Authorization = `Bearer ${token}`
+  localStorage.setItem("Authorization", Authorization)
+}
+
+export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-
-  axios
-    .post("http://localhost:5001/api/login", userData)
+  userService
+    .login(userData)
     .then((response) => {
+      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response.data.user })
-      history.push("/")
+      dispatch({ type: SET_AUTHENTICATED, payload: response })
+      setAuthorizationHeader(response.accessToken)
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response,
+        payload: err.response?.data,
       })
     })
 }
 
-export const signupUser = (newUserData, history) => (dispatch) => {
+export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-
-  axios
-    .post("http://localhost:5000/api/register", newUserData)
+  userService
+    .register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_USER, payload: response.data })
-
-      history.push("/")
+      dispatch({ type: SET_USER, payload: response.message })
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: err.response?.data,
       })
     })
 }
 
 export const logoutUser = () => (dispatch) => {
-  axios.post("http://localhost:5000/api/logout")
+  localStorage.removeItem("Authorization")
+  userService.logout()
   dispatch({ type: SET_UNAUTHENTICATED })
 }

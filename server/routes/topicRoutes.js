@@ -11,10 +11,10 @@ const {
     inviteForTopic,
     deleteTopic,
   } = require("../controllers/topicControllers");
-  
+  const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
-topicRoutes.get("/topics", getAllTopics);
-topicRoutes.post("/topics", createNewTopic);
+topicRoutes.get("/topics", jwtAuthorization, getAllTopics);
+topicRoutes.post("/topics", jwtAuthorization, createNewTopic);
 topicRoutes.get("/topics/:topicId", getTopic);
 topicRoutes.put("/topics/:topicId", updateTopic);
 topicRoutes.put("/topics/:topicId/join", joinTopic);
