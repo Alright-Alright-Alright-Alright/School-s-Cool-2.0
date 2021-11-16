@@ -14,7 +14,7 @@ const topicSchema = new Schema(
         description: {
             type: String,
         },
-        author: {
+        owner: {
             type: Schema.Types.ObjectId,
             ref: "User",
         },
