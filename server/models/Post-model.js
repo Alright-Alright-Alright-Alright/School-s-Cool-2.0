@@ -19,9 +19,9 @@ const postSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    channel: {
+    topic: {
         type: Schema.Types.ObjectId,
-        ref: "Channel"
+        ref: "Topic"
     },
     comment: [{
         type: Schema.Types.ObjectId,

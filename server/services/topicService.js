@@ -1,5 +1,6 @@
 const {
     getAllTopicsDb,
+    addTopicToDB
   } = require("../db/topicDb");
   
 const getAllTopicsService = async () => {
@@ -10,6 +11,15 @@ const getAllTopicsService = async () => {
     }
   };
 
+  const createNewTopicService = async (title, description, author) => {
+    try {
+      return await addTopicToDB(title, description, author)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
 module.exports = {
     getAllTopicsService,
+    createNewTopicService
 };

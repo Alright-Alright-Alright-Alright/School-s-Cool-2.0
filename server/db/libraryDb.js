@@ -1,6 +1,6 @@
 const User = require("../models/User-model");
 const File = require("../models/File-model");
-const Channel = require("../models/Channel-model");
+const Topic = require("../models/Topic-model");
 
 exports.creatingFile = async (fileName, category, privacy, fileUrl, owner) => {
   let file = await File.create({
@@ -15,14 +15,14 @@ exports.creatingFile = async (fileName, category, privacy, fileUrl, owner) => {
       $push: { fileUrl: file._id },
     });
 
-    let channel = await Channel.findOneAndUpdate(
+    let topic = await Topic.findOneAndUpdate(
       { name: file.category },
       {
-        $push: { channelFiles: file._id },
+        $push: { topicFiles: file._id },
       }
     );
 
-    return { user, channel };
+    return { user, topic };
   } catch (error) {
     throw new Error("Something went wrong adding a file", error.message);
   }

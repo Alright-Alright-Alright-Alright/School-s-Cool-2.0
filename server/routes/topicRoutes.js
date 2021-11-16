@@ -14,7 +14,7 @@ const {
   const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
 topicRoutes.get("/topics", jwtAuthorization, getAllTopics);
-topicRoutes.post("/topics",jwtAuthorization, createNewTopic);
+topicRoutes.post("/topics", jwtAuthorization, createNewTopic);
 topicRoutes.get("/topics/:topicId",jwtAuthorization, getTopic);
 topicRoutes.put("/topics/:topicId",jwtAuthorization, updateTopic);
 topicRoutes.put("/topics/:topicId/join",jwtAuthorization, joinTopic);
