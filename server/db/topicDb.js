@@ -2,7 +2,7 @@ const Topic = require("../models/Topic-model");
 
 const getAllTopicsDb = async () => {
   try {
-    return await Topic.find().sort({ dateStart: "asc" });
+    return await Topic.find().sort({ dateStart: "asc" }).populate("members");
   } catch (e) {
     throw new Error(e.message);
   }
