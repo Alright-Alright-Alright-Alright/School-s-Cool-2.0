@@ -10,9 +10,9 @@ const {
 const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 
 libraryRoutes.post("/file-upload", files, fileUpload);
-libraryRoutes.post("/add-file", jwtAuthorization, addFile);
-libraryRoutes.get("/library-user", jwtAuthorization, userLibrary);
-libraryRoutes.get("/library", jwtAuthorization, getLibrary);
-libraryRoutes.put("/library-delete", jwtAuthorization, deleteFile);
+libraryRoutes.post("/add-file", addFile);
+libraryRoutes.get("/library-user", userLibrary);
+libraryRoutes.get("/library", getLibrary);
+libraryRoutes.put("/library-delete", deleteFile);
 
 module.exports = libraryRoutes;

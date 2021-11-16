@@ -1,7 +1,6 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
 const { passportAuthenticate } = require("../middleware/passportMiddleware");
-const JWT = require("jsonwebtoken");
 
 // Register
 exports.register = async (req, res) => {
@@ -44,10 +43,7 @@ exports.login = (req, res) => {
     res.status(400).json({ message: "Password must not be empty" });
     return;
   }
-  const user = { email };
-  const accessToken = JWT.sign({user}, process.env.JWT_SECRETORKEY, { expiresIn: '1h' });
-
-  passportAuthenticate(req, res, accessToken);
+  passportAuthenticate(req, res);
 };
 
 // Keep user logged in

@@ -12,12 +12,12 @@ const {
 } = require("../controllers/eventController");
 const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
-eventRoutes.get("/events",jwtAuthorization, getAllEvents);
-eventRoutes.post("/events",jwtAuthorization, createNewEvent);
-eventRoutes.get("/events/:eventId",jwtAuthorization, getEvent);
-eventRoutes.put("/events/:eventId",jwtAuthorization, updateEvent);
-eventRoutes.put("/events/:eventId/join",jwtAuthorization, joinEvent);
-eventRoutes.put("/events/:eventId/leave",jwtAuthorization, leaveEvent);
-eventRoutes.delete("/events/:eventId",jwtAuthorization, deleteEvent);
+eventRoutes.get("/events", getAllEvents);
+eventRoutes.post("/events", createNewEvent);
+eventRoutes.get("/events/:eventId", getEvent);
+eventRoutes.put("/events/:eventId", updateEvent);
+eventRoutes.put("/events/:eventId/join", joinEvent);
+eventRoutes.put("/events/:eventId/leave", leaveEvent);
+eventRoutes.delete("/events/:eventId", deleteEvent);
 
 module.exports = eventRoutes;

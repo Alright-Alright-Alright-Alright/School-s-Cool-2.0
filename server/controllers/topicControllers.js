@@ -14,8 +14,7 @@ const getAllTopics = async (req, res, next) => {
 
 const createNewTopic = async (req, res, next) => {
   const { title, description } = req.body;
-  author = req.user._id
-  console.log(title, description, author);
+  author = req.user.userLogedIn._id
   
   try {
     const topic = await createNewTopicService(title, description, author);
