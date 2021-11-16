@@ -2,11 +2,11 @@ const User = require("../models/User-model");
 const File = require("../models/File-model");
 const Topic = require("../models/Topic-model");
 
-exports.creatingFile = async (fileName, category, privacy, fileUrl, owner) => {
+exports.creatingFile = async (fileName, category, private, fileUrl, owner) => {
   let file = await File.create({
     fileName,
     category,
-    privacy,
+    private,
     fileUrl,
     owner,
   });
