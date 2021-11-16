@@ -15,11 +15,11 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item[0].titleTest}
-        listItemTitle={item[0].titleTest}
-        listItemDate={item[0].date}
-        listItemComments={item[0].comment}
-        listItemUsers={item[0].user}
+        key={item?.title}
+        listItemTitle={item?.title}
+        listItemDate={item?.date}
+        listItemComments={item?.comment}
+        listItemUsers={item?.user}
       />
     ))
 
@@ -27,11 +27,11 @@ export default function Dashcard({
     .slice(3, 6)
     .map((item) => (
       <DashCardListItem
-        key={item[0].titleTest}
-        listItemTitle={item[0].titleTest}
-        listItemDate={item[0].date}
-        listItemComments={item[0].comment}
-        listItemUsers={item[0].user}
+        key={item?.titleTest}
+        listItemTitle={item?.titleTest}
+        listItemDate={item?.date}
+        listItemComments={item?.comment}
+        listItemUsers={item?.user}
       />
     ))
 
