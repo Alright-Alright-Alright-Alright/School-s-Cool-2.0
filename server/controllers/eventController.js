@@ -73,7 +73,6 @@ const joinEvent = async (req, res, next) => {
   const { _id } = req.user.userLogedIn;
   try {
     await joinEventService(eventId, _id);
-
     return res.status(201).json({ message: "You joined the event" });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);

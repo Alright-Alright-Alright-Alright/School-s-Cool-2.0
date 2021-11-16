@@ -64,7 +64,7 @@ const updateEventDb = async (
 
 const userJoinEventDb = async (eventId, _id) => {
   try {
-    Event.findByIdAndUpdate(eventId, {
+    return await Event.findByIdAndUpdate(eventId, {
       $push: { attendees: _id },
     });
   } catch (error) {
@@ -74,7 +74,7 @@ const userJoinEventDb = async (eventId, _id) => {
 
 const userLeaveEventDb = async (eventId, _id) => {
   try {
-    Event.findByIdAndUpdate(eventId, {
+    return await Event.findByIdAndUpdate(eventId, {
       $pull: { attendees: _id },
     });
   } catch (error) {
