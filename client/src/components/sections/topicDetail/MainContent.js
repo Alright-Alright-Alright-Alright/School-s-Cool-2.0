@@ -6,7 +6,7 @@ import TopicPost from "../../core/TopicPost/TopicPost"
 function MainContent() {
   return (
     <div className="">
-      <TopicHeaderCard />
+      <TopicHeaderCard onClick={() => console.log("Hello")} />
       <TopicPost />
     </div>
   )

@@ -1,8 +1,9 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Button from "../Button"
 import Icon from "../Icon"
 
-function TopicHeaderCard() {
+function TopicHeaderCard({ onClick }) {
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="flex justify-between p-3">
@@ -15,6 +16,7 @@ function TopicHeaderCard() {
           className="bg-grey-super_light w-full rounded-full text-base pl-3"
           type="text"
           placeholder="Add a comment"
+          onChange={(e) => props.body(e.target.value)}
         />
       </div>
 
@@ -25,10 +27,14 @@ function TopicHeaderCard() {
           </button>
           <p className="pl-3">Add a resource</p>
         </div>
-        <Button buttonName="Add post to topic" btnPrimary />
+        <Button buttonName="Add post to topic" btnPrimary onClick={onClick} />
       </div>
     </div>
   )
+}
+
+TopicHeaderCard.propTypes = {
+  onClick: PropTypes.func.isRequired,
 }
 
 export default TopicHeaderCard
