@@ -51,9 +51,9 @@ module.exports = {
       wider: ".1em",
       widest: ".2em",
     },
-    maxWidth: {
-      dashcard: "320px",
-    },
+    // maxWidth: {
+    //   dashcard: "320px",
+    // },
     minHeight: {
       dashcard: "181px",
       dashcardrow: "39px",
