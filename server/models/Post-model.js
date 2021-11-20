@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-require("./User-model");
-require("./Channel-model");
-require("./Comment-model")
+// require("./User-model");
+// require("./Channel-model");
+// require("./Comment-model")
 
 const postSchema = new Schema(
   {
-    postTitle: {
-      type: String,
-      required: true
-    },
-    postBody: {
+    // title: {
+    //   type: String,
+    //   // required: true
+    // },
+    body: {
         type: String,
-        required: true
+        // required: true
     },
     author: {
         type: Schema.Types.ObjectId,
@@ -23,17 +23,14 @@ const postSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Topic"
     },
-    comment: [{
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
     }],
-    votes: [{
-      type: String
+    likedBy: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }],
-    showContent: {
-      type: Boolean,
-      default: true
-    },
   },
   {
     timestamps: true,
