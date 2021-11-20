@@ -9,12 +9,16 @@ import store from "./redux/store"
 import Home from "./pages/Home"
 import TopicIndex from "./pages/TopicOverview"
 import TopicDetailPage from "./pages/TopicDetailPage"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 // import Topic from "./routes/topic"
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="/" element={<App />}>
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<TopicIndex />} />
