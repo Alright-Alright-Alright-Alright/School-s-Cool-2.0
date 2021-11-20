@@ -7,10 +7,10 @@ export default function TopicIndex() {
       <h2>Topics</h2>
       <Link
         style={{ display: "block", margin: "1rem 0" }}
-        to="/topics/123"
-        key="123"
+        to="/topics/619419a06ae0dc828aecc5f6"
+        key="619419a06ae0dc828aecc5f6"
       >
-        Go to topic 123
+        Go to topic 619419a06ae0dc828aecc5f6
       </Link>
       <Outlet />
     </main>
