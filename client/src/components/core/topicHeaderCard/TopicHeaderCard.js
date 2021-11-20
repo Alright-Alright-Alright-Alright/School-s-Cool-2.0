@@ -1,9 +1,17 @@
-import React from "react"
+// eslint-disable-next-line no-unused-vars
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Button from "../Button"
 import Icon from "../Icon"
 
-function TopicHeaderCard({ onClick }) {
+function TopicHeaderCard({ onClick, postBody }) {
+  //   const [postBody, setpostBody] = useState("")
+
+  //   const handleChange = (e) => {
+  //     // setpostBody(e.target.value)
+  //     postBody(e.target.value)
+  //   }
+
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="flex justify-between p-3">
@@ -15,8 +23,8 @@ function TopicHeaderCard({ onClick }) {
         <input
           className="bg-grey-super_light w-full rounded-full text-base pl-3"
           type="text"
-          placeholder="Add a comment"
-          onChange={(e) => props.body(e.target.value)}
+          placeholder="Add a post"
+          onChange={(e) => postBody(e.target.value)}
         />
       </div>
 
@@ -35,6 +43,7 @@ function TopicHeaderCard({ onClick }) {
 
 TopicHeaderCard.propTypes = {
   onClick: PropTypes.func.isRequired,
+  postBody: PropTypes.func.isRequired,
 }
 
 export default TopicHeaderCard

@@ -1,6 +1,9 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-unused-prop-types */
 import React from "react"
+import PropTypes from "prop-types"
 
-function TopicPost() {
+function TopicPost({ post }) {
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div>
@@ -20,18 +23,13 @@ function TopicPost() {
             </a>
           </div>
           <div className="flex items-center">
-            <p className="text-base">Date</p>
+            <p className="text-base">{post.createdAt}</p>
           </div>
         </div>
       </div>
       <div className="">
         <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
-          Olore de volut audae velitiori ipsuntiate litatur secuptatias iunturi
-          osandeliquis reni as debissit hit ommossequi dis a quid untis quist
-          dolor sandist inciminctet ut officiu ntiam, eliatis anducit alit fuga.
-          Olore de volut audae velitiori ipsuntiate litatur secuptatias iunturi
-          osandeliquis reni as debissit hit ommossequi dis a quid untis quist
-          dolor sandist inciminctet ut officiu ntiam, eliatis anducit alit fuga.
+          {post.body}
         </p>
       </div>
       <div className="flex justify-end pt-1 pr-3">
@@ -51,6 +49,10 @@ function TopicPost() {
       </div>
     </div>
   )
+}
+
+TopicPost.propTypes = {
+  post: PropTypes.object.isRequired,
 }
 
 export default TopicPost
