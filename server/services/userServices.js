@@ -1,5 +1,6 @@
 const { getingTheUser, updatingTheUser, followingTheUser, deletingTheUser } = require("../db/userDb");
 const bcrypt = require("bcryptjs");
+
 exports.getTheUser = async (userid) => {
   try {
     return await getingTheUser(userid);
