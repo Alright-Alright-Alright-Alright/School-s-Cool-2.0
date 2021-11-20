@@ -61,7 +61,10 @@ module.exports = {
     height: {
       dashcard: "208px",
       dashcardtitle: "43px",
+      topicsCard: "290px",
+      topicsCardImage: "184px",
     },
+    width: { topicsCard: "203px" },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
