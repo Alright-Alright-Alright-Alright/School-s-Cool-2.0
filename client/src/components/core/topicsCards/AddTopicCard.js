@@ -1,31 +1,8 @@
 import React from "react"
 
-const cardStyle = {
-  position: "static",
-  width: "203px",
-  height: "290px",
-  background: "#FFFFFF",
-  boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.25)",
-  borderRadius: "0px 20px 20px 20px",
-  flex: "none",
-  order: "0",
-  flexGrow: "0",
-  margin: "0px 32px",
-}
-
-const textStyle = {
-  fontFamily: "Karla",
-  fontSize: "20px",
-  fontStyle: "normal",
-  fontWeight: "600",
-  lineHeight: "26px",
-  letterSpacing: "0.05em",
-  textAlign: "center",
-}
-
 const TopicsCard = () => (
-  <div style={cardStyle}>
-    <div>
+  <div className="w-topicsCard h-topicsCard flex flex-col shadow-xl rounded-br-xl rounded-bl-xl">
+    <button type="submit">
       <section style={{ margin: "51px 32px 15px" }}>
         <svg
           width="138"
@@ -44,8 +21,10 @@ const TopicsCard = () => (
           />
         </svg>
       </section>
-      <section style={textStyle}>New Topic</section>
-    </div>
+      <section className="font-sans font-semibold text-lg text-center">
+        New Topic
+      </section>
+    </button>
   </div>
 )
 
