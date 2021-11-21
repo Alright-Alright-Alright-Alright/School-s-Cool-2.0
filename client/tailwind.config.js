@@ -64,8 +64,14 @@ module.exports = {
       topicsCard: "290px",
       topicsCardImage: "184px",
       topicsCardBottomHalf: "106px",
+      modal: "285px",
     },
-    width: { topicsCard: "203px" },
+    width: {
+      topicsCard: "203px",
+      modal: "672px",
+      modalSelect: "187px",
+      modalTextInputs: "616px",
+    },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React from "react"
 import AddTopicCard from "./AddTopicCard"
@@ -5,7 +6,10 @@ import Icon from "../Icon"
 
 const TopicCards = ({ topics }) => {
   const topicsCard = topics.map((topic) => (
-    <div className="w-topicsCard h-topicsCard flex flex-col shadow-xl rounded-br-xl rounded-bl-xl bg-white">
+    <div
+      key={topic._id}
+      className="w-topicsCard h-topicsCard shadow-xl rounded-br-xl rounded-bl-xl bg-white"
+    >
       <section className="h-topicsCardImage">
         <img
           src="https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560"
@@ -18,8 +22,8 @@ const TopicCards = ({ topics }) => {
           <h1 className="font-sans font-semibold text-lg">{topic.title}</h1>
         </div>
         <hr />
-        <div className="flex">
-          <div>
+        <div className="flex justify-around">
+          <div className="flex justify-start">
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
             <p>20</p>
             {/* {members.length} */}
@@ -27,7 +31,7 @@ const TopicCards = ({ topics }) => {
             <p>20</p>
             {/* {files.length} */}
           </div>
-          <div>
+          <div className="flex justify-end">
             <Icon iconName="add" iconStyle="fill-inactive text-grey-dark" />
           </div>
         </div>
