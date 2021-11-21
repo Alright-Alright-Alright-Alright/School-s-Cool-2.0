@@ -8,9 +8,9 @@ const getAllTopicsDb = async () => {
   }
 };
 
-const addTopicToDb = async (title, description, owner) => {
+const addTopicToDb = async (title, description, bannerImage, owner) => {
   try {
-    return await Topic.create({ title, description, owner });
+    return await Topic.create({ title, description, bannerImage, owner });
   } catch (error) {
     throw new Error(error);
   }

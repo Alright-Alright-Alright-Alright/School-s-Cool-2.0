@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import fileUploadHandler from "../../middleware/UploadFile"
 import { addAtopic } from "../../redux/actions/topicActions"
 import Button from "./Button"
 
@@ -10,12 +11,6 @@ const Modal = () => {
 
   const dispatch = useDispatch()
 
-  const topicData = {
-    title,
-    description,
-    bannerImage,
-  }
-
   const chooseTitle = (e) => {
     seTitle(e.target.value)
   }
@@ -24,12 +19,19 @@ const Modal = () => {
     setDescription(e.target.value)
   }
 
-  const chooseImageBanner = (e) => {
-    setBannerImage(e.target.value)
+  const chooseBannerImage = (e) => {
+    setBannerImage(e.target.files[0])
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
+    const image = await fileUploadHandler(bannerImage)
+    const topicData = {
+      title,
+      description,
+      bannerImage: image,
+    }
+
     dispatch(addAtopic(topicData))
   }
 
@@ -68,7 +70,7 @@ const Modal = () => {
           name=""
           id=""
           className="w-modalSelect"
-          onChange={chooseImageBanner}
+          onChange={chooseBannerImage}
         />
       </section>
       <section className="flex justify-center">

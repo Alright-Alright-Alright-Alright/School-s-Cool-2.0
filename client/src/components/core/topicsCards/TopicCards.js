@@ -12,7 +12,7 @@ const TopicCards = ({ topics }) => {
     >
       <section className="h-topicsCardImage">
         <img
-          src="https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560"
+          src={topic.bannerImage}
           alt="topic_Image"
           className="h-topicsCardImage rounded-tr-xl"
         />
@@ -21,15 +21,15 @@ const TopicCards = ({ topics }) => {
         <div>
           <h1 className="font-sans font-semibold text-lg">{topic.title}</h1>
         </div>
-        <hr />
-        <div className="flex justify-around">
+        <span className="flex justify-center">
+          <hr className="w-modalHrWidth relative top-5" />
+        </span>
+        <div className="flex">
           <div className="flex justify-start">
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
-            <p>20</p>
-            {/* {members.length} */}
+            <span>{topics.members}</span>
             <Icon iconName="file" iconStyle="fill-inactive text-grey-dark" />
-            <p>20</p>
-            {/* {files.length} */}
+            <span>{topics.files}</span>
           </div>
           <div className="flex justify-end">
             <Icon iconName="add" iconStyle="fill-inactive text-grey-dark" />

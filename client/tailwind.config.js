@@ -71,6 +71,7 @@ module.exports = {
       modal: "672px",
       modalSelect: "187px",
       modalTextInputs: "616px",
+      modalHrWidth: "175.5px",
     },
     borderWidth: {
       DEFAULT: "1px",

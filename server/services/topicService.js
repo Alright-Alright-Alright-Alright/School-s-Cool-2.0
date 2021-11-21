@@ -16,9 +16,9 @@ const getAllTopicsService = async () => {
   }
 };
 
-const createNewTopicService = async (title, description, owner) => {
+const createNewTopicService = async (title, description, bannerImage, owner) => {
   try {
-    return await addTopicToDb(title, description, owner);
+    return await addTopicToDb(title, description, bannerImage, owner);
   } catch (error) {
     throw new Error(error);
   }
