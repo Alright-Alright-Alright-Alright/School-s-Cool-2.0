@@ -3,14 +3,14 @@ import { SET_POSTS, POST_POST } from "../types/posts"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-// const authToken = localStorage.getItem("Authorization")
+const authToken = localStorage.getItem("Authorization")
 
 export const getAllPosts = (topicId) => (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   axios
     .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}/posts`, topicId, {
-      //   headers: { Authorization: authToken },
+      headers: { Authorization: authToken },
     })
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
@@ -19,7 +19,7 @@ export const getAllPosts = (topicId) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response,
+        payload: err.response.data,
       })
     })
 }
@@ -31,7 +31,7 @@ export const createPost = (newPost) => (dispatch) => {
       `${process.env.REACT_APP_API_URL}/topics/${newPost.topicId}/posts`,
       newPost,
       {
-        //   headers: { Authorization: authToken },
+        headers: { Authorization: authToken },
       }
     )
     .then((response) => {
@@ -41,7 +41,7 @@ export const createPost = (newPost) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response,
+        payload: err.response.data,
       })
     })
 }
