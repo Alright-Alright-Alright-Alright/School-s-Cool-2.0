@@ -13,25 +13,25 @@ const eventSchema = new Schema(
         ref: "User",
       },
     ],
-    eventName: {
+    title: {
       type: String,
       trim: true,
       required: [true, "Event name is required."],
     },
-    eventDateStart: {
+    dateStart: {
       type: Date,
       required: [true, "Date is required."],
     },
-    eventDateEnd: {
+    dateEnd: {
       type: Date,
     },
-    eventLocation: {
+    location: {
       type: String,
     },
-    eventDescription:{
+    description:{
         type: String
     },
-    eventBannerImage: {
+    bannerImage: {
       type: String,
       default: "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg"
     },
