@@ -4,8 +4,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
 
 function TopicPost({ post }) {
+  dayjs.extend(relativeTime)
+
   console.log(post)
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -29,7 +33,7 @@ function TopicPost({ post }) {
             {/* <a href="/" className="text-base pl-3" /> */}
           </div>
           <div className="flex items-center">
-            <p className="text-base">{post.createdAt}</p>
+            <p className="text-base">{dayjs(post.createdAt).fromNow()}</p>
           </div>
         </div>
       </div>
