@@ -25,6 +25,7 @@ function TopicHeaderCard({ onClick, postBody }) {
           type="text"
           placeholder="Add a post"
           onChange={(e) => postBody(e.target.value)}
+          required
         />
       </div>
 
@@ -35,7 +36,12 @@ function TopicHeaderCard({ onClick, postBody }) {
           </button>
           <p className="pl-3">Add a resource</p>
         </div>
-        <Button buttonName="Add post to topic" btnPrimary onClick={onClick} />
+        <Button
+          buttonName="Add post to topic"
+          buttonStyle="btnTopicStyle"
+          buttonSubmit
+          onClick={onClick}
+        />
       </div>
     </div>
   )

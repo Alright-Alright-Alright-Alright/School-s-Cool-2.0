@@ -1,7 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
 function TopicPost({ post }) {
   return (
@@ -11,16 +13,19 @@ function TopicPost({ post }) {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-2"
-              src="https://via.placeholder.com/40x40"
+              src={post.author?.imageUrl}
               alt="profile"
             />
-            <p className="text-base">User name</p>
+            <p className="text-base">
+              {post.author?.firstName} {post.author?.lastName}
+            </p>
             <p className="text-base pl-3 text-grey-medium_light">
               Commented on
             </p>
-            <a href="/" className="text-base pl-3">
-              Topic name
-            </a>
+            <Link to={`/topics/${post.topic?._id}`} className="text-base pl-3">
+              {post.topic?.title}
+            </Link>
+            {/* <a href="/" className="text-base pl-3" /> */}
           </div>
           <div className="flex items-center">
             <p className="text-base">{post.createdAt}</p>
