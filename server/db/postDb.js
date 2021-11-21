@@ -4,16 +4,16 @@ const getAllPostsDb = async (topicId) => {
   try {
     return await Post.find({topic: topicId})
       .sort({ createdAt: "desc" })
-      .populate("author", 'firstName lastName imageUrl')
+      .populate("owner", 'firstName lastName imageUrl')
       .populate("topic", 'title')
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const addPostToDb = async (body, author, topicId) => {
+const addPostToDb = async (body, owner, topicId) => {
   try {
-    return await Post.create({ body: body, author, topic:topicId}, { new: true })
+    return await Post.create({ body: body, owner, topic:topicId}, { new: true })
   } catch (error) {
     throw new Error(error)
   }

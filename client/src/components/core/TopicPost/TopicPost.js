@@ -6,6 +6,7 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 
 function TopicPost({ post }) {
+  console.log(post)
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div>
@@ -13,11 +14,11 @@ function TopicPost({ post }) {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-2"
-              src={post.author?.imageUrl}
+              src={post.owner?.imageUrl}
               alt="profile"
             />
             <p className="text-base">
-              {post.author?.firstName} {post.author?.lastName}
+              {post.owner?.firstName} {post.owner?.lastName}
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
               Commented on
