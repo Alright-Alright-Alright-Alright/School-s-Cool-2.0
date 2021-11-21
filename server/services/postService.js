@@ -13,9 +13,9 @@ const getAllPostsService = async (topicId) => {
     }
   };
 
-const createPostService = async (title, body, author, topicId) => {
+const createPostService = async ( body, author, topicId) => {
     try {
-        return await addPostToDb(title, body, author, topicId);
+        return await addPostToDb( body, author, topicId);
     } catch (e) {
         throw new Error(e.message);
     }
