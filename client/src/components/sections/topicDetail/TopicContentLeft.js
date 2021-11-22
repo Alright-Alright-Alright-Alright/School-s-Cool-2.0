@@ -6,9 +6,10 @@ function ContentLeft() {
     <div className="flex flex-col place-items-end">
       <div className="p-3">
         <img
-          className="rounded-r-3xl rounded-b-3xl"
+          className="rounded-r-3xl rounded-b-3xl "
           src="https://via.placeholder.com/320"
           alt="placeholder"
+          width="400"
         />
         <div className="p-3 flex-col  place-items-end content-end max-w-xs">
           <h1 className="text-xl pb-2">Algebra Help</h1>
@@ -26,21 +27,22 @@ function ContentLeft() {
             dashCardData={[]}
           />
         </div>
-      </div>
-
-      <div className="p-3">
-        <p>Topic created by</p>
-        <div className="flex items-center py-3">
-          <img
-            className="w-10 h-10 rounded-full mr-2"
-            src="https://via.placeholder.com/40x40"
-            alt="profile"
-          />
-          <p className="text-base">User name</p>
-          <p className="text-base pl-3 text-grey-medium_light">Commented on</p>
-          <a href="/" className="text-base pl-3">
-            Topic name
-          </a>
+        <div className="p-3 w-full">
+          <p>Topic created by</p>
+          <div className="flex items-center py-3">
+            <img
+              className="w-10 h-10 rounded-full mr-2"
+              src="https://via.placeholder.com/40x40"
+              alt="profile"
+            />
+            <p className="text-base">User name</p>
+            <p className="text-base pl-3 text-grey-medium_light">
+              Commented on
+            </p>
+            <a href="/" className="text-base pl-3">
+              Topic name
+            </a>
+          </div>
         </div>
       </div>
     </div>

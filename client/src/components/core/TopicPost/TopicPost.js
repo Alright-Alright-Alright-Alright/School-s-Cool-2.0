@@ -6,11 +6,12 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import Comment from "../comment/Comment"
+import CommentForm from "../comment/CommentForm"
 
 function TopicPost({ post }) {
   dayjs.extend(relativeTime)
 
-  console.log(post)
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div>
@@ -30,7 +31,6 @@ function TopicPost({ post }) {
             <Link to={`/topics/${post.topic?._id}`} className="text-base pl-3">
               {post.topic?.title}
             </Link>
-            {/* <a href="/" className="text-base pl-3" /> */}
           </div>
           <div className="flex items-center">
             <p className="text-base">{dayjs(post.createdAt).fromNow()}</p>
@@ -45,7 +45,7 @@ function TopicPost({ post }) {
       <div className="flex justify-end pt-1 pr-3">
         <p className="text-base">Icons</p>
       </div>
-      <div className="flex px-5 pb-5 pt-3">
+      {/* <div className="flex px-5 pb-5 pt-3">
         <img
           className="w-10 h-10 rounded-full mr-2"
           src="https://via.placeholder.com/30x30"
@@ -56,7 +56,11 @@ function TopicPost({ post }) {
           type="text"
           placeholder="Add a comment"
         />
-      </div>
+      </div> */}
+      <Comment />
+      <Comment />
+
+      <CommentForm />
     </div>
   )
 }
