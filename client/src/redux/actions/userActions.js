@@ -25,7 +25,6 @@ export const loginUser = (userData) => (dispatch) => {
   userService
     .login(userData)
     .then((response) => {
-      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_AUTHENTICATED, payload: response })
       setAuthorizationHeader(response.accessToken)

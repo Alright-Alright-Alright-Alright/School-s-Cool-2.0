@@ -1,22 +1,18 @@
-/* eslint-disable dot-notation */
 import axios from "axios"
 
-// const authToken = localStorage.getItem("Authorization")
+const backendUrl = process.env.REACT_APP_API_URL
+const authToken = localStorage.getItem("Authorization")
 
-class TopicService {
-  constructor() {
-    const service = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
-      withCredentials: true,
+export const getTopics = () =>
+  axios
+    .get(`${backendUrl}/topics`, {
+      headers: { Authorization: authToken },
     })
+    .then((responseFromAPI) => responseFromAPI.data)
 
-    this.service = service
-    // service.defaults.headers.common["Authorization"] = authToken
-  }
-
-  getAllTopics = () => {
-    this.service.get("/topics").then((response) => response.data)
-  }
-}
-
-export default TopicService
+export const addTopic = (topicData) =>
+  axios
+    .post(`${backendUrl}/topics`, topicData, {
+      headers: { Authorization: authToken },
+    })
+    .then((responseFromAPI) => responseFromAPI.data)
