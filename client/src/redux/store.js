@@ -8,6 +8,7 @@ import topicsReducer from "./reducers/topicReducer"
 import uiReducer from "./reducers/uiReducer"
 import userReducer from "./reducers/userReducer"
 import eventsReducer from "./reducers/eventReducer"
+import postsReducer from "./reducers/postReducer"
 
 const initialState = {}
 
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   topics: topicsReducer,
   events: eventsReducer,
   UI: uiReducer,
+  posts: postsReducer,
 })
 
 const store = createStore(
