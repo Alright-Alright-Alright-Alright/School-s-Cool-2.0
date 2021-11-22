@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import fileUploadHandler from "../../middleware/UploadFile"
 import { addAtopic } from "../../redux/actions/topicActions"
 import Button from "./Button"
+import SwitchButton from "./SwitchButton"
 
 const Modal = () => {
   const [title, seTitle] = useState("")
@@ -37,7 +38,7 @@ const Modal = () => {
 
   return (
     <form
-      className="rounded-2xl bg-white flex flex-col justify-evenly"
+      className="h-72 w-full rounded-2xl bg-white flex flex-col justify-evenly absolute"
       onSubmit={handleFormSubmit}
     >
       <section className="flex justify-center">
@@ -46,7 +47,7 @@ const Modal = () => {
           name=""
           id=""
           placeholder="Add your descriptive topic name"
-          className=""
+          className="w-full"
           onChange={chooseTitle}
         />
       </section>
@@ -68,15 +69,12 @@ const Modal = () => {
       <section className="flex justify-center">
         <textarea
           placeholder="Briefly explain what your topic is about"
-          className=""
+          className="w-full"
           onChange={chooseDescription}
         />
       </section>
-      <section className="flex justify-around">
-        <select name="" id="">
-          <option value="">Public</option>
-          <option value="">Private</option>
-        </select>
+      <section className="flex justify-between px-5">
+        <SwitchButton />
         <Button buttonName="Create Topic" buttonSubmit="submit" />
       </section>
     </form>

@@ -13,3 +13,12 @@
   --color-content: currentColor;
   --color-counter: currentColor;
 }
+
+#toogle-switch::after {
+  content: "";
+  @apply h-6 w-6 rounded-full bg-grey-dark absolute left-0 top-0 transform scale-110 duration-200
+}
+
+#toogle-switch:checked::after {
+  @apply transform scale-110 translate-x-6
+}
