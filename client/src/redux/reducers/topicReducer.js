@@ -10,7 +10,7 @@ const topicReducer = (state = initialState.topics, action) => {
     case GET_TOPICS:
       return [...state, ...action.payload]
     case POST_TOPIC:
-      return action.payload
+      return [...state, ...action.payload]
     default:
       return state
   }
