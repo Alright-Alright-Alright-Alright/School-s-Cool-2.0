@@ -11,7 +11,7 @@ const TopicsCard = () => {
   return (
     <div>
       <div>{showModal && <Modal />}</div>
-      <div className="w-topicsCard h-topicsCard flex flex-col shadow-xl rounded-br-xl rounded-bl-xl">
+      <div className="flex flex-col justify-between w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
         <button type="button" onClick={showModalHandler}>
           <section style={{ margin: "51px 32px 15px" }}>
             <svg

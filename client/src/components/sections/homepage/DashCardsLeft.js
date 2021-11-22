@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { getAllTopics } from "../../../redux/actions/topicActions"
 import { getAllEvents } from "../../../redux/actions/eventActions"
-import { getAllCourses } from "../../../redux/actions/courseActions"
+import getAllCourses from "../../../redux/actions/courseActions"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics)
