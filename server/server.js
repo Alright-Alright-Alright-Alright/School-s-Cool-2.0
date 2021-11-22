@@ -70,6 +70,9 @@ app.use("/api", libraryRoutes);
 const topicRoutes = require("./routes/topicRoutes");
 app.use("/api", topicRoutes);
 
+const postRoutes = require("./routes/postRoutes");
+app.use("/api", postRoutes);
+
 
 //Server =====================================
 app.listen(process.env.PORT, () =>

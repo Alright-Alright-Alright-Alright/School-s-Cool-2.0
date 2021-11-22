@@ -3,7 +3,7 @@ import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
 
 function ActivityFeed() {
-  const [filter, setFilter] = useState(true)
+  const [filter, setFilter] = useState("btnPrimaryStyle")
 
   return (
     <div className="mt-3">
@@ -16,13 +16,18 @@ function ActivityFeed() {
         <div className="space-x-4 md:place-content-between text-center pr-3">
           <Button
             buttonName="All activity"
-            btnPrimary={filter}
-            onClick={() => setFilter(!filter)}
+            buttonStyle={filter}
+            // btnPrimary={filter}
+            onClick={() => setFilter("btnPrimaryStyle")}
           />
           <Button
             buttonName="Followed activity"
-            btnPrimary={!filter}
-            onClick={() => setFilter(!filter)}
+            buttonStyle={
+              filter === "btnSecondaryStyle"
+                ? "btnPrimaryStyle"
+                : "btnSecondaryStyle"
+            }
+            onClick={() => setFilter("btnSecondaryStyle")}
           />
         </div>
       </div>
