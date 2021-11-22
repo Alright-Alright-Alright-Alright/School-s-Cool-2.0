@@ -37,7 +37,7 @@ const Modal = () => {
 
   return (
     <form
-      className="w-modal h-modal rounded-2xl bg-white flex flex-col justify-evenly"
+      className="rounded-2xl bg-white flex flex-col justify-evenly"
       onSubmit={handleFormSubmit}
     >
       <section className="flex justify-center">
@@ -46,37 +46,29 @@ const Modal = () => {
           name=""
           id=""
           placeholder="Add your descriptive topic name"
-          className="w-modalTextInputs"
+          className=""
           onChange={chooseTitle}
         />
       </section>
       <section className="flex justify-evenly">
-        <select
-          name=""
-          id=""
-          className="w-modalSelect bg-grey-super_light rounded-lg"
-        >
+        <select name="" id="" className=" bg-grey-super_light rounded-lg">
           <option value="">Category</option>
         </select>
-        <select
-          name=""
-          id=""
-          className="w-modalSelect bg-grey-super_light rounded-lg"
-        >
+        <select name="" id="" className=" bg-grey-super_light rounded-lg">
           <option value="">Subject</option>
         </select>
         <input
           type="file"
           name=""
           id=""
-          className="w-modalSelect"
+          className=""
           onChange={chooseBannerImage}
         />
       </section>
       <section className="flex justify-center">
         <textarea
           placeholder="Briefly explain what your topic is about"
-          className="w-modalTextInputs"
+          className=""
           onChange={chooseDescription}
         />
       </section>

@@ -54,10 +54,10 @@ module.exports = {
     // maxWidth: {
     //   dashcard: "320px",
     // },
-    minHeight: {
-      dashcard: "181px",
-      dashcardrow: "39px",
-    },
+    // minHeight: {
+    //   dashcard: "181px",
+    //   dashcardrow: "39px",
+    // },
     // height: {
     //   dashcard: "208px",
     //   dashcardtitle: "43px",

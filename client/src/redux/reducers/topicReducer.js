@@ -8,9 +8,9 @@ const initialState = {
 const topicReducer = (state = initialState.topics, action) => {
   switch (action.type) {
     case GET_TOPICS:
-      return [...state, ...action.payload]
+      return [...action.payload]
     case POST_TOPIC:
-      return [...state, ...action.payload]
+      return [...action.payload]
     default:
       return state
   }
