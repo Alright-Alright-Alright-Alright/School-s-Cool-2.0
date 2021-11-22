@@ -7,10 +7,11 @@ import App from "./App"
 // import Topics from "./routes/topics"
 import store from "./redux/store"
 import Home from "./pages/Home"
-import TopicIndex from "./pages/TopicOverview"
+// import TopicIndex from "./pages/TopicOverview"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import Topics from "./pages/Topics"
 // import Topic from "./routes/topic"
 
 ReactDOM.render(
@@ -21,7 +22,7 @@ ReactDOM.render(
         <Route path="register" element={<Register />} />
         <Route path="/" element={<App />}>
           <Route path="home" element={<Home />} />
-          <Route path="topics" element={<TopicIndex />} />
+          <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
         </Route>
       </Routes>

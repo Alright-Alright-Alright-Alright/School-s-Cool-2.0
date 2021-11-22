@@ -8,7 +8,6 @@ import Topics from "./pages/Topics"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Home from "./pages/Home"
 
-
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
