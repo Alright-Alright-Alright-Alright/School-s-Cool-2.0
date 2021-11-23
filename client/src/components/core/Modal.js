@@ -4,6 +4,7 @@ import fileUploadHandler from "../../middleware/UploadFile"
 import { addAtopic } from "../../redux/actions/topicActions"
 import Button from "./Button"
 import SwitchButton from "./SwitchButton"
+import Icon from "./Icon"
 
 const Modal = () => {
   const [title, seTitle] = useState("")
@@ -38,25 +39,30 @@ const Modal = () => {
 
   return (
     <form
-      className="h-72 w-full rounded-2xl bg-white flex flex-col justify-evenly absolute"
+      className="h-72 w-4/5 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-20 md:inset-y-20"
       onSubmit={handleFormSubmit}
     >
-      <section className="flex justify-center">
+      <section className="flex justify-between px-5">
         <input
           type="text"
           name=""
           id=""
           placeholder="Add your descriptive topic name"
-          className="w-full"
+          className="w-2/3"
           onChange={chooseTitle}
         />
+        <Icon iconName="close" />
       </section>
       <section className="flex justify-evenly">
-        <select name="" id="" className=" bg-grey-super_light rounded-lg">
+        <select name="" id="" className=" bg-grey-super_light rounded-lg w-48">
           <option value="">Category</option>
+          <option value="">Home Work</option>
+          <option value="">Doubts</option>
         </select>
-        <select name="" id="" className=" bg-grey-super_light rounded-lg">
+        <select name="" id="" className=" bg-grey-super_light rounded-lg  w-48">
           <option value="">Subject</option>
+          <option value="">Maths</option>
+          <option value="">Literature</option>
         </select>
         <input
           type="file"
@@ -69,13 +75,17 @@ const Modal = () => {
       <section className="flex justify-center">
         <textarea
           placeholder="Briefly explain what your topic is about"
-          className="w-full"
+          className="w-full px-5"
           onChange={chooseDescription}
         />
       </section>
       <section className="flex justify-between px-5">
         <SwitchButton />
-        <Button buttonName="Create Topic" buttonSubmit="submit" />
+        <Button
+          buttonName="Create Topic"
+          buttonStyle="btnTopicStyle"
+          buttonSubmit
+        />
       </section>
     </form>
   )
