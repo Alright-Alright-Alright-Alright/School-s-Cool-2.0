@@ -38,11 +38,11 @@ module.exports = {
       sans: ["Karla", "sans-serif"],
     },
     fontSize: {
-      xs: ["10px", "12px"],
-      sm: ["12px", "18px"],
-      base: ["14px", "16px"],
-      lg: ["20px", "23px"],
-      xl: ["32px", "37px"],
+      xs: ["0.625rem", "0.75rem"],
+      sm: ["0.75rem", "1.125rem"],
+      base: [".875rem", "1rem"],
+      lg: ["1.25rem", "1.5rem"],
+      xl: ["2rem", "2.25rem"],
     },
     letterSpacing: {
       tight: "0",
@@ -51,28 +51,6 @@ module.exports = {
       wider: ".1em",
       widest: ".2em",
     },
-    // maxWidth: {
-    //   dashcard: "320px",
-    // },
-    // minHeight: {
-    //   dashcard: "181px",
-    //   dashcardrow: "39px",
-    // },
-    // height: {
-    //   dashcard: "208px",
-    //   dashcardtitle: "43px",
-    //   topicsCard: "290px",
-    //   topicsCardImage: "184px",
-    //   topicsCardBottomHalf: "106px",
-    //   modal: "285px",
-    // },
-    // width: {
-    //   topicsCard: "203px",
-    //   modal: "672px",
-    //   modalSelect: "187px",
-    //   modalTextInputs: "616px",
-    //   modalHrWidth: "175.5px",
-    // },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
