@@ -18,11 +18,11 @@ const getAllTopics = async (req, res, next) => {
 };
 
 const createNewTopic = async (req, res, next) => {
-  const { title, description, bannerImage } = req.body;
+  const { title, description, bannerImage, private } = req.body;
   owner = req.user.userLogedIn._id;
 
   try {
-    const topic = await createNewTopicService(title, description, bannerImage, owner);
+    const topic = await createNewTopicService(title, description, bannerImage, private, owner);
     return res.status(201).json(topic);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);

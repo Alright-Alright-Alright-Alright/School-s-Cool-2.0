@@ -12,15 +12,19 @@ function MainTopicsContent() {
 
   const dispatch = useDispatch()
 
+  const handleShowModal = () => {
+    setShowModal(!showModal)
+  }
+
   useEffect(() => {
     dispatch(getAllTopics())
   }, [dispatch])
 
   return (
     <div className="relative">
-      {showModal && <Modal />}
-      <div className="flex flex-wrap gap-8 m-6">
-        <button type="button" onClick={() => setShowModal(!showModal)}>
+      {showModal && <Modal handleShowModal={handleShowModal} />}
+      <div className="flex justify-center flex-wrap gap-8 m-6">
+        <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
         {topics.map((topic) => (
