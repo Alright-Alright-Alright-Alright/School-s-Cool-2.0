@@ -7,7 +7,7 @@ import Button from "./Button"
 import SwitchButton from "./SwitchButton"
 import Icon from "./Icon"
 
-const Modal = ({ handleShowModal }) => {
+const Modal = ({ handleShowModal, getTopicsFromDB }) => {
   const [title, seTitle] = useState("")
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
@@ -43,6 +43,7 @@ const Modal = ({ handleShowModal }) => {
     }
     handleShowModal()
     dispatch(addAtopic(topicData))
+    getTopicsFromDB()
   }
 
   return (
