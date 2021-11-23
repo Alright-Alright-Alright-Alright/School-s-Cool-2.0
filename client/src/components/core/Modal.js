@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import fileUploadHandler from "../../middleware/UploadFile"
 import { addAtopic } from "../../redux/actions/topicActions"
@@ -12,8 +12,13 @@ const Modal = ({ handleShowModal }) => {
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
+  const hiddenFileInput = useRef(null)
 
   const dispatch = useDispatch()
+
+  const handleClick = () => {
+    hiddenFileInput.current.click()
+  }
 
   const chooseTitle = (e) => {
     seTitle(e.target.value)
@@ -42,7 +47,7 @@ const Modal = ({ handleShowModal }) => {
 
   return (
     <form
-      className="h-72 w-4/6 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-40 md:inset-y-20 shadow-xl"
+      className="h-72 w-4/6 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-40 md:inset-y-1/4 shadow-xl"
       onSubmit={handleFormSubmit}
     >
       <section className="flex justify-between px-5">
@@ -58,21 +63,34 @@ const Modal = ({ handleShowModal }) => {
           <Icon iconName="close" />
         </button>
       </section>
-      <section className="flex justify-around">
-        <select name="" id="" className="bg-grey-super_light rounded-lg w-44">
+      <section className="flex justify-between px-5">
+        <select name="" id="" className="bg-grey-super_light rounded-lg  w-1/4">
           <option value="">Choose a category</option>
           <option value="">Home Work</option>
           <option value="">Doubts</option>
         </select>
-        <select name="" id="" className=" bg-grey-super_light rounded-lg  w-44">
+        <select
+          name=""
+          id=""
+          className=" bg-grey-super_light rounded-lg  w-1/4"
+        >
           <option value="">Choose a subject</option>
           <option value="">Maths</option>
           <option value="">Literature</option>
         </select>
+        <button
+          type="button"
+          onClick={handleClick}
+          className="flex justify-around w-1/4"
+        >
+          <span className="">Add Cover Image</span>
+          <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
+        </button>
         <input
           type="file"
           size="60"
-          className="w-44"
+          className="hidden"
+          ref={hiddenFileInput}
           onChange={chooseBannerImage}
         />
       </section>
@@ -84,9 +102,11 @@ const Modal = ({ handleShowModal }) => {
         />
       </section>
       <section className="flex justify-between px-5">
-        <button type="button" onClick={() => setPrivacy(!privacy)}>
-          <SwitchButton />
-        </button>
+        <SwitchButton
+          nameLeft="PUBLIC"
+          nameRight="PRIVATE"
+          toogle={() => setPrivacy(!privacy)}
+        />
         <Button
           buttonName="Create Topic"
           buttonStyle="btnTopicStyle"
