@@ -30,13 +30,19 @@ export const joinTopic = (topicId, user) => {
 }
 
 export const leaveTopic = (topicId, user) => {
+  axios.put(
+    `${backendUrl}/topics/${topicId}/leave`,
+    { topicId, user },
+    {
+      headers: { Authorization: authToken },
+    }
+  )
+}
+
+export const getTopicById = (topicId) => {
   axios
-    .put(
-      `${backendUrl}/topics/${topicId}/leave`,
-      { topicId, user },
-      {
-        headers: { Authorization: authToken },
-      }
-    )
+    .get(`${backendUrl}/topics/${topicId}`, {
+      headers: { Authorization: authToken },
+    })
     .then((responseFromAPI) => responseFromAPI.data)
 }

@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
+<<<<<<< HEAD
 import {
   GET_TOPICS,
   POST_TOPIC,
@@ -13,6 +14,10 @@ import {
   joinTopic,
   leaveTopic,
 } from "../services/topicService"
+=======
+import { GET_TOPICS, POST_TOPIC, GET_TOPIC } from "../types/topics"
+import { getTopics, addTopic, getTopicById } from "../services/topicService"
+>>>>>>> 9772607 (merge)
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
@@ -21,6 +26,7 @@ export const getAllTopics = () => async (dispatch) => {
 
   const topicFromDB = await getTopics()
   try {
+    console.log(topicFromDB)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPICS, payload: topicFromDB })
   } catch (error) {
@@ -68,6 +74,13 @@ export const leaveAtopic = (topicId, user) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
+    
+export const getOneTopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  const topicById = await getTopicById(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_TOPIC, payload: topicById })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
