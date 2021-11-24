@@ -1,3 +1,6 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable dot-notation */
+/* eslint-disable no-unused-vars */
 import {
   GET_TOPICS,
   GET_TOPIC,
@@ -13,6 +16,9 @@ import {
   joinTopic,
   leaveTopic,
 } from "../services/topicService"
+
+// import { GET_TOPICS, POST_TOPIC, GET_TOPIC } from "../types/topics"
+// import { getAllTopics, addTopic, getTopicById } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
