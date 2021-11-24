@@ -14,6 +14,7 @@ import {
   addTopic,
   joinTopic,
   leaveTopic,
+  getTopicById,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -86,6 +87,20 @@ export const leaveAtopic = (topicId, user) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getOneTopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  const topicById = await getTopicById(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_TOPIC, payload: topicById })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
