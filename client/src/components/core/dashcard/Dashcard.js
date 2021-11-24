@@ -11,11 +11,11 @@ export default function Dashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  const firstDashCardRows = dashCardData
+  const firstThreeItems = dashCardData
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item?.title}
+        key={item.title}
         listItemTitle={item?.title}
         listItemDate={item?.date}
         listItemComments={item?.comment}
@@ -23,17 +23,15 @@ export default function Dashcard({
       />
     ))
 
-  const secondDashCardRows = dashCardData
-    .slice(3, 6)
-    .map((item) => (
-      <DashCardListItem
-        key={item?.titleTest}
-        listItemTitle={item?.titleTest}
-        listItemDate={item?.date}
-        listItemComments={item?.comment}
-        listItemUsers={item?.user}
-      />
-    ))
+  const allItems = dashCardData.map((item) => (
+    <DashCardListItem
+      key={item?.title}
+      listItemTitle={item?.title}
+      listItemDate={item?.date}
+      listItemComments={item?.comment}
+      listItemUsers={item?.user}
+    />
+  ))
 
   return (
     <>
@@ -49,10 +47,9 @@ export default function Dashcard({
             </div>
           </div>
         </div>
-        <div className="flex-col pl-4 pr-4">
+        <div className="flex-col pl-4 pr-4 max-h-96 overflow-y-auto">
           <div className="divide-y-2 divide-primary">
-            {firstDashCardRows}
-            {expandDashCard ? secondDashCardRows : null}
+            {expandDashCard ? allItems : firstThreeItems}
             <div />
           </div>
         </div>

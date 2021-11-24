@@ -1,4 +1,5 @@
 import React from "react"
+import Icon from "../Icon"
 
 function ActivityCard() {
   return (
@@ -41,8 +42,19 @@ function ActivityCard() {
           dolor sandist inciminctet ut officiu ntiam, eliatis anducit alit fuga.
         </p>
       </div>
-      <div className="flex justify-end pt-1 pr-3">
-        <p className="text-base">Icons</p>
+      <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
+        <div className="flex">
+          <Icon iconName="file" />
+          <span>00</span>
+        </div>
+        <div className="flex">
+          <Icon iconName="like" iconStyle="fill-inactive" />
+          <span>00</span>
+        </div>
+        <div className="flex">
+          <Icon iconName="message" />
+          <span>3</span>
+        </div>
       </div>
       <div className="flex p-3">
         <img
