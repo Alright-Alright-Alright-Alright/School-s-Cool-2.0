@@ -43,7 +43,7 @@ const Modal = ({ handleShowModal, getTopicsFromDB }) => {
     }
     handleShowModal()
     dispatch(addAtopic(topicData))
-    getTopicsFromDB()
+    await getTopicsFromDB()
   }
 
   return (

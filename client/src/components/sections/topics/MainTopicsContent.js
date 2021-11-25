@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import AddTopicCard from "../../core/topicsCards/AddTopicCard"
@@ -38,7 +39,11 @@ function MainTopicsContent() {
           <AddTopicCard />
         </button>
         {topics.map((topic) => (
-          <TopicCard key={topic._id} topics={topic} />
+          <TopicCard
+            key={topic._id}
+            topics={topic}
+            getTopicsFromDB={getAllTopicsHandler}
+          />
         ))}
       </div>
     </div>

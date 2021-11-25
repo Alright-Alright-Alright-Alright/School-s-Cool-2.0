@@ -39,7 +39,7 @@ export const addAtopic = (topicData) => async (dispatch) => {
 export const joinAtopic = (topicId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const joinTopicToDB = await joinTopic({ topicId, user })
+  const joinTopicToDB = await joinTopic(topicId, user)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
