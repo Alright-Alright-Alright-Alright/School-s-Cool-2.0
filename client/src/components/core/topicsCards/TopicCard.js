@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useState /* useEffect */ } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { joinAtopic } from "../../../redux/actions/topicActions"
@@ -17,6 +17,16 @@ const TopicCard = ({ topics, getTopicsFromDB }) => {
     setJoin(true)
     await getTopicsFromDB()
   }
+
+  const checkJoinedUser = () => {
+    topics.members.map((member) => {
+      if (member._id === user._id) setJoin(true)
+    })
+  }
+
+  useEffect(() => {
+    checkJoinedUser()
+  }, [join])
 
   return (
     <div
