@@ -37,12 +37,6 @@ class UserService {
     this.service
       .post("/new-password", { password, token })
       .then((response) => response.data)
-
-  // setAuthorizationHeader = () => {
-  //   const authToken = localStorage.getItem("Authorization")
-  //   // this.service.defaults.headers.common["Authorization"] = `Bearer ${token}`
-  //   axios.defaults.headers.common["Authorization"] = authToken
-  // }
 }
 
 export default UserService
