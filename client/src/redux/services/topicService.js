@@ -16,3 +16,15 @@ export const addTopic = (topicData) =>
       headers: { Authorization: authToken },
     })
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const joinTopic = (topicId, user) => {
+  axios
+    .post(
+      `${backendUrl}//topics/${topicId}/join"`,
+      { topicId, user },
+      {
+        headers: { Authorization: authToken },
+      }
+    )
+    .then((responseFromAPI) => responseFromAPI.data)
+}

@@ -8,6 +8,7 @@ import { getAllTopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
   const topics = useSelector((state) => state.topics)
+  const user = useSelector((state) => state.user)
   const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ function MainTopicsContent() {
 
   useEffect(() => {
     getAllTopicsHandler()
-  }, [topics])
+  }, [])
 
   return (
     <div className="relative">
@@ -37,7 +38,7 @@ function MainTopicsContent() {
           <AddTopicCard />
         </button>
         {topics.map((topic) => (
-          <TopicCard topics={topic} />
+          <TopicCard topics={topic} user={user} />
         ))}
       </div>
     </div>
