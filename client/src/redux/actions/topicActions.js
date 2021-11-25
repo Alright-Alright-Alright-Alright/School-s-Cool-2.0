@@ -6,9 +6,6 @@ import { getTopics, addTopic, joinTopic } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-// const topicService = new TopicService()
-// const authToken = localStorage.getItem("Authorization")
-
 export const getAllTopics = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 

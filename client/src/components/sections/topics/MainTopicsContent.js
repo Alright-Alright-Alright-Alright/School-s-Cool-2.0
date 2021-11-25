@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
@@ -8,7 +9,6 @@ import { getAllTopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
   const topics = useSelector((state) => state.topics)
-  const user = useSelector((state) => state.user)
   const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
@@ -38,7 +38,7 @@ function MainTopicsContent() {
           <AddTopicCard />
         </button>
         {topics.map((topic) => (
-          <TopicCard topics={topic} user={user} />
+          <TopicCard key={topic._id} topics={topic} />
         ))}
       </div>
     </div>

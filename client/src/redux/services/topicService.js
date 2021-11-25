@@ -19,8 +19,8 @@ export const addTopic = (topicData) =>
 
 export const joinTopic = (topicId, user) => {
   axios
-    .post(
-      `${backendUrl}//topics/${topicId}/join"`,
+    .put(
+      `${backendUrl}/topics/${topicId}/join`,
       { topicId, user },
       {
         headers: { Authorization: authToken },
