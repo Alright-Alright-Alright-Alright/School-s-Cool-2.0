@@ -48,7 +48,7 @@ const Modal = ({ handleShowModal, getTopicsFromDB }) => {
 
   return (
     <form
-      className="h-72 w-4/6 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-40 md:inset-y-1/4 shadow-xl"
+      className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-1/7 md:inset-y-1/4 shadow-xl"
       onSubmit={handleFormSubmit}
     >
       <section className="flex justify-between px-5">
@@ -65,7 +65,7 @@ const Modal = ({ handleShowModal, getTopicsFromDB }) => {
         </button>
       </section>
       <section className="flex justify-between px-5">
-        <select name="" id="" className="bg-grey-super_light rounded-lg  w-1/4">
+        <select name="" id="" className="bg-grey-super_light rounded-lg  w-2/7">
           <option value="">Choose a category</option>
           <option value="">Home Work</option>
           <option value="">Doubts</option>
@@ -73,7 +73,7 @@ const Modal = ({ handleShowModal, getTopicsFromDB }) => {
         <select
           name=""
           id=""
-          className=" bg-grey-super_light rounded-lg  w-1/4"
+          className=" bg-grey-super_light rounded-lg  w-2/7"
         >
           <option value="">Choose a subject</option>
           <option value="">Maths</option>
@@ -82,7 +82,7 @@ const Modal = ({ handleShowModal, getTopicsFromDB }) => {
         <button
           type="button"
           onClick={handleClick}
-          className="flex justify-around w-1/4"
+          className="flex justify-around w-2/7"
         >
           <span className="">Add Cover Image</span>
           <Icon iconName="add" iconStyle="fill-inactive text-aqua" />

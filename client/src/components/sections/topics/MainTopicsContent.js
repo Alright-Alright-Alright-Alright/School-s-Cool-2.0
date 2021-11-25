@@ -22,7 +22,7 @@ function MainTopicsContent() {
 
   useEffect(() => {
     getAllTopicsHandler()
-  }, [])
+  }, [topics])
 
   return (
     <div className="relative">
@@ -32,7 +32,7 @@ function MainTopicsContent() {
           getTopicsFromDB={getAllTopicsHandler}
         />
       )}
-      <div className="flex justify-center flex-wrap gap-8 m-6">
+      <div className="flex justify-center flex-wrap gap-7 m-6">
         <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
