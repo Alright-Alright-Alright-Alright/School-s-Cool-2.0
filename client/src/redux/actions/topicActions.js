@@ -1,8 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable dot-notation */
 /* eslint-disable no-unused-vars */
-import { GET_TOPICS, POST_TOPIC, JOIN_TOPIC } from "../types/topics"
-import { getTopics, addTopic, joinTopic } from "../services/topicService"
+import {
+  GET_TOPICS,
+  POST_TOPIC,
+  JOIN_TOPIC,
+  LEAVE_TOPIC,
+} from "../types/topics"
+import {
+  getTopics,
+  addTopic,
+  joinTopic,
+  leaveTopic,
+} from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
@@ -43,6 +53,21 @@ export const joinAtopic = (topicId, user) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const leaveAtopic = (topicId, user) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const leaveTopicToDB = await leaveTopic(topicId, user)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

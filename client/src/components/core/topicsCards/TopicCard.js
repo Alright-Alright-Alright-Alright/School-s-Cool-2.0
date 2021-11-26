@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { joinAtopic } from "../../../redux/actions/topicActions"
+import { joinAtopic, leaveAtopic } from "../../../redux/actions/topicActions"
 import Icon from "../Icon"
 
 const TopicCard = ({ topics, getTopicsFromDB }) => {
@@ -12,15 +12,16 @@ const TopicCard = ({ topics, getTopicsFromDB }) => {
   const [join, setJoin] = useState(false)
   const dispatch = useDispatch()
 
-  const joinTopicHandler = async () => {
-    dispatch(joinAtopic(topics._id, user?._id))
-    setJoin(true)
+  const clickHandler = async () => {
+    setJoin(!join)
+    if (!join) dispatch(joinAtopic(topics._id, user?._id))
+    if (join) dispatch(leaveAtopic(topics._id, user?._id))
     await getTopicsFromDB()
   }
 
   const checkJoinedUser = () => {
     topics.members.map((member) => {
-      if (member._id === user._id) setJoin(true)
+      if (member?._id === user?._id) setJoin(true)
     })
   }
 
@@ -54,7 +55,7 @@ const TopicCard = ({ topics, getTopicsFromDB }) => {
             <span>{topics.recources?.length}</span>
           </div>
           <div className="p-3">
-            <button type="button" onClick={joinTopicHandler}>
+            <button type="button" onClick={clickHandler}>
               {join ? (
                 <Icon
                   iconName="follow"

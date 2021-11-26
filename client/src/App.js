@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { Suspense, lazy } from "react"
+import React, { Suspense, lazy, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Route, Routes, Outlet } from "react-router-dom"
 import NavBar from "./components/layout/NavBar"
 import Login from "./pages/Login"
@@ -7,10 +8,23 @@ import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Home from "./pages/Home"
+import { loggedInUser, loginUser } from "./redux/actions/userActions"
 
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
+  const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchUser = () => {
+      if (!user) {
+        dispatch(loggedInUser())
+      }
+    }
+    fetchUser()
+  }, [])
+
   return (
     <div className="App">
       <NavBar />
