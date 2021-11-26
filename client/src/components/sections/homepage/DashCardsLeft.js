@@ -4,7 +4,7 @@ import Dashcard from "../../core/dashcard/Dashcard"
 import { getAllTopics } from "../../../redux/actions/topicActions"
 import { getAllEvents } from "../../../redux/actions/eventActions"
 import getAllCourses from "../../../redux/actions/courseActions"
-import { getAllPosts } from "../../../redux/actions/postActions"
+// import { getAllPosts } from "../../../redux/actions/postActions"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics)
@@ -19,7 +19,7 @@ function DashCardsLeft() {
     dispatch(getAllTopics())
     dispatch(getAllEvents())
     dispatch(getAllCourses())
-    dispatch(getAllPosts())
+    // dispatch(getAllPosts())
   }, [dispatch])
 
   return (
