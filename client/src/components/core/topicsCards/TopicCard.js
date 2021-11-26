@@ -4,30 +4,38 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { joinAtopic, leaveAtopic } from "../../../redux/actions/topicActions"
+import {
+  getAllTopics,
+  joinAtopic,
+  leaveAtopic,
+} from "../../../redux/actions/topicActions"
 import Icon from "../Icon"
 
-const TopicCard = ({ topics, getTopicsFromDB }) => {
+const TopicCard = ({ topics }) => {
   const user = useSelector((state) => state.user)
   const [join, setJoin] = useState(false)
   const dispatch = useDispatch()
 
-  const clickHandler = async () => {
-    setJoin(!join)
-    if (!join) dispatch(joinAtopic(topics._id, user?._id))
-    if (join) dispatch(leaveAtopic(topics._id, user?._id))
-    await getTopicsFromDB()
+  const leaveTopicHandler = async () => {
+    setJoin(false)
+    dispatch(leaveAtopic(topics._id, user._id))
+    dispatch(getAllTopics())
   }
 
-  const checkJoinedUser = () => {
-    topics.members.map((member) => {
-      if (member?._id === user?._id) setJoin(true)
-    })
+  const JoinTopicHandler = () => {
+    setJoin(true)
+    dispatch(joinAtopic(topics._id, user._id))
+    dispatch(getAllTopics())
   }
 
   useEffect(() => {
+    const checkJoinedUser = () => {
+      topics.members.map((member) => {
+        if (member._id === user?._id) setJoin(true)
+      })
+    }
     checkJoinedUser()
-  }, [join])
+  }, [join, topics.members, user?._id, topics])
 
   return (
     <div
@@ -55,19 +63,21 @@ const TopicCard = ({ topics, getTopicsFromDB }) => {
             <span>{topics.recources?.length}</span>
           </div>
           <div className="p-3">
-            <button type="button" onClick={clickHandler}>
-              {join ? (
+            {join ? (
+              <button type="button" onClick={leaveTopicHandler}>
                 <Icon
                   iconName="follow"
                   iconStyle="fill-active text-grey-dark"
                 />
-              ) : (
+              </button>
+            ) : (
+              <button type="button" onClick={JoinTopicHandler}>
                 <Icon
                   iconName="follow"
                   iconStyle="fill-inactive text-grey-dark"
                 />
-              )}
-            </button>
+              </button>
+            )}
           </div>
         </div>
       </section>
