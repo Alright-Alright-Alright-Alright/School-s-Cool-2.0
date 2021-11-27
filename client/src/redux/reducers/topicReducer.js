@@ -14,9 +14,15 @@ const initialState = {
 const topicReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_TOPICS:
-      return [...action.payload]
+      return {
+        ...state,
+        topics: [...action.payload],
+      }
     case POST_TOPIC:
-      return [...action.payload]
+      return {
+        ...state,
+        topics: [...action.payload],
+      }
     case JOIN_TOPIC:
       return [...action.payload]
     case LEAVE_TOPIC:
