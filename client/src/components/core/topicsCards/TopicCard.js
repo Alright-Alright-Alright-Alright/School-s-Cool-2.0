@@ -18,12 +18,12 @@ const TopicCard = ({ topics }) => {
 
   const leaveTopicHandler = async () => {
     setJoin(false)
-    dispatch(leaveAtopic(topics._id, user._id))
+    dispatch(leaveAtopic(topics._id))
   }
 
   const JoinTopicHandler = () => {
     setJoin(true)
-    dispatch(joinAtopic(topics._id, user._id))
+    dispatch(joinAtopic(topics._id))
   }
 
   useEffect(() => {

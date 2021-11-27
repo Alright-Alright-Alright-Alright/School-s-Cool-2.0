@@ -1,49 +1,34 @@
 import axios from "axios"
 
-const backendUrl = process.env.REACT_APP_API_URL
 const authToken = localStorage.getItem("Authorization")
 
+const service = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
+  headers: { Authorization: authToken },
+})
+
 export const getTopics = () =>
-  axios
-    .get(`${backendUrl}/topics`, {
-      headers: { Authorization: authToken },
-    })
-    .then((responseFromAPI) => responseFromAPI.data)
+  service.get(`/topics`).then((responseFromAPI) => responseFromAPI.data)
 
 export const getTopic = (topicId) =>
-  axios
-    .get(`${backendUrl}/topics/${topicId}`, {
-      headers: { Authorization: authToken },
-    })
+  service
+    .get(`/topics/${topicId}`)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const addTopic = (topicData) =>
-  axios
-    .post(`${backendUrl}/topics`, topicData, {
-      headers: { Authorization: authToken },
-    })
+  service
+    .post(`/topics`, topicData)
     .then((responseFromAPI) => responseFromAPI.data)
 
-export const joinTopic = (topicId, user) => {
-  axios
-    .put(
-      `${backendUrl}/topics/${topicId}/join`,
-      { user },
-      {
-        headers: { Authorization: authToken },
-      }
-    )
+export const joinTopic = (topicId) => {
+  service
+    .put(`/topics/${topicId}/join`)
     .then((responseFromAPI) => responseFromAPI.data)
 }
 
-export const leaveTopic = (topicId, user) => {
-  axios
-    .put(
-      `${backendUrl}/topics/${topicId}/leave`,
-      { user },
-      {
-        headers: { Authorization: authToken },
-      }
-    )
+export const leaveTopic = (topicId) => {
+  service
+    .put(`/topics/${topicId}/leave`)
     .then((responseFromAPI) => responseFromAPI.data)
 }

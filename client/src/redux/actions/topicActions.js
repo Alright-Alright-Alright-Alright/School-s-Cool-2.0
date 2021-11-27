@@ -63,11 +63,10 @@ export const getAtopic = (topicId) => async (dispatch) => {
   }
 }
 
-export const joinAtopic = (topicId, user) => async (dispatch) => {
+export const joinAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const joinTopicToDB = await joinTopic(topicId, user)
-  console.log(joinTopicToDB)
+  const joinTopicToDB = await joinTopic(topicId)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
@@ -79,10 +78,10 @@ export const joinAtopic = (topicId, user) => async (dispatch) => {
   }
 }
 
-export const leaveAtopic = (topicId, user) => async (dispatch) => {
+export const leaveAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const leaveTopicToDB = await leaveTopic(topicId, user)
+  const leaveTopicToDB = await leaveTopic(topicId)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
