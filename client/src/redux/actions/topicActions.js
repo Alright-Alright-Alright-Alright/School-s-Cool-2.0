@@ -79,9 +79,14 @@ export const leaveAtopic = (topicId, user) => async (dispatch) => {
   }
 }
 
-export const getOneTopic = (topicId) => async (dispatch) => {
+export const getOneTopic = (topicId, user) => async (dispatch) => {
+  console.log("Hello", topicId, user)
   dispatch({ type: LOADING_UI })
-  const topicById = await getTopicById(topicId)
+  const topicById = await getTopicById(topicId, user)
+  console.log(topicById)
+
+  console.log(getTopicById(topicId))
+
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicById })

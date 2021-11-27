@@ -10,12 +10,16 @@ import { getOneTopic } from "../../../redux/actions/topicActions"
 
 function TopicDetailIndex() {
   const topic = useSelector((state) => state.topic)
+  const user = useSelector((state) => state.user)
+
   const params = useParams()
   const dispatch = useDispatch()
 
+  console.log(user)
+
   useEffect(() => {
-    dispatch(getOneTopic(params.topicId))
-  }, [dispatch, params.topicId])
+    dispatch(getOneTopic(params.topicId, user?.id))
+  }, [dispatch, params.topicId, user?.id])
 
   console.log(params.topicId)
 

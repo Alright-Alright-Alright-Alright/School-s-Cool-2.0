@@ -39,10 +39,14 @@ export const leaveTopic = (topicId, user) => {
   )
 }
 
-export const getTopicById = (topicId) => {
+export const getTopicById = (topicId, user) => {
   axios
-    .get(`${backendUrl}/topics/${topicId}`, {
-      headers: { Authorization: authToken },
-    })
+    .get(
+      `${backendUrl}/topics/${topicId}`,
+      { topicId, user },
+      {
+        headers: { Authorization: authToken },
+      }
+    )
     .then((responseFromAPI) => responseFromAPI.data)
 }

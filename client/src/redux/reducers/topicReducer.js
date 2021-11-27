@@ -23,6 +23,12 @@ const topicReducer = (state = initialState, action) => {
         ...state,
         topics: [...action.payload],
       }
+    case GET_TOPIC:
+      return {
+        ...state,
+        topicById: { ...action.payload },
+      }
+
     case JOIN_TOPIC:
       return [...action.payload]
     case LEAVE_TOPIC:
