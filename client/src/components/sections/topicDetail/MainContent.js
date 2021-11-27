@@ -11,7 +11,7 @@ import TopicPost from "../../core/TopicPost/TopicPost"
 function MainContent() {
   const [body, setPostBody] = useState("")
   const posts = useSelector((state) => state.posts.posts)
-  const topic = useSelector((state) => state.topics.topic)
+  const topic = useSelector((state) => state.topics.singleTopic)
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
   const params = useParams()

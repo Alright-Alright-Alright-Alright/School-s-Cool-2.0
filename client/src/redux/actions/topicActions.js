@@ -33,6 +33,37 @@ export const addAtopic = (topicData) => async (dispatch) => {
   }
 }
 
+export const joinAtopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const joinTopicToDB = await joinTopic(topicId)
+  console.log(joinTopicToDB)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const leaveAtopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const leaveTopicToDB = await leaveTopic(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
 export const getAlltopics = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
@@ -55,36 +86,6 @@ export const getAtopic = (topicId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicFromDB })
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    })
-  }
-}
-
-export const joinAtopic = (topicId) => async (dispatch) => {
-  dispatch({ type: LOADING_UI })
-
-  const joinTopicToDB = await joinTopic(topicId)
-  try {
-    dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    })
-  }
-}
-
-export const leaveAtopic = (topicId) => async (dispatch) => {
-  dispatch({ type: LOADING_UI })
-
-  const leaveTopicToDB = await leaveTopic(topicId)
-  try {
-    dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

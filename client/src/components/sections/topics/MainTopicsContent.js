@@ -9,7 +9,7 @@ import Modal from "../../core/Modal"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
-  const topics = useSelector((state) => state.topics.topics)
+  const topics = useSelector((state) => state.topics.allTopics)
   const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ function MainTopicsContent() {
 
   useEffect(() => {
     dispatch(getAlltopics())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="relative">
@@ -29,7 +29,7 @@ function MainTopicsContent() {
         <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
-        {topics.map((topic) => (
+        {topics?.map((topic) => (
           <TopicCard key={topic._id} topics={topic} />
         ))}
       </div>

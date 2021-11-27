@@ -1,22 +1,18 @@
 /* eslint-disable dot-notation */
 import axios from "axios"
 
-// const authToken = localStorage.getItem("Authorization")
+const authToken = localStorage.getItem("Authorization")
 
-class EventService {
-  constructor() {
-    const service = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
-      withCredentials: true,
-    })
+const service = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
+  headers: { Authorization: authToken },
+})
 
-    this.service = service
-    // service.defaults.headers.common["Authorization"] = authToken
-  }
+export const getAllEvents = () =>
+  service.get(`/events`).then((response) => response.data)
 
-  getAllEvents = () => {
-    this.service.get("/events").then((response) => response.data)
-  }
-}
-
-export default EventService
+export const getEvent = (eventId) =>
+  service
+    .get(`/event/${eventId}`)
+    .then((responseFromAPI) => responseFromAPI.data)
