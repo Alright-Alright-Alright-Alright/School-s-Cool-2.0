@@ -7,7 +7,6 @@ import {
   POST_TOPIC,
   JOIN_TOPIC,
   LEAVE_TOPIC,
-  GET_TOPIC,
 } from "../types/topics"
 import {
   getTopics,
