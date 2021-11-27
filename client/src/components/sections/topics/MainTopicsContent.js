@@ -9,8 +9,10 @@ import Modal from "../../core/Modal"
 import { getAllTopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
-  const topics = useSelector((state) => state.topics)
+  const topics = useSelector((state) => state.topics.topics)
   const [showModal, setShowModal] = useState(false)
+
+  console.log(topics)
 
   const dispatch = useDispatch()
 
