@@ -49,7 +49,7 @@ export const getAlltopics = () => async (dispatch) => {
   }
 }
 
-export const getAtopic = (topicId) => async (dispatch) => {
+export const getOneTopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const topicFromDB = await getTopic(topicId)
@@ -95,21 +95,21 @@ export const leaveAtopic = (topicId, user) => async (dispatch) => {
   }
 }
 
-export const getOneTopic = (topicId, user) => async (dispatch) => {
-  console.log("Hello", topicId, user)
-  dispatch({ type: LOADING_UI })
-  const topicById = await getTopicById(topicId, user)
-  console.log(topicById)
+// export const getOneTopic = (topicId, user) => async (dispatch) => {
+//   console.log("Hello", topicId, user)
+//   dispatch({ type: LOADING_UI })
+//   // const topicById = await getTopicById(topicId, user)
+//   console.log(topicById)
 
-  console.log(getTopicById(topicId))
+//   // console.log(getTopicById(topicId))
 
-  try {
-    dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: GET_TOPIC, payload: topicById })
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    })
-  }
-}
+//   try {
+//     dispatch({ type: CLEAR_ERRORS })
+//     dispatch({ type: GET_TOPIC, payload: topicById })
+//   } catch (error) {
+//     dispatch({
+//       type: SET_ERRORS,
+//       payload: error.response,
+//     })
+//   }
+// }
