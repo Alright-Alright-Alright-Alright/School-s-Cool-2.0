@@ -1,5 +1,6 @@
 // Topics reducer types
 export const GET_TOPICS = "GET_TOPICS"
+export const GET_TOPIC = "GET_TOPIC"
 export const POST_TOPIC = "POST_TOPIC"
 export const JOIN_TOPIC = "JOIN_TOPIC"
 export const LEAVE_TOPIC = "LEAVE_TOPIC"

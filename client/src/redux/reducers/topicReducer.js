@@ -4,6 +4,7 @@ import {
   POST_TOPIC,
   JOIN_TOPIC,
   LEAVE_TOPIC,
+  GET_TOPIC,
 } from "../types/topics"
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
 const topicReducer = (state = initialState.topics, action) => {
   switch (action.type) {
     case GET_TOPICS:
+      return [...action.payload]
+    case GET_TOPIC:
       return [...action.payload]
     case POST_TOPIC:
       return [...action.payload]

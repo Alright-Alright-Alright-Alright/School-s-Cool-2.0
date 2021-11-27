@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import Dashcard from "../../core/dashcard/Dashcard"
-import { getAllTopics } from "../../../redux/actions/topicActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
 import { getAllEvents } from "../../../redux/actions/eventActions"
 import getAllCourses from "../../../redux/actions/courseActions"
 // import { getAllPosts } from "../../../redux/actions/postActions"
@@ -10,13 +10,13 @@ function DashCardsLeft() {
   const topics = useSelector((state) => state.topics)
   const courses = useSelector((state) => state.courses)
   const events = useSelector((state) => state.events)
-  const posts = useSelector((state) => state.posts)
-  console.log(posts)
+  // const posts = useSelector((state) => state.posts)
+  // console.log(posts)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllTopics())
+    dispatch(getAlltopics())
     dispatch(getAllEvents())
     dispatch(getAllCourses())
     // dispatch(getAllPosts())

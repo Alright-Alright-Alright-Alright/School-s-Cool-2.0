@@ -10,6 +10,13 @@ export const getTopics = () =>
     })
     .then((responseFromAPI) => responseFromAPI.data)
 
+export const getTopic = (topicId) =>
+  axios
+    .get(`${backendUrl}/topics/${topicId}`, {
+      headers: { Authorization: authToken },
+    })
+    .then((responseFromAPI) => responseFromAPI.data)
+
 export const addTopic = (topicData) =>
   axios
     .post(`${backendUrl}/topics`, topicData, {

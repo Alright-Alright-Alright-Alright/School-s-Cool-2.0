@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import {
-  getAllTopics,
+  getAlltopics,
   joinAtopic,
   leaveAtopic,
 } from "../../../redux/actions/topicActions"
@@ -19,13 +19,13 @@ const TopicCard = ({ topics }) => {
   const leaveTopicHandler = async () => {
     setJoin(false)
     dispatch(leaveAtopic(topics._id, user._id))
-    dispatch(getAllTopics())
+    dispatch(getAlltopics())
   }
 
   const JoinTopicHandler = () => {
     setJoin(true)
     dispatch(joinAtopic(topics._id, user._id))
-    dispatch(getAllTopics())
+    dispatch(getAlltopics())
   }
 
   useEffect(() => {

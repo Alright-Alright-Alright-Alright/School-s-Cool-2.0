@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux"
 import AddTopicCard from "../../core/topicsCards/AddTopicCard"
 import TopicCard from "../../core/topicsCards/TopicCard"
 import Modal from "../../core/Modal"
-import { getAllTopics } from "../../../redux/actions/topicActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
   const topics = useSelector((state) => state.topics)
@@ -19,7 +19,7 @@ function MainTopicsContent() {
   }
 
   useEffect(() => {
-    dispatch(getAllTopics())
+    dispatch(getAlltopics())
   }, [])
 
   return (

@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import fileUploadHandler from "../../middleware/UploadFile"
-import { addAtopic, getAllTopics } from "../../redux/actions/topicActions"
+import { addAtopic, getAlltopics } from "../../redux/actions/topicActions"
 import Button from "./Button"
 import SwitchButton from "./SwitchButton"
 import Icon from "./Icon"
@@ -43,7 +43,7 @@ const Modal = ({ handleShowModal }) => {
     }
     handleShowModal()
     dispatch(addAtopic(topicData))
-    dispatch(getAllTopics())
+    dispatch(getAlltopics())
   }
 
   return (
