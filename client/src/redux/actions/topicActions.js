@@ -79,7 +79,8 @@ export const getAlltopics = () => async (dispatch) => {
   }
 }
 
-export const getOneTopic = (topicId) => async (dispatch) => {
+export const getOneTopic = (topicId, user) => async (dispatch) => {
+  console.log("Hello", topicId, user)
   dispatch({ type: LOADING_UI })
 
   const topicFromDB = await getTopic(topicId)
