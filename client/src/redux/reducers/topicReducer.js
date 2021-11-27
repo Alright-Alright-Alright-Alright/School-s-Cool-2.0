@@ -9,20 +9,36 @@ import {
 
 const initialState = {
   topics: [],
+  topic: {},
 }
 
-const topicReducer = (state = initialState.topics, action) => {
+const topicReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_TOPICS:
-      return [...action.payload]
+      return {
+        topics: [...action.payload],
+        topic: {},
+      }
     case GET_TOPIC:
-      return [...action.payload]
+      return {
+        topics: [],
+        topic: { ...action.payload },
+      }
     case POST_TOPIC:
-      return [...action.payload]
+      return {
+        topics: [...action.payload],
+        topic: {},
+      }
     case JOIN_TOPIC:
-      return [...action.payload]
+      return {
+        topics: [...action.payload],
+        topic: {},
+      }
     case LEAVE_TOPIC:
-      return [...action.payload]
+      return {
+        topics: [...action.payload],
+        topic: {},
+      }
     default:
       return state
   }

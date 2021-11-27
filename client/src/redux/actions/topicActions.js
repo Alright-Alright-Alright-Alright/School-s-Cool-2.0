@@ -48,10 +48,10 @@ export const getAlltopics = () => async (dispatch) => {
   }
 }
 
-export const getAtopic = () => async (dispatch) => {
+export const getAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const topicFromDB = await getTopic()
+  const topicFromDB = await getTopic(topicId)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicFromDB })
@@ -67,6 +67,7 @@ export const joinAtopic = (topicId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const joinTopicToDB = await joinTopic(topicId, user)
+  console.log(joinTopicToDB)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })

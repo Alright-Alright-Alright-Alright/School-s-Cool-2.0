@@ -19,13 +19,11 @@ const TopicCard = ({ topics }) => {
   const leaveTopicHandler = async () => {
     setJoin(false)
     dispatch(leaveAtopic(topics._id, user._id))
-    dispatch(getAlltopics())
   }
 
   const JoinTopicHandler = () => {
     setJoin(true)
     dispatch(joinAtopic(topics._id, user._id))
-    dispatch(getAlltopics())
   }
 
   useEffect(() => {
@@ -35,7 +33,8 @@ const TopicCard = ({ topics }) => {
       })
     }
     checkJoinedUser()
-  }, [join, topics.members, user?._id, topics])
+    dispatch(getAlltopics())
+  }, [join, dispatch])
 
   return (
     <div

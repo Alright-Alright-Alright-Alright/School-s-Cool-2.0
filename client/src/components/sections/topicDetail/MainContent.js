@@ -4,17 +4,19 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getAllPosts, createPost } from "../../../redux/actions/postActions"
+import { getAtopic } from "../../../redux/actions/topicActions"
 import TopicHeaderCard from "../../core/topicHeaderCard/TopicHeaderCard"
 import TopicPost from "../../core/TopicPost/TopicPost"
 
 function MainContent() {
   const [body, setPostBody] = useState("")
   const posts = useSelector((state) => state.posts.posts)
+  const topic = useSelector((state) => state.topics.topic)
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
   const params = useParams()
   const dispatch = useDispatch()
-
+  console.log(topic)
   const newPost = {
     body,
     topicId: params.topicId,
@@ -23,6 +25,7 @@ function MainContent() {
 
   useEffect(() => {
     dispatch(getAllPosts(params.topicId))
+    dispatch(getAtopic(params.topicId))
   }, [dispatch, params.topicId])
 
   const createNewPost = () => {
