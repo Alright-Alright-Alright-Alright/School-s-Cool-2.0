@@ -1,6 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable dot-notation */
-/* eslint-disable no-unused-vars */
 import {
   GET_TOPICS,
   GET_TOPIC,
@@ -37,7 +34,6 @@ export const joinAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const joinTopicToDB = await joinTopic(topicId)
-  console.log(joinTopicToDB)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })

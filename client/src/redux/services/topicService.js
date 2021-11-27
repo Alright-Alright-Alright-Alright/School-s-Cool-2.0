@@ -21,14 +21,12 @@ export const addTopic = (topicData) =>
     .post(`/topics`, topicData)
     .then((responseFromAPI) => responseFromAPI.data)
 
-export const joinTopic = (topicId) => {
+export const joinTopic = (topicId) =>
   service
     .put(`/topics/${topicId}/join`)
     .then((responseFromAPI) => responseFromAPI.data)
-}
 
-export const leaveTopic = (topicId) => {
+export const leaveTopic = (topicId) =>
   service
     .put(`/topics/${topicId}/leave`)
     .then((responseFromAPI) => responseFromAPI.data)
-}
