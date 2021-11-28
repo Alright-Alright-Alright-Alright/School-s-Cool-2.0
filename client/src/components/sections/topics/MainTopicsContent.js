@@ -25,14 +25,25 @@ function MainTopicsContent() {
   return (
     <div className="relative">
       {showModal && <Modal handleShowModal={handleShowModal} />}
-      <div className="flex justify-center flex-wrap gap-7 m-6">
-        <button type="button" onClick={handleShowModal}>
-          <AddTopicCard />
-        </button>
-        {topics.map((topic) => (
-          <TopicCard key={topic._id} topics={topic} />
-        ))}
-      </div>
+      {showModal ? (
+        <div className="flex justify-center flex-wrap gap-7 m-6 filter blur-sm">
+          <button type="button" onClick={handleShowModal}>
+            <AddTopicCard />
+          </button>
+          {topics.map((topic) => (
+            <TopicCard key={topic._id} topics={topic} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center flex-wrap gap-7 m-6 filter">
+          <button type="button" onClick={handleShowModal}>
+            <AddTopicCard />
+          </button>
+          {topics.map((topic) => (
+            <TopicCard key={topic._id} topics={topic} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

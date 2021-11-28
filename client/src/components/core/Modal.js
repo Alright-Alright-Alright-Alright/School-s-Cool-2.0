@@ -48,7 +48,7 @@ const Modal = ({ handleShowModal }) => {
 
   return (
     <form
-      className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute inset-1/7 md:inset-y-1/4 shadow-xl"
+      className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-10 inset-1/7 md:inset-y-1/4 shadow-xl"
       onSubmit={handleFormSubmit}
     >
       <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
