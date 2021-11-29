@@ -17,7 +17,7 @@ const topicReducer = (state = initialState, action) => {
     case GET_TOPICS:
       return {
         topics: [...action.payload],
-        topic: {},
+        topic: [],
       }
     case GET_TOPIC:
       return {
