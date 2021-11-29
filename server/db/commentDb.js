@@ -13,10 +13,11 @@ const getAllCommentsDb = async (postId) => {
 
 const addCommentToDb = async (body, owner, postId) => {
   let newComment = await Comment.create({ body, owner});
+
   try {
      let updatedPost = await Post.findByIdAndUpdate(postId, {
       $push: { comments: newComment }, 
-    })
+    }, { new: true })
     return updatedPost
   } catch (error) {
     throw new Error(error)

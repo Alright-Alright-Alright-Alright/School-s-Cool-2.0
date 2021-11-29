@@ -12,8 +12,6 @@ function MainTopicsContent() {
   const topics = useSelector((state) => state.topics.topics)
   const [showModal, setShowModal] = useState(false)
 
-  console.log(topics)
-
   const dispatch = useDispatch()
 
   const handleShowModal = () => {

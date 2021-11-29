@@ -61,7 +61,7 @@ function TopicPost({ post }) {
       {postById?.comments?.map((commentData) => (
         <Comment key={commentData._id} comment={commentData} />
       ))}
-      <CommentForm />
+      <CommentForm postId={post._id} />
     </div>
   )
 }

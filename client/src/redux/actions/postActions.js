@@ -82,12 +82,17 @@ export const getPostById = (postId) => (dispatch) => {
 //   }
 // }
 
-export const submitComment = (postId) => (dispatch) => {
+export const submitComment = (owner, commentBody, postId) => (dispatch) => {
+  console.log(postId, commentBody, owner)
   dispatch({ type: LOADING_UI })
   axios
-    .post(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
-      headers: { Authorization: authToken },
-    })
+    .post(
+      `${process.env.REACT_APP_API_URL}/posts/${postId}/comments`,
+      { commentBody, owner },
+      {
+        headers: { Authorization: authToken },
+      }
+    )
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SUBMIT_COMMENT, payload: response.data })
