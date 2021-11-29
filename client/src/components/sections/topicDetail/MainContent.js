@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import PropTypes from "prop-types"
-import { getAllPosts, createPost } from "../../../redux/actions/postActions"
+import { createPost } from "../../../redux/actions/postActions"
+import { getOneTopic } from "../../../redux/actions/topicActions"
 import TopicHeaderCard from "../../core/topicHeaderCard/TopicHeaderCard"
 import TopicPost from "../../core/TopicPost/TopicPost"
 
@@ -14,18 +15,15 @@ function MainContent({ topic }) {
   const user = useSelector((state) => state.user)
   const params = useParams()
   const dispatch = useDispatch()
-
   const newPost = {
     body,
     topicId: params.topicId,
-    author: user?.user?._id,
+    author: user?.user?.id,
   }
 
   const createNewPost = () => {
     dispatch(createPost(newPost))
-    setTimeout(() => {
-      dispatch(getAllPosts(params.topicId))
-    }, 100)
+    dispatch(getOneTopic(params.topicId))
   }
 
   return (
@@ -35,15 +33,14 @@ function MainContent({ topic }) {
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
       />
-      {topic.posts.map((post, index) => (
-        <TopicPost key={index} post={post} />
+      {topic?.posts?.map((post) => (
+        <TopicPost key={post._id} post={post} />
       ))}
     </div>
   )
 }
 
 MainContent.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   topic: PropTypes.object.isRequired,
 }
 

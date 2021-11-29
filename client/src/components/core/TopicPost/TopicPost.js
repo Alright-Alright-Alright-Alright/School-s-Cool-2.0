@@ -1,16 +1,26 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { useSelector, useDispatch } from "react-redux"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
+import { getPostById } from "../../../redux/actions/postActions"
 
 function TopicPost({ post }) {
+  const postById = useSelector((state) => state.posts.post)
+  const dispatch = useDispatch()
+
   dayjs.extend(relativeTime)
+
+  useEffect(() => {
+    dispatch(getPostById(post._id))
+  }, [dispatch, post._id])
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -19,16 +29,19 @@ function TopicPost({ post }) {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-2"
-              src={post.owner?.imageUrl}
+              src={postById?.owner?.imageUrl}
               alt="profile"
             />
             <p className="text-base">
-              {post.owner?.firstName} {post.owner?.lastName}
+              {postById?.owner?.firstName} {postById?.owner?.lastName}
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
               Commented on
             </p>
-            <Link to={`/topics/${post.topic?._id}`} className="text-base pl-3">
+            <Link
+              to={`/topics/${postById?.topic?._id}`}
+              className="text-base pl-3"
+            >
               {post.topic?.title}
             </Link>
           </div>
@@ -45,21 +58,9 @@ function TopicPost({ post }) {
       <div className="flex justify-end pt-1 pr-3">
         <p className="text-base">Icons</p>
       </div>
-      {/* <div className="flex px-5 pb-5 pt-3">
-        <img
-          className="w-10 h-10 rounded-full mr-2"
-          src="https://via.placeholder.com/30x30"
-          alt="profile"
-        />
-        <input
-          className="bg-grey-super_light w-full rounded-full text-base pl-3"
-          type="text"
-          placeholder="Add a comment"
-        />
-      </div> */}
-      <Comment />
-      <Comment />
-
+      {postById?.comments?.map((commentData) => (
+        <Comment key={commentData._id} comment={commentData} />
+      ))}
       <CommentForm />
     </div>
   )

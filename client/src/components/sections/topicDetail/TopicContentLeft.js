@@ -3,9 +3,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import Dashcard from "../../core/dashcard/Dashcard"
 
-function ContentLeft({ topic }) {
-  const { bannerImage, title, description, resources, isPrivate } = topic
-  console.log(topic)
+function TopicContentLeft({ topic }) {
+  const { bannerImage, title, description, isPrivate, resources } = topic
   return (
     <div className="flex flex-col place-items-end">
       <div className="p-3">
@@ -49,9 +48,9 @@ function ContentLeft({ topic }) {
   )
 }
 
-ContentLeft.propTypes = {
+TopicContentLeft.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   topic: PropTypes.object.isRequired,
 }
 
-export default ContentLeft
+export default TopicContentLeft
