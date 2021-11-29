@@ -1,3 +1,5 @@
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
@@ -68,6 +70,10 @@ export default function Dashcard({
       </div>
     </>
   )
+}
+
+Dashcard.defaultProps = {
+  dashCardData: [],
 }
 
 Dashcard.propTypes = {
