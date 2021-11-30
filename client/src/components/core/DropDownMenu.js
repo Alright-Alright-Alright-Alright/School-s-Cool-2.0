@@ -4,7 +4,7 @@ import Icon from "./Icon"
 
 function DropDownMenu({ data }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [filter, setFilter] = useState(data.dropDownItems[0])
+  const [filter, setFilter] = useState(data?.dropDownItems[0])
 
   return (
     <div className="relative">
@@ -17,7 +17,7 @@ function DropDownMenu({ data }) {
             <button
               type="button"
               key={item}
-              className={`text-grey-dark w-full px-4 py-2 text-left hover:bg-${data.bgColorOnHover}`}
+              className={`text-grey-dark w-full px-4 py-2 text-left hover:bg-${data?.bgColorOnHover}`}
               onClick={() => setFilter(item)}
             >
               <div className="flex place-self-center">
