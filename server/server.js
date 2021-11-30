@@ -73,6 +73,9 @@ app.use("/api", topicRoutes);
 const postRoutes = require("./routes/postRoutes");
 app.use("/api", postRoutes);
 
+const commentRoutes = require("./routes/commentRoutes");
+app.use("/api", commentRoutes);
+
 
 //Server =====================================
 app.listen(process.env.PORT, () =>

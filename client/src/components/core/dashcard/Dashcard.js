@@ -1,3 +1,5 @@
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
@@ -15,7 +17,7 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item.title}
+        key={item.id}
         listItemTitle={item?.title}
         listItemDate={item?.date}
         listItemComments={item?.comment}
@@ -25,7 +27,7 @@ export default function Dashcard({
 
   const allItems = dashCardData.map((item) => (
     <DashCardListItem
-      key={item?.title}
+      key={item?.id}
       listItemTitle={item?.title}
       listItemDate={item?.date}
       listItemComments={item?.comment}
@@ -68,6 +70,10 @@ export default function Dashcard({
       </div>
     </>
   )
+}
+
+Dashcard.defaultProps = {
+  dashCardData: [],
 }
 
 Dashcard.propTypes = {

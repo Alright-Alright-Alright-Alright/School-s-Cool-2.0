@@ -1,23 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react"
 import PropTypes from "prop-types"
+import { useSelector } from "react-redux"
 import Button from "../Button"
 import Icon from "../Icon"
 
 function TopicHeaderCard({ onClick, postBody }) {
-  //   const [postBody, setpostBody] = useState("")
-
-  //   const handleChange = (e) => {
-  //     // setpostBody(e.target.value)
-  //     postBody(e.target.value)
-  //   }
+  const user = useSelector((state) => state.user)
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="flex justify-between p-3">
         <img
           className="w-10 h-10 rounded-full mr-2"
-          src="https://via.placeholder.com/30x30"
+          src={`${user?.imageUrl}`}
           alt="profile"
         />
         <input
