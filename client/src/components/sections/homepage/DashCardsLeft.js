@@ -6,6 +6,8 @@ import { getAllEvents } from "../../../redux/actions/eventActions"
 import getAllCourses from "../../../redux/actions/courseActions"
 // import { getAllPosts } from "../../../redux/actions/postActions"
 
+import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
   const courses = useSelector((state) => state.courses)
@@ -28,16 +30,19 @@ function DashCardsLeft() {
         dashCardData={topics}
         dashCardTitle="Topics"
         dashCardStyle="bg-aqua"
+        dropdownMenuData={dashcardDropdownMenu.topics}
       />
       <Dashcard
         dashCardData={courses}
         dashCardTitle="Courses"
         dashCardStyle="bg-yellow"
+        dropdownMenuData={dashcardDropdownMenu.courses}
       />{" "}
       <Dashcard
         dashCardData={events}
         dashCardTitle="Events"
         dashCardStyle="bg-grey-dark"
+        dropdownMenuData={dashcardDropdownMenu.events}
       />{" "}
     </div>
   )

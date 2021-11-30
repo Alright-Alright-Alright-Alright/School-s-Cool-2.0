@@ -8,6 +8,7 @@ export default function Dashcard({
   dashCardData,
   dashCardTitle,
   dashCardStyle,
+  dropdownMenuData,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
@@ -43,7 +44,7 @@ export default function Dashcard({
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu />
+              <DropDownMenu data={dropdownMenuData} />
             </div>
           </div>
         </div>
@@ -75,4 +76,8 @@ Dashcard.propTypes = {
   dashCardData: PropTypes.array.isRequired,
   dashCardTitle: PropTypes.string.isRequired,
   dashCardStyle: PropTypes.string.isRequired,
+  dropdownMenuData: PropTypes.shape({
+    bgColorOnHover: PropTypes.string,
+    dropDownItems: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 }

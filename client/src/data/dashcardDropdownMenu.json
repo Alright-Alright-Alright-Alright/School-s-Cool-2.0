@@ -1,0 +1,18 @@
+{
+  "topics": {
+    "bgColorOnHover": "aqua-light",
+    "dropDownItems": ["All topics", "Created by me", "Followed by me"]
+  },
+  "courses": {
+    "bgColorOnHover": "yellow-light",
+    "dropDownItems": ["All courses", "Created by me", "In progress", "completed"]
+  },
+  "events": {
+    "bgColorOnHover": "sky-light",
+    "dropDownItems": ["All events", "Created by me", "Attending"]
+  },
+  "users": {
+    "bgColorOnHover": "pink-light",
+    "dropDownItems": ["All users"]
+  }
+}

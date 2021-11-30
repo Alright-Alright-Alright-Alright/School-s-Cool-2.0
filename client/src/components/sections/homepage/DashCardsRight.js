@@ -1,6 +1,8 @@
 import React from "react"
 import Dashcard from "../../core/dashcard/Dashcard"
 
+import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+
 const dummyData = [
   [{ titleTest: "test", comment: ["1", "2", "3"], user: ["1", "2", "3"] }],
   [{ titleTest: "test2", comment: ["1"], user: ["1", "2", "3"] }],
@@ -31,6 +33,7 @@ function DashCardsRight() {
         dashCardData={dummyData}
         dashCardTitle="Testing"
         dashCardStyle="bg-pink"
+        dropdownMenuData={dashcardDropdownMenu.users}
       />
     </div>
   )
