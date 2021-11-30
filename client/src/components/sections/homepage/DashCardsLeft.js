@@ -6,7 +6,7 @@ import { getAllEvents } from "../../../redux/actions/eventActions"
 import getAllCourses from "../../../redux/actions/courseActions"
 
 function DashCardsLeft() {
-  const topics = useSelector((state) => state.topics.topics)
+  const topics = useSelector((state) => state.topics.allTopics)
   const courses = useSelector((state) => state.courses)
   const events = useSelector((state) => state.events)
   // const posts = useSelector((state) => state.posts)

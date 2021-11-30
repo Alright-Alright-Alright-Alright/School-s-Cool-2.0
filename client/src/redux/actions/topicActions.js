@@ -1,6 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable dot-notation */
-/* eslint-disable no-unused-vars */
 import {
   GET_TOPICS,
   GET_TOPIC,
@@ -35,6 +32,36 @@ export const addAtopic = (topicData) => async (dispatch) => {
   }
 }
 
+export const joinAtopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const joinTopicToDB = await joinTopic(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const leaveAtopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const leaveTopicToDB = await leaveTopic(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
 export const getAlltopics = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
@@ -57,37 +84,6 @@ export const getOneTopic = (topicId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicFromDB })
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    })
-  }
-}
-
-export const joinAtopic = (topicId, user) => async (dispatch) => {
-  dispatch({ type: LOADING_UI })
-
-  const joinTopicToDB = await joinTopic(topicId, user)
-  console.log(joinTopicToDB)
-  try {
-    dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    })
-  }
-}
-
-export const leaveAtopic = (topicId, user) => async (dispatch) => {
-  dispatch({ type: LOADING_UI })
-
-  const leaveTopicToDB = await leaveTopic(topicId, user)
-  try {
-    dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

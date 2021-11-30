@@ -9,7 +9,7 @@ import Modal from "../../core/Modal"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
-  const topics = useSelector((state) => state.topics.topics)
+  const topics = useSelector((state) => state.topics.allTopics)
   const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
@@ -20,12 +20,16 @@ function MainTopicsContent() {
 
   useEffect(() => {
     dispatch(getAlltopics())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="relative">
       {showModal && <Modal handleShowModal={handleShowModal} />}
-      <div className="flex justify-center flex-wrap gap-7 m-6">
+      <div
+        className={`flex justify-center flex-wrap gap-7 m-6 filter ${
+          showModal && "blur-sm"
+        }`}
+      >
         <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
