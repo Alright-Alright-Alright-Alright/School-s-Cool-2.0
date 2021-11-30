@@ -14,8 +14,6 @@ function TopicDetailIndex() {
   const params = useParams()
   const dispatch = useDispatch()
 
-  console.log(user)
-
   useEffect(() => {
     dispatch(getOneTopic(params.topicId, user?.id))
   }, [dispatch, params.topicId, user?.id])
