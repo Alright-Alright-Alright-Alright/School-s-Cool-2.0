@@ -8,7 +8,7 @@ import getAllCourses from "../../../redux/actions/courseActions"
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
   const courses = useSelector((state) => state.courses)
-  const events = useSelector((state) => state.events)
+  // const events = useSelector((state) => state.events)
   // const posts = useSelector((state) => state.posts)
   // console.log(posts)
 
@@ -33,7 +33,7 @@ function DashCardsLeft() {
         dashCardStyle="bg-yellow"
       />{" "}
       <Dashcard
-        dashCardData={events}
+        // dashCardData={events}
         dashCardTitle="Events"
         dashCardStyle="bg-grey-dark"
       />{" "}

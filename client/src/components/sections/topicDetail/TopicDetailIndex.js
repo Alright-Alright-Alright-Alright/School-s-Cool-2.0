@@ -9,7 +9,7 @@ import TopicContentRight from "./TopicContentRight"
 import { getOneTopic } from "../../../redux/actions/topicActions"
 
 function TopicDetailIndex() {
-  const topic = useSelector((state) => state.topics.topic)
+  const topic = useSelector((state) => state.topics.singleTopic)
   const params = useParams()
   const dispatch = useDispatch()
 
