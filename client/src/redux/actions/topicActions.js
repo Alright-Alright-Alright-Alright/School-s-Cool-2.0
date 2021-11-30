@@ -7,7 +7,6 @@ import {
   POST_TOPIC,
   JOIN_TOPIC,
   LEAVE_TOPIC,
-  GET_TOPIC,
 } from "../types/topics"
 
 import {
@@ -16,14 +15,7 @@ import {
   addTopic,
   joinTopic,
   leaveTopic,
-  getTopicById,
 } from "../services/topicService"
-<<<<<<< HEAD
-
-// import { GET_TOPICS, POST_TOPIC, GET_TOPIC } from "../types/topics"
-// import { getAllTopics, addTopic, getTopicById } from "../services/topicService"
-=======
->>>>>>> 27043e6 (merge)
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
@@ -78,11 +70,7 @@ export const getAlltopics = () => async (dispatch) => {
   const topicsFromDB = await getTopics()
   try {
     dispatch({ type: CLEAR_ERRORS })
-<<<<<<< HEAD
     dispatch({ type: GET_TOPICS, payload: topicsFromDB })
-=======
-    dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
->>>>>>> 27043e6 (merge)
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
