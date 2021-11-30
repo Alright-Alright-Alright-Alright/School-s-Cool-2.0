@@ -9,23 +9,17 @@ import TopicContentRight from "./TopicContentRight"
 import { getOneTopic } from "../../../redux/actions/topicActions"
 
 function TopicDetailIndex() {
-<<<<<<< HEAD
   const topic = useSelector((state) => state.topics.singleTopic)
-=======
-  const topic = useSelector((state) => state.topic)
->>>>>>> 9ff2a94 (merge)
+  const user = useSelector((state) => state.user)
   const params = useParams()
   const dispatch = useDispatch()
 
+  console.log(user)
+
   useEffect(() => {
-    dispatch(getOneTopic(params.topicId))
-  }, [dispatch, params.topicId])
+    dispatch(getOneTopic(params.topicId, user?.id))
+  }, [dispatch, params.topicId, user?.id])
 
-<<<<<<< HEAD
-=======
-  console.log(params.topicId)
-
->>>>>>> 9ff2a94 (merge)
   return (
     <>
       <Main

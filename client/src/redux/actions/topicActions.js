@@ -12,7 +12,6 @@ import {
   addTopic,
   joinTopic,
   leaveTopic,
-  getTopicById,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
