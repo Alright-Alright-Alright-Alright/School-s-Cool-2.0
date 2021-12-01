@@ -6,6 +6,7 @@ import PropTypes from "prop-types"
 import Icon from "../Icon"
 
 function Comment({ comment }) {
+  // console.log(comment)
   return (
     <div className="flex px-5 pb-1 pt-3 items-center">
       <img
@@ -21,9 +22,9 @@ function Comment({ comment }) {
   )
 }
 
-Comment.defaultProps = {
-  comment: "This is a test comment",
-}
+// Comment.defaultProps = {
+//   comment: "This is a test comment",
+// }
 
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,

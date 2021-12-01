@@ -6,14 +6,21 @@ const getAllPostsDb = async (topicId) => {
     return await Post.find({ topic: topicId })
       .sort({ createdAt: "desc" })
       .populate("owner", "firstName lastName imageUrl")
-      .populate("topic", "title");
+      .populate("topic", "title")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      })
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
 const addPostToDb = async (body, owner, topicId) => {
-  let newPost = await Post.create({ body, owner });
+  let newPost = await Post.create({ body, owner, topic: topicId });
   try {
     let updatedTopic = await Topic.findByIdAndUpdate(
       topicId,
@@ -22,12 +29,6 @@ const addPostToDb = async (body, owner, topicId) => {
       },
       { new: true }
     );
-    // console.log(updatedTopic)
-
-    // (owner, {
-    //   $push: { fileUrl: file._id },
-    // });
-    // return await Post.create({ body: body, owner, topic:topicId}, { new: true })
   } catch (error) {
     throw new Error(error);
   }
@@ -47,10 +48,10 @@ const getPostByIdDb = async (postId) => {
       .populate("owner", "firstName lastName imageUrl")
       .populate({
         path: "comments",
-          populate: {
-            path: "owner",
-            select: "firstName lastName imageUrl"
-          }
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
       });
   } catch (error) {
     throw new Error(error);

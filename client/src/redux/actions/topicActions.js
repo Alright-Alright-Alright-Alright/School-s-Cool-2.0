@@ -1,6 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable dot-notation */
-/* eslint-disable no-unused-vars */
 import {
   GET_TOPICS,
   GET_TOPIC,
@@ -79,10 +76,8 @@ export const getAlltopics = () => async (dispatch) => {
   }
 }
 
-export const getOneTopic = (topicId, user) => async (dispatch) => {
-  console.log("Hello", topicId, user)
+export const getOneTopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-
   const topicFromDB = await getTopic(topicId)
   try {
     dispatch({ type: CLEAR_ERRORS })
