@@ -29,7 +29,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   buttonName: PropTypes.string.isRequired,
-  buttonStyle: PropTypes.bool,
+  buttonStyle: PropTypes.string,
   buttonSubmit: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,

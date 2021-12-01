@@ -1,4 +1,4 @@
-import { POST_POST, SET_POSTS } from "../types/posts"
+import { SET_POST, GET_POST, SUBMIT_COMMENT } from "../types/posts"
 // import {
 //   SET_ERRORS,
 //   CLEAR_ERRORS,
@@ -8,19 +8,28 @@ import { POST_POST, SET_POSTS } from "../types/posts"
 
 const initialState = {
   posts: [],
+  post: {},
 }
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_POSTS:
+    case GET_POST:
       return {
         ...state,
         ...action.payload,
       }
-    case POST_POST:
+    case SET_POST:
       return {
         ...state,
         posts: [action.payload, ...state.posts],
+      }
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: [action.payload, ...state.post.comments],
+        },
       }
     default:
       return state

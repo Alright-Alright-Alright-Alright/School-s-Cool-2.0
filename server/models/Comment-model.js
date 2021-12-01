@@ -10,14 +10,6 @@ const commentSchema = new Schema(
     body:{
         type: String
     },
-    post: {
-      type: Schema.Types.ObjectId,
-      ref: "Post"
-  }, 
-  event: {
-    type: Schema.Types.ObjectId,
-    ref: "Event"
-}
   },
   {
     timestamps: true,

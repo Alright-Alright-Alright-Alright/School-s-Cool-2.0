@@ -11,10 +11,10 @@ const getAllPosts = async (req, res, next) => {
       };
 
 const createPost = async (req, res, next) => {
-    const { body, author, topicId } = req.body;
+    const { body, owner, topicId } = req.body;
     // const { userId } = req.userLogedIn._id
         try {
-          const post = await createPostService( body, author, topicId);
+          const post = await createPostService( body, owner, topicId);
             return res.status(201).json({message: "Success", post});
         } catch (e) {
             res.status(500).json({ message: e.message }) && next(e);
@@ -33,7 +33,7 @@ const getPostsByTopicId = async (req, res, next) => {
 
 const getPostById = async (req, res, next) => {
         try {
-          const post = await getPostByIdService(req.params.id);
+          const post = await getPostByIdService(req.params.postId);
             return res.status(201).json({message: "Success", post});
         } catch (e) {
             res.status(500).json({ message: e.message }) && next(e);

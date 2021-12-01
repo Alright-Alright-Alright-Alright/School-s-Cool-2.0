@@ -18,7 +18,8 @@ const addTopicToDb = async (title, description, bannerImage, private, owner) => 
 
 const getSingleTopicFromdb = async (topicId) => {
   try {
-    return await Topic.findById(topicId);
+    return await Topic.findById(topicId).populate("posts").populate("owner", 'firstName lastName imageUrl')
+    ;
   } catch (error) {
     throw new Error(error);
   }

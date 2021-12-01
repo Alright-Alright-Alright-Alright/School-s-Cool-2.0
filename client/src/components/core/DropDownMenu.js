@@ -1,28 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import Icon from "./Icon"
 
-const topicsItems = [
-  {
-    id: "allTopics",
-    title: "All topics",
-    bgcolor: "aqua-light",
-  },
-  {
-    id: "createdTopics",
-    title: "Created by me",
-    bgcolor: "aqua-light",
-  },
-  {
-    id: "followdTopics",
-    title: "Followed by me",
-    bgcolor: "aqua-light",
-  },
-]
-
-function DropDownMenu() {
+function DropDownMenu({ data }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [filter, setFilter] = useState(data?.dropDownItems[0])
+
   return (
     <div className="relative">
       <button type="button" onClick={() => setIsOpen(!isOpen)}>
@@ -30,15 +13,19 @@ function DropDownMenu() {
       </button>
       {isOpen && (
         <div className="absolute right-10 -top-2 w-48 py-6 mt-2 bg-white rounded-xl shadow-xl">
-          {topicsItems.map((item) => (
+          {data.dropDownItems.map((item) => (
             <button
               type="button"
-              key={item.id}
-              className={`text-grey-dark w-full px-4 py-2 text-left hover:bg-${item.bgcolor}`}
+              key={item}
+              className={`text-grey-dark w-full px-4 py-2 text-left hover:bg-${data?.bgColorOnHover}`}
+              onClick={() => setFilter(item)}
             >
               <div className="flex place-self-center">
-                <Icon iconName="select" />
-                <p>{item.title}</p>
+                <Icon
+                  iconName="select"
+                  iconStyle={filter === item ? "" : "invisible"}
+                />
+                <p>{item}</p>
               </div>
             </button>
           ))}
@@ -46,6 +33,13 @@ function DropDownMenu() {
       )}
     </div>
   )
+}
+
+DropDownMenu.propTypes = {
+  data: PropTypes.shape({
+    bgColorOnHover: PropTypes.string,
+    dropDownItems: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 }
 
 export default DropDownMenu
