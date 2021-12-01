@@ -1,15 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import Dashcard from "../../core/dashcard/Dashcard"
 
 function TopicContentLeft({ topic }) {
-  const { bannerImage, title, description, isPrivate, resources } = topic
+  const { bannerImage, title, description, isPrivate, resources, owner } = topic
   return (
     <div className="flex flex-col place-items-end">
       <div className="p-3">
         <img
-          className="rounded-r-3xl rounded-b-3xl "
+          className="rounded-r-3xl rounded-b-3xl object-cover h-48 w-full"
           src={`${bannerImage}`}
           alt="placeholder"
           width="400"
@@ -27,21 +29,25 @@ function TopicContentLeft({ topic }) {
           />
         </div>
         <div className="p-3 w-full">
-          <p>{isPrivate ? "Private" : "Public"} topic created by</p>
-          <div className="flex items-center py-3">
-            <img
-              className="w-10 h-10 rounded-full mr-2"
-              src="https://via.placeholder.com/40x40"
-              alt="profile"
-            />
-            <p className="text-base">User name</p>
-            <p className="text-base pl-3 text-grey-medium_light">
+          <p>{isPrivate ? "Private" : "Public"} topic created by </p>
+          <Link to={`/profile/${owner?._id}`}>
+            <div className="flex items-center py-3">
+              <img
+                className="w-10 h-10 rounded-full mr-2"
+                src={`${owner?.imageUrl}`}
+                alt="profile"
+              />
+              <p className="text-base">
+                {owner?.firstName} {owner?.lastName}
+              </p>
+              {/* <p className="text-base pl-3 text-grey-medium_light">
               Commented on
             </p>
             <a href="/" className="text-base pl-3">
               Topic name
-            </a>
-          </div>
+            </a> */}
+            </div>
+          </Link>
         </div>
       </div>
     </div>
