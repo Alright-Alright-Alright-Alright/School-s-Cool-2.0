@@ -18,11 +18,7 @@ const topicSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-<<<<<<< HEAD
-    private: { type: String, enum: ["Yes", "No"], default: "No" },
-=======
     private: { type: Boolean, enum: [true, false], default: false },
->>>>>>> db8269b3d355fdef1a7d1592a57cb40ef7a2df91
     bannerImage: {
       type: String,
     },

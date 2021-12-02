@@ -18,19 +18,11 @@ const getAllTopics = async (req, res, next) => {
 };
 
 const createNewTopic = async (req, res, next) => {
-<<<<<<< HEAD
-  const { title, description } = req.body;
-  owner = req.user.userLogedIn._id;
-
-  try {
-    const topic = await createNewTopicService(title, description, owner);
-=======
   const { title, description, bannerImage, private } = req.body;
   owner = req.user.userLogedIn._id;
 
   try {
     const topic = await createNewTopicService(title, description, bannerImage, private, owner);
->>>>>>> db8269b3d355fdef1a7d1592a57cb40ef7a2df91
     return res.status(201).json(topic);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -61,13 +53,8 @@ const joinTopic = async (req, res, next) => {
   const user = req.user.userLogedIn._id;
   const topicId = req.params.topicId;
   try {
-<<<<<<< HEAD
-    await joinTopicService(topicId, user);
-    return res.status(201).json({message: "You have joined the topic"});
-=======
     let topic = await joinTopicService(topicId, user);
     return res.status(201).json({message: "You have joined the topic", topic});
->>>>>>> db8269b3d355fdef1a7d1592a57cb40ef7a2df91
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -77,13 +64,8 @@ const leaveTopic = async (req, res, next) => {
   const user = req.user.userLogedIn._id;
   const topicId = req.params.topicId;
   try {
-<<<<<<< HEAD
-    const topic = await leaveTopicService(topicId, user);
-    return res.status(201).json({message: "You have leaved the topic"});
-=======
     let topic = await leaveTopicService(topicId, user);
     return res.status(201).json({message: "You have leaved the topic", topic});
->>>>>>> db8269b3d355fdef1a7d1592a57cb40ef7a2df91
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
