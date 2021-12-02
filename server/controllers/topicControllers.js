@@ -53,8 +53,8 @@ const joinTopic = async (req, res, next) => {
   const user = req.user.userLogedIn._id;
   const topicId = req.params.topicId;
   try {
-    await joinTopicService(topicId, user);
-    return res.status(201).json({message: "You have joined the topic"});
+    let topic = await joinTopicService(topicId, user);
+    return res.status(201).json({message: "You have joined the topic", topic});
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -64,8 +64,8 @@ const leaveTopic = async (req, res, next) => {
   const user = req.user.userLogedIn._id;
   const topicId = req.params.topicId;
   try {
-    const topic = await leaveTopicService(topicId, user);
-    return res.status(201).json({message: "You have leaved the topic"});
+    let topic = await leaveTopicService(topicId, user);
+    return res.status(201).json({message: "You have leaved the topic", topic});
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

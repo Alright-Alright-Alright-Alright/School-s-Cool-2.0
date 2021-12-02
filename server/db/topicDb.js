@@ -37,7 +37,7 @@ const addUserToTopicDb = async (topicId, user) => {
   try {
     return await Topic.findByIdAndUpdate(topicId, {
       $push: { members: user },
-    });
+    }, {new: true});
   } catch (error) {
     throw new Error(error);
   }
@@ -47,7 +47,7 @@ const takeOutUserFromTopicDb = async (topicId, user) => {
   try {
     return await Topic.findByIdAndUpdate(topicId, {
       $pull: { members: user },
-    });
+    }, {new: true});
   } catch (error) {
     throw new Error(error);
   }
