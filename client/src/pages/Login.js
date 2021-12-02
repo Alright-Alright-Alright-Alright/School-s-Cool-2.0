@@ -3,7 +3,7 @@ import LoginIndex from "../components/sections/login/LoginIndex"
 
 function Login() {
   return (
-    <div className="bg-pink">
+    <div className="bg-login-background bg-cover">
       <LoginIndex />
     </div>
   )
