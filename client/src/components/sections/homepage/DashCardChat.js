@@ -1,5 +1,6 @@
 import React from "react"
 import Dashcard from "../../core/dashcard/Dashcard"
+
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
 const dummyData = [
@@ -33,24 +34,48 @@ const dummyData = [
   },
 ]
 
-function DashCardsRight() {
+const dummyDataContacts = [
+  {
+    ContactName: "Jim",
+  },
+  {
+    ContactName: "Jannet",
+  },
+  {
+    ContactName: "Oscar",
+  },
+  {
+    ContactName: "Valerie",
+  },
+  {
+    ContactName: "Sara",
+  },
+]
+
+function DashCardsChat() {
   return (
     <div>
       <Dashcard
         dashCardData={dummyData}
-        dashCardTitle="Testing"
-        dashCardStyle="bg-pink"
+        dashCardTitle="Chat"
+        dashCardStyle="bg-sky"
         dropdownMenuData={dashcardDropdownMenu.users}
-      />
-      <Dashcard
-        dashCardData={dummyData}
-        dashCardTitle="Blah Blah"
-        dashCardStyle="bg-grey-medium"
-        dropdownMenuData={dashcardDropdownMenu.users}
-        chat
+        chat="false"
       />
     </div>
   )
 }
 
-export default DashCardsRight
+function DashCardChatList() {
+  return (
+    <Dashcard
+      dashCardData={dummyDataContacts}
+      dashCardTitle="Chat"
+      dashCardStyle="bg-sky"
+      dropdownMenuData={dashcardDropdownMenu.users}
+      chat="true"
+    />
+  )
+}
+
+export { DashCardsChat, DashCardChatList }

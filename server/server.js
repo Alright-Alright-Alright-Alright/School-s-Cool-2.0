@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const socketio = require("socket.io");
 const cors = require("cors");
 
 // MongoDB connection =====================================
@@ -78,6 +79,28 @@ app.use("/api", commentRoutes);
 
 
 //Server =====================================
-app.listen(process.env.PORT, () =>
+const Server = app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)
 );
+
+
+//SocketIO =================================
+const io = socketio(Server,{
+  cors:{
+    origin: [process.env.CORS_ALLOWED]
+  }
+} );
+
+io.on('connection', socket=>{
+  const id = socket.handshake.query.id
+  console.log(`Client ${id} just Connected`)
+  socket.join(id)
+
+  socket.on("send-message", ({members, content}) => {
+    console.log(`Members: ${members}, content: ${content}`)
+  })
+
+  socket.on('disconnect', () => {
+    console.log(`client ${id} disconnected`)
+  })
+})

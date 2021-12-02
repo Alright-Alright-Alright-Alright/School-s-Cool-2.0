@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
+import DashCardListChats from "./DashCardListChats"
 import DropDownMenu from "../DropDownMenu"
 
 export default function Dashcard({
@@ -11,12 +12,30 @@ export default function Dashcard({
   dashCardTitle,
   dashCardStyle,
   dropdownMenuData,
+  chat,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
   const firstThreeItems = dashCardData
     .slice(0, 3)
-    .map((item) => (
+    .map((item) =>
+      chat === "true" ? (
+        <DashCardListChats listContactName={item?.ContactName} />
+      ) : (
+        <DashCardListItem
+          key={item.id}
+          listItemTitle={item?.title}
+          listItemDate={item?.date}
+          listItemComments={item?.comment}
+          listItemUsers={item?.user}
+        />
+      )
+    )
+
+  const allItems = dashCardData.map((item) =>
+    chat === "true" ? (
+      <DashCardListChats listContactName={item?.ContactName} />
+    ) : (
       <DashCardListItem
         key={item.id}
         listItemTitle={item?.title}
@@ -24,21 +43,16 @@ export default function Dashcard({
         listItemComments={item?.comment}
         listItemUsers={item?.user}
       />
-    ))
-
-  const allItems = dashCardData.map((item) => (
-    <DashCardListItem
-      key={item?.id}
-      listItemTitle={item?.title}
-      listItemDate={item?.date}
-      listItemComments={item?.comment}
-      listItemUsers={item?.user}
-    />
-  ))
+    )
+  )
 
   return (
     <>
-      <div className="flex flex-col relative max-w-dashcard m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+      <div
+        className={`flex flex-col 
+        ${chat === "true" ? "absolute bottom-0 right-0" : ""}
+        m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl`}
+      >
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
@@ -62,9 +76,9 @@ export default function Dashcard({
             onClick={() => setExpandDashCard(!expandDashCard)}
           >
             {expandDashCard ? (
-              <Icon iconName="collapse" />
+              <Icon iconName={`${chat === "true" ? "expand" : "collapse"}`} />
             ) : (
-              <Icon iconName="expand" />
+              <Icon iconName={`${chat === "true" ? "collapse" : "expand"}`} />
             )}
           </button>
         </div>
@@ -86,4 +100,5 @@ Dashcard.propTypes = {
     bgColorOnHover: PropTypes.string,
     dropDownItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  chat: PropTypes.string,
 }
