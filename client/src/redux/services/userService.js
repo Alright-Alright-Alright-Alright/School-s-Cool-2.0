@@ -30,6 +30,9 @@ class UserService {
     this.service.post("/logout", {}).then((response) => response.data)
   }
 
+  getAllUsers = () =>
+    this.service.get("/users").then((response) => response.data)
+
   forgot = (email) =>
     this.service.post("/forgot", { email }).then((response) => response.data)
 
