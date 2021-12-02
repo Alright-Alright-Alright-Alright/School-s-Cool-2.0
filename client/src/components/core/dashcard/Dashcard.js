@@ -1,3 +1,5 @@
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
@@ -8,14 +10,15 @@ export default function Dashcard({
   dashCardData,
   dashCardTitle,
   dashCardStyle,
+  dropdownMenuData,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  const firstDashCardRows = dashCardData
+  const firstThreeItems = dashCardData
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item?.title}
+        key={item.id}
         listItemTitle={item?.title}
         listItemDate={item?.date}
         listItemComments={item?.comment}
@@ -23,17 +26,15 @@ export default function Dashcard({
       />
     ))
 
-  const secondDashCardRows = dashCardData
-    .slice(3, 6)
-    .map((item) => (
-      <DashCardListItem
-        key={item?.titleTest}
-        listItemTitle={item?.titleTest}
-        listItemDate={item?.date}
-        listItemComments={item?.comment}
-        listItemUsers={item?.user}
-      />
-    ))
+  const allItems = dashCardData.map((item) => (
+    <DashCardListItem
+      key={item?.id}
+      listItemTitle={item?.title}
+      listItemDate={item?.date}
+      listItemComments={item?.comment}
+      listItemUsers={item?.user}
+    />
+  ))
 
   return (
     <>
@@ -45,14 +46,13 @@ export default function Dashcard({
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu />
+              <DropDownMenu data={dropdownMenuData} />
             </div>
           </div>
         </div>
-        <div className="flex-col pl-4 pr-4">
+        <div className="flex-col pl-4 pr-4 max-h-96 overflow-y-auto">
           <div className="divide-y-2 divide-primary">
-            {firstDashCardRows}
-            {expandDashCard ? secondDashCardRows : null}
+            {expandDashCard ? allItems : firstThreeItems}
             <div />
           </div>
         </div>
@@ -73,9 +73,17 @@ export default function Dashcard({
   )
 }
 
+Dashcard.defaultProps = {
+  dashCardData: [],
+}
+
 Dashcard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   dashCardData: PropTypes.array.isRequired,
   dashCardTitle: PropTypes.string.isRequired,
   dashCardStyle: PropTypes.string.isRequired,
+  dropdownMenuData: PropTypes.shape({
+    bgColorOnHover: PropTypes.string,
+    dropDownItems: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 }

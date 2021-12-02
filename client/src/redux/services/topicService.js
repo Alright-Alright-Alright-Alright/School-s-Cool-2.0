@@ -1,22 +1,32 @@
-/* eslint-disable dot-notation */
 import axios from "axios"
 
-// const authToken = localStorage.getItem("Authorization")
+const authToken = localStorage.getItem("Authorization")
 
-class TopicService {
-  constructor() {
-    const service = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
-      withCredentials: true,
-    })
+const service = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
+  headers: { Authorization: authToken },
+})
 
-    this.service = service
-    // service.defaults.headers.common["Authorization"] = authToken
-  }
+export const getTopics = () =>
+  service.get(`/topics`).then((responseFromAPI) => responseFromAPI.data)
 
-  getAllTopics = () => {
-    this.service.get("/topics").then((response) => response.data)
-  }
-}
+export const getTopic = (topicId) =>
+  service
+    .get(`/topics/${topicId}`)
+    .then((responseFromAPI) => responseFromAPI.data)
 
-export default TopicService
+export const addTopic = (topicData) =>
+  service
+    .post(`/topics`, topicData)
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const joinTopic = (topicId) =>
+  service
+    .put(`/topics/${topicId}/join`)
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const leaveTopic = (topicId) =>
+  service
+    .put(`/topics/${topicId}/leave`)
+    .then((responseFromAPI) => responseFromAPI.data)

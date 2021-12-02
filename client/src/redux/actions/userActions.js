@@ -7,6 +7,7 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
+  SET_USERLOGGED_IN,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user"
@@ -25,9 +26,8 @@ export const loginUser = (userData) => (dispatch) => {
   userService
     .login(userData)
     .then((response) => {
-      console.log(response)
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_AUTHENTICATED, payload: response })
+      dispatch({ type: SET_AUTHENTICATED, payload: response.user })
       setAuthorizationHeader(response.accessToken)
     })
     .catch((err) => {
@@ -45,6 +45,22 @@ export const registerUser = (registerNewUser) => (dispatch) => {
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.message })
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response?.data,
+      })
+    })
+}
+
+export const loggedInUser = () => (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  userService
+    .loggedin()
+    .then((response) => {
+      dispatch({ type: CLEAR_ERRORS })
+      dispatch({ type: SET_USERLOGGED_IN, payload: response })
     })
     .catch((err) => {
       dispatch({

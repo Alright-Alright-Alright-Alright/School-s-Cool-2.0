@@ -38,11 +38,11 @@ module.exports = {
       sans: ["Karla", "sans-serif"],
     },
     fontSize: {
-      xs: ["10px", "12px"],
-      sm: ["12px", "18px"],
-      base: ["14px", "16px"],
-      lg: ["20px", "23px"],
-      xl: ["32px", "37px"],
+      xs: ["0.625rem", "0.75rem"],
+      sm: ["0.75rem", "1.125rem"],
+      base: [".875rem", "1rem"],
+      lg: ["1.25rem", "1.5rem"],
+      xl: ["2rem", "2.25rem"],
     },
     letterSpacing: {
       tight: "0",
@@ -50,17 +50,6 @@ module.exports = {
       wide: ".06em",
       wider: ".1em",
       widest: ".2em",
-    },
-    maxWidth: {
-      dashcard: "320px",
-    },
-    minHeight: {
-      dashcard: "181px",
-      dashcardrow: "39px",
-    },
-    height: {
-      dashcard: "208px",
-      dashcardtitle: "43px",
     },
     borderWidth: {
       DEFAULT: "1px",
@@ -77,6 +66,24 @@ module.exports = {
       secondary: "#ffed4a",
       danger: "#e3342f",
     }),
+    extend: {
+      width: {
+        "1/7": "14.2857143%",
+        "2/7": "28.5714286%",
+        "3/7": "42.8571429%",
+        "4/7": "57.1428571%",
+        "5/7": "71.4285714%",
+        "6/7": "85.7142857%",
+      },
+    },
+    inset: {
+      0: 0,
+      // ...
+      64: "16rem",
+      "1/5": "20%",
+      "1/6": "16.66666667%",
+      "1/7": "14.2857143%",
+    },
   },
   variants: {
     extend: {},

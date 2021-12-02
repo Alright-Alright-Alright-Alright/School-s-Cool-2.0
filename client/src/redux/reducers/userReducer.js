@@ -3,42 +3,27 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-  //   LOADING_USER,
-  //   MARK_NOTIFICATIONS_READ,
+  SET_USERLOGGED_IN,
 } from "../types/user"
 
-const initialState = {
-  loggedIn: false,
-  loading: false,
-  notifications: [],
-}
+const initialState = null
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
       return {
-        loggedIn: true,
-        loading: false,
         ...action.payload,
       }
     case SET_UNAUTHENTICATED:
       return initialState
     case SET_USER:
       return {
-        loggedIn: true,
-        loading: false,
         ...action.payload,
       }
-    // case LOADING_USER:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   }
-    // case MARK_NOTIFICATIONS_READ:
-    //   state.notifications.forEach((not) => (not.read = true))
-    //   return {
-    //     ...state,
-    //   }
+    case SET_USERLOGGED_IN:
+      return {
+        ...action.payload,
+      }
     default:
       return state
   }
