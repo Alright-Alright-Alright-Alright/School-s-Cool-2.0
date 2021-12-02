@@ -34,7 +34,7 @@ const TopicCard = ({ topics }) => {
     }
     checkJoinedUser()
     dispatch(getAlltopics())
-  }, [join, dispatch])
+  }, [dispatch])
 
   return (
     <div
