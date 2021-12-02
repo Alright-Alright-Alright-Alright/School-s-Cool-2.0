@@ -4,9 +4,9 @@ import LoginForm from "./LoginForm"
 
 function index() {
   return (
-    <>
+    <div className="bg-white">
       <Main main={<LoginForm />} />
-    </>
+    </div>
   )
 }
 

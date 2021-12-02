@@ -39,11 +39,11 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="flex justify-center h-1/4">
-      <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3 w-80">
+    <div className="bg-sky h-screen flex ">
+      <div className="bg-grey-dark w-3/5 ">
         <form
           onSubmit={handleFormSubmit}
-          className="flex flex-col m-3 justify-center"
+          className="bg-yellow flex flex-col h-2/5 rounded-2xl justify-center"
         >
           <label>Email: </label>
           <input
