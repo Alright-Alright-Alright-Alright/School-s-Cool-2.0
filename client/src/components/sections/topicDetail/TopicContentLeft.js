@@ -40,12 +40,6 @@ function TopicContentLeft({ topic }) {
               <p className="text-base">
                 {owner?.firstName} {owner?.lastName}
               </p>
-              {/* <p className="text-base pl-3 text-grey-medium_light">
-              Commented on
-            </p>
-            <a href="/" className="text-base pl-3">
-              Topic name
-            </a> */}
             </div>
           </Link>
         </div>
