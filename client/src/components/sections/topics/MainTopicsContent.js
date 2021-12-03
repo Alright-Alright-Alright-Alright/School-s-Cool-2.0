@@ -11,7 +11,7 @@ import { getAlltopics } from "../../../redux/actions/topicActions"
 function MainTopicsContent() {
   const topics = useSelector((state) => state.topics.allTopics)
   const [showModal, setShowModal] = useState(false)
-
+  console.log(topics)
   const dispatch = useDispatch()
 
   const handleShowModal = () => {
@@ -27,7 +27,7 @@ function MainTopicsContent() {
       {showModal && <Modal handleShowModal={handleShowModal} />}
       <div
         className={`flex justify-center flex-wrap gap-7 m-6 filter ${
-          showModal && "blur-sm"
+          showModal && "blur-md"
         }`}
       >
         <button type="button" onClick={handleShowModal}>

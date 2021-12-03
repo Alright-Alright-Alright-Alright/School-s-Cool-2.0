@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import {
   GET_TOPICS,
@@ -28,13 +31,19 @@ const topicReducer = (state = initialState, action) => {
       return [...state, action.payload]
     case JOIN_TOPIC:
       return {
-        ...state,
-        allTopics: state.allTopics,
+        allTopics: state.allTopics.map((eachTopic) =>
+          eachTopic._id === action.payload.topic._id
+            ? action.payload.topic
+            : eachTopic
+        ),
       }
     case LEAVE_TOPIC:
       return {
-        ...state,
-        allTopics: state.allTopics,
+        allTopics: state.allTopics.map((eachTopic) =>
+          eachTopic._id === action.payload.topic._id
+            ? action.payload.topic
+            : eachTopic
+        ),
       }
     default:
       return state

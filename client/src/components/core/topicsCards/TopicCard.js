@@ -26,15 +26,16 @@ const TopicCard = ({ topics }) => {
     dispatch(joinAtopic(topics._id))
   }
 
+  const checkJoinedUser = () => {
+    topics.members.map((member) => {
+      if (member._id === user?._id) setJoin(true)
+    })
+  }
+
   useEffect(() => {
-    const checkJoinedUser = () => {
-      topics.members.map((member) => {
-        if (member._id === user?._id) setJoin(true)
-      })
-    }
     checkJoinedUser()
     dispatch(getAlltopics())
-  }, [join, dispatch])
+  }, [dispatch])
 
   return (
     <div
