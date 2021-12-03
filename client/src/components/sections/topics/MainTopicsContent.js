@@ -11,7 +11,7 @@ import { getAlltopics } from "../../../redux/actions/topicActions"
 function MainTopicsContent() {
   const topics = useSelector((state) => state.topics.allTopics)
   const [showModal, setShowModal] = useState(false)
-  console.log(topics)
+
   const dispatch = useDispatch()
 
   const handleShowModal = () => {

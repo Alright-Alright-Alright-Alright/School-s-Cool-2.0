@@ -2,7 +2,7 @@ const Topic = require("../models/Topic-model");
 
 const getAllTopicsDb = async () => {
   try {
-    return await Topic.find({new: true}).sort({ dateStart: "asc" }).populate("members");
+    return await Topic.find().sort({ dateStart: "asc" }).populate("members");
   } catch (e) {
     throw new Error(e.message);
   }
@@ -18,7 +18,7 @@ const addTopicToDb = async (title, description, bannerImage, private, owner) => 
 
 const getSingleTopicFromdb = async (topicId) => {
   try {
-    return await Topic.findById(topicId, {new: true}).populate("posts").populate("owner", 'firstName lastName imageUrl')
+    return await Topic.findById(topicId).populate("posts").populate("owner", 'firstName lastName imageUrl')
     ;
   } catch (error) {
     throw new Error(error);
