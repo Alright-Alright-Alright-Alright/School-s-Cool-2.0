@@ -34,7 +34,11 @@ const getSingleTopicFromdb = async (topicId) => {
       .populate("owner", "firstName lastName imageUrl")
       .populate("members", "_id firstName lastName imageUrl")
       .populate({
-        path: "posts",
+          path: "posts",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl"
+          },
         populate: {
           path: "comments",
           populate: {
