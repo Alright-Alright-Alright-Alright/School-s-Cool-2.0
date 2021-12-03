@@ -14,10 +14,10 @@ export default function Main({
       <div className="h-screen grid lg:grid-cols-4 bg-grey-super_light">
         <div className="hidden lg:block">{contentLeft}</div>
         <div className="lg:col-span-2">{main}</div>
-        <div className="h-screen hidden lg:block">
-          {contentRight}
-          <div>{contentBottomRight}</div>
-        </div>
+        <div className="h-screen hidden lg:block">{contentRight}</div>
+      </div>
+      <div className="grid lg:grid-rows-1 bg-grey-super_light justify-items-end">
+        <div>{contentBottomRight}</div>
       </div>
     </>
   )

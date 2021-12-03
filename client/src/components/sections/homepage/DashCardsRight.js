@@ -49,6 +49,12 @@ function DashCardsRight() {
         dropdownMenuData={dashcardDropdownMenu.users}
         chat
       />
+      <Dashcard
+        dashCardData={dummyData}
+        dashCardTitle="Testing"
+        dashCardStyle="bg-pink"
+        dropdownMenuData={dashcardDropdownMenu.users}
+      />
     </div>
   )
 }

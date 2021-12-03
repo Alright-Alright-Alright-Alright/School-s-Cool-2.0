@@ -49,19 +49,30 @@ export default function Dashcard({
   return (
     <>
       <div
+        style={chat === "true" ? { maxWidth: "16em" } : {}}
         className={`flex flex-col 
-        ${chat === "true" ? "absolute bottom-0 right-0" : ""}
+        ${chat === "true" ? "w-full fixed bottom-0 right-0" : ""}
         m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl`}
       >
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
-            <p className="text-lg pl-4">{dashCardTitle}</p>
-            <div className="flex flex-row">
-              <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu data={dropdownMenuData} />
-            </div>
+            <p
+              className={`text-lg pl-4 ${
+                chat === "true" ? "mx-auto mb-1" : ""
+              }`}
+            >
+              {dashCardTitle}
+            </p>
+            {chat === "false" ? (
+              <div className="flex flex-row">
+                <h2 className="text-base pr-4">Filter</h2>
+                <DropDownMenu data={dropdownMenuData} />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="flex-col pl-4 pr-4 max-h-96 overflow-y-auto">

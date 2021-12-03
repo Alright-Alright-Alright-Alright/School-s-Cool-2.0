@@ -3,9 +3,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import Icon from "../Icon"
 
 export default function DashCardListChats({
   listContactName,
+  // isOnline,
   // listContactId,
   // listContactAvatar,
 }) {
@@ -15,6 +17,19 @@ export default function DashCardListChats({
         <div className="flex-col">
           <Link to="/">{listContactName}</Link>
         </div>
+        <div className="flex grid-cols-2 pb-1 items-center">
+          <div className="flex">
+            <button type="button">
+              <Icon
+                iconName="message"
+                iconStyle="fill-inactive text-grey-dark"
+              />
+            </button>
+          </div>
+          <button type="button">
+            <Icon iconName="follow" iconStyle="fill-inactive text-grey-dark" />
+          </button>
+        </div>
       </div>
     </>
   )
@@ -22,4 +37,5 @@ export default function DashCardListChats({
 
 DashCardListChats.propTypes = {
   listContactName: PropTypes.string.isRequired,
+  // isOnline: PropTypes.bool
 }
