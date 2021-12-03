@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import PropTypes from "prop-types"
@@ -11,8 +11,6 @@ import TopicPost from "../../core/TopicPost/TopicPost"
 
 function MainContent({ topic }) {
   const [body, setPostBody] = useState("")
-  // const posts = useSelector((state) => state.posts.posts)
-  // const topic = useSelector((state) => state.topics.singleTopic)
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
   const params = useParams()
@@ -27,6 +25,10 @@ function MainContent({ topic }) {
     dispatch(createPost(newPost))
     dispatch(getOneTopic(params.topicId))
   }
+
+  useEffect(() => {
+    dispatch(getOneTopic(params.topicId))
+  }, [dispatch, params.topicId])
 
   return (
     <div className="">

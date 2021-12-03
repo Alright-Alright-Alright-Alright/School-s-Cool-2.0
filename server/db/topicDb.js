@@ -8,9 +8,21 @@ const getAllTopicsDb = async () => {
   }
 };
 
-const addTopicToDb = async (title, description, bannerImage, private, owner) => {
+const addTopicToDb = async (
+  title,
+  description,
+  bannerImage,
+  private,
+  owner
+) => {
   try {
-    return await Topic.create({ title, description, bannerImage, private, owner });
+    return await Topic.create({
+      title,
+      description,
+      bannerImage,
+      private,
+      owner,
+    });
   } catch (error) {
     throw new Error(error);
   }
@@ -18,8 +30,10 @@ const addTopicToDb = async (title, description, bannerImage, private, owner) => 
 
 const getSingleTopicFromdb = async (topicId) => {
   try {
-    return await Topic.findById(topicId, {new: true}).populate("posts").populate("owner", 'firstName lastName imageUrl')
-    ;
+    return await Topic.findById(topicId)
+      .populate("posts")
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("members", "_id firstName lastName imageUrl");
   } catch (error) {
     throw new Error(error);
   }
@@ -51,15 +65,15 @@ const takeOutUserFromTopicDb = async (topicId, user) => {
   } catch (error) {
     throw new Error(error);
   }
-}
+};
 
 const deleteTopicFromdb = async (topicId) => {
   try {
-    return await Topic.findByIdAndDelete(topicId)
+    return await Topic.findByIdAndDelete(topicId);
   } catch (error) {
     throw new Error(error);
   }
-}
+};
 
 module.exports = {
   getAllTopicsDb,
@@ -68,5 +82,5 @@ module.exports = {
   addUserToTopicDb,
   updateTopicDb,
   takeOutUserFromTopicDb,
-  deleteTopicFromdb
+  deleteTopicFromdb,
 };

@@ -1,22 +1,26 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
-import Dashcard from "../../core/dashcard/Dashcard"
+import TopicDashcard from "../../core/topicDashCard/TopicDashcard"
+import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
-function TopicContentRight({ topic }) {
+function TopicContentRight({ topic, users }) {
   return (
     <div className="place-items-start max-w-xs">
-      <Dashcard
-        dashCardTitle="Topic Members"
-        dashCardStyle="bg-aqua"
-        dashCardData={topic.members}
+      <TopicDashcard
+        topicDashCardTitle="Topic Members"
+        topicDashCardStyle="bg-aqua"
+        topicDashCardData={topic?.members}
+        users={users?.users}
+        dropdownMenuData={dashcardDropdownMenu.topicMembers}
       />
     </div>
   )
 }
 
 TopicContentRight.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   topic: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
 }
 
 export default TopicContentRight

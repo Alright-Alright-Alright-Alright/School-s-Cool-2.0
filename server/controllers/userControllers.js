@@ -2,7 +2,8 @@ const {
   getTheUser,
   updateTheUser,
   deleteTheUser,
-  followTheUser
+  followTheUser,
+  getAllTheUsers
 } = require("../services/userServices");
 
 exports.getUser = async (req, res) => {
@@ -51,3 +52,15 @@ exports.deleteUser = async (req, res) => {
       .json({ message: "Something went wrong deleting this user" });
   }
 };
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    let users = await getAllTheUsers();
+    res.status(200).json({ message: "Here's the users", users });
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "We can not find you. Please, make sure you are registered and logged in.",
+    });
+  }
+}

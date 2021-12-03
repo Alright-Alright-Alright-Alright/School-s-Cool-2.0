@@ -8,6 +8,7 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_USERLOGGED_IN,
+  SET_USERS,
   //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user"
@@ -74,4 +75,19 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("Authorization")
   userService.logout()
   dispatch({ type: SET_UNAUTHENTICATED })
+}
+
+export const getAllUsers = () => (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  userService
+    .getAllUsers()
+    .then((response) => {
+      dispatch({ type: SET_USERS, payload: response })
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response?.data,
+      })
+    })
 }
