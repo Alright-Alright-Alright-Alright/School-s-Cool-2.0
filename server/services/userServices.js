@@ -1,4 +1,10 @@
-const { getingTheUser, updatingTheUser, followingTheUser, deletingTheUser } = require("../db/userDb");
+const {
+  getingTheUser,
+  updatingTheUser,
+  followingTheUser,
+  deletingTheUser,
+  getingAllTheUsers,
+} = require("../db/userDb");
 const bcrypt = require("bcryptjs");
 
 exports.getTheUser = async (userid) => {
@@ -9,7 +15,7 @@ exports.getTheUser = async (userid) => {
   }
 };
 
-// review this function after frontend is done. 
+// review this function after frontend is done.
 exports.updateTheUser = async (
   userid,
   firstName,
@@ -50,16 +56,24 @@ exports.updateTheUser = async (
 
 exports.followTheUser = async (theUser, userToFollow) => {
   try {
-    return await followingTheUser(theUser, userToFollow)
+    return await followingTheUser(theUser, userToFollow);
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
-}
+};
 
 exports.deleteTheUser = async (userid) => {
   try {
-    return await deletingTheUser(userid)
+    return await deletingTheUser(userid);
   } catch (error) {
     throw new Error(error.message);
   }
-}
+};
+
+exports.getAllTheUsers = async () => {
+  try {
+    return await getingAllTheUsers();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

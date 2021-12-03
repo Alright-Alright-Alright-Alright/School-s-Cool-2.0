@@ -60,3 +60,11 @@ exports.deletingTheUser = async (userid) => {
     throw new Error(error.message)
   }  
 }
+
+exports.getingAllTheUsers = async () => {
+  try {
+    return await User.find({}, "firstName lastName imageUrl");
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}

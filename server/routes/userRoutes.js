@@ -7,6 +7,7 @@ const {
   updateUser,
   followUser,
   deleteUser,
+  getAllUsers
 } = require("../controllers/userControllers");
 const {jwtAuthorization} = require("../middleware/JWTmiddleware");
 
@@ -16,5 +17,7 @@ userRoutes.put("/profile/:userid", updateUser);
 userRoutes.put("/:userid/follow", followUser)
 userRoutes.post("/upload", files, fileUpload);
 userRoutes.delete("/profile/:userid/delete", deleteUser);
+userRoutes.get("/users", getAllUsers);
+
 
 module.exports = userRoutes;
