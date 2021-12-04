@@ -12,7 +12,8 @@ const getAllPosts = async (req, res, next) => {
 
 const createPost = async (req, res, next) => {
     const { body, owner, topicId } = req.body;
-    // const { userId } = req.userLogedIn._id
+    // const { _id } = req.user.userLogedIn;
+    // console.log(_id)
         try {
           const post = await createPostService( body, owner, topicId);
             return res.status(201).json({message: "Success", post});

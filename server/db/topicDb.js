@@ -31,9 +31,22 @@ const addTopicToDb = async (
 const getSingleTopicFromdb = async (topicId) => {
   try {
     return await Topic.findById(topicId)
-      .populate("posts")
       .populate("owner", "firstName lastName imageUrl")
-      .populate("members", "_id firstName lastName imageUrl");
+      .populate("members", "_id firstName lastName imageUrl")
+      .populate({
+          path: "posts",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl"
+          },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl"
+          }
+        }
+      })
   } catch (error) {
     throw new Error(error);
   }

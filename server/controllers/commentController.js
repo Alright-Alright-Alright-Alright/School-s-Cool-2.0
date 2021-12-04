@@ -15,11 +15,10 @@ const getAllComments = async (req, res, next) => {
 };
 
 const createComment = async (req, res, next) => {
-  const { commentBody, owner } = req.body;
-  const { postId } = req.params
+  const { commentBody, owner, postId } = req.body;
 
   try {
-    const comment = await createCommentService(commentBody, owner, postId);
+    const comment = await createCommentService(owner, commentBody, postId);
     return res.status(201).json({ message: "Success", comment });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
