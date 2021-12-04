@@ -18,7 +18,7 @@ function MainContent({ topic }) {
   const newPost = {
     body,
     topicId: params.topicId,
-    author: user?.user?.id,
+    owner: user?._id,
   }
 
   const createNewPost = () => {
@@ -38,7 +38,7 @@ function MainContent({ topic }) {
         postBody={(e) => setPostBody(e)}
       />
       {topic?.posts?.map((post) => (
-        <TopicPost key={post._id} post={post} />
+        <TopicPost key={post._id} post={post} topicId={params.topicId} />
       ))}
     </div>
   )

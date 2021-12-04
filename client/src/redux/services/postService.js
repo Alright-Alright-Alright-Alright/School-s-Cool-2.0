@@ -8,14 +8,19 @@ const service = axios.create({
   headers: { Authorization: authToken },
 })
 
-export const getPostByIdService = (postId) =>
+export const getAllPostService = (topicId) =>
   service
-    .get(`/posts/${postId}`)
+    .get(`/topics/${topicId}/posts`)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const createPostService = (newPost) =>
   service
     .post(`/topics/${newPost.topicId}/posts`, newPost)
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const getPostByIdService = (postId) =>
+  service
+    .get(`/posts/${postId}`)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const submitCommentService = (owner, commentBody, postId) =>

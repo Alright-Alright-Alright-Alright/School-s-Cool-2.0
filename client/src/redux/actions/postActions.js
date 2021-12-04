@@ -5,10 +5,26 @@ import {
   getPostByIdService,
   createPostService,
   submitCommentService,
+  getAllPostService,
 } from "../services/postService"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 const authToken = localStorage.getItem("Authorization")
+
+export const getAllPosts = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const allPosts = await getAllPostService(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SET_POSTS, payload: allPosts })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
 
 export const getPostById = (postId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
