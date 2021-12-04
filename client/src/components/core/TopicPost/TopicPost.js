@@ -13,19 +13,20 @@ import CommentForm from "../comment/CommentForm"
 import { getAllPosts, getPostById } from "../../../redux/actions/postActions"
 import Icon from "../Icon"
 
-function TopicPost({ post, topicId }) {
+function TopicPost({ post, topicId, comments }) {
   const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.post)
   const singleTopic = useSelector((state) => state.topics.singleTopic)
+  const posts = useSelector((state) => state.posts.posts)
+
   const dispatch = useDispatch()
 
   dayjs.extend(relativeTime)
 
   useEffect(() => {
     dispatch(getPostById(post._id))
+    dispatch(getAllPosts(topicId))
   }, [dispatch, post._id, topicId])
-
-  console.log(postById)
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -80,7 +81,7 @@ function TopicPost({ post, topicId }) {
           <span>{postById?.comments?.length}</span>
         </div>
       </div>
-      {postById?.comments?.map((commentData) => (
+      {comments?.map((commentData) => (
         <Comment key={commentData._id} comment={commentData} />
       ))}
       <CommentForm postId={post._id} />
@@ -91,6 +92,7 @@ function TopicPost({ post, topicId }) {
 TopicPost.propTypes = {
   topicId: PropTypes.string.isRequired,
   post: PropTypes.object.isRequired,
+  comments: PropTypes.array.isRequired,
 }
 
 export default TopicPost

@@ -60,12 +60,11 @@ export const submitComment =
   (owner, commentBody, postId) => async (dispatch) => {
     dispatch({ type: LOADING_UI })
 
-    const addNewCommentDb = await submitCommentService(
+    const addNewCommentDb = await submitCommentService({
       owner,
       commentBody,
-      postId
-    )
-    console.log(addNewCommentDb)
+      postId,
+    })
     try {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb.comment })
@@ -75,23 +74,4 @@ export const submitComment =
         payload: error.response,
       })
     }
-
-    // axios
-    //   .post(
-    //     `${process.env.REACT_APP_API_URL}/posts/${postId}/comments`,
-    //     { commentBody, owner },
-    //     {
-    //       headers: { Authorization: authToken },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     dispatch({ type: CLEAR_ERRORS })
-    //     dispatch({ type: SET_POST, payload: response.data })
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: SET_ERRORS,
-    //       payload: err.response.data,
-    //     })
-    //   })
   }
