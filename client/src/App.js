@@ -14,7 +14,6 @@ import { loggedInUser } from "./redux/actions/userActions"
 
 function App() {
   const user = useSelector((state) => state.user.singleUser)
-  console.log(user)
   const dispatch = useDispatch()
 
   useEffect(() => {
