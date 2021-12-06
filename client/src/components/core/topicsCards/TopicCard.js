@@ -12,7 +12,7 @@ import {
 import Icon from "../Icon"
 
 const TopicCard = ({ topics }) => {
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user.singleUser)
   const [join, setJoin] = useState(false)
   const dispatch = useDispatch()
 
@@ -27,9 +27,7 @@ const TopicCard = ({ topics }) => {
   }
 
   const checkJoinedUser = () => {
-    topics.members.map((member) => {
-      if (member._id === user?._id) setJoin(true)
-    })
+    topics.members.map((member) => member._id === user?._id && setJoin(true))
   }
 
   useEffect(() => {
