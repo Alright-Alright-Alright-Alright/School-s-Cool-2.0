@@ -13,9 +13,11 @@ const fileSchema = new Schema(
       ref: "User",
     },
     category: {
-      type: String,
-      //required: [true, "Category is required."],
-    }
+      enum: ["School work", "Sports", "Entertainment", "Psychology"],
+    },
+    subject: {
+      enum: ["Biology", "Mathematics", "Physics", "Technology"],
+    },
   },
   {
     timestamps: true,
