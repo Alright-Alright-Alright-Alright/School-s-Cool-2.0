@@ -7,7 +7,6 @@ import Button from "../../core/Button"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
-
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
@@ -32,9 +31,10 @@ const LoginForm = () => {
     dispatch(loginUser(userLogin))
     setEmail("")
     setPassword("")
-    setTimeout(() => {
-      navigate("/")
-    }, 1500)
+    if (!UI.errors) {
+      return null
+    }
+    return setTimeout(() => navigate("/"), 1500)
   }
 
   const logo = (
@@ -126,7 +126,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <p>{UI.errors.message}</p>}
+          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
         </form>
       </div>
     </div>

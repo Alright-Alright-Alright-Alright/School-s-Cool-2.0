@@ -45,9 +45,10 @@ const RegisterForm = () => {
     setLastName("")
     setEmail("")
     setPassword("")
-    setTimeout(() => {
-      navigate("/login")
-    }, 1500)
+    if (!UI.errors) {
+      return null
+    }
+    return setTimeout(() => navigate("/"), 1500)
   }
 
   const logo = (
@@ -148,7 +149,7 @@ const RegisterForm = () => {
               buttonStyle="btnSecondaryStyle"
             />
           </div>
-          {UI.errors && <p>{UI.errors.message}</p>}
+          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
         </form>
       </div>
     </div>

@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const { jwtAuthorization } = require("./middleware/JWTmiddleware");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -59,22 +59,22 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api", authRoutes);
 
 const userRoutes = require("./routes/userRoutes");
-app.use("/api", userRoutes);
+app.use("/api",jwtAuthorization, userRoutes);
 
 const eventRoutes = require("./routes/eventRoutes");
-app.use("/api", eventRoutes);
+app.use("/api", jwtAuthorization, eventRoutes);
 
 const libraryRoutes = require("./routes/libraryRoutes");
-app.use("/api", libraryRoutes);
+app.use("/api", jwtAuthorization, libraryRoutes);
 
 const topicRoutes = require("./routes/topicRoutes");
-app.use("/api", topicRoutes);
+app.use("/api", jwtAuthorization, topicRoutes);
 
 const postRoutes = require("./routes/postRoutes");
-app.use("/api", postRoutes);
+app.use("/api", jwtAuthorization, postRoutes);
 
 const commentRoutes = require("./routes/commentRoutes");
-app.use("/api", commentRoutes);
+app.use("/api", jwtAuthorization, commentRoutes);
 
 
 //Server =====================================
