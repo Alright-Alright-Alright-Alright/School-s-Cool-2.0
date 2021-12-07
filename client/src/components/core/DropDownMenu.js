@@ -1,13 +1,32 @@
-import React, { useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import PropTypes from "prop-types"
 import Icon from "./Icon"
 
 function DropDownMenu({ data }) {
+  const node = useRef()
+
   const [isOpen, setIsOpen] = useState(false)
   const [filter, setFilter] = useState(data?.dropDownItems[0])
 
+  const handleClick = (e) => {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return
+    }
+    // outside click
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [])
+
   return (
-    <div className="relative">
+    <div ref={node} className="relative z-20">
       <button type="button" onClick={() => setIsOpen(!isOpen)}>
         <Icon iconName="seemore" iconStyle="text-white" />
       </button>
