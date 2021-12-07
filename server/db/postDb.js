@@ -58,9 +58,48 @@ const getPostByIdDb = async (postId) => {
   }
 };
 
+const likePostDb = async (postId, userId) => {
+  try {
+    let post = await Post.findById(postId)
+    // .populate({
+    //   path: "likedBy",
+    //   populate: {
+    //     path: "user",
+    //     select: "firstName lastName imageUrl",
+    //   },
+    // });
+    if (post.likedBy.includes(userId)) {
+      return {message: "You already liked this post"};
+      // post.likedBy = post.likes.filter((id) => id !== userId);
+    } else {
+      post.likedBy.push(userId);
+    }
+    await post.save();
+    return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const unlikePostDb = async (postId, userId) => {
+  try {
+    let post = await Post.findById(postId);
+    if (post.likedBy.includes(userId)) {
+      post.likedBy.pull(userId);
+      // post.likedBy = post.likes.filter((id) => id !== userId);
+    }
+    await post.save();
+    return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllPostsDb,
   addPostToDb,
   getPostsByTopicIdDb,
   getPostByIdDb,
+  likePostDb,
+  unlikePostDb,
 };
