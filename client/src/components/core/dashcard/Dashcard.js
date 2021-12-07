@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/default-props-match-prop-types */
 /* eslint-disable react/require-default-props */
 import React, { useState } from "react"
@@ -18,21 +19,23 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item.id}
+        key={item._id}
+        linkId={item._id}
         listItemTitle={item?.title}
         listItemDate={item?.date}
-        listItemComments={item?.comment}
-        listItemUsers={item?.user}
+        listItemComments={item?.posts}
+        listItemUsers={item?.members}
       />
     ))
 
   const allItems = dashCardData.map((item) => (
     <DashCardListItem
-      key={item?.id}
+      key={item._id}
+      linkId={item._id}
       listItemTitle={item?.title}
       listItemDate={item?.date}
-      listItemComments={item?.comment}
-      listItemUsers={item?.user}
+      listItemComments={item?.posts}
+      listItemUsers={item?.members}
     />
   ))
 
