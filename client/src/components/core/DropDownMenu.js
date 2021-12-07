@@ -1,13 +1,31 @@
-import React, { useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import PropTypes from "prop-types"
 import Icon from "./Icon"
 
-function DropDownMenu({ data }) {
+function DropDownMenu({ data, selectFilter, filter }) {
+  const node = useRef()
+
   const [isOpen, setIsOpen] = useState(false)
-  const [filter, setFilter] = useState(data?.dropDownItems[0])
+
+  const handleClick = (e) => {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return
+    }
+    // outside click
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [])
 
   return (
-    <div className="relative">
+    <div ref={node} className="relative z-20">
       <button type="button" onClick={() => setIsOpen(!isOpen)}>
         <Icon iconName="seemore" iconStyle="text-white" />
       </button>
@@ -18,7 +36,7 @@ function DropDownMenu({ data }) {
               type="button"
               key={item}
               className={`text-grey-dark w-full px-4 py-2 text-left hover:bg-${data?.bgColorOnHover}`}
-              onClick={() => setFilter(item)}
+              onClick={() => selectFilter(item)}
             >
               <div className="flex place-self-center">
                 <Icon
@@ -40,6 +58,8 @@ DropDownMenu.propTypes = {
     bgColorOnHover: PropTypes.string,
     dropDownItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  filter: PropTypes.string.isRequired,
+  selectFilter: PropTypes.func.isRequired,
 }
 
 export default DropDownMenu
