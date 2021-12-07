@@ -12,7 +12,7 @@ export default function Dashcard({
   dropdownMenuData,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
-  const [filter, setFilter] = useState(dropdownMenuData.dropDownItems[0])
+  const [filter, setFilter] = useState(dropdownMenuData?.dropDownItems[0])
 
   const user = useSelector((state) => state.user.singleUser)
 
