@@ -14,6 +14,7 @@ export default function Dashcard({
   dropdownMenuData,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
+  const [filter, setFilter] = useState(dropdownMenuData.dropDownItems[0])
 
   const firstThreeItems = dashCardData
     .slice(0, 3)
@@ -39,6 +40,10 @@ export default function Dashcard({
     />
   ))
 
+  const onSelectFilter = (item) => {
+    setFilter(item)
+  }
+
   return (
     <>
       <div className="flex flex-col relative max-w-dashcard m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
@@ -48,8 +53,12 @@ export default function Dashcard({
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
-              <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu data={dropdownMenuData} />
+              <h2 className="text-base pr-4">{filter}</h2>
+              <DropDownMenu
+                data={dropdownMenuData}
+                filter={filter}
+                selectFilter={onSelectFilter}
+              />
             </div>
           </div>
         </div>
