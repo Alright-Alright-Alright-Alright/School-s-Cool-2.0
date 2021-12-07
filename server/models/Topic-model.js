@@ -28,7 +28,7 @@ const topicSchema = new Schema(
         ref: "User",
       },
     ],
-    recources: [
+    resources: [
       {
         type: Schema.Types.ObjectId,
         ref: "File",
