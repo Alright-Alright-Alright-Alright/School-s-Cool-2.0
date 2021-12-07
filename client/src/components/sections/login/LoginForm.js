@@ -31,10 +31,7 @@ const LoginForm = () => {
     dispatch(loginUser(userLogin))
     setEmail("")
     setPassword("")
-    if (!UI.errors) {
-      return null
-    }
-    return setTimeout(() => navigate("/"), 1500)
+    setTimeout(() => navigate("/"), 1500)
   }
 
   const logo = (

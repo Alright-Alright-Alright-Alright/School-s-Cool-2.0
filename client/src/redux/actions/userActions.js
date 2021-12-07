@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable dot-notation */
-import {login, register, loggedin, logout} from "../services/userService"
+import {login, register, loggedin, logout, getAllUsers} from "../services/userService"
 
 import {
   SET_USER,
@@ -71,7 +71,7 @@ export const logoutUser = () => (dispatch) => {
   dispatch({ type: SET_UNAUTHENTICATED })
 }
 
-export const getAllUsers = () => (dispatch) => {
+export const getAllTheUsers = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
     getAllUsers()
     .then((response) => {
