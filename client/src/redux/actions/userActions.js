@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable dot-notation */
-// import axios from "axios"
-import UserService from "../services/userService"
+import {login, register, loggedin, logout} from "../services/userService"
 
 import {
   SET_USER,
@@ -15,8 +14,6 @@ import {
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
-const userService = new UserService()
-
 export const setAuthorizationHeader = (token) => {
   const Authorization = `Bearer ${token}`
   localStorage.setItem("Authorization", Authorization)
@@ -24,8 +21,7 @@ export const setAuthorizationHeader = (token) => {
 
 export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  userService
-    .login(userData)
+    login(userData)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_AUTHENTICATED, payload: response.user })
@@ -41,8 +37,7 @@ export const loginUser = (userData) => (dispatch) => {
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  userService
-    .register(registerNewUser)
+    register(registerNewUser)
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USER, payload: response.message })
@@ -57,8 +52,7 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 
 export const loggedInUser = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  userService
-    .loggedin()
+    loggedin()
     .then((response) => {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_USERLOGGED_IN, payload: response })
@@ -73,14 +67,13 @@ export const loggedInUser = () => (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("Authorization")
-  userService.logout()
+  logout()
   dispatch({ type: SET_UNAUTHENTICATED })
 }
 
 export const getAllUsers = () => (dispatch) => {
   dispatch({ type: LOADING_UI })
-  userService
-    .getAllUsers()
+    getAllUsers()
     .then((response) => {
       dispatch({ type: SET_USERS, payload: response })
     })
