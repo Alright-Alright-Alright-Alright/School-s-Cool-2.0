@@ -1,11 +1,20 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios"
-import { SET_POSTS, GET_POST, SET_POST, SUBMIT_COMMENT } from "../types/posts"
+import {
+  SET_POSTS,
+  GET_POST,
+  SET_POST,
+  SUBMIT_COMMENT,
+  LIKE_POST,
+  UNLIKE_POST,
+} from "../types/posts"
 import {
   getPostByIdService,
   createPostService,
   submitCommentService,
   getAllPostService,
+  likePostService,
+  unlikePostService,
 } from "../services/postService"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
@@ -75,3 +84,34 @@ export const submitComment =
       })
     }
   }
+
+export const likePost = (postId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  console.log(postId, userId)
+
+  try {
+    const likePostDb = await likePostService(postId, { userId })
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LIKE_POST, payload: likePostDb.data })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const unlikePost = (postId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const unlikePostDb = await unlikePostService(postId, { userId })
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: UNLIKE_POST, payload: unlikePostDb.data })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}

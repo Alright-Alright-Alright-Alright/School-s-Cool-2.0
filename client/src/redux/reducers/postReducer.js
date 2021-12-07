@@ -1,4 +1,14 @@
-import { SET_POSTS, SET_POST, GET_POST, SUBMIT_COMMENT } from "../types/posts"
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-case-declarations */
+import {
+  SET_POSTS,
+  SET_POST,
+  GET_POST,
+  SUBMIT_COMMENT,
+  LIKE_POST,
+  UNLIKE_POST,
+} from "../types/posts"
 // import {
 //   SET_ERRORS,
 //   CLEAR_ERRORS,
@@ -36,6 +46,44 @@ const postsReducer = (state = initialState, action) => {
           comments: [action.payload, ...state.post.comments],
         },
       }
+    // case LIKE_POST:
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   }
+    // case UNLIKE_POST:
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   }
+    case LIKE_POST:
+      return {
+        posts: state.posts.map((eachPost) =>
+          eachPost._id === action.payload.post._id
+            ? action.payload.post
+            : eachPost
+        ),
+      }
+    case UNLIKE_POST:
+      return {
+        posts: state.posts.map((eachPost) =>
+          eachPost._id === action.payload.post._id
+            ? action.payload.post
+            : eachPost
+        ),
+      }
+    // case LIKE_POST:
+    // case UNLIKE_POST:
+    //   const index = state.posts.findIndex(
+    //     (post) => post.postId === action.payload.postId
+    //   )
+    //   state.posts[index] = action.payload
+    //   if (state.post.postId === action.payload.postId) {
+    //     state.post = action.payload
+    //   }
+    //   return {
+    //     ...state,
+    //   }
     default:
       return state
   }

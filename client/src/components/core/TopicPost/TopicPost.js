@@ -10,23 +10,39 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
-import { getAllPosts, getPostById } from "../../../redux/actions/postActions"
+import {
+  getAllPosts,
+  getPostById,
+  likePost,
+  unlikePost,
+} from "../../../redux/actions/postActions"
 import Icon from "../Icon"
 
 function TopicPost({ post, topicId, comments }) {
   const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.post)
-  const singleTopic = useSelector((state) => state.topics.singleTopic)
-  const posts = useSelector((state) => state.posts.posts)
+  const user = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
-
+  // console.log(post)
   dayjs.extend(relativeTime)
+
+  const handleLike = () => {
+    dispatch(likePost(post._id, user._id))
+    setPostLiked(true)
+    console.log(post._id, user._id)
+  }
+
+  const handleUnlike = () => {
+    dispatch(unlikePost(post._id, user._id))
+    setPostLiked(false)
+    console.log(post._id, user._id)
+  }
 
   useEffect(() => {
     dispatch(getPostById(post._id))
     dispatch(getAllPosts(topicId))
-  }, [dispatch, post._id, topicId])
+  }, [dispatch, post._id, topicId, postLiked])
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -67,14 +83,16 @@ function TopicPost({ post, topicId, comments }) {
           <span>00</span>
         </div>
         <div className="flex">
-          <button type="button" onClick={() => setPostLiked(!postLiked)}>
-            {postLiked ? (
+          {post?.likedBy?.includes(user._id) ? (
+            <button type="button" onClick={handleUnlike}>
               <Icon iconName="like" iconStyle="fill-active" />
-            ) : (
+            </button>
+          ) : (
+            <button type="button" onClick={handleLike}>
               <Icon iconName="like" iconStyle="fill-inactive" />
-            )}
-          </button>
-          <span>{postById?.likedBy?.length}</span>
+            </button>
+          )}
+          <span>{post?.likedBy?.length}</span>
         </div>
         <div className="flex">
           <Icon iconName="message" />
