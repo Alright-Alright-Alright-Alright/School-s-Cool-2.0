@@ -5,7 +5,7 @@ const authToken = localStorage.getItem("Authorization")
 const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   withCredentials: true,
-  headers: { Authorization: authToken },
+  headers: { "x-auth-token": authToken },
 })
 
 export const getAllPostService = (topicId) =>
