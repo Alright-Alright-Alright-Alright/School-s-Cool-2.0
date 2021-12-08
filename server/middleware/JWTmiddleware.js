@@ -7,7 +7,7 @@ exports.jwtAuthorization = (req, res, next) => {
     return res.sendStatus(401);
 
   JWT.verify(token, process.env.JWT_SECRETORKEY, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) return res.status(401).send("Not Authorized!");
     req.user = user;
     next();
   });
