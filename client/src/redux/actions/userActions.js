@@ -24,8 +24,7 @@ export const loginUser = (userData) => (dispatch) => {
     .then((response) => {
       setAuthorizationHeader(response.accessToken)
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_AUTHENTICATED, payload: response.user })
-      
+      dispatch({ type: SET_AUTHENTICATED, payload: response })
     })
     .catch((err) => {
       dispatch({
