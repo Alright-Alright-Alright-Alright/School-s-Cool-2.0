@@ -7,7 +7,7 @@ import { submitComment, getPostById } from "../../../redux/actions/postActions"
 
 function CommentForm({ postId }) {
   const [commentBody, setCommentBody] = useState("")
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
   const handleFormSubmit = (e) => {

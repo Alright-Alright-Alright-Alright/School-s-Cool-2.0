@@ -6,7 +6,7 @@ import Button from "../Button"
 import Icon from "../Icon"
 
 function TopicHeaderCard({ onClick, postBody }) {
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user.singleUser)
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
