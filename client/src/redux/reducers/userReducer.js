@@ -8,6 +8,7 @@ import {
 } from "../types/user"
 
 const initialState = {
+  token: null,
   singleUser: null,
   users: [],
 }
@@ -15,22 +16,15 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
-      return {
-        ...state,
-        singleUser: action.payload,
-      }
-    case SET_UNAUTHENTICATED:
-      return initialState
     case SET_USER:
-      return {
-        ...state,
-        singleUser: action.payload,
-      }
     case SET_USERLOGGED_IN:
       return {
         ...state,
         singleUser: action.payload,
+        token: localStorage.getItem("Authorization"),
       }
+    case SET_UNAUTHENTICATED:
+      return initialState
     case SET_USERS:
       return {
         ...state,

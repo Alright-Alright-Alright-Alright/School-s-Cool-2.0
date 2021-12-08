@@ -8,7 +8,7 @@ import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Home from "./pages/Home"
-import { loggedInUser } from "./redux/actions/userActions"
+import { loadUser, loggedInUser } from "./redux/actions/userActions"
 
 // const Home = lazy(() => import("./pages/Home"))
 
@@ -19,7 +19,8 @@ function App() {
   useEffect(() => {
     const fetchUser = () => !user && dispatch(loggedInUser())
     fetchUser()
-  }, [dispatch, user])
+    dispatch(loadUser())
+  }, [dispatch])
 
   return (
     <div className="App">

@@ -8,7 +8,7 @@ import {
   SET_UNAUTHENTICATED,
   SET_USERLOGGED_IN,
   SET_USERS,
-  //   LOADING_USER,
+  LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user"
 
@@ -23,9 +23,10 @@ export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
     login(userData)
     .then((response) => {
+      setAuthorizationHeader(response.accessToken)
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SET_AUTHENTICATED, payload: response.user })
-      setAuthorizationHeader(response.accessToken)
+      
     })
     .catch((err) => {
       dispatch({
@@ -84,3 +85,13 @@ export const getAllTheUsers = () => (dispatch) => {
       })
     })
 }
+
+export const loadUser = () => (dispatch, getState) => {
+    const {token} = getState().user;
+    if (token) {
+      return dispatch({
+        type: LOADING_USER,
+        token,
+      });
+    } return null;
+  };
