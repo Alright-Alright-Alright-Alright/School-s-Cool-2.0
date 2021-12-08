@@ -18,7 +18,7 @@ const topicSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    private: { type: Boolean, enum: [true, false], default: false },
+    isPrivate: { type: Boolean, enum: [true, false], default: false },
     bannerImage: {
       type: String,
     },

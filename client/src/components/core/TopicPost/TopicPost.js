@@ -21,7 +21,7 @@ import Icon from "../Icon"
 function TopicPost({ post, topicId, comments }) {
   const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.post)
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user.singleUser)
 
   const dispatch = useDispatch()
   // console.log(post)
