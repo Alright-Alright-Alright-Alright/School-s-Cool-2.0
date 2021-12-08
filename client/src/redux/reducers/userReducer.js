@@ -18,7 +18,7 @@ const userReducer = (state = initialState, action) => {
     case SET_AUTHENTICATED:
       return {
         ...state,
-        token: action.payload.accessToken,
+        token: `Bearer ${action.payload.accessToken}`,
         singleUser: action.payload.user,
       }
     case SET_USER:

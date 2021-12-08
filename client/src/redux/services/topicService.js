@@ -8,7 +8,7 @@ const service = axios.create({
 
 const configHeaders = () => {
   const { token } = store.getState().user
-  service.defaults.headers.common["x-auth-token"] = `Bearer ${token}`
+  service.defaults.headers.common["x-auth-token"] = token
 }
 
 export const getTopics = () =>
