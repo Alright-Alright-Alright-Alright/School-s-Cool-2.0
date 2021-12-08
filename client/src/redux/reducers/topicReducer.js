@@ -16,7 +16,6 @@ const initialState = {
 }
 
 const topicReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case GET_TOPICS:
       return {
