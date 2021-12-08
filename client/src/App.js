@@ -8,7 +8,7 @@ import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Home from "./pages/Home"
-import { loadUser, loggedInUser } from "./redux/actions/userActions"
+import { loggedInUser } from "./redux/actions/userActions"
 
 // const Home = lazy(() => import("./pages/Home"))
 
