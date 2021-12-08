@@ -16,12 +16,12 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
-    case SET_USER:
       return {
         ...state,
         token: action.payload.accessToken,
         singleUser: action.payload.user,
       }
+    case SET_USER:
     case SET_USERLOGGED_IN:
       return {
         ...state,
