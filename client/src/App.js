@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     const fetchUser = () => !user && dispatch(loggedInUser())
     fetchUser()
-    dispatch(loadUser())
   }, [dispatch])
 
   return (
