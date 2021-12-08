@@ -1,37 +1,26 @@
-import axios from "axios"
-import store from "../store"
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-})
-
-const configHeaders = () => {
-  const { token } = store.getState().user
-  service.defaults.headers.common["x-auth-token"] = token
-}
+import { service, setHeaders } from "../api/axios"
 
 export const getTopics = () =>
   service
-    .get(`/topics`, configHeaders())
+    .get(`/topics`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const getTopic = (topicId) =>
   service
-    .get(`/topics/${topicId}`)
+    .get(`/topics/${topicId}`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const addTopic = (topicData) =>
   service
-    .post(`/topics`, topicData)
+    .post(`/topics`, topicData, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const joinTopic = (topicId) =>
   service
-    .put(`/topics/${topicId}/join`)
+    .put(`/topics/${topicId}/join`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const leaveTopic = (topicId) =>
   service
-    .put(`/topics/${topicId}/leave`)
+    .put(`/topics/${topicId}/leave`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)

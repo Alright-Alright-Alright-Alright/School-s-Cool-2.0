@@ -1,21 +1,13 @@
-import axios from "axios"
-
-const authToken = localStorage.getItem("Authorization")
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-  headers: { "x-auth-token": authToken },
-})
+import { service, setHeaders } from "../api/axios"
 
 export const getAllPostService = (topicId) =>
   service
-    .get(`/topics/${topicId}/posts`)
+    .get(`/topics/${topicId}/posts`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const createPostService = (newPost) =>
   service
-    .post(`/topics/${newPost.topicId}/posts`, newPost)
+    .post(`/topics/${newPost.topicId}/posts`, newPost, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const getPostByIdService = (postId) =>
@@ -25,25 +17,25 @@ export const getPostByIdService = (postId) =>
 
 export const submitCommentService = (owner, commentBody, postId) =>
   service
-    .post(`/posts/${postId}/comments`, owner, commentBody, postId)
+    .post(`/posts/${postId}/comments`, owner, commentBody, postId, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const likePostService = (postId, userId) =>
   service
-    .put(`/posts/${postId}/likepost`, userId)
+    .put(`/posts/${postId}/likepost`, userId, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const unlikePostService = (postId, userId) =>
   service
-    .put(`/posts/${postId}/unlikepost`, userId)
+    .put(`/posts/${postId}/unlikepost`, userId, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const deletePostService = (postId) =>
   service
-    .delete(`/posts/${postId}`)
+    .delete(`/posts/${postId}`, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const editPostService = (postId, newPost) =>
   service
-    .put(`/posts/${postId}`, newPost)
+    .put(`/posts/${postId}`, newPost, setHeaders())
     .then((responseFromAPI) => responseFromAPI.data)

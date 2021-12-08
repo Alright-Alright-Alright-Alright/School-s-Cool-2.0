@@ -1,16 +1,10 @@
 /* eslint-disable dot-notation */
-import axios from "axios"
-
-const authToken = localStorage.getItem("Authorization")
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-  headers: { "x-auth-token": authToken },
-})
+import { service, setHeaders } from "../api/axios"
 
 export const login = (loginUser) =>
-  service.post("/login", loginUser).then((response) => response.data)
+  service
+    .post("/login", loginUser, setHeaders())
+    .then((response) => response.data)
 
 export const register = (registerNewUser) =>
   service.post("/register", registerNewUser).then((response) => response.data)
@@ -20,12 +14,11 @@ export const loggedin = () =>
 
 export const logout = () => {
   localStorage.removeItem("Authorization")
-  // delete axios.defaults.headers.common["Authorization"]
   service.post("/logout", {}).then((response) => response.data)
 }
 
 export const getAllUsers = () =>
-  service.get("/users").then((response) => response.data)
+  service.get("/users", setHeaders()).then((response) => response.data)
 
 export const forgot = (email) =>
   service.post("/forgot", { email }).then((response) => response.data)
