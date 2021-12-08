@@ -12,9 +12,9 @@ const getAllCommentsService = async (topicId) => {
     }
   };
 
-const createCommentService = async ( body, owner, postId) => {
+const createCommentService = async ( owner, body, postId) => {
     try {
-        return await addCommentToDb( body, owner, postId);
+        return await addCommentToDb( owner, body, postId);
     } catch (e) {
         throw new Error(e.message);
     }

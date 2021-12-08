@@ -7,7 +7,7 @@ import TopicContentLeft from "./TopicContentLeft"
 import MainContent from "./MainContent"
 import TopicContentRight from "./TopicContentRight"
 import { getOneTopic } from "../../../redux/actions/topicActions"
-import { getAllUsers } from "../../../redux/actions/userActions"
+import { getAllTheUsers } from "../../../redux/actions/userActions"
 
 function TopicDetailIndex() {
   const topic = useSelector((state) => state.topics.singleTopic)
@@ -17,7 +17,7 @@ function TopicDetailIndex() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllUsers())
+    dispatch(getAllTheUsers())
     dispatch(getOneTopic(params.topicId, user?.id))
   }, [dispatch, params.topicId, user?.id])
 

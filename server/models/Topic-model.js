@@ -18,7 +18,7 @@ const topicSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    private: { type: Boolean, enum: [true, false], default: false },
+    isPrivate: { type: Boolean, enum: [true, false], default: false },
     bannerImage: {
       type: String,
     },
@@ -28,7 +28,7 @@ const topicSchema = new Schema(
         ref: "User",
       },
     ],
-    recources: [
+    resources: [
       {
         type: Schema.Types.ObjectId,
         ref: "File",

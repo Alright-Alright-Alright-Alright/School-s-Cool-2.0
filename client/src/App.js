@@ -8,22 +8,18 @@ import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import TopicDetailPage from "./pages/TopicDetailPage"
 import Home from "./pages/Home"
-import { loggedInUser, loginUser } from "./redux/actions/userActions"
+import { loggedInUser } from "./redux/actions/userActions"
 
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchUser = () => {
-      if (!user) {
-        dispatch(loggedInUser())
-      }
-    }
+    const fetchUser = () => !user && dispatch(loggedInUser())
     fetchUser()
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="App">

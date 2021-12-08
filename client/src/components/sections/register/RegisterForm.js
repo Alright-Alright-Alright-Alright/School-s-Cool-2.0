@@ -45,9 +45,7 @@ const RegisterForm = () => {
     setLastName("")
     setEmail("")
     setPassword("")
-    setTimeout(() => {
-      navigate("/login")
-    }, 1500)
+    setTimeout(() => navigate("/"), 1500)
   }
 
   const logo = (
@@ -100,10 +98,10 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-1/4 h-3/5 rounded-2xl flex flex-col justify-around p-5"
+          className="bg-white shadow-lg w-1/4 h-4/6 rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
-          <div className="h-2/5 flex flex-col px-12 justify-around">
+          <div className="h-2/5 flex flex-col px-8 justify-around">
             <label className="text-sm my-2">First Name:</label>
             <input
               type="text"
@@ -141,14 +139,14 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="flex justify-center px-12">
+          <div className="flex justify-center px-8">
             <Button
               buttonName="Register"
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />
           </div>
-          {UI.errors && <p>{UI.errors.message}</p>}
+          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
         </form>
       </div>
     </div>

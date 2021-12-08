@@ -1,164 +1,117 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios"
-import { SET_POSTS, GET_POST, SET_POST, SUBMIT_COMMENT } from "../types/posts"
-import { getPostByIdService } from "../services/postService"
+import {
+  SET_POSTS,
+  GET_POST,
+  SET_POST,
+  SUBMIT_COMMENT,
+  LIKE_POST,
+  UNLIKE_POST,
+} from "../types/posts"
+import {
+  getPostByIdService,
+  createPostService,
+  submitCommentService,
+  getAllPostService,
+  likePostService,
+  unlikePostService,
+} from "../services/postService"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 const authToken = localStorage.getItem("Authorization")
 
-// export const getAllPosts = (topicId) => (dispatch) => {
-//   dispatch({ type: LOADING_UI })
-
-//   axios
-//     .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}/posts`, topicId, {
-//       headers: { Authorization: authToken },
-//     })
-//     .then((response) => {
-//       dispatch({ type: CLEAR_ERRORS })
-//       dispatch({ type: SET_POSTS, payload: response.data })
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: SET_ERRORS,
-//         payload: err.response.data,
-//       })
-//     })
-// }
-
-export const createPost = (newPost) => (dispatch) => {
+export const getAllPosts = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  axios
-    .post(
-      `${process.env.REACT_APP_API_URL}/topics/${newPost.topicId}/posts`,
-      newPost,
-      {
-        headers: { Authorization: authToken },
-      }
-    )
-    .then((response) => {
-      dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_POST, payload: response.data })
+
+  const allPosts = await getAllPostService(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SET_POSTS, payload: allPosts })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
     })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      })
-    })
+  }
 }
 
-export const getPostById = (postId) => (dispatch) => {
+export const getPostById = (postId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  axios
-    .get(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
-      headers: { Authorization: authToken },
+
+  const postById = await getPostByIdService(postId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_POST, payload: postById })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
     })
-    .then((response) => {
-      dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: GET_POST, payload: response.data })
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      })
-    })
+  }
 }
 
-// export const getPostById = (postId) => async (dispatch) => {
-//   dispatch({ type: LOADING_UI })
-
-//   const postFromDB = await getPostByIdService(postId)
-//   console.log(postFromDB)
-
-//   try {
-//     dispatch({ type: CLEAR_ERRORS })
-//     dispatch({ type: GET_POST, payload: postFromDB })
-//   } catch (error) {
-//     dispatch({
-//       type: SET_ERRORS,
-//       payload: error.response,
-//     })
-//   }
-// }
-
-export const submitComment = (owner, commentBody, postId) => (dispatch) => {
-  console.log(postId, commentBody, owner)
+export const createPost = (newPost) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  axios
-    .post(
-      `${process.env.REACT_APP_API_URL}/posts/${postId}/comments`,
-      { commentBody, owner },
-      {
-        headers: { Authorization: authToken },
-      }
-    )
-    .then((response) => {
-      dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_POST, payload: response.data })
+
+  const addNewPostDb = await createPostService(newPost)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SET_POST, payload: addNewPostDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
     })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      })
-    })
+  }
 }
 
-// export const getPostById = (postId) => (dispatch) => {
-//   dispatch({ type: LOADING_UI })
-//   axios
-//     .get(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
-//       headers: { Authorization: authToken },
-//     })
-//     .then((response) => {
-//       dispatch({ type: CLEAR_ERRORS })
-//       dispatch({ type: GET_POST, payload: response.data })
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: SET_ERRORS,
-//         payload: err.response.data,
-//       })
-//     })
-// }
+export const submitComment =
+  (owner, commentBody, postId) => async (dispatch) => {
+    dispatch({ type: LOADING_UI })
 
-// export const getPostById = (postId) => async (dispatch) => {
-//   dispatch({ type: LOADING_UI })
+    const addNewCommentDb = await submitCommentService({
+      owner,
+      commentBody,
+      postId,
+    })
+    try {
+      dispatch({ type: CLEAR_ERRORS })
+      dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb.comment })
+    } catch (error) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response,
+      })
+    }
+  }
 
-//   const postFromDB = await getPostByIdService(postId)
-//   console.log(postFromDB)
+export const likePost = (postId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  console.log(postId, userId)
 
-//   try {
-//     dispatch({ type: CLEAR_ERRORS })
-//     dispatch({ type: GET_POST, payload: postFromDB })
-//   } catch (error) {
-//     dispatch({
-//       type: SET_ERRORS,
-//       payload: error.response,
-//     })
-//   }
-// }
+  try {
+    const likePostDb = await likePostService(postId, { userId })
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LIKE_POST, payload: likePostDb.data })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
 
-// export const submitComment = (owner, commentBody, postId) => (dispatch) => {
-//   console.log(postId, commentBody, owner)
-//   dispatch({ type: LOADING_UI })
-//   axios
-//     .post(
-//       `${process.env.REACT_APP_API_URL}/posts/${postId}/comments`,
-//       { commentBody, owner },
-//       {
-//         headers: { Authorization: authToken },
-//       }
-//     )
-//     .then((response) => {
-//       dispatch({ type: CLEAR_ERRORS })
-//       dispatch({ type: SUBMIT_COMMENT, payload: response.data })
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: SET_ERRORS,
-//         payload: err.response.data,
-//       })
-//     })
-// }
+export const unlikePost = (postId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const unlikePostDb = await unlikePostService(postId, { userId })
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: UNLIKE_POST, payload: unlikePostDb.data })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}

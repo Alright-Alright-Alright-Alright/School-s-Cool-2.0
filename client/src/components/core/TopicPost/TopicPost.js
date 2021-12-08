@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
@@ -10,17 +10,39 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
-import { getPostById } from "../../../redux/actions/postActions"
+import {
+  getAllPosts,
+  getPostById,
+  likePost,
+  unlikePost,
+} from "../../../redux/actions/postActions"
+import Icon from "../Icon"
 
-function TopicPost({ post }) {
+function TopicPost({ post, topicId, comments }) {
+  const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.post)
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.singleUser)
 
+  const dispatch = useDispatch()
+  // console.log(post)
   dayjs.extend(relativeTime)
+
+  const handleLike = () => {
+    dispatch(likePost(post._id, user._id))
+    setPostLiked(true)
+    console.log(post._id, user._id)
+  }
+
+  const handleUnlike = () => {
+    dispatch(unlikePost(post._id, user._id))
+    setPostLiked(false)
+    console.log(post._id, user._id)
+  }
 
   useEffect(() => {
     dispatch(getPostById(post._id))
-  }, [dispatch, post._id])
+    dispatch(getAllPosts(topicId))
+  }, [dispatch, post._id, topicId, postLiked])
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -55,10 +77,29 @@ function TopicPost({ post }) {
           {post.body}
         </p>
       </div>
-      <div className="flex justify-end pt-1 pr-3">
-        <p className="text-base">Icons</p>
+      <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
+        <div className="flex">
+          <Icon iconName="file" />
+          <span>00</span>
+        </div>
+        <div className="flex">
+          {post?.likedBy?.includes(user._id) ? (
+            <button type="button" onClick={handleUnlike}>
+              <Icon iconName="like" iconStyle="fill-active" />
+            </button>
+          ) : (
+            <button type="button" onClick={handleLike}>
+              <Icon iconName="like" iconStyle="fill-inactive" />
+            </button>
+          )}
+          <span>{post?.likedBy?.length}</span>
+        </div>
+        <div className="flex">
+          <Icon iconName="message" />
+          <span>{postById?.comments?.length}</span>
+        </div>
       </div>
-      {postById?.comments?.map((commentData) => (
+      {comments?.map((commentData) => (
         <Comment key={commentData._id} comment={commentData} />
       ))}
       <CommentForm postId={post._id} />
@@ -67,7 +108,9 @@ function TopicPost({ post }) {
 }
 
 TopicPost.propTypes = {
+  topicId: PropTypes.string.isRequired,
   post: PropTypes.object.isRequired,
+  comments: PropTypes.array.isRequired,
 }
 
 export default TopicPost

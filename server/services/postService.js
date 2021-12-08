@@ -2,7 +2,9 @@ const {
     getAllPostsDb,
     addPostToDb,
     getPostsByTopicIdDb,
-    getPostByIdDb
+    getPostByIdDb,
+    likePostDb,
+    unlikePostDb
   } = require("../db/postDb");
   
 const getAllPostsService = async (topicId) => {
@@ -37,9 +39,27 @@ const getPostByIdService = async (postId) => {
     }
 };
 
+const likePostService = async (postId, userId) => {
+    try {
+        return await likePostDb(postId, userId);
+    } catch (e) {
+        throw new Error(e.message);
+    }
+};
+
+const unlikePostService = async (postId, userId) => {
+    try {
+        return await unlikePostDb(postId, userId);
+    } catch (e) {
+        throw new Error(e.message);
+    }
+};
+
 module.exports = {
     getAllPostsService, 
     createPostService, 
     getPostByIdService, 
-    getPostsByTopicIdService
+    getPostsByTopicIdService,
+    likePostService,
+    unlikePostService
 };

@@ -8,10 +8,10 @@ import Dashcard from "../../core/dashcard/Dashcard"
 function TopicContentLeft({ topic }) {
   const { bannerImage, title, description, isPrivate, resources, owner } = topic
   return (
-    <div className="flex flex-col place-items-end">
+    <div className="flex flex-col justify-end items-end content-end ">
       <div className="p-3">
         <img
-          className="rounded-r-3xl rounded-b-3xl object-cover h-48 w-full"
+          className="rounded-r-3xl rounded-b-3xl object-cover h-72 max-w-xs"
           src={`${bannerImage}`}
           alt="placeholder"
           width="400"

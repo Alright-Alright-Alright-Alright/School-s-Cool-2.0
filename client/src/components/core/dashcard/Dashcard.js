@@ -1,6 +1,5 @@
-/* eslint-disable react/default-props-match-prop-types */
-/* eslint-disable react/require-default-props */
 import React, { useState } from "react"
+import { useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
@@ -13,28 +12,53 @@ export default function Dashcard({
   dropdownMenuData,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
+  const [filter, setFilter] = useState(dropdownMenuData?.dropDownItems[0])
 
-  const firstThreeItems = dashCardData
+  const user = useSelector((state) => state.user.singleUser)
+
+  let filterRule
+  switch (filter) {
+    case "Created by me":
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      filterRule = (item) => item.owner === user._id
+      break
+    case "Followed by me":
+      filterRule = (item) =>
+        item.members.find((member) => member._id === user._id)
+      break
+    default:
+      filterRule = (item) => item
+  }
+
+  const filteredItems = dashCardData.filter(filterRule)
+
+  const firstThreeItems = filteredItems
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item.id}
+        key={item._id}
+        linkId={item._id}
         listItemTitle={item?.title}
         listItemDate={item?.date}
-        listItemComments={item?.comment}
-        listItemUsers={item?.user}
+        listItemComments={item?.posts}
+        listItemUsers={item?.members}
       />
     ))
 
-  const allItems = dashCardData.map((item) => (
+  const allItems = filteredItems.map((item) => (
     <DashCardListItem
-      key={item?.id}
+      key={item._id}
+      linkId={item._id}
       listItemTitle={item?.title}
       listItemDate={item?.date}
-      listItemComments={item?.comment}
-      listItemUsers={item?.user}
+      listItemComments={item?.posts}
+      listItemUsers={item?.members}
     />
   ))
+
+  const onSelectFilter = (item) => {
+    setFilter(item)
+  }
 
   return (
     <>
@@ -45,8 +69,12 @@ export default function Dashcard({
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4">{dashCardTitle}</p>
             <div className="flex flex-row">
-              <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu data={dropdownMenuData} />
+              <h2 className="text-base pr-4">{filter}</h2>
+              <DropDownMenu
+                data={dropdownMenuData}
+                filter={filter}
+                selectFilter={onSelectFilter}
+              />
             </div>
           </div>
         </div>
@@ -79,7 +107,7 @@ Dashcard.defaultProps = {
 
 Dashcard.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  dashCardData: PropTypes.array.isRequired,
+  dashCardData: PropTypes.array,
   dashCardTitle: PropTypes.string.isRequired,
   dashCardStyle: PropTypes.string.isRequired,
   dropdownMenuData: PropTypes.shape({
