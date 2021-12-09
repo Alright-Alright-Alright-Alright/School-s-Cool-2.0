@@ -58,7 +58,7 @@ const TopicCard = ({ topics }) => {
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
             <span>{topics.members?.length}</span>
             <Icon iconName="file" iconStyle="fill-inactive text-grey-dark" />
-            <span>{topics.recources?.length}</span>
+            <span>{topics.resources?.length}</span>
           </div>
           <div className="p-3">
             {join ? (

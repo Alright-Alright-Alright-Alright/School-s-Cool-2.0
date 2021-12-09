@@ -1,18 +1,10 @@
 /* eslint-disable dot-notation */
-import axios from "axios"
-
-const authToken = localStorage.getItem("Authorization")
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-  headers: { Authorization: authToken },
-})
+import { service, configHeaders } from "../api/axios"
 
 export const getAllEvents = () =>
-  service.get(`/events`).then((response) => response.data)
+  service.get(`/events`, configHeaders()).then((response) => response.data)
 
 export const getEvent = (eventId) =>
   service
-    .get(`/event/${eventId}`)
+    .get(`/event/${eventId}`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)

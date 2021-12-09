@@ -8,7 +8,6 @@ import {
   SET_UNAUTHENTICATED,
   SET_USERLOGGED_IN,
   SET_USERS,
-  //   LOADING_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user"
 
@@ -23,9 +22,9 @@ export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI })
     login(userData)
     .then((response) => {
-      dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SET_AUTHENTICATED, payload: response.user })
       setAuthorizationHeader(response.accessToken)
+      dispatch({ type: CLEAR_ERRORS })
+      dispatch({ type: SET_AUTHENTICATED, payload: response })
     })
     .catch((err) => {
       dispatch({
