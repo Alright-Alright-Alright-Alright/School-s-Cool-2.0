@@ -22,6 +22,12 @@ const topicSchema = new Schema(
     bannerImage: {
       type: String,
     },
+    category: {
+      type: String, enum: ["Home work", "School work", "Doubts", "Sports", "Entertainment", "Psychology"],
+    },
+    subject: {
+      type: String, enum: ["Biology", "Literature", "Mathematics", "Physics", "Technology", "Football"],
+    },
     members: [
       {
         type: Schema.Types.ObjectId,

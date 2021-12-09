@@ -6,7 +6,16 @@ import { Link } from "react-router-dom"
 import Dashcard from "../../core/dashcard/Dashcard"
 
 function TopicContentLeft({ topic }) {
-  const { bannerImage, title, description, isPrivate, resources, owner } = topic
+  const {
+    title,
+    description,
+    category,
+    subject,
+    bannerImage,
+    isPrivate,
+    resources,
+    owner,
+  } = topic
   return (
     <div className="flex flex-col justify-end items-end content-end ">
       <div className="p-3">
@@ -18,7 +27,9 @@ function TopicContentLeft({ topic }) {
         />
         <div className="p-3 flex-col  place-items-end content-end max-w-xs">
           <h1 className="text-xl pb-2">{title}</h1>
-          <p className="text-lg pb-2">Schoolwork: Math</p>
+          <p className="text-lg pb-2">
+            {category}: {subject}
+          </p>
           <p className="text-sm">{description} </p>
         </div>
         <div className="place-items-end">

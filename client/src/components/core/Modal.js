@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-onchange */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
@@ -9,6 +11,8 @@ import Icon from "./Icon"
 
 const Modal = ({ handleShowModal }) => {
   const [title, seTitle] = useState("")
+  const [category, setCategory] = useState("")
+  const [subject, setSubject] = useState("")
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
@@ -32,14 +36,24 @@ const Modal = ({ handleShowModal }) => {
     setBannerImage(e.target.files[0])
   }
 
+  const chooseCategory = (e) => {
+    setCategory(e.target.value)
+  }
+
+  const chooseSubject = (e) => {
+    setSubject(e.target.value)
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const topicData = {
       title,
       description,
+      category,
+      subject,
       bannerImage: image,
-      private: privacy,
+      isPrivate: privacy,
     }
     handleShowModal()
     dispatch(addAtopic(topicData))
@@ -66,24 +80,36 @@ const Modal = ({ handleShowModal }) => {
       </section>
       <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
         <select
+          onChange={chooseCategory}
           name=""
           id=""
           className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
         >
-          <option value="">Choose a category</option>
-          <option value="">Home Work</option>
-          <option value="">Doubts</option>
+          <option className="text-base" disabled selected>
+            Choose a category
+          </option>
+          <option value="School work">School work</option>
+          <option value="Sports">Sports</option>
+          <option value="">Entertainment</option>
+          <option value="Entertainment">Psychology</option>
+          <option value="Home Work">Home Work</option>
+          <option value="Doubts">Doubts</option>
         </select>
         <select
+          onChange={chooseSubject}
           name=""
           id=""
           className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
         >
-          <option className="text-base" value="">
+          <option className="text-base" disabled selected>
             Choose a subject
           </option>
-          <option value="">Maths</option>
-          <option value="">Literature</option>
+          <option value="Biology">Biology</option>
+          <option value="Physics">Physics</option>
+          <option value="Technology">Technology</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Literature">Literature</option>
+          <option value="Football">Football</option>
         </select>
         <button
           type="button"
@@ -105,7 +131,7 @@ const Modal = ({ handleShowModal }) => {
         <input
           type="text"
           placeholder="Briefly explain what your topic is about"
-          className="w-full placeholder-grey-medium text-base"
+          className="w-full placeholder-grey-medium text-base h-10"
           onChange={chooseDescription}
         />
       </section>
