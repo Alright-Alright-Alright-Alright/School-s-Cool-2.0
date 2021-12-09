@@ -11,16 +11,20 @@ const getAllTopicsDb = async () => {
 const addTopicToDb = async (
   title,
   description,
+  category,
+  subject,
   bannerImage,
-  private,
+  isPrivate,
   owner
 ) => {
   try {
     return await Topic.create({
       title,
       description,
+      category,
+      subject,
       bannerImage,
-      private,
+      isPrivate,
       owner,
     });
   } catch (error) {
@@ -34,19 +38,19 @@ const getSingleTopicFromdb = async (topicId) => {
       .populate("owner", "firstName lastName imageUrl")
       .populate("members", "_id firstName lastName imageUrl")
       .populate({
-          path: "posts",
-          populate: {
-            path: "owner",
-            select: "firstName, lastName, imageUrl"
-          },
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
         populate: {
           path: "comments",
           populate: {
             path: "owner",
-            select: "firstName, lastName, imageUrl"
-          }
-        }
-      })
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      });
   } catch (error) {
     throw new Error(error);
   }
@@ -54,7 +58,11 @@ const getSingleTopicFromdb = async (topicId) => {
 
 const updateTopicDb = async (topicId, title, description) => {
   try {
-    return await Topic.findByIdAndUpdate(topicId, { title, description }, {new: true});
+    return await Topic.findByIdAndUpdate(
+      topicId,
+      { title, description },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }
@@ -62,9 +70,13 @@ const updateTopicDb = async (topicId, title, description) => {
 
 const addUserToTopicDb = async (topicId, user) => {
   try {
-    return await Topic.findByIdAndUpdate(topicId, {
-      $push: { members: user },
-    }, {new: true});
+    return await Topic.findByIdAndUpdate(
+      topicId,
+      {
+        $push: { members: user },
+      },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }
@@ -72,9 +84,13 @@ const addUserToTopicDb = async (topicId, user) => {
 
 const takeOutUserFromTopicDb = async (topicId, user) => {
   try {
-    return await Topic.findByIdAndUpdate(topicId, {
-      $pull: { members: user },
-    }, {new: true});
+    return await Topic.findByIdAndUpdate(
+      topicId,
+      {
+        $pull: { members: user },
+      },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }

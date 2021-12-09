@@ -1,4 +1,4 @@
-import axios from "axios"
+import { service, configHeaders } from "../redux/api/axios"
 
 const fileUploadHandler = async (selectedFile) => {
   const data = new FormData()
@@ -6,9 +6,14 @@ const fileUploadHandler = async (selectedFile) => {
 
   const response =
     selectedFile !== "" &&
-    (await axios.post(`${process.env.REACT_APP_API_URL}/file-upload`, data, {
-      withCredentials: true,
-    }))
+    (await service.post(
+      `/file-upload`,
+      data,
+      {
+        withCredentials: true,
+      },
+      configHeaders()
+    ))
   return selectedFile !== "" && response.data.secure_url
 }
 
