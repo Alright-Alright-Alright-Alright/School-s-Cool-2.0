@@ -31,7 +31,7 @@ const LoginForm = () => {
     dispatch(loginUser(userLogin))
     setEmail("")
     setPassword("")
-    setTimeout(() => navigate("/"), 1500)
+    setTimeout(() => navigate("/home"), 1500)
   }
 
   const logo = (

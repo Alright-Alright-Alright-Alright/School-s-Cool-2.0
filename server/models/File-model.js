@@ -13,10 +13,10 @@ const fileSchema = new Schema(
       ref: "User",
     },
     category: {
-      enum: ["School work", "Sports", "Entertainment", "Psychology"],
+      type: String
     },
     subject: {
-      enum: ["Biology", "Mathematics", "Physics", "Technology"],
+      type: String
     },
   },
   {

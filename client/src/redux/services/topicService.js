@@ -1,15 +1,9 @@
-import axios from "axios"
-
-const authToken = localStorage.getItem("Authorization")
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-  headers: { Authorization: authToken },
-})
+import { service, configHeaders } from "../api/axios"
 
 export const getTopics = () =>
-  service.get(`/topics`).then((responseFromAPI) => responseFromAPI.data)
+  service
+    .get(`/topics`, configHeaders())
+    .then((responseFromAPI) => responseFromAPI.data)
 
 export const getTopic = (topicId) =>
   service
