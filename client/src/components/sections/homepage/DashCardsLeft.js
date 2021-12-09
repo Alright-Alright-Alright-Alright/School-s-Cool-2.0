@@ -7,6 +7,7 @@ import { getAllEvents } from "../../../redux/actions/eventActions"
 // import getAllCourses from "../../../redux/actions/courseActions"
 
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
@@ -19,6 +20,7 @@ function DashCardsLeft() {
 
   useEffect(() => {
     dispatch(getAlltopics())
+    dispatch(getAllFilesFromLibrary())
     // dispatch(getAllEvents())
     // dispatch(getAllCourses())
   }, [dispatch])
