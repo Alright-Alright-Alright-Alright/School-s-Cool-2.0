@@ -6,5 +6,5 @@ export const getAllEvents = () =>
 
 export const getEvent = (eventId) =>
   service
-    .get(`/event/${eventId}`)
+    .get(`/event/${eventId}`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
