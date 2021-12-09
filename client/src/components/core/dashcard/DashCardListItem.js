@@ -29,12 +29,12 @@ export default function DashCardListItem({
                 iconStyle="fill-inactive text-grey-dark"
               />
             </button>
-            <p>{listItemComments?.length}</p>
+            <p>{listItemUsers?.length}</p>
           </div>
           <button type="button">
             <Icon iconName="message" iconStyle="fill-inactive text-grey-dark" />
           </button>
-          <p>{listItemUsers?.length}</p>
+          <p>{listItemComments?.length}</p>
         </div>
       </div>
     </>
