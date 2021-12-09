@@ -1,5 +1,5 @@
 // Library reducer types
-export const SET_LIBRARY = "SET_LIBRARY"
+export const GET_LIBRARY = "GET_LIBRARY"
 export const POST_FILE = "POST_FILE"
 export const DELETE_FILE = "DELETE_FILE"
 export const LIKE_FILE = "LIKE_FILE"

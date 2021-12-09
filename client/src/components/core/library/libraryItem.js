@@ -1,24 +1,45 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-vars */
 import React from "react"
+import Icon from "../Icon"
 
-const libraryItem = () => (
-  <div className="flex justify-center content-center">
-    <table className="table-fixed">
+const libraryItem = ({ library }) => (
+  <div className="flex justify-center content-center bg- w-full">
+    <table className="w-full border-solid border-2">
       <thead>
-        <tr>
-          <th className="w-1/2 ">Name</th>
-          <th className="w-1/4 ">Topic</th>
-          <th className="w-1/4 ">Date added</th>
-          <th className="w-1/4 ">User</th>
+        <tr className="border-solid border-2">
+          <th className="border-solid border-2">Name</th>
+          <th className="border-solid border-2">Topic</th>
+          <th className="border-solid border-2">Date added</th>
+          <th className="border-solid border-2">User</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Resource Name</td>
-          <td>Topic Name</td>
-          <td>{JSON.stringify(new Date())}</td>
-          <td>User Name</td>
-        </tr>
-      </tbody>
+      {library.map((item) => (
+        <tbody key={item._id} className="border-solid border-2">
+          <tr className="h-16">
+            <td className="flex flex-col h-16">
+              <span>{item.fileName}</span>
+              <span> {item.subject}</span>
+            </td>
+            <td>{item.category}</td>
+            <td>
+              {JSON.stringify(
+                `${new Date().getDate()}/${
+                  new Date().getMonth() + 1
+                }/${new Date().getFullYear()}`
+              )}
+            </td>
+            <td className="h-16 flex justify-evenly content-center">
+              <span>
+                {item.owner.firstName} {item.owner.lastName}
+              </span>
+              <Icon iconName="like" iconStyle="fill-inactive" />
+              <Icon iconName="message" iconStyle="fill-inactive" />
+            </td>
+          </tr>
+        </tbody>
+      ))}
     </table>
   </div>
 )
