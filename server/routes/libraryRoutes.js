@@ -7,10 +7,9 @@ const {
   getLibrary,
   deleteFile,
 } = require("../controllers/libraryControllers");
-const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 
 libraryRoutes.post("/file-upload", files, fileUpload);
-libraryRoutes.post("/add-file", addFile);
+libraryRoutes.post("/library/add-file", addFile);
 libraryRoutes.get("/library-user", userLibrary);
 libraryRoutes.get("/library", getLibrary);
 libraryRoutes.put("/library-delete", deleteFile);

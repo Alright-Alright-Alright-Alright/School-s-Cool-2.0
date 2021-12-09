@@ -2,11 +2,19 @@ const User = require("../models/User-model");
 const File = require("../models/File-model");
 const Topic = require("../models/Topic-model");
 
-exports.creatingFile = async (fileName, category, private, fileUrl, owner) => {
+exports.creatingFile = async (
+  fileName,
+  category,
+  subject,
+  isPrivate,
+  fileUrl,
+  owner
+) => {
   let file = await File.create({
     fileName,
     category,
-    private,
+    subject,
+    isPrivate,
     fileUrl,
     owner,
   });
@@ -16,10 +24,11 @@ exports.creatingFile = async (fileName, category, private, fileUrl, owner) => {
     });
 
     let topic = await Topic.findOneAndUpdate(
-      { name: file.category },
+      { category: file.category },
       {
-        $push: { topicFiles: file._id },
-      }
+        $push: { resources: file._id },
+      },
+      { new: true }
     );
 
     return { user, topic };

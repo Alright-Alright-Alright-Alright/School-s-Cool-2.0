@@ -5,9 +5,9 @@ const {
   fileDeleting,
 } = require("../db/libraryDb");
 
-exports.createFile = async (fileName, category, private, fileUrl, owner) => {
+exports.createFile = async (fileName, category, subject, isPrivate, fileUrl, owner) => {
   try {
-    let file = await creatingFile(fileName, category, private, fileUrl, owner);
+    let file = await creatingFile(fileName, category, subject, isPrivate, fileUrl, owner);
     return file;
   } catch (error) {
     throw new Error(error.message);
