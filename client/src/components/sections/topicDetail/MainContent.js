@@ -35,6 +35,8 @@ function MainContent({ topic }) {
     dispatch(getAllPosts(params.topicId))
   }, [dispatch, params.topicId])
 
+  // console.log(posts)
+
   return (
     <div className="">
       {UI.errors && <p>{UI.errors.message}</p>}

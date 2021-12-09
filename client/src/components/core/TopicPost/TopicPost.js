@@ -19,30 +19,39 @@ import {
 import Icon from "../Icon"
 
 function TopicPost({ post, topicId, comments }) {
+  const [showMoreComments, setShowMoreComments] = useState(false)
   const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.post)
   const user = useSelector((state) => state.user.singleUser)
-
   const dispatch = useDispatch()
-  // console.log(post)
   dayjs.extend(relativeTime)
 
   const handleLike = () => {
     dispatch(likePost(post._id, user._id))
     setPostLiked(true)
-    console.log(post._id, user._id)
+    // console.log(post._id, user._id)
   }
 
   const handleUnlike = () => {
     dispatch(unlikePost(post._id, user._id))
     setPostLiked(false)
-    console.log(post._id, user._id)
+    // console.log(post._id, user._id)
   }
 
   useEffect(() => {
     dispatch(getPostById(post._id))
     dispatch(getAllPosts(topicId))
   }, [dispatch, post._id, topicId, postLiked])
+
+  const firstThreeComments = comments
+    .slice(0, 3)
+    .map((commentData) => (
+      <Comment key={commentData._id} comment={commentData} />
+    ))
+
+  const allComments = comments.map((commentData) => (
+    <Comment key={commentData._id} comment={commentData} />
+  ))
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -96,12 +105,24 @@ function TopicPost({ post, topicId, comments }) {
         </div>
         <div className="flex">
           <Icon iconName="message" />
-          <span>{postById?.comments?.length}</span>
+          <span>{post?.comments?.length}</span>
         </div>
       </div>
-      {comments?.map((commentData) => (
-        <Comment key={commentData._id} comment={commentData} />
-      ))}
+      {showMoreComments ? allComments : firstThreeComments}
+      {comments.length > 3 && (
+        <div className="flex justify-center pt-3">
+          <button
+            className="hover:bg-grey-super_light rounded-full p-1 justify-center items-center"
+            type="button"
+            onClick={() => setShowMoreComments(!showMoreComments)}
+          >
+            {comments.length > 3 && !showMoreComments ? (
+              <Icon iconName="expand" />
+            ) : null}
+            {showMoreComments && <Icon iconName="collapse" />}
+          </button>
+        </div>
+      )}
       <CommentForm postId={post._id} />
     </div>
   )
