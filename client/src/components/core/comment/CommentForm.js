@@ -9,11 +9,11 @@ import {
   getPostById,
   getAllPosts,
 } from "../../../redux/actions/postActions"
-import { getOneTopic } from "../../../redux/actions/topicActions"
 
 function CommentForm({ postId }) {
   const [commentBody, setCommentBody] = useState("")
   const user = useSelector((state) => state.user.singleUser)
+  const singlePost = useSelector((state) => state.posts.singlePost)
   const dispatch = useDispatch()
 
   const params = useParams()
@@ -21,13 +21,12 @@ function CommentForm({ postId }) {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     dispatch(submitComment(user._id, commentBody, postId))
-    dispatch(getPostById(postId))
-    dispatch(getOneTopic(params.topicId))
     dispatch(getAllPosts(params.topicId))
   }
 
   useEffect(() => {
-    dispatch(getOneTopic(params.topicId))
+    dispatch(getAllPosts(params.topicId))
+    dispatch(getPostById(postId))
   }, [dispatch])
 
   return (

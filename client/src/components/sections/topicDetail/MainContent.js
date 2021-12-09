@@ -14,7 +14,7 @@ function MainContent({ topic }) {
   const [body, setPostBody] = useState("")
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
-  const posts = useSelector((state) => state.posts.posts)
+  const posts = useSelector((state) => state.posts.allPosts)
   const params = useParams()
   const dispatch = useDispatch()
   const newPost = {
@@ -26,12 +26,12 @@ function MainContent({ topic }) {
   const createNewPost = () => {
     dispatch(createPost(newPost))
     setPostBody("")
-    dispatch(getOneTopic(params.topicId))
+    // dispatch(getOneTopic(params.topicId))
     dispatch(getAllPosts(params.topicId))
   }
 
   useEffect(() => {
-    dispatch(getOneTopic(params.topicId))
+    // dispatch(getOneTopic(params.topicId))
     dispatch(getAllPosts(params.topicId))
   }, [dispatch, params.topicId])
 
@@ -44,7 +44,7 @@ function MainContent({ topic }) {
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
       />
-      {posts?.posts?.map((post) => (
+      {posts?.map((post) => (
         <TopicPost
           key={post._id}
           post={post}

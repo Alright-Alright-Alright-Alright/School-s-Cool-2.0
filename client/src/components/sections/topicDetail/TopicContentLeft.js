@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import Dashcard from "../../core/dashcard/Dashcard"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
+import data from "../../../data/dashcardDropdownMenu.json"
 
 const resources = [
   {
@@ -50,6 +51,7 @@ function TopicContentLeft({ topic }) {
             resourceDashCardTitle="Resources"
             resourceDashCardStyle="bg-aqua"
             resourceDashCardData={resources}
+            dropdownMenuData={data.resources}
           />
         </div>
         <div className="p-3 w-full">

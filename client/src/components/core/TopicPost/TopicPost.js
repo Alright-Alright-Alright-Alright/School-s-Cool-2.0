@@ -38,10 +38,10 @@ function TopicPost({ post, topicId, comments }) {
     // console.log(post._id, user._id)
   }
 
-  useEffect(() => {
-    dispatch(getPostById(post._id))
-    dispatch(getAllPosts(topicId))
-  }, [dispatch, post._id, topicId, postLiked])
+  // useEffect(() => {
+  //   dispatch(getPostById(post._id))
+  //   dispatch(getAllPosts(topicId))
+  // }, [dispatch, post._id, topicId, postLiked])
 
   const firstThreeComments = comments
     .slice(0, 3)
@@ -92,7 +92,7 @@ function TopicPost({ post, topicId, comments }) {
           <span>00</span>
         </div>
         <div className="flex">
-          {post?.likedBy?.includes(user._id) ? (
+          {post?.likedBy?.includes(user?._id) ? (
             <button type="button" onClick={handleUnlike}>
               <Icon iconName="like" iconStyle="fill-active" />
             </button>

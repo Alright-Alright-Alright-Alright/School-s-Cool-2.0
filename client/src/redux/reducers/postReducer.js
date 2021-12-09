@@ -17,8 +17,8 @@ import {
 // } from "../types/ui"
 
 const initialState = {
-  posts: [],
-  post: {},
+  allPosts: [],
+  singlePost: {},
 }
 
 const postsReducer = (state = initialState, action) => {
@@ -26,64 +26,46 @@ const postsReducer = (state = initialState, action) => {
     case SET_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        allPosts: action.payload,
       }
     case GET_POST:
       return {
         ...state,
-        ...action.payload,
+        singlePost: action.payload,
       }
+    case LIKE_POST:
+    case UNLIKE_POST:
+      console.log(action.payload)
+      return {
+        allPosts: state.allPosts.map((eachPost) =>
+          eachPost._id === action.payload._id ? action.payload : eachPost
+        ),
+      }
+
+    // const index = state.allPosts.findIndex(
+    //   (post) => post.post_id === action.payload.post_id
+    // )
+    // state.allPosts[index] = action.payload
+    // if (state.post.post_id === action.payload.post_id) {
+    //   state.singlePost = action.payload
+    // }
+    // return {
+    //   ...state,
+    // }
     case SET_POST:
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
+        allPosts: [action.payload, ...state.posts],
       }
     case SUBMIT_COMMENT:
+      console.log(action.payload)
       return {
         ...state,
-        post: {
-          ...state.post,
-          comments: [action.payload, ...state.post.comments],
+        singlePost: {
+          ...state.singlePost,
+          comments: [action.payload, ...state.singlePost.comments],
         },
       }
-    // case LIKE_POST:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   }
-    // case UNLIKE_POST:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   }
-    case LIKE_POST:
-      return {
-        posts: state.posts.map((eachPost) =>
-          eachPost._id === action.payload.post._id
-            ? action.payload.post
-            : eachPost
-        ),
-      }
-    case UNLIKE_POST:
-      return {
-        posts: state.posts.map((eachPost) =>
-          eachPost._id === action.payload.post._id
-            ? action.payload.post
-            : eachPost
-        ),
-      }
-    // case LIKE_POST:
-    // case UNLIKE_POST:
-    //   const index = state.posts.findIndex(
-    //     (post) => post.postId === action.payload.postId
-    //   )
-    //   state.posts[index] = action.payload
-    //   if (state.post.postId === action.payload.postId) {
-    //     state.post = action.payload
-    //   }
-    //   return {
-    //     ...state,
-    //   }
     default:
       return state
   }

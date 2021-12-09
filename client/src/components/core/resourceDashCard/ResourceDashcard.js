@@ -8,6 +8,7 @@ import PropTypes from "prop-types"
 import Icon from "../Icon"
 import ResourceDashCardListItem from "./ResourceDashCardListItem"
 import DropDownMenu from "../DropDownMenu"
+// import data from "../../../data/dashcardDropdownMenu.json"
 
 export default function ResourceDashcard({
   resourceDashCardData,
