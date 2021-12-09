@@ -1,13 +1,13 @@
-import { service, setHeaders } from "../api/axios"
+import { service, configHeaders } from "../api/axios"
 
 export const getAllPostService = (topicId) =>
   service
-    .get(`/topics/${topicId}/posts`, setHeaders())
+    .get(`/topics/${topicId}/posts`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const createPostService = (newPost) =>
   service
-    .post(`/topics/${newPost.topicId}/posts`, newPost, setHeaders())
+    .post(`/topics/${newPost.topicId}/posts`, newPost)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const getPostByIdService = (postId) =>
@@ -17,25 +17,25 @@ export const getPostByIdService = (postId) =>
 
 export const submitCommentService = (owner, commentBody, postId) =>
   service
-    .post(`/posts/${postId}/comments`, owner, commentBody, postId, setHeaders())
+    .post(`/posts/${postId}/comments`, owner, commentBody, postId)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const likePostService = (postId, userId) =>
   service
-    .put(`/posts/${postId}/likepost`, userId, setHeaders())
+    .put(`/posts/${postId}/likepost`, userId)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const unlikePostService = (postId, userId) =>
   service
-    .put(`/posts/${postId}/unlikepost`, userId, setHeaders())
+    .put(`/posts/${postId}/unlikepost`, userId)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const deletePostService = (postId) =>
   service
-    .delete(`/posts/${postId}`, setHeaders())
+    .delete(`/posts/${postId}`)
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const editPostService = (postId, newPost) =>
   service
-    .put(`/posts/${postId}`, newPost, setHeaders())
+    .put(`/posts/${postId}`, newPost)
     .then((responseFromAPI) => responseFromAPI.data)

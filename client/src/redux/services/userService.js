@@ -1,16 +1,14 @@
 /* eslint-disable dot-notation */
-import { service, setHeaders } from "../api/axios"
+import { service, configHeaders } from "../api/axios"
 
 export const login = (loginUser) =>
-  service
-    .post("/login", loginUser, setHeaders())
-    .then((response) => response.data)
+  service.post("/login", loginUser).then((response) => response.data)
 
 export const register = (registerNewUser) =>
   service.post("/register", registerNewUser).then((response) => response.data)
 
 export const loggedin = () =>
-  service.get("/loggedin").then((response) => response.data)
+  service.get("/loggedin", configHeaders()).then((response) => response.data)
 
 export const logout = () => {
   localStorage.removeItem("Authorization")
@@ -18,7 +16,7 @@ export const logout = () => {
 }
 
 export const getAllUsers = () =>
-  service.get("/users", setHeaders()).then((response) => response.data)
+  service.get("/users", configHeaders()).then((response) => response.data)
 
 export const forgot = (email) =>
   service.post("/forgot", { email }).then((response) => response.data)

@@ -1,10 +1,10 @@
 /* eslint-disable dot-notation */
-import { service, setHeaders } from "../api/axios"
+import { service, configHeaders } from "../api/axios"
 
 export const getAllEvents = () =>
-  service.get(`/events`, setHeaders()).then((response) => response.data)
+  service.get(`/events`, configHeaders()).then((response) => response.data)
 
 export const getEvent = (eventId) =>
   service
-    .get(`/event/${eventId}`, setHeaders())
+    .get(`/event/${eventId}`)
     .then((responseFromAPI) => responseFromAPI.data)
