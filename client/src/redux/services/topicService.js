@@ -1,15 +1,4 @@
-import axios from "axios"
-import store from "../store"
-
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-})
-
-const configHeaders = () => {
-  const { token } = store.getState().user
-  service.defaults.headers.common["x-auth-token"] = token
-}
+import { service, configHeaders } from "../api/axios"
 
 export const getTopics = () =>
   service
