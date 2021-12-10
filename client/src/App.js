@@ -17,13 +17,7 @@ function App() {
   const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
 
-  useEffect(
-    () =>
-      !user && token
-        ? dispatch(loggedInUser())
-        : localStorage.removeItem("Authorization"),
-    [dispatch, user, token]
-  )
+  useEffect(() => !user && dispatch(loggedInUser()), [dispatch, user])
 
   return (
     <div className="App">
