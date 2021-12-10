@@ -35,23 +35,11 @@ const postsReducer = (state = initialState, action) => {
       }
     case LIKE_POST:
     case UNLIKE_POST:
-      console.log(action.payload)
       return {
         allPosts: state.allPosts.map((eachPost) =>
           eachPost._id === action.payload._id ? action.payload : eachPost
         ),
       }
-
-    // const index = state.allPosts.findIndex(
-    //   (post) => post.post_id === action.payload.post_id
-    // )
-    // state.allPosts[index] = action.payload
-    // if (state.post.post_id === action.payload.post_id) {
-    //   state.singlePost = action.payload
-    // }
-    // return {
-    //   ...state,
-    // }
     case SET_POST:
       return {
         ...state,

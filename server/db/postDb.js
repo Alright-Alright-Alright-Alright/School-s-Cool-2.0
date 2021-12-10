@@ -13,7 +13,7 @@ const getAllPostsDb = async (topicId) => {
           path: "owner",
           select: "firstName lastName imageUrl",
         },
-      })
+      });
   } catch (e) {
     throw new Error(e.message);
   }
@@ -61,16 +61,16 @@ const getPostByIdDb = async (postId) => {
 const likePostDb = async (postId, userId) => {
   try {
     let post = await Post.findById(postId)
-    // .populate({
-    //   path: "likedBy",
-    //   populate: {
-    //     path: "user",
-    //     select: "firstName lastName imageUrl",
-    //   },
-    // });
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
     if (post.likedBy.includes(userId)) {
-      return {message: "You already liked this post"};
-      // post.likedBy = post.likes.filter((id) => id !== userId);
+      return { message: "You already liked this post" };
     } else {
       post.likedBy.push(userId);
     }
@@ -83,10 +83,17 @@ const likePostDb = async (postId, userId) => {
 
 const unlikePostDb = async (postId, userId) => {
   try {
-    let post = await Post.findById(postId);
+    let post = await Post.findById(postId)
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
     if (post.likedBy.includes(userId)) {
       post.likedBy.pull(userId);
-      // post.likedBy = post.likes.filter((id) => id !== userId);
     }
     await post.save();
     return post;

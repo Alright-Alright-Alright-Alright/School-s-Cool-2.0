@@ -46,10 +46,10 @@ function MainContent({ topic }) {
       />
       {posts?.map((post) => (
         <TopicPost
-          key={post._id}
+          key={post?._id}
           post={post}
           topicId={params.topicId}
-          comments={post.comments}
+          comments={post?.comments}
         />
       ))}
     </div>
