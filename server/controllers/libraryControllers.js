@@ -6,10 +6,10 @@ const {
 } = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
-  const { fileName, category, subject, isPrivate, fileUrl } = req.body;
+  const { title, category, subject, isPrivate, fileUrl } = req.body;
   const owner = req.user.userLogedIn._id;
   try {
-    let file = await createFile(fileName, category, subject, isPrivate, fileUrl, owner);
+    let file = await createFile(title, category, subject, isPrivate, fileUrl, owner);
     res.status(200).json({ message: "Here's your file", file });
   } catch (error) {
     throw new Error(error.message);

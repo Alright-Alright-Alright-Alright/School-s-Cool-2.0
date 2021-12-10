@@ -5,7 +5,7 @@ require("./User-model");
 
 const fileSchema = new Schema(
   {
-    fileName: String,
+    title: String,
     isPrivate: { type: Boolean, enum: [true, false], default: false },
     fileUrl: String,
     owner: {

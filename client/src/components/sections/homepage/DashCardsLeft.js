@@ -21,7 +21,7 @@ function DashCardsLeft() {
   useEffect(() => {
     dispatch(getAlltopics())
     dispatch(getAllFilesFromLibrary())
-    // dispatch(getAllEvents())
+    dispatch(getAllEvents())
     // dispatch(getAllCourses())
   }, [dispatch])
 

@@ -15,7 +15,7 @@ const MainLibraryContent = () => {
   }, [dispatch])
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen mt-8">
       <LibraryItem library={library} />
     </div>
   )
