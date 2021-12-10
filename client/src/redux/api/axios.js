@@ -4,7 +4,6 @@ import store from "../store"
 export const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   withCredentials: true,
-  headers: { "x-auth-token": store.getState().user.token },
 })
 
 export const configHeaders = () => {
