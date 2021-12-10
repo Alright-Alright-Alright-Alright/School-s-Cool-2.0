@@ -89,10 +89,7 @@ export const submitComment =
 
 export const likePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  // console.log(postId, userId)
-
   const likePostDb = await likePostService(postId, { userId })
-  console.log(likePostDb)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LIKE_POST, payload: likePostDb })
@@ -106,10 +103,7 @@ export const likePost = (postId, userId) => async (dispatch) => {
 
 export const unlikePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-
   const unlikePostDb = await unlikePostService(postId, { userId })
-  console.log(unlikePostDb)
-
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_POST, payload: unlikePostDb })
