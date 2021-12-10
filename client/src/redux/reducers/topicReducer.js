@@ -28,15 +28,11 @@ const topicReducer = (state = initialState, action) => {
         singleTopic: action.payload,
       }
     case POST_TOPIC:
-      return [...state, action.payload]
-    case JOIN_TOPIC:
       return {
-        allTopics: state.allTopics.map((eachTopic) =>
-          eachTopic._id === action.payload.topic._id
-            ? action.payload.topic
-            : eachTopic
-        ),
+        ...state,
+        allTopics: [action.payload],
       }
+    case JOIN_TOPIC:
     case LEAVE_TOPIC:
       return {
         allTopics: state.allTopics.map((eachTopic) =>
@@ -45,6 +41,7 @@ const topicReducer = (state = initialState, action) => {
             : eachTopic
         ),
       }
+
     default:
       return state
   }

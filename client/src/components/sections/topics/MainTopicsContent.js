@@ -32,7 +32,7 @@ function MainTopicsContent() {
         <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
-        {topics.map((topic) => (
+        {topics?.map((topic) => (
           <TopicCard key={topic._id} topics={topic} />
         ))}
       </div>
