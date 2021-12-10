@@ -10,31 +10,62 @@ const libraryItem = ({ library }) => {
   dayjs.extend(relativeTime)
 
   return (
-    <div className="flex justify-center content-center bg- w-full">
-      <table className="w-full border-solid border-2">
+    <div className="w-full font-sans">
+      <table className="w-full">
         <thead>
-          <tr className="border-solid border-2">
-            <th className="border-solid border-2">Name</th>
-            <th className="border-solid border-2">Topic</th>
-            <th className="border-solid border-2">Date added</th>
-            <th className="border-solid border-2">User</th>
+          <tr className="text-left">
+            <th className="border-l-2 border-b-2 border-grey-medium_light pl-3">
+              Name
+            </th>
+            <th className="border-l-2 border-b-2 border-grey-medium_light pl-3">
+              Category
+            </th>
+            <th className="border-l-2 border-b-2 border-grey-medium_light pl-3">
+              Date added
+            </th>
+            <th className="border-l-2 border-b-2 border-grey-medium_light pl-3">
+              User
+            </th>
           </tr>
         </thead>
         {library.map((item) => (
-          <tbody key={item._id} className="border-solid border-2">
-            <tr className="h-16">
-              <td className="flex flex-col h-16">
-                <span>{item.fileName}</span>
-                <span> {item.subject}</span>
+          <tbody key={item._id}>
+            <tr className="h-16 border-b-2 border-grey-medium_light">
+              <td className="flex h-16 justify-around items-center pl-3">
+                <div>
+                  {item.fileUrl.includes("pdf") ? (
+                    <Icon iconName="pdf" iconStyle="fill-inactive" />
+                  ) : (
+                    <Icon iconName="jpg" iconStyle="fill-inactive" />
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-semibold">{item.title}</span>
+                  <span className="text-sm text-grey-medium_light">
+                    {item.subject}
+                  </span>
+                </div>
               </td>
-              <td>{item.category}</td>
-              <td>{dayjs(item.createdAt).fromNow()}</td>
-              <td className="h-16 flex justify-evenly content-center">
-                <span>
-                  {item.owner.firstName} {item.owner.lastName}
-                </span>
+              <td className="font-semibold pl-3">{item.category}</td>
+              <td className=" text-grey-medium_light pl-3">
+                {dayjs(item.createdAt).fromNow()}
+              </td>
+              <td className="h-16 flex items-center justify-around">
+                <div className="flex items-center py-3">
+                  <img
+                    className="w-10 h-10 rounded-full mr-2"
+                    src={`${item.owner.imageUrl}`}
+                    alt="profile"
+                  />
+                  <p className="text-base font-semibold">
+                    {item.owner.firstName} {item.owner.lastName}
+                  </p>
+                </div>
                 <Icon iconName="like" iconStyle="fill-inactive" />
                 <Icon iconName="message" iconStyle="fill-inactive" />
+                <a href={item.fileUrl}>
+                  <Icon iconName="download" />
+                </a>
               </td>
             </tr>
           </tbody>
