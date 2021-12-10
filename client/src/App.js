@@ -16,10 +16,7 @@ function App() {
   const user = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const fetchUser = () => user && dispatch(loggedInUser())
-    fetchUser()
-  }, [dispatch, user])
+  useEffect(() => user && dispatch(loggedInUser()), [dispatch, user])
 
   return (
     <div className="App">
