@@ -22,7 +22,13 @@ const Index = () => {
   return (
     <div>
       <Main
-        main={<MainLibraryContent library={library} showModal={showModal} />}
+        main={
+          <MainLibraryContent
+            library={library}
+            showModal={showModal}
+            handleShowModal={handleShowModal}
+          />
+        }
         contentLeft={
           <LibraryContentLeft
             library={library}
