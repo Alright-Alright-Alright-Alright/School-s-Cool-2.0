@@ -3,7 +3,7 @@ const File = require("../models/File-model");
 const Topic = require("../models/Topic-model");
 
 exports.creatingFile = async (
-  fileName,
+  title,
   category,
   subject,
   isPrivate,
@@ -11,7 +11,7 @@ exports.creatingFile = async (
   owner
 ) => {
   let file = await File.create({
-    fileName,
+    title,
     category,
     subject,
     isPrivate,
@@ -23,8 +23,8 @@ exports.creatingFile = async (
       $push: { fileUrl: file._id },
     });
 
-    let topic = await Topic.findOneAndUpdate(
-      { category: file.category },
+    let topic = await Topic.updateMany(
+      { category: file.category, subject: file.subject },
       {
         $push: { resources: file._id },
       },
