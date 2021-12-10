@@ -33,7 +33,7 @@ const libraryItem = ({ library }) => {
             <tr className="h-16 border-b-2 border-grey-medium_light">
               <td className="flex h-16 justify-around items-center pl-3">
                 <div>
-                  {item.fileUrl.includes("pdf") ? (
+                  {item?.fileUrl?.includes("pdf") ? (
                     <Icon iconName="pdf" iconStyle="fill-inactive" />
                   ) : (
                     <Icon iconName="jpg" iconStyle="fill-inactive" />
@@ -54,16 +54,16 @@ const libraryItem = ({ library }) => {
                 <div className="flex items-center py-3">
                   <img
                     className="w-10 h-10 rounded-full mr-2"
-                    src={`${item.owner.imageUrl}`}
+                    src={`${item?.owner?.imageUrl}`}
                     alt="profile"
                   />
                   <p className="text-base font-semibold">
-                    {item.owner.firstName} {item.owner.lastName}
+                    {item?.owner?.firstName} {item?.owner?.lastName}
                   </p>
                 </div>
                 <Icon iconName="like" iconStyle="fill-inactive" />
                 <Icon iconName="message" iconStyle="fill-inactive" />
-                <a href={item.fileUrl}>
+                <a href={item?.fileUrl}>
                   <Icon iconName="download" />
                 </a>
               </td>

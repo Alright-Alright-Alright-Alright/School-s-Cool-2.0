@@ -6,9 +6,9 @@ import React from "react"
 import LibraryItem from "../../core/library/libraryItem"
 import LibraryModal from "../../core/LibraryModal"
 
-const MainLibraryContent = ({ library, showModal }) => (
-  <div className="h-screen mt-8">
-    {showModal && <LibraryModal />}
+const MainLibraryContent = ({ library, showModal, handleShowModal }) => (
+  <div className="h-screen mt-8 relative">
+    {showModal && <LibraryModal handleShowModal={handleShowModal} />}
     <LibraryItem library={library} />
   </div>
 )
