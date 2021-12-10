@@ -18,7 +18,10 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(
-    () => !user && token && dispatch(loggedInUser()),
+    () =>
+      !user && token
+        ? dispatch(loggedInUser())
+        : localStorage.removeItem("Authorization"),
     [dispatch, user, token]
   )
 
