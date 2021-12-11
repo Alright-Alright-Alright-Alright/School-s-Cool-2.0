@@ -20,10 +20,10 @@ exports.creatingFile = async (
   });
   try {
     let user = await User.findByIdAndUpdate(owner, {
-      $push: { fileUrl: file._id },
+      $push: { resources: file._id },
     });
 
-    let topic = await Topic.updateMany(
+    let topic = await Topic.findOneAndUpdate(
       { category: file.category, subject: file.subject },
       {
         $push: { resources: file._id },
@@ -31,7 +31,7 @@ exports.creatingFile = async (
       { new: true }
     );
 
-    return { user, topic };
+    return file;
   } catch (error) {
     throw new Error("Something went wrong adding a file", error.message);
   }
@@ -40,7 +40,7 @@ exports.creatingFile = async (
 exports.getingUserLibrary = async (owner) => {
   try {
     return await User.findById(owner)
-      .populate({ path: "fileUrl", populate: { path: "owner" } })
+      .populate({ path: "resources", populate: { path: "owner" } })
       .then((userData) => {
         let userFiles = userData.fileUrl;
         return userFiles;
