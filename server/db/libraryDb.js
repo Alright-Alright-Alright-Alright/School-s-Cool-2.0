@@ -19,8 +19,8 @@ exports.creatingFile = async (
       fileUrl,
       owner,
     }).then(async (fileToPopulate) => {
-      const result = await File.findById(fileToPopulate._id).populate("owner")
-      return result
+      const result = await File.findById(fileToPopulate._id).populate("owner");
+      return result;
     });
 
     await User.findByIdAndUpdate(owner, {
@@ -38,6 +38,20 @@ exports.creatingFile = async (
     return file;
   } catch (error) {
     throw new Error("Something went wrong adding a file", error.message);
+  }
+};
+
+exports.addLikeToFileDb = async (fileId, user) => {
+  try {
+    return await File.findByIdAndUpdate(
+      fileId,
+      {
+        $push: { likedBy: user },
+      },
+      { new: true }
+    );
+  } catch (error) {
+    throw new Error(error);
   }
 };
 

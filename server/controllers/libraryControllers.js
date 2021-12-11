@@ -3,6 +3,7 @@ const {
   getUserLibrary,
   getLibrary,
   fileDelete,
+  addLikeService
 } = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
@@ -11,6 +12,17 @@ exports.addFile = async (req, res) => {
   try {
     let file = await createFile(title, category, subject, isPrivate, fileUrl, owner);
     res.status(200).json({ message: "Here's your file", file });
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.addLike = async (req, res) => {
+  let fileId = req.params.fileId
+  let user = req.user.userLogedIn._id
+  try {
+    let file = await addLikeService(fileId, user);
+    res.status(200).json(file);
   } catch (error) {
     throw new Error(error.message);
   }

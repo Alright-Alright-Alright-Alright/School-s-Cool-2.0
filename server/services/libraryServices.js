@@ -3,6 +3,7 @@ const {
   getingUserLibrary,
   getingLibrary,
   fileDeleting,
+  addLikeToFileDb
 } = require("../db/libraryDb");
 
 exports.createFile = async (title, category, subject, isPrivate, fileUrl, owner) => {
@@ -13,6 +14,14 @@ exports.createFile = async (title, category, subject, isPrivate, fileUrl, owner)
     throw new Error(error.message);
   }
 };
+
+exports.addLikeService = async (fileId, user) => {
+  try {
+    return await addLikeToFileDb(fileId, user)
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 exports.getUserLibrary = async (owner) => {
   try {
