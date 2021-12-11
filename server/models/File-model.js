@@ -18,6 +18,10 @@ const fileSchema = new Schema(
     subject: {
       type: String
     },
+    likedBy: [{
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }],
   },
   {
     timestamps: true,
