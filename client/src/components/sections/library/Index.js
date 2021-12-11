@@ -20,7 +20,7 @@ const Index = () => {
   }, [dispatch])
 
   return (
-    <div>
+    <div className="">
       <Main
         main={
           <MainLibraryContent
