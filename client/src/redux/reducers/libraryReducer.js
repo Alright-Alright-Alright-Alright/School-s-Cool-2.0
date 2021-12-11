@@ -18,8 +18,7 @@ const libraryReducer = (state = initialState, action) => {
       }
     case POST_FILE:
       return {
-        ...state,
-        allFiles: [action.payload],
+        allFiles: [...state.allFiles, action.payload],
       }
     default:
       return state
