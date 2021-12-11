@@ -1,8 +1,23 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React from "react"
 
 const LibraryContentLeft = ({ library, handleShowModal }) => {
+  const uniqueCatergories = () => {
+    const arr = []
+    library.map(
+      (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
+    )
+    const categories = arr.map((item) => (
+      <div key={item} className="text-xl py-2">
+        <button type="button">{item}</button>
+      </div>
+    ))
+
+    return categories
+  }
+
   const add = (
     <svg
       width="20"
@@ -30,13 +45,7 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
           Add a resource
         </button>
       </section>
-      <section className="pt-6">
-        {library.map((item) => (
-          <div key={item._id} className="text-xl py-2">
-            {item.category}
-          </div>
-        ))}
-      </section>
+      <section className="pt-6">{uniqueCatergories()}</section>
     </div>
   )
 }
