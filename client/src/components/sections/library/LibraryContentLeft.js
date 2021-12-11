@@ -3,7 +3,10 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react"
 import { useDispatch } from "react-redux"
-import { filterLibraryByCategory } from "../../../redux/actions/libraryActions"
+import {
+  filterLibraryByCategory,
+  getAllFilesFromLibrary,
+} from "../../../redux/actions/libraryActions"
 
 const LibraryContentLeft = ({ library, handleShowModal }) => {
   const dispatch = useDispatch()
@@ -23,7 +26,6 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
         </button>
       </div>
     ))
-
     return categories
   }
 
@@ -55,6 +57,15 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
         </button>
       </section>
       <section className="pt-6">{uniqueCatergories()}</section>
+      <section>
+        <button
+          className="text-xl py-2 hover:text-pink"
+          type="button"
+          onClick={() => dispatch(getAllFilesFromLibrary())}
+        >
+          All resources
+        </button>
+      </section>
     </div>
   )
 }
