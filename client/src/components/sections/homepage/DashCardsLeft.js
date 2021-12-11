@@ -7,11 +7,12 @@ import { getAllEvents } from "../../../redux/actions/eventActions"
 // import getAllCourses from "../../../redux/actions/courseActions"
 
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
   const courses = useSelector((state) => state.courses)
-  // const events = useSelector((state) => state.events)
+  const events = useSelector((state) => state.events.events)
   // const posts = useSelector((state) => state.posts)
   // console.log(posts)
 
@@ -19,7 +20,8 @@ function DashCardsLeft() {
 
   useEffect(() => {
     dispatch(getAlltopics())
-    // dispatch(getAllEvents())
+    dispatch(getAllFilesFromLibrary())
+    dispatch(getAllEvents())
     // dispatch(getAllCourses())
   }, [dispatch])
 
@@ -38,7 +40,7 @@ function DashCardsLeft() {
         dropdownMenuData={dashcardDropdownMenu.courses}
       />{" "}
       <Dashcard
-        // dashCardData={events}
+        dashCardData={events}
         dashCardTitle="Events"
         dashCardStyle="bg-grey-dark"
         dropdownMenuData={dashcardDropdownMenu.events}

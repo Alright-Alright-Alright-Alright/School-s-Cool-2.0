@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import AddTopicCard from "../../core/topicsCards/AddTopicCard"
 import TopicCard from "../../core/topicsCards/TopicCard"
-import Modal from "../../core/Modal"
+import TopicModal from "../../core/TopicModal"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 
 function MainTopicsContent() {
@@ -23,7 +23,7 @@ function MainTopicsContent() {
 
   return (
     <div className="relative">
-      {showModal && <Modal handleShowModal={handleShowModal} />}
+      {showModal && <TopicModal handleShowModal={handleShowModal} />}
       <div
         className={`flex justify-center flex-wrap gap-7 m-6 filter ${
           showModal && "blur-md"
@@ -32,7 +32,7 @@ function MainTopicsContent() {
         <button type="button" onClick={handleShowModal}>
           <AddTopicCard />
         </button>
-        {topics.map((topic) => (
+        {topics?.map((topic) => (
           <TopicCard key={topic._id} topics={topic} />
         ))}
       </div>

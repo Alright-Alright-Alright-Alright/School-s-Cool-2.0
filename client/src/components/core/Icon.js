@@ -27,6 +27,8 @@ const icons = {
     '<ellipse cx="2.5" cy="14.5" rx="1.49999" ry="1.5" transform="rotate(-90 2.5 14.5)" fill="currentColor"/><ellipse cx="2.5" cy="8.49997" rx="1.5" ry="1.5" transform="rotate(-90 2.5 8.49997)" fill="currentColor"/><ellipse cx="2.5" cy="2.49999" rx="1.49999" ry="1.5" transform="rotate(-90 2.5 2.49999)" fill="currentColor"/>',
   select:
     '<path d="M1 4.5L5.5 9.5L12.5 1" stroke="currentColor" fill="transparent" stroke-linecap="round"/>',
+  jpg: '<path d="M8.5 5V5.5H9H13.5V17.5H0.5V0.5H8.5V5ZM9.5 4.5V1.20711L12.7929 4.5H9.5Z" stroke="#0F2331" stroke-miterlimit="10"/>',
+  pdf: '<path d="M13.5 17.5H0.5V0.5H8.79289L13.5 5.20711V17.5Z" stroke="#0F2331" stroke-miterlimit="10"/>',
 }
 
 export default function Icon({ iconName, iconStyle, viewbox }) {
