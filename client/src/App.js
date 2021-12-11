@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { Suspense, lazy, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Route, Routes, Outlet } from "react-router-dom"
 import NavBar from "./components/layout/NavBar"
 import Login from "./pages/Login"
@@ -13,13 +13,11 @@ import { loggedInUser } from "./redux/actions/userActions"
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
-  const user = localStorage.getItem("Authorization")
+  const user = useSelector((state) => state.user.singleUser)
+  const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const fetchUser = () => user && dispatch(loggedInUser())
-    fetchUser()
-  }, [dispatch, user])
+  useEffect(() => !user && dispatch(loggedInUser()), [dispatch, user])
 
   return (
     <div className="App">

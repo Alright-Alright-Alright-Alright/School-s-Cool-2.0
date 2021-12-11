@@ -50,7 +50,8 @@ const getSingleTopicFromdb = async (topicId) => {
             select: "firstName, lastName, imageUrl",
           },
         },
-      });
+      })
+      .populate("resources");
   } catch (error) {
     throw new Error(error);
   }

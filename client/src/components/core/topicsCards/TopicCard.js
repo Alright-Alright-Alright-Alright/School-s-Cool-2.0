@@ -4,11 +4,7 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import {
-  getAlltopics,
-  joinAtopic,
-  leaveAtopic,
-} from "../../../redux/actions/topicActions"
+import { joinAtopic, leaveAtopic } from "../../../redux/actions/topicActions"
 import Icon from "../Icon"
 
 const TopicCard = ({ topics }) => {
@@ -32,8 +28,7 @@ const TopicCard = ({ topics }) => {
 
   useEffect(() => {
     checkJoinedUser()
-    dispatch(getAlltopics())
-  }, [dispatch])
+  }, [])
 
   return (
     <div

@@ -30,6 +30,7 @@ function TopicContentLeft({ topic }) {
     category,
     subject,
   } = topic
+
   return (
     <div className="flex flex-col justify-end items-end content-end ">
       <div className="p-3">
