@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import TopicDashcard from "../../core/topicDashCard/TopicDashcard"
+// import Dashcard from "../../core/dashcard/Dashcard"
+import TopicDashCard from "../../core/topicDashCard/TopicDashcard"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 import { getAllTheUsers } from "../../../redux/actions/userActions"
 
 function DashCardsRight() {
-  const users = useSelector((state) => state.user.users.users)
+  const allUsers = useSelector((state) => state.user.users)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -14,13 +15,19 @@ function DashCardsRight() {
 
   return (
     <div>
-      <TopicDashcard
+      <TopicDashCard
         topicDashCardTitle="Community"
         topicDashCardStyle="bg-pink"
-        // topicDashCardData={users}
-        users={users}
-        dropdownMenuData={dashcardDropdownMenu.users}
+        // topicDashCardData={topic?.members}
+        users={allUsers.users}
+        dropdownMenuData={dashcardDropdownMenu.topicMembers}
       />
+      {/* <Dashcard
+        dashCardData={dummyData}
+        dashCardTitle="Testing"
+        dashCardStyle="bg-pink"
+        dropdownMenuData={dashcardDropdownMenu.users}
+      /> */}
     </div>
   )
 }

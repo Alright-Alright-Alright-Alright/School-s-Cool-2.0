@@ -18,5 +18,9 @@
   "topicMembers": {
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All users", "Amsterdam Mentors"]
+  },
+  "resources": {
+    "bgColorOnHover": "aqua-light",
+    "dropDownItems": ["All files", "Created by me", "Followed by me"]
   }
 }
