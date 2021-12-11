@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { GET_LIBRARY, POST_FILE } from "../types/library"
+import { FILTER_CATEGORY, GET_LIBRARY, POST_FILE } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import { addFile, getLibraryFiles } from "../services/libraryServices"
 
@@ -25,6 +25,19 @@ export const addFileToLibrary = (fileData) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: POST_FILE, payload: addAFile })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const filterLibraryByCategory = (category) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: FILTER_CATEGORY, payload: category })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

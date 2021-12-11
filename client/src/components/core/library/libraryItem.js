@@ -30,8 +30,8 @@ const libraryItem = ({ library }) => {
         </thead>
         {library.map((item) => (
           <tbody key={item._id}>
-            <tr className="h-16 border-b-2 border-grey-medium_light">
-              <td className="flex h-16 justify-around items-center pl-3">
+            <tr className="h-16 border-b-2 border-grey-medium_light hover:bg-pink-light">
+              <td className="flex h-16 justify-start items-center pl-3">
                 <div>
                   {item?.fileUrl?.includes("pdf") ? (
                     <Icon iconName="pdf" iconStyle="fill-inactive" />
