@@ -17,7 +17,15 @@ const addCommentToDb = async (owner, body, postId) => {
      let updatedPost = await Post.findByIdAndUpdate(postId, {
       $push: { comments: newComment }, 
     }, { new: true })
-    return newComment
+    .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+    return updatedPost
   } catch (error) {
     throw new Error(error)
   }

@@ -17,8 +17,8 @@ import {
 // } from "../types/ui"
 
 const initialState = {
-  posts: [],
-  post: {},
+  allPosts: [],
+  singlePost: {},
 }
 
 const postsReducer = (state = initialState, action) => {
@@ -26,64 +26,31 @@ const postsReducer = (state = initialState, action) => {
     case SET_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        allPosts: action.payload,
       }
     case GET_POST:
       return {
         ...state,
-        ...action.payload,
+        singlePost: action.payload,
+      }
+    case LIKE_POST:
+    case UNLIKE_POST:
+      return {
+        allPosts: state.allPosts.map((eachPost) =>
+          eachPost._id === action.payload._id ? action.payload : eachPost
+        ),
       }
     case SET_POST:
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
+        allPosts: [action.payload, ...state.posts],
       }
     case SUBMIT_COMMENT:
       return {
-        ...state,
-        post: {
-          ...state.post,
-          comments: [action.payload, ...state.post.comments],
-        },
-      }
-    // case LIKE_POST:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   }
-    // case UNLIKE_POST:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   }
-    case LIKE_POST:
-      return {
-        posts: state.posts.map((eachPost) =>
-          eachPost._id === action.payload.post._id
-            ? action.payload.post
-            : eachPost
+        allPosts: state.allPosts.map((eachPost) =>
+          eachPost._id === action.payload._id ? action.payload : eachPost
         ),
       }
-    case UNLIKE_POST:
-      return {
-        posts: state.posts.map((eachPost) =>
-          eachPost._id === action.payload.post._id
-            ? action.payload.post
-            : eachPost
-        ),
-      }
-    // case LIKE_POST:
-    // case UNLIKE_POST:
-    //   const index = state.posts.findIndex(
-    //     (post) => post.postId === action.payload.postId
-    //   )
-    //   state.posts[index] = action.payload
-    //   if (state.post.postId === action.payload.postId) {
-    //     state.post = action.payload
-    //   }
-    //   return {
-    //     ...state,
-    //   }
     default:
       return state
   }
