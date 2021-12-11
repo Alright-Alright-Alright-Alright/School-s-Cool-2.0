@@ -29,8 +29,7 @@ const topicReducer = (state = initialState, action) => {
       }
     case POST_TOPIC:
       return {
-        ...state,
-        allTopics: [action.payload],
+        allTopics: [...state.allTopics, action.payload],
       }
     case JOIN_TOPIC:
     case LEAVE_TOPIC:
