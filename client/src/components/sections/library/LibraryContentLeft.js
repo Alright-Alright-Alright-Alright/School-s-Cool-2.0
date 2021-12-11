@@ -32,9 +32,9 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
       </section>
       <section className="pt-6">
         {library.map((item) => (
-          <p key={item._id} className="text-xl py-2">
+          <div key={item._id} className="text-xl py-2">
             {item.category}
-          </p>
+          </div>
         ))}
       </section>
     </div>

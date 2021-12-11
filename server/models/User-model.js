@@ -28,7 +28,7 @@ const userSchema = new Schema(
       enum: ["USER", "EDITOR", "ADMIN"],
       default: "USER",
     },
-    fileUrl: [
+    resources: [
       {
         type: Schema.Types.ObjectId,
         ref: "File",
