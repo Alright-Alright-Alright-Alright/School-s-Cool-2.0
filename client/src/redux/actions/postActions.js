@@ -74,9 +74,11 @@ export const submitComment =
       commentBody,
       postId,
     })
+
+    console.log(addNewCommentDb)
     try {
       dispatch({ type: CLEAR_ERRORS })
-      dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb.comment })
+      dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb })
     } catch (error) {
       dispatch({
         type: SET_ERRORS,
@@ -87,12 +89,10 @@ export const submitComment =
 
 export const likePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  console.log(postId, userId)
-
+  const likePostDb = await likePostService(postId, { userId })
   try {
-    const likePostDb = await likePostService(postId, { userId })
     dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: LIKE_POST, payload: likePostDb.data })
+    dispatch({ type: LIKE_POST, payload: likePostDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -103,11 +103,10 @@ export const likePost = (postId, userId) => async (dispatch) => {
 
 export const unlikePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-
+  const unlikePostDb = await unlikePostService(postId, { userId })
   try {
-    const unlikePostDb = await unlikePostService(postId, { userId })
     dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: UNLIKE_POST, payload: unlikePostDb.data })
+    dispatch({ type: UNLIKE_POST, payload: unlikePostDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
