@@ -60,8 +60,11 @@ const libraryItem = ({ library }) => {
                   <p className="text-base font-semibold">
                     {item?.owner?.firstName} {item?.owner?.lastName}
                   </p>
+                </div>{" "}
+                <div className="flex">
+                  <Icon iconName="like" iconStyle="fill-inactive" />{" "}
+                  <span className="pl-1">{item.likedBy.length}</span>
                 </div>
-                <Icon iconName="like" iconStyle="fill-inactive" />
                 <Icon iconName="message" iconStyle="fill-inactive" />
                 <a href={item?.fileUrl}>
                   <Icon iconName="download" />
