@@ -10,20 +10,24 @@ exports.creatingFile = async (
   fileUrl,
   owner
 ) => {
-  let file = await File.create({
-    title,
-    category,
-    subject,
-    isPrivate,
-    fileUrl,
-    owner,
-  });
   try {
-    let user = await User.findByIdAndUpdate(owner, {
+    let file = await File.create({
+      title,
+      category,
+      subject,
+      isPrivate,
+      fileUrl,
+      owner,
+    }).then(async (fileToPopulate) => {
+      const result = await File.findById(fileToPopulate._id).populate("owner")
+      return result
+    });
+
+    await User.findByIdAndUpdate(owner, {
       $push: { resources: file._id },
     });
 
-    let topic = await Topic.findOneAndUpdate(
+    await Topic.findOneAndUpdate(
       { category: file.category, subject: file.subject },
       {
         $push: { resources: file._id },
