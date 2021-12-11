@@ -47,10 +47,10 @@ const libraryItem = ({ library }) => {
                 </div>
               </td>
               <td className="font-semibold pl-3">{item.category}</td>
-              <td className=" text-grey-medium_light pl-3">
+              <td className="text-grey-medium_light pl-3">
                 {dayjs(item.createdAt).fromNow()}
               </td>
-              <td className="h-16 flex items-center justify-around">
+              <td className="h-16 flex items-center justify-around pr-3">
                 <div className="flex items-center py-3">
                   <img
                     className="w-10 h-10 rounded-full mr-2"
@@ -61,14 +61,25 @@ const libraryItem = ({ library }) => {
                     {item?.owner?.firstName} {item?.owner?.lastName}
                   </p>
                 </div>{" "}
+              </td>
+              <td className="border-t-2 border-grey-medium_light">
                 <div className="flex">
                   <Icon iconName="like" iconStyle="fill-inactive" />{" "}
                   <span className="pl-1">{item.likedBy.length}</span>
                 </div>
-                <Icon iconName="message" iconStyle="fill-inactive" />
-                <a href={item?.fileUrl}>
-                  <Icon iconName="download" />
-                </a>
+              </td>
+              <td className="border-t-2 border-grey-medium_light">
+                <div className="flex ">
+                  <Icon iconName="message" iconStyle="fill-inactive" />
+                  <span className="pl-1">0</span>
+                </div>
+              </td>
+              <td className="border-t-2 border-grey-medium_light">
+                <div className="pl-3">
+                  <a href={item?.fileUrl}>
+                    <Icon iconName="download" />
+                  </a>
+                </div>
               </td>
             </tr>
           </tbody>
