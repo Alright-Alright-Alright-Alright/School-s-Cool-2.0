@@ -74,8 +74,6 @@ export const submitComment =
       commentBody,
       postId,
     })
-
-    console.log(addNewCommentDb)
     try {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb })

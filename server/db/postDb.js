@@ -21,6 +21,7 @@ const getAllPostsDb = async (topicId) => {
 
 const addPostToDb = async (body, owner, topicId) => {
   let newPost = await Post.create({ body, owner, topic: topicId });
+
   try {
     let updatedTopic = await Topic.findByIdAndUpdate(
       topicId,
@@ -29,18 +30,12 @@ const addPostToDb = async (body, owner, topicId) => {
       },
       { new: true }
     );
+    return newPost;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-const getPostsByTopicIdDb = async (topicId) => {
-  try {
-    return await Post.find({ topicId });
-  } catch (error) {
-    throw new Error(error);
-  }
-};
 
 const getPostByIdDb = async (postId) => {
   try {
@@ -107,7 +102,6 @@ const unlikePostDb = async (postId, userId) => {
 module.exports = {
   getAllPostsDb,
   addPostToDb,
-  getPostsByTopicIdDb,
   getPostByIdDb,
   likePostDb,
   unlikePostDb,
