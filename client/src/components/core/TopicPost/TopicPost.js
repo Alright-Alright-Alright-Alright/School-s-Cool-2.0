@@ -21,7 +21,7 @@ import Icon from "../Icon"
 function TopicPost({ post, topicId, comments }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
   const [postLiked, setPostLiked] = useState(false)
-  const postById = useSelector((state) => state.posts.post)
+  const postById = useSelector((state) => state.posts.singlePost)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
@@ -37,6 +37,8 @@ function TopicPost({ post, topicId, comments }) {
     setPostLiked(false)
     // console.log(post._id, user._id)
   }
+
+  console.log(postById)
 
   // useEffect(() => {
   //   dispatch(getPostById(post._id))
