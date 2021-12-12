@@ -59,6 +59,24 @@ exports.addLikeToFileDb = async (fileId, user) => {
   }
 };
 
+exports.pullLikeToFileDb = async (fileId, user) => {
+  try {
+    let fileUnliked = await File.findByIdAndUpdate(
+      fileId,
+      {
+        $pull: { likedBy: user },
+      },
+      { new: true }
+    ).then( unlikeFile => {
+      let result = File.findById(unlikeFile._id).populate("owner")
+      return result
+    })
+    return fileUnliked
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.getingUserLibrary = async (user) => {
   try {
     return await User.findById(user)
