@@ -23,7 +23,7 @@ export default function ResourceDashcard({
     .map((item) => (
       <ResourceDashCardListItem
         key={item?._id}
-        listItemName={item?.fileName}
+        listItemName={item?.title}
         listItemLikes={item?.likedBy}
         listItemComments={item?.comments}
         resourceDashCardData={resourceDashCardData}
