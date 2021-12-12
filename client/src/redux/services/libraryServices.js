@@ -14,3 +14,8 @@ export const addFile = (fileData) =>
   service
     .post(`/library/add-file`, fileData)
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const iLikeThisFile = (fileId) =>
+  service
+    .put(`/library/${fileId}/liked`)
+    .then((responseFromAPI) => responseFromAPI.data)
