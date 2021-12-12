@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from "react-redux"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Icon from "../Icon"
-import { iLikedAfile } from "../../../redux/actions/libraryActions"
+import {
+  iLikedAfile,
+  iUnlikedAfile,
+} from "../../../redux/actions/libraryActions"
+
 
 const libraryItem = ({ library }) => {
   const user = useSelector((state) => state.user.singleUser)
@@ -70,7 +74,12 @@ const libraryItem = ({ library }) => {
               <td className="border-t-2 border-grey-medium_light">
                 <div className="flex">
                   {item.likedBy.includes(user._id) ? (
-                    <Icon iconName="like" iconStyle="fill-active" />
+                    <button
+                      type="button"
+                      onClick={() => dispatch(iUnlikedAfile(item._id))}
+                    >
+                      <Icon iconName="like" iconStyle="fill-active" />
+                    </button>
                   ) : (
                     <button
                       type="button"

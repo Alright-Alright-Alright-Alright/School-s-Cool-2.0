@@ -10,6 +10,7 @@ import {
   GET_USER_LIBRARY,
   LIKE_FILE,
   POST_FILE,
+  UNLIKE_FILE,
 } from "../types/library"
 
 const initialState = {
@@ -45,6 +46,7 @@ const libraryReducer = (state = initialState, action) => {
         ),
       }
     case LIKE_FILE:
+    case UNLIKE_FILE:
       return {
         allFiles: state.allFiles.map((eachFile) =>
           eachFile._id === action.payload._id ? action.payload : eachFile
