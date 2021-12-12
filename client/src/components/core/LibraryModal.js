@@ -110,7 +110,7 @@ const Modal = ({ handleShowModal }) => {
           className="flex justify-around items-center w-2/7"
         >
           <span className="text-base">Select your File</span>
-          <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
+          <Icon iconName="add" iconStyle="fill-inactive text-pink" />
         </button>
         <input
           type="file"
@@ -128,7 +128,7 @@ const Modal = ({ handleShowModal }) => {
         />
         <Button
           buttonName="Add a File"
-          buttonStyle="btnTopicStyle"
+          buttonStyle="btnLibraryStyle"
           buttonSubmit
         />
       </section>
