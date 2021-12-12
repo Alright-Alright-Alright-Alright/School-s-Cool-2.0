@@ -3,7 +3,12 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 
-import { FILTER_CATEGORY, GET_LIBRARY, POST_FILE } from "../types/library"
+import {
+  FILTER_CATEGORY,
+  FILTER_SUBJECT,
+  GET_LIBRARY,
+  POST_FILE,
+} from "../types/library"
 
 const initialState = {
   allFiles: [],
@@ -24,6 +29,12 @@ const libraryReducer = (state = initialState, action) => {
       return {
         allFiles: state.allFiles.filter(
           (file) => file.category === action.payload
+        ),
+      }
+    case FILTER_SUBJECT:
+      return {
+        allFiles: state.allFiles.filter(
+          (file) => file.subject === action.payload
         ),
       }
     default:
