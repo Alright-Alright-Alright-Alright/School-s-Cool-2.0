@@ -17,7 +17,7 @@ const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
       (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
     )
     const subjects = arr.map((item) => (
-      <span className="pr-3">
+      <span key={item} className="pr-3">
         <Button
           buttonName={item}
           buttonStyle="btnLibraryStyle"
