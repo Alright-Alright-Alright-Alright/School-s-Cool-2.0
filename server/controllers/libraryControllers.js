@@ -29,8 +29,9 @@ exports.addLike = async (req, res) => {
 };
 
 exports.userLibrary = async (req, res) => {
+  user = req.user.userLogedIn._id
   try {
-    let userFiles = await getUserLibrary(req.user.userLogedIn._id);
+    let userFiles = await getUserLibrary(user);
     res.status(200).json(userFiles);
   } catch (error) {
     throw new Error(error.message);

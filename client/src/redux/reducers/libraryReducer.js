@@ -7,6 +7,7 @@ import {
   FILTER_CATEGORY,
   FILTER_SUBJECT,
   GET_LIBRARY,
+  GET_USER_LIBRARY,
   POST_FILE,
 } from "../types/library"
 
@@ -17,6 +18,11 @@ const initialState = {
 const libraryReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LIBRARY:
+      return {
+        ...state,
+        allFiles: action.payload,
+      }
+    case GET_USER_LIBRARY:
       return {
         ...state,
         allFiles: action.payload,

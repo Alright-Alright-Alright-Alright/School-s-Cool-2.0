@@ -55,12 +55,12 @@ exports.addLikeToFileDb = async (fileId, user) => {
   }
 };
 
-exports.getingUserLibrary = async (owner) => {
+exports.getingUserLibrary = async (user) => {
   try {
-    return await User.findById(owner)
+    return await User.findById(user)
       .populate({ path: "resources", populate: { path: "owner" } })
       .then((userData) => {
-        let userFiles = userData.fileUrl;
+        let userFiles = userData.resources;
         return userFiles;
       });
   } catch (error) {

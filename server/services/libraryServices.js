@@ -23,9 +23,9 @@ exports.addLikeService = async (fileId, user) => {
   }
 }
 
-exports.getUserLibrary = async (owner) => {
+exports.getUserLibrary = async (user) => {
   try {
-    return getingUserLibrary(owner);
+    return getingUserLibrary(user);
   } catch (error) {
     throw new Error(error.message);
   }
