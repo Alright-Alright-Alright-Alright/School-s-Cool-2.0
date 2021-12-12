@@ -24,3 +24,13 @@ export const leaveTopic = (topicId) =>
   service
     .put(`/topics/${topicId}/leave`)
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const inviteForTopicService = (topicId, userId) =>
+  service
+    .put(`/topics/${topicId}/invite`, { userId })
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const removeInviteForTopicService = (topicId, userId) =>
+  service
+    .put(`/topics/${topicId}/removeInvite`, { userId })
+    .then((responseFromAPI) => responseFromAPI.data)
