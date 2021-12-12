@@ -20,7 +20,7 @@ exports.passportAuthenticate = (req, res) => {
         res.status(500).json({ message: "Session save went bad." });
         return;
       }
-      const userLogedIn = { _id: user._id, email: user.email };
+      const userLogedIn = { _id: user._id };
       const accessToken = JWT.sign({userLogedIn}, process.env.JWT_SECRETORKEY, {expiresIn: "1h"});
       res.status(200).json({user, accessToken});
     });
