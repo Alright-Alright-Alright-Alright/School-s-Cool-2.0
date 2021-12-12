@@ -6,10 +6,9 @@ export const getLibraryFiles = () =>
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const getUserLibraryFiles = () =>
-  service.get(`/library-user`, configHeaders()).then((responseFromAPI) => {
-    console.log(responseFromAPI.data)
-    return responseFromAPI.data
-  })
+  service
+    .get(`/library-user`, configHeaders())
+    .then((responseFromAPI) => responseFromAPI.data)
 
 export const addFile = (fileData) =>
   service
