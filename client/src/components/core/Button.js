@@ -8,6 +8,8 @@ const styles = {
     "border-2 rounded-full text-white bg-grey-dark border-grey-dark",
   btnTopicStyle:
     "border-2 rounded-full bg-white border-aqua text-aqua hover:bg-aqua hover:text-white",
+  btnLibraryStyle:
+    "border-2 rounded-full bg-white border-pink text-pink hover:bg-pink hover:text-white",
 }
 
 function Button({ buttonName, buttonStyle, buttonSubmit, onClick, disabled }) {
