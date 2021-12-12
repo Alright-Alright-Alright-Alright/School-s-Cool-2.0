@@ -6,7 +6,11 @@ import {
   POST_FILE,
 } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
-import { addFile, getLibraryFiles } from "../services/libraryServices"
+import {
+  addFile,
+  getLibraryFiles,
+  getUserLibraryFiles,
+} from "../services/libraryServices"
 
 export const getAllFilesFromLibrary = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
@@ -15,6 +19,21 @@ export const getAllFilesFromLibrary = () => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_LIBRARY, payload: libraryFilesFromDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getUserFilesFromLibrary = () => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const userFilesFromDB = await getUserLibraryFiles()
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_LIBRARY, payload: userFilesFromDB })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

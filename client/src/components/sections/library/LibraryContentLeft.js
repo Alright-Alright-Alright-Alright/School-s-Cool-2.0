@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import {
   filterLibraryByCategory,
   getAllFilesFromLibrary,
+  getUserFilesFromLibrary,
 } from "../../../redux/actions/libraryActions"
 
 const LibraryContentLeft = ({ library, handleShowModal }) => {
@@ -56,6 +57,16 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
           Add a resource
         </button>
       </section>
+      <section className="pt-2">
+        <button
+          type="button"
+          className="text-lg"
+          onClick={() => dispatch(getUserFilesFromLibrary())}
+        >
+          View my resources
+        </button>
+      </section>
+      <hr className="mt-8 w-52 text-grey-light" />
       <section className="pt-6">{uniqueCatergories()}</section>
       <section>
         <button
