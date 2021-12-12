@@ -51,7 +51,8 @@ const getPostById = async (req, res, next) => {
 };
 
 const likePost = async (req, res, next) => {
-  const { userId } = req.body;
+  // const { userId } = req.body;
+  const userId = req.user.userLogedIn._id;
   const { postId } = req.params;
 
   try {
@@ -63,7 +64,7 @@ const likePost = async (req, res, next) => {
 };
 
 const unlikePost = async (req, res, next) => {
-  const { userId } = req.body;
+  const userId = req.user.userLogedIn._id;
   const { postId } = req.params;
 
   try {

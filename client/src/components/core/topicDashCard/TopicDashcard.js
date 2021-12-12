@@ -3,8 +3,6 @@
 /* eslint-disable react/default-props-match-prop-types */
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable  */
-
 
 import React, { useState } from "react"
 import PropTypes from "prop-types"
@@ -21,15 +19,17 @@ export default function TopicDashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  const firstThreeItems = users.slice(0, 3).map((item) => (
-    <TopicDashCardListItem
-      key={item?._id}
-      listItemUserId={item?._id}
-      listItemFirstName={item?.firstName}
-      listItemLastName={item?.lastName}
-      topicDashCardData={topicDashCardData}
-    />
-  ))
+  const firstThreeItems = users
+    .slice(0, 3)
+    .map((item) => (
+      <TopicDashCardListItem
+        key={item?._id}
+        listItemUserId={item?._id}
+        listItemFirstName={item?.firstName}
+        listItemLastName={item?.lastName}
+        topicDashCardData={topicDashCardData}
+      />
+    ))
 
   const allItems = users.map((item) => (
     <TopicDashCardListItem
@@ -87,5 +87,6 @@ TopicDashcard.propTypes = {
   topicDashCardData: PropTypes.array.isRequired,
   topicDashCardTitle: PropTypes.string.isRequired,
   topicDashCardStyle: PropTypes.string.isRequired,
+  dropdownMenuData: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
 }
