@@ -8,6 +8,8 @@ import {
   JOIN_TOPIC,
   LEAVE_TOPIC,
   GET_TOPIC,
+  INVITE_FOR_TOPIC,
+  REMOVE_INVITE,
 } from "../types/topics"
 
 const initialState = {
@@ -40,7 +42,12 @@ const topicReducer = (state = initialState, action) => {
             : eachTopic
         ),
       }
-
+    case INVITE_FOR_TOPIC:
+    case REMOVE_INVITE:
+      return {
+        ...state,
+        singleTopic: action.payload,
+      }
     default:
       return state
   }

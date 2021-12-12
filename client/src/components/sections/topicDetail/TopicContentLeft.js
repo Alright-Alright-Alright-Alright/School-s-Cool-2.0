@@ -3,22 +3,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
-import Dashcard from "../../core/dashcard/Dashcard"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
-
-// const resources = [
-//   {
-//     id: 1,
-//     fileName: "file1.pdf",
-//     fileType: "pdf",
-//     fileSize: "1.5 MB",
-//     fileUrl: "https://www.google.com",
-//     fileDescription: "This is a file description",
-//     comments: [],
-//     likedBy: [],
-//   },
-// ]
 
 function TopicContentLeft({ topic }) {
   const {
@@ -31,8 +17,6 @@ function TopicContentLeft({ topic }) {
     subject,
     resources,
   } = topic
-
-  console.log(resources)
 
   return (
     <div className="flex flex-col justify-end items-end content-end ">

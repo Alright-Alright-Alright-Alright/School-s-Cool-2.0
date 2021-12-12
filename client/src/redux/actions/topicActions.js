@@ -4,6 +4,8 @@ import {
   POST_TOPIC,
   JOIN_TOPIC,
   LEAVE_TOPIC,
+  INVITE_FOR_TOPIC,
+  REMOVE_INVITE,
 } from "../types/topics"
 
 import {
@@ -12,6 +14,8 @@ import {
   addTopic,
   joinTopic,
   leaveTopic,
+  inviteForTopicService,
+  removeInviteForTopicService,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -90,21 +94,32 @@ export const getOneTopic = (topicId) => async (dispatch) => {
   }
 }
 
-// export const getOneTopic = (topicId, user) => async (dispatch) => {
-//   console.log("Hello", topicId, user)
-//   dispatch({ type: LOADING_UI })
-//   // const topicById = await getTopicById(topicId, user)
-//   console.log(topicById)
+export const inviteForTopic = (topicId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
 
-//   // console.log(getTopicById(topicId))
+  const inviteForTopicDb = await inviteForTopicService(topicId, userId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: INVITE_FOR_TOPIC, payload: inviteForTopicDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
 
-//   try {
-//     dispatch({ type: CLEAR_ERRORS })
-//     dispatch({ type: GET_TOPIC, payload: topicById })
-//   } catch (error) {
-//     dispatch({
-//       type: SET_ERRORS,
-//       payload: error.response,
-//     })
-//   }
-// }
+export const removeInvite = (topicId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const removeInviteDb = await removeInviteForTopicService(topicId, userId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: REMOVE_INVITE, payload: removeInviteDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
