@@ -77,7 +77,24 @@ const addUserToTopicDb = async (topicId, user) => {
         $push: { members: user },
       },
       { new: true }
-    );
+    ) 
+    .populate("owner", "firstName lastName imageUrl")
+    .populate("members", "_id firstName lastName imageUrl")
+    .populate({
+      path: "posts",
+      populate: {
+        path: "owner",
+        select: "firstName, lastName, imageUrl",
+      },
+      populate: {
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+      },
+    })
+    .populate("resources");
   } catch (error) {
     throw new Error(error);
   }
@@ -91,7 +108,24 @@ const takeOutUserFromTopicDb = async (topicId, user) => {
         $pull: { members: user },
       },
       { new: true }
-    );
+    )
+    .populate("owner", "firstName lastName imageUrl")
+    .populate("members", "_id firstName lastName imageUrl")
+    .populate({
+      path: "posts",
+      populate: {
+        path: "owner",
+        select: "firstName, lastName, imageUrl",
+      },
+      populate: {
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+      },
+    })
+    .populate("resources");
   } catch (error) {
     throw new Error(error);
   }

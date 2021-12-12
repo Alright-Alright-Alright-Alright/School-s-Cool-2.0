@@ -56,6 +56,22 @@ const leaveTopicService = async (topicId, user) => {
   }
 };
 
+const inviteForTopicService = async (topicId, user) => {
+  try {
+    return await addUserToTopicDb(topicId, user);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const removeInviteForTopicService = async (topicId, user) => {
+  try {
+    return await takeOutUserFromTopicDb(topicId, user);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const deleteTopicService = async (topicId) => {
   try {
     return await deleteTopicFromdb(topicId);
@@ -71,5 +87,7 @@ module.exports = {
   joinTopicService,
   updateTopicService,
   leaveTopicService,
+  inviteForTopicService,
+  removeInviteForTopicService,
   deleteTopicService,
 };

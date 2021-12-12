@@ -24,6 +24,7 @@ export default function TopicDashcard({
   const firstThreeItems = users.slice(0, 3).map((item) => (
     <TopicDashCardListItem
       key={item?._id}
+      listItemUserId={item?._id}
       listItemFirstName={item?.firstName}
       listItemLastName={item?.lastName}
       topicDashCardData={topicDashCardData}
@@ -33,6 +34,7 @@ export default function TopicDashcard({
   const allItems = users.map((item) => (
     <TopicDashCardListItem
       key={item?._id}
+      listItemUserId={item?._id}
       listItemFirstName={item?.firstName}
       listItemLastName={item?.lastName}
       topicDashCardData={topicDashCardData}

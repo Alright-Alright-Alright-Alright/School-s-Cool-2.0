@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import PropTypes from "prop-types"
 import { createPost, getAllPosts } from "../../../redux/actions/postActions"
-import { getOneTopic } from "../../../redux/actions/topicActions"
 import TopicHeaderCard from "../../core/topicHeaderCard/TopicHeaderCard"
 import TopicPost from "../../core/TopicPost/TopicPost"
 
@@ -26,16 +25,12 @@ function MainContent({ topic }) {
   const createNewPost = () => {
     dispatch(createPost(newPost))
     setPostBody("")
-    // dispatch(getOneTopic(params.topicId))
     dispatch(getAllPosts(params.topicId))
   }
 
   useEffect(() => {
-    // dispatch(getOneTopic(params.topicId))
     dispatch(getAllPosts(params.topicId))
   }, [dispatch, params.topicId])
-
-  // console.log(posts)
 
   return (
     <div className="">

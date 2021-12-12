@@ -5,6 +5,8 @@ const {
   joinTopicService,
   updateTopicService,
   leaveTopicService,
+  inviteForTopicService,
+  removeInviteForTopicService,
   deleteTopicService
 } = require("../services/topicService");
 
@@ -72,8 +74,23 @@ const leaveTopic = async (req, res, next) => {
 };
 
 const inviteForTopic = async (req, res, next) => {
+  const { userId } = req.body;
+  const topicId = req.params.topicId;
+
   try {
-    const topic = await inviteForTopicService(req.params.id, req.body);
+    const topic = await inviteForTopicService(topicId, userId);
+    return res.status(201).json(topic);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const removeInviteForTopic = async (req, res, next) => {
+  const { userId } = req.body;
+  const topicId = req.params.topicId;
+  
+  try {
+    const topic = await removeInviteForTopicService(topicId, userId);
     return res.status(201).json(topic);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -98,5 +115,6 @@ module.exports = {
   joinTopic,
   leaveTopic,
   inviteForTopic,
+  removeInviteForTopic,
   deleteTopic,
 };

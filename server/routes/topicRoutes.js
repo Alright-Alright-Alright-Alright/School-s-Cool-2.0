@@ -9,6 +9,7 @@ const {
   joinTopic,
   leaveTopic,
   inviteForTopic,
+  removeInviteForTopic,
   deleteTopic,
 } = require("../controllers/topicControllers");
 
@@ -19,6 +20,7 @@ topicRoutes.put("/topics/:topicId", updateTopic);
 topicRoutes.put("/topics/:topicId/join", joinTopic);
 topicRoutes.put("/topics/:topicId/leave", leaveTopic);
 topicRoutes.put("/topics/:topicId/invite", inviteForTopic);
+topicRoutes.put("/topics/:topicId/removeInvite", removeInviteForTopic);
 topicRoutes.delete("/topics/:topicId", deleteTopic);
 
 module.exports = topicRoutes;
