@@ -21,7 +21,7 @@ exports.passportAuthenticate = (req, res) => {
         return;
       }
       const userLogedIn = { _id: user._id, email: user.email };
-      const accessToken = JWT.sign({userLogedIn}, process.env.JWT_SECRETORKEY, { expiresIn: '1h' });
+      const accessToken = JWT.sign({userLogedIn}, process.env.JWT_SECRETORKEY);
       res.status(200).json({user, accessToken});
     });
   })(req, res)
