@@ -31,12 +31,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
-    saveUninitialized: true,
     cookie: {
-      maxAge: 60000000,
-    },
-    ttl: 60 * 60 * 24,
-    rolling: true, //session gets refreshed
+      secure: false,
+      maxAge: 3600000 //1 hour
+  },
+    rolling: false, //session gets refreshed
   })
 );
 app.set("trust proxy", 1); // trust first proxy

@@ -1,12 +1,21 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Icon from "../Icon"
+import {
+  iLikedAfile,
+  iUnlikedAfile,
+} from "../../../redux/actions/libraryActions"
+
 
 const libraryItem = ({ library }) => {
+  const user = useSelector((state) => state.user.singleUser)
+  const dispatch = useDispatch()
   dayjs.extend(relativeTime)
 
   return (
@@ -64,7 +73,22 @@ const libraryItem = ({ library }) => {
               </td>
               <td className="border-t-2 border-grey-medium_light">
                 <div className="flex">
-                  <Icon iconName="like" iconStyle="fill-inactive" />{" "}
+                  {item.likedBy.includes(user._id) ? (
+                    <button
+                      type="button"
+                      onClick={() => dispatch(iUnlikedAfile(item._id))}
+                    >
+                      <Icon iconName="like" iconStyle="fill-active" />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => dispatch(iLikedAfile(item._id))}
+                    >
+                      <Icon iconName="like" iconStyle="fill-inactive" />
+                    </button>
+                  )}
+
                   <span className="pl-1">{item.likedBy.length}</span>
                 </div>
               </td>

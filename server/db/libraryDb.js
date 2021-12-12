@@ -43,13 +43,35 @@ exports.creatingFile = async (
 
 exports.addLikeToFileDb = async (fileId, user) => {
   try {
-    return await File.findByIdAndUpdate(
+    let fileLiked = await File.findByIdAndUpdate(
       fileId,
       {
         $push: { likedBy: user },
       },
       { new: true }
-    );
+    ).then( likedFile => {
+      let result = File.findById(likedFile._id).populate("owner")
+      return result
+    })
+    return fileLiked
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.pullLikeToFileDb = async (fileId, user) => {
+  try {
+    let fileUnliked = await File.findByIdAndUpdate(
+      fileId,
+      {
+        $pull: { likedBy: user },
+      },
+      { new: true }
+    ).then( unlikeFile => {
+      let result = File.findById(unlikeFile._id).populate("owner")
+      return result
+    })
+    return fileUnliked
   } catch (error) {
     throw new Error(error);
   }
