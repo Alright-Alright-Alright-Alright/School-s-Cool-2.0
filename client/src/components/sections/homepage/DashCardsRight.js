@@ -14,20 +14,13 @@ function DashCardsRight() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className="max-w-xs">
       <TopicDashCard
         topicDashCardTitle="Community"
         topicDashCardStyle="bg-pink"
-        // topicDashCardData={topic?.members}
         users={allUsers.users}
         dropdownMenuData={dashcardDropdownMenu.topicMembers}
       />
-      {/* <Dashcard
-        dashCardData={dummyData}
-        dashCardTitle="Testing"
-        dashCardStyle="bg-pink"
-        dropdownMenuData={dashcardDropdownMenu.users}
-      /> */}
     </div>
   )
 }
