@@ -32,8 +32,9 @@ app.use(
     saveUninitialized: true,
     resave: false,
     cookie: {
-      maxAge: new Date(Date.now() + 60 * 60 * 1000) // 1 hour
-    },
+      secure: false,
+      maxAge: 3600000 //1 hour
+  },
     rolling: false, //session gets refreshed
   })
 );
