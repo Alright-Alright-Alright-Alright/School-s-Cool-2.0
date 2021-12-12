@@ -3,6 +3,7 @@ import {
   FILTER_CATEGORY,
   FILTER_SUBJECT,
   GET_LIBRARY,
+  LIKE_FILE,
   POST_FILE,
 } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -10,6 +11,7 @@ import {
   addFile,
   getLibraryFiles,
   getUserLibraryFiles,
+  iLikeThisFile,
 } from "../services/libraryServices"
 
 export const getAllFilesFromLibrary = () => async (dispatch) => {
@@ -75,6 +77,21 @@ export const filterLibraryBySubject = (subject) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: FILTER_SUBJECT, payload: subject })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const iLikedAfile = (fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const like = await iLikeThisFile(fileId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: LIKE_FILE, payload: like })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
