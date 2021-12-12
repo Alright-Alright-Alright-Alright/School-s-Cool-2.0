@@ -42,7 +42,7 @@ function DashCardsLeft() {
       <Dashcard
         dashCardData={events}
         dashCardTitle="Events"
-        dashCardStyle="bg-grey-dark"
+        dashCardStyle="bg-sky"
         dropdownMenuData={dashcardDropdownMenu.events}
       />{" "}
     </div>
