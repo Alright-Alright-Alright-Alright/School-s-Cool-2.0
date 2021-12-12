@@ -1,12 +1,19 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
 import Button from "../Button"
 import Icon from "../Icon"
+import LibraryModal from "../LibraryModal"
 
 function TopicHeaderCard({ onClick, postBody }) {
   const user = useSelector((state) => state.user.singleUser)
+  const [showModal, setShowModal] = useState(false)
+
+  const handleShowModal = () => {
+    setShowModal(!showModal)
+  }
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -27,10 +34,11 @@ function TopicHeaderCard({ onClick, postBody }) {
 
       <div className="flex justify-between p-3">
         <div className="flex items-center">
-          <button type="button">
+          <button type="button" onClick={handleShowModal}>
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
           </button>
           <p className="pl-3">Add a resource</p>
+          {showModal && <LibraryModal handleShowModal={handleShowModal} />}
         </div>
         <Button
           buttonName="Add post to topic"
