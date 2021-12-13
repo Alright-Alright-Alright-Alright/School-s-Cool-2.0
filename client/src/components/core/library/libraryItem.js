@@ -11,10 +11,6 @@ import {
   iLikedAfile,
   iUnlikedAfile,
 } from "../../../redux/actions/libraryActions"
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 
 const libraryItem = ({ library }) => {
   const user = useSelector((state) => state.user.singleUser)
