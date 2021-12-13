@@ -48,6 +48,7 @@ const postsReducer = (state = initialState, action) => {
       }
     case SUBMIT_COMMENT:
       return {
+        ...state,
         allPosts: state.allPosts.map((eachPost) =>
           eachPost._id === action.payload._id ? action.payload : eachPost
         ),
