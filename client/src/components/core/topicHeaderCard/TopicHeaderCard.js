@@ -32,7 +32,7 @@ function TopicHeaderCard({ onClick, postBody }) {
         />
       </div>
 
-      <div className="flex justify-between p-3">
+      <div className="flex justify-between p-3 relative">
         <div className="flex items-center">
           <button type="button" onClick={handleShowModal}>
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
