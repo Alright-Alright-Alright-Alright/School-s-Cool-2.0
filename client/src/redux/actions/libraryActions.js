@@ -14,7 +14,10 @@ import {
   getUserLibraryFiles,
   iLikeThisFile,
   iUnlikeThisFile,
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 } from "../services/libraryServices"
 
 export const getAllFilesFromLibrary = () => async (dispatch) => {

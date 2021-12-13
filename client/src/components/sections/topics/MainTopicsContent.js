@@ -42,7 +42,7 @@ function MainTopicsContent() {
 
   return (
     <div>
-      <div className="flex pt-5 justify-end lg:pr-20 space-x-3">
+      <div className="flex pt-5 justify-end space-x-3 pr-10">
         <Button
           buttonName="All topics"
           buttonStyle="btnTopicStyle"

@@ -26,7 +26,7 @@ function DashCardsLeft() {
   }, [dispatch])
 
   return (
-    <div className="max-w-xs">
+    <div className="max-w-md float-right pr-6">
       <Dashcard
         dashCardData={topics}
         dashCardTitle="Topics"

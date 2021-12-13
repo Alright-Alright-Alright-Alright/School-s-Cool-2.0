@@ -85,7 +85,11 @@ const Modal = ({ handleShowModal }) => {
           <option value="Sports">Sports</option>
           <option value="Entertainment">Entertainment</option>
           <option value="Psychology">Psychology</option>
+<<<<<<< HEAD
           <option value="Home work">Home Work</option>
+=======
+          <option value="Home work">Home work</option>
+>>>>>>> dev
           <option value="Doubts">Doubts</option>
         </select>
         <select
