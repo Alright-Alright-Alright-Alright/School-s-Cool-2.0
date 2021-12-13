@@ -17,10 +17,15 @@ function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(
-    () => (!user && !token ? navigate("/login") : dispatch(loggedInUser())),
-    [dispatch]
-  )
+  useEffect(() => {
+    if (!user && !token) {
+      navigate("/login")
+    } else if (!token) {
+      localStorage.removeItem("user")
+    } else {
+      dispatch(loggedInUser())
+    }
+  }, [dispatch])
 
   return (
     <div className="App">

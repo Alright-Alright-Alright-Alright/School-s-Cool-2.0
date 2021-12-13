@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   token: localStorage.getItem("Authorization"),
-  singleUser: null,
+  singleUser: JSON.parse(localStorage.getItem("user")) || null,
   users: [],
 }
 
