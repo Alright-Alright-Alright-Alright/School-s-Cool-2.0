@@ -20,7 +20,6 @@ import Icon from "../Icon"
 
 function TopicPost({ post, topicId, comments }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
-  const [postLiked, setPostLiked] = useState(false)
   const postById = useSelector((state) => state.posts.singlePost)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
@@ -28,22 +27,11 @@ function TopicPost({ post, topicId, comments }) {
 
   const handleLike = () => {
     dispatch(likePost(post._id, user._id))
-    setPostLiked(true)
-    // console.log(post._id, user._id)
   }
 
   const handleUnlike = () => {
     dispatch(unlikePost(post._id, user._id))
-    setPostLiked(false)
-    // console.log(post._id, user._id)
   }
-
-  console.log(postById)
-
-  // useEffect(() => {
-  //   dispatch(getPostById(post._id))
-  //   dispatch(getAllPosts(topicId))
-  // }, [dispatch, post._id, topicId, postLiked])
 
   const firstThreeComments = comments
     .slice(0, 3)

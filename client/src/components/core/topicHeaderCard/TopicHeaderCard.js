@@ -34,10 +34,10 @@ function TopicHeaderCard({ onClick, postBody }) {
 
       <div className="flex justify-between p-3">
         <div className="flex items-center">
-          <button type="button" onClick={handleShowModal}>
+          <button type="button" onClick={handleShowModal} className="flex">
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
+            <p className="pl-3">Add a resource</p>
           </button>
-          <p className="pl-3">Add a resource</p>
           {showModal && <LibraryModal handleShowModal={handleShowModal} />}
         </div>
         <Button
