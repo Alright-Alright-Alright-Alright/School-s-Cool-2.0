@@ -9,7 +9,7 @@ import SwitchButton from "./SwitchButton"
 import Icon from "./Icon"
 import { addFileToLibrary } from "../../redux/actions/libraryActions"
 
-const Modal = ({ handleShowModal }) => {
+const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
   const [category, setCategory] = useState("")
   const [subject, setSubject] = useState("")
@@ -44,8 +44,8 @@ const Modal = ({ handleShowModal }) => {
     const image = await fileUploadHandler(fileUrl)
     const fileData = {
       title,
-      category,
-      subject,
+      category: singleTopic ? singleTopic.category : category,
+      subject: singleTopic ? singleTopic.subject : subject,
       fileUrl: image,
       isPrivate: privacy,
     }
@@ -72,38 +72,52 @@ const Modal = ({ handleShowModal }) => {
         </button>
       </section>
       <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
-        <select
-          onChange={chooseCategory}
-          name=""
-          id=""
-          className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
-        >
-          <option className="text-base" disabled selected>
-            Choose a category
-          </option>
-          <option value="School work">School work</option>
-          <option value="Sports">Sports</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Psychology">Psychology</option>
-          <option value="Home work">Home work</option>
-          <option value="Doubts">Doubts</option>
-        </select>
-        <select
-          onChange={chooseSubject}
-          name=""
-          id=""
-          className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
-        >
-          <option className="text-base" disabled selected>
-            Choose a subject
-          </option>
-          <option value="Biology">Biology</option>
-          <option value="Physics">Physics</option>
-          <option value="Technology">Technology</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Literature">Literature</option>
-          <option value="Football">Football</option>
-        </select>
+        {singleTopic ? (
+          <div>
+            <p className="text-sm">Category:</p>
+            <p>{singleTopic.category}</p>
+          </div>
+        ) : (
+          <select
+            onChange={chooseCategory}
+            name=""
+            id=""
+            className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
+          >
+            <option className="text-base" disabled selected>
+              Choose a category
+            </option>
+            <option value="School work">School work</option>
+            <option value="Sports">Sports</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Psychology">Psychology</option>
+            <option value="Home work">Home work</option>
+            <option value="Doubts">Doubts</option>
+          </select>
+        )}
+        {singleTopic ? (
+          <div>
+            <p className="text-sm">Subject:</p>
+            <p>{singleTopic.subject}</p>
+          </div>
+        ) : (
+          <select
+            onChange={chooseSubject}
+            name=""
+            id=""
+            className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
+          >
+            <option className="text-base" disabled selected>
+              Choose a subject
+            </option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="Technology">Technology</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Literature">Literature</option>
+            <option value="Football">Football</option>
+          </select>
+        )}
         <button
           type="button"
           onClick={handleClick}
