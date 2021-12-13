@@ -36,6 +36,7 @@ const postsReducer = (state = initialState, action) => {
     case LIKE_POST:
     case UNLIKE_POST:
       return {
+        ...state,
         allPosts: state.allPosts.map((eachPost) =>
           eachPost._id === action.payload._id ? action.payload : eachPost
         ),
@@ -43,7 +44,7 @@ const postsReducer = (state = initialState, action) => {
     case SET_POST:
       return {
         ...state,
-        allPosts: [action.payload, ...state.posts],
+        allPosts: [action.payload, ...state.allPosts],
       }
     case SUBMIT_COMMENT:
       return {
