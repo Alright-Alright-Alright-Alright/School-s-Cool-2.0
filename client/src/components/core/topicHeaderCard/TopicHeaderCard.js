@@ -9,6 +9,7 @@ import LibraryModal from "../LibraryModal"
 
 function TopicHeaderCard({ onClick, postBody }) {
   const user = useSelector((state) => state.user.singleUser)
+  const singleTopic = useSelector((state) => state.topics.singleTopic)
   const [showModal, setShowModal] = useState(false)
 
   const handleShowModal = () => {
@@ -38,7 +39,12 @@ function TopicHeaderCard({ onClick, postBody }) {
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
           </button>
           <p className="pl-3">Add a resource</p>
-          {showModal && <LibraryModal handleShowModal={handleShowModal} />}
+          {showModal && (
+            <LibraryModal
+              handleShowModal={handleShowModal}
+              singleTopic={singleTopic}
+            />
+          )}
         </div>
         <Button
           buttonName="Add post to topic"
