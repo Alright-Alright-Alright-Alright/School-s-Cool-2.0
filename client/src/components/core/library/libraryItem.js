@@ -92,7 +92,7 @@ const libraryItem = ({ library, showModal }) => {
                 </div>
               </td>
               <td className="border-t-2 border-grey-medium_light">
-                <div className="flex ">
+                <div className="flex pl-1">
                   <Icon iconName="message" iconStyle="fill-inactive" />
                   <span className="pl-1">0</span>
                 </div>
