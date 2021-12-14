@@ -14,6 +14,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [category, setCategory] = useState("")
   const [subject, setSubject] = useState("")
   const [fileUrl, setFilUrl] = useState("")
+  const [imgPreview, setImgPreview] = useState("")
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
 
@@ -23,12 +24,18 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     hiddenFileInput.current.click()
   }
 
+  const handleImagePreview = async (img) => {
+    const image = await fileUploadHandler(img)
+    setImgPreview(image)
+  }
+
   const chooseTitle = (e) => {
     seTitle(e.target.value)
   }
 
-  const chooseBannerImage = (e) => {
+  const chooseBannerImage = async (e) => {
     setFilUrl(e.target.files[0])
+    handleImagePreview(e.target.files[0])
   }
 
   const chooseCategory = (e) => {
@@ -54,99 +61,117 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   }
 
   return (
-    <form
-      className="h-72 w-3/5 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/6 md:inset-y-1/4 shadow-xl"
-      onSubmit={handleFormSubmit}
-    >
-      <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
-        <input
-          type="text"
-          name=""
-          id=""
-          placeholder="Add your file name"
-          className="w-2/3 placeholder-grey-medium text-lg"
-          onChange={chooseTitle}
-        />
-        <button type="button" onClick={handleShowModal}>
-          <Icon iconName="close" />
-        </button>
-      </section>
-      <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
-        {singleTopic ? (
-          <div>
-            <p className="text-sm">Category:</p>
-            <p>{singleTopic.category}</p>
-          </div>
-        ) : (
-          <select
-            onChange={chooseCategory}
+    <div className="absolute inset-0 flex justify-center pt-28 z-50">
+      <form
+        className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
+        onSubmit={handleFormSubmit}
+      >
+        <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
+          <input
+            type="text"
             name=""
             id=""
-            className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
-          >
-            <option className="text-base" disabled selected>
-              Choose a category
-            </option>
-            <option value="School work">School work</option>
-            <option value="Sports">Sports</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Psychology">Psychology</option>
-            <option value="Home work">Home work</option>
-            <option value="Doubts">Doubts</option>
-          </select>
-        )}
-        {singleTopic ? (
-          <div>
-            <p className="text-sm">Subject:</p>
-            <p>{singleTopic.subject}</p>
+            placeholder="Add your file name"
+            className="w-2/3 placeholder-grey-medium text-md"
+            onChange={chooseTitle}
+            required
+          />
+          <button type="button" onClick={handleShowModal}>
+            <Icon iconName="close" />
+          </button>
+        </section>
+        <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
+          {singleTopic ? (
+            <div>
+              <p className="text-sm">Category:</p>
+              <p>{singleTopic.category}</p>
+            </div>
+          ) : (
+            <select
+              onChange={chooseCategory}
+              name="category"
+              id=""
+              className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
+            >
+              <option disabled selected>
+                Choose a category
+              </option>
+              <option value="School work">School work</option>
+              <option value="Sports">Sports</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Psychology">Psychology</option>
+              <option value="Home work">Home work</option>
+              <option value="Doubts">Doubts</option>
+            </select>
+          )}
+          {singleTopic ? (
+            <div>
+              <p className="text-sm">Subject:</p>
+              <p>{singleTopic.subject}</p>
+            </div>
+          ) : (
+            <select
+              onChange={chooseSubject}
+              name="subject"
+              id=""
+              className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
+            >
+              <option disabled selected>
+                Choose a subject
+              </option>
+              <option value="Biology">Biology</option>
+              <option value="Physics">Physics</option>
+              <option value="Technology">Technology</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Literature">Literature</option>
+              <option value="Football">Football</option>
+            </select>
+          )}
+          <div className="flex justify-end items-center w-2/7">
+            {imgPreview && (
+              <img
+                src={imgPreview}
+                alt="Preview"
+                className="w-10 h-10 rounded-sm mr-2"
+              />
+            )}
+            <div>
+              <button
+                type="button"
+                onClick={handleClick}
+                className="flex items-center"
+              >
+                <span className="text-sm pr-3">
+                  {imgPreview ? "File preview" : "Select your File"}
+                </span>
+                <Icon iconName="add" iconStyle="fill-inactive text-pink" />
+              </button>
+              <input
+                type="file"
+                name="file"
+                size="60"
+                className="hidden"
+                ref={hiddenFileInput}
+                onChange={chooseBannerImage}
+                required
+              />
+            </div>
           </div>
-        ) : (
-          <select
-            onChange={chooseSubject}
-            name=""
-            id=""
-            className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
-          >
-            <option className="text-base" disabled selected>
-              Choose a subject
-            </option>
-            <option value="Biology">Biology</option>
-            <option value="Physics">Physics</option>
-            <option value="Technology">Technology</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Literature">Literature</option>
-            <option value="Football">Football</option>
-          </select>
-        )}
-        <button
-          type="button"
-          onClick={handleClick}
-          className="flex justify-around items-center w-2/7"
-        >
-          <span className="text-base">Select your File</span>
-          <Icon iconName="add" iconStyle="fill-inactive text-pink" />
-        </button>
-        <input
-          type="file"
-          size="60"
-          className="hidden"
-          ref={hiddenFileInput}
-          onChange={chooseBannerImage}
-        />
-      </section>
-      <section className="flex justify-between px-5">
-        <SwitchButton
-          nameLeft="PUBLIC"
-          nameRight="PRIVATE"
-          toogle={() => setPrivacy(!privacy)}
-        />
-        <Button
-          buttonName="Add a File"
-          buttonStyle="btnLibraryStyle"
-          buttonSubmit
-        />
-      </section>
-    </form>
+        </section>
+        <section className="flex justify-between px-5">
+          <SwitchButton
+            nameLeft="PUBLIC"
+            nameRight="PRIVATE"
+            toogle={() => setPrivacy(!privacy)}
+          />
+          <Button
+            buttonName="Add a File"
+            buttonStyle="btnLibraryStyle"
+            buttonSubmit
+          />
+        </section>
+      </form>
+    </div>
   )
 }
 

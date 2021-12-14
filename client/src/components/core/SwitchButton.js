@@ -2,8 +2,8 @@
 import React from "react"
 
 const SwitchButton = ({ toogle, nameLeft, nameRight }) => (
-  <div className="w-44 flex justify-around">
-    <p>{nameLeft}</p>
+  <div className="w-44 flex justify-around items-center">
+    <p className="text-base">{nameLeft}</p>
     <button type="button" onClick={toogle}>
       <label htmlFor="toggle-switch">
         <input
@@ -13,7 +13,7 @@ const SwitchButton = ({ toogle, nameLeft, nameRight }) => (
         />
       </label>
     </button>
-    <p>{nameRight}</p>
+    <p className="text-base">{nameRight}</p>
   </div>
 )
 
