@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import {
   filterLibraryByCategory,
@@ -11,6 +11,22 @@ import {
 
 const LibraryContentLeft = ({ library, handleShowModal }) => {
   const dispatch = useDispatch()
+  const [color, setColor] = useState(false)
+
+  const handleFilter = (item) => {
+    dispatch(filterLibraryByCategory(item))
+    setColor(true)
+  }
+
+  const handleMyFiles = () => {
+    dispatch(getUserFilesFromLibrary())
+    setColor(false)
+  }
+
+  const getFiles = () => {
+    dispatch(getAllFilesFromLibrary())
+    setColor(false)
+  }
 
   const uniqueCatergories = () => {
     const arr = []
@@ -18,11 +34,11 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
       (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
     )
     const categories = arr.map((item) => (
-      <div key={item} className="text-xl py-2 hover:text-pink">
-        <button
-          type="button"
-          onClick={() => dispatch(filterLibraryByCategory(item))}
-        >
+      <div
+        key={item}
+        className={`text-xl py-2 hover:text-pink ${color && "text-pink"}`}
+      >
+        <button type="button" onClick={() => handleFilter(item)}>
           {item}
         </button>
       </div>
@@ -58,11 +74,7 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
         </button>
       </section>
       <section className="pt-2">
-        <button
-          type="button"
-          className="text-lg"
-          onClick={() => dispatch(getUserFilesFromLibrary())}
-        >
+        <button type="button" className="text-lg" onClick={handleMyFiles}>
           View my resources
         </button>
       </section>
@@ -72,7 +84,7 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
         <button
           className="text-xl py-2 hover:text-pink"
           type="button"
-          onClick={() => dispatch(getAllFilesFromLibrary())}
+          onClick={getFiles}
         >
           All resources
         </button>
