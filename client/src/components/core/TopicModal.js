@@ -71,7 +71,7 @@ const Modal = ({ handleShowModal }) => {
           name=""
           id=""
           placeholder="Add your descriptive topic name"
-          className="w-2/3 placeholder-grey-medium text-lg"
+          className="w-2/3 placeholder-grey-medium text-md"
           onChange={chooseTitle}
         />
         <button type="button" onClick={handleShowModal}>
@@ -83,9 +83,9 @@ const Modal = ({ handleShowModal }) => {
           onChange={chooseCategory}
           name=""
           id=""
-          className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
+          className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
         >
-          <option className="text-base" disabled selected>
+          <option disabled selected>
             Choose a category
           </option>
           <option value="School work">School work</option>
@@ -99,9 +99,9 @@ const Modal = ({ handleShowModal }) => {
           onChange={chooseSubject}
           name=""
           id=""
-          className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
+          className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
         >
-          <option className="text-base" disabled selected>
+          <option disabled selected>
             Choose a subject
           </option>
           <option value="Biology">Biology</option>
@@ -116,7 +116,7 @@ const Modal = ({ handleShowModal }) => {
           onClick={handleClick}
           className="flex justify-around items-center w-2/7"
         >
-          <span className="text-base">Add Cover Image</span>
+          <span className="text-sm">Add Cover Image</span>
           <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
         </button>
         <input

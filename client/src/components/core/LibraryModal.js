@@ -72,7 +72,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             name=""
             id=""
             placeholder="Add your file name"
-            className="w-2/3 placeholder-grey-medium text-lg"
+            className="w-2/3 placeholder-grey-medium text-md"
             onChange={chooseTitle}
             required
           />
@@ -91,7 +91,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseCategory}
               name="category"
               id=""
-              className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
+              className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
             >
               <option disabled selected>
                 Choose a category
@@ -114,7 +114,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseSubject}
               name="subject"
               id=""
-              className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
+              className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
             >
               <option disabled selected>
                 Choose a subject
@@ -141,7 +141,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 onClick={handleClick}
                 className="flex items-center"
               >
-                <span className="text-base pr-3">
+                <span className="text-sm pr-3">
                   {imgPreview ? "File preview" : "Select your File"}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
