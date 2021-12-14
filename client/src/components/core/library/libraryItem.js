@@ -12,13 +12,13 @@ import {
   iUnlikedAfile,
 } from "../../../redux/actions/libraryActions"
 
-const libraryItem = ({ library }) => {
+const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
 
   return (
-    <div className="w-full font-sans">
+    <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>
       <table className="w-full">
         <thead>
           <tr className="text-left">

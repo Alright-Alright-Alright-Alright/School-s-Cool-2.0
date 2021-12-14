@@ -61,7 +61,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   }
 
   return (
-    <div className="absolute inset-0 flex justify-center z-50 pt-28">
+    <div className="absolute inset-0 flex justify-center pt-28 z-50">
       <form
         className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
