@@ -141,7 +141,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 onClick={handleClick}
                 className="flex items-center"
               >
-                <span className="text-base pr-3">Select your File</span>
+                <span className="text-base pr-3">
+                  {imgPreview ? "File preview" : "Select your File"}
+                </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>
               <input
