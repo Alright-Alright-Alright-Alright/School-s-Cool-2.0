@@ -14,6 +14,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [category, setCategory] = useState("")
   const [subject, setSubject] = useState("")
   const [fileUrl, setFilUrl] = useState("")
+  const [imgPreview, setImgPreview] = useState("")
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
 
@@ -23,12 +24,18 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     hiddenFileInput.current.click()
   }
 
+  const handleImagePreview = async (img) => {
+    const image = await fileUploadHandler(img)
+    setImgPreview(image)
+  }
+
   const chooseTitle = (e) => {
     seTitle(e.target.value)
   }
 
-  const chooseBannerImage = (e) => {
+  const chooseBannerImage = async (e) => {
     setFilUrl(e.target.files[0])
+    handleImagePreview(e.target.files[0])
   }
 
   const chooseCategory = (e) => {
@@ -66,6 +73,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
           placeholder="Add your file name"
           className="w-2/3 placeholder-grey-medium text-lg"
           onChange={chooseTitle}
+          required
         />
         <button type="button" onClick={handleShowModal}>
           <Icon iconName="close" />
@@ -83,6 +91,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             name=""
             id=""
             className="bg-grey-super_light rounded-lg  w-2/7 text-base py-3 pl-3"
+            required
           >
             <option className="text-base" disabled selected>
               Choose a category
@@ -103,9 +112,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         ) : (
           <select
             onChange={chooseSubject}
-            name=""
+            name="file"
             id=""
             className=" bg-grey-super_light rounded-lg  w-2/7 text-base py-2 pl-3 "
+            required
           >
             <option className="text-base" disabled selected>
               Choose a subject
@@ -117,6 +127,13 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             <option value="Literature">Literature</option>
             <option value="Football">Football</option>
           </select>
+        )}
+        {imgPreview && (
+          <img
+            src={imgPreview}
+            alt="Preview"
+            className="w-10 h-10 rounded-sm mr-2"
+          />
         )}
         <button
           type="button"
@@ -132,6 +149,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
           className="hidden"
           ref={hiddenFileInput}
           onChange={chooseBannerImage}
+          required
         />
       </section>
       <section className="flex justify-between px-5">
