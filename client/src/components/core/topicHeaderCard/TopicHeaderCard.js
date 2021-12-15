@@ -9,6 +9,7 @@ import LibraryModal from "../LibraryModal"
 
 function TopicHeaderCard({ onClick, postBody }) {
   const user = useSelector((state) => state.user.singleUser)
+  const singleTopic = useSelector((state) => state.topics.singleTopic)
   const [showModal, setShowModal] = useState(false)
 
   const handleShowModal = () => {
@@ -32,7 +33,7 @@ function TopicHeaderCard({ onClick, postBody }) {
         />
       </div>
 
-      <div className="flex justify-between p-3">
+      <div className="flex justify-between p-3 relative">
         <div className="flex items-center">
           <button type="button" onClick={handleShowModal} className="flex">
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
