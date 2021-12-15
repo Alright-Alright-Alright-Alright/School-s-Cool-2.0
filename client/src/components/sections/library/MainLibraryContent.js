@@ -32,7 +32,7 @@ const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
     <div className="h-screen mt-8 relative">
       <div className="pb-8">{uniqueBySubject()}</div>
       {showModal && <LibraryModal handleShowModal={handleShowModal} />}
-      <LibraryItem library={library} />
+      <LibraryItem library={library} showModal={showModal} />
     </div>
   )
 }

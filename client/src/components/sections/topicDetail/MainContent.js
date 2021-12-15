@@ -33,7 +33,7 @@ function MainContent({ topic }) {
   }, [dispatch, params.topicId])
 
   return (
-    <div className="">
+    <div className="static">
       {UI.errors && <p>{UI.errors.message}</p>}
       <TopicHeaderCard
         onClick={createNewPost}
