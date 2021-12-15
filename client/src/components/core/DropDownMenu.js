@@ -27,10 +27,10 @@ function DropDownMenu({ data, selectFilter, filter }) {
   return (
     <div ref={node} className="relative z-20">
       <button type="button" onClick={() => setIsOpen(!isOpen)}>
-        <Icon iconName="seemore" iconStyle="text-white" />
+        <Icon iconName="seemore" iconStyle={`${data.iconColor}`} />
       </button>
       {isOpen && (
-        <div className="absolute right-10 -top-2 w-48 py-6 mt-2 bg-white rounded-xl shadow-xl">
+        <div className="absolute right-10 -top-1 w-48 py-6 mt-2 bg-white rounded-xl shadow-xl">
           {data.dropDownItems.map((item) => (
             <button
               type="button"
@@ -55,6 +55,7 @@ function DropDownMenu({ data, selectFilter, filter }) {
 
 DropDownMenu.propTypes = {
   data: PropTypes.shape({
+    iconColor: PropTypes.string,
     bgColorOnHover: PropTypes.string,
     dropDownItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,

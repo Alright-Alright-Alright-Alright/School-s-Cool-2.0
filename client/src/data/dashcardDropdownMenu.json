@@ -1,26 +1,37 @@
 {
   "topics": {
+    "iconColor": "text-white",
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All topics", "Created by me", "Followed by me"]
   },
   "courses": {
+    "iconColor": "text-white",
     "bgColorOnHover": "yellow-light",
     "dropDownItems": ["All courses", "Created by me", "In progress", "completed"]
   },
   "events": {
+    "iconColor": "text-white",
     "bgColorOnHover": "sky-light",
     "dropDownItems": ["All events", "Created by me", "Attending"]
   },
   "users": {
+    "iconColor": "text-white",
     "bgColorOnHover": "pink-light",
     "dropDownItems": ["All users"]
   },
   "topicMembers": {
+    "iconColor": "text-white",
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All users", "Amsterdam Mentors"]
   },
   "resources": {
+    "iconColor": "text-white",
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All files", "Created by me", "Followed by me"]
+  },
+  "comment": {
+    "iconColor": "text-grey-dark",
+    "bgColorOnHover": "grey-super_light",
+    "dropDownItems": ["Edit", "Delete"]
   }
 }
