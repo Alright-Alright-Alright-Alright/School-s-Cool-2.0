@@ -98,10 +98,10 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-1/4 h-4/6 rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-6/7 h-auto lg:w-1/5 lg:h-3/6 rounded-2xl flex flex-col justify-around p-3"
         >
-          <div className="flex justify-center">{logo}</div>
-          <div className="h-2/5 flex flex-col px-8 justify-around">
+          <div className="flex justify-center p-8">{logo}</div>
+          <div className="h-2/5 flex flex-col px-8 justify-around pt-8">
             <label className="text-sm my-2">First Name:</label>
             <input
               type="text"
@@ -139,7 +139,7 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="flex justify-center px-8">
+          <div className="flex justify-center pt-10 lg:pt-20">
             <Button
               buttonName="Register"
               buttonSubmit
