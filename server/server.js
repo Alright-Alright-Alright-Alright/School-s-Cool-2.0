@@ -57,6 +57,9 @@ app.use(
 const authRoutes = require("./routes/authRoutes");
 app.use("/api", authRoutes);
 
+const activityRoutes = require("./routes/activityRoutes");
+app.use("/api", jwtAuthorization, activityRoutes);
+
 const userRoutes = require("./routes/userRoutes");
 app.use("/api",jwtAuthorization, userRoutes);
 

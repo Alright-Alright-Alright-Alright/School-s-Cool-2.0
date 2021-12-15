@@ -1,0 +1,2 @@
+const GET_ACTIVITIES = "GET_ACTIVITIES"
+export default GET_ACTIVITIES
