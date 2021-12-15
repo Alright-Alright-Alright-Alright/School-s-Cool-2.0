@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 require("./User-model");
 
-const chatSchema = new Schema(
+const conversationSchema = new Schema(
   {
     members: [
       {
@@ -23,8 +23,6 @@ const chatSchema = new Schema(
               type: String,
               required: true
             },
-            unread: Boolean,
-            read: Boolean,
         }
     ]
   },
@@ -33,5 +31,5 @@ const chatSchema = new Schema(
   }
 );
 
-const Chat = mongoose.model("Chat", chatSchema);
-module.exports = Chat;
+const Conversation = mongoose.model("Conversation", conversationSchema);
+module.exports = Conversation;
