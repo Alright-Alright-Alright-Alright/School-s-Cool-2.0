@@ -6,7 +6,7 @@ import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
 function TopicContentRight({ topic, users }) {
   return (
-    <div className="place-items-start max-w-xs fixed w-1/4">
+    <div className="place-items-start max-w-xs hidden lg:block">
       <TopicDashcard
         topicDashCardTitle="Topic Members"
         topicDashCardStyle="bg-aqua"

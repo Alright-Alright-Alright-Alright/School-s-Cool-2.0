@@ -6,10 +6,10 @@ import PropTypes from "prop-types"
 export default function Main({ main, contentLeft, contentRight }) {
   return (
     <>
-      <div className="min-h-screen grid lg:grid-cols-4 bg-grey-super_light">
-        <div className="hidden lg:block">{contentLeft}</div>
+      <div className="min-h-screen grid sm:grid-cols-1 lg:grid-cols-4 bg-grey-super_light">
+        <div className=" lg:block">{contentLeft}</div>
         <div className="lg:col-span-2">{main}</div>
-        <div className="hidden lg:block">{contentRight}</div>
+        <div className=" lg:block">{contentRight}</div>
       </div>
     </>
   )

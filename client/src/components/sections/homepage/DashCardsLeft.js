@@ -26,27 +26,25 @@ function DashCardsLeft() {
   }, [dispatch])
 
   return (
-    <div className="max-w-md fixed">
-      <div className="float-right ">
-        <Dashcard
-          dashCardData={topics}
-          dashCardTitle="Topics"
-          dashCardStyle="bg-aqua"
-          dropdownMenuData={dashcardDropdownMenu.topics}
-        />
-        <Dashcard
-          dashCardData={courses}
-          dashCardTitle="Courses"
-          dashCardStyle="bg-yellow"
-          dropdownMenuData={dashcardDropdownMenu.courses}
-        />{" "}
-        <Dashcard
-          dashCardData={events}
-          dashCardTitle="Events"
-          dashCardStyle="bg-sky"
-          dropdownMenuData={dashcardDropdownMenu.events}
-        />{" "}
-      </div>
+    <div className="max-w-md float-right pr-6 hidden lg:block">
+      <Dashcard
+        dashCardData={topics}
+        dashCardTitle="Topics"
+        dashCardStyle="bg-aqua"
+        dropdownMenuData={dashcardDropdownMenu.topics}
+      />
+      <Dashcard
+        dashCardData={courses}
+        dashCardTitle="Courses"
+        dashCardStyle="bg-yellow"
+        dropdownMenuData={dashcardDropdownMenu.courses}
+      />{" "}
+      <Dashcard
+        dashCardData={events}
+        dashCardTitle="Events"
+        dashCardStyle="bg-sky"
+        dropdownMenuData={dashcardDropdownMenu.events}
+      />{" "}
     </div>
   )
 }
