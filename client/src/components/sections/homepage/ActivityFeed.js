@@ -6,8 +6,8 @@ function ActivityFeed() {
   const [filter, setFilter] = useState("btnPrimaryStyle")
 
   return (
-    <div className="mt-3">
-      <div className="sm:flex md:place-content-between">
+    <div className="mt-3 ">
+      <div className="sm:flex md:place-content-between ">
         <div>
           <h1 className="text-lg text-center mb-3 md:mb-0 pl-3">
             Activity Feed
