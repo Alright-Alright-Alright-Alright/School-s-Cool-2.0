@@ -12,7 +12,7 @@ import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
   const courses = useSelector((state) => state.courses)
-  const events = useSelector((state) => state.events.events)
+  const events = useSelector((state) => state.events.allEvents)
   // const posts = useSelector((state) => state.posts)
   // console.log(posts)
 
