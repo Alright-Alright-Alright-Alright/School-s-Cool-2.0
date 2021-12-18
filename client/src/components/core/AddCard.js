@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from "react"
 
-const TopicsCard = () => (
+const TopicsCard = ({ cardTitle }) => (
   <div className="flex flex-col content-center w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
     <section style={{ margin: "51px 32px 15px" }}>
       <svg
@@ -21,7 +22,7 @@ const TopicsCard = () => (
       </svg>
     </section>
     <section className="font-sans font-semibold text-lg text-center">
-      New Topic
+      {cardTitle}
     </section>
   </div>
 )

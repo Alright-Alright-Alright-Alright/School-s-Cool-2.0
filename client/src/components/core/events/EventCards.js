@@ -15,20 +15,23 @@ const EventCards = ({events}) => {
   
   return (
     <div className="flex flex-col justify-between w-2/5 h-2/5 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
+      <Link to={events._id}>
       <section className="">
         <img
           src={events.bannerImage}
           alt="event_Image"
-          className="object-cover h-48 w-full rounded-tr-3xl"
+          className="object-cover h-36 w-full rounded-tr-3xl"
         />
       </section>
-      <section className="border-b-2 border-grey-light ml-3 mr-3 h-16 flex flex-col justify-evenly">
-        <h1 className="text-md">{events.title}</h1>
-        <p className="text-base">{events.description}</p>
+      <section className="border-b-2 border-grey-light mx-3 h-24 flex flex-col justify-around">
+        <div className="flex items-center">
+        <h1 className="text-md w-2/4">{events.title}</h1>
+        <p className="text-base w-3/4 pl-2">{events.description}</p>
+        </div>
         <p className="text-sm">{events.location}</p>
-      </section>
+      </section></Link>
 
-      <section>
+      <section className="h-12">
         <div className="flex justify-between">
           <div className="flex p-3">
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
