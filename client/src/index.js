@@ -13,6 +13,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import Library from "./pages/Library"
+import Events from "./pages/Events"
 // import Topic from "./routes/topic"
 
 ReactDOM.render(
@@ -26,6 +27,7 @@ ReactDOM.render(
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
           <Route path="/library" element={<Library />} />
+          <Route path="/events" element={<Events />} />
         </Route>
       </Routes>
     </BrowserRouter>
