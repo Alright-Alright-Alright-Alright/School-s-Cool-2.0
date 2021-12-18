@@ -67,7 +67,7 @@ function MainTopicsContent() {
           }`}
         >
           <button type="button" onClick={handleShowModal}>
-            <AddCard cardTitle="New topic" />
+            <AddCard cardTitle="New topic" color="#18C7BB" />
           </button>
           {filteredTopics?.map((topic) => (
             <TopicCard key={topic._id} topics={topic} />

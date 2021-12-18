@@ -7,7 +7,7 @@ import AddCard from "../../core/AddCard"
 const MainEventsContent = ({ events }) => (
   <div className="w-full flex justify-center flex-wrap gap-3 m-6">
     <button type="button" className="pr-28">
-      <AddCard cardTitle="New event" />
+      <AddCard cardTitle="New event" color="#27A8DF" />
     </button>
     {events.map((event) => (
       <EventCards key={event._id} events={event} />
