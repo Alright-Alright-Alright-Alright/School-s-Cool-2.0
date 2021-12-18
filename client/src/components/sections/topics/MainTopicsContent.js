@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import AddCard from "../../core/AddCard"
-import TopicCard from "../../core/topicsCards/TopicCard"
-import TopicModal from "../../core/TopicModal"
+import TopicCard from "../../core/topics/topicsCards/TopicCard"
+import TopicModal from "../../core/topics/TopicModal"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 import Button from "../../core/Button"
 

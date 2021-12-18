@@ -6,9 +6,9 @@
 
 import React, { useState } from "react"
 import PropTypes from "prop-types"
-import Icon from "../Icon"
+import Icon from "../../Icon"
 import TopicDashCardListItem from "./TopicDashCardListItem"
-import DropDownMenu from "../DropDownMenu"
+import DropDownMenu from "../../DropDownMenu"
 
 export default function TopicDashcard({
   topicDashCardData,

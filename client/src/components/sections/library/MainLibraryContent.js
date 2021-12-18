@@ -6,7 +6,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import Button from "../../core/Button"
 import LibraryItem from "../../core/library/libraryItem"
-import LibraryModal from "../../core/LibraryModal"
+import LibraryModal from "../../core/library/LibraryModal"
 import { filterLibraryBySubject } from "../../../redux/actions/libraryActions"
 
 const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
