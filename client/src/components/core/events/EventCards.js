@@ -30,8 +30,8 @@ const EventCards = ({events}) => {
           </div>
           <div className="flex justify-around">
             <p className="text-sm">{events.location}</p>
-            <p className="text-sm">{events.dateStart.slice(0, 10)}</p>
-            <p className="text-sm">{events.dateEnd.slice(0, 10)}</p>
+            <p className="text-sm">{events?.dateStart.slice(0, 10)}</p>
+            <p className="text-sm">{events?.dateEnd.slice(0, 10)}</p>
           </div>
         </section>
       </Link>
@@ -40,7 +40,7 @@ const EventCards = ({events}) => {
         <div className="flex justify-between">
           <div className="flex p-3">
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
-            <span>{events.attendees.length}</span>
+            <span>{events?.attendees.length}</span>
           </div>
           <div className="p-3">
             {join ? (

@@ -1,5 +1,5 @@
-import { SET_EVENTS } from "../types/events"
-import { getEvents } from "../services/eventsService"
+import { POST_EVENT, SET_EVENTS } from "../types/events"
+import { getEvents, createEvent } from "../services/eventsService"
 
 import { SET_ERRORS, CLEAR_ERRORS } from "../types/ui"
 
@@ -16,6 +16,15 @@ export const getAllEvents = () => async (dispatch) => {
   }
 }
 
-export const otherFunction = () => () => {
-  console.log("object")
+export const createNewEvent = (eventData) => async (dispatch) => {
+  const addEvent = await createEvent(eventData)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: POST_EVENT, payload: addEvent })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
 }
