@@ -8,15 +8,15 @@ import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
-import Comment from "../comment/Comment"
-import CommentForm from "../comment/CommentForm"
+import Comment from "../../comment/Comment"
+import CommentForm from "../../comment/CommentForm"
 import {
   getAllPosts,
   getPostById,
   likePost,
   unlikePost,
-} from "../../../redux/actions/postActions"
-import Icon from "../Icon"
+} from "../../../../redux/actions/postActions"
+import Icon from "../../Icon"
 
 function TopicPost({ post, topicId, comments }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
