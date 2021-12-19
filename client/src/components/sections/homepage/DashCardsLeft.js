@@ -34,7 +34,7 @@ function DashCardsLeft() {
         dropdownMenuData={dashcardDropdownMenu.topics}
       />
       <Dashcard
-        dashCardData={courses}
+        // dashCardData={courses}
         dashCardTitle="Courses"
         dashCardStyle="bg-yellow"
         dropdownMenuData={dashcardDropdownMenu.courses}
