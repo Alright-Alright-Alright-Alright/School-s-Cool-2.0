@@ -20,7 +20,7 @@ const MainEventsContent = ({ events }) => {
           showModal && "blur-md"
         }`}
       >
-        <button type="button" className="pr-48" onClick={handleShowModal}>
+        <button type="button" className="mr-48" onClick={handleShowModal}>
           <AddCard cardTitle="New event" color="#27A8DF" />
         </button>
         {events.map((event) => (

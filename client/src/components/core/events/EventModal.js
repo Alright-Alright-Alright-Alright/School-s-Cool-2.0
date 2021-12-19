@@ -5,7 +5,10 @@ import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import DatePicker from "react-datepicker"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { addAtopic, getAlltopics } from "../../../redux/actions/topicActions"
+import {
+  createNewEvent,
+  getAllEvents,
+} from "../../../redux/actions/eventActions"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -47,7 +50,7 @@ const Modal = ({ handleShowModal }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
-    const topicData = {
+    const eventData = {
       title,
       description,
       dateStart: startDate,
@@ -56,9 +59,9 @@ const Modal = ({ handleShowModal }) => {
       bannerImage: image,
       isPrivate: privacy,
     }
+    dispatch(createNewEvent(eventData))
+    dispatch(getAllEvents())
     handleShowModal()
-    dispatch(addAtopic(topicData))
-    dispatch(getAlltopics())
   }
 
   return (
