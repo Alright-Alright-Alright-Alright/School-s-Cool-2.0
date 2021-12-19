@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 // import Dashcard from "../../core/dashcard/Dashcard"
-import TopicDashCard from "../../core/topicDashCard/TopicDashcard"
+import TopicDashCard from "../../core/topics/topicDashCard/TopicDashcard"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 import { getAllTheUsers } from "../../../redux/actions/userActions"
 

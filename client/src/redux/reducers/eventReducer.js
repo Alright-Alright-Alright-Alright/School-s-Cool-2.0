@@ -1,7 +1,8 @@
-import { SET_EVENTS } from "../types/events"
+import { POST_EVENT, SET_EVENTS } from "../types/events"
 
 const initialState = {
-  events: [],
+  allEvents: [],
+  singleEvent: {},
 }
 
 const eventReducer = (state = initialState, action) => {
@@ -9,7 +10,11 @@ const eventReducer = (state = initialState, action) => {
     case SET_EVENTS:
       return {
         ...state,
-        events: [...action.payload],
+        allEvents: action.payload,
+      }
+    case POST_EVENT:
+      return {
+        allEvents: [...action.payload],
       }
     default:
       return state

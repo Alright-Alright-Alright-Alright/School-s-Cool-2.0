@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
-import TopicDashcard from "../../core/topicDashCard/TopicDashcard"
+import TopicDashcard from "../../core/topics/topicDashCard/TopicDashcard"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
 function TopicContentRight({ topic, users }) {

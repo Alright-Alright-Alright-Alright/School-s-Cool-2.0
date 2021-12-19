@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { joinAtopic, leaveAtopic } from "../../../redux/actions/topicActions"
-import Icon from "../Icon"
+import { joinAtopic, leaveAtopic } from "../../../../redux/actions/topicActions"
+import Icon from "../../Icon"
 
 const TopicCard = ({ topics }) => {
   const user = useSelector((state) => state.user.singleUser)
