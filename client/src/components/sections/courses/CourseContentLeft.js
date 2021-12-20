@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import PropTypes from "prop-types"
 import { getAllCourses } from "../../../redux/actions/courseActions"
 
 function MainContent({ setCourseId }) {
@@ -15,8 +14,11 @@ function MainContent({ setCourseId }) {
   return (
     <>
       <div className="pl-5 pt-10">
-        <section className="flex">
-          <p className="text-lg">Courses</p>
+        <section className="flex-col">
+          <p className="text-lg ">Courses</p>
+          <button type="button" className="text-lg hover:text-yellow">
+            View my Courses
+          </button>
         </section>
         <hr className="mt-8 w-52 text-grey-light" />
         <section>
@@ -27,7 +29,7 @@ function MainContent({ setCourseId }) {
                 className="text-xl py-2 hover:text-yellow"
                 onClick={() => setCourseId(item.sys.id)}
               >
-                <p>{item.headerTitle}</p>
+                <p>{item.title}</p>
               </button>
             </div>
           ))}
@@ -35,6 +37,10 @@ function MainContent({ setCourseId }) {
       </div>
     </>
   )
+}
+
+MainContent.propTypes = {
+  setCourseId: PropTypes.func.isRequired,
 }
 
 export default MainContent

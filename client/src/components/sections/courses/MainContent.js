@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import PropTypes from "prop-types"
 import { getSingleCourse } from "../../../redux/actions/courseActions"
 import Button from "../../core/Button"
 
@@ -45,6 +44,10 @@ function MainContent({ courseId }) {
       </div>
     </div>
   )
+}
+
+MainContent.propTypes = {
+  courseId: PropTypes.string.isRequired,
 }
 
 export default MainContent

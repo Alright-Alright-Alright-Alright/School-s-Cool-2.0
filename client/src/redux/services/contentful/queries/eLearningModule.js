@@ -1,6 +1,6 @@
 const eLearningModuleQuery = (moduleId) => `{
     eLearningModule (id: "${moduleId}") {
-        headerTitle
+        title
         description
         pagesCollection {
           items {

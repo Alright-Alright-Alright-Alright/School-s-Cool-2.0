@@ -1,7 +1,7 @@
 const eLearningModuleCollectionQuery = `{
 	eLearningModuleCollection {
         items {
-          headerTitle
+          title
           description
           sys {
             id

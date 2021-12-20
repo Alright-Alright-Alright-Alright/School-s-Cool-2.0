@@ -11,7 +11,7 @@ import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
-  const courses = useSelector((state) => state.courses)
+  const courses = useSelector((state) => state.courses.allCourses)
   const events = useSelector((state) => state.events.allEvents)
   // const posts = useSelector((state) => state.posts)
   // console.log(posts)
@@ -34,7 +34,7 @@ function DashCardsLeft() {
         dropdownMenuData={dashcardDropdownMenu.topics}
       />
       <Dashcard
-        // dashCardData={courses}
+        dashCardData={courses}
         dashCardTitle="Courses"
         dashCardStyle="bg-yellow"
         dropdownMenuData={dashcardDropdownMenu.courses}
