@@ -3,11 +3,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
-import fileUploadHandler from "../../middleware/UploadFile"
-import Button from "./Button"
-import SwitchButton from "./SwitchButton"
-import Icon from "./Icon"
-import { addFileToLibrary } from "../../redux/actions/libraryActions"
+import fileUploadHandler from "../../../middleware/UploadFile"
+import Button from "../Button"
+import SwitchButton from "../SwitchButton"
+import Icon from "../Icon"
+import { addFileToLibrary } from "../../../redux/actions/libraryActions"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")

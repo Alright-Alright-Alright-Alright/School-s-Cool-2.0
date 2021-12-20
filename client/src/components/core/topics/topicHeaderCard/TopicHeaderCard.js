@@ -3,9 +3,9 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
-import Button from "../Button"
-import Icon from "../Icon"
-import LibraryModal from "../LibraryModal"
+import Button from "../../Button"
+import Icon from "../../Icon"
+import LibraryModal from "../../library/LibraryModal"
 
 function TopicHeaderCard({ onClick, postBody }) {
   const user = useSelector((state) => state.user.singleUser)
