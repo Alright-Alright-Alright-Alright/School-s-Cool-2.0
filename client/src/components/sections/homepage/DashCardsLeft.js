@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 import { getAllEvents } from "../../../redux/actions/eventActions"
-// import getAllCourses from "../../../redux/actions/courseActions"
+import { getAllCourses } from "../../../redux/actions/courseActions"
 
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
@@ -22,7 +22,7 @@ function DashCardsLeft() {
     dispatch(getAlltopics())
     dispatch(getAllFilesFromLibrary())
     dispatch(getAllEvents())
-    // dispatch(getAllCourses())
+    dispatch(getAllCourses())
   }, [dispatch])
 
   return (

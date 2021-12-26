@@ -1,21 +1,17 @@
 const eLearningModuleQuery = (moduleId) => `{
-    eLearningModule (id: "${moduleId}") {
+  eLearningModule (id: "${moduleId}"){
+    title
+    eLearningLessonsCollection {
+      items {
         title
-        description
-        pagesCollection {
+        eLearningPagesCollection {
           items {
             title
-            image {
-                url
-              }
-            plainTextField
-            richTextField {
-            json
-              }
-            plainLongTextField
           }
         }
       }
-  }`
+    }
+  }
+}`
 
 export default eLearningModuleQuery

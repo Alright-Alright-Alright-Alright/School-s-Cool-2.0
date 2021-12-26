@@ -1,8 +1,13 @@
-import { SET_ALL_COURSES, SET_ONE_COURSE } from "../types/courses"
+import {
+  SET_ALL_COURSES,
+  SET_ONE_COURSE,
+  SET_ONE_LESSON,
+} from "../types/courses"
 
 const initialState = {
   allCourses: [],
   singleCourse: {},
+  singleLesson: {},
 }
 
 const courseReducer = (state = initialState, action) => {
@@ -16,6 +21,11 @@ const courseReducer = (state = initialState, action) => {
       return {
         ...state,
         singleCourse: action.payload,
+      }
+    case SET_ONE_LESSON:
+      return {
+        ...state,
+        singleLesson: action.payload,
       }
     default:
       return state

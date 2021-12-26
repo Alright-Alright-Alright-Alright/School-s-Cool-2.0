@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.10.0",
+    "@contentful/rich-text-react-renderer": "^15.10.0",
+    "@contentful/rich-text-types": "^15.10.1",
     "@craco/craco": "^6.4.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",

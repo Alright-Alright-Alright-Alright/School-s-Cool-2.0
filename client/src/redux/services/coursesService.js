@@ -3,6 +3,7 @@ import axios from "axios"
 import { service, configHeaders } from "../api/contentfulAxios"
 import eLearningModuleQuery from "./contentful/queries/eLearningModule"
 import eLearningModuleCollectionQuery from "./contentful/queries/eLearningModuleCollection"
+import eLearningLessonQuery from "./contentful/queries/eLearningLesson"
 
 const baseUrl = "https://graphql.contentful.com/content/v1/spaces"
 const spaceId = "jfc6o2gu3xdp"
@@ -35,6 +36,24 @@ export const getSingleCourseService = async (courseId) => {
     `${baseUrl}/${spaceId}/`,
     {
       query: eLearningModuleQuery(courseId),
+    },
+    {
+      headers,
+    }
+  )
+  return response.data.data
+}
+
+export const getSingleLessonService = async (lessonId) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.REACT_APP_CONTENTFUL_TOKEN}`,
+  }
+
+  const response = await axios.post(
+    `${baseUrl}/${spaceId}/`,
+    {
+      query: eLearningLessonQuery(lessonId),
     },
     {
       headers,

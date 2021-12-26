@@ -1,13 +1,21 @@
 const eLearningModuleCollectionQuery = `{
-	eLearningModuleCollection {
+  eLearningModuleCollection {
+    items {
+      title
+      sys {
+        id
+      }
+      eLearningLessonsCollection {
         items {
           title
-          description
           sys {
             id
           }
         }
       }
+      
+    }
+  }
     }`
 
 export default eLearningModuleCollectionQuery
