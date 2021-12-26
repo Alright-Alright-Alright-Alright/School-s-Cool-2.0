@@ -10,6 +10,8 @@ const styles = {
     "border-2 rounded-full bg-white border-aqua text-aqua hover:bg-aqua hover:text-white",
   btnLibraryStyle:
     "border-2 rounded-full bg-white border-pink text-pink hover:bg-pink hover:text-white",
+  btnCourseStyle:
+    "border-2 rounded-full bg-white border-yellow text-yellow hover:bg-yellow hover:text-white",
   btnEventStyle:
     "border-2 rounded-full bg-white border-sky text-sky hover:bg-sky hover:text-white",
 }
