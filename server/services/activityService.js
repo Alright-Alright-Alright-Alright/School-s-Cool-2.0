@@ -1,5 +1,6 @@
 const {
-    getAllActivitiesDb
+    getAllActivitiesDb,
+    getFollowedActivitiesDb,
   } = require("../db/activityDb");
   
 const getAllActivitiesService = async (userId) => {
@@ -10,6 +11,15 @@ const getAllActivitiesService = async (userId) => {
     }
   };
 
+const getFollowedActivitiesService = async (userId) => {
+  try {
+    return await getFollowedActivitiesDb(userId);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 module.exports = {
-    getAllActivitiesService
+    getAllActivitiesService,
+    getFollowedActivitiesService
 };

@@ -9,6 +9,7 @@ import uiReducer from "./reducers/uiReducer"
 import userReducer from "./reducers/userReducer"
 import eventsReducer from "./reducers/eventReducer"
 import postsReducer from "./reducers/postReducer"
+import activitiesReducer from "./reducers/activityReducer"
 
 const initialState = {}
 
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   events: eventsReducer,
   UI: uiReducer,
   posts: postsReducer,
+  activities: activitiesReducer,
 })
 
 const store = createStore(

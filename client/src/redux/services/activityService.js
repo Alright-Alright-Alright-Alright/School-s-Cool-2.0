@@ -1,8 +1,12 @@
 import { service, configHeaders } from "../api/axios"
 
-const getAllActivityService = () =>
+export const getAllActivityService = () =>
   service
     .get(`/activities`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
-export default getAllActivityService
+export const getFollowedActivityService = () => {
+  service
+    .get(`/followedActivities`, configHeaders())
+    .then((responseFromAPI) => responseFromAPI.data)
+}
