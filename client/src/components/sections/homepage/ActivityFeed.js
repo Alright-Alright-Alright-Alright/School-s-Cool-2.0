@@ -1,9 +1,29 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import {
+  getAllActivities,
+  getFollowedActivities,
+} from "../../../redux/actions/activityActions"
 import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
 
 function ActivityFeed() {
   const [filter, setFilter] = useState("btnPrimaryStyle")
+
+  const allActivities = useSelector((state) => state.activities.allActivities)
+  const followedActivities = useSelector(
+    (state) => state.activities.followedActivities
+  )
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllActivities())
+    dispatch(getFollowedActivities())
+  }, [dispatch])
+
+  console.log(allActivities)
+  console.log(followedActivities)
 
   return (
     <div className="mt-3 ">
@@ -31,9 +51,10 @@ function ActivityFeed() {
           />
         </div>
       </div>
-      <ActivityCard />
-      <ActivityCard />
-      <ActivityCard />
+      {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
+      {allActivities.map((activity) => (
+        <ActivityCard key={activity._id} activity={activity} />
+      ))}
     </div>
   )
 }
