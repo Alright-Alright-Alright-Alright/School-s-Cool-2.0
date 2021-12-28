@@ -23,7 +23,7 @@ function TopicContentLeft({ topic }) {
       <div className="p-3">
         <img
           className="rounded-r-3xl rounded-b-3xl object-cover h-72"
-          src={`${bannerImage}`}
+          src={topic && `${bannerImage}`}
           alt="placeholder"
           width="400"
         />
