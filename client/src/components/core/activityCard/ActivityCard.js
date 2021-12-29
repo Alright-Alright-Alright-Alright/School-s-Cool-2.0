@@ -1,13 +1,14 @@
 import React from "react"
+import PropTypes from "prop-types"
 import Icon from "../Icon"
 
-function ActivityCard() {
+function ActivityCard({ activity }) {
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="p-3">
         <img
           className="object-cover w-full max-h-40 rounded-bl-2xl rounded-br-2xl rounded-r-2xl"
-          src="https://via.placeholder.com/390x184"
+          src={activity.topic?.bannerImage}
           alt="banner"
         />
       </div>
@@ -16,30 +17,25 @@ function ActivityCard() {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-2"
-              src="https://via.placeholder.com/40x40"
+              src={activity.owner?.imageUrl}
               alt="profile"
             />
-            <p className="text-base">User name</p>
-            <p className="text-base pl-3 text-grey-medium_light">
-              Commented on
+            <p className="text-base">
+              {activity.owner?.firstName} {activity.owner?.lastName}
             </p>
+            <p className="text-base pl-3 text-grey-medium_light">Posted on</p>
             <a href="/" className="text-base pl-3">
-              Topic name
+              {activity.topic?.title}
             </a>
           </div>
           <div className="flex items-center">
-            <p className="text-base">Date</p>
+            <p className="text-base">{activity.createdAt}</p>
           </div>
         </div>
       </div>
       <div className="">
         <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
-          Olore de volut audae velitiori ipsuntiate litatur secuptatias iunturi
-          osandeliquis reni as debissit hit ommossequi dis a quid untis quist
-          dolor sandist inciminctet ut officiu ntiam, eliatis anducit alit fuga.
-          Olore de volut audae velitiori ipsuntiate litatur secuptatias iunturi
-          osandeliquis reni as debissit hit ommossequi dis a quid untis quist
-          dolor sandist inciminctet ut officiu ntiam, eliatis anducit alit fuga.
+          {activity.body}
         </p>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
@@ -49,11 +45,11 @@ function ActivityCard() {
         </div>
         <div className="flex">
           <Icon iconName="like" iconStyle="fill-inactive" />
-          <span>00</span>
+          <span>{activity.likedBy.length}</span>
         </div>
         <div className="flex">
           <Icon iconName="message" />
-          <span>3</span>
+          <span>{activity.comments.length}</span>
         </div>
       </div>
       <div className="flex p-3">
@@ -73,3 +69,12 @@ function ActivityCard() {
 }
 
 export default ActivityCard
+
+ActivityCard.defaultProps = {
+  activity: {},
+}
+
+ActivityCard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  activity: PropTypes.object,
+}
