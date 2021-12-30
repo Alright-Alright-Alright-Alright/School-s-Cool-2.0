@@ -83,6 +83,7 @@ export const getAlltopics = () => async (dispatch) => {
 export const getOneTopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
   const topicFromDB = await getTopic(topicId)
+  console.log(topicFromDB)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicFromDB })

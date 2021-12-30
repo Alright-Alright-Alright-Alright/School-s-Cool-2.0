@@ -10,7 +10,7 @@ import { getOneTopic } from "../../../redux/actions/topicActions"
 import { getAllTheUsers } from "../../../redux/actions/userActions"
 
 function TopicDetailIndex() {
-  const topic = useSelector((state) => state.topics.singleTopic)
+  const topic = useSelector((state) => state.topics)
   const user = useSelector((state) => state.user)
   const allUsers = useSelector((state) => state.user.users)
   const params = useParams()
@@ -20,12 +20,12 @@ function TopicDetailIndex() {
     dispatch(getAllTheUsers())
     dispatch(getOneTopic(params.topicId, user?.id))
   }, [dispatch, params.topicId, user?.id])
-
+  console.log(topic)
   return (
     <>
       <Main
-        main={<MainContent topic={topic} />}
-        contentLeft={<TopicContentLeft topic={topic} />}
+        main={<MainContent topic={topic.singleTopic} />}
+        contentLeft={<TopicContentLeft topic={topic.singleTopic} />}
         contentRight={<TopicContentRight topic={topic} users={allUsers} />}
       />
     </>
