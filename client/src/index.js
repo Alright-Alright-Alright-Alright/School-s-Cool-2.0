@@ -27,9 +27,9 @@ ReactDOM.render(
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="library" element={<Library />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="events" element={<Events />} />
         </Route>
       </Routes>
     </BrowserRouter>

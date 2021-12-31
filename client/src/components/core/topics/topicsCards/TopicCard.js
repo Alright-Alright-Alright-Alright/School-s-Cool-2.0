@@ -35,7 +35,7 @@ const TopicCard = ({ topics }) => {
       key={topics._id}
       className="flex flex-col justify-between w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl"
     >
-      <Link to={`/topics/${topics._id}`}>
+      <Link to={`${topics._id}`}>
         <section className="">
           <img
             src={topics.bannerImage}
