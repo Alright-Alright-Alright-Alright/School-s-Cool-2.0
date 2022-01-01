@@ -33,8 +33,6 @@ function CourseContentLeft({ setCourseId }) {
     dispatch(leaveCourse(courseId))
   }
 
-  console.log(courses)
-
   return (
     <>
       <div className="pl-5 pt-10">

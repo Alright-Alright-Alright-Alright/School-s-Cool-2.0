@@ -21,7 +21,6 @@ export const getAllCourses = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const coursesFromDB = await getAllCoursesService()
-  // console.log(coursesFromDB)
 
   try {
     dispatch({ type: CLEAR_ERRORS })
@@ -65,10 +64,8 @@ export const getSingleLesson = (lessonId) => async (dispatch) => {
 }
 
 export const joinCourse = (courseId) => async (dispatch) => {
-  console.log("Joined course")
   dispatch({ type: LOADING_UI })
   const joinCourseFromDb = await joinCourseService({ courseId })
-  console.log(joinCourseFromDb)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_COURSE, payload: joinCourseFromDb })
@@ -81,11 +78,8 @@ export const joinCourse = (courseId) => async (dispatch) => {
 }
 
 export const leaveCourse = (courseId) => async (dispatch) => {
-  console.log("left course")
-
   dispatch({ type: LOADING_UI })
   const leaveCourseFromDb = await leaveCourseService({ courseId })
-  console.log(leaveCourseFromDb)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_COURSE, payload: leaveCourseFromDb })

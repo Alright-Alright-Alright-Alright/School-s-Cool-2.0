@@ -33,10 +33,6 @@ function CourseMainContent() {
 
   const document = courseContent?.richTextField?.json
 
-  console.log(singleLesson)
-  console.log(singleCourse)
-  console.log(params)
-
   return (
     <div className=" pt-6">
       <p>{params.courseId}</p>
