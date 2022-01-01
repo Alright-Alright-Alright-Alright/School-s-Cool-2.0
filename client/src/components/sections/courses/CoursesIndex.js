@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react"
 import Main from "../../layout/main"
-import MainContent from "./MainContent"
+import CourseMainContent from "./CourseMainContent"
 import CourseContentLeft from "./CourseContentLeft"
 import CourseContentRight from "./CourseContentRight"
 
@@ -12,7 +13,7 @@ const CoursesIndex = () => {
       <Main
         contentRight={<CourseContentRight />}
         contentLeft={<CourseContentLeft setCourseId={(e) => setCourseId(e)} />}
-        main={<MainContent courseId={courseId} />}
+        // main={<CourseMainContent courseId={courseId} />}
       />
     </>
   )
