@@ -2,6 +2,8 @@ import {
   SET_ALL_COURSES,
   SET_ONE_COURSE,
   SET_ONE_LESSON,
+  // JOIN_COURSE,
+  // LEAVE_COURSE,
 } from "../types/courses"
 
 const initialState = {

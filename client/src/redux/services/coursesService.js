@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios"
-import { service, configHeaders } from "../api/contentfulAxios"
+import { service, configHeaders } from "../api/axios"
 import eLearningModuleQuery from "./contentful/queries/eLearningModule"
 import eLearningModuleCollectionQuery from "./contentful/queries/eLearningModuleCollection"
 import eLearningLessonQuery from "./contentful/queries/eLearningLesson"
@@ -61,3 +61,13 @@ export const getSingleLessonService = async (lessonId) => {
   )
   return response.data.data
 }
+
+export const joinCourseService = (courseId) =>
+  service
+    .put(`/joinCourse`, courseId)
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const leaveCourseService = (courseId) =>
+  service
+    .put(`/leaveCourse`, courseId)
+    .then((responseFromAPI) => responseFromAPI.data)
