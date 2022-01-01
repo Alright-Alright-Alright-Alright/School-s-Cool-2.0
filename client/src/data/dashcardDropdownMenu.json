@@ -5,7 +5,7 @@
   },
   "courses": {
     "bgColorOnHover": "yellow-light",
-    "dropDownItems": ["All courses", "Created by me", "In progress", "completed"]
+    "dropDownItems": ["All courses", "Created by me", "In progress", "Completed"]
   },
   "events": {
     "bgColorOnHover": "sky-light",

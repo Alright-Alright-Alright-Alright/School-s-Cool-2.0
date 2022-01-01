@@ -11,12 +11,13 @@ export default function DashCardListItem({
   listItemDate,
   listItemComments,
   listItemUsers,
+  listItemType,
 }) {
   return (
     <>
       <div className="pt-3 flex justify-between">
         <div className="flex-col">
-          <Link to={`/topics/${linkId}`}>{listItemTitle}</Link>
+          <Link to={`/${listItemType}/${linkId}`}>{listItemTitle}</Link>
           {listItemDate && (
             <p className="text-xs text-grey-medium pb-1">{listItemDate}</p>
           )}
@@ -48,4 +49,5 @@ DashCardListItem.propTypes = {
   listItemDate: PropTypes.string,
   listItemComments: PropTypes.array.isRequired,
   listItemUsers: PropTypes.array.isRequired,
+  listItemType: PropTypes.string.isRequired,
 }

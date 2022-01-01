@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -15,6 +16,8 @@ import Topics from "./pages/Topics"
 import Library from "./pages/Library"
 import Courses from "./pages/Courses"
 import Events from "./pages/Events"
+import CourseMainContent from "./components/sections/courses/CourseMainContent"
+import CourseDetailContent from "./components/sections/courses/CourseDetailContent"
 // import Topic from "./routes/topic"
 
 ReactDOM.render(
@@ -27,9 +30,16 @@ ReactDOM.render(
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
-          <Route path="library" element={<Library />} />
-          <Route path="courses" element={<Courses />} />
-          <Route path="events" element={<Events />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/courses" element={<Courses />}>
+            <Route path=":courseId" element={<CourseMainContent />}>
+              {/* <Route
+                path="/courses/:courseId/lesson/:lessonId"
+                element={<CourseDetailContent />}
+              /> */}
+            </Route>
+          </Route>
+          <Route path="/events" element={<Events />} />
         </Route>
       </Routes>
     </BrowserRouter>

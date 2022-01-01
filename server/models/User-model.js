@@ -42,6 +42,10 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
+    courses: {
+      type: Array,
+      default: [],
+    },
     resetToken: String,
     expireToken: Date,
   },

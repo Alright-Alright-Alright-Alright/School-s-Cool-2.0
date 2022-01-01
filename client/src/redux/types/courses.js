@@ -2,6 +2,7 @@
 export const SET_ALL_COURSES = "SET_ALL_COURSES"
 export const SET_ONE_COURSE = "SET_ONE_COURSE"
 export const SET_ONE_LESSON = "SET_ONE_LESSON"
+export const JOIN_COURSE = "JOIN_COURSE"
 export const POST_FILE = "POST_FILE"
 export const DELETE_FILE = "DELETE_FILE"
 export const LIKE_FILE = "LIKE_FILE"
