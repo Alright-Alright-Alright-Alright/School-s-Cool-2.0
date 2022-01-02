@@ -9,5 +9,5 @@ export const createEvent = (eventData) =>
 
 export const getEvent = (eventId) =>
   service
-    .get(`/event/${eventId}`, configHeaders())
+    .get(`/events/${eventId}`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
