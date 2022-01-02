@@ -7,6 +7,8 @@ import {
   SET_USERS,
 } from "../types/user"
 
+import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
+
 const initialState = {
   token: localStorage.getItem("Authorization"),
   singleUser: JSON.parse(localStorage.getItem("user")) || null,
@@ -23,6 +25,8 @@ const userReducer = (state = initialState, action) => {
       }
     case SET_USER:
     case SET_USERLOGGED_IN:
+    case JOIN_COURSE:
+    case LEAVE_COURSE:
       return {
         ...state,
         singleUser: action.payload,

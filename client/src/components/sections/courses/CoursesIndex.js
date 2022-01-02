@@ -1,21 +1,13 @@
-import React, { useState } from "react"
+/* eslint-disable no-unused-vars */
+import React from "react"
 import Main from "../../layout/main"
-import MainContent from "./MainContent"
+import CourseMainContent from "./CourseMainContent"
 import CourseContentLeft from "./CourseContentLeft"
-import CourseContentRight from "./CourseContentRight"
 
-const CoursesIndex = () => {
-  const [courseId, setCourseId] = useState(null)
-
-  return (
-    <>
-      <Main
-        contentRight={<CourseContentRight />}
-        contentLeft={<CourseContentLeft setCourseId={(e) => setCourseId(e)} />}
-        main={<MainContent courseId={courseId} />}
-      />
-    </>
-  )
-}
+const CoursesIndex = () => (
+  <>
+    <Main contentLeft={<CourseContentLeft />} main={<CourseMainContent />} />
+  </>
+)
 
 export default CoursesIndex
