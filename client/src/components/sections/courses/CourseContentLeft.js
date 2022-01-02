@@ -11,8 +11,7 @@ import {
 import Icon from "../../core/Icon"
 
 function CourseContentLeft({ setCourseId }) {
-  const [joinedCourse, setJoinedCourse] = useState(false)
-  const [showLessons, setShowLessons] = useState(false)
+  const [filter, setFilter] = useState("All courses")
   const courses = useSelector((state) => state.courses.allCourses)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
@@ -20,10 +19,6 @@ function CourseContentLeft({ setCourseId }) {
   useEffect(() => {
     dispatch(getAllCourses())
   }, [dispatch])
-
-  const handleShowLesson = () => {
-    setShowLessons(!showLessons)
-  }
 
   const handleJoinCourse = (courseId) => {
     dispatch(joinCourse(courseId))
@@ -33,25 +28,45 @@ function CourseContentLeft({ setCourseId }) {
     dispatch(leaveCourse(courseId))
   }
 
+  let filterRule
+  switch (filter) {
+    case "My courses":
+      filterRule = (item) => user.courses.includes(item.sys.id)
+      break
+    default:
+      filterRule = (item) => item
+  }
+
+  const filteredCourses = courses.filter(filterRule)
+
   return (
     <>
       <div className="pl-5 pt-10">
-        <section className="flex-col">
-          <p className="text-lg ">Courses</p>
-          <button type="button" className="text-lg hover:text-yellow">
+        <section className="flex flex-col items-start">
+          <button
+            type="button"
+            className="text-lg hover:text-yellow"
+            onClick={() => setFilter("All courses")}
+          >
+            All courses
+          </button>
+          <button
+            type="button"
+            className="text-lg hover:text-yellow"
+            onClick={() => setFilter("My courses")}
+          >
             View my Courses
           </button>
         </section>
         <hr className="mt-8 w-52 text-grey-light" />
         <section>
-          {courses?.map((item) => (
+          {filteredCourses?.map((item) => (
             <div key={item.title}>
               <div className="flex justify-between items-center">
                 <Link to={`/courses/${item.sys.id}`}>
                   <button
                     type="button"
                     className="text-xl py-2 hover:text-yellow text-left"
-                    onClick={(e) => handleShowLesson(e)}
                   >
                     <p>{item.title}</p>
                   </button>
