@@ -24,8 +24,6 @@ function CourseDetailLeft({ eLearningPageContent }) {
     dispatch(getSingleCourse(params.courseId))
   }, [dispatch, params.courseId])
 
-  console.log(singleCourse)
-
   return (
     <>
       <div className="pl-5 pt-10">
@@ -41,14 +39,12 @@ function CourseDetailLeft({ eLearningPageContent }) {
         <section>
           {singleCourse?.eLearningLessonsCollection?.items.map((lesson) => (
             <div key={lesson.id}>
-              <p>{lesson.description}</p>
               <button
                 type="button"
                 onClick={() => dispatch(getSingleLesson(lesson.sys.id))}
                 className="text-lg hover:text-yellow py-3"
               >
-                {" "}
-                Show lessons{" "}
+                <p>{lesson.title}</p>
               </button>
             </div>
           ))}
