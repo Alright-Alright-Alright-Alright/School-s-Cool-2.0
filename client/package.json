@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://school-s-cool-2-0.vercel.app",
   "private": true,
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.10.0",
