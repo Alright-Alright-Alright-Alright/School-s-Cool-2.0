@@ -3,7 +3,10 @@ const eLearningModuleQuery = (moduleId) => `{
     title
     eLearningLessonsCollection {
       items {
-        title
+        title 
+        sys {
+          id
+        }
         eLearningPagesCollection {
           items {
             title

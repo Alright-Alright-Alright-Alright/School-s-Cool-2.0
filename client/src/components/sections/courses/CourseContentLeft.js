@@ -78,24 +78,6 @@ function CourseContentLeft({ setCourseId }) {
                   </button>
                 )}
               </div>
-              {showLessons ? (
-                <ul>
-                  {item?.eLearningLessonsCollection?.items?.map((lesson) => (
-                    <Link
-                      to={`/courses/${item.sys.id}/lesson/${lesson.sys.id}`}
-                    >
-                      <li
-                        className="hover:text-yellow"
-                        aria-hidden="true"
-                        key={lesson.sys.id}
-                        onClick={() => setCourseId(lesson.sys.id)}
-                      >
-                        {lesson.title}
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              ) : null}
             </div>
           ))}
         </section>

@@ -16,9 +16,7 @@ import Topics from "./pages/Topics"
 import Library from "./pages/Library"
 import Courses from "./pages/Courses"
 import Events from "./pages/Events"
-import CourseMainContent from "./components/sections/courses/CourseMainContent"
-import CourseDetailContent from "./components/sections/courses/CourseDetailContent"
-// import Topic from "./routes/topic"
+import CourseDetailPage from "./pages/CourseDetailPage"
 
 ReactDOM.render(
   <Provider store={store}>
@@ -31,14 +29,8 @@ ReactDOM.render(
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
           <Route path="/library" element={<Library />} />
-          <Route path="/courses" element={<Courses />}>
-            <Route path=":courseId" element={<CourseMainContent />}>
-              {/* <Route
-                path="/courses/:courseId/lesson/:lessonId"
-                element={<CourseDetailContent />}
-              /> */}
-            </Route>
-          </Route>
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseId" element={<CourseDetailPage />} />
           <Route path="/events" element={<Events />} />
         </Route>
       </Routes>
