@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from "react"
-import { useDispatch } from "react-redux"
+import React, { useState, useRef, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -17,7 +18,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [imgPreview, setImgPreview] = useState("")
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
-
+  const topics = useSelector((state) => state.topics.allTopics)
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -60,6 +61,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     dispatch(addFileToLibrary(fileData))
   }
 
+  useEffect(() => {
+    dispatch(getAlltopics())
+  }, [dispatch])
+
   return (
     <div className="absolute inset-0 flex justify-center pt-28 z-50">
       <form
@@ -96,12 +101,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a category
               </option>
-              <option value="School work">School work</option>
-              <option value="Sports">Sports</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Psychology">Psychology</option>
-              <option value="Home work">Home work</option>
-              <option value="Doubts">Doubts</option>
+              {topics.map((topic) => (
+                <option value={`${topic.category}`}>{topic.category}</option>
+              ))}
             </select>
           )}
           {singleTopic ? (
@@ -119,12 +121,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a subject
               </option>
-              <option value="Biology">Biology</option>
-              <option value="Physics">Physics</option>
-              <option value="Technology">Technology</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Literature">Literature</option>
-              <option value="Football">Football</option>
+              {topics.map((topic) => (
+                <option value={`${topic.subject}`}>{topic.subject}</option>
+              ))}
             </select>
           )}
           <div className="flex justify-end items-center w-2/7">
