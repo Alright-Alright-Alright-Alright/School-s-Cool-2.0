@@ -17,6 +17,7 @@ import Library from "./pages/Library"
 import Courses from "./pages/Courses"
 import Events from "./pages/Events"
 import CourseDetailPage from "./pages/CourseDetailPage"
+import EventDetailsPage from "./pages/EventDetailsPage"
 
 ReactDOM.render(
   <Provider store={store}>
@@ -28,10 +29,11 @@ ReactDOM.render(
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseDetailPage />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="library" element={<Library />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="courses/:courseId" element={<CourseDetailPage />} />
+          <Route path="events" element={<Events />} />
+          <Route path="events/:eventId" element={<EventDetailsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
