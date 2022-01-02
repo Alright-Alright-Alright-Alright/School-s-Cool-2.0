@@ -1,12 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
-import { getAllCourses } from "../../../redux/actions/courseActions"
+import { Link } from "react-router-dom"
+import {
+  getAllCourses,
+  joinCourse,
+  leaveCourse,
+} from "../../../redux/actions/courseActions"
 import Icon from "../../core/Icon"
 
 function CourseContentLeft({ setCourseId }) {
+  const [joinedCourse, setJoinedCourse] = useState(false)
   const [showLessons, setShowLessons] = useState(false)
   const courses = useSelector((state) => state.courses.allCourses)
+  const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -17,7 +25,13 @@ function CourseContentLeft({ setCourseId }) {
     setShowLessons(!showLessons)
   }
 
-  console.log(courses)
+  const handleJoinCourse = (courseId) => {
+    dispatch(joinCourse(courseId))
+  }
+
+  const handleLeaveCourse = (courseId) => {
+    dispatch(leaveCourse(courseId))
+  }
 
   return (
     <>
@@ -33,34 +47,37 @@ function CourseContentLeft({ setCourseId }) {
           {courses?.map((item) => (
             <div key={item.title}>
               <div className="flex justify-between items-center">
-                <button
-                  type="button"
-                  className="text-xl py-2 hover:text-yellow text-left"
-                  onClick={(e) => handleShowLesson(e)}
-                >
-                  <p>{item.title}</p>
-                </button>
-                <button type="button" onClick={() => console.log(item)}>
-                  <Icon
-                    iconName="add"
-                    iconStyle="fill-inactive text-grey-dark"
-                  />
-                </button>
+                <Link to={`/courses/${item.sys.id}`}>
+                  <button
+                    type="button"
+                    className="text-xl py-2 hover:text-yellow text-left"
+                    onClick={(e) => handleShowLesson(e)}
+                  >
+                    <p>{item.title}</p>
+                  </button>
+                </Link>
+                {user.courses.includes(item.sys.id) ? (
+                  <button
+                    type="button"
+                    onClick={() => handleLeaveCourse(item.sys.id)}
+                  >
+                    <Icon
+                      iconName="add"
+                      iconStyle="fill-active text-grey-dark"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleJoinCourse(item.sys.id)}
+                  >
+                    <Icon
+                      iconName="add"
+                      iconStyle="fill-inactive text-grey-dark"
+                    />
+                  </button>
+                )}
               </div>
-              {showLessons ? (
-                <ul>
-                  {item?.eLearningLessonsCollection?.items?.map((lesson) => (
-                    <li
-                      className="hover:text-yellow"
-                      aria-hidden="true"
-                      key={lesson.sys.id}
-                      onClick={() => setCourseId(lesson.sys.id)}
-                    >
-                      {lesson.title}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
             </div>
           ))}
         </section>

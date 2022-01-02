@@ -37,22 +37,24 @@ export default function Dashcard({
     .map((item) => (
       <DashCardListItem
         key={item._id}
-        linkId={item._id}
+        linkId={item._id || item.sys.id}
         listItemTitle={item?.title}
         listItemDate={item?.date}
         listItemComments={item?.posts}
         listItemUsers={item?.members}
+        listItemType={dashCardTitle}
       />
     ))
 
   const allItems = filteredItems.map((item) => (
     <DashCardListItem
       key={item._id}
-      linkId={item._id}
+      linkId={item._id || item.sys.id}
       listItemTitle={item?.title}
       listItemDate={item?.date}
       listItemComments={item?.posts}
       listItemUsers={item?.members}
+      listItemType={dashCardTitle}
     />
   ))
 
