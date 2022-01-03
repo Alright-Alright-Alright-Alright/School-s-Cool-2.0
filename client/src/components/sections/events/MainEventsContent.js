@@ -16,11 +16,11 @@ const MainEventsContent = ({ events }) => {
     <div className="relative">
       {showModal && <EventModal handleShowModal={handleShowModal} />}
       <div
-        className={`w-full flex justify-evenly flex-wrap gap-3 m-6 filter ${
+        className={`w-full flex justify-between flex-wrap gap-3 m-6 filter ${
           showModal && "blur-md"
         }`}
       >
-        <button type="button" className="mr-48" onClick={handleShowModal}>
+        <button type="button" onClick={handleShowModal}>
           <AddCard cardTitle="New event" color="#27A8DF" />
         </button>
         {events.map((event) => (
