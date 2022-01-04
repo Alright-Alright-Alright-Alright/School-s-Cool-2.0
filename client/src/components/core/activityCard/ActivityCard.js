@@ -1,8 +1,51 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import { useSelector, useDispatch } from "react-redux"
+import Comment from "../comment/Comment"
+import CommentForm from "../comment/CommentForm"
+import { likePost, unlikePost } from "../../../redux/actions/postActions"
+import {
+  getAllActivities,
+  getFollowedActivities,
+} from "../../../redux/actions/activityActions"
 import Icon from "../Icon"
 
+dayjs.extend(relativeTime)
+
 function ActivityCard({ activity }) {
+  const [showMoreComments, setShowMoreComments] = useState(false)
+  const user = useSelector((state) => state.user.singleUser)
+  const dispatch = useDispatch()
+
+  const handleLike = () => {
+    dispatch(likePost(activity._id, user._id))
+    dispatch(getAllActivities())
+    dispatch(getFollowedActivities())
+  }
+
+  const handleUnlike = () => {
+    dispatch(unlikePost(activity._id, user._id))
+    dispatch(getAllActivities())
+    dispatch(getFollowedActivities())
+  }
+
+  const handleSubmitComment = () => {
+    dispatch(getAllActivities())
+    dispatch(getFollowedActivities())
+  }
+
+  const firstThreeComments = activity.comments
+    .slice(0, 3)
+    .map((commentData) => (
+      <Comment key={commentData._id} comment={commentData} />
+    ))
+
+  const allComments = activity.comments.map((commentData) => (
+    <Comment key={commentData._id} comment={commentData} />
+  ))
+
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="p-3">
@@ -29,7 +72,7 @@ function ActivityCard({ activity }) {
             </a>
           </div>
           <div className="flex items-center">
-            <p className="text-base">{activity.createdAt}</p>
+            <p className="text-base">{dayjs(activity.createdAt).fromNow()}</p>
           </div>
         </div>
       </div>
@@ -44,7 +87,16 @@ function ActivityCard({ activity }) {
           <span>00</span>
         </div>
         <div className="flex">
-          <Icon iconName="like" iconStyle="fill-inactive" />
+          {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
+          {activity.likedBy?.includes(user._id) ? (
+            <button type="button" onClick={handleUnlike}>
+              <Icon iconName="like" iconStyle="fill-active" />
+            </button>
+          ) : (
+            <button type="button" onClick={handleLike}>
+              <Icon iconName="like" iconStyle="fill-inactive" />
+            </button>
+          )}
           <span>{activity.likedBy.length}</span>
         </div>
         <div className="flex">
@@ -52,18 +104,25 @@ function ActivityCard({ activity }) {
           <span>{activity.comments.length}</span>
         </div>
       </div>
-      <div className="flex p-3">
-        <img
-          className="w-10 h-10 rounded-full mr-2"
-          src="https://via.placeholder.com/30x30"
-          alt="profile"
-        />
-        <input
-          className="bg-grey-super_light w-full rounded-full text-base pl-3"
-          type="text"
-          placeholder="Add a comment"
-        />
-      </div>
+      {showMoreComments ? allComments : firstThreeComments}
+      {activity.comments.length > 3 && (
+        <div className="flex justify-center pt-3">
+          <button
+            className="hover:bg-grey-super_light rounded-full p-1 justify-center items-center"
+            type="button"
+            onClick={() => setShowMoreComments(!showMoreComments)}
+          >
+            {activity.comments.length > 3 && !showMoreComments ? (
+              <Icon iconName="expand" />
+            ) : null}
+            {showMoreComments && <Icon iconName="collapse" />}
+          </button>
+        </div>
+      )}
+      <CommentForm
+        postId={activity._id}
+        onSubmitComment={() => handleSubmitComment}
+      />
     </div>
   )
 }

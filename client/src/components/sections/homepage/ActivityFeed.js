@@ -8,7 +8,7 @@ import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
 
 function ActivityFeed() {
-  const [filter, setFilter] = useState("btnPrimaryStyle")
+  const [filter, setFilter] = useState(false)
 
   const allActivities = useSelector((state) => state.activities.allActivities)
   const followedActivities = useSelector(
@@ -20,10 +20,9 @@ function ActivityFeed() {
   useEffect(() => {
     dispatch(getAllActivities())
     dispatch(getFollowedActivities())
-  }, [dispatch])
+  })
 
-  console.log(allActivities)
-  console.log(followedActivities)
+  const shownActivities = filter ? followedActivities : allActivities
 
   return (
     <div className="mt-3 ">
@@ -36,23 +35,18 @@ function ActivityFeed() {
         <div className="space-x-4 md:place-content-between text-center pr-3">
           <Button
             buttonName="All activity"
-            buttonStyle={filter}
-            // btnPrimary={filter}
-            onClick={() => setFilter("btnPrimaryStyle")}
+            buttonStyle={filter ? "btnSecondaryStyle" : "btnPrimaryStyle"}
+            onClick={() => setFilter(false)}
           />
           <Button
             buttonName="Followed activity"
-            buttonStyle={
-              filter === "btnSecondaryStyle"
-                ? "btnPrimaryStyle"
-                : "btnSecondaryStyle"
-            }
-            onClick={() => setFilter("btnSecondaryStyle")}
+            buttonStyle={filter ? "btnPrimaryStyle" : "btnSecondaryStyle"}
+            onClick={() => setFilter(true)}
           />
         </div>
       </div>
       {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
-      {allActivities.map((activity) => (
+      {shownActivities.map((activity) => (
         <ActivityCard key={activity._id} activity={activity} />
       ))}
     </div>
