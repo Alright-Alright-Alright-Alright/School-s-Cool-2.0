@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
 
@@ -49,6 +50,24 @@ function TopicContentLeft({ topic }) {
       </div>
     </div>
   )
+}
+
+TopicContentLeft.defaultProps = {
+  topic: {
+    bannerImage: "",
+    title: "",
+    description: "",
+    isPrivate: false,
+    owner: "",
+    category: "",
+    subject: "",
+    resources: [],
+  },
+}
+
+TopicContentLeft.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  topic: PropTypes.object,
 }
 
 export default TopicContentLeft
