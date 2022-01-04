@@ -60,7 +60,6 @@ const Modal = ({ handleShowModal }) => {
       isPrivate: privacy,
     }
     dispatch(createNewEvent(eventData))
-    dispatch(getAllEvents())
     handleShowModal()
   }
 
