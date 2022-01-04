@@ -21,6 +21,22 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const topics = useSelector((state) => state.topics.allTopics)
   const dispatch = useDispatch()
 
+  const filterCategory = () => {
+    const arr = []
+    topics.map(
+      (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
+    )
+    return arr
+  }
+
+  const filterSubject = () => {
+    const arr = []
+    topics.map(
+      (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
+    )
+    return arr
+  }
+
   const handleClick = () => {
     hiddenFileInput.current.click()
   }
@@ -101,8 +117,8 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a category
               </option>
-              {topics.map((topic) => (
-                <option value={`${topic.category}`}>{topic.category}</option>
+              {filterCategory().map((cat) => (
+                <option value={cat}>{cat}</option>
               ))}
             </select>
           )}
@@ -121,8 +137,8 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a subject
               </option>
-              {topics.map((topic) => (
-                <option value={`${topic.subject}`}>{topic.subject}</option>
+              {filterSubject().map((sub) => (
+                <option value={sub}>{sub}</option>
               ))}
             </select>
           )}

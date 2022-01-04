@@ -27,7 +27,7 @@ exports.creatingFile = async (
       $push: { resources: file._id },
     });
 
-    await Topic.findOneAndUpdate(
+    await Topic.updateMany(
       { category: file.category, subject: file.subject },
       {
         $push: { resources: file._id },
