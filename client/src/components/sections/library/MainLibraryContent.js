@@ -5,7 +5,7 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 import Button from "../../core/Button"
-import LibraryItem from "../../core/library/libraryItem"
+import LibraryItem from "../../core/library/LibraryItem"
 import LibraryModal from "../../core/library/LibraryModal"
 import { filterLibraryBySubject } from "../../../redux/actions/libraryActions"
 

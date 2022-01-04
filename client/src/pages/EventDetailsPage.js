@@ -1,5 +1,5 @@
 import React from "react"
-import EventDetailsIndex from "../components/sections/eventDetails/eventDetailsIndex"
+import EventDetailsIndex from "../components/sections/eventDetails/EventDetailsIndex"
 
 const EventDetailsPage = () => {
   console.log("eventDetails page mouting")
