@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import Main from "../../layout/main"
+import Main from "../../layout/Main"
 import MainEventsContent from "./MainEventsContent"
 import { getAllEvents } from "../../../redux/actions/eventActions"
 

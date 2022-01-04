@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Main from "../../layout/main"
+import Main from "../../layout/Main"
 import CourseDetailMainContent from "./CourseDetailMainContent"
 // import CourseDetailRight from "./CourseDetailRight"
 import CourseDetailLeft from "./CourseDetailLeft"

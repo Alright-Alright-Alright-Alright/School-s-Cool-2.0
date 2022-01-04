@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react"
-import Main from "../../layout/main"
+import Main from "../../layout/Main"
 import CourseMainContent from "./CourseMainContent"
 import CourseContentLeft from "./CourseContentLeft"
 

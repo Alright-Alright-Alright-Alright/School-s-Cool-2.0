@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import Main from "../../layout/main"
+import Main from "../../layout/Main"
 import MainLibraryContent from "./MainLibraryContent"
 import LibraryContentLeft from "./LibraryContentLeft"
 import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
