@@ -39,7 +39,12 @@ function TopicHeaderCard({ onClick, postBody }) {
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
             <p className="pl-3">Add a resource</p>
           </button>
-          {showModal && <LibraryModal handleShowModal={handleShowModal} />}
+          {showModal && (
+            <LibraryModal
+              handleShowModal={handleShowModal}
+              singleTopic={singleTopic}
+            />
+          )}
         </div>
         <Button
           buttonName="Add post to topic"
