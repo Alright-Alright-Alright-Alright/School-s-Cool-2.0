@@ -57,7 +57,6 @@ const Modal = ({ handleShowModal }) => {
     }
     handleShowModal()
     dispatch(addAtopic(topicData))
-    dispatch(getAlltopics())
   }
 
   return (
