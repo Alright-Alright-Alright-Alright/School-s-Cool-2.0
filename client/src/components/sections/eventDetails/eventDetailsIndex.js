@@ -12,13 +12,13 @@ const eventDetailsIndex = () => {
   useEffect(() => {
     console.log("mounting")
     dispatch(getOneEvent(eventId))
-  }, [])
+  }, [dispatch])
 
   console.log(event)
 
   return (
     <div>
-      <h1>{event[0].title}</h1>
+      <h1>{event.title}</h1>
     </div>
   )
 }
