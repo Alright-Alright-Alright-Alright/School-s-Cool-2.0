@@ -1,16 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
 import EventCards from "../../core/events/EventCards"
 import AddCard from "../../core/AddCard"
 import EventModal from "../../core/events/EventModal"
+import { getAllEvents } from "../../../redux/actions/eventActions"
 
 const MainEventsContent = ({ events }) => {
+  const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
   const handleShowModal = () => {
     setShowModal(!showModal)
   }
+
+  useEffect(() => {
+    dispatch(getAllEvents())
+  }, [dispatch])
 
   return (
     <div className="relative">
