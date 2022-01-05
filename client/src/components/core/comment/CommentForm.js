@@ -10,7 +10,7 @@ import {
   getAllPosts,
 } from "../../../redux/actions/postActions"
 
-function CommentForm({ postId }) {
+function CommentForm({ postId, onSubmitComment }) {
   const [commentBody, setCommentBody] = useState("")
   const user = useSelector((state) => state.user.singleUser)
   const singlePost = useSelector((state) => state.posts.singlePost)
@@ -21,12 +21,20 @@ function CommentForm({ postId }) {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     dispatch(submitComment(user._id, commentBody, postId))
-    dispatch(getAllPosts(params.topicId))
+    if (params.topicId) {
+      dispatch(getAllPosts(params.topicId))
+    } else {
+      onSubmitComment()
+    }
   }
 
   useEffect(() => {
-    dispatch(getAllPosts(params.topicId))
     dispatch(getPostById(postId))
+    if (params.topicId) {
+      dispatch(getAllPosts(params.topicId))
+    } else {
+      onSubmitComment()
+    }
   }, [dispatch])
 
   return (
@@ -49,6 +57,8 @@ function CommentForm({ postId }) {
 
 CommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
+  /* eslint-disable-next-line */
+  onSubmitComment: PropTypes.func
 }
 
 export default CommentForm
