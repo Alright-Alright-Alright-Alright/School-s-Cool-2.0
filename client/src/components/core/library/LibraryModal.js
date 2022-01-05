@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -8,7 +9,6 @@ import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
-import { getAlltopics } from "../../../redux/actions/topicActions"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -29,9 +29,11 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     return arr
   }
 
-  const filterSubject = () => {
+  const findFunction = (cat) => topics.filter((topic) => topic.category === cat)
+
+  const filterSubject = (cat) => {
     const arr = []
-    topics.map(
+    findFunction(cat).map(
       (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
     )
     return arr
@@ -76,10 +78,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     handleShowModal()
     dispatch(addFileToLibrary(fileData))
   }
-
-  useEffect(() => {
-    dispatch(getAlltopics())
-  }, [dispatch])
 
   return (
     <div className="absolute inset-0 flex justify-center pt-28 z-50">
@@ -137,7 +135,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a subject
               </option>
-              {filterSubject().map((sub) => (
+              {filterSubject(category).map((sub) => (
                 <option value={sub}>{sub}</option>
               ))}
             </select>

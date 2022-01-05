@@ -32,7 +32,7 @@ const createNewEvent = async (req, res, next) => {
       location,
       bannerImage
     );
-    res.status(201).json({ message: "Event has been created", event });
+    res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

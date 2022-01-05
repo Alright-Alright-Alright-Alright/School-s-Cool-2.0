@@ -59,8 +59,8 @@ const Modal = ({ handleShowModal }) => {
       bannerImage: image,
       isPrivate: privacy,
     }
-    dispatch(createNewEvent(eventData))
     handleShowModal()
+    dispatch(createNewEvent(eventData))
   }
 
   return (
