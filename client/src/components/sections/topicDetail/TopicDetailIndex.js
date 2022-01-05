@@ -23,8 +23,8 @@ const TopicDetailIndex = () => {
   return (
     <>
       <Main
-        main={<MainContent topic={topic.singleTopic} />}
-        contentLeft={<TopicContentLeft topic={topic.singleTopic} />}
+        main={<MainContent />}
+        contentLeft={<TopicContentLeft />}
         contentRight={<TopicContentRight topic={topic} users={allUsers} />}
       />
     </>
