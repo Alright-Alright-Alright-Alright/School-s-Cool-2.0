@@ -9,6 +9,7 @@ import LibraryContentRight from "./LibraryContentRight"
 
 const Index = () => {
   const library = useSelector((state) => state.library.allFiles)
+  const singleFile = useSelector((state) => state.library.singleFile)
   const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
 
@@ -38,7 +39,7 @@ const Index = () => {
         }
         contentRight={
           <LibraryContentRight
-            library={library}
+            singleFile={singleFile}
             handleShowModal={handleShowModal}
           />
         }

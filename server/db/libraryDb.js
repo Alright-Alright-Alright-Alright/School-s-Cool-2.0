@@ -49,11 +49,11 @@ exports.addLikeToFileDb = async (fileId, user) => {
         $push: { likedBy: user },
       },
       { new: true }
-    ).then( likedFile => {
-      let result = File.findById(likedFile._id).populate("owner")
-      return result
-    })
-    return fileLiked
+    ).then((likedFile) => {
+      let result = File.findById(likedFile._id).populate("owner");
+      return result;
+    });
+    return fileLiked;
   } catch (error) {
     throw new Error(error);
   }
@@ -67,11 +67,11 @@ exports.pullLikeToFileDb = async (fileId, user) => {
         $pull: { likedBy: user },
       },
       { new: true }
-    ).then( unlikeFile => {
-      let result = File.findById(unlikeFile._id).populate("owner")
-      return result
-    })
-    return fileUnliked
+    ).then((unlikeFile) => {
+      let result = File.findById(unlikeFile._id).populate("owner");
+      return result;
+    });
+    return fileUnliked;
   } catch (error) {
     throw new Error(error);
   }
@@ -97,6 +97,17 @@ exports.getingLibrary = async () => {
       .then((allFiles) => {
         return allFiles;
       });
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.getingSingleFileDB = async (fileId) => {
+  try {
+    return await File.findById(fileId).populate(
+      "owner",
+      "firstName lastName imageUrl"
+    );
   } catch (error) {
     throw new Error(error.message);
   }

@@ -5,6 +5,7 @@ const {
   fileDelete,
   addLikeService,
   pullLikeService,
+  getingSingleFile
 } = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
@@ -65,6 +66,16 @@ exports.getLibrary = async (req, res) => {
     throw new Error(error.message);
   }
 };
+
+exports.getSingleFile = async (req, res) => {
+  let fileId = req.params.fileId;
+  try {
+    let file = await getingSingleFile(fileId)
+    res.status(200).json(file)
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 exports.deleteFile = async (req, res) => {
   let userId = req.user.userLogedIn._id;

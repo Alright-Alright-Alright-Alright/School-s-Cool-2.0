@@ -7,7 +7,8 @@ const {
   getLibrary,
   deleteFile,
   addLike,
-  pullLike
+  pullLike,
+  getSingleFile
 } = require("../controllers/libraryControllers");
 
 libraryRoutes.post("/file-upload", files, fileUpload);
@@ -16,6 +17,7 @@ libraryRoutes.get("/library-user", userLibrary);
 libraryRoutes.get("/library", getLibrary);
 libraryRoutes.put("/library/:fileId/liked", addLike);
 libraryRoutes.put("/library/:fileId/unliked", pullLike);
+libraryRoutes.get("/library/:fileId", getSingleFile);
 libraryRoutes.put("/library-delete", deleteFile);
 
 module.exports = libraryRoutes;

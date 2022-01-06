@@ -10,6 +10,7 @@ import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -21,6 +22,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const hiddenFileInput = useRef(null)
   const topics = useSelector((state) => state.topics.allTopics)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAlltopics())
+  }, [dispatch])
 
   const filterCategory = () => {
     const arr = []

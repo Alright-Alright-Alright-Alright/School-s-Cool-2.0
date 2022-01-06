@@ -5,6 +5,11 @@ export const getLibraryFiles = () =>
     .get(`/library`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
+export const getFile = (fileId) =>
+  service
+    .get(`/library/${fileId}`)
+    .then((responseFromAPI) => responseFromAPI.data)
+
 export const getUserLibraryFiles = () =>
   service
     .get(`/library-user`, configHeaders())
@@ -26,6 +31,4 @@ export const iUnlikeThisFile = (fileId) =>
     .then((responseFromAPI) => responseFromAPI.data)
 
 export const fileDeleteService = (fileId) =>
-  service
-    .put("/library-delete", { fileId })
-    .then((fileDeleted) => console.log(fileDeleted))
+  service.put("/library-delete", { fileId }).then((fileDeleted) => fileDeleted)
