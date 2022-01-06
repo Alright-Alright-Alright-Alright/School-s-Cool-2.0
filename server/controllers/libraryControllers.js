@@ -72,7 +72,6 @@ exports.deleteFile = async (req, res) => {
 
   try {
     let file = await fileDelete(userId, fileToDelete);
-    console.log(file);
     res.status(200).json(file);
   } catch (error) {
     throw new Error(error.message);

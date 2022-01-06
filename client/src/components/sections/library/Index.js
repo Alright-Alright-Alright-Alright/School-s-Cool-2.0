@@ -5,6 +5,7 @@ import Main from "../../layout/Main"
 import MainLibraryContent from "./MainLibraryContent"
 import LibraryContentLeft from "./LibraryContentLeft"
 import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
+import LibraryContentRight from "./LibraryContentRight"
 
 const Index = () => {
   const library = useSelector((state) => state.library.allFiles)
@@ -31,6 +32,12 @@ const Index = () => {
         }
         contentLeft={
           <LibraryContentLeft
+            library={library}
+            handleShowModal={handleShowModal}
+          />
+        }
+        contentRight={
+          <LibraryContentRight
             library={library}
             handleShowModal={handleShowModal}
           />
