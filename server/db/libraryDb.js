@@ -106,16 +106,16 @@ exports.fileDeleting = async (userId, fileToDelete) => {
   let file = await File.findByIdAndRemove(fileToDelete);
   try {
     let user = await User.findByIdAndUpdate(userId, {
-      $pull: { fileUrl: file._id },
+      $pull: { resources: file._id },
     });
 
-    let channel = await Channel.findOneAndUpdate(
-      { name: file.category },
+    let topic = await Topic.updateMany(
+      { category: file.category, subject: file.subject },
       {
-        $pull: { channelFiles: file._id },
+        $pull: { resources: file._id },
       }
     );
-    return { user, channel };
+    return { user, topic };
   } catch (error) {
     throw new Error("Something went wrong when deleting this file");
   }

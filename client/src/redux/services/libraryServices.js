@@ -24,3 +24,8 @@ export const iUnlikeThisFile = (fileId) =>
   service
     .put(`/library/${fileId}/unliked`)
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const fileDeleteService = (fileId) =>
+  service
+    .put("/library-delete", { fileId })
+    .then((fileDeleted) => console.log(fileDeleted))

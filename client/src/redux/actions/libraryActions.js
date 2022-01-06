@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import {
+  DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
   GET_LIBRARY,
@@ -10,6 +11,7 @@ import {
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import {
   addFile,
+  fileDeleteService,
   getLibraryFiles,
   getUserLibraryFiles,
   iLikeThisFile,
@@ -109,6 +111,21 @@ export const iUnlikedAfile = (fileId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_FILE, payload: unlike })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deleteFile = (fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  await fileDeleteService(fileId)
+
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_FILE, payload: fileId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

@@ -4,6 +4,7 @@
 /* eslint-disable no-unused-vars */
 
 import {
+  DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
   GET_LIBRARY,
@@ -50,6 +51,13 @@ const libraryReducer = (state = initialState, action) => {
       return {
         allFiles: state.allFiles.map((eachFile) =>
           eachFile._id === action.payload._id ? action.payload : eachFile
+        ),
+      }
+    case DELETE_FILE:
+      return {
+        ...state,
+        allFiles: state.allFiles.filter(
+          (eachFile) => eachFile._id !== action.payload
         ),
       }
     default:

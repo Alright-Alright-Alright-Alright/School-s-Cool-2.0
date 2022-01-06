@@ -10,12 +10,15 @@ import Icon from "../Icon"
 import {
   iLikedAfile,
   iUnlikedAfile,
+  deleteFile,
 } from "../../../redux/actions/libraryActions"
 
 const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
+
+  const deletingFile = () => {}
 
   return (
     <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>
@@ -71,7 +74,7 @@ const libraryItem = ({ library, showModal }) => {
                 </div>{" "}
               </td>
               <td className="border-t-2 border-grey-medium_light">
-                <div className="flex">
+                {/* <div className="flex">
                   {item.likedBy.includes(user._id) ? (
                     <button
                       type="button"
@@ -89,20 +92,21 @@ const libraryItem = ({ library, showModal }) => {
                   )}
 
                   <span className="pl-1">{item.likedBy.length}</span>
-                </div>
+                </div> */}
               </td>
               <td className="border-t-2 border-grey-medium_light">
-                <div className="flex pl-1">
-                  <Icon iconName="message" iconStyle="fill-inactive" />
-                  <span className="pl-1">0</span>
-                </div>
+                <button type="button" className="pt-1">
+                  <Icon iconName="follow" iconStyle="fill-inactive text-pink" />
+                </button>
               </td>
               <td className="border-t-2 border-grey-medium_light">
-                <div className="pl-3">
-                  <a href={item?.fileUrl}>
-                    <Icon iconName="download" />
-                  </a>
-                </div>
+                <button
+                  type="button"
+                  className="pt-2"
+                  onClick={() => dispatch(deleteFile(item._id))}
+                >
+                  <Icon iconName="trash" />
+                </button>
               </td>
             </tr>
           </tbody>
