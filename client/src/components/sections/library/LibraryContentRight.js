@@ -15,35 +15,45 @@ const LibraryContentRight = ({ singleFile }) => {
   return singleFile !== null ? (
     <div className="flex flex-col w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8">
       <div className="h-1/2 flex flex-col justify-around">
-        <section className="mt-8 ml-8">
-          <div className="flex items-center">
+        <section className="mt-6 ml-8">
+          <div className="flex items-center pb-4">
             <img
               src={singleFile.fileUrl}
               alt="file preview"
-              className="w-24 h-20 rounded-md"
+              className="w-1/4 h-1/5 rounded-md"
             />
-            <p className="pl-4">{singleFile.title}</p>
+            <p className="pl-4 font-semibold text-lg">{singleFile.title}</p>
           </div>
-          <p>
-            {singleFile?.owner?.firstName} {singleFile?.owner?.lastName}
-          </p>
+          <div className="font-semibold items-center flex">
+            <img
+              src={singleFile.owner.imageUrl}
+              alt="file preview"
+              className="w-8 h-8 rounded-full"
+            />
+            <p className="pl-2 text-sm">
+              {singleFile?.owner?.firstName} {singleFile?.owner?.lastName}
+            </p>
+          </div>
         </section>
-
+        <hr className="ml-8 w-52 text-grey-light" />
         <section className="ml-8">
           <div>
-            {singleFile.category}: {singleFile.subject}
+            <p className="text-grey-medium font-semibold">
+              {singleFile.category}: {singleFile.subject}
+            </p>
           </div>
           <div className="ml-8">grade range</div>
           <div className="ml-8">#tags</div>
         </section>
-        <section className="ml-8">
+        <hr className="ml-8 w-52 text-grey-light" />
+        <section className="ml-8 flex">
           <div className="flex">
             {singleFile.likedBy.includes(singleFile.owner._id) ? (
               <button
                 type="button"
                 onClick={() => dispatch(iUnlikedAfile(singleFile._id))}
               >
-                <Icon iconName="like" iconStyle="fill-active" />
+                <Icon iconName="like" iconStyle="fill-active text-pink" />
               </button>
             ) : (
               <button
@@ -55,8 +65,13 @@ const LibraryContentRight = ({ singleFile }) => {
             )}
             <span className="pl-1">{singleFile.likedBy.length}</span>
           </div>
+          <div className="flex pl-4">
+            <Icon iconName="message" iconStyle="fill-inactive" />
+            <span className="pl-1">{0}</span>
+          </div>
         </section>
       </div>
+      <hr className="ml-8 w-52 text-grey-light" />
       <div className="h-1/2">
         <section className="ml-8">comments</section>
       </div>
