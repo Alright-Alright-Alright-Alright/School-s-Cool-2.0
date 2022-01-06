@@ -23,7 +23,7 @@ function TopicContentLeft({ topic }) {
       <div className="p-3">
         <img
           className="rounded-r-3xl rounded-b-3xl object-cover h-72"
-          src={topic && `${bannerImage}`}
+          src={bannerImage}
           alt="placeholder"
           width="400"
         />
@@ -62,9 +62,22 @@ function TopicContentLeft({ topic }) {
   )
 }
 
+TopicContentLeft.defaultProps = {
+  topic: {
+    bannerImage: "",
+    title: "",
+    description: "",
+    isPrivate: false,
+    owner: "",
+    category: "",
+    subject: "",
+    resources: [],
+  },
+}
+
 TopicContentLeft.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  topic: PropTypes.object.isRequired,
+  topic: PropTypes.object,
 }
 
 export default TopicContentLeft
