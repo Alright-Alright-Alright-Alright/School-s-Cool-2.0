@@ -8,6 +8,7 @@ import {
   iLikedAfile,
   iUnlikedAfile,
 } from "../../../redux/actions/libraryActions"
+import Comment from "../../core/comment/Comment"
 
 // eslint-disable-next-line react/prop-types
 const LibraryContentRight = ({ singleFile }) => {
@@ -73,12 +74,16 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
       <hr className="ml-8 w-52 text-grey-light" />
       <div className="h-1/2">
-        <section className="ml-8">comments</section>
+        <section className="ml-1">
+          <Comment singleFile={singleFile} />
+        </section>
       </div>
     </div>
   ) : (
     <div className="flex items-center justify-center w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8">
-      <h1>Click on a file to see its details</h1>
+      <h1 className="text-grey-dark font-semibold">
+        Click on a file to see its details
+      </h1>
     </div>
   )
 }
