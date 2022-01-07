@@ -4,7 +4,8 @@ const {
   getingLibrary,
   fileDeleting,
   addLikeToFileDb,
-  pullLikeToFileDb
+  pullLikeToFileDb,
+  getingSingleFileDB
 } = require("../db/libraryDb");
 
 exports.createFile = async (title, category, subject, isPrivate, fileUrl, owner) => {
@@ -35,6 +36,14 @@ exports.pullLikeService = async (fileId, user) => {
 exports.getUserLibrary = async (user) => {
   try {
     return getingUserLibrary(user);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.getingSingleFile = async (fileId) => {
+  try {
+    return getingSingleFileDB(fileId);
   } catch (error) {
     throw new Error(error.message);
   }

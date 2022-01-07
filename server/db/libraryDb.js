@@ -49,11 +49,11 @@ exports.addLikeToFileDb = async (fileId, user) => {
         $push: { likedBy: user },
       },
       { new: true }
-    ).then( likedFile => {
-      let result = File.findById(likedFile._id).populate("owner")
-      return result
-    })
-    return fileLiked
+    ).then((likedFile) => {
+      let result = File.findById(likedFile._id).populate("owner");
+      return result;
+    });
+    return fileLiked;
   } catch (error) {
     throw new Error(error);
   }
@@ -67,11 +67,11 @@ exports.pullLikeToFileDb = async (fileId, user) => {
         $pull: { likedBy: user },
       },
       { new: true }
-    ).then( unlikeFile => {
-      let result = File.findById(unlikeFile._id).populate("owner")
-      return result
-    })
-    return fileUnliked
+    ).then((unlikeFile) => {
+      let result = File.findById(unlikeFile._id).populate("owner");
+      return result;
+    });
+    return fileUnliked;
   } catch (error) {
     throw new Error(error);
   }
@@ -102,20 +102,31 @@ exports.getingLibrary = async () => {
   }
 };
 
+exports.getingSingleFileDB = async (fileId) => {
+  try {
+    return await File.findById(fileId).populate(
+      "owner",
+      "firstName lastName imageUrl"
+    );
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 exports.fileDeleting = async (userId, fileToDelete) => {
   let file = await File.findByIdAndRemove(fileToDelete);
   try {
     let user = await User.findByIdAndUpdate(userId, {
-      $pull: { fileUrl: file._id },
+      $pull: { resources: file._id },
     });
 
-    let channel = await Channel.findOneAndUpdate(
-      { name: file.category },
+    let topic = await Topic.updateMany(
+      { category: file.category, subject: file.subject },
       {
-        $pull: { channelFiles: file._id },
+        $pull: { resources: file._id },
       }
     );
-    return { user, channel };
+    return { user, topic };
   } catch (error) {
     throw new Error("Something went wrong when deleting this file");
   }

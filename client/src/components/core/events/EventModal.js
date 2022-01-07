@@ -5,10 +5,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import DatePicker from "react-datepicker"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import {
-  createNewEvent,
-  getAllEvents,
-} from "../../../redux/actions/eventActions"
+import { createNewEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"

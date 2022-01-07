@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
@@ -9,6 +10,7 @@ import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -20,6 +22,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const hiddenFileInput = useRef(null)
   const topics = useSelector((state) => state.topics.allTopics)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAlltopics())
+  }, [dispatch])
 
   const filterCategory = () => {
     const arr = []
@@ -37,6 +43,15 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
     )
     return arr
+  }
+
+  const fileType = () => {
+    if (imgPreview.includes("pdf")) {
+      return <Icon iconName="pdf" viewbox="0 0 22 22" />
+    }
+    if (imgPreview.includes("jpg")) {
+      return <Icon iconName="jpg" viewbox="0 0 22 22" />
+    }
   }
 
   const handleClick = () => {
@@ -141,13 +156,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </select>
           )}
           <div className="flex justify-end items-center w-2/7">
-            {imgPreview && (
-              <img
-                src={imgPreview}
-                alt="Preview"
-                className="w-10 h-10 rounded-sm mr-2"
-              />
-            )}
+            {imgPreview && fileType()}
             <div>
               <button
                 type="button"
@@ -155,7 +164,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 className="flex items-center"
               >
                 <span className="text-sm pr-3">
-                  {imgPreview ? "File preview" : "Select your File"}
+                  {imgPreview ? "File type" : "Select your File"}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>

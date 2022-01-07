@@ -8,8 +8,8 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Icon from "../Icon"
 import {
-  iLikedAfile,
-  iUnlikedAfile,
+  deleteFile,
+  getSingleFile,
 } from "../../../redux/actions/libraryActions"
 
 const libraryItem = ({ library, showModal }) => {
@@ -38,7 +38,10 @@ const libraryItem = ({ library, showModal }) => {
         </thead>
         {library.map((item) => (
           <tbody key={item._id}>
-            <tr className="h-16 border-b-2 border-grey-medium_light hover:bg-pink-light hover:shadow-md">
+            <tr
+              onClick={() => dispatch(getSingleFile(item._id))}
+              className="h-16 border-b-2 border-grey-medium_light hover:bg-pink-light hover:shadow-md cursor-pointer"
+            >
               <td className="flex h-16 justify-start items-center pl-3">
                 <div>
                   {item?.fileUrl?.includes("pdf") ? (
@@ -70,39 +73,21 @@ const libraryItem = ({ library, showModal }) => {
                   </p>
                 </div>{" "}
               </td>
-              <td className="border-t-2 border-grey-medium_light">
-                <div className="flex">
-                  {item.likedBy.includes(user._id) ? (
-                    <button
-                      type="button"
-                      onClick={() => dispatch(iUnlikedAfile(item._id))}
-                    >
-                      <Icon iconName="like" iconStyle="fill-active" />
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => dispatch(iLikedAfile(item._id))}
-                    >
-                      <Icon iconName="like" iconStyle="fill-inactive" />
-                    </button>
-                  )}
+              <td className="border-t-2 border-grey-medium_light" />
 
-                  <span className="pl-1">{item.likedBy.length}</span>
-                </div>
+              <td className="border-t-2 border-grey-medium_light">
+                <button type="button" className="pt-1">
+                  <Icon iconName="follow" iconStyle="fill-inactive text-pink" />
+                </button>
               </td>
               <td className="border-t-2 border-grey-medium_light">
-                <div className="flex pl-1">
-                  <Icon iconName="message" iconStyle="fill-inactive" />
-                  <span className="pl-1">0</span>
-                </div>
-              </td>
-              <td className="border-t-2 border-grey-medium_light">
-                <div className="pl-3">
-                  <a href={item?.fileUrl}>
-                    <Icon iconName="download" />
-                  </a>
-                </div>
+                <button
+                  type="button"
+                  className="pt-2"
+                  onClick={() => dispatch(deleteFile(item._id))}
+                >
+                  <Icon iconName="trash" />
+                </button>
               </td>
             </tr>
           </tbody>

@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import {
+  DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
+  GET_FILE,
   GET_LIBRARY,
   LIKE_FILE,
   POST_FILE,
@@ -10,6 +12,8 @@ import {
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import {
   addFile,
+  fileDeleteService,
+  getFile,
   getLibraryFiles,
   getUserLibraryFiles,
   iLikeThisFile,
@@ -23,6 +27,21 @@ export const getAllFilesFromLibrary = () => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_LIBRARY, payload: libraryFilesFromDB })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getSingleFile = (fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const file = await getFile(fileId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_FILE, payload: file })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -109,6 +128,21 @@ export const iUnlikedAfile = (fileId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_FILE, payload: unlike })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deleteFile = (fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  await fileDeleteService(fileId)
+
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_FILE, payload: fileId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
