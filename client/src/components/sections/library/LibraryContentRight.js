@@ -11,6 +11,7 @@ import {
 } from "../../../redux/actions/libraryActions"
 import Comment from "../../core/comment/Comment"
 import CommentFormLibrary from "../../core/comment/CommentFormLibrary"
+import PdfFile from "../../core/PdfFile"
 
 // eslint-disable-next-line react/prop-types
 const LibraryContentRight = ({ singleFile }) => {
@@ -25,11 +26,15 @@ const LibraryContentRight = ({ singleFile }) => {
       <div className="h-1/2 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
-            <img
-              src={singleFile.fileUrl}
-              alt="file preview"
-              className="w-1/4 h-1/5 rounded-md"
-            />
+            {singleFile.fileUrl.includes("pdf") ? (
+              <PdfFile pdf={singleFile.fileUrl} />
+            ) : (
+              <img
+                src={singleFile.fileUrl}
+                alt="file preview"
+                className="w-1/4 h-1/5 rounded-md"
+              />
+            )}
             <p className="pl-4 font-semibold text-lg">{singleFile.title}</p>
           </div>
           <div className="font-semibold items-center flex">
