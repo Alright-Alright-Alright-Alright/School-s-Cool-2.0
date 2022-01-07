@@ -18,9 +18,7 @@ const eventDetailIndex = () => {
   useEffect(() => {
     dispatch(getOneEvent(eventId))
     dispatch(getAllTheUsers())
-  }, [dispatch])
-
-  console.log(allUsers)
+  }, [dispatch, eventId])
 
   return (
     <>

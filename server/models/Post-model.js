@@ -19,6 +19,10 @@ const postSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Topic"
     },
+    event: {
+        type: Schema.Types.ObjectId,
+        ref: "Event"
+    },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"

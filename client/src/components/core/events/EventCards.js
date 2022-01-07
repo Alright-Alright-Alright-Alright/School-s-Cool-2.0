@@ -26,7 +26,7 @@ const EventCards = ({events}) => {
         <section className="border-b-2 border-grey-light mx-3 h-24 flex flex-col justify-around">
           <div className="flex items-center">
             <h1 className="text-md w-2/4">{events.title}</h1>
-            <p className="text-base w-3/4 pl-2">{events.description}</p>
+            {/* <p className="text-base w-3/4 pl-2">{events.description}</p> */}
           </div>
           <div className="flex justify-around">
             <p className="text-sm">{events.location}</p>

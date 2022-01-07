@@ -4,7 +4,6 @@ import EventDashcard from "../../core/events/eventDashCard/EventDashcard"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
 function EventDetailContentRight({ event, users }) {
-  console.log(event)
   return (
     <div className="place-items-start max-w-xs hidden lg:block">
       <EventDashcard

@@ -25,8 +25,6 @@ function EventDetailContentLeft({ event }) {
             {dayjs(event?.dateStart).format("MMM DD, YYYY")} -{" "}
             {dayjs(event?.dateEnd).format("MMM DD, YYYY")}
           </p>
-
-          <p className="text-sm">{event?.description} </p>
         </div>
         <div className="place-items-end">
           <ResourceDashcard
