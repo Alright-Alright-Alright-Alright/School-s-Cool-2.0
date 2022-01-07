@@ -1,11 +1,11 @@
 import React from "react"
-import EventDetailsIndex from "../components/sections/eventDetails/EventDetailsIndex"
+import EventDetailIndex from "../components/sections/eventDetail/EventDetailIndex"
 
 const EventDetailsPage = () => {
   console.log("eventDetails page mouting")
   return (
     <div>
-      <EventDetailsIndex />
+      <EventDetailIndex />
     </div>
   )
 }

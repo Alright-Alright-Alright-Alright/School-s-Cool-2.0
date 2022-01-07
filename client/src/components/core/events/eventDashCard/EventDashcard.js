@@ -1,43 +1,40 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/default-props-match-prop-types */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/forbid-prop-types */
-
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Icon from "../../Icon"
-import TopicDashCardListItem from "./TopicDashCardListItem"
+import EventDashCardListItem from "./EventDashCardListItem"
 import DropDownMenu from "../../DropDownMenu"
 
-export default function TopicDashcard({
-  topicDashCardData,
-  topicDashCardTitle,
-  topicDashCardStyle,
+export default function EventDashcard({
+  eventDashCardData,
+  eventDashCardTitle,
+  eventDashCardStyle,
   dropdownMenuData,
   users,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
+  console.log(users)
+
   const firstThreeItems = users
     .slice(0, 3)
     .map((item) => (
-      <TopicDashCardListItem
+      <EventDashCardListItem
         key={item?._id}
         listItemUserId={item?._id}
         listItemFirstName={item?.firstName}
         listItemLastName={item?.lastName}
-        topicDashCardData={topicDashCardData}
+        eventDashCardData={eventDashCardData}
       />
     ))
 
   const allItems = users.map((item) => (
-    <TopicDashCardListItem
+    <EventDashCardListItem
       key={item?._id}
       listItemUserId={item?._id}
       listItemFirstName={item?.firstName}
       listItemLastName={item?.lastName}
-      topicDashCardData={topicDashCardData}
+      eventDashCardData={eventDashCardData}
     />
   ))
 
@@ -45,10 +42,10 @@ export default function TopicDashcard({
     <div className="w-full">
       <div className="flex flex-col relative w-full m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
-          className={`w-full ${topicDashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
+          className={`w-full ${eventDashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
-            <p className="text-lg pl-4">{topicDashCardTitle}</p>
+            <p className="text-lg pl-4">{eventDashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
               <DropDownMenu data={dropdownMenuData} />
@@ -78,15 +75,15 @@ export default function TopicDashcard({
   )
 }
 
-TopicDashcard.defaultProps = {
-  topicDashCardData: [],
+EventDashcard.defaultProps = {
+  eventDashCardData: [],
   users: [],
 }
 
-TopicDashcard.propTypes = {
-  topicDashCardData: PropTypes.arrayOf.isRequired,
-  topicDashCardTitle: PropTypes.string.isRequired,
-  topicDashCardStyle: PropTypes.string.isRequired,
+EventDashcard.propTypes = {
+  eventDashCardData: PropTypes.arrayOf,
+  eventDashCardTitle: PropTypes.string.isRequired,
+  eventDashCardStyle: PropTypes.string.isRequired,
   dropdownMenuData: PropTypes.shape.isRequired,
-  users: PropTypes.arrayOf.isRequired,
+  users: PropTypes.arrayOf,
 }
