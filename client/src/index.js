@@ -18,10 +18,12 @@ import Courses from "./pages/Courses"
 import Events from "./pages/Events"
 import CourseDetailPage from "./pages/CourseDetailPage"
 import EventDetailsPage from "./pages/EventDetailsPage"
+import ScrollToTop from "./hooks/ScrollToTop"
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

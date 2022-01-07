@@ -7,11 +7,13 @@ import {
   LIKE_POST,
   UNLIKE_POST,
 } from "../types/posts"
+
 import {
   getPostByIdService,
   createPostService,
   submitCommentService,
   getAllPostService,
+  getAllEventPostService,
   likePostService,
   unlikePostService,
 } from "../services/postService"
@@ -21,6 +23,21 @@ export const getAllPosts = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const allPosts = await getAllPostService(topicId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SET_POSTS, payload: allPosts })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getAllEventPosts = (eventId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const allPosts = await getAllEventPostService(eventId)
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: SET_POSTS, payload: allPosts })
@@ -72,7 +89,6 @@ export const submitComment =
       postId,
     })
 
-    console.log(addNewCommentDb)
     try {
       dispatch({ type: CLEAR_ERRORS })
       dispatch({ type: SUBMIT_COMMENT, payload: addNewCommentDb })
