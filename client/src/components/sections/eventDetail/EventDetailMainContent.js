@@ -45,7 +45,13 @@ function EventDetailMainContent({ event }) {
       // postBody={(e) => setPostBody(e)}
       /> */}
       {posts?.map((post) => (
-        <h1 key={post?.id}>{post?.body}</h1>
+        <TopicPost
+          key={post._id}
+          post={post}
+          //   topicId={params.topicId}
+          comments={post?.comments}
+        />
+        // <h1 key={post?.id}>{post?.body}</h1>
       ))}
     </div>
   )

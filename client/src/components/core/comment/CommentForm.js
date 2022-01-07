@@ -1,42 +1,19 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
-import { useParams } from "react-router-dom"
-import {
-  submitComment,
-  getPostById,
-  getAllPosts,
-} from "../../../redux/actions/postActions"
+import { submitComment } from "../../../redux/actions/postActions"
 
-function CommentForm({ postId, onSubmitComment }) {
+function CommentForm({ postId }) {
   const [commentBody, setCommentBody] = useState("")
   const user = useSelector((state) => state.user.singleUser)
-  const singlePost = useSelector((state) => state.posts.singlePost)
   const dispatch = useDispatch()
-
-  const params = useParams()
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
     dispatch(submitComment(user._id, commentBody, postId))
-    if (params.topicId) {
-      dispatch(getAllPosts(params.topicId))
-    } else {
-      onSubmitComment()
-    }
     setCommentBody("")
   }
-
-  useEffect(() => {
-    dispatch(getPostById(postId))
-    if (params.topicId) {
-      dispatch(getAllPosts(params.topicId))
-    } else {
-      onSubmitComment()
-    }
-  }, [dispatch])
 
   return (
     <form className="flex px-5 pb-5 pt-3" onSubmit={handleFormSubmit}>
@@ -58,8 +35,6 @@ function CommentForm({ postId, onSubmitComment }) {
 
 CommentForm.propTypes = {
   postId: PropTypes.string.isRequired,
-  /* eslint-disable-next-line */
-  onSubmitComment: PropTypes.func
 }
 
 export default CommentForm
