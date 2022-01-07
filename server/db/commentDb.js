@@ -10,7 +10,13 @@ const getAllCommentsDb = async (id) => {
 
     let file = File.findById(id)
       .sort({ createdAt: "desc" })
-      .populate("comments")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      })
       .populate("owner");
 
     return post ? post : file;
