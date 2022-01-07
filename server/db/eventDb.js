@@ -36,7 +36,9 @@ const createEventDb = async (
 
 const getEventDb = async (eventId) => {
   try {
-    return await Event.find({ _id: eventId }).populate("attendees");
+    return await Event.find({ _id: eventId })
+      .populate("attendees")
+      .populate("owner", "firstName lastName imageUrl");
   } catch (e) {
     throw new Error(e.message);
   }
@@ -97,5 +99,5 @@ module.exports = {
   updateEventDb,
   userJoinEventDb,
   userLeaveEventDb,
-  deleteEventFromDb
+  deleteEventFromDb,
 };

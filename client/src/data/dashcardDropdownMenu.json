@@ -19,6 +19,10 @@
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All users", "Amsterdam Mentors"]
   },
+  "eventMembers": {
+    "bgColorOnHover": "sky-light",
+    "dropDownItems": ["All attendees", "Invite other users"]
+  },
   "resources": {
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All files", "Created by me", "Followed by me"]

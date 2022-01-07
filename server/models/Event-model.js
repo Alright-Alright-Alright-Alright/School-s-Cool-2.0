@@ -35,9 +35,9 @@ const eventSchema = new Schema(
       type: String,
       default: "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg"
     },
-    comment: [{
+    posts: [{
       type: Schema.Types.ObjectId,
-      ref: "Comment"
+      ref: "Post"
   }],
   },
   {
