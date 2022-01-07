@@ -22,3 +22,7 @@
 #toogle-switch:checked::after {
   @apply transform scale-95 translate-x-6
 }
+
+.scrollBar::-webkit-scrollbar {
+  display: none;
+}

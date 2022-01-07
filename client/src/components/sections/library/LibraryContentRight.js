@@ -81,11 +81,19 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
       <hr className="ml-8 w-5/6 text-grey-light" />
       <div className="h-1/2">
-        <section className="ml-1 h-full flex flex-col justify-between">
-          {singleFile.comments.map((comment) => (
-            <Comment comment={comment} />
-          ))}
-          <CommentFormLibrary singleFile={singleFile} />
+        <section className="ml-1 h-full flex flex-col">
+          <div className="h-3/4 overflow-y-auto scrollBar">
+            {singleFile.comments.map((comment) => (
+              <Comment
+                comment={comment}
+                key={comment._id}
+                id={singleFile._id}
+              />
+            ))}
+          </div>
+          <div className="h-1/4">
+            <CommentFormLibrary singleFile={singleFile} />
+          </div>
         </section>
       </div>
     </div>

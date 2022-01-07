@@ -1,7 +1,8 @@
 const {
     getAllCommentsDb,
     addCommentToDb,
-    getCommentByIdDb
+    getCommentByIdDb,
+    deletingCommentFromDb
   } = require("../db/commentDb");
   
 const getAllCommentsService = async (id) => {
@@ -28,8 +29,17 @@ const getCommentByIdService = async (postId) => {
     }
 };
 
+const deletingCommentService = async (commentId, id) => {
+  try {
+      return await deletingCommentFromDb(commentId, id);
+  } catch (e) {
+      throw new Error(e.message);
+  }
+};
+
 module.exports = {
     getAllCommentsService,
     createCommentService,
     getCommentByIdService,
+    deletingCommentService,
 };

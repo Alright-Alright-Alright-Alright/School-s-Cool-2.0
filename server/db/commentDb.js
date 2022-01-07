@@ -77,8 +77,49 @@ const getCommentByIdDb = async (commentId) => {
   }
 };
 
+const deletingCommentFromDb = async (commentId, id) => {
+  try {
+    let post = await Post.findByIdAndUpdate(
+      id,
+      {
+        $pull: { comments: commentId },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+
+    let file = await File.findByIdAndUpdate(
+      id,
+      {
+        $pull: { comments: commentId },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+
+    return post ? post : file;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllCommentsDb,
   addCommentToDb,
   getCommentByIdDb,
+  deletingCommentFromDb
 };
