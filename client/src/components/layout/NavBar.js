@@ -136,7 +136,7 @@ function NavBar() {
       </div>
       <div className="-mr-2 flex md:hidden">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsOpen(!isOpen)}>
             <img
               alt="profile"
               src="https://www.multisignaal.nl/wp-content/uploads/2021/08/blank-profile-picture-973460_1280.png"
@@ -196,6 +196,7 @@ function NavBar() {
                   to={item.href}
                   key={item.id}
                   className={`block mt-4 lg:inline-block lg:mt-0 hover:text-${item.color} mr-4`}
+                  onClick={() => setIsOpen(!isOpen)}
                 >
                   {item.title}
                 </Link>
