@@ -8,9 +8,9 @@ const {
 } = require("../services/postService");
 
 const getAllPosts = async (req, res, next) => {
-  const { topicId } = req.params;
+  const { topicId, eventId } = req.params;
   try {
-    const posts = await getAllPostsService(topicId);
+    const posts = await getAllPostsService(topicId, eventId);
     return res.status(201).json(posts);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -18,13 +18,11 @@ const getAllPosts = async (req, res, next) => {
 };
 
 const createPost = async (req, res, next) => {
-  const { body, topicId } = req.body;
+  const { body, topicId, eventId } = req.body;
   const owner = req.user.userLogedIn._id;
 
-  // const { _id } = req.user.userLogedIn;
-  console.log(owner)
   try {
-    const newPost = await createPostService(body, owner, topicId);
+    const newPost = await createPostService(body, owner, topicId, eventId);
     return res.status(201).json(newPost);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -51,7 +49,6 @@ const getPostById = async (req, res, next) => {
 };
 
 const likePost = async (req, res, next) => {
-  // const { userId } = req.body;
   const userId = req.user.userLogedIn._id;
   const { postId } = req.params;
 

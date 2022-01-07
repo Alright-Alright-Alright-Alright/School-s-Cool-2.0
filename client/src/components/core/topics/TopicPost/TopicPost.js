@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
@@ -10,12 +10,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
 import Comment from "../../comment/Comment"
 import CommentForm from "../../comment/CommentForm"
-import {
-  getAllPosts,
-  getPostById,
-  likePost,
-  unlikePost,
-} from "../../../../redux/actions/postActions"
+import { likePost, unlikePost } from "../../../../redux/actions/postActions"
 import Icon from "../../Icon"
 
 function TopicPost({ post, topicId, comments }) {
@@ -66,9 +61,12 @@ function TopicPost({ post, topicId, comments }) {
               {post.topic?.title}
             </Link>
           </div>
-          <div className="flex items-center">
+          <div className="hidden lg:flex items-center">
             <p className="text-base">{dayjs(post.createdAt).fromNow()}</p>
           </div>
+        </div>
+        <div className="lg:hidden flex items-center pl-3 text-grey-medium_light">
+          <p className="text-base">{dayjs(post.createdAt).fromNow()}</p>
         </div>
       </div>
       <div className="">

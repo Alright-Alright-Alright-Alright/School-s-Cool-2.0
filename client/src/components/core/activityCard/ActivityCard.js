@@ -71,9 +71,14 @@ function ActivityCard({ activity }) {
               {activity.topic?.title}
             </a>
           </div>
-          <div className="flex items-center">
+          <div className="hidden lg:block items-center">
             <p className="text-base">{dayjs(activity.createdAt).fromNow()}</p>
           </div>
+        </div>
+        <div className="flex items-center lg:hidden pl-3 pt-3">
+          <p className="text-base text-grey-medium_light">
+            {dayjs(activity.createdAt).fromNow()}
+          </p>
         </div>
       </div>
       <div className="">
