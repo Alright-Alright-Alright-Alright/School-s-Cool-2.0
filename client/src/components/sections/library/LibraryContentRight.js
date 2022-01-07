@@ -75,7 +75,7 @@ const LibraryContentRight = ({ singleFile }) => {
           </div>
           <div className="flex pl-4">
             <Icon iconName="message" iconStyle="fill-inactive" />
-            <span className="pl-1">{0}</span>
+            <span className="pl-1">{singleFile.comments.length}</span>
           </div>
         </section>
       </div>
