@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 require("./User-model");
+require("./Comment-model");
 
 const fileSchema = new Schema(
   {
@@ -22,6 +23,10 @@ const fileSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     }],
+    comments: [{
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+  }]
   },
   {
     timestamps: true,

@@ -1,23 +1,41 @@
 const Comment = require("../models/Comment-model");
-const Post = require("../models/Post-model")
+const Post = require("../models/Post-model");
+const File = require("../models/File-model");
 
-const getAllCommentsDb = async (postId) => {
+const getAllCommentsDb = async (id) => {
   try {
-    return await Post.find(postId)
+    let post = await Post.findById(id)
       .sort({ createdAt: "desc" })
-      .populate("Comment")
+      .populate("Comment");
+
+    let file = File.findById(id)
+      .sort({ createdAt: "desc" })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      })
+      .populate("owner");
+
+    return post ? post : file;
   } catch (e) {
     throw new Error(e.message);
   }
 };
 
-const addCommentToDb = async (owner, body, postId) => {
-  let newComment = await Comment.create({ body, owner});
+const addCommentToDb = async (owner, body, id) => {
+  let newComment = await Comment.create({ body, owner });
   try {
-     let updatedPost = await Post.findByIdAndUpdate(postId, {
-      $push: { comments: newComment }, 
-    }, { new: true })
-    .populate("owner", "firstName lastName imageUrl")
+    let updatedPost = await Post.findByIdAndUpdate(
+      id,
+      {
+        $push: { comments: newComment },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
       .populate({
         path: "comments",
         populate: {
@@ -25,22 +43,42 @@ const addCommentToDb = async (owner, body, postId) => {
           select: "firstName lastName imageUrl",
         },
       });
-    return updatedPost
+
+    let updatedFile = await File.findByIdAndUpdate(
+      id,
+      {
+        $push: { comments: newComment },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+
+    return updatedPost ? updatedPost : updatedFile;
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
 };
 
 const getCommentByIdDb = async (commentId) => {
-    try {
-        return await Comment.findById(commentId).populate("owner", 'firstName lastName imageUrl')
-    } catch (error) {
-        throw new Error(error)
-    }
+  try {
+    return await Comment.findById(commentId).populate(
+      "owner",
+      "firstName lastName imageUrl"
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 module.exports = {
-    getAllCommentsDb,
-    addCommentToDb,
-    getCommentByIdDb
-  };
+  getAllCommentsDb,
+  addCommentToDb,
+  getCommentByIdDb,
+};

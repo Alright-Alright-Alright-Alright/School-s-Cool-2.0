@@ -32,3 +32,13 @@ export const iUnlikeThisFile = (fileId) =>
 
 export const fileDeleteService = (fileId) =>
   service.put("/library-delete", { fileId }).then((fileDeleted) => fileDeleted)
+
+export const getCommentsService = (fileId) =>
+  service
+    .get(`/library/${fileId}/comments`)
+    .then((responseFromAPI) => responseFromAPI.data)
+
+export const submitCommentService = (commentBody, fileId) =>
+  service
+    .post(`/library/${fileId}/comments`, commentBody, fileId)
+    .then((responseFromAPI) => responseFromAPI.data)

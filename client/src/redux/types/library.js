@@ -1,5 +1,7 @@
 // Library reducer types
 export const GET_LIBRARY = "GET_LIBRARY"
+export const GET_COMMENTS = "GET_COMMENTS"
+export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_USER_LIBRARY = "GET_USER_LIBRARY"
 export const POST_FILE = "POST_FILE"
 export const FILTER_CATEGORY = "FILTER_CATEGORY"

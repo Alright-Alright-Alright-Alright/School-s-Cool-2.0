@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   SET_POSTS,
   GET_POST,
@@ -16,7 +17,6 @@ import {
   likePostService,
   unlikePostService,
 } from "../services/postService"
-
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 export const getAllPosts = (topicId) => async (dispatch) => {

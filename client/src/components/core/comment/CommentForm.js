@@ -26,6 +26,7 @@ function CommentForm({ postId, onSubmitComment }) {
     } else {
       onSubmitComment()
     }
+    setCommentBody("")
   }
 
   useEffect(() => {

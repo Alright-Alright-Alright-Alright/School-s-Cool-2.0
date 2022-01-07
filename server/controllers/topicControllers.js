@@ -21,7 +21,7 @@ const getAllTopics = async (req, res, next) => {
 
 const createNewTopic = async (req, res, next) => {
   const { title, description, category, subject, bannerImage, isPrivate } = req.body;
-  owner = req.user.userLogedIn._id;
+  const owner = req.user.userLogedIn._id;
 
   try {
     const topic = await createNewTopicService(title, description, category, subject, bannerImage, isPrivate, owner);
