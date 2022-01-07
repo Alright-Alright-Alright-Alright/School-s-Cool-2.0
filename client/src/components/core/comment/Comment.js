@@ -8,7 +8,6 @@ import Icon from "../Icon"
 import { deleteComment } from "../../../redux/actions/libraryActions"
 
 function Comment({ comment, id }) {
-  console.log("comment:", comment._id, "id:", id)
   const dispatch = useDispatch()
   return (
     <div className="flex px-5 pb-1 pt-3 items-center">
