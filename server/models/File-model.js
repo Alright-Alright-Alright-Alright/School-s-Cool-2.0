@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 require("./User-model");
+require("./Comment-model");
 
 const fileSchema = new Schema(
   {

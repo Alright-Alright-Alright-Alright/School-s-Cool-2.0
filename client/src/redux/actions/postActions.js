@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import axios from "axios"
 import {
   SET_POSTS,
   GET_POST,
@@ -17,8 +16,6 @@ import {
   unlikePostService,
 } from "../services/postService"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
-
-const authToken = localStorage.getItem("Authorization")
 
 export const getAllPosts = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })

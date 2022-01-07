@@ -5,9 +5,10 @@ const {
 } = require("../services/commentService");
 
 const getAllComments = async (req, res, next) => {
-  const { postId } = req.params;
+  const id = req.params.postId ? req.params.postId : req.params.fileId
+
   try {
-    const comment = await getAllCommentsService(postId);
+    const comment = await getAllCommentsService(id);
     return res.status(201).json(comment);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -15,10 +16,11 @@ const getAllComments = async (req, res, next) => {
 };
 
 const createComment = async (req, res, next) => {
-  const { commentBody, owner, postId } = req.body;
-
+  const { commentBody } = req.body;
+  const id = req.body.postId ? req.body.postId : req.body.fileId
+  const owner = req.user.userLogedIn._id;
   try {
-    const comment = await createCommentService(owner, commentBody, postId);
+    const comment = await createCommentService(owner, commentBody, id);
     return res.status(201).json(comment);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);

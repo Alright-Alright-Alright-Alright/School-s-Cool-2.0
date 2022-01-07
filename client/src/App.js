@@ -25,7 +25,7 @@ function App() {
     } else {
       dispatch(loggedInUser())
     }
-  }, [dispatch])
+  }, [dispatch, token])
 
   return (
     <div className="App">

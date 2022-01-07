@@ -1,8 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import {
+  ADD_COMMENT,
   DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
+  GET_COMMENTS,
   GET_FILE,
   GET_LIBRARY,
   LIKE_FILE,
@@ -13,11 +15,13 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import {
   addFile,
   fileDeleteService,
+  getCommentsService,
   getFile,
   getLibraryFiles,
   getUserLibraryFiles,
   iLikeThisFile,
   iUnlikeThisFile,
+  submitCommentService,
 } from "../services/libraryServices"
 
 export const getAllFilesFromLibrary = () => async (dispatch) => {
@@ -42,6 +46,40 @@ export const getSingleFile = (fileId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_FILE, payload: file })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getComments = (fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const comments = await getCommentsService(fileId)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: GET_COMMENTS, payload: comments })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const submitComment = (commentBody, fileId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const addNewCommentDb = await submitCommentService({
+    commentBody,
+    fileId,
+  })
+
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: ADD_COMMENT, payload: addNewCommentDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

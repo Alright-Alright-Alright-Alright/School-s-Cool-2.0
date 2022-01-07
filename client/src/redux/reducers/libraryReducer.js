@@ -4,9 +4,11 @@
 /* eslint-disable no-unused-vars */
 
 import {
+  ADD_COMMENT,
   DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
+  GET_COMMENTS,
   GET_FILE,
   GET_LIBRARY,
   GET_USER_LIBRARY,
@@ -58,6 +60,8 @@ const libraryReducer = (state = initialState, action) => {
       }
     case LIKE_FILE:
     case UNLIKE_FILE:
+    case GET_COMMENTS:
+    case ADD_COMMENT:
       return {
         // allFiles: state.allFiles.map((eachFile) =>
         //   eachFile._id === action.payload._id ? action.payload : eachFile

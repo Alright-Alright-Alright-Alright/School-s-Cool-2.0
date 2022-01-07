@@ -50,7 +50,15 @@ exports.addLikeToFileDb = async (fileId, user) => {
       },
       { new: true }
     ).then((likedFile) => {
-      let result = File.findById(likedFile._id).populate("owner");
+      let result = File.findById(likedFile._id)
+        .populate("owner")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName lastName imageUrl",
+          },
+        });
       return result;
     });
     return fileLiked;
@@ -68,7 +76,15 @@ exports.pullLikeToFileDb = async (fileId, user) => {
       },
       { new: true }
     ).then((unlikeFile) => {
-      let result = File.findById(unlikeFile._id).populate("owner");
+      let result = File.findById(unlikeFile._id)
+        .populate("owner")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName lastName imageUrl",
+          },
+        });
       return result;
     });
     return fileUnliked;
@@ -107,7 +123,13 @@ exports.getingSingleFileDB = async (fileId) => {
     return await File.findById(fileId).populate(
       "owner",
       "firstName lastName imageUrl"
-    );
+    ).populate({
+      path: "comments",
+      populate: {
+        path: "owner",
+        select: "firstName lastName imageUrl",
+      },
+    })
   } catch (error) {
     throw new Error(error.message);
   }
