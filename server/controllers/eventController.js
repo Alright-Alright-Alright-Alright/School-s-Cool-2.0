@@ -72,8 +72,8 @@ const joinEvent = async (req, res, next) => {
   const { eventId } = req.params;
   const { _id } = req.user.userLogedIn;
   try {
-    await joinEventService(eventId, _id);
-    return res.status(201).json({ message: "You joined the event" });
+    let event = await joinEventService(eventId, _id);
+    return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -83,8 +83,8 @@ const leaveEvent = async (req, res, next) => {
   const { eventId } = req.params;
   const { _id } = req.user.userLogedIn;
   try {
-    await leaveEventService(eventId, _id);
-    return res.status(201).json({ message: "You left the event" });
+    let event = await leaveEventService(eventId, _id);
+    return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

@@ -9,7 +9,7 @@ function EventDetailContentRight({ event, users }) {
       <EventDashcard
         eventDashCardTitle="Event Attendees"
         eventDashCardStyle="bg-sky"
-        eventDashCardData={event?.members}
+        eventDashCardData={event?.attendees}
         users={users?.users}
         dropdownMenuData={dashcardDropdownMenu.eventMembers}
       />

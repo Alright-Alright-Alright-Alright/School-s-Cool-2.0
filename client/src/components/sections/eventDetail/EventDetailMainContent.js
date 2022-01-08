@@ -15,6 +15,7 @@ import TopicPost from "../../core/topics/TopicPost/TopicPost"
 function EventDetailMainContent({ event }) {
   const [body, setPostBody] = useState("")
   const UI = useSelector((state) => state.UI)
+  const user = useSelector((state) => state.user.singleUser)
   const posts = useSelector((state) => state.posts.allPosts)
   const params = useParams()
   const dispatch = useDispatch()
@@ -35,15 +36,11 @@ function EventDetailMainContent({ event }) {
     <div>
       {UI.errors && <p>{UI.errors.message}</p>}
 
-      <EventDescriptionCard event={event} />
+      <EventDescriptionCard event={event} user={user} />
       <EventHeaderCard
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
       />
-      {/* <TopicHeaderCard
-      // onClick={createNewPost}
-      // postBody={(e) => setPostBody(e)}
-      /> */}
       {posts?.map((post) => (
         <TopicPost
           key={post._id}
@@ -51,7 +48,6 @@ function EventDetailMainContent({ event }) {
           //   topicId={params.topicId}
           comments={post?.comments}
         />
-        // <h1 key={post?.id}>{post?.body}</h1>
       ))}
     </div>
   )
