@@ -11,6 +11,7 @@ import {
 } from "../../../redux/actions/libraryActions"
 import Comment from "../../core/comment/Comment"
 import CommentFormLibrary from "../../core/comment/CommentFormLibrary"
+import PdfFile from "../../core/PdfFile"
 
 // eslint-disable-next-line react/prop-types
 const LibraryContentRight = ({ singleFile }) => {
@@ -25,11 +26,15 @@ const LibraryContentRight = ({ singleFile }) => {
       <div className="h-1/2 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
-            <img
-              src={singleFile.fileUrl}
-              alt="file preview"
-              className="w-1/4 h-1/5 rounded-md"
-            />
+            {singleFile.fileUrl.includes("pdf") ? (
+              <PdfFile pdf={singleFile.fileUrl} />
+            ) : (
+              <img
+                src={singleFile.fileUrl}
+                alt="file preview"
+                className="w-1/4 h-1/5 rounded-md"
+              />
+            )}
             <p className="pl-4 font-semibold text-lg">{singleFile.title}</p>
           </div>
           <div className="font-semibold items-center flex">
@@ -50,8 +55,14 @@ const LibraryContentRight = ({ singleFile }) => {
               {singleFile.category}: {singleFile.subject}
             </p>
           </div>
-          <div className="ml-8">grade range</div>
-          <div className="ml-8">#tags</div>
+          <div className="text-sm">grade range</div>
+          <div className="">
+            {singleFile.tags.map((tag) => (
+              <span className="mr-1 bg-grey-super_light rounded-full px-3 text-base text-grey-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
         </section>
         <hr className="ml-8 w-5/6 text-grey-light" />
         <section className="ml-8 flex">
@@ -81,11 +92,19 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
       <hr className="ml-8 w-5/6 text-grey-light" />
       <div className="h-1/2">
-        <section className="ml-1 h-full flex flex-col justify-between">
-          {singleFile.comments.map((comment) => (
-            <Comment comment={comment} />
-          ))}
-          <CommentFormLibrary singleFile={singleFile} />
+        <section className="ml-1 h-full flex flex-col">
+          <div className="h-3/4 overflow-y-auto scrollBar">
+            {singleFile.comments.map((comment) => (
+              <Comment
+                comment={comment}
+                key={comment._id}
+                id={singleFile._id}
+              />
+            ))}
+          </div>
+          <div className="h-1/4">
+            <CommentFormLibrary singleFile={singleFile} />
+          </div>
         </section>
       </div>
     </div>

@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import {
   ADD_COMMENT,
+  DELETE_COMMENT,
   DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
@@ -14,6 +15,7 @@ import {
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import {
   addFile,
+  deleteCommentService,
   fileDeleteService,
   getCommentsService,
   getFile,
@@ -80,6 +82,25 @@ export const submitComment = (commentBody, fileId) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: ADD_COMMENT, payload: addNewCommentDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deleteComment = (commentId, id) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const deleteCommentDb = await deleteCommentService({
+    commentId,
+    id,
+  })
+
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_COMMENT, payload: deleteCommentDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

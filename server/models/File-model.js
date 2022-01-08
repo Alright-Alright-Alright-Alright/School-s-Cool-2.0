@@ -14,24 +14,36 @@ const fileSchema = new Schema(
       ref: "User",
     },
     category: {
-      type: String
+      type: String,
     },
     subject: {
-      type: String
+      type: String,
     },
-    likedBy: [{
-      type: Schema.Types.ObjectId,
-      ref: "User"
-    }],
-    comments: [{
-      type: Schema.Types.ObjectId,
-      ref: "Comment"
-  }]
+    likedBy: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    tags: {
+      type: [String],
+      validate: [arrayLimit, "Exceeds the limit of 5"],
+    },
   },
   {
     timestamps: true,
   }
 );
+
+function arrayLimit(val) {
+  return val.length <= 5;
+}
 
 const File = mongoose.model("File", fileSchema);
 module.exports = File;

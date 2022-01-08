@@ -11,6 +11,7 @@ import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
 import { getAlltopics } from "../../../redux/actions/topicActions"
+import TagsInput from "../TagsInput"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -19,8 +20,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [fileUrl, setFilUrl] = useState("")
   const [imgPreview, setImgPreview] = useState("")
   const [privacy, setPrivacy] = useState(false)
+  const [tags, setTags] = useState([])
   const hiddenFileInput = useRef(null)
   const topics = useSelector((state) => state.topics.allTopics)
+  const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -89,6 +92,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       subject: singleTopic ? singleTopic.subject : subject,
       fileUrl: image,
       isPrivate: privacy,
+      tags,
     }
     handleShowModal()
     dispatch(addFileToLibrary(fileData))
@@ -113,6 +117,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
           <button type="button" onClick={handleShowModal}>
             <Icon iconName="close" />
           </button>
+        </section>
+        <section>
+          <TagsInput selectedTags={selectedTags} />
         </section>
         <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
           {singleTopic ? (
