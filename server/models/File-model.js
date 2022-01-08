@@ -15,9 +15,11 @@ const fileSchema = new Schema(
     },
     category: {
       type: String,
+      required: true,
     },
     subject: {
       type: String,
+      required: true,
     },
     likedBy: [
       {
@@ -34,6 +36,7 @@ const fileSchema = new Schema(
     tags: {
       type: [String],
       validate: [arrayLimit, "Exceeds the limit of 5"],
+      required: true,
     },
   },
   {
