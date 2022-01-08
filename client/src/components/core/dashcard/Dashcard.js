@@ -39,9 +39,9 @@ export default function Dashcard({
         key={item._id}
         linkId={item._id || item.sys.id}
         listItemTitle={item?.title}
-        listItemDate={item?.date}
+        listItemDate={item?.dateStart}
         listItemComments={item?.posts}
-        listItemUsers={item?.members}
+        listItemUsers={item?.members || item?.attendees}
         listItemType={dashCardTitle}
       />
     ))
@@ -51,9 +51,9 @@ export default function Dashcard({
       key={item._id}
       linkId={item._id || item.sys.id}
       listItemTitle={item?.title}
-      listItemDate={item?.date}
+      listItemDate={item?.dateStart}
       listItemComments={item?.posts}
-      listItemUsers={item?.members}
+      listItemUsers={item?.members || item?.attendees}
       listItemType={dashCardTitle}
     />
   ))

@@ -1,8 +1,7 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import dayjs from "dayjs"
 import Icon from "../Icon"
 
 export default function DashCardListItem({
@@ -19,7 +18,9 @@ export default function DashCardListItem({
         <div className="flex-col">
           <Link to={`/${listItemType}/${linkId}`}>{listItemTitle}</Link>
           {listItemDate && (
-            <p className="text-xs text-grey-medium pb-1">{listItemDate}</p>
+            <p className="text-xs text-grey-medium pb-1">
+              {dayjs(listItemDate).format("MMM DD, YYYY")}
+            </p>
           )}
         </div>
 
@@ -57,12 +58,15 @@ export default function DashCardListItem({
   )
 }
 
+DashCardListItem.defaultProps = {
+  listItemDate: "",
+}
+
 DashCardListItem.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   linkId: PropTypes.string.isRequired,
   listItemTitle: PropTypes.string.isRequired,
   listItemDate: PropTypes.string,
-  listItemComments: PropTypes.array.isRequired,
-  listItemUsers: PropTypes.array.isRequired,
+  listItemComments: PropTypes.arrayOf.isRequired,
+  listItemUsers: PropTypes.arrayOf.isRequired,
   listItemType: PropTypes.string.isRequired,
 }
