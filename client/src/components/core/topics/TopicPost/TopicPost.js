@@ -15,7 +15,6 @@ import Icon from "../../Icon"
 
 function TopicPost({ post, topicId, comments }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
-  const postById = useSelector((state) => state.posts.singlePost)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
@@ -45,20 +44,17 @@ function TopicPost({ post, topicId, comments }) {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-2"
-              src={postById?.owner?.imageUrl}
+              src={post?.owner?.imageUrl}
               alt="profile"
             />
             <p className="text-base">
-              {postById?.owner?.firstName} {postById?.owner?.lastName}
+              {post?.owner?.firstName} {post?.owner?.lastName}
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
               Commented on
             </p>
-            <Link
-              to={`/topics/${postById?.topic?._id}`}
-              className="text-base pl-3"
-            >
-              {post.topic?.title}
+            <Link to={`/topics/${post?.topic?._id}`} className="text-base pl-3">
+              {post.topic?.title || post.event?.title}
             </Link>
           </div>
           <div className="hidden lg:flex items-center">
@@ -75,10 +71,10 @@ function TopicPost({ post, topicId, comments }) {
         </p>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
-        <div className="flex">
+        {/* <div className="flex">
           <Icon iconName="file" />
           <span>00</span>
-        </div>
+        </div> */}
         <div className="flex">
           {post?.likedBy?.includes(user?._id) ? (
             <button type="button" onClick={handleUnlike}>
@@ -116,8 +112,12 @@ function TopicPost({ post, topicId, comments }) {
   )
 }
 
+TopicPost.defaultProps = {
+  topicId: "",
+}
+
 TopicPost.propTypes = {
-  topicId: PropTypes.string.isRequired,
+  topicId: PropTypes.string,
   post: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
 }
