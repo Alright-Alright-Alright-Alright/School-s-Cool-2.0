@@ -1,11 +1,9 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
+import dayjs from "dayjs"
+import PropTypes from "prop-types"
 import Icon from "../Icon"
 import { joinEvent, leaveEvent } from "../../../redux/actions/eventActions"
 
@@ -13,10 +11,6 @@ const EventCards = ({ event }) => {
   const user = useSelector((state) => state.user.singleUser)
   const [join, setJoin] = useState(false)
   const dispatch = useDispatch()
-
-  const params = useParams()
-
-  console.log(event.attendees)
 
   const joinEventHandler = () => {
     dispatch(joinEvent(event?._id, user._id))
@@ -28,7 +22,6 @@ const EventCards = ({ event }) => {
     setJoin(!join)
   }
 
-  
   return (
     <div className="flex flex-col justify-between w-3/7 h-2/5 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
       <Link to={`${event?._id}`}>
@@ -46,8 +39,14 @@ const EventCards = ({ event }) => {
           </div>
           <div className="flex justify-around">
             <p className="text-sm">{event?.location}</p>
-            <p className="text-sm">{event?.dateStart.slice(0, 10)}</p>
-            <p className="text-sm">{event?.dateEnd.slice(0, 10)}</p>
+            <p className="text-sm">
+              {" "}
+              {dayjs(event?.dateStart).format("MMM DD, YYYY")}
+            </p>
+            <p className="text-sm">
+              {" "}
+              {dayjs(event?.dateEnd).format("MMM DD, YYYY")}
+            </p>
           </div>
         </section>
       </Link>
@@ -78,7 +77,11 @@ const EventCards = ({ event }) => {
         </div>
       </section>
     </div>
-  );
+  )
+}
+
+EventCards.propTypes = {
+  event: PropTypes.shape.isRequired,
 }
 
 export default EventCards

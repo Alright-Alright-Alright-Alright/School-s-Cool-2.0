@@ -1,12 +1,22 @@
 /* eslint-disable no-underscore-dangle */
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
 import Button from "../../Button"
-import { joinEvent, leaveEvent } from "../../../../redux/actions/eventActions"
+import {
+  getOneEvent,
+  joinEvent,
+  leaveEvent,
+} from "../../../../redux/actions/eventActions"
 
 function EventDescriptionCard({ event, user }) {
   const dispatch = useDispatch()
+  const { eventId } = useParams()
+
+  useEffect(() => {
+    dispatch(getOneEvent(eventId))
+  }, [dispatch, eventId])
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
