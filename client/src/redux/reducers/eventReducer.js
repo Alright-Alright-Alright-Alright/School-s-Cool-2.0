@@ -1,4 +1,11 @@
-import { GET_EVENT, POST_EVENT, SET_EVENTS } from "../types/events"
+/* eslint-disable no-underscore-dangle */
+import {
+  GET_EVENT,
+  POST_EVENT,
+  SET_EVENTS,
+  JOIN_EVENT,
+  LEAVE_EVENT,
+} from "../types/events"
 
 const initialState = {
   allEvents: [],
@@ -20,6 +27,13 @@ const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         singleEvent: action.payload,
+      }
+    case JOIN_EVENT:
+    case LEAVE_EVENT:
+      return {
+        allEvents: state.allEvents.map((eachEvent) =>
+          eachEvent._id === action.payload._id ? action.payload : eachEvent
+        ),
       }
     default:
       return state

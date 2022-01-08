@@ -1,7 +1,23 @@
-import React from "react"
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
+import { useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
+import Button from "../../Button"
+import {
+  getOneEvent,
+  joinEvent,
+  leaveEvent,
+} from "../../../../redux/actions/eventActions"
 
-function EventDescriptionCard({ event }) {
+function EventDescriptionCard({ event, user }) {
+  const dispatch = useDispatch()
+  const { eventId } = useParams()
+
+  useEffect(() => {
+    dispatch(getOneEvent(eventId))
+  }, [dispatch, eventId])
+
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div>
@@ -11,32 +27,30 @@ function EventDescriptionCard({ event }) {
         <p>{event?.description}</p>
       </div>
 
-      {/* <div className="flex justify-between p-3 relative">
-        <div className="flex items-center">
-          <button type="button" onClick={handleShowModal} className="flex">
-            <Icon iconName="add" iconStyle="fill-inactive text-sky" />
-            <p className="pl-3">Add a resource</p>
-          </button>
-          {showModal && (
-            <LibraryModal
-              handleShowModal={handleShowModal}
-              singleTopic={singleTopic}
-            />
-          )}
-        </div>
-        <Button
-          buttonName="Add post to event"
-          buttonStyle="btnEventStyle"
-          buttonSubmit
-          onClick={onClick}
-        />
-      </div> */}
+      <div className="flex justify-end p-3 relative">
+        {event?.attendees?.some((attendee) => attendee._id === user._id) ? (
+          <Button
+            buttonName="Leave this event"
+            buttonStyle="btnEventStyleActive"
+            buttonSubmit
+            onClick={() => dispatch(leaveEvent(event._id, user._id))}
+          />
+        ) : (
+          <Button
+            buttonName="Join this event"
+            buttonStyle="btnEventStyle"
+            buttonSubmit
+            onClick={() => dispatch(joinEvent(event._id, user._id))}
+          />
+        )}
+      </div>
     </div>
   )
 }
 
 EventDescriptionCard.propTypes = {
   event: PropTypes.shape.isRequired,
+  user: PropTypes.shape.isRequired,
 }
 
 export default EventDescriptionCard

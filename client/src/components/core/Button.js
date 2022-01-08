@@ -14,6 +14,8 @@ const styles = {
     "border-2 rounded-full bg-white border-yellow text-yellow hover:bg-yellow hover:text-white",
   btnEventStyle:
     "border-2 rounded-full bg-white border-sky text-sky hover:bg-sky hover:text-white",
+  btnEventStyleActive:
+    "border-2 rounded-full bg-sky border-sky text-white hover:bg-white hover:text-sky",
 }
 
 function Button({ buttonName, buttonStyle, buttonSubmit, onClick, disabled }) {
