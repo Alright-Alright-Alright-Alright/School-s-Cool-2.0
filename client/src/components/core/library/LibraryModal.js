@@ -129,6 +129,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </div>
           ) : (
             <select
+              required
               onChange={chooseCategory}
               name="category"
               id=""
@@ -149,6 +150,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </div>
           ) : (
             <select
+              required
               onChange={chooseSubject}
               name="subject"
               id=""

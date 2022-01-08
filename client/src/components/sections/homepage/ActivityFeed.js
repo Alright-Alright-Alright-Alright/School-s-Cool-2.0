@@ -20,7 +20,7 @@ function ActivityFeed() {
   useEffect(() => {
     dispatch(getAllActivities())
     dispatch(getFollowedActivities())
-  })
+  }, [dispatch])
 
   const shownActivities = filter ? followedActivities : allActivities
 
