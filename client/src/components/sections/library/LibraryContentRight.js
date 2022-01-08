@@ -55,8 +55,14 @@ const LibraryContentRight = ({ singleFile }) => {
               {singleFile.category}: {singleFile.subject}
             </p>
           </div>
-          <div className="ml-8">grade range</div>
-          <div className="ml-8">#tags</div>
+          <div className="text-sm">grade range</div>
+          <div className="">
+            {singleFile.tags.map((tag) => (
+              <span className="mr-1 bg-grey-super_light rounded-full px-3 text-base text-grey-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
         </section>
         <hr className="ml-8 w-5/6 text-grey-light" />
         <section className="ml-8 flex">

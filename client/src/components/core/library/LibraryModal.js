@@ -84,7 +84,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   }
 
   const handleFormSubmit = async (e) => {
-    console.log(tags)
     e.preventDefault()
     const image = await fileUploadHandler(fileUrl)
     const fileData = {
