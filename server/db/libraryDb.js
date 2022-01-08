@@ -8,6 +8,7 @@ exports.creatingFile = async (
   subject,
   isPrivate,
   fileUrl,
+  tags,
   owner
 ) => {
   try {
@@ -17,6 +18,7 @@ exports.creatingFile = async (
       subject,
       isPrivate,
       fileUrl,
+      tags,
       owner,
     }).then(async (fileToPopulate) => {
       const result = await File.findById(fileToPopulate._id).populate("owner");
@@ -120,16 +122,15 @@ exports.getingLibrary = async () => {
 
 exports.getingSingleFileDB = async (fileId) => {
   try {
-    return await File.findById(fileId).populate(
-      "owner",
-      "firstName lastName imageUrl"
-    ).populate({
-      path: "comments",
-      populate: {
-        path: "owner",
-        select: "firstName lastName imageUrl",
-      },
-    })
+    return await File.findById(fileId)
+      .populate("owner", "firstName lastName imageUrl")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
   } catch (error) {
     throw new Error(error.message);
   }
