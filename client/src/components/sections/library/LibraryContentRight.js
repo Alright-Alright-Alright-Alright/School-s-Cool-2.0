@@ -102,7 +102,7 @@ const LibraryContentRight = ({ singleFile }) => {
               />
             ))}
           </div>
-          <div className="h-1/4">
+          <div className="h-1/4 mb-2">
             <CommentFormLibrary singleFile={singleFile} />
           </div>
         </section>
