@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -14,11 +14,34 @@ import {
 
 const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
+  const [selected, setSelected] = useState([])
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
 
+  const downloadFiles = () => {
+    selected.for((file) => {
+      const response = {
+        file,
+      }
+      window.location.href = response.file
+    })
+  }
+
   return (
     <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>
+      {selected.length > 0 && (
+        <div className="flex justify-end mb-5 ">
+          <button
+            onClick={downloadFiles}
+            type="button"
+            className="border-2 rounded-full border-pink bg-pink text-white"
+          >
+            <p className="ml-5 mr-5 mt-2 mb-2 text-base">
+              Download selected files
+            </p>
+          </button>
+        </div>
+      )}
       <table className="w-full">
         <thead>
           <tr className="text-left">
@@ -76,9 +99,35 @@ const libraryItem = ({ library, showModal }) => {
               <td className="border-t-2 border-grey-medium_light" />
 
               <td className="border-t-2 border-grey-medium_light">
-                <button type="button" className="pt-1">
-                  <Icon iconName="follow" iconStyle="fill-inactive text-pink" />
-                </button>
+                {selected?.includes(item.fileUrl) ? (
+                  <button
+                    type="button"
+                    className="pt-1"
+                    onClick={() =>
+                      setSelected(() => {
+                        const index = selected.indexOf(item.fileUrl)
+
+                        if (index > -1) {
+                          selected.splice(index, 1)
+                        }
+                        return selected
+                      })
+                    }
+                  >
+                    <Icon iconName="follow" iconStyle="fill-active text-pink" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="pt-1"
+                    onClick={() => setSelected([...selected, item.fileUrl])}
+                  >
+                    <Icon
+                      iconName="follow"
+                      iconStyle="fill-inactive text-pink"
+                    />
+                  </button>
+                )}
               </td>
               <td className="border-t-2 border-grey-medium_light">
                 <button
@@ -86,7 +135,7 @@ const libraryItem = ({ library, showModal }) => {
                   className="pt-2"
                   onClick={() => dispatch(deleteFile(item._id))}
                 >
-                  <Icon iconName="trash" />
+                  {user._id === item.owner._id && <Icon iconName="trash" />}
                 </button>
               </td>
             </tr>
