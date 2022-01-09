@@ -58,7 +58,10 @@ const LibraryContentRight = ({ singleFile }) => {
           <div className="text-sm">grade range</div>
           <div className="">
             {singleFile.tags.map((tag) => (
-              <span className="mr-1 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium">
+              <span
+                key={tag}
+                className="mr-1 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+              >
                 {tag}
               </span>
             ))}
@@ -102,7 +105,7 @@ const LibraryContentRight = ({ singleFile }) => {
               />
             ))}
           </div>
-          <div className="h-1/4">
+          <div className="h-1/4 mb-2">
             <CommentFormLibrary singleFile={singleFile} />
           </div>
         </section>
