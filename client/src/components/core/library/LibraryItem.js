@@ -19,7 +19,8 @@ const libraryItem = ({ library, showModal }) => {
   dayjs.extend(relativeTime)
 
   const downloadFiles = () => {
-    selected.for((file) => {
+    selected.forEach((file) => {
+      console.log(file)
       const response = {
         file,
       }
