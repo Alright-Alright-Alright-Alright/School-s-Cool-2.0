@@ -2,12 +2,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
 import { deleteComment } from "../../../redux/actions/libraryActions"
 
 function Comment({ comment, id }) {
+  const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   return (
     <div className="flex px-5 pb-1 pt-3 items-center">
@@ -22,7 +23,9 @@ function Comment({ comment, id }) {
           type="button"
           onClick={() => dispatch(deleteComment(comment._id, id))}
         >
-          <Icon iconName="close" iconStyle="text-grey-dark" />
+          {user._id === comment.owner._id && (
+            <Icon iconName="close" iconStyle="text-grey-dark" />
+          )}
         </button>
       </div>
     </div>

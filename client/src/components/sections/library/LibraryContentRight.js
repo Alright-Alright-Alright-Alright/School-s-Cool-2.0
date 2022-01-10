@@ -22,8 +22,8 @@ const LibraryContentRight = ({ singleFile }) => {
   }, [dispatch, singleFile?._id])
 
   return singleFile !== null ? (
-    <div className="flex flex-col w-5/6 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8">
-      <div className="h-1/2 flex flex-col justify-around">
+    <div className="flex flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8">
+      <div className="h-3/5 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
             {singleFile.fileUrl.includes("pdf") ? (
@@ -49,7 +49,7 @@ const LibraryContentRight = ({ singleFile }) => {
           </div>
         </section>
         <hr className="ml-8 w-5/6 text-grey-light" />
-        <section className="ml-8">
+        <section className="ml-8 h-1/4 flex flex-col justify-evenly">
           <div>
             <p className="text-grey-medium font-semibold">
               {singleFile.category}: {singleFile.subject}
@@ -58,14 +58,17 @@ const LibraryContentRight = ({ singleFile }) => {
           <div className="text-sm">grade range</div>
           <div className="">
             {singleFile.tags.map((tag) => (
-              <span className="mr-1 bg-grey-super_light rounded-full px-3 text-base text-grey-medium">
+              <span
+                key={tag}
+                className="mr-1 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+              >
                 {tag}
               </span>
             ))}
           </div>
         </section>
         <hr className="ml-8 w-5/6 text-grey-light" />
-        <section className="ml-8 flex">
+        <section className="ml-8 flex items-center">
           <div className="flex">
             {singleFile.likedBy.includes(singleFile.owner._id) ? (
               <button
@@ -91,7 +94,7 @@ const LibraryContentRight = ({ singleFile }) => {
         </section>
       </div>
       <hr className="ml-8 w-5/6 text-grey-light" />
-      <div className="h-1/2">
+      <div className="h-2/5">
         <section className="ml-1 h-full flex flex-col">
           <div className="h-3/4 overflow-y-auto scrollBar">
             {singleFile.comments.map((comment) => (
@@ -102,7 +105,7 @@ const LibraryContentRight = ({ singleFile }) => {
               />
             ))}
           </div>
-          <div className="h-1/4">
+          <div className="h-1/4 mb-2">
             <CommentFormLibrary singleFile={singleFile} />
           </div>
         </section>
