@@ -23,7 +23,7 @@ const EventCards = ({ event }) => {
   }
 
   return (
-    <div className="flex flex-col justify-between w-3/7 h-2/5 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
+    <div className="flex flex-col justify-between w-full lg:w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
       <Link to={`${event?._id}`}>
         <section className="">
           <img
