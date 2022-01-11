@@ -35,12 +35,12 @@ function ActivityFeed() {
         <div className="space-x-4 md:place-content-between text-center pr-3">
           <Button
             buttonName="All activity"
-            buttonStyle={filter ? "btnSecondaryStyle" : "btnPrimaryStyle"}
+            buttonStyle={filter ? "btnPrimaryStyle" : "btnSecondaryStyle"}
             onClick={() => setFilter(false)}
           />
           <Button
             buttonName="Followed activity"
-            buttonStyle={filter ? "btnPrimaryStyle" : "btnSecondaryStyle"}
+            buttonStyle={filter ? "btnSecondaryStyle" : "btnPrimaryStyle"}
             onClick={() => setFilter(true)}
           />
         </div>
