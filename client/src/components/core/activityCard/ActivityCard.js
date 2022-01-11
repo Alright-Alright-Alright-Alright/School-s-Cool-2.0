@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
@@ -46,14 +47,18 @@ function ActivityCard({ activity }) {
     <Comment key={commentData._id} comment={commentData} />
   ))
 
+  const activityType = activity.topic ? "topic" : "event"
+
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="p-3">
-        <img
-          className="object-cover w-full max-h-40 rounded-bl-2xl rounded-br-2xl rounded-r-2xl"
-          src={activity.topic?.bannerImage}
-          alt="banner"
-        />
+        <Link to={`/${activityType}s/${activity[activityType]._id}`}>
+          <img
+            className="object-cover w-full max-h-40 rounded-bl-2xl rounded-br-2xl rounded-r-2xl"
+            src={activity[activityType].bannerImage}
+            alt="banner"
+          />
+        </Link>
       </div>
       <div>
         <div className="flex justify-between pl-3 pr-3">
@@ -67,9 +72,12 @@ function ActivityCard({ activity }) {
               {activity.owner?.firstName} {activity.owner?.lastName}
             </p>
             <p className="text-base pl-3 text-grey-medium_light">Posted on</p>
-            <a href="/" className="text-base pl-3">
-              {activity.topic?.title}
-            </a>
+            <Link
+              to={`/${activityType}s/${activity[activityType]._id}`}
+              className="text-base pl-3"
+            >
+              {activity[activityType].title}
+            </Link>
           </div>
           <div className="hidden lg:block items-center">
             <p className="text-base">{dayjs(activity.createdAt).fromNow()}</p>
