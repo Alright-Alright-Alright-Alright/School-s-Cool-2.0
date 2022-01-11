@@ -1,13 +1,51 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fill-active {
+  --color-bg: currentColor;
+  --color-content: theme("colors.grey.super_light");
+  --color-counter: currentColor;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.fill-inactive {
+  --color-bg: theme("colors.transparent");
+  --color-content: currentColor;
+  --color-counter: currentColor;
 }
+
+#toogle-switch::after {
+  content: "";
+  @apply h-6 w-6 rounded-full bg-grey-dark absolute left-0 top-0 transform scale-95 duration-200
+}
+
+#toogle-switch:checked::after {
+  @apply transform scale-95 translate-x-6
+}
+
+.scrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.react-pdf__Document span {
+  display: none;
+ }
+ 
+ .react-pdf__Page__canvas {
+   margin: 0 auto;
+   max-width: 65px !important;
+   height: 80px !important;
+   padding-bottom: 3px;
+ }
+ 
+ .react-pdf__Page__annotations {
+   display: none;
+ }
+ 
+ .annotationLayer {
+   display: none;
+ }
+ 
+ .react-pdf__Page__textContent {
+   display: none;
+ }

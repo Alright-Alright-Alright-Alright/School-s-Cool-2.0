@@ -1,7 +1,7 @@
-const User          = require('../models/User-model');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt        = require('bcryptjs'); 
-const passport      = require('passport');
+const User = require("../models/User-model");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 passport.serializeUser((loggedInUser, cb) => {
   cb(null, loggedInUser._id);
@@ -17,23 +17,22 @@ passport.deserializeUser((userIdFromSession, cb) => {
   });
 });
 
-passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, next) => {
-  User.findOne({ email }, (err, foundUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
+passport.use(
+  new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    User.findOne({ email }, (err, foundUser) => {
+      if (err) {
+        return done(err);
+      }
 
-    if (!foundUser) {
-      next(null, false, { message: 'Email does not exists.' });
-      return;
-    }
+      if (!foundUser) {
+        return done(null, false, { message: "Email does not exists." });
+      }
 
-    if (!bcrypt.compareSync(password, foundUser.password)) {
-      next(null, false, { message: 'Incorrect password.' });
-      return;
-    }
+      if (!bcrypt.compareSync(password, foundUser.password)) {
+        return done(null, false, { message: "Incorrect password." });
+      }
 
-    next(null, foundUser);
-  });
-}));
+      done(null, foundUser);
+    });
+  })
+);

@@ -1,28 +1,77 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://school-s-cool-2-0.vercel.app",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
+    "@contentful/rich-text-html-renderer": "^15.10.0",
+    "@contentful/rich-text-react-renderer": "^15.10.0",
+    "@contentful/rich-text-types": "^15.10.1",
+    "@craco/craco": "^6.4.0",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^9.8.8",
+    "axios": "^0.24.0",
+    "dayjs": "^1.10.7",
+    "postcss": "^7.0.39",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-datepicker": "^4.5.0",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "react-pdf": "^5.6.0",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "4.0.2",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "airbnb",
+      "plugin:jsx-a11y/recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "jsx-a11y",
+      "prettier"
+    ],
+    "rules": {
+      "semi": 0,
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "semi": false
+        }
+      ]
+    }
   },
+  "eslintIgnore": [
+    "node_modules",
+    "build/*",
+    "craco.config.js",
+    "*.test.js"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -34,5 +83,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "react-error-overlay": "6.0.9"
   }
 }

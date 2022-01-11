@@ -28,26 +28,26 @@ const userSchema = new Schema(
       enum: ["USER", "EDITOR", "ADMIN"],
       default: "USER",
     },
-    fileUrl: [
+    resources: [
       {
         type: Schema.Types.ObjectId,
         ref: "File",
       },
     ],
+    followers: {
+      type: Array,
+      default: [],
+    },
+    followings: {
+      type: Array,
+      default: [],
+    },
+    courses: {
+      type: Array,
+      default: [],
+    },
     resetToken: String,
     expireToken: Date,
-    newChannelEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newEventEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
-    newPostEmailNotification: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,

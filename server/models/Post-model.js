@@ -1,39 +1,36 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-require("./User-model");
-require("./Channel-model");
-require("./Comment-model")
+// require("./User-model");
+// require("./Channel-model");
+// require("./Comment-model")
 
 const postSchema = new Schema(
   {
-    postTitle: {
-      type: String,
-      required: true
-    },
-    postBody: {
+    body: {
         type: String,
         required: true
     },
-    author: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    channel: {
+    topic: {
         type: Schema.Types.ObjectId,
-        ref: "Channel"
+        ref: "Topic"
     },
-    comment: [{
+    event: {
+        type: Schema.Types.ObjectId,
+        ref: "Event"
+    },
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
     }],
-    votes: [{
-      type: String
+    likedBy: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }],
-    showContent: {
-      type: Boolean,
-      default: true
-    },
   },
   {
     timestamps: true,

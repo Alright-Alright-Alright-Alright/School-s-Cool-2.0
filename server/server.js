@@ -1,5 +1,5 @@
-require("dotenv").config()
-
+require("dotenv").config();
+const { jwtAuthorization } = require("./middleware/JWTmiddleware");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -28,15 +28,14 @@ require("./configs/passport");
 // auth session =============================
 app.use(
   session({
-    secret: "ironducks jumping through the mountains",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
-    saveUninitialized: true,
     cookie: {
-      maxAge: 60000000,
-    },
-    ttl: 60 * 60 * 24,
-    rolling: true //session gets refreshed
+      secure: false,
+      maxAge: 3600000 //1 hour
+  },
+    rolling: false, //session gets refreshed
   })
 );
 app.set("trust proxy", 1); // trust first proxy
@@ -55,17 +54,34 @@ app.use(
 
 //routes
 // ==========================================
-const authRoutes = require('./routes/authRoutes');
-app.use('/api', authRoutes);
+const authRoutes = require("./routes/authRoutes");
+app.use("/api", authRoutes);
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/api', userRoutes);
+const activityRoutes = require("./routes/activityRoutes");
+app.use("/api", jwtAuthorization, activityRoutes);
 
-const eventRoutes = require('./routes/eventRoutes');
-app.use('/api', eventRoutes);
+const userRoutes = require("./routes/userRoutes");
+app.use("/api",jwtAuthorization, userRoutes);
+
+const eventRoutes = require("./routes/eventRoutes");
+app.use("/api", jwtAuthorization, eventRoutes);
+
+const libraryRoutes = require("./routes/libraryRoutes");
+app.use("/api", jwtAuthorization, libraryRoutes);
+
+const topicRoutes = require("./routes/topicRoutes");
+app.use("/api", jwtAuthorization, topicRoutes);
+
+const postRoutes = require("./routes/postRoutes");
+app.use("/api", jwtAuthorization, postRoutes);
+
+const commentRoutes = require("./routes/commentRoutes");
+app.use("/api", jwtAuthorization, commentRoutes);
+
+const courseRoutes = require("./routes/courseRoutes");
+app.use("/api", jwtAuthorization, courseRoutes);
 
 //Server =====================================
-const Server = app.listen(process.env.PORT, () =>
+app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)
 );
-

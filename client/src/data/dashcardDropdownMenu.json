@@ -1,0 +1,30 @@
+{
+  "topics": {
+    "bgColorOnHover": "aqua-light",
+    "dropDownItems": ["All topics", "Created by me", "Followed by me"]
+  },
+  "courses": {
+    "bgColorOnHover": "yellow-light",
+    "dropDownItems": ["All courses", "Created by me", "In progress", "Completed"]
+  },
+  "events": {
+    "bgColorOnHover": "sky-light",
+    "dropDownItems": ["All events", "Created by me", "Attending"]
+  },
+  "users": {
+    "bgColorOnHover": "pink-light",
+    "dropDownItems": ["All users"]
+  },
+  "topicMembers": {
+    "bgColorOnHover": "aqua-light",
+    "dropDownItems": ["All users", "Amsterdam Mentors"]
+  },
+  "eventMembers": {
+    "bgColorOnHover": "sky-light",
+    "dropDownItems": ["All attendees", "Invite other users"]
+  },
+  "resources": {
+    "bgColorOnHover": "aqua-light",
+    "dropDownItems": ["All files", "Created by me", "Followed by me"]
+  }
+}

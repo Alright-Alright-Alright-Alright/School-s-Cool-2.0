@@ -1,71 +1,91 @@
-const User = require("../models/User-model");
-const File = require("../models/File-model");
-const Channel = require("../models/Channel-model");
+const {
+  createFile,
+  getUserLibrary,
+  getLibrary,
+  fileDelete,
+  addLikeService,
+  pullLikeService,
+  getingSingleFile
+} = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
-  const { fileName, category, privacy, fileUrl } = req.body;
-  let file = await File.create({
-    fileName,
-    category,
-    privacy,
-    fileUrl,
-    owner: req.user._id,
-  });
+  const { title, category, subject, isPrivate, fileUrl, tags } = req.body;
+  const owner = req.user.userLogedIn._id;
   try {
-    let user = await User.findByIdAndUpdate(req.user._id, {
-      $push: { fileUrl: file._id },
-    });
-
-    let channel = await Channel.findOneAndUpdate(
-      { name: file.category },
-      {
-        $push: { channelFiles: file._id },
-      }
+    let file = await createFile(
+      title,
+      category,
+      subject,
+      isPrivate,
+      fileUrl,
+      tags,
+      owner
     );
-
-    return res.json({ user, channel });
+    res.status(200).json({ message: "Here's your file", file });
   } catch (error) {
-    res.status(500).json({
-      message: "Something went wrong adding a file",
-    });
+    throw new Error(error.message);
   }
 };
 
-exports.userLibrary = (req, res) => {
-  User.findById(req.user._id)
-    .populate({ path: "fileUrl", populate: { path: "owner" } })
-    .then((userData) => {
-      let userFiles = userData.fileUrl;
-      res.json({ message: "All files here", userFiles });
-    });
+exports.addLike = async (req, res) => {
+  let fileId = req.params.fileId;
+  let user = req.user.userLogedIn._id;
+  try {
+    let file = await addLikeService(fileId, user);
+    res.status(200).json(file);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
-exports.getLibrary = (req, res) => {
-  File.find()
-    .populate("owner")
-    .then((allFiles) => {
-      res.json({ message: "All files here", allFiles });
-    });
+exports.pullLike = async (req, res) => {
+  let fileId = req.params.fileId;
+  let user = req.user.userLogedIn._id;
+  try {
+    let file = await pullLikeService(fileId, user);
+    res.status(200).json(file);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
+
+exports.userLibrary = async (req, res) => {
+  user = req.user.userLogedIn._id;
+  try {
+    let userFiles = await getUserLibrary(user);
+    res.status(200).json(userFiles);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.getLibrary = async (req, res) => {
+  try {
+    let allFiles = await getLibrary();
+    res.status(200).json(allFiles);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.getSingleFile = async (req, res) => {
+  let fileId = req.params.fileId;
+  try {
+    let file = await getingSingleFile(fileId)
+    res.status(200).json(file)
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 exports.deleteFile = async (req, res) => {
-  let file = await File.findByIdAndRemove(req.body.fileToDelete._id);
+  let userId = req.user.userLogedIn._id;
+  let fileToDelete = req.body.fileId;
+
   try {
-    let user = await User.findByIdAndUpdate(req.user._id, {
-      $pull: { fileUrl: file._id },
-    });
-
-    let channel = await Channel.findOneAndUpdate(
-      { name: file.category },
-      {
-        $pull: { channelFiles: file._id },
-      }
-    );
-
-    return res.json({ user, channel });
+    let file = await fileDelete(userId, fileToDelete);
+    res.status(200).json(file);
   } catch (error) {
-    res.status(500).json({
-      message: "Something went wrong when deleting this file",
-    });
+    throw new Error(error.message);
   }
 };
