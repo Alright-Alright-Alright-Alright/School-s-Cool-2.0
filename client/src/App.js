@@ -12,20 +12,18 @@ import { loggedInUser } from "./redux/actions/userActions"
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
-  const user = useSelector((state) => state.user.singleUser)
+  const loggedIn = useSelector((state) => state.user.isLoggedIn)
   const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user && !token) {
+    if (!loggedIn && !token) {
       navigate("/login")
-    } else if (!token) {
-      localStorage.removeItem("user")
     } else {
       dispatch(loggedInUser())
     }
-  }, [dispatch, token])
+  }, [dispatch, token, loggedIn, navigate])
 
   return (
     <div className="App">
