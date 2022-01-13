@@ -8,12 +8,21 @@ import {
 } from "../types/user"
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
-const initialState = {
-  token: localStorage.getItem("Authorization"),
-  singleUser: null,
-  users: [],
-  isLoggedIn: false,
-}
+const user = JSON.parse(localStorage.getItem("user"))
+
+const initialState = user
+  ? {
+      token: localStorage.getItem("Authorization"),
+      singleUser: user,
+      users: [],
+      isLoggedIn: true,
+    }
+  : {
+      token: null,
+      singleUser: null,
+      users: [],
+      isLoggedIn: false,
+    }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
