@@ -68,7 +68,7 @@ const userJoinEventDb = async (eventId, _id) => {
   try {
     return await Event.findByIdAndUpdate(eventId, {
       $push: { attendees: _id },
-    });
+    }).populate("owner", "firstName lastName imageUrl");
   } catch (error) {
     throw new Error(error);
   }
@@ -78,7 +78,7 @@ const userLeaveEventDb = async (eventId, _id) => {
   try {
     return await Event.findByIdAndUpdate(eventId, {
       $pull: { attendees: _id },
-    });
+    }).populate("owner", "firstName lastName imageUrl");
   } catch (error) {
     throw new Error(error);
   }
