@@ -55,12 +55,12 @@ const LibraryContentRight = ({ singleFile }) => {
               {singleFile.category}: {singleFile.subject}
             </p>
           </div>
-          <div className="text-sm">grade range</div>
-          <div className="">
+          {/* <div className="text-sm">grade range</div> */}
+          <div className="flex flex-wrap gap-1 justify-start">
             {singleFile.tags.map((tag) => (
               <span
                 key={tag}
-                className="mr-1 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+                className="mr-2 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
               >
                 {tag}
               </span>
@@ -97,13 +97,19 @@ const LibraryContentRight = ({ singleFile }) => {
       <div className="h-2/5">
         <section className="ml-1 h-full flex flex-col">
           <div className="h-3/4 overflow-y-auto scrollBar">
-            {singleFile.comments.map((comment) => (
-              <Comment
-                comment={comment}
-                key={comment._id}
-                id={singleFile._id}
-              />
-            ))}
+            {singleFile.comments.length === 0 ? (
+              <p className="h-full text-grey-medium text-base flex items-center justify-center">
+                No comments yet on this file
+              </p>
+            ) : (
+              singleFile.comments.map((comment) => (
+                <Comment
+                  comment={comment}
+                  key={comment._id}
+                  id={singleFile._id}
+                />
+              ))
+            )}
           </div>
           <div className="h-1/4 mb-2">
             <CommentFormLibrary singleFile={singleFile} />
