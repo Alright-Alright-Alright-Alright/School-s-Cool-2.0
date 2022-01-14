@@ -24,6 +24,14 @@ function ProfileMainContent() {
   const [lastName, setLastName] = useState(user.lastName)
   const [email, setEmail] = useState(user.email)
 
+  const filteredTopics = topics.filter((item) =>
+    item.members.find((member) => member._id === user._id)
+  )
+
+  const filteredEvents = events.filter((item) =>
+    item.attendees.find((member) => member._id === user._id)
+  )
+
   useEffect(() => {
     dispatch(getAlltopics())
     dispatch(getAllFilesFromLibrary())
@@ -44,8 +52,8 @@ function ProfileMainContent() {
   }
 
   return (
-    <div className="flex flex-col items-center ">
-      <img className="p-6 w-2/7" src={user.imageUrl} alt="profile" />
+    <div className="flex flex-col items-center px-3">
+      <img className="p-6 w-1/2 h-auto" src={user.imageUrl} alt="profile" />
       <div className="flex">
         {user._id === userId ? (
           <div className="p-3">
@@ -69,8 +77,8 @@ function ProfileMainContent() {
           />
         </div>
       </div>
-      <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-6/7 lg:w-2/3 ">
-        <div className="flex flex-col items-start w-full lg:w-2/5">
+      <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-full ">
+        <div className="flex flex-col items-start w-1/2">
           <p className="border-b-2 border-grey-light w-full my-1">
             First name:
           </p>
@@ -123,16 +131,16 @@ function ProfileMainContent() {
         </div>
       </div>
 
-      <div className="block lg:flex w-full justify-center items-center ">
-        <div className="w-6/7 lg:w-1/3 lg:pr-3">
+      <div className="block lg:flex w-full gap-6 ">
+        <div className="lg:w-1/2">
           <Dashcard
-            dashCardData={topics}
+            dashCardData={filteredTopics}
             dashCardTitle="Topics"
             dashCardStyle="bg-aqua"
             dropdownMenuData={dashcardDropdownMenu.topics}
           />
         </div>
-        <div className="w-6/7 lg:w-1/3 lg:pr-3">
+        <div className="lg:w-1/2">
           <Dashcard
             dashCardData={courses}
             dashCardTitle="Courses"
@@ -141,16 +149,16 @@ function ProfileMainContent() {
           />
         </div>
       </div>
-      <div className="block lg:flex w-full justify-center ">
-        <div className="w-6/7 lg:w-1/3 lg:pr-3">
+      <div className="block lg:flex w-full gap-6 ">
+        <div className="lg:w-1/2">
           <Dashcard
-            dashCardData={events}
+            dashCardData={filteredEvents}
             dashCardTitle="Events"
             dashCardStyle="bg-sky"
             dropdownMenuData={dashcardDropdownMenu.events}
           />
         </div>
-        <div className="w-6/7 lg:w-1/3 lg:pr-3">
+        <div className="lg:w-1/2">
           <Dashcard
             dashCardData={events}
             dashCardTitle="Files"
