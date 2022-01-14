@@ -31,9 +31,8 @@ const eventReducer = (state = initialState, action) => {
     case JOIN_EVENT:
     case LEAVE_EVENT:
       return {
-        allEvents: state.allEvents.map((eachEvent) =>
-          eachEvent._id === action.payload._id ? action.payload : eachEvent
-        ),
+        ...state,
+        singleEvent: action.payload,
       }
     default:
       return state

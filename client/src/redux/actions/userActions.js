@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable dot-notation */
-import {login, register, loggedin, logout, getAllUsers} from "../services/userService"
+import {login, register, loggedin, logout, getAllUsers, updateUserService} from "../services/userService"
 
 import {
   SET_USER,
@@ -83,4 +83,19 @@ export const getAllTheUsers = () => (dispatch) => {
         payload: err.response?.data,
       })
     })
+}
+
+export const updateUser = (userData) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  const updatedUser = await updateUserService(userData)
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SET_USER, payload: updatedUser })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
 }

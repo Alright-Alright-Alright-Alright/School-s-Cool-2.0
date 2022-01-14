@@ -59,7 +59,6 @@ export const getOneEvent = (eventId) => async (dispatch) => {
 export const joinEvent = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
   const joinEventDb = await joinEventService(eventId, user)
-  console.log(joinEventDb)
 
   try {
     dispatch({ type: CLEAR_ERRORS })
@@ -75,7 +74,7 @@ export const joinEvent = (eventId, user) => async (dispatch) => {
 export const leaveEvent = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
   const leaveEventDb = await leaveEventService(eventId, user)
-  console.log(leaveEventDb)
+
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_EVENT, payload: leaveEventDb })

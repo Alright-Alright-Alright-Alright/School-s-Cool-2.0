@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -11,12 +11,23 @@ import {
 } from "../../../../redux/actions/eventActions"
 
 function EventDescriptionCard({ event, user }) {
+  const [attendEvent, setAttendEvent] = useState(false)
   const dispatch = useDispatch()
   const { eventId } = useParams()
 
   useEffect(() => {
     dispatch(getOneEvent(eventId))
-  }, [dispatch, eventId])
+  }, [dispatch])
+
+  const handleAttendEvent = () => {
+    if (attendEvent) {
+      dispatch(leaveEvent(eventId, user._id))
+      setAttendEvent(false)
+    } else {
+      dispatch(joinEvent(eventId, user._id))
+      setAttendEvent(true)
+    }
+  }
 
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -28,19 +39,20 @@ function EventDescriptionCard({ event, user }) {
       </div>
 
       <div className="flex justify-end p-3 relative">
-        {event?.attendees?.some((attendee) => attendee._id === user._id) ? (
+        {event?.attendees?.some((attendee) => attendee._id === user._id) ||
+        attendEvent ? (
           <Button
             buttonName="Leave this event"
             buttonStyle="btnEventStyleActive"
             buttonSubmit
-            onClick={() => dispatch(leaveEvent(event._id, user._id))}
+            onClick={handleAttendEvent}
           />
         ) : (
           <Button
             buttonName="Join this event"
             buttonStyle="btnEventStyle"
             buttonSubmit
-            onClick={() => dispatch(joinEvent(event._id, user._id))}
+            onClick={handleAttendEvent}
           />
         )}
       </div>
