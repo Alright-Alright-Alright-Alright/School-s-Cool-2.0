@@ -3,7 +3,8 @@ const courseRoutes = express.Router();
 
 const { joinCourse, leaveCourse } = require("../controllers/courseController");
 
-courseRoutes.put("/joinCourse", joinCourse);
-courseRoutes.put("/leaveCourse", leaveCourse);
+courseRoutes.get("/courses")
+courseRoutes.put("/courses/joinCourse", joinCourse);
+courseRoutes.put("/courses/leaveCourse", leaveCourse);
 
 module.exports = courseRoutes;
