@@ -6,14 +6,23 @@ import {
   SET_USERLOGGED_IN,
   SET_USERS,
 } from "../types/user"
-
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
-const initialState = {
-  token: localStorage.getItem("Authorization"),
-  singleUser: JSON.parse(localStorage.getItem("user")) || null,
-  users: [],
-}
+const user = JSON.parse(localStorage.getItem("user"))
+
+const initialState = user
+  ? {
+      token: localStorage.getItem("Authorization"),
+      singleUser: user,
+      users: [],
+      isLoggedIn: true,
+    }
+  : {
+      token: null,
+      singleUser: null,
+      users: [],
+      isLoggedIn: false,
+    }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,6 +39,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         singleUser: action.payload,
+        isLoggedIn: true,
       }
     case SET_UNAUTHENTICATED:
       return initialState
@@ -37,6 +47,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
+        isLoggedIn: true,
       }
     default:
       return state
