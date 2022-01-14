@@ -19,6 +19,8 @@ import Events from "./pages/Events"
 import CourseDetailPage from "./pages/CourseDetailPage"
 import EventDetailsPage from "./pages/EventDetailsPage"
 import ScrollToTop from "./hooks/ScrollToTop"
+import NotFound from "./pages/NotFound"
+import Profile from "./pages/Profile"
 
 ReactDOM.render(
   <Provider store={store}>
@@ -36,7 +38,9 @@ ReactDOM.render(
           <Route path="courses/:courseId" element={<CourseDetailPage />} />
           <Route path="events" element={<Events />} />
           <Route path="events/:eventId" element={<EventDetailsPage />} />
+          <Route path="profile/:userId" element={<Profile />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </Provider>,

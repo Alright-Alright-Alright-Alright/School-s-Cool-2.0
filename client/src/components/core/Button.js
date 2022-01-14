@@ -3,9 +3,10 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const styles = {
-  btnPrimaryStyle: "border-2 rounded-full bg-white border-grey-dark",
+  btnPrimaryStyle:
+    "border-2 rounded-full bg-white border-grey-dark hover:bg-grey-dark hover:text-white hover:border-white",
   btnSecondaryStyle:
-    "border-2 rounded-full text-white bg-grey-dark border-grey-dark",
+    "border-2 rounded-full text-white bg-grey-dark border-grey-dark hover:bg-white hover:text-grey-dark hover:border-grey-dark",
   btnTopicStyle:
     "border-2 rounded-full bg-white border-aqua text-aqua hover:bg-aqua hover:text-white",
   btnLibraryStyle:
