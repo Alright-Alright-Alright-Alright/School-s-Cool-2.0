@@ -48,15 +48,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     return arr
   }
 
-  const fileType = () => {
-    if (imgPreview.includes("pdf")) {
-      return <Icon iconName="pdf" viewbox="0 0 22 22" />
-    }
-    if (imgPreview.includes("jpg")) {
-      return <Icon iconName="jpg" viewbox="0 0 22 22" />
-    }
-  }
-
   const handleClick = () => {
     hiddenFileInput.current.click()
   }
@@ -165,7 +156,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </select>
           )}
           <div className="flex justify-end items-center w-2/7">
-            {imgPreview && fileType()}
             <div>
               <button
                 type="button"
@@ -173,7 +163,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 className="flex items-center"
               >
                 <span className="text-sm pr-3">
-                  {imgPreview ? "File type" : "Select your File"}
+                  {imgPreview
+                    ? "File successfully uploaded"
+                    : "Select your File"}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>

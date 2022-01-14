@@ -2,6 +2,7 @@
 import React, { Suspense, lazy, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Route, Routes, Outlet, useNavigate } from "react-router-dom"
+import jwt from "jsonwebtoken"
 import NavBar from "./components/layout/NavBar"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -12,20 +13,22 @@ import { loggedInUser } from "./redux/actions/userActions"
 // const Home = lazy(() => import("./pages/Home"))
 
 function App() {
-  const user = useSelector((state) => state.user.singleUser)
+  const loggedIn = useSelector((state) => state.user.isLoggedIn)
   const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const currentTime = new Date().getTime().toString().slice(0, 10)
 
   useEffect(() => {
-    if (!user && !token) {
+    if (
+      jwt.decode(token?.slice(7, token.length))?.exp < Number(currentTime) ||
+      (!loggedIn && !token)
+    ) {
       navigate("/login")
-    } else if (!token) {
-      localStorage.removeItem("user")
     } else {
       dispatch(loggedInUser())
     }
-  }, [dispatch, token])
+  }, [dispatch, token, loggedIn, navigate, currentTime])
 
   return (
     <div className="App">

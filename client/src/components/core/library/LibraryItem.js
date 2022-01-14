@@ -14,6 +14,7 @@ import {
 
 const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
+  const [tableRowClicked, setTableRowClicked] = useState([])
   const [selected, setSelected] = useState([])
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
@@ -26,6 +27,11 @@ const libraryItem = ({ library, showModal }) => {
       }
       window.location.href = response.file
     })
+  }
+
+  const selectedRow = (id) => {
+    dispatch(getSingleFile(id))
+    setTableRowClicked([id])
   }
 
   return (
@@ -43,7 +49,7 @@ const libraryItem = ({ library, showModal }) => {
           </button>
         </div>
       )}
-      <table className="w-full">
+      <table className="w-full ">
         <thead>
           <tr className="text-left">
             <th className="border-l-2 border-b-2 border-grey-medium_light pl-3">
@@ -60,11 +66,14 @@ const libraryItem = ({ library, showModal }) => {
             </th>
           </tr>
         </thead>
-        {library.map((item) => (
-          <tbody key={item._id}>
+        <tbody>
+          {library.map((item, index) => (
             <tr
-              onClick={() => dispatch(getSingleFile(item._id))}
-              className="h-16 border-b-2 border-grey-medium_light hover:bg-pink-light hover:shadow-md cursor-pointer"
+              key={item._id}
+              onClick={() => selectedRow(item._id, index)}
+              className={`h-16 border-b-2 border-grey-medium_light hover:bg-pink-light hover:shadow-md cursor-pointer ${
+                tableRowClicked.includes(item._id) && "bg-pink-light"
+              }`}
             >
               <td className="flex h-16 justify-start items-center pl-3">
                 <div>
@@ -106,10 +115,10 @@ const libraryItem = ({ library, showModal }) => {
                     className="pt-1"
                     onClick={() =>
                       setSelected(() => {
-                        const index = selected.indexOf(item.fileUrl)
+                        const i = selected.indexOf(item.fileUrl)
 
-                        if (index > -1) {
-                          selected.splice(index, 1)
+                        if (i > -1) {
+                          selected.splice(i, 1)
                         }
                         return selected
                       })
@@ -140,8 +149,8 @@ const libraryItem = ({ library, showModal }) => {
                 </button>
               </td>
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </table>
     </div>
   )

@@ -23,9 +23,10 @@ exports.updateUser = async (req, res) => {
   const { userid } = req.params;
   const { firstName, lastName, email, imageUrl } = req.body;
   let password = req.body.password;
+
   try {
-    await updateTheUser(userid, firstName, lastName, email, imageUrl, password);
-    res.status(200).json({ message: `User ${userid} has been updated` });
+    const updatedUser = await updateTheUser(userid, firstName, lastName, email, imageUrl, password);
+    res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong updating the user" });
   }

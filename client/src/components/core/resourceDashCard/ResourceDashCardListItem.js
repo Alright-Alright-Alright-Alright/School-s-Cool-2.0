@@ -15,7 +15,7 @@ export default function TopicDashCardListItem({
     <>
     <div className="pt-3 flex justify-between">
       <div className="flex-col">
-        <Link to={`/topics/${listItemName}`}>{listItemName}</Link>
+        <Link to={`/library`}>{listItemName}</Link>
       </div>
       <div className="flex gap-1 w-20 grid-cols-2 pb-1 items-center">
         <div className="flex gap-1 w-20">
