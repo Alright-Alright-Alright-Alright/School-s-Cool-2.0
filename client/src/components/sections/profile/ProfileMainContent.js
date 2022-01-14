@@ -39,7 +39,6 @@ function ProfileMainContent() {
       lastName,
       email,
     }
-    console.log(userData)
     dispatch(updateUser(userData))
     setShowEditForm(false)
   }
