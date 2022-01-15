@@ -34,6 +34,11 @@ const libraryItem = ({ library, showModal }) => {
     setTableRowClicked([id])
   }
 
+  const isItprivate = () =>
+    library.filter((item) =>
+      user._id === item.owner._id ? item : item.isPrivate === false
+    )
+
   return (
     <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>
       {selected.length > 0 && (
@@ -70,7 +75,7 @@ const libraryItem = ({ library, showModal }) => {
           className="overflow-y-auto flex flex-col w-full scrollBar"
           style={{ height: "60vh" }}
         >
-          {library.map((item, index) => (
+          {isItprivate().map((item, index) => (
             <tr
               key={item._id}
               onClick={() => selectedRow(item._id, index)}
