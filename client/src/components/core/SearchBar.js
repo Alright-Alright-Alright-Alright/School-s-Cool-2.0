@@ -46,6 +46,11 @@ function SearchBar({ placeholder }) {
     setWordEntered("")
   }
 
+  const whenLibrary = (id) => {
+    dispatch(getSingleFile(id))
+    clearInput()
+  }
+
   useEffect(() => {
     whereToSearch()
   }, [urlPath])
@@ -82,7 +87,7 @@ function SearchBar({ placeholder }) {
             value.collectionName === "library" ? (
               <Link
                 to={`/${value.collectionName}`}
-                onClick={() => dispatch(getSingleFile(value._id))}
+                onClick={() => whenLibrary(value._id)}
               >
                 <p>{value.title} </p>
               </Link>
