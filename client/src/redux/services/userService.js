@@ -30,3 +30,6 @@ export const updateUserService = (userData) =>
   service
     .put(`/profile/${userData.id}`, userData)
     .then((response) => response.data)
+
+export const getUserProfileService = (user) =>
+  service.get(`/profile/${user}`).then((response) => response.data)

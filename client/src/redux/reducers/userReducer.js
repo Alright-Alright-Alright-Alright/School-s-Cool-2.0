@@ -5,6 +5,7 @@ import {
   SET_UNAUTHENTICATED,
   SET_USERLOGGED_IN,
   SET_USERS,
+  SET_USER_PROFILE,
 } from "../types/user"
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
@@ -40,6 +41,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         singleUser: action.payload,
         isLoggedIn: true,
+      }
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: action.payload,
       }
     case SET_UNAUTHENTICATED:
       return initialState

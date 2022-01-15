@@ -192,7 +192,7 @@ function NavBar() {
           >
             <img
               alt="profile"
-              src="https://www.multisignaal.nl/wp-content/uploads/2021/08/blank-profile-picture-973460_1280.png"
+              src={user.imageUrl}
               width="36"
               height="36"
               className="rounded-full"

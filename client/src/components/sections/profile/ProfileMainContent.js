@@ -1,24 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useParams } from "react-router-dom"
+import PropTypes from "prop-types"
 import Dashcard from "../../core/dashcard/Dashcard"
-import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
-import { getAlltopics } from "../../../redux/actions/topicActions"
-import { getAllEvents } from "../../../redux/actions/eventActions"
-import { getAllCourses } from "../../../redux/actions/courseActions"
-import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 import { updateUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 
-function ProfileMainContent() {
+function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [showEditForm, setShowEditForm] = useState(false)
   const user = useSelector((state) => state.user.singleUser)
-  const topics = useSelector((state) => state.topics.allTopics)
-  const courses = useSelector((state) => state.courses.allCourses)
-  const events = useSelector((state) => state.events.allEvents)
   const dispatch = useDispatch()
-  const { userId } = useParams()
 
   const [firstName, setFirstName] = useState(user.firstName)
   const [lastName, setLastName] = useState(user.lastName)
@@ -29,15 +20,14 @@ function ProfileMainContent() {
   )
 
   const filteredEvents = events.filter((item) =>
-    item.attendees.find((member) => member._id === user._id)
+    item.attendees.some((attendee) => attendee._id === userProfile._id)
   )
 
-  useEffect(() => {
-    dispatch(getAlltopics())
-    dispatch(getAllFilesFromLibrary())
-    dispatch(getAllEvents())
-    dispatch(getAllCourses())
-  }, [dispatch])
+  const filteredFiles = files?.filter(
+    (item) => item?.owner?._id === userProfile._id
+  )
+
+  useEffect(() => {}, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -53,9 +43,13 @@ function ProfileMainContent() {
 
   return (
     <div className="flex flex-col items-center px-3">
-      <img className="p-6 w-1/2 h-auto" src={user.imageUrl} alt="profile" />
+      <img
+        className="p-6 w-1/2 h-auto"
+        src={userProfile?.imageUrl}
+        alt="profile"
+      />
       <div className="flex">
-        {user._id === userId ? (
+        {userProfile?._id === user._id ? (
           <div className="p-3">
             <Button
               buttonName="Edit Profile"
@@ -91,19 +85,19 @@ function ProfileMainContent() {
             <form onSubmit={handleSubmit}>
               <input
                 className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
-                placeholder={user.firstName}
+                placeholder={user?.firstName}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
                 className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
-                placeholder={user.lastName}
+                placeholder={user?.lastName}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
                 className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
-                placeholder={user.email}
+                placeholder={user?.email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -118,13 +112,13 @@ function ProfileMainContent() {
           ) : (
             <>
               <p className="border-b-2 border-grey-light w-full pl-2 my-1">
-                {user.firstName}
+                {userProfile?.firstName}
               </p>
               <p className="border-b-2 border-grey-light w-full pl-2 my-1">
-                {user.lastName}
+                {userProfile?.lastName}
               </p>
               <p className="border-b-2 border-grey-light w-full pl-2 my-1">
-                {user.email}
+                {userProfile?.email}
               </p>
             </>
           )}
@@ -132,12 +126,15 @@ function ProfileMainContent() {
       </div>
 
       <div className="block lg:flex w-full gap-6 ">
+        <h1 className=" text-center text-lg">
+          {`${userProfile?.firstName}'s`} activities
+        </h1>
         <div className="lg:w-1/2">
           <Dashcard
             dashCardData={filteredTopics}
             dashCardTitle="Topics"
             dashCardStyle="bg-aqua"
-            dropdownMenuData={dashcardDropdownMenu.topics}
+            // dropdownMenuData={dashcardDropdownMenu.topics}
           />
         </div>
         <div className="lg:w-1/2">
@@ -145,7 +142,7 @@ function ProfileMainContent() {
             dashCardData={courses}
             dashCardTitle="Courses"
             dashCardStyle="bg-yellow"
-            dropdownMenuData={dashcardDropdownMenu.courses}
+            // dropdownMenuData={dashcardDropdownMenu.courses}
           />
         </div>
       </div>
@@ -155,20 +152,36 @@ function ProfileMainContent() {
             dashCardData={filteredEvents}
             dashCardTitle="Events"
             dashCardStyle="bg-sky"
-            dropdownMenuData={dashcardDropdownMenu.events}
+            // dropdownMenuData={dashcardDropdownMenu.events}
           />
         </div>
         <div className="lg:w-1/2">
           <Dashcard
-            dashCardData={events}
+            dashCardData={filteredFiles}
             dashCardTitle="Files"
             dashCardStyle="bg-pink"
-            dropdownMenuData={dashcardDropdownMenu.events}
+            // dropdownMenuData={dashcardDropdownMenu.files}
           />
         </div>
       </div>
     </div>
   )
+}
+
+ProfileMainContent.defaultProps = {
+  userProfile: {},
+  topics: [],
+  courses: [],
+  events: [],
+  files: [],
+}
+
+ProfileMainContent.propTypes = {
+  userProfile: PropTypes.shape,
+  topics: PropTypes.arrayOf,
+  courses: PropTypes.arrayOf,
+  events: PropTypes.arrayOf,
+  files: PropTypes.arrayOf,
 }
 
 export default ProfileMainContent
