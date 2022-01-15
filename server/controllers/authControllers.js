@@ -2,6 +2,8 @@ const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
+const { passportAuthenticate } = require("../middleware/passportMiddleware");
+const { chatSignupToken, chatLoginToken } = require("../services/chatService");
 
 // Register
 exports.register = async (req, res) => {
@@ -26,15 +28,21 @@ exports.register = async (req, res) => {
   }
 
   try {
-    await newUser(firstName, lastName, email, password);
-    res.status(200).json({ message: "Registration sucessfull, please login" });
+    const user = await newUser(req.body);
+    const chatToken = await chatSignupToken(email);
+    
+    await Promise.all({user, chatToken});
+    res.status(201).json({ user, chatToken });
+
+    // await newUser(firstName, lastName, email, password).chatSignupToken(firstname);
+    // res.status(200).json({ message: "Registration sucessfull, please login" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 // Login
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   if (isEmpty(email)) {
@@ -74,6 +82,13 @@ exports.login = (req, res) => {
       res.status(200).json({ user, accessToken });
     });
   })(req, res);
+    const user = passportAuthenticate(req, res);
+    const chatToken = chatLoginToken(email);
+    console.log(chatToken)
+
+    // await Promise.all({user, chatToken});
+    
+    res.status(201).json(await Promise.all({user, chatToken}));
 };
 
 // Keep user logged in
