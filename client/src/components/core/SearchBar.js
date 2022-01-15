@@ -78,9 +78,8 @@ function SearchBar({ placeholder }) {
       </div>
       {filteredData.length !== 0 && (
         <div>
-          {filteredData.slice(0, 15).map((value) => {
-            console.log(value)
-            return value.collectionName === "library" ? (
+          {filteredData.slice(0, 15).map((value) =>
+            value.collectionName === "library" ? (
               <Link
                 to={`/${value.collectionName}`}
                 onClick={() => dispatch(getSingleFile(value._id))}
@@ -95,7 +94,7 @@ function SearchBar({ placeholder }) {
                 <p>{value.title} </p>
               </Link>
             )
-          })}
+          )}
         </div>
       )}
     </div>
