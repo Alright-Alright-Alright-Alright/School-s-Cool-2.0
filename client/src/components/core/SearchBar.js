@@ -2,13 +2,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import Icon from "./Icon"
+import { getSingleFile } from "../../redux/actions/libraryActions"
 
 function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState([])
   const [wordEntered, setWordEntered] = useState("")
+  const dispatch = useDispatch()
   const urlPath = window.location.pathname
   const topics = useSelector((state) => state.topics.allTopics)
   const events = useSelector((state) => state.events.allEvents)
@@ -78,7 +80,14 @@ function SearchBar({ placeholder }) {
         <div>
           {filteredData.slice(0, 15).map((value) => {
             console.log(value)
-            return (
+            return value.collectionName === "library" ? (
+              <Link
+                to={`/${value.collectionName}`}
+                onClick={() => dispatch(getSingleFile(value._id))}
+              >
+                <p>{value.title} </p>
+              </Link>
+            ) : (
               <Link
                 to={`/${value.collectionName}/${value._id}`}
                 onClick={clearInput}
