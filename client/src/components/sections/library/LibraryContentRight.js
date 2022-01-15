@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Icon from "../../core/Icon"
 import {
   iLikedAfile,
@@ -15,6 +15,7 @@ import PdfFile from "../../core/PdfFile"
 
 // eslint-disable-next-line react/prop-types
 const LibraryContentRight = ({ singleFile }) => {
+  const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const LibraryContentRight = ({ singleFile }) => {
         <hr className="ml-8 w-5/6 text-grey-light" />
         <section className="ml-8 flex items-center">
           <div className="flex">
-            {singleFile.likedBy.includes(singleFile.owner._id) ? (
+            {singleFile.likedBy.includes(user._id) ? (
               <button
                 type="button"
                 onClick={() => dispatch(iUnlikedAfile(singleFile._id))}
