@@ -25,3 +25,8 @@ export const newPassword = (password, token) =>
   service
     .post("/new-password", { password, token })
     .then((response) => response.data)
+
+export const updateUserService = (userData) =>
+  service
+    .put(`/profile/${userData.id}`, userData)
+    .then((response) => response.data)

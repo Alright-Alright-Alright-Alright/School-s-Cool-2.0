@@ -36,8 +36,8 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item._id}
-        linkId={item._id || item.sys.id}
+        key={item?._id}
+        linkId={item?._id || item?.sys?.id}
         listItemTitle={item?.title}
         listItemDate={item?.dateStart}
         listItemComments={item?.posts}
@@ -48,8 +48,8 @@ export default function Dashcard({
 
   const allItems = filteredItems.map((item) => (
     <DashCardListItem
-      key={item._id}
-      linkId={item._id || item.sys.id}
+      key={item?._id}
+      linkId={item?._id || item?.sys?.id}
       listItemTitle={item?.title}
       listItemDate={item?.dateStart}
       listItemComments={item?.posts}
@@ -63,8 +63,8 @@ export default function Dashcard({
   }
 
   return (
-    <div className="w-full">
-      <div className="flex flex-col relative w-full m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+    <div className="w-full py-3">
+      <div className="flex flex-col relative w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >

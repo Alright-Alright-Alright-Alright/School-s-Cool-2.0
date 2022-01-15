@@ -1,6 +1,10 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { logoutUser } from "../../redux/actions/userActions"
 
 const navItems = [
   {
@@ -35,6 +39,15 @@ const navItems = [
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showDropDown, setShowDropDown] = useState(false)
+  const user = useSelector((state) => state.user.singleUser)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    navigate("/login")
+  }
 
   return (
     <nav className="flex justify-between bg-grey-super_light shadow-md sticky top-0 z-30 p-5">
@@ -122,21 +135,61 @@ function NavBar() {
             </svg>
           </div>
         </div>
-        <div className="hidden md:block pl-2">
-          <Link to="/">
+        <div className="hidden md:block pl-2 relative z-20">
+          <button
+            type="button"
+            className=""
+            data-dropdown-toggle="dropdown"
+            onClick={() => setShowDropDown(!showDropDown)}
+          >
             <img
               alt="profile"
-              src="https://www.multisignaal.nl/wp-content/uploads/2021/08/blank-profile-picture-973460_1280.png"
+              src={user.imageUrl}
               width="36"
               height="36"
               className="rounded-full"
             />
-          </Link>
+          </button>
+          {showDropDown && (
+            <div
+              id="dropdown"
+              className="w-44 list-none  divide-y shadow absolute right-1/5 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
+            >
+              <ul className="py-1" aria-labelledby="dropdownButton">
+                <li>
+                  <Link
+                    to={`/profile/${user._id}`}
+                    onClick={() => setShowDropDown(false)}
+                    className="block px-4 py-2 text-grey-darker text-base hover:bg-grey-light hover:text-grey-darkest"
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className=" w-full text-left block py-2 px-4 text-base bg-grey-super_light hover:bg-grey-light"
+                    onClick={() => {
+                      setShowDropDown(false)
+                      handleLogout()
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
       <div className="-mr-2 flex md:hidden">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to="/" onClick={() => setIsOpen(!isOpen)}>
+          <button
+            type="button"
+            className=""
+            data-dropdown-toggle="dropdown"
+            onClick={() => setShowDropDown(!showDropDown)}
+          >
             <img
               alt="profile"
               src="https://www.multisignaal.nl/wp-content/uploads/2021/08/blank-profile-picture-973460_1280.png"
@@ -144,7 +197,37 @@ function NavBar() {
               height="36"
               className="rounded-full"
             />
-          </Link>
+          </button>
+          {showDropDown && (
+            <div
+              id="dropdown"
+              className="w-44 list-none  divide-y shadow absolute right-1/5 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
+            >
+              <ul className="py-1" aria-labelledby="dropdownButton">
+                <li>
+                  <Link
+                    to={`/profile/${user._id}`}
+                    onClick={() => setShowDropDown(false)}
+                    className="block px-4 py-2 text-grey-darker text-base hover:bg-grey-light hover:text-grey-darkest"
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className=" w-full text-left block py-2 px-4 text-base bg-grey-super_light hover:bg-grey-light"
+                    onClick={() => {
+                      setShowDropDown(false)
+                      handleLogout()
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
