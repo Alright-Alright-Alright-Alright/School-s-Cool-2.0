@@ -6,6 +6,7 @@ require("./Comment-model");
 
 const fileSchema = new Schema(
   {
+    collectionName: { type: String, default: "library" },
     title: String,
     isPrivate: { type: Boolean, enum: [true, false], default: false },
     fileUrl: String,
