@@ -10,7 +10,7 @@ exports.getUser = async (req, res) => {
   const { userid } = req.params;
   try {
     let user = await getTheUser(userid);
-    res.status(200).json({ message: "Here's the user", user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({
       message:
