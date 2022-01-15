@@ -125,25 +125,27 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
         </div>
       </div>
 
-      <div className="block lg:flex w-full gap-6 ">
+      <div className="flex-col w-full gap-6 ">
         <h1 className=" text-center text-lg">
           {`${userProfile?.firstName}'s`} activities
         </h1>
-        <div className="lg:w-1/2">
-          <Dashcard
-            dashCardData={filteredTopics}
-            dashCardTitle="Topics"
-            dashCardStyle="bg-aqua"
-            // dropdownMenuData={dashcardDropdownMenu.topics}
-          />
-        </div>
-        <div className="lg:w-1/2">
-          <Dashcard
-            dashCardData={courses}
-            dashCardTitle="Courses"
-            dashCardStyle="bg-yellow"
-            // dropdownMenuData={dashcardDropdownMenu.courses}
-          />
+        <div className="block lg:flex gap-6">
+          <div className="lg:w-1/2">
+            <Dashcard
+              dashCardData={filteredTopics}
+              dashCardTitle="Topics"
+              dashCardStyle="bg-aqua"
+              // dropdownMenuData={dashcardDropdownMenu.topics}
+            />
+          </div>
+          <div className="lg:w-1/2">
+            <Dashcard
+              dashCardData={courses}
+              dashCardTitle="Courses"
+              dashCardStyle="bg-yellow"
+              // dropdownMenuData={dashcardDropdownMenu.courses}
+            />
+          </div>
         </div>
       </div>
       <div className="block lg:flex w-full gap-6 ">
