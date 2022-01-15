@@ -135,7 +135,7 @@ function NavBar() {
             </svg>
           </div>
         </div>
-        <div className="hidden md:block pl-2 relative z-20">
+        <div className="hidden md:block pl-2 relative z-20 top-1/5">
           <button
             type="button"
             className=""

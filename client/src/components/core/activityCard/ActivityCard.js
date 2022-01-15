@@ -52,10 +52,10 @@ function ActivityCard({ activity }) {
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div className="p-3">
-        <Link to={`/${activityType}s/${activity[activityType]._id}`}>
+        <Link to={`/${activityType}s/${activity[activityType]?._id}`}>
           <img
             className="object-cover w-full max-h-40 rounded-bl-2xl rounded-br-2xl rounded-r-2xl"
-            src={activity[activityType].bannerImage}
+            src={activity[activityType]?.bannerImage}
             alt="banner"
           />
         </Link>
@@ -73,10 +73,10 @@ function ActivityCard({ activity }) {
             </p>
             <p className="text-base pl-3 text-grey-medium_light">Posted on</p>
             <Link
-              to={`/${activityType}s/${activity[activityType]._id}`}
+              to={`/${activityType}s/${activity[activityType]?._id}`}
               className="text-base pl-3"
             >
-              {activity[activityType].title}
+              {activity[activityType]?.title}
             </Link>
           </div>
           <div className="hidden lg:block items-center">
