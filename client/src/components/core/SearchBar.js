@@ -90,14 +90,14 @@ function SearchBar({ placeholder }) {
                 to={`/${value.collectionName}`}
                 onClick={() => whenLibrary(value._id)}
               >
-                <p>{value.title} </p>
+                <p className="py-1">{value.title} </p>
               </Link>
             ) : (
               <Link
                 to={`/${value.collectionName}/${value._id}`}
                 onClick={clearInput}
               >
-                <p>{value.title} </p>
+                <p className="py-1">{value.title} </p>
               </Link>
             )
           )}
