@@ -22,7 +22,8 @@ function SearchBar({ placeholder }) {
     if (urlPath.includes("topics")) data = topics
     if (urlPath.includes("events")) data = events
     if (urlPath.includes("library")) data = library
-    if (urlPath.includes("home")) data = [...library, ...topics, ...events]
+    if (urlPath.includes("home") || urlPath.includes("profile"))
+      data = [...library, ...topics, ...events]
     return data
   }
 
