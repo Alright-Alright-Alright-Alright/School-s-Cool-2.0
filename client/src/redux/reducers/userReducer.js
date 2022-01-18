@@ -32,6 +32,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         token: `Bearer ${action.payload.accessToken}`,
         singleUser: action.payload.user,
+        chatToken: action.payload.chatToken.token,
       }
     case SET_USER:
     case SET_USERLOGGED_IN:

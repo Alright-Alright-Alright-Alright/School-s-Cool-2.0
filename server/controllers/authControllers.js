@@ -2,7 +2,7 @@ const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
 const { newUser } = require("../services/authServices");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
-const { passportAuthenticate } = require("../middleware/passportMiddleware");
+// const { passportAuthenticate } = require("../middleware/passportMiddleware");
 const { chatSignupToken, chatLoginToken } = require("../services/chatService");
 
 // Register
@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
 
   try {
     const user = await newUser(req.body);
-    const chatToken = await chatSignupToken(email);
+    const chatToken = await chatSignupToken(firstName);
     
     await Promise.all({user, chatToken});
     res.status(201).json({ user, chatToken });
@@ -55,6 +55,9 @@ exports.login = async (req, res) => {
     return;
   }
 
+  const chatToken = await chatLoginToken(email);
+  console.log(chatToken)
+
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
       res
@@ -68,27 +71,26 @@ exports.login = async (req, res) => {
       return;
     }
 
+
+
     req.login(user, (err) => {
       if (err) {
         res.status(500).json({ message: "Session save went bad." });
         return;
       }
+
+
       const userLogedIn = { _id: user._id };
       const accessToken = JWT.sign(
         { userLogedIn },
         process.env.JWT_SECRETORKEY,
         { expiresIn: "1h" }
       );
-      res.status(200).json({ user, accessToken });
+
+
+      res.status(200).json({ user, accessToken, chatToken });
     });
   })(req, res);
-    const user = passportAuthenticate(req, res);
-    const chatToken = chatLoginToken(email);
-    console.log(chatToken)
-
-    // await Promise.all({user, chatToken});
-    
-    res.status(201).json(await Promise.all({user, chatToken}));
 };
 
 // Keep user logged in

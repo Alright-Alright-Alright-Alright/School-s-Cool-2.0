@@ -27,21 +27,25 @@ export const setAuthorizationHeader = (token) => {
   localStorage.setItem("Authorization", Authorization);
 };
 
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
+
   dispatch({ type: LOADING_UI });
-  login(userData)
-    .then((response) => {
-      localStorage.setItem("user", JSON.stringify(response.user));
-      setAuthorizationHeader(response.accessToken);
-      dispatch({ type: CLEAR_ERRORS });
-      dispatch({ type: SET_AUTHENTICATED, payload: response });
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response?.data,
-      });
+
+  const logInUser = await login(userData);
+  console.log(logInUser);
+
+  try {
+    localStorage.setItem("user", JSON.stringify(logInUser.user));
+    setAuthorizationHeader(logInUser.accessToken);
+
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: SET_AUTHENTICATED, payload: logInUser });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
     });
+  }
 };
 
 export const registerUser = (registerNewUser) => (dispatch) => {
