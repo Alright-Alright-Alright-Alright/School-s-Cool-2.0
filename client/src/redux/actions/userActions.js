@@ -76,6 +76,7 @@ export const loggedInUser = () => (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("Authorization");
+  localStorage.removeItem("user");
   logout();
   dispatch({ type: SET_UNAUTHENTICATED });
 };
