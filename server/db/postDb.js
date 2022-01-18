@@ -127,10 +127,19 @@ const unlikePostDb = async (postId, userId) => {
   }
 };
 
+const deletePostDb = async (postId) => {
+  try {
+    await Post.findByIdAndRemove(postId)
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   getAllPostsDb,
   addPostToDb,
   getPostByIdDb,
   likePostDb,
   unlikePostDb,
+  deletePostDb,
 };

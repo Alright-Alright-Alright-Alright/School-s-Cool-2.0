@@ -28,6 +28,10 @@ function MainContent({ topic }) {
     dispatch(getAllPosts(params.topicId))
   }
 
+  const handleDeletePost = () => {
+    dispatch(getAllPosts(params.topicId))
+  }
+
   useEffect(() => {
     dispatch(getAllPosts(params.topicId))
   }, [dispatch, params.topicId])
@@ -45,6 +49,7 @@ function MainContent({ topic }) {
           post={post}
           topicId={params.topicId}
           comments={post?.comments}
+          onDeletePost={handleDeletePost}
         />
       ))}
     </div>

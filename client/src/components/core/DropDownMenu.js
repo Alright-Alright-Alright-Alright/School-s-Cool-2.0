@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react"
 import PropTypes from "prop-types"
 import Icon from "./Icon"
 
-function DropDownMenu({ data, selectFilter, filter }) {
+function DropDownMenu({ data, selectFilter, position, filter }) {
   const node = useRef()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -25,9 +25,9 @@ function DropDownMenu({ data, selectFilter, filter }) {
   }, [])
 
   return (
-    <div ref={node} className="relative z-20">
+    <div ref={node} className={`z-20 ${position}`}>
       <button type="button" onClick={() => setIsOpen(!isOpen)}>
-        <Icon iconName="seemore" iconStyle="text-white" />
+        <Icon iconName="seemore" iconStyle="text-current" />
       </button>
       {isOpen && (
         <div className="absolute right-10 -top-2 w-48 py-6 mt-2 bg-white rounded-xl shadow-xl">
@@ -53,12 +53,17 @@ function DropDownMenu({ data, selectFilter, filter }) {
   )
 }
 
+DropDownMenu.defaultProps = {
+  filter: null,
+  position: "",
+}
 DropDownMenu.propTypes = {
   data: PropTypes.shape({
     bgColorOnHover: PropTypes.string,
     dropDownItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.string,
+  position: PropTypes.string,
   selectFilter: PropTypes.func.isRequired,
 }
 
