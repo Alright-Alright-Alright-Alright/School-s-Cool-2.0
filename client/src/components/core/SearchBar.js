@@ -31,9 +31,13 @@ function SearchBar({ placeholder }) {
     const searchWord = event.target.value
 
     setWordEntered(searchWord)
-    const newFilter = whereToSearch().filter((value) =>
-      value.title.toLowerCase().includes(searchWord.toLowerCase())
-    )
+    const newFilter = whereToSearch().filter((value) => {
+      const tag = value.tags?.join(" ").toLowerCase().split(" ")
+      return (
+        value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+        tag?.includes(searchWord.toLowerCase())
+      )
+    })
 
     if (searchWord === "") {
       setFilteredData([])
