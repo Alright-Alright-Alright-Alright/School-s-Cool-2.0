@@ -87,14 +87,13 @@ module.exports = {
           "url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80')",
       },
     },
-    inset: {
-      0: 0,
-      // ...
-      64: "16rem",
-      "1/5": "20%",
-      "1/6": "16.66666667%",
-      "1/7": "14.2857143%",
-    },
+    // inset: {
+    //   0: 0,
+    //   64: "16rem",
+    //   "1/5": "20%",
+    //   "1/6": "16.66666667%",
+    //   "1/7": "14.2857143%",
+    // },
   },
   variants: {
     extend: {},

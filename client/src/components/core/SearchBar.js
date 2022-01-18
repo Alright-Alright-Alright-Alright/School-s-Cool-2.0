@@ -22,7 +22,8 @@ function SearchBar({ placeholder }) {
     if (urlPath.includes("topics")) data = topics
     if (urlPath.includes("events")) data = events
     if (urlPath.includes("library")) data = library
-    if (urlPath.includes("home")) data = [...library, ...topics, ...events]
+    if (urlPath.includes("home") || urlPath.includes("profile"))
+      data = [...library, ...topics, ...events]
     return data
   }
 
@@ -30,9 +31,13 @@ function SearchBar({ placeholder }) {
     const searchWord = event.target.value
 
     setWordEntered(searchWord)
-    const newFilter = whereToSearch().filter((value) =>
-      value.title.toLowerCase().includes(searchWord.toLowerCase())
-    )
+    const newFilter = whereToSearch().filter((value) => {
+      const tag = value.tags?.join(" ").toLowerCase().split(" ")
+      return (
+        value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+        tag?.includes(searchWord.toLowerCase())
+      )
+    })
 
     if (searchWord === "") {
       setFilteredData([])
@@ -89,14 +94,14 @@ function SearchBar({ placeholder }) {
                 to={`/${value.collectionName}`}
                 onClick={() => whenLibrary(value._id)}
               >
-                <p>{value.title} </p>
+                <p className="py-1">{value.title} </p>
               </Link>
             ) : (
               <Link
                 to={`/${value.collectionName}/${value._id}`}
                 onClick={clearInput}
               >
-                <p>{value.title} </p>
+                <p className="py-1">{value.title} </p>
               </Link>
             )
           )}
