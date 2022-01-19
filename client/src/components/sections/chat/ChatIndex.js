@@ -31,6 +31,14 @@ const App = () => {
 
   console.log(channel)
 
+  const getUsers = async () => {
+    const response = await chatClient.queryUsers({
+      id: { $in: ["empty-shadow-8", "jack", "jessie"] },
+    })
+
+    console.log(response)
+  }
+
   useEffect(() => {
     const initChat = async () => {
       const client = StreamChat.getInstance("4gr5arqkjs4r")
@@ -38,7 +46,7 @@ const App = () => {
       //   const usersForChat = allUsers.map((chatUser) => chatUser.firstName)
 
       const newChannel = client.channel("messaging", "travel", {
-        name: "Awesome channel about traveling",
+        name: "Awesome channel about Tiago",
         // members: usersForChat,
       })
       // Here, 'travel' will be the channel ID
@@ -58,6 +66,7 @@ const App = () => {
     }
 
     initChat()
+    // getUsers()
   }, [])
 
   const disconnect = () => {
