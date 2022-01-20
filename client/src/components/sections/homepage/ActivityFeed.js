@@ -25,7 +25,7 @@ function ActivityFeed() {
   const shownActivities = filter ? followedActivities : allActivities
 
   return (
-    <div className="mt-3 ">
+    <div className="mt-3">
       <div className="sm:flex md:place-content-between ">
         <div>
           <h1 className="text-lg text-center mb-3 md:mb-0 pl-3">

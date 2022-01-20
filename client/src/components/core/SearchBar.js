@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import Icon from "./Icon"
 import { getSingleFile } from "../../redux/actions/libraryActions"
+import { searching, notSearching } from "../../redux/actions/searchBarAction"
 
 function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState([])
@@ -56,22 +56,25 @@ function SearchBar({ placeholder }) {
     clearInput()
   }
 
+  const changeOpacity = () => {}
+
   useEffect(() => {
     whereToSearch()
-  }, [urlPath])
+    return wordEntered ? dispatch(searching()) : dispatch(notSearching())
+  }, [urlPath, wordEntered])
 
   return (
     <div>
       <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
         <input
-          type="text"
+          type="search"
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
           className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-60"
         />
         <div>
-          {filteredData.length === 0 ? (
+          {filteredData.length === 0 && (
             <svg
               className="fill-current text-grey-darker h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -79,29 +82,35 @@ function SearchBar({ placeholder }) {
             >
               <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
-          ) : (
-            <button type="button" onClick={clearInput}>
-              <Icon iconName="close" />
-            </button>
           )}
         </div>
       </div>
       {filteredData.length !== 0 && (
-        <div>
+        <div className="absolute bg-grey-super_light w-72 shadow-2xl pl-4 rounded-md">
           {filteredData.slice(0, 15).map((value) =>
             value.collectionName === "library" ? (
               <Link
                 to={`/${value.collectionName}`}
                 onClick={() => whenLibrary(value._id)}
               >
-                <p className="py-1">{value.title} </p>
+                <p className="py-2 relative">
+                  {value.title}{" "}
+                  <span className="text-sm text-grey-medium">
+                    at {value.collectionName}
+                  </span>
+                </p>
               </Link>
             ) : (
               <Link
                 to={`/${value.collectionName}/${value._id}`}
                 onClick={clearInput}
               >
-                <p className="py-1">{value.title} </p>
+                <p className="py-2 relative">
+                  {value.title}{" "}
+                  <span className="text-sm text-grey-medium">
+                    at {value.collectionName}
+                  </span>{" "}
+                </p>
               </Link>
             )
           )}

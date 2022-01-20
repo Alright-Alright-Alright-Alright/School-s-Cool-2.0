@@ -1,0 +1,2 @@
+export const SEARCHING = "SEARCHING"
+export const NOT_SEARCHING = "NOT_SEARCHING"

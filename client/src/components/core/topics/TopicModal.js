@@ -67,6 +67,7 @@ const Modal = ({ handleShowModal }) => {
       >
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
+            required
             type="text"
             name=""
             id=""
