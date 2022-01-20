@@ -6,7 +6,7 @@ import DashCardsRight from "./DashCardsRight"
 
 function index() {
   return (
-    <div className="static">
+    <div className="static ">
       <Main
         main={<ActivityFeed />}
         contentLeft={<DashCardsLeft />}

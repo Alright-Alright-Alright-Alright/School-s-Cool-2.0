@@ -51,7 +51,7 @@ function NavBar() {
   }
 
   return (
-    <nav className="flex justify-between bg-grey-super_light shadow-md sticky top-0 z-30 p-5">
+    <nav className="flex justify-between bg-grey-super_light shadow-md sticky top-0 z-50 p-5">
       <div>
         <div className="flex-shrink-0">
           <Link to="/home">
@@ -146,7 +146,7 @@ function NavBar() {
           >
             <img
               alt="profile"
-              src={user.imageUrl}
+              src={user?.imageUrl}
               width="36"
               height="36"
               className="rounded-full"
@@ -194,7 +194,7 @@ function NavBar() {
           >
             <img
               alt="profile"
-              src={user.imageUrl}
+              src={user?.imageUrl}
               width="36"
               height="36"
               className="rounded-full"
