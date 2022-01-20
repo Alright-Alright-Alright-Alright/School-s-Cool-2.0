@@ -59,17 +59,17 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               }}
             />
           </div>
-        ) : null}
-
-        <div className="p-3">
-          <Button
-            buttonName="Follow user"
-            buttonStyle="btnPrimaryStyle"
-            onClick={() => {
-              console.log("follow user")
-            }}
-          />
-        </div>
+        ) : (
+          <div className="p-3">
+            <Button
+              buttonName="Follow user"
+              buttonStyle="btnPrimaryStyle"
+              onClick={() => {
+                console.log("follow user")
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-full ">
         <div className="flex flex-col items-start w-1/2">
@@ -102,6 +102,23 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div className="flex justify-end pt-3">
+                <button type="button">
+                  <div className="pr-3">
+                    <Button
+                      buttonName="Change Profile Picture"
+                      buttonStyle="btnSecondaryStyle"
+                    />
+                    <input
+                      type="file"
+                      name="file"
+                      size="60"
+                      className="hidden"
+                      // ref={hiddenFileInput}
+                      // onChange={chooseBannerImage}
+                      required
+                    />
+                  </div>
+                </button>
                 <Button
                   buttonName="Save changes"
                   buttonStyle="btnPrimaryStyle"
