@@ -10,6 +10,19 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [showEditForm, setShowEditForm] = useState(false)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
+  const { userId } = useParams()
+
+  const [firstName, setFirstName] = useState(user.firstName)
+  const [lastName, setLastName] = useState(user.lastName)
+  const [email, setEmail] = useState(user.email)
+
+  const filteredTopics = topics.filter((item) =>
+    item.members.find((member) => member._id === user._id)
+  )
+
+  const filteredEvents = events.filter((item) =>
+    item.attendees.find((member) => member._id === user._id)
+  )
 
   const [firstName, setFirstName] = useState(user.firstName)
   const [lastName, setLastName] = useState(user.lastName)
@@ -28,6 +41,18 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   )
 
   useEffect(() => {}, [dispatch])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const userData = {
+      id: user._id,
+      firstName,
+      lastName,
+      email,
+    }
+    dispatch(updateUser(userData))
+    setShowEditForm(false)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
