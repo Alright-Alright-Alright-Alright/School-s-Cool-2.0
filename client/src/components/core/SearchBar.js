@@ -56,8 +56,6 @@ function SearchBar({ placeholder }) {
     clearInput()
   }
 
-  const changeOpacity = () => {}
-
   useEffect(() => {
     whereToSearch()
     return wordEntered ? dispatch(searching()) : dispatch(notSearching())
