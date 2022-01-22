@@ -71,8 +71,8 @@ const RichTextToolbar = () => {
             <Editor
               editorState={editorState}
               onEditorStateChange={handleEditorChange}
-              wrapperClassName="flex-col"
-              editorClassName=" bg-grey-super_light text-left rounded-full text-base pl-3"
+              wrapperClassName="flex-col "
+              editorClassName=" bg-grey-super_light text-center text-base pl-3 rounded-l-2xl rounded-b-2xl rounded-r-2xl"
               toolbarClassName="flex"
               placeholder="Add a post"
               toolbar={{
@@ -81,6 +81,10 @@ const RichTextToolbar = () => {
                   options: ["bold", "italic", "underline"],
                 },
                 list: {
+                  inDropdown: false,
+                  className: undefined,
+                  component: undefined,
+                  dropdownClassName: undefined,
                   options: ["unordered", "ordered"],
                 },
                 link: { options: ["link"] },
