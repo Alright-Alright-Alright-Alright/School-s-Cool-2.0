@@ -25,12 +25,13 @@ const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
 
-    dispatch(loginUser(userLogin))
-
-    setTimeout(() => navigate("/home"), 1500)
+    dispatch(loginUser(userLogin)).then(
+      () =>
+        UI.errors.message === null && setTimeout(() => navigate("/home"), 1500)
+    )
   }
 
   const logo = (
