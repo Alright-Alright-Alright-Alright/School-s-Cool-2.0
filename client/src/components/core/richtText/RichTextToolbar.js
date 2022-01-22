@@ -13,8 +13,7 @@ import Button from "../Button"
 import Icon from "../Icon"
 import LibraryModal from "../library/LibraryModal"
 import { createPost, getAllPosts } from "../../../redux/actions/postActions"
-
-// import "./App.css"
+import "./RichTextToolbar.css"
 
 const RichTextToolbar = () => {
   const singleTopic = useSelector((state) => state.topics.singleTopic)
@@ -71,9 +70,9 @@ const RichTextToolbar = () => {
             <Editor
               editorState={editorState}
               onEditorStateChange={handleEditorChange}
-              wrapperClassName="wrapper-class"
-              editorClassName="bg-grey-super_light text-left rounded-full text-base pl-3"
-              toolbarClassName="rounded-full text-base pt-2"
+              wrapperClassName="flex-col"
+              editorClassName=" bg-grey-super_light text-left rounded-full text-base pl-3"
+              toolbarClassName="flex"
               placeholder="Add a post"
               toolbar={{
                 options: ["inline", "list", "link"],
