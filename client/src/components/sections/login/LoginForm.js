@@ -29,8 +29,6 @@ const LoginForm = () => {
     e.preventDefault()
 
     dispatch(loginUser(userLogin))
-    setEmail("")
-    setPassword("")
     setTimeout(() => navigate("/home"), 1500)
   }
 
