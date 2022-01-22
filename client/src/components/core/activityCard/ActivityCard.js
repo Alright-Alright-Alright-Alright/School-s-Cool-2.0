@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import ReactHtmlParser from "react-html-parser"
 import { useSelector, useDispatch } from "react-redux"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
@@ -91,7 +92,7 @@ function ActivityCard({ activity }) {
       </div>
       <div className="">
         <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
-          {activity.body}
+          {ReactHtmlParser(activity.body)}
         </p>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
