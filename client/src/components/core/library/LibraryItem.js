@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
@@ -19,15 +20,8 @@ const libraryItem = ({ library, showModal }) => {
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
 
-  const downloadFiles = () => {
-    selected.forEach((file) => {
-      console.log(file)
-      const response = {
-        file,
-      }
-      window.location.href = response.file
-    })
-  }
+  const downloadFiles = () =>
+    selected.forEach((file) => (window.location.href = file))
 
   const selectedRow = (id) => {
     dispatch(getSingleFile(id))
