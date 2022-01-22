@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
@@ -27,13 +28,13 @@ const LoginForm = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-
     dispatch(loginUser(userLogin))
-    setEmail("")
-    setPassword("")
-    setTimeout(() => navigate("/home"), 1500)
+    return (
+      UI.errors?.message !== (null || undefined) &&
+      setTimeout(() => navigate("/home"), 1500)
+    )
   }
-
+  console.log(UI.errors?.message)
   const logo = (
     <svg
       width="175"
