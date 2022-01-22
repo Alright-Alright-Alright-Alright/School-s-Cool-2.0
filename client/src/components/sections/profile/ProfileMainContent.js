@@ -1,13 +1,19 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { updateUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
+import fileUploadHandler from "../../../middleware/UploadFile"
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
+  const [fileUrl, setFileUrl] = useState("")
+  const [imagePreview, setImagePreview] = useState("")
+  const [profileImage, setProfileImage] = useState(userProfile?.imageUrl)
   const [showEditForm, setShowEditForm] = useState(false)
+  const hiddenFileInput = useRef(null)
+
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
@@ -29,13 +35,31 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   useEffect(() => {}, [dispatch])
 
-  const handleSubmit = (e) => {
+  const handleImagePreview = async (img) => {
+    const image = await fileUploadHandler(img)
+    setImagePreview(image)
+    setProfileImage(image)
+  }
+
+  const chooseProfileImage = async (e) => {
+    setFileUrl(e.target.files[0])
+    handleImagePreview(e.target.files[0])
+  }
+
+  const handleClick = () => {
+    hiddenFileInput.current.click()
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const image = await fileUploadHandler(fileUrl)
+
     const userData = {
       id: user._id,
       firstName,
       lastName,
       email,
+      imageUrl: image,
     }
     dispatch(updateUser(userData))
     setShowEditForm(false)
@@ -43,11 +67,8 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   return (
     <div className="flex flex-col items-center px-3">
-      <img
-        className="p-6 w-1/2 h-auto"
-        src={userProfile?.imageUrl}
-        alt="profile"
-      />
+      <img className="p-6 w-1/2 h-auto" src={profileImage} alt="profile" />
+      {/* <img className="p-6 w-1/2 h-auto" src={imagePreview} alt="profile" /> */}
       <div className="flex">
         {userProfile?._id === user._id ? (
           <div className="p-3">
@@ -59,17 +80,17 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               }}
             />
           </div>
-        ) : null}
-
-        <div className="p-3">
-          <Button
-            buttonName="Follow user"
-            buttonStyle="btnPrimaryStyle"
-            onClick={() => {
-              console.log("follow user")
-            }}
-          />
-        </div>
+        ) : (
+          <div className="p-3">
+            <Button
+              buttonName="Follow user"
+              buttonStyle="btnPrimaryStyle"
+              onClick={() => {
+                console.log("follow user")
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-full ">
         <div className="flex flex-col items-start w-1/2">
@@ -101,7 +122,35 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <div className="flex justify-end pt-3">
+              <div className="flex justify-end items-center">
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleClick}
+                    className="flex items-center"
+                  >
+                    <span className="text-sm pr-3">
+                      {imagePreview ? (
+                        "File successfully uploaded"
+                      ) : (
+                        <Button
+                          buttonName="Change Profile Picture"
+                          buttonStyle="btnSecondaryStyle"
+                        />
+                      )}
+                    </span>
+                    {/* <Icon iconName="add" iconStyle="fill-inactive text-pink" /> */}
+                  </button>
+                  <input
+                    type="file"
+                    name="file"
+                    size="60"
+                    className="hidden"
+                    ref={hiddenFileInput}
+                    onChange={chooseProfileImage}
+                    required
+                  />
+                </div>
                 <Button
                   buttonName="Save changes"
                   buttonStyle="btnPrimaryStyle"
