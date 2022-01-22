@@ -30,7 +30,7 @@ const LoginForm = () => {
     e.preventDefault()
     dispatch(loginUser(userLogin))
     return (
-      UI.errors?.message !== (null || undefined) &&
+      UI.errors?.message !== (undefined || null) &&
       setTimeout(() => navigate("/home"), 1500)
     )
   }
