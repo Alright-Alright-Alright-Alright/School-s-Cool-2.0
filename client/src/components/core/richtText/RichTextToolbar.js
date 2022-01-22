@@ -52,6 +52,7 @@ const RichTextToolbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(createPost(newPost))
+    dispatch(getAllPosts(params.topicId))
     setEditorState(EditorState.createEmpty())
   }
 

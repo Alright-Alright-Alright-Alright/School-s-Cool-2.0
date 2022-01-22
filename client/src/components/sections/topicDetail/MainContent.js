@@ -41,10 +41,10 @@ function MainContent({ topic }) {
     <div className="static">
       {UI.errors && <p>{UI.errors.message}</p>}
       <RichTextToolbar />
-      <TopicHeaderCard
+      {/* <TopicHeaderCard
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
-      />
+      /> */}
       {posts?.map((post) => (
         <TopicPost
           key={post?._id}
