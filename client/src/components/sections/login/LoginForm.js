@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { loginUser } from "../../../redux/actions/userActions"
@@ -7,6 +7,7 @@ import Button from "../../core/Button"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
+  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
@@ -28,8 +29,9 @@ const LoginForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     dispatch(loginUser(userLogin))
-    setTimeout(() => navigate("/home"), 1500)
   }
+
+  useEffect(() => user && setTimeout(() => navigate("/home"), 1500), [user])
 
   const logo = (
     <svg
