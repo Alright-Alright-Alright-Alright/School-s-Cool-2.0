@@ -7,7 +7,7 @@ import Button from "../../core/Button"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
-  const user = localStorage.getItem("user")
+  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
