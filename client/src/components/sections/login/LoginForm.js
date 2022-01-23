@@ -25,9 +25,8 @@ const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-
     dispatch(loginUser(userLogin))
     setTimeout(() => navigate("/home"), 1500)
   }

@@ -70,6 +70,9 @@ export const createPost = (newPost) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const addNewPostDb = await createPostService(newPost)
+  console.log("New Post", newPost)
+  console.log("New Post DB", addNewPostDb)
+
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: SET_POST, payload: addNewPostDb })

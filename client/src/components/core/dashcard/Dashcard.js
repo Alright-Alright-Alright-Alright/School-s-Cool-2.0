@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
 import DropDownMenu from "../DropDownMenu"
@@ -69,7 +70,11 @@ export default function Dashcard({
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
-            <p className="text-lg pl-4">{dashCardTitle}</p>
+            <p className="text-lg pl-4">
+              <Link to={`/${dashCardTitle.toLowerCase()}`}>
+                {dashCardTitle}
+              </Link>
+            </p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">{filter}</h2>
               <DropDownMenu

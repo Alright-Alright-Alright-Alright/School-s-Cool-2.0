@@ -8,6 +8,7 @@ import PropTypes from "prop-types"
 import { createPost, getAllPosts } from "../../../redux/actions/postActions"
 import TopicHeaderCard from "../../core/topics/topicHeaderCard/TopicHeaderCard"
 import TopicPost from "../../core/topics/TopicPost/TopicPost"
+import RichTextToolbar from "../../core/richtText/RichTextToolbar"
 
 function MainContent({ topic }) {
   const [body, setPostBody] = useState("")
@@ -39,10 +40,11 @@ function MainContent({ topic }) {
   return (
     <div className="static">
       {UI.errors && <p>{UI.errors.message}</p>}
-      <TopicHeaderCard
+      <RichTextToolbar />
+      {/* <TopicHeaderCard
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
-      />
+      /> */}
       {posts?.map((post) => (
         <TopicPost
           key={post?._id}

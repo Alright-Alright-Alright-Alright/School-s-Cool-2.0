@@ -10,7 +10,7 @@ export default function Main({ main, contentLeft, contentRight }) {
   return (
     <>
       <div
-        className={`grid sm:grid-cols-1 lg:grid-cols-4 bg-grey-super_light ${
+        className={`min-h-screen grid sm:grid-cols-1 lg:grid-cols-4 bg-grey-super_light ${
           searching && "opacity-40"
         }`}
       >
