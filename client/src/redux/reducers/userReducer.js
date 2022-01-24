@@ -9,21 +9,12 @@ import {
 } from "../types/user"
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
-const user = JSON.parse(localStorage.getItem("user"))
-
-const initialState = user
-  ? {
-      token: localStorage.getItem("Authorization"),
-      singleUser: user,
-      users: [],
-      isLoggedIn: true,
-    }
-  : {
-      token: null,
-      singleUser: null,
-      users: [],
-      isLoggedIn: false,
-    }
+const initialState = {
+  token: localStorage.getItem("Authorization"),
+  singleUser: null,
+  users: [],
+  isLoggedIn: false,
+}
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,6 +23,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         token: `Bearer ${action.payload.accessToken}`,
         singleUser: action.payload.user,
+        isLoggedIn: true,
       }
     case SET_USER:
     case SET_USERLOGGED_IN:

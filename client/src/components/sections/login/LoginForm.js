@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { loginUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
+import ErrorHandler from "../../core/ErrorHandler"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
@@ -31,7 +32,10 @@ const LoginForm = () => {
     dispatch(loginUser(userLogin))
   }
 
-  useEffect(() => user && setTimeout(() => navigate("/home"), 1500), [user])
+  useEffect(
+    () => user !== null && setTimeout(() => navigate("/home"), 1500),
+    [user]
+  )
 
   const logo = (
     <svg
@@ -122,7 +126,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          {UI.errors && <ErrorHandler error={UI.errors} />}
         </form>
       </div>
     </div>

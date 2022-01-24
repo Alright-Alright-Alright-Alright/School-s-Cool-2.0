@@ -126,15 +126,14 @@ export const getUserFilesFromLibrary = () => async (dispatch) => {
 
 export const addFileToLibrary = (fileData) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-
-  const addAFile = await addFile(fileData)
   try {
+    const addAFile = await addFile(fileData)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: POST_FILE, payload: addAFile })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response,
+      payload: error.response.data.message,
     })
   }
 }
