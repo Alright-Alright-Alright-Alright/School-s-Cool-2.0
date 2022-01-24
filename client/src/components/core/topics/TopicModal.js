@@ -19,6 +19,7 @@ const Modal = ({ handleShowModal }) => {
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
+  console.log(UI.errors)
 
   const dispatch = useDispatch()
 
@@ -57,7 +58,13 @@ const Modal = ({ handleShowModal }) => {
       bannerImage: image,
       isPrivate: privacy,
     }
-    handleShowModal()
+    if (
+      topicData.title.length > 0 &&
+      topicData.description.length > 0 &&
+      topicData.category.length > 0 &&
+      topicData.subject.length > 0
+    )
+      handleShowModal()
     dispatch(addAtopic(topicData))
   }
 

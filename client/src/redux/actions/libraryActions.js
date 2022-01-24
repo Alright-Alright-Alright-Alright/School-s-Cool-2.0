@@ -29,8 +29,8 @@ import {
 export const getAllFilesFromLibrary = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const libraryFilesFromDB = await getLibraryFiles()
   try {
+    const libraryFilesFromDB = await getLibraryFiles()
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_LIBRARY, payload: libraryFilesFromDB })
   } catch (error) {
@@ -44,8 +44,8 @@ export const getAllFilesFromLibrary = () => async (dispatch) => {
 export const getSingleFile = (fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const file = await getFile(fileId)
   try {
+    const file = await getFile(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_FILE, payload: file })
   } catch (error) {
@@ -59,8 +59,8 @@ export const getSingleFile = (fileId) => async (dispatch) => {
 export const getComments = (fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const comments = await getCommentsService(fileId)
   try {
+    const comments = await getCommentsService(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_COMMENTS, payload: comments })
   } catch (error) {
@@ -74,12 +74,11 @@ export const getComments = (fileId) => async (dispatch) => {
 export const submitComment = (commentBody, fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const addNewCommentDb = await submitCommentService({
-    commentBody,
-    fileId,
-  })
-
   try {
+    const addNewCommentDb = await submitCommentService({
+      commentBody,
+      fileId,
+    })
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: ADD_COMMENT, payload: addNewCommentDb })
   } catch (error) {
@@ -93,12 +92,11 @@ export const submitComment = (commentBody, fileId) => async (dispatch) => {
 export const deleteComment = (commentId, id) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const deleteCommentDb = await deleteCommentService({
-    commentId,
-    id,
-  })
-
   try {
+    const deleteCommentDb = await deleteCommentService({
+      commentId,
+      id,
+    })
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_COMMENT, payload: deleteCommentDb })
   } catch (error) {
@@ -112,8 +110,8 @@ export const deleteComment = (commentId, id) => async (dispatch) => {
 export const getUserFilesFromLibrary = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const userFilesFromDB = await getUserLibraryFiles()
   try {
+    const userFilesFromDB = await getUserLibraryFiles()
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_LIBRARY, payload: userFilesFromDB })
   } catch (error) {
@@ -167,8 +165,8 @@ export const filterLibraryBySubject = (subject) => async (dispatch) => {
 export const iLikedAfile = (fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const like = await iLikeThisFile(fileId)
   try {
+    const like = await iLikeThisFile(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LIKE_FILE, payload: like })
   } catch (error) {
@@ -182,8 +180,8 @@ export const iLikedAfile = (fileId) => async (dispatch) => {
 export const iUnlikedAfile = (fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const unlike = await iUnlikeThisFile(fileId)
   try {
+    const unlike = await iUnlikeThisFile(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_FILE, payload: unlike })
   } catch (error) {
@@ -196,9 +194,9 @@ export const iUnlikedAfile = (fileId) => async (dispatch) => {
 
 export const deleteFile = (fileId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  await fileDeleteService(fileId)
 
   try {
+    await fileDeleteService(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_FILE, payload: fileId })
   } catch (error) {

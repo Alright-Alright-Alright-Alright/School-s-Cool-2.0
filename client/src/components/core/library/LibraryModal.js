@@ -87,7 +87,11 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       isPrivate: privacy,
       tags,
     }
-    if (fileData.tags.length > 0 && fileData.category && fileData.subject)
+    if (
+      fileData.tags.length > 0 &&
+      fileData.category.length > 0 &&
+      fileData.subject.length > 0
+    )
       handleShowModal()
     dispatch(addFileToLibrary(fileData))
   }
