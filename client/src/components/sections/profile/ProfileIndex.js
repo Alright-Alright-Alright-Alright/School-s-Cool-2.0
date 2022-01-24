@@ -11,7 +11,6 @@ function ProfileIndex() {
   const courses = useSelector((state) => state.courses.allCourses)
   const events = useSelector((state) => state.events.allEvents)
   const files = useSelector((state) => state.library.allFiles)
-
   const dispatch = useDispatch()
   const { userId } = useParams()
 
