@@ -88,6 +88,7 @@ const Modal = ({ handleShowModal }) => {
                 setDateRange(update)
               }}
               placeholderText="Select event dates"
+              withPortal
             />
           </div>
           <input
