@@ -54,7 +54,7 @@ const MainEventsContent = ({ events }) => {
       </div>
       {showModal && <EventModal handleShowModal={handleShowModal} />}
       <div
-        className={`flex justify-center lg:justify-between flex-wrap gap-3 m-6 filter ${
+        className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
           showModal && "blur-md"
         }`}
       >

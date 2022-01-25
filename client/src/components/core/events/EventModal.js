@@ -19,7 +19,6 @@ const Modal = ({ handleShowModal }) => {
   const [privacy, setPrivacy] = useState(false)
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
-
   const hiddenFileInput = useRef(null)
 
   const dispatch = useDispatch()
@@ -51,7 +50,7 @@ const Modal = ({ handleShowModal }) => {
       title,
       description,
       dateStart: startDate,
-      dateEnd: endDate,
+      dateEnd: endDate === null && startDate,
       location,
       bannerImage: image,
       isPrivate: privacy,
@@ -89,6 +88,7 @@ const Modal = ({ handleShowModal }) => {
                 setDateRange(update)
               }}
               placeholderText="Select event dates"
+              withPortal
             />
           </div>
           <input

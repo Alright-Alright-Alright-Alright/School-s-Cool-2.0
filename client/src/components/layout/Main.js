@@ -14,9 +14,9 @@ export default function Main({ main, contentLeft, contentRight }) {
           searching && "opacity-40"
         }`}
       >
-        <div className=" lg:block max-w-lg">{contentLeft}</div>
-        <div className="lg:col-span-2">{main}</div>
-        <div className=" lg:block max-w-lg">{contentRight}</div>
+        <div className="lg:block max-w-lg sm:h-2/7">{contentLeft}</div>
+        <div className="lg:col-span-2 sm:h-3/7">{main}</div>
+        <div className="lg:block max-w-lg sm:h-2/7">{contentRight}</div>
       </div>
     </>
   )

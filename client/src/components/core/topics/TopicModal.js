@@ -2,9 +2,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { addAtopic, getAlltopics } from "../../../redux/actions/topicActions"
+import { addAtopic } from "../../../redux/actions/topicActions"
+import ErrorHandler from "../ErrorHandler"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -17,6 +18,7 @@ const Modal = ({ handleShowModal }) => {
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
+  const UI = useSelector((state) => state.UI)
 
   const dispatch = useDispatch()
 
@@ -55,16 +57,23 @@ const Modal = ({ handleShowModal }) => {
       bannerImage: image,
       isPrivate: privacy,
     }
-    handleShowModal()
+    if (
+      topicData.title.length > 0 &&
+      topicData.description.length > 0 &&
+      topicData.category.length > 0 &&
+      topicData.subject.length > 0
+    )
+      handleShowModal()
     dispatch(addAtopic(topicData))
   }
 
   return (
     <div className="flex justify-center content-center">
       <form
-        className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
+        className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-20 shadow-xl"
         onSubmit={handleFormSubmit}
       >
+        {UI.errors && <ErrorHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
             required

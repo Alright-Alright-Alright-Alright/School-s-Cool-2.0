@@ -62,7 +62,7 @@ function MainTopicsContent() {
       <div className="relative">
         {showModal && <TopicModal handleShowModal={handleShowModal} />}
         <div
-          className={`flex justify-center flex-wrap gap-7 m-6 filter ${
+          className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
             showModal && "blur-md"
           }`}
         >

@@ -33,10 +33,11 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.followUser = async (req, res) => {
-  let theUser = req.body.userid
+  let theUser = req.user.userLogedIn._id
   let userToFollow = req.params.userid
   try {
     await followTheUser(theUser,userToFollow)
+    res.status(200).json({ message: "Successfully followed the user" })
   } catch (error) {
     res.status(500).json(error)
   }

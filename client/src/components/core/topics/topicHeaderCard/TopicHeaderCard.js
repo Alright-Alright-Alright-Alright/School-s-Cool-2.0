@@ -6,14 +6,21 @@ import { useSelector } from "react-redux"
 import Button from "../../Button"
 import Icon from "../../Icon"
 import LibraryModal from "../../library/LibraryModal"
+import RichTextToolbar from "../../richtText/RichTextToolbar"
 
 function TopicHeaderCard({ onClick, postBody }) {
+  const [body, setPostBody] = useState("")
+
   const user = useSelector((state) => state.user.singleUser)
   const singleTopic = useSelector((state) => state.topics.singleTopic)
   const [showModal, setShowModal] = useState(false)
 
   const handleShowModal = () => {
     setShowModal(!showModal)
+  }
+
+  const handlePostBody = (e) => {
+    setPostBody(e.target.value)
   }
 
   return (
@@ -31,6 +38,7 @@ function TopicHeaderCard({ onClick, postBody }) {
           onChange={(e) => postBody(e.target.value)}
           required
         />
+        {/* <RichTextToolbar /> */}
       </div>
 
       <div className="flex justify-between p-3 relative">

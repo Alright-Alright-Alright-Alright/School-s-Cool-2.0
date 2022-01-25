@@ -39,7 +39,6 @@ const TagsInput = ({ selectedTags }) => {
         </p>
       ) : (
         <input
-          required
           type="text"
           onKeyUp={(event) => addTags(event)}
           placeholder={`${
