@@ -16,8 +16,11 @@ exports.addFile = async (req, res) => {
     if (tags.length < 1) {
       res.status(400).json({ message: "Please add at least one tag" });
       return;
-    } else if (isEmpty(category, subject)) {
-      res.status(400).json({ message: "Please choose category or subject" });
+    } else if (isEmpty(category)) {
+      res.status(400).json({ message: "Please choose a category" });
+      return;
+    } else if (isEmpty(subject)) {
+      res.status(400).json({ message: "Please choose a subject" });
       return;
     } else {
       let file = await createFile(
