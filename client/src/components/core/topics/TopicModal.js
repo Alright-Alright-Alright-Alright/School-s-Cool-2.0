@@ -19,7 +19,6 @@ const Modal = ({ handleShowModal }) => {
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
-  console.log(UI.errors)
 
   const dispatch = useDispatch()
 
