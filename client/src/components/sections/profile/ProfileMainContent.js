@@ -67,7 +67,11 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   return (
     <div className="flex flex-col items-center px-3">
-      <img className="p-6 w-1/2 h-auto" src={profileImage} alt="profile" />
+      <img
+        className="p-6 w-1/2 h-auto"
+        src={profileImage || user.imageUrl}
+        alt="profile"
+      />
       {/* <img className="p-6 w-1/2 h-auto" src={imagePreview} alt="profile" /> */}
       <div className="flex">
         {userProfile?._id === user._id ? (
