@@ -113,6 +113,8 @@ exports.newPassword = async (req, res) => {
     const { token } = req.params;
     if (newPassword !== confirmPassword) {
       throw new Error("Passwords don't match!");
+    } else if (newPassword.length < 6) {
+      throw new Error("Password must have at least 6 characters");
     } else {
       await newPasswordService(newPassword, token);
       res.status(200).json({ message: "password updated with success" });
