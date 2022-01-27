@@ -23,14 +23,7 @@ exports.newUser = async (firstName, lastName, email, password) => {
 
 exports.forgetPasswordService = async (email) => {
   try {
-    let token = crypto.randomBytes(32, async (err, buffer) => {
-      if (err) {
-        throw new Error(err);
-      } else {
-        return buffer.toString("hex");
-      }
-    });
-
+    let forgetPasswordToken = crypto.randomBytes(32).toString("hex");
     sendEmailService(
       email,
       "Password Reset",
@@ -39,12 +32,9 @@ exports.forgetPasswordService = async (email) => {
         <h5>Best Regards, <br/>
         School's Cool</h5>`
     );
-
-    let user = await forgetPasswordDb(email, token);
-    console.log("service", user);
+    let user = await forgetPasswordDb(email, forgetPasswordToken);
     return user;
   } catch (error) {
-    console.log("Service", error.message);
     throw new Error(error.message);
   }
 };

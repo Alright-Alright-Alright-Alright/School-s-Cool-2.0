@@ -95,11 +95,9 @@ exports.logout = (req, res) => {
 exports.forgetPassword = async (req, res) => {
   try {
     const email = req.body.email;
-    let user = await forgetPasswordService(email);
-    console.log("User controller", user);
+    await forgetPasswordService(email);
     res.json({ message: "Check your email buddy" });
   } catch (error) {
-    console.log("controller", error.message);
     res.status(422).json({ message: error.message });
   }
 };
