@@ -21,6 +21,8 @@ import EventDetailsPage from "./pages/EventDetailsPage"
 import ScrollToTop from "./hooks/ScrollToTop"
 import NotFound from "./pages/NotFound"
 import Profile from "./pages/Profile"
+import NewPassword from "./pages/NewPassword"
+import ForgotPassword from "./pages/ForgotPassword"
 
 ReactDOM.render(
   <Provider store={store}>
@@ -29,6 +31,8 @@ ReactDOM.render(
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="forgot" element={<ForgotPassword />} />
+        <Route path="new-password/:token" element={<NewPassword />} />
         <Route path="/" element={<App />}>
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<Topics />} />

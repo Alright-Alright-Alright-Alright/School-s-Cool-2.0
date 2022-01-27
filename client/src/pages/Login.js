@@ -1,5 +1,5 @@
 import React from "react"
-import LoginIndex from "../components/sections/login/LoginIndex"
+import LoginIndex from "../components/sections/auth/login/LoginIndex"
 
 function Login() {
   return (
