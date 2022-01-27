@@ -38,3 +38,21 @@ exports.forgetPasswordDb = async (email, forgetPasswordToken) => {
     throw new Error(error.message);
   }
 };
+
+exports.newPasswordDb = async (hashedpassword, token) => {
+  try {
+    const user = await User.findOne({
+      resetToken: token,
+      expireToken: { $gt: Date.now() },
+    });
+    if (!user) {
+      throw new Error("Try again session expired");
+    }
+    user.password = hashedpassword;
+    user.resetToken = undefined;
+    user.expireToken = undefined;
+    user.save();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

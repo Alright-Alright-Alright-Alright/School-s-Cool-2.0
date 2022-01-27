@@ -1,33 +1,22 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-import { registerUser } from "../../../redux/actions/userActions"
-import Button from "../../core/Button"
+import { loginUser } from "../../../../redux/actions/userActions"
+import Button from "../../../core/Button"
+import ErrorHandler from "../../../core/ErrorHandler"
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
+  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const registerNewUser = {
-    firstName,
-    lastName,
+  const userLogin = {
     email,
     password,
-  }
-
-  const chooseFirstName = (e) => {
-    setFirstName(e.target.value)
-  }
-
-  const chooseLastName = (e) => {
-    setLastName(e.target.value)
   }
 
   const chooseEmail = (e) => {
@@ -38,15 +27,15 @@ const RegisterForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-    dispatch(registerUser(registerNewUser))
-    setFirstName("")
-    setLastName("")
-    setEmail("")
-    setPassword("")
-    setTimeout(() => navigate("/login"), 1500)
+    dispatch(loginUser(userLogin))
   }
+
+  useEffect(
+    () => user !== null && setTimeout(() => navigate("/home"), 1500),
+    [user]
+  )
 
   const logo = (
     <svg
@@ -98,28 +87,10 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-4/6  rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-3/6 rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
-          <div className="h-2/5 flex flex-col px-8 justify-around">
-            <label className="text-sm my-2">First Name:</label>
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={chooseFirstName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
-
-            <label className="text-sm my-2">Last Name: </label>
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={chooseLastName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
-
+          <div className="lg:h-2/5 flex flex-col px-8 justify-around">
             <label className="text-sm my-2">Email: </label>
             <input
               type="email"
@@ -127,6 +98,7 @@ const RegisterForm = () => {
               checked={email}
               onChange={chooseEmail}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
+              placeholder="Enter your email"
             />
 
             <label className="text-sm my-2">Password: </label>
@@ -136,28 +108,31 @@ const RegisterForm = () => {
               value={password}
               onChange={choosePassword}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
-              required
+              placeholder="Enter your password"
             />
+            <p className="text-sm flex justify-end">
+              <Link to="/forgot">Forgot password?</Link>
+            </p>
           </div>
           <div className="flex justify-between px-8">
-            <Link to="/login">
+            <Button
+              buttonName="Log in"
+              buttonSubmit
+              buttonStyle="btnSecondaryStyle"
+            />
+            <Link to="/register">
               <Button
-                buttonName="Or login"
+                buttonName="Sign up"
                 buttonSubmit
                 buttonStyle="btnPrimaryStyle"
               />
             </Link>
-            <Button
-              buttonName="Register"
-              buttonSubmit
-              buttonStyle="btnSecondaryStyle"
-            />
           </div>
-          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          {UI.errors && <ErrorHandler error={UI.errors} />}
         </form>
       </div>
     </div>
   )
 }
 
-export default RegisterForm
+export default LoginForm

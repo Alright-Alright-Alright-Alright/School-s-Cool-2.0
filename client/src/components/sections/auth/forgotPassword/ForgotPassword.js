@@ -1,41 +1,24 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
-import { loginUser } from "../../../redux/actions/userActions"
-import Button from "../../core/Button"
-import ErrorHandler from "../../core/ErrorHandler"
+import Button from "../../../core/Button"
+import ErrorHandler from "../../../core/ErrorHandler"
+import { forgetAction } from "../../../../redux/actions/userActions"
 
-const LoginForm = () => {
+const ForgotPassword = () => {
   const UI = useSelector((state) => state.UI)
-  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const userLogin = {
-    email,
-    password,
-  }
 
   const chooseEmail = (e) => {
     setEmail(e.target.value)
   }
 
-  const choosePassword = (e) => {
-    setPassword(e.target.value)
-  }
-
   const handleFormSubmit = async (e) => {
     e.preventDefault()
-    dispatch(loginUser(userLogin))
+    dispatch(forgetAction(email))
   }
-
-  useEffect(
-    () => user !== null && setTimeout(() => navigate("/home"), 1500),
-    [user]
-  )
 
   const logo = (
     <svg
@@ -100,31 +83,13 @@ const LoginForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
               placeholder="Enter your email"
             />
-
-            <label className="text-sm my-2">Password: </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={choosePassword}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
-              placeholder="Enter your password"
-            />
-            <p className="text-sm flex justify-end">Forgot password?</p>
           </div>
           <div className="flex justify-between px-8">
             <Button
-              buttonName="Log in"
+              buttonName="Submit"
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />
-            <Link to="/register">
-              <Button
-                buttonName="Sign up"
-                buttonSubmit
-                buttonStyle="btnPrimaryStyle"
-              />
-            </Link>
           </div>
           {UI.errors && <ErrorHandler error={UI.errors} />}
         </form>
@@ -133,4 +98,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default ForgotPassword

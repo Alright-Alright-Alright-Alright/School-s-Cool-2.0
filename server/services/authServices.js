@@ -1,6 +1,10 @@
 const bcrypt = require("bcryptjs");
 const { sendEmailService } = require("../services/emailServices");
-const { createNewUser, forgetPasswordDb } = require("../db/authDb");
+const {
+  createNewUser,
+  forgetPasswordDb,
+  newPasswordDb,
+} = require("../db/authDb");
 const crypto = require("crypto");
 
 exports.newUser = async (firstName, lastName, email, password) => {
@@ -28,12 +32,21 @@ exports.forgetPasswordService = async (email) => {
       email,
       "Password Reset",
       `<h4>Hey buddy,</h4> <br/>
-        <h4>You requested us to reset your password, please, click <a href="${process.env.FRONTEND_URL}/forgot/${forgetPasswordToken}">here</a> to set a new one.</h4><br/>
+        <h4>You requested us to reset your password, please, click <a href="${process.env.FRONTEND_URL}/new-password/${forgetPasswordToken}">here</a> to set a new one.</h4><br/>
         <h5>Best Regards, <br/>
         School's Cool</h5>`
     );
     let user = await forgetPasswordDb(email, forgetPasswordToken);
     return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.newPasswordService = async (newPassword, token) => {
+  try {
+    let hashedpassword = await bcrypt.hash(newPassword, 10)
+    return await newPasswordDb(hashedpassword, token);
   } catch (error) {
     throw new Error(error.message);
   }

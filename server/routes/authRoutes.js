@@ -6,7 +6,8 @@ const {
   login,
   loggedIn,
   logout,
-  forgetPassword
+  forgetPassword,
+  newPassword
 } = require("../controllers/authControllers");
 
 //pass on controllers
@@ -15,6 +16,6 @@ authRoutes.post("/login", login);
 authRoutes.get("/loggedIn", loggedIn);
 authRoutes.post("/logout", logout);
 authRoutes.post("/forgot", forgetPassword)
-authRoutes.post('/new-password',)
+authRoutes.post('/new-password/:token', newPassword)
 
 module.exports = authRoutes;

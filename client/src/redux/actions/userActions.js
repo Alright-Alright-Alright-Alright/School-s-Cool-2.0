@@ -8,6 +8,8 @@ import {
   getAllUsers,
   updateUserService,
   getUserProfileService,
+  newPasswordService,
+  forgot,
 } from "../services/userService";
 
 import {
@@ -117,6 +119,32 @@ export const getUserProfile = (user) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: SET_USER_PROFILE, payload: userProfile });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
+
+export const forgetAction = ( email ) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    await forgot( email );
+    dispatch({ type: CLEAR_ERRORS });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
+
+export const newPasswordAction = ( newPassword, confirmPassword, token ) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    await newPasswordService( newPassword, confirmPassword, token );
+    dispatch({ type: CLEAR_ERRORS });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

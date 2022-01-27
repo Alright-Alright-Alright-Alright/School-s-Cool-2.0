@@ -1,5 +1,9 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
-const { newUser, forgetPasswordService } = require("../services/authServices");
+const {
+  newUser,
+  forgetPasswordService,
+  newPasswordService,
+} = require("../services/authServices");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
 
@@ -97,6 +101,22 @@ exports.forgetPassword = async (req, res) => {
     const email = req.body.email;
     await forgetPasswordService(email);
     res.json({ message: "Check your email buddy" });
+  } catch (error) {
+    res.status(422).json({ message: error.message });
+  }
+};
+
+// New password
+exports.newPassword = async (req, res) => {
+  try {
+    const { newPassword, confirmPassword } = req.body;
+    const { token } = req.params;
+    if (newPassword !== confirmPassword) {
+      throw new Error("Passwords don't match!");
+    } else {
+      await newPasswordService(newPassword, token);
+      res.status(200).json({ message: "password updated with success" });
+    }
   } catch (error) {
     res.status(422).json({ message: error.message });
   }
