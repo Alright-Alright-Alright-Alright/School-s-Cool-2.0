@@ -22,25 +22,29 @@ exports.newUser = async (firstName, lastName, email, password) => {
 };
 
 exports.forgetPasswordService = async (email) => {
-  crypto.randomBytes(32, async (err, buffer) => {
-    try {
+  try {
+    let token = crypto.randomBytes(32, async (err, buffer) => {
       if (err) {
-        res.status(500).json(err);
+        throw new Error(err);
+      } else {
+        return buffer.toString("hex");
       }
+    });
 
-      const forgetPasswordToken = buffer.toString("hex");
-
-      sendEmailService(
-        email,
-        "Password Reset",
-        `<h4>Hey buddy,</h4> <br/>
+    sendEmailService(
+      email,
+      "Password Reset",
+      `<h4>Hey buddy,</h4> <br/>
         <h4>You requested us to reset your password, please, click <a href="${process.env.FRONTEND_URL}/forgot/${forgetPasswordToken}">here</a> to set a new one.</h4><br/>
         <h5>Best Regards, <br/>
         School's Cool</h5>`
-      );
-      return await forgetPasswordDb(email, forgetPasswordToken);
-    } catch (error) {
-      throw new Error(error);
-    }
-  });
+    );
+
+    let user = await forgetPasswordDb(email, token);
+    console.log("service", user);
+    return user;
+  } catch (error) {
+    console.log("Service", error.message);
+    throw new Error(error.message);
+  }
 };

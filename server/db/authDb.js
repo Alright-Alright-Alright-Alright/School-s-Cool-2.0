@@ -23,20 +23,20 @@ exports.createNewUser = async (firstName, lastName, email, password) => {
   }
 };
 
-exports.forgetPasswordDb = async (email, forgetPasswordToken) => {
+exports.forgetPasswordDb = async (email, token) => {
   try {
     const user = await User.findOne({ email }, { new: true });
-
     if (!user) {
-      throw new Error({ message: "User dont exists with that email" });
+      throw new Error("User dont exists with that email");
     } else {
-      user.resetToken = forgetPasswordToken;
+      user.resetToken = token;
       user.expireToken = Date.now() + 3600000;
       user.save();
-      console.log(user);
+      console.log("db", user);
       return user;
     }
   } catch (error) {
-    throw new Error(error);
+    console.log('DB',error.message);
+    throw new Error(error.message)
   }
 };
