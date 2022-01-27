@@ -22,7 +22,7 @@ import {
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
-import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui";
+import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_SUCCESS } from "../types/ui";
 
 export const setAuthorizationHeader = (token) => {
   const Authorization = `Bearer ${token}`;
@@ -130,8 +130,9 @@ export const getUserProfile = (user) => async (dispatch) => {
 export const forgetAction = ( email ) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
-    await forgot( email );
+    const sucessMessage = await forgot( email );
     dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: SET_SUCCESS, payload: sucessMessage });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -143,8 +144,9 @@ export const forgetAction = ( email ) => async (dispatch) => {
 export const newPasswordAction = ( newPassword, confirmPassword, token ) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
-    await newPasswordService( newPassword, confirmPassword, token );
+    const sucessMessage = await newPasswordService( newPassword, confirmPassword, token );
     dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: SET_SUCCESS, payload: sucessMessage });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

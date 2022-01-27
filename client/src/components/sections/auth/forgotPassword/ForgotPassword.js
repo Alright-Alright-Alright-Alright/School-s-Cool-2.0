@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import Button from "../../../core/Button"
-import ErrorHandler from "../../../core/ErrorHandler"
+import MessageHandler from "../../../core/MessageHandler"
 import { forgetAction } from "../../../../redux/actions/userActions"
 
 const ForgotPassword = () => {
@@ -91,7 +91,8 @@ const ForgotPassword = () => {
               buttonStyle="btnSecondaryStyle"
             />
           </div>
-          {UI.errors && <ErrorHandler error={UI.errors} />}
+          {UI.success && <MessageHandler success={UI.success.message} />}
+          {UI.errors && <MessageHandler error={UI.errors.message} />}
         </form>
       </div>
     </div>

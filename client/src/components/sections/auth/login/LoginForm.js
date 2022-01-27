@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { loginUser } from "../../../../redux/actions/userActions"
 import Button from "../../../core/Button"
-import ErrorHandler from "../../../core/ErrorHandler"
+import MessageHandler from "../../../core/MessageHandler"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
@@ -128,7 +128,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <ErrorHandler error={UI.errors} />}
+          {UI.errors && <MessageHandler error={UI.errors} />}
         </form>
       </div>
     </div>

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import Button from "../../../core/Button"
-import ErrorHandler from "../../../core/ErrorHandler"
+import MessageHandler from "../../../core/MessageHandler"
 import { newPasswordAction } from "../../../../redux/actions/userActions"
 
 const NewPassword = () => {
@@ -25,7 +25,9 @@ const NewPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     dispatch(newPasswordAction(password, confirmPassword, token))
-    // navigate("/login")
+    setTimeout(() => {
+      navigate("/login")
+    }, 1500)
   }
 
   const logo = (
@@ -104,7 +106,8 @@ const NewPassword = () => {
               buttonStyle="btnSecondaryStyle"
             />
           </div>
-          {UI.errors && <ErrorHandler error={UI.errors.data.message} />}
+          {UI.success && <MessageHandler success={UI.success.message} />}
+          {UI.errors && <MessageHandler error={UI.errors.data.message} />}
         </form>
       </div>
     </div>
