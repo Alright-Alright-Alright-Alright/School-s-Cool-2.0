@@ -16,8 +16,8 @@ import {
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 export const getAllEvents = () => async (dispatch) => {
-  const allEvents = await getEvents()
   try {
+    const allEvents = await getEvents()
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: SET_EVENTS, payload: allEvents })
   } catch (error) {
@@ -29,8 +29,8 @@ export const getAllEvents = () => async (dispatch) => {
 }
 
 export const createNewEvent = (eventData) => async (dispatch) => {
-  const addEvent = await createEvent(eventData)
   try {
+    const addEvent = await createEvent(eventData)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: POST_EVENT, payload: addEvent })
   } catch (error) {
@@ -43,9 +43,9 @@ export const createNewEvent = (eventData) => async (dispatch) => {
 
 export const getOneEvent = (eventId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const eventFromDB = await getEvent(eventId)
 
   try {
+    const eventFromDB = await getEvent(eventId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_EVENT, payload: eventFromDB })
   } catch (error) {
@@ -58,9 +58,9 @@ export const getOneEvent = (eventId) => async (dispatch) => {
 
 export const joinEvent = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const joinEventDb = await joinEventService(eventId, user)
 
   try {
+    const joinEventDb = await joinEventService(eventId, user)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_EVENT, payload: joinEventDb })
   } catch (error) {
@@ -73,9 +73,9 @@ export const joinEvent = (eventId, user) => async (dispatch) => {
 
 export const leaveEvent = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const leaveEventDb = await leaveEventService(eventId, user)
 
   try {
+    const leaveEventDb = await leaveEventService(eventId, user)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_EVENT, payload: leaveEventDb })
   } catch (error) {
