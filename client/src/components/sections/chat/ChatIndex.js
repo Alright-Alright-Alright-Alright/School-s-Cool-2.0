@@ -52,15 +52,15 @@ const App = () => {
       // Here, 'travel' will be the channel ID
       await newChannel.create()
 
-      await client.connectUser(
-        {
-          id: "empty-shadow-8",
-          name: "empty-shadow-8",
-          image:
-            "https://getstream.io/random_png/?id=empty-shadow-8&name=empty-shadow-8",
-        },
-        userToken
-      )
+      // await client.connectUser(
+      //   {
+      //     id: "empty-shadow-8",
+      //     name: "empty-shadow-8",
+      //     image:
+      //       "https://getstream.io/random_png/?id=empty-shadow-8&name=empty-shadow-8",
+      //   },
+      //   userToken
+      // )
       setChannel(newChannel)
       setChatClient(client)
     }

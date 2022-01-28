@@ -4,8 +4,13 @@
 import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+import { StreamChat } from "stream-chat"
 import { logoutUser } from "../../redux/actions/userActions"
 import SearchBar from "../core/SearchBar"
+
+const STREAM_API = process.env.REACT_APP_STREAM_API_SECRET
+
+const client = new StreamChat(STREAM_API)
 
 const navItems = [
   {
@@ -46,6 +51,7 @@ function NavBar() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
+    client.disconnectUser()
     dispatch(logoutUser())
     navigate("/login")
   }
