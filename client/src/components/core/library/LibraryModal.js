@@ -12,6 +12,7 @@ import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 import TagsInput from "../TagsInput"
+import ErrorHandler from "../ErrorHandler"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -23,6 +24,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [tags, setTags] = useState([])
   const hiddenFileInput = useRef(null)
   const topics = useSelector((state) => state.topics.allTopics)
+  const UI = useSelector((state) => state.UI)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const dispatch = useDispatch()
 
@@ -46,15 +48,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
     )
     return arr
-  }
-
-  const fileType = () => {
-    if (imgPreview.includes("pdf")) {
-      return <Icon iconName="pdf" viewbox="0 0 22 22" />
-    }
-    if (imgPreview.includes("jpg")) {
-      return <Icon iconName="jpg" viewbox="0 0 22 22" />
-    }
   }
 
   const handleClick = () => {
@@ -94,7 +87,12 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       isPrivate: privacy,
       tags,
     }
-    handleShowModal()
+    if (
+      fileData.tags.length > 0 &&
+      fileData.category.length > 0 &&
+      fileData.subject.length > 0
+    )
+      handleShowModal()
     dispatch(addFileToLibrary(fileData))
   }
 
@@ -104,6 +102,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
+        {UI.errors && <ErrorHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"
@@ -165,7 +164,6 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </select>
           )}
           <div className="flex justify-end items-center w-2/7">
-            {imgPreview && fileType()}
             <div>
               <button
                 type="button"
@@ -173,7 +171,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 className="flex items-center"
               >
                 <span className="text-sm pr-3">
-                  {imgPreview ? "File type" : "Select your File"}
+                  {imgPreview
+                    ? "File successfully uploaded"
+                    : "Select your File"}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>

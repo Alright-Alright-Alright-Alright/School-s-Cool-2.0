@@ -4,7 +4,8 @@ const {
     getPostsByTopicIdDb,
     getPostByIdDb,
     likePostDb,
-    unlikePostDb
+    unlikePostDb,
+    deletePostDb
   } = require("../db/postDb");
   
 const getAllPostsService = async (topicId, eventId) => {
@@ -55,11 +56,20 @@ const unlikePostService = async (postId, userId) => {
     }
 };
 
+const deletePostService = async (postId) => {
+    try {
+        return await deletePostDb(postId);
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 module.exports = {
     getAllPostsService, 
     createPostService, 
     getPostByIdService, 
     getPostsByTopicIdService,
     likePostService,
-    unlikePostService
+    unlikePostService,
+    deletePostService
 };

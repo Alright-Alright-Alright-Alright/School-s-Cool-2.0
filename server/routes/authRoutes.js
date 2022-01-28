@@ -12,6 +12,6 @@ const {
 authRoutes.post("/register", register);
 authRoutes.post("/login", login);
 authRoutes.get("/loggedIn", loggedIn);
-authRoutes.get("/logout", logout);
+authRoutes.post("/logout", logout);
 
 module.exports = authRoutes;

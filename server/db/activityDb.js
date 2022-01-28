@@ -6,6 +6,7 @@ const getAllActivitiesDb = async (userId) => {
     return await Post.find()
       .sort({ createdAt: "desc" })
       .populate('topic', "title bannerImage")
+      .populate('event', "title bannerImage")
       .populate("owner", "firstName lastName imageUrl")
       .populate({
         path: "comments",
@@ -24,6 +25,7 @@ const getFollowedActivitiesDb = async (userId) => {
     const activities = await Post.find()
       .sort({ createdAt: "desc" })
       .populate('topic', "title bannerImage members")
+      .populate('event', "title bannerImage attendees")
       .populate("owner", "firstName lastName imageUrl followers")
       .populate({
         path: "comments",
@@ -32,7 +34,7 @@ const getFollowedActivitiesDb = async (userId) => {
           select: "firstName lastName imageUrl",
         },
       })
-    return activities.filter(activity => activity.topic?.members.includes(userId) || activity.owner?.followers.includes(userId))
+    return activities.filter(activity => activity.topic?.members.includes(userId) || activity.owner?.followers.includes(userId) || activity.event?.attendees.includes(userId))
   } catch (e) {
     throw new Error(e.message);
   }

@@ -14,8 +14,6 @@ export default function EventDashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  console.log(users)
-
   const firstThreeItems = users
     .slice(0, 3)
     .map((item) => (
@@ -81,9 +79,9 @@ EventDashcard.defaultProps = {
 }
 
 EventDashcard.propTypes = {
-  eventDashCardData: PropTypes.arrayOf,
+  eventDashCardData: PropTypes.arrayOf(PropTypes.shape),
   eventDashCardTitle: PropTypes.string.isRequired,
   eventDashCardStyle: PropTypes.string.isRequired,
   dropdownMenuData: PropTypes.shape.isRequired,
-  users: PropTypes.arrayOf,
+  users: PropTypes.arrayOf(PropTypes.shape),
 }

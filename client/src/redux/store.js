@@ -10,6 +10,7 @@ import userReducer from "./reducers/userReducer"
 import eventsReducer from "./reducers/eventReducer"
 import postsReducer from "./reducers/postReducer"
 import activitiesReducer from "./reducers/activityReducer"
+import searchBarReducer from "./reducers/searchBarReducer"
 
 const initialState = {}
 
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   UI: uiReducer,
   posts: postsReducer,
   activities: activitiesReducer,
+  searchBar: searchBarReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

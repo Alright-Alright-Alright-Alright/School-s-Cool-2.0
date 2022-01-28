@@ -1,0 +1,30 @@
+.rdw-editor-toolbar {
+    border: none;
+   
+}
+
+.rdw-inline-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+	align-items: center;
+	align-content: center;
+    border: none;
+}
+
+.rdw-option-wrapper {
+    padding-left: 1rem;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: none;
+
+}
+
+.rdw-inline-wrapper > div:hover {
+    border: none;
+    text-shadow: none;
+}
+
+.rdw-list-wrapper {
+    display: flex;
+}

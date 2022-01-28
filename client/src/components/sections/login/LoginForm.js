@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { loginUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
+import ErrorHandler from "../../core/ErrorHandler"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
+  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
@@ -25,14 +27,15 @@ const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-
     dispatch(loginUser(userLogin))
-    setEmail("")
-    setPassword("")
-    setTimeout(() => navigate("/home"), 1500)
   }
+
+  useEffect(
+    () => user !== null && setTimeout(() => navigate("/home"), 1500),
+    [user]
+  )
 
   const logo = (
     <svg
@@ -123,7 +126,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          {UI.errors && <ErrorHandler error={UI.errors} />}
         </form>
       </div>
     </div>
