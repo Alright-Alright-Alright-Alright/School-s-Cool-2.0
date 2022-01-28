@@ -1,5 +1,5 @@
 import React from "react"
-import RegisterIndex from "../components/sections/register/RegisterIndex"
+import RegisterIndex from "../components/sections/auth/register/RegisterIndex"
 
 function Register() {
   return (

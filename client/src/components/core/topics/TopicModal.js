@@ -5,7 +5,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import { addAtopic } from "../../../redux/actions/topicActions"
-import ErrorHandler from "../ErrorHandler"
+import MessageHandler from "../MessageHandler"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -73,7 +73,7 @@ const Modal = ({ handleShowModal }) => {
         className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-20 shadow-xl"
         onSubmit={handleFormSubmit}
       >
-        {UI.errors && <ErrorHandler error={UI.errors} />}
+        {UI.errors && <MessageHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
             required

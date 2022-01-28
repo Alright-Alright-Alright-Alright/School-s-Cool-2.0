@@ -12,7 +12,7 @@ import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
 import { getAlltopics } from "../../../redux/actions/topicActions"
 import TagsInput from "../TagsInput"
-import ErrorHandler from "../ErrorHandler"
+import MessageHandler from "../MessageHandler"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -102,7 +102,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
-        {UI.errors && <ErrorHandler error={UI.errors} />}
+        {UI.errors && <MessageHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"

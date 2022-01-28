@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-import { loginUser } from "../../../redux/actions/userActions"
-import Button from "../../core/Button"
-import ErrorHandler from "../../core/ErrorHandler"
+import { loginUser } from "../../../../redux/actions/userActions"
+import Button from "../../../core/Button"
+import MessageHandler from "../../../core/MessageHandler"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
@@ -110,7 +110,9 @@ const LoginForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
               placeholder="Enter your password"
             />
-            <p className="text-sm flex justify-end">Forgot password?</p>
+            <p className="text-sm flex justify-end">
+              <Link to="/forgot">Forgot password?</Link>
+            </p>
           </div>
           <div className="flex justify-between px-8">
             <Button
@@ -126,7 +128,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <ErrorHandler error={UI.errors} />}
+          {UI.errors && <MessageHandler error={UI.errors} />}
         </form>
       </div>
     </div>

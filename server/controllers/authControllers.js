@@ -1,5 +1,9 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
-const { newUser } = require("../services/authServices");
+const {
+  newUser,
+  forgetPasswordService,
+  newPasswordService,
+} = require("../services/authServices");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
 
@@ -89,4 +93,33 @@ exports.loggedIn = (req, res) => {
 exports.logout = (req, res) => {
   req.logout();
   res.status(200).json({ message: "Log out success!" });
+};
+
+// Forget password
+exports.forgetPassword = async (req, res) => {
+  try {
+    const email = req.body.email;
+    await forgetPasswordService(email);
+    res.json({ message: "Check your email buddy" });
+  } catch (error) {
+    res.status(422).json({ message: error.message });
+  }
+};
+
+// New password
+exports.newPassword = async (req, res) => {
+  try {
+    const { newPassword, confirmPassword } = req.body;
+    const { token } = req.params;
+    if (newPassword !== confirmPassword) {
+      throw new Error("Passwords don't match!");
+    } else if (newPassword.length < 6) {
+      throw new Error("Password must have at least 6 characters");
+    } else {
+      await newPasswordService(newPassword, token);
+      res.status(200).json({ message: "password updated with success" });
+    }
+  } catch (error) {
+    res.status(422).json({ message: error.message });
+  }
 };
