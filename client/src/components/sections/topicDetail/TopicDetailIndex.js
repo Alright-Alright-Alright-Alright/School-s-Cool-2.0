@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import Main from "../../layout/Main"
 import TopicContentLeft from "./TopicContentLeft"
+
 import MainContent from "./MainContent"
 import TopicContentRight from "./TopicContentRight"
 import { getOneTopic } from "../../../redux/actions/topicActions"
