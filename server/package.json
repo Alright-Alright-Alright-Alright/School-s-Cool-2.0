@@ -25,14 +25,6 @@
     "express-session": "^1.17.2",
     "getstream": "^7.4.1",
     "jsonwebtoken": "^8.5.1",
-<<<<<<< HEAD
-    "mongoose": "^6.1.8",
-    "multer": "^1.4.4",
-    "nodemailer": "^6.7.2",
-    "nodemon": "^2.0.15",
-    "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
-=======
     "mongoose": "^6.0.12",
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
@@ -40,6 +32,5 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "stream-chat": "^5.1.1"
->>>>>>> f60972c (merge)
   }
 }
