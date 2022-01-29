@@ -10,6 +10,7 @@ import {
   GET_LIBRARY,
   LIKE_FILE,
   POST_FILE,
+  SORT_BY,
   UNLIKE_FILE,
 } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -199,6 +200,19 @@ export const deleteFile = (fileId) => async (dispatch) => {
     await fileDeleteService(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_FILE, payload: fileId })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const getSortedBy = (thisVariable) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SORT_BY, payload: thisVariable })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
