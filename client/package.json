@@ -21,6 +21,7 @@
     "postcss": "^7.0.39",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-chat-widget": "^3.1.4",
     "react-datepicker": "^4.5.0",
     "react-dom": "^17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
@@ -31,7 +32,7 @@
     "react-scripts": "4.0.2",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
-    "stream-chat": "^5.1.2",
+    "stream-chat": "^5.4.0",
     "stream-chat-react": "^6.12.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "web-vitals": "^2.1.2"
