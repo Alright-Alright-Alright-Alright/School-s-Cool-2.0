@@ -38,6 +38,10 @@ const libraryItem = ({ library, showModal }) => {
     )
   }
 
+  useEffect(() => {
+    dispatch(getAllFilesFromLibrary())
+  }, [sortedFiles, dispatch])
+
   return (
     <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>
       {selected.length > 0 && (
