@@ -13,6 +13,7 @@ import {
   getAllFilesFromLibrary,
   getSingleFile,
   getSortedBy,
+  sortedByUser,
 } from "../../../redux/actions/libraryActions"
 
 const libraryItem = ({ library, showModal }) => {
@@ -88,7 +89,13 @@ const libraryItem = ({ library, showModal }) => {
               </button>
             </th>
             <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/6">
-              User
+              <button
+                type="button"
+                onClick={() => dispatch(sortedByUser())}
+                className="font-semibold"
+              >
+                User
+              </button>
             </th>
           </tr>
         </thead>
