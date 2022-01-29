@@ -46,7 +46,7 @@ export const loginUser = (userData) => async (dispatch) => {
       });
     });
   }
-};
+
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI });
