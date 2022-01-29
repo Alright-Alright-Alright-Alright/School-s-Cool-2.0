@@ -65,9 +65,6 @@ const libraryReducer = (state = initialState, action) => {
     case ADD_COMMENT:
     case DELETE_COMMENT:
       return {
-        // allFiles: state.allFiles.map((eachFile) =>
-        //   eachFile._id === action.payload._id ? action.payload : eachFile
-        // ),
         ...state,
         singleFile:
           state.singleFile._id === action.payload._id
