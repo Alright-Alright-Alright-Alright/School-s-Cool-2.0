@@ -15,11 +15,13 @@ import {
   GET_USER_LIBRARY,
   LIKE_FILE,
   POST_FILE,
+  SORT_BY,
   UNLIKE_FILE,
 } from "../types/library"
 
 const initialState = {
   allFiles: [],
+  sortedFiles: [],
   singleFile: null,
 }
 
@@ -28,7 +30,9 @@ const libraryReducer = (state = initialState, action) => {
     case GET_LIBRARY:
       return {
         ...state,
-        allFiles: action.payload,
+        allFiles: action.payload.sort(
+          (a, b) => b.likedBy.length - a.likedBy.length
+        ),
       }
     case GET_FILE:
       return {
@@ -77,6 +81,23 @@ const libraryReducer = (state = initialState, action) => {
         allFiles: state.allFiles.filter(
           (eachFile) => eachFile._id !== action.payload
         ),
+      }
+    case SORT_BY:
+      return {
+        ...state,
+        sortedFiles: state.allFiles.sort((a, b) => {
+          if (
+            a[action.payload].toLowerCase() > b[action.payload].toLowerCase()
+          ) {
+            return 1
+          }
+          if (
+            a[action.payload].toLowerCase() < b[action.payload].toLowerCase()
+          ) {
+            return -1
+          }
+          return 0
+        }),
       }
     default:
       return state
