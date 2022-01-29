@@ -29,7 +29,8 @@ export const setAuthorizationHeader = (token) => {
   localStorage.setItem("Authorization", Authorization);
 };
 
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
+
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
@@ -44,6 +45,7 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err.response.data.message,
       });
     });
+  }
 };
 
 export const registerUser = (registerNewUser) => (dispatch) => {
