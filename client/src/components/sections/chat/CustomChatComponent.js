@@ -37,7 +37,7 @@ function CustomChatComponent({ messages }) {
 
   console.log(messages)
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full   right-1 pl-2">
       <div className="flex w-full py-1 justify-between">
         <Button
           onClick={() => setShowChannels(!showChannels)}

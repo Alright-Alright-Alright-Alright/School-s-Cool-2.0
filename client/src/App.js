@@ -4,15 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Route, Routes, Outlet, useNavigate } from "react-router-dom"
 import jwt from "jsonwebtoken"
 import NavBar from "./components/layout/NavBar"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Topics from "./pages/Topics"
-import TopicDetailPage from "./pages/TopicDetailPage"
-import Home from "./pages/Home"
 import { loggedInUser } from "./redux/actions/userActions"
-import ChatMainContent from "./components/sections/chat/ChatMainContent"
 import ChatWidget from "./components/sections/chat/ChatWidget"
-// const Home = lazy(() => import("./pages/Home"))
 
 function App() {
   const loggedIn = useSelector((state) => state.user.isLoggedIn)
@@ -35,19 +28,8 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* <Home /> */}
       <ChatWidget />
       <Outlet />
-      {/* <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route path="/topics" element={<Topics />}>
-            <Route path=":topicId" element={<TopicDetailPage />} />
-          </Route>
-        </Routes>
-      </Suspense> */}
     </div>
   )
 }
