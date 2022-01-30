@@ -86,7 +86,7 @@ const libraryReducer = (state = initialState, action) => {
     case SORT_BY:
       return {
         ...state,
-        sortedFiles: state.allFiles.sort((a, b) => {
+        allFiles: [...state.allFiles].sort((a, b) => {
           if (
             a[action.payload].toLowerCase() > b[action.payload].toLowerCase()
           ) {
@@ -103,7 +103,7 @@ const libraryReducer = (state = initialState, action) => {
     case SORT_BY_NAME:
       return {
         ...state,
-        sortedFiles: state.allFiles.sort((a, b) => {
+        allFiles: [...state.allFiles].sort((a, b) => {
           if (
             a.owner.firstName.toLowerCase() > b.owner.firstName.toLowerCase()
           ) {
