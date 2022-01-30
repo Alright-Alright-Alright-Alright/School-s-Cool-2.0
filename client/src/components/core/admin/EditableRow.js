@@ -45,7 +45,11 @@ function EditableRow({
             type="submit"
             className="pr-2 hover:bg-grey-light h-6 w-6 rounded-full "
           >
-            <Icon iconName="file" />
+            <Icon
+              iconName="select"
+              viewbox="-1 -1 14 14"
+              iconStyle="fill-active"
+            />
           </button>
           <button
             type="button"
