@@ -11,6 +11,7 @@ import {
   LIKE_FILE,
   POST_FILE,
   SORT_BY,
+  SORT_BY_NAME,
   UNLIKE_FILE,
 } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -213,6 +214,19 @@ export const getSortedBy = (thisVariable) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: SORT_BY, payload: thisVariable })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const sortedByUser = () => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  try {
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: SORT_BY_NAME })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

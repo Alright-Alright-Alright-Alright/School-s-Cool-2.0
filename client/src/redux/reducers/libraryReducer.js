@@ -2,7 +2,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-
 import {
   ADD_COMMENT,
   DELETE_COMMENT,
@@ -16,6 +15,7 @@ import {
   LIKE_FILE,
   POST_FILE,
   SORT_BY,
+  SORT_BY_NAME,
   UNLIKE_FILE,
 } from "../types/library"
 
@@ -85,7 +85,7 @@ const libraryReducer = (state = initialState, action) => {
     case SORT_BY:
       return {
         ...state,
-        sortedFiles: state.allFiles.sort((a, b) => {
+        allFiles: [...state.allFiles].sort((a, b) => {
           if (
             a[action.payload].toLowerCase() > b[action.payload].toLowerCase()
           ) {
@@ -93,6 +93,23 @@ const libraryReducer = (state = initialState, action) => {
           }
           if (
             a[action.payload].toLowerCase() < b[action.payload].toLowerCase()
+          ) {
+            return -1
+          }
+          return 0
+        }),
+      }
+    case SORT_BY_NAME:
+      return {
+        ...state,
+        allFiles: [...state.allFiles].sort((a, b) => {
+          if (
+            a.owner.firstName.toLowerCase() > b.owner.firstName.toLowerCase()
+          ) {
+            return 1
+          }
+          if (
+            a.owner.firstName.toLowerCase() < b.owner.firstName.toLowerCase()
           ) {
             return -1
           }
