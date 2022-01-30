@@ -21,11 +21,11 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { userid } = req.params;
-  const { firstName, lastName, email, imageUrl } = req.body;
+  const { firstName, lastName, email, imageUrl, role } = req.body;
   let password = req.body.password;
 
   try {
-    const updatedUser = await updateTheUser(userid, firstName, lastName, email, imageUrl, password);
+    const updatedUser = await updateTheUser(userid, firstName, lastName, email, imageUrl, role, password);
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong updating the user" });
