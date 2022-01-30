@@ -3,13 +3,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import Icon from "../Icon"
 import {
   deleteFile,
+  getAllFilesFromLibrary,
   getSingleFile,
   getSortedBy,
   sortedByUser,
@@ -17,6 +18,7 @@ import {
 
 const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
+  const sortedFiles = useSelector((state) => state.library.sortedFiles)
   const [tableRowClicked, setTableRowClicked] = useState([])
   const [selected, setSelected] = useState([])
   const dispatch = useDispatch()
@@ -30,10 +32,16 @@ const libraryItem = ({ library, showModal }) => {
     setTableRowClicked([id])
   }
 
-  const isItprivate = () =>
-    library.filter((item) =>
+  const isItprivate = () => {
+    const arr = sortedFiles.length > 0 ? sortedFiles : library
+    return arr.filter((item) =>
       user._id === item.owner._id ? item : item.isPrivate === false
     )
+  }
+
+  useEffect(() => {
+    dispatch(getAllFilesFromLibrary())
+  }, [sortedFiles, dispatch])
 
   return (
     <div className={`w-full font-sans filter ${showModal && "blur-md"}`}>

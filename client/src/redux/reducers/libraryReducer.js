@@ -2,7 +2,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-
 import {
   ADD_COMMENT,
   DELETE_COMMENT,
