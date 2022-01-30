@@ -21,7 +21,6 @@ import {
 
 const initialState = {
   allFiles: [],
-  sortedFiles: [],
   singleFile: null,
 }
 
