@@ -101,6 +101,7 @@ export const updateUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
 
   const updatedUser = await updateUserService(userData);
+  console.log(updatedUser);
   try {
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: SET_USER, payload: updatedUser });

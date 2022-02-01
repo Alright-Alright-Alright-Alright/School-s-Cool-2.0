@@ -160,6 +160,15 @@ function NavBar() {
               <ul className="py-1" aria-labelledby="dropdownButton">
                 <li>
                   <Link
+                    to="/admin"
+                    onClick={() => setShowDropDown(false)}
+                    className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
+                  >
+                    Admin
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     to={`/profile/${user._id}`}
                     onClick={() => setShowDropDown(false)}
                     className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
@@ -206,6 +215,15 @@ function NavBar() {
               className="w-44 list-none  divide-y shadow absolute right-1/5 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
             >
               <ul className="py-1" aria-labelledby="dropdownButton">
+                <li>
+                  <Link
+                    to="/admin"
+                    onClick={() => setShowDropDown(false)}
+                    className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
+                  >
+                    Admin
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to={`/profile/${user._id}`}

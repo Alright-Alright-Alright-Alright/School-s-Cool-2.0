@@ -22,7 +22,8 @@ exports.updateTheUser = async (
   lastName,
   email,
   imageUrl,
-  password
+  role,
+  password,
 ) => {
   try {
     return await updatingTheUser(
@@ -31,6 +32,7 @@ exports.updateTheUser = async (
       lastName,
       email,
       imageUrl,
+      role,
       password
     );
     // let newPassword = null;
@@ -57,7 +59,6 @@ exports.updateTheUser = async (
     //   );
     // }
   } catch (error) {
-    console.log(error.message);
     throw new Error(error.message);
   }
 };
