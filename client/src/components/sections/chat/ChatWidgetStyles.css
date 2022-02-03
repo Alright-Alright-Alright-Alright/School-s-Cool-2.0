@@ -1,9 +1,9 @@
 .chatwidget {
     font-family: inherit
 }
-.rcw-widget-container{
+/* .rcw-widget-container{
     @apply text-base
-}
+} */
 
 /* .rcw-widget-container > button img {
     @apply object-fill
@@ -15,8 +15,8 @@
   } */
 
 .rcw-conversation-container .rcw-header {
-    @apply bg-grey-medium
-    /* @apply text-grey-dark; */
+    @apply bg-grey-medium_light
+    text-grey-dark
   }
 
 /* .rcw-open-launcher {
@@ -29,25 +29,20 @@
     content:url("/Users/dirk/Development/Projects/School-s-Cool-2.0/client/src/components/sections/chat/community-chat.png");
 } */
 
-/* .rcw-launcher {
+.rcw-launcher {
     display: flex;
     align-items: center;
     justify-content: center;
     @apply bg-grey-medium;
-
     @apply mr-2;
-    /* width: 10%;
-    height: 100%;
-    /* border-radius: 100px;
-    @apply object-fill;
 
-} */
+}
 
-/* .rcw-close-launcher > img{
+.rcw-close-launcher > img{
     display: flex;
     align-items: center;
     justify-content: center;
-} */
+}
 
 /* .rcw-launcher   {
     flex-shrink: 0;

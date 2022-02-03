@@ -4,24 +4,25 @@
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import Button from "../../core/Button"
+import Icon from "../../core/Icon"
 
-function CustomChatComponent({ messages }) {
+function CustomChatComponent({ messages, handleNewChannel }) {
   const [showChannels, setShowChannels] = useState(false)
   const users = useSelector((state) => state.user.users.users)
 
   const handleSetChat = (user) => {
     setShowChannels(false)
-    console.log(user)
+    handleNewChannel(user)
   }
 
   const userList = users.map((user) => (
-    <li key={user._id}>
+    <div key={user._id}>
       <button
-        className=" w-full"
         type="button"
-        onClick={() => handleSetChat(user._id)}
+        onClick={() => handleSetChat(user)}
+        className="w-full"
       >
-        <div className="flex justify-start items-center pt-1 hover:bg-grey-medium_light w-full rounded-xl ">
+        <div className="flex justify-start items-center pt-1 hover:bg-grey-medium_light w-full rounded-full ">
           <img
             src={user.imageUrl}
             alt={user.firstName}
@@ -32,28 +33,29 @@ function CustomChatComponent({ messages }) {
           </p>
         </div>
       </button>
-    </li>
+    </div>
   ))
 
-  console.log(messages)
   return (
-    <div className="flex flex-col w-full   right-1 pl-2">
-      <div className="flex w-full py-1 justify-between">
+    <div className="flex flex-col justify-items-center ">
+      <div className="flex justify-between relative top-0 ">
+        {/* <Icon iconName="collapse" iconStyle="fill-active" /> */}
         <Button
           onClick={() => setShowChannels(!showChannels)}
-          buttonName="Show Channels"
+          buttonName="Show Contacts"
           buttonStyle="btnSecondaryStyle"
-        />
-        <Button
-          onClick={() => setShowChannels(!showChannels)}
-          buttonName="Show Chat"
-          buttonStyle="btnPrimaryStyle"
         />
       </div>
       {showChannels && (
-        <div className="flex-col w-full ">
-          <h2>Channels</h2>
-          <ul>{userList}</ul>
+        <div>
+          <div className="flex-col w-full fixed bg-white shadow-xl rounded-2xl right-96 overflow-y-scroll h-full  top-0">
+            <h1 className=" text-lg p-3 bg-grey-medium_light w-full">
+              Contacts
+            </h1>
+            <div className="relative pl-3">
+              <div>{userList}</div>
+            </div>
+          </div>
         </div>
       )}
     </div>

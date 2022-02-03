@@ -8,6 +8,7 @@ import {
   Widget,
   addUserMessage,
   renderCustomComponent,
+  addResponseMessage,
 } from "react-chat-widget"
 import { StreamChat } from "stream-chat"
 import ChatLogo from "./community-chat.png"
@@ -28,6 +29,7 @@ const DEFAULT_USER = {
 const STREAM_API = process.env.REACT_APP_STREAM_API_SECRET
 
 function ChatWidget({ user }) {
+  const [newChannel, setNewChannel] = useState(null)
   const [messages, setMessages] = useState(null)
   const currentUser = useSelector((state) => state.user.singleUser)
 
@@ -37,8 +39,8 @@ function ChatWidget({ user }) {
   const client = new StreamChat(STREAM_API)
   //   const { id, name } = user
 
-  const id = currentUser._id
-  const name = currentUser.firstName
+  const id = currentUser?._id
+  const name = currentUser?.firstName
 
   const channel = useRef(null)
 
@@ -48,8 +50,6 @@ function ChatWidget({ user }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, name])
 
-  // Method - Set the channel, in this case we are setting a messaging
-  // default chat provided by StreamChat
   const setChannel = useCallback(async () => {
     channel.current = client.channel("messaging", "General", {
       name: "School's cool chat",
@@ -61,11 +61,8 @@ function ChatWidget({ user }) {
     return async () => {
       await channelWatch.stopWatching()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Method - We make use of chat-widget "handleNewUserMessage" prop to update
-  // the chat and send the message to the channel
   const handleNewUserMessage = useCallback(
     async (message) =>
       await channel.current.sendMessage({
@@ -74,12 +71,34 @@ function ChatWidget({ user }) {
     []
   )
 
+  const handleNewChannel = useCallback(async (userToChatWith) => {
+    console.log(userToChatWith)
+    channel.current = client.channel("messaging", {
+      members: [userToChatWith._id, currentUser._id],
+    })
+
+    const channelWatch = await channel.current.watch()
+    setMessages(channelWatch.messages)
+
+    return async () => {
+      await channelWatch.stopWatching()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const customComponent = () => (
+    <CustomChatComponent
+      messages={messages}
+      handleNewChannel={handleNewChannel}
+    />
+  )
+
   // Effect - Set the user and channel on first render
   useEffect(() => {
     setUser()
     setChannel()
-    renderCustomComponent(CustomChatComponent, { messages })
-  }, [setUser, setChannel])
+    renderCustomComponent(customComponent)
+  }, [setUser, setChannel, handleNewChannel])
 
   // Effect - Map through the messages and add them to the widget using 'addUserMessage'
   useEffect(
@@ -87,16 +106,22 @@ function ChatWidget({ user }) {
     [messages]
   )
 
+  useEffect(() => {
+    addResponseMessage("Welcome to this chat!")
+  }, [])
+
   return (
     <div className="Chatwidget">
       <Widget
         handleNewUserMessage={handleNewUserMessage}
-        title="School's cool chat"
-        subtitle="General chat room"
-        profileClientAvatar={currentUser.imageUrl}
+        title="School's cool Amsterdam"
+        subtitle=""
+        profileClientAvatar={currentUser?.imageUrl}
         launcherOpenImg={ChatLogo}
         emojis
         showBadge
+        addResponseMessage={addResponseMessage}
+        resizable
       />
     </div>
   )
