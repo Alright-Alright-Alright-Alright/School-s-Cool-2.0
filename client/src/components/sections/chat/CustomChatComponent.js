@@ -38,7 +38,7 @@ function CustomChatComponent({ messages, handleNewChannel }) {
 
   return (
     <div className="flex flex-col justify-items-center ">
-      <div className="flex justify-between relative top-0 ">
+      <div className="flex justify-between fixed top-21 ">
         {/* <Icon iconName="collapse" iconStyle="fill-active" /> */}
         <Button
           onClick={() => setShowChannels(!showChannels)}
