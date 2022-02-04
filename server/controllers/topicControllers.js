@@ -26,9 +26,12 @@ const createNewTopic = async (req, res, next) => {
   const owner = req.user.userLogedIn._id;
 
   try {
-    if (isEmpty(category, subject, description)) {
-      res.status(400).json({ message: "Please fill all the required fields" });
-      return;
+    if (isEmpty(category)) {
+      res.status(400).json({ message: "Please choose a category" });
+    } else if (isEmpty(subject)) {
+      res.status(400).json({ message: "Please choose a subject" });
+    } else if (isEmpty(description)) {
+      res.status(400).json({ message: "It would be helpful if everyone to see a description of the event." });
     } else {
       const topic = await createNewTopicService(
         title,
@@ -42,7 +45,7 @@ const createNewTopic = async (req, res, next) => {
       return res.status(201).json(topic);
     }
   } catch (e) {
-    res.status(500).json({ message: e.message }) && next(e);
+    res.status(500).json({ message: e.message });
   }
 };
 
