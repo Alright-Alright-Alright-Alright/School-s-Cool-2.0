@@ -2,7 +2,9 @@ const User = require("../models/User-model");
 
 exports.getingTheUser = async (userid) => {
   try {
-    return await User.findById(userid);
+    return await User.findByIdAndUpdate(userid, { lastLoginDate: Date.now() }, { new: true });
+
+    // return await User.findById(userid);
   } catch (error) {  
     throw new Error(error.message);
   }
