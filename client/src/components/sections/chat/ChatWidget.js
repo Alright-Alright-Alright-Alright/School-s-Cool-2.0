@@ -46,7 +46,10 @@ function ChatWidget({ user }) {
 
   // Method - Set the user with the strean chat client variable
   const setUser = useCallback(async () => {
-    await client.connectUser({ id, name }, client.devToken(id))
+    await client.connectUser(
+      { id: currentUser?._id, name: currentUser?.firstName },
+      client.devToken(id)
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, name])
 
@@ -95,8 +98,15 @@ function ChatWidget({ user }) {
 
   // Effect - Set the user and channel on first render
   useEffect(() => {
-    setUser()
-    setChannel()
+    setTimeout(() => {
+      setUser()
+    }, 1000)
+
+    setTimeout(() => {
+      setChannel()
+    }, 2000)
+
+    // setChannel()
     renderCustomComponent(customComponent)
   }, [setUser, setChannel, handleNewChannel])
 

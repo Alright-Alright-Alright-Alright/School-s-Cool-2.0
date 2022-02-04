@@ -48,7 +48,7 @@ function CustomChatComponent({ messages, handleNewChannel }) {
       </div>
       {showChannels && (
         <div>
-          <div className="flex-col w-full fixed bg-white shadow-xl rounded-2xl right-96 overflow-y-scroll h-full  top-0">
+          <div className="flex-col w-full fixed bg-white shadow-xl rounded-2xl lg:right-96 overflow-y-scroll h-full  top-0">
             <h1 className=" text-lg p-3 bg-grey-medium_light w-full">
               Contacts
             </h1>
