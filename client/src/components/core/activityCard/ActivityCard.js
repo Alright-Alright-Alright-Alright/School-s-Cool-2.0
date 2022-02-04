@@ -102,7 +102,7 @@ function ActivityCard({ activity }) {
         </div>
         <div className="flex">
           {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
-          {activity.likedBy?.includes(user._id) ? (
+          {activity.likedBy?.includes(user?._id) ? (
             <button type="button" onClick={handleUnlike}>
               <Icon iconName="like" iconStyle="fill-active" />
             </button>
