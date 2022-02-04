@@ -27,11 +27,11 @@ const createNewTopic = async (req, res, next) => {
 
   try {
     if (isEmpty(category)) {
-      res.status(400).json({ message: "Please choose a category" });
+      return res.status(400).json({ message: "Please choose a category" });
     } else if (isEmpty(subject)) {
-      res.status(400).json({ message: "Please choose a subject" });
+      return res.status(400).json({ message: "Please choose a subject" });
     } else if (isEmpty(description)) {
-      res.status(400).json({ message: "It would be helpful if everyone to see a description of the event." });
+      return res.status(400).json({ message: "It would be helpful if everyone to see a description of the event." });
     } else {
       const topic = await createNewTopicService(
         title,
