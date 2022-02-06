@@ -22,15 +22,14 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
 export const addAtopic = (topicData) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-
-  const addTopicToDB = await addTopic(topicData)
   try {
+    const addTopicToDB = await addTopic(topicData)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: POST_TOPIC, payload: addTopicToDB })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response,
+      payload: error.response.data.message,
     })
   }
 }
@@ -38,8 +37,8 @@ export const addAtopic = (topicData) => async (dispatch) => {
 export const joinAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const joinTopicToDB = await joinTopic(topicId)
   try {
+    const joinTopicToDB = await joinTopic(topicId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: JOIN_TOPIC, payload: joinTopicToDB })
   } catch (error) {
@@ -53,8 +52,8 @@ export const joinAtopic = (topicId) => async (dispatch) => {
 export const leaveAtopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const leaveTopicToDB = await leaveTopic(topicId)
   try {
+    const leaveTopicToDB = await leaveTopic(topicId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_TOPIC, payload: leaveTopicToDB })
   } catch (error) {
@@ -68,8 +67,8 @@ export const leaveAtopic = (topicId) => async (dispatch) => {
 export const getAlltopics = () => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const topicsFromDB = await getTopics()
   try {
+    const topicsFromDB = await getTopics()
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPICS, payload: topicsFromDB })
   } catch (error) {
@@ -82,8 +81,9 @@ export const getAlltopics = () => async (dispatch) => {
 
 export const getOneTopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const topicFromDB = await getTopic(topicId)
+
   try {
+    const topicFromDB = await getTopic(topicId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: GET_TOPIC, payload: topicFromDB })
   } catch (error) {
@@ -97,8 +97,8 @@ export const getOneTopic = (topicId) => async (dispatch) => {
 export const inviteForTopic = (topicId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const inviteForTopicDb = await inviteForTopicService(topicId, userId)
   try {
+    const inviteForTopicDb = await inviteForTopicService(topicId, userId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: INVITE_FOR_TOPIC, payload: inviteForTopicDb })
   } catch (error) {
@@ -112,8 +112,8 @@ export const inviteForTopic = (topicId, userId) => async (dispatch) => {
 export const removeInvite = (topicId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
-  const removeInviteDb = await removeInviteForTopicService(topicId, userId)
   try {
+    const removeInviteDb = await removeInviteForTopicService(topicId, userId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: REMOVE_INVITE, payload: removeInviteDb })
   } catch (error) {

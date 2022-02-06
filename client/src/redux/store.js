@@ -9,6 +9,8 @@ import uiReducer from "./reducers/uiReducer"
 import userReducer from "./reducers/userReducer"
 import eventsReducer from "./reducers/eventReducer"
 import postsReducer from "./reducers/postReducer"
+import activitiesReducer from "./reducers/activityReducer"
+import searchBarReducer from "./reducers/searchBarReducer"
 
 const initialState = {}
 
@@ -22,15 +24,15 @@ const reducers = combineReducers({
   events: eventsReducer,
   UI: uiReducer,
   posts: postsReducer,
+  activities: activitiesReducer,
+  searchBar: searchBarReducer,
 })
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducers,
   initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  composeEnhancers(applyMiddleware(...middleware))
 )
 
 export default store

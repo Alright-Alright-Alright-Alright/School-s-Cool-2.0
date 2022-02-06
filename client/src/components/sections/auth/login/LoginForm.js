@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-import { loginUser } from "../../../redux/actions/userActions"
-import Button from "../../core/Button"
+import { loginUser } from "../../../../redux/actions/userActions"
+import Button from "../../../core/Button"
+import MessageHandler from "../../../core/MessageHandler"
 
 const LoginForm = () => {
   const UI = useSelector((state) => state.UI)
+  const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
@@ -25,14 +27,15 @@ const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
-
     dispatch(loginUser(userLogin))
-    setEmail("")
-    setPassword("")
-    setTimeout(() => navigate("/home"), 1500)
   }
+
+  useEffect(
+    () => user !== null && setTimeout(() => navigate("/home"), 1500),
+    [user]
+  )
 
   const logo = (
     <svg
@@ -84,10 +87,10 @@ const LoginForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-1/5 h-3/6 rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-3/6 rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
-          <div className="h-2/5 flex flex-col px-8 justify-around">
+          <div className="lg:h-2/5 flex flex-col px-8 justify-around">
             <label className="text-sm my-2">Email: </label>
             <input
               type="email"
@@ -107,7 +110,9 @@ const LoginForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
               placeholder="Enter your password"
             />
-            <p className="text-sm flex justify-end">Forgot password?</p>
+            <p className="text-sm flex justify-end">
+              <Link to="/forgot">Forgot password?</Link>
+            </p>
           </div>
           <div className="flex justify-between px-8">
             <Button
@@ -123,7 +128,7 @@ const LoginForm = () => {
               />
             </Link>
           </div>
-          {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          {UI.errors && <MessageHandler error={UI.errors} />}
         </form>
       </div>
     </div>

@@ -2,7 +2,9 @@ const User = require("../models/User-model");
 
 exports.getingTheUser = async (userid) => {
   try {
-    return await User.findById(userid);
+    return await User.findByIdAndUpdate(userid, { lastLoginDate: Date.now() }, { new: true });
+
+    // return await User.findById(userid);
   } catch (error) {  
     throw new Error(error.message);
   }
@@ -14,8 +16,17 @@ exports.updatingTheUser = async (
   lastName,
   email,
   imageUrl,
-  password
+  role,
+  password,
 ) => {
+  console.log(userid,
+    firstName,
+    lastName,
+    email,
+    imageUrl,
+    role,
+    password,
+    )
   try {
     return await User.findByIdAndUpdate(
       userid,
@@ -24,6 +35,7 @@ exports.updatingTheUser = async (
         lastName,
         email,
         imageUrl,
+        role,
         password,
       },
       { new: true }
@@ -63,7 +75,7 @@ exports.deletingTheUser = async (userid) => {
 
 exports.getingAllTheUsers = async () => {
   try {
-    return await User.find({}, "firstName lastName imageUrl");
+    return await User.find({}, "firstName lastName imageUrl role email");
   } catch (error) {
     throw new Error(error.message)
   }

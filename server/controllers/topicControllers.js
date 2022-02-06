@@ -1,3 +1,4 @@
+const { isEmpty } = require("../middleware/authMiddlewareValidators");
 const {
   getAllTopicsService,
   createNewTopicService,
@@ -7,7 +8,7 @@ const {
   leaveTopicService,
   inviteForTopicService,
   removeInviteForTopicService,
-  deleteTopicService
+  deleteTopicService,
 } = require("../services/topicService");
 
 const getAllTopics = async (req, res, next) => {
@@ -20,14 +21,31 @@ const getAllTopics = async (req, res, next) => {
 };
 
 const createNewTopic = async (req, res, next) => {
-  const { title, description, category, subject, bannerImage, isPrivate } = req.body;
-  owner = req.user.userLogedIn._id;
+  const { title, description, category, subject, bannerImage, isPrivate } =
+    req.body;
+  const owner = req.user.userLogedIn._id;
 
   try {
-    const topic = await createNewTopicService(title, description, category, subject, bannerImage, isPrivate, owner);
-    return res.status(201).json(topic);
+    if (isEmpty(category)) {
+      return res.status(400).json({ message: "Please choose a category" });
+    } else if (isEmpty(subject)) {
+      return res.status(400).json({ message: "Please choose a subject" });
+    } else if (isEmpty(description)) {
+      return res.status(400).json({ message: "It would be helpful if everyone to see a description of the event." });
+    } else {
+      const topic = await createNewTopicService(
+        title,
+        description,
+        category,
+        subject,
+        bannerImage,
+        isPrivate,
+        owner
+      );
+      return res.status(201).json(topic);
+    }
   } catch (e) {
-    res.status(500).json({ message: e.message }) && next(e);
+    res.status(500).json({ message: e.message });
   }
 };
 
@@ -42,10 +60,10 @@ const getTopic = async (req, res, next) => {
 
 const updateTopic = async (req, res, next) => {
   const topicId = req.params.topicId;
-  const {title, description} = req.body
+  const { title, description } = req.body;
   try {
     await updateTopicService(topicId, title, description);
-    return res.status(201).json({message: "Your topic has been updated"});
+    return res.status(201).json({ message: "Your topic has been updated" });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -56,7 +74,9 @@ const joinTopic = async (req, res, next) => {
   const topicId = req.params.topicId;
   try {
     let topic = await joinTopicService(topicId, user);
-    return res.status(201).json({message: "You have joined the topic", topic});
+    return res
+      .status(201)
+      .json({ message: "You have joined the topic", topic });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -67,7 +87,9 @@ const leaveTopic = async (req, res, next) => {
   const topicId = req.params.topicId;
   try {
     let topic = await leaveTopicService(topicId, user);
-    return res.status(201).json({message: "You have leaved the topic", topic});
+    return res
+      .status(201)
+      .json({ message: "You have leaved the topic", topic });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -88,7 +110,7 @@ const inviteForTopic = async (req, res, next) => {
 const removeInviteForTopic = async (req, res, next) => {
   const { userId } = req.body;
   const topicId = req.params.topicId;
-  
+
   try {
     const topic = await removeInviteForTopicService(topicId, userId);
     return res.status(201).json(topic);
@@ -101,7 +123,7 @@ const deleteTopic = async (req, res, next) => {
   const topicId = req.params.topicId;
   try {
     const topic = await deleteTopicService(topicId);
-    return res.status(201).json({message: "The topic has been deleted"});
+    return res.status(201).json({ message: "The topic has been deleted" });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

@@ -42,7 +42,7 @@ function MainTopicsContent() {
 
   return (
     <div>
-      <div className="flex pt-5 justify-end space-x-3 pr-10">
+      <div className="flex pt-5 justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
         <Button
           buttonName="All topics"
           buttonStyle="btnTopicStyle"
@@ -62,7 +62,7 @@ function MainTopicsContent() {
       <div className="relative">
         {showModal && <TopicModal handleShowModal={handleShowModal} />}
         <div
-          className={`flex justify-center flex-wrap gap-7 m-6 filter ${
+          className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
             showModal && "blur-md"
           }`}
         >

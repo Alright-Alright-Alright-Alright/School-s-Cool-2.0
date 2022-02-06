@@ -1,5 +1,5 @@
 import React from "react"
-import Main from "../../layout/main"
+import Main from "../../layout/Main"
 import MainTopicsContent from "./MainTopicsContent"
 
 const Index = () => (

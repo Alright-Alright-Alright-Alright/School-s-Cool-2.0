@@ -6,6 +6,7 @@ require("./File-model");
 
 const topicSchema = new Schema(
   {
+    collectionName: { type: String, default: "topics" },
     title: {
       type: String,
       required: true,

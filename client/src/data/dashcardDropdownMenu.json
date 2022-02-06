@@ -5,7 +5,7 @@
   },
   "courses": {
     "bgColorOnHover": "yellow-light",
-    "dropDownItems": ["All courses", "Created by me", "In progress", "completed"]
+    "dropDownItems": ["All courses", "Created by me", "In progress", "Completed"]
   },
   "events": {
     "bgColorOnHover": "sky-light",
@@ -18,6 +18,10 @@
   "topicMembers": {
     "bgColorOnHover": "aqua-light",
     "dropDownItems": ["All users", "Amsterdam Mentors"]
+  },
+  "eventMembers": {
+    "bgColorOnHover": "sky-light",
+    "dropDownItems": ["All attendees", "Invite other users"]
   },
   "resources": {
     "bgColorOnHover": "aqua-light",

@@ -21,20 +21,25 @@ const createNewEvent = async (req, res, next) => {
   const { title, dateStart, dateEnd, description, location, bannerImage } =
     req.body;
   const { _id } = req.user.userLogedIn;
-  // Passing info to services
   try {
-    const event = await createEventService(
-      _id,
-      title,
-      dateStart,
-      dateEnd,
-      description,
-      location,
-      bannerImage
-    );
-    res.status(201).json({ message: "Event has been created", event });
+    if (!title) {
+      throw new Error("Please write a title for the Event")
+    } else if (!location) {
+      throw new Error("Please write a Event location")
+    } else {
+      const event = await createEventService(
+        _id,
+        title,
+        dateStart,
+        dateEnd,
+        description,
+        location,
+        bannerImage
+      );
+      res.status(201).json(event);
+    }
   } catch (e) {
-    res.status(500).json({ message: e.message }) && next(e);
+    res.status(500).json({ message: e.message });
   }
 };
 
@@ -72,8 +77,8 @@ const joinEvent = async (req, res, next) => {
   const { eventId } = req.params;
   const { _id } = req.user.userLogedIn;
   try {
-    await joinEventService(eventId, _id);
-    return res.status(201).json({ message: "You joined the event" });
+    let event = await joinEventService(eventId, _id);
+    return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
@@ -83,8 +88,8 @@ const leaveEvent = async (req, res, next) => {
   const { eventId } = req.params;
   const { _id } = req.user.userLogedIn;
   try {
-    await leaveEventService(eventId, _id);
-    return res.status(201).json({ message: "You left the event" });
+    let event = await leaveEventService(eventId, _id);
+    return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

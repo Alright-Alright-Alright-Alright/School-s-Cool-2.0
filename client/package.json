@@ -1,8 +1,12 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://school-s-cool-2-0.vercel.app",
   "private": true,
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.10.0",
+    "@contentful/rich-text-react-renderer": "^15.10.0",
+    "@contentful/rich-text-types": "^15.10.1",
     "@craco/craco": "^6.4.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
@@ -10,12 +14,19 @@
     "autoprefixer": "^9.8.8",
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
+    "dompurify": "^2.3.4",
+    "draft-convert": "^2.1.12",
+    "draft-js": "^0.11.7",
+    "jsonwebtoken": "^8.5.1",
     "postcss": "^7.0.39",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-calendar": "^3.7.0",
     "react-datepicker": "^4.5.0",
     "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
+    "react-html-parser": "^2.0.2",
+    "react-pdf": "^5.6.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.2",
@@ -85,6 +96,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "react-error-overlay": "6.0.9"
   }
 }

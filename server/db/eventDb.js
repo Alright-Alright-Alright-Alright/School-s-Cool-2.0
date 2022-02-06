@@ -36,7 +36,9 @@ const createEventDb = async (
 
 const getEventDb = async (eventId) => {
   try {
-    return await Event.find({ _id: eventId }).populate("attendees");
+    return await Event.find({ _id: eventId })
+      .populate("attendees")
+      .populate("owner", "firstName lastName imageUrl");
   } catch (e) {
     throw new Error(e.message);
   }
@@ -66,7 +68,7 @@ const userJoinEventDb = async (eventId, _id) => {
   try {
     return await Event.findByIdAndUpdate(eventId, {
       $push: { attendees: _id },
-    });
+    }).populate("owner", "firstName lastName imageUrl");
   } catch (error) {
     throw new Error(error);
   }
@@ -76,7 +78,7 @@ const userLeaveEventDb = async (eventId, _id) => {
   try {
     return await Event.findByIdAndUpdate(eventId, {
       $pull: { attendees: _id },
-    });
+    }).populate("owner", "firstName lastName imageUrl");
   } catch (error) {
     throw new Error(error);
   }
@@ -97,5 +99,5 @@ module.exports = {
   updateEventDb,
   userJoinEventDb,
   userLeaveEventDb,
-  deleteEventFromDb
+  deleteEventFromDb,
 };

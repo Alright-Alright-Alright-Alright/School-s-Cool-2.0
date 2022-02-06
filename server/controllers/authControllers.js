@@ -1,13 +1,20 @@
 const { isEmail, isEmpty } = require("../middleware/authMiddlewareValidators");
-const { newUser } = require("../services/authServices");
-const { passportAuthenticate } = require("../middleware/passportMiddleware");
+const {
+  newUser,
+  forgetPasswordService,
+  newPasswordService,
+} = require("../services/authServices");
+const passport = require("passport");
+const JWT = require("jsonwebtoken");
 
 // Register
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (isEmpty(email, firstName, lastName, password)) {
-    res.status(400).json({ message: "Please fill in all the required fields!" });
+    res
+      .status(400)
+      .json({ message: "Please fill in all the required fields!" });
     return;
   }
   if (!isEmail(email)) {
@@ -43,7 +50,34 @@ exports.login = (req, res) => {
     res.status(400).json({ message: "Password must not be empty" });
     return;
   }
-  passportAuthenticate(req, res);
+
+  passport.authenticate("local", (err, user, failureDetails) => {
+    if (err) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong authenticating user" });
+      return;
+    }
+
+    if (!user) {
+      res.status(401).json(failureDetails);
+      return;
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        res.status(500).json({ message: "Session save went bad." });
+        return;
+      }
+      const userLogedIn = { _id: user._id };
+      const accessToken = JWT.sign(
+        { userLogedIn },
+        process.env.JWT_SECRETORKEY,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({ user, accessToken });
+    });
+  })(req, res);
 };
 
 // Keep user logged in
@@ -59,4 +93,33 @@ exports.loggedIn = (req, res) => {
 exports.logout = (req, res) => {
   req.logout();
   res.status(200).json({ message: "Log out success!" });
+};
+
+// Forget password
+exports.forgetPassword = async (req, res) => {
+  try {
+    const email = req.body.email;
+    await forgetPasswordService(email);
+    res.json({ message: "Check your email buddy" });
+  } catch (error) {
+    res.status(422).json({ message: error.message });
+  }
+};
+
+// New password
+exports.newPassword = async (req, res) => {
+  try {
+    const { newPassword, confirmPassword } = req.body;
+    const { token } = req.params;
+    if (newPassword !== confirmPassword) {
+      throw new Error("Passwords don't match!");
+    } else if (newPassword.length < 6) {
+      throw new Error("Password must have at least 6 characters");
+    } else {
+      await newPasswordService(newPassword, token);
+      res.status(200).json({ message: "password updated with success" });
+    }
+  } catch (error) {
+    res.status(422).json({ message: error.message });
+  }
 };

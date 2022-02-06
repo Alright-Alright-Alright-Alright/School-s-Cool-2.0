@@ -42,6 +42,14 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
+    courses: {
+      type: Array,
+      default: [],
+    },
+    lastLoginDate: {
+      type: Date,
+      default: Date.now
+  },
     resetToken: String,
     expireToken: Date,
   },

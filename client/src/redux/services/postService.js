@@ -5,6 +5,11 @@ export const getAllPostService = (topicId) =>
     .get(`/topics/${topicId}/posts`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
 
+export const getAllEventPostService = (eventId) =>
+  service
+    .get(`/events/${eventId}/posts`, configHeaders())
+    .then((responseFromAPI) => responseFromAPI.data)
+
 export const createPostService = (newPost) =>
   service
     .post(`/topics/${newPost.topicId}/posts`, newPost)

@@ -3,9 +3,10 @@ const { Schema, model } = mongoose;
 
 const eventSchema = new Schema(
   {
-    owner:{
-        type: Schema.Types.ObjectId,
-        ref: "User",
+    collectionName: { type: String, default: "events" },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     attendees: [
       {
@@ -28,17 +29,20 @@ const eventSchema = new Schema(
     location: {
       type: String,
     },
-    description:{
-        type: String
+    description: {
+      type: String,
     },
     bannerImage: {
       type: String,
-      default: "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg"
+      default:
+        "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg",
     },
-    comment: [{
-      type: Schema.Types.ObjectId,
-      ref: "Comment"
-  }],
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
   {
     timestamps: true,

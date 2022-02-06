@@ -4,20 +4,21 @@ const {
     getPostsByTopicIdDb,
     getPostByIdDb,
     likePostDb,
-    unlikePostDb
+    unlikePostDb,
+    deletePostDb
   } = require("../db/postDb");
   
-const getAllPostsService = async (topicId) => {
+const getAllPostsService = async (topicId, eventId) => {
     try {
-      return await getAllPostsDb(topicId);
+      return await getAllPostsDb(topicId, eventId);
     } catch (e) {
       throw new Error(e.message);
     }
   };
 
-const createPostService = async ( body, author, topicId) => {
+const createPostService = async ( body, author, topicId, eventId) => {
     try {
-        return await addPostToDb( body, author, topicId);
+        return await addPostToDb( body, author, topicId, eventId);
     } catch (e) {
         throw new Error(e.message);
     }
@@ -55,11 +56,20 @@ const unlikePostService = async (postId, userId) => {
     }
 };
 
+const deletePostService = async (postId) => {
+    try {
+        return await deletePostDb(postId);
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 module.exports = {
     getAllPostsService, 
     createPostService, 
     getPostByIdService, 
     getPostsByTopicIdService,
     likePostService,
-    unlikePostService
+    unlikePostService,
+    deletePostService
 };

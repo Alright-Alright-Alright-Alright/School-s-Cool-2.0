@@ -8,6 +8,7 @@ import {
   SUBMIT_COMMENT,
   LIKE_POST,
   UNLIKE_POST,
+  DELETE_POST,
 } from "../types/posts"
 // import {
 //   SET_ERRORS,
@@ -45,6 +46,13 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         allPosts: [action.payload, ...state.allPosts],
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        allPosts: state.allPosts.filter(
+          (eachPost) => eachPost._id !== action.payload._id
+        ),
       }
     case SUBMIT_COMMENT:
       return {

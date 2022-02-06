@@ -22,34 +22,43 @@ exports.updateTheUser = async (
   lastName,
   email,
   imageUrl,
-  password
+  role,
+  password,
 ) => {
   try {
-    let newPassword = null;
-    let user = await getingTheUser(userid);
-    if (user.password !== password) {
-      const salt = bcrypt.genSaltSync(10);
-      newPassword = bcrypt.hashSync(password, salt);
-      return await updatingTheUser(
-        userid,
-        firstName,
-        lastName,
-        email,
-        imageUrl,
-        newPassword
-      );
-    } else {
-      return await updatingTheUser(
-        userid,
-        firstName,
-        lastName,
-        email,
-        imageUrl,
-        password
-      );
-    }
+    return await updatingTheUser(
+      userid,
+      firstName,
+      lastName,
+      email,
+      imageUrl,
+      role,
+      password
+    );
+    // let newPassword = null;
+    // let user = await getingTheUser(userid);
+    // if (user.password !== password) {
+    //   const salt = bcrypt.genSaltSync(10);
+    //   newPassword = bcrypt.hashSync(password, salt);
+    //   return await updatingTheUser(
+    //     userid,
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     imageUrl,
+    //     newPassword
+    //   );
+    // } else {
+    //   return await updatingTheUser(
+    //     userid,
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     imageUrl,
+    //     password
+    //   );
+    // }
   } catch (error) {
-    console.log(error.message);
     throw new Error(error.message);
   }
 };

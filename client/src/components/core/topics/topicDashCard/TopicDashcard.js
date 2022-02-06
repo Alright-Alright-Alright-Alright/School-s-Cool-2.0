@@ -84,9 +84,9 @@ TopicDashcard.defaultProps = {
 }
 
 TopicDashcard.propTypes = {
-  topicDashCardData: PropTypes.array.isRequired,
+  topicDashCardData: PropTypes.arrayOf.isRequired,
   topicDashCardTitle: PropTypes.string.isRequired,
   topicDashCardStyle: PropTypes.string.isRequired,
-  dropdownMenuData: PropTypes.object.isRequired,
-  users: PropTypes.array.isRequired,
+  dropdownMenuData: PropTypes.shape.isRequired,
+  users: PropTypes.arrayOf.isRequired,
 }

@@ -21,7 +21,15 @@ export const getAllUsers = () =>
 export const forgot = (email) =>
   service.post("/forgot", { email }).then((response) => response.data)
 
-export const newPassword = (password, token) =>
+export const newPasswordService = (newPassword, confirmPassword, token) =>
   service
-    .post("/new-password", { password, token })
+    .post(`/new-password/${token}`, { newPassword, confirmPassword })
     .then((response) => response.data)
+
+export const updateUserService = (userData) =>
+  service
+    .put(`/profile/${userData.id}`, userData)
+    .then((response) => response.data)
+
+export const getUserProfileService = (user) =>
+  service.get(`/profile/${user}`).then((response) => response.data)

@@ -1,26 +1,47 @@
+const { isEmpty } = require("../middleware/authMiddlewareValidators");
 const {
   createFile,
   getUserLibrary,
   getLibrary,
   fileDelete,
   addLikeService,
-  pullLikeService
+  pullLikeService,
+  getingSingleFile,
 } = require("../services/libraryServices");
 
 exports.addFile = async (req, res) => {
-  const { title, category, subject, isPrivate, fileUrl } = req.body;
+  const { title, category, subject, isPrivate, fileUrl, tags } = req.body;
   const owner = req.user.userLogedIn._id;
   try {
-    let file = await createFile(title, category, subject, isPrivate, fileUrl, owner);
-    res.status(200).json({ message: "Here's your file", file });
+    if (tags.length < 1) {
+      res.status(400).json({ message: "Please add at least one tag" });
+      return;
+    } else if (isEmpty(category)) {
+      res.status(400).json({ message: "Please choose a category" });
+      return;
+    } else if (isEmpty(subject)) {
+      res.status(400).json({ message: "Please choose a subject" });
+      return;
+    } else {
+      let file = await createFile(
+        title,
+        category,
+        subject,
+        isPrivate,
+        fileUrl,
+        tags,
+        owner
+      );
+      res.status(200).json({ message: "Here's your file", file });
+    }
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 exports.addLike = async (req, res) => {
-  let fileId = req.params.fileId
-  let user = req.user.userLogedIn._id
+  let fileId = req.params.fileId;
+  let user = req.user.userLogedIn._id;
   try {
     let file = await addLikeService(fileId, user);
     res.status(200).json(file);
@@ -30,8 +51,8 @@ exports.addLike = async (req, res) => {
 };
 
 exports.pullLike = async (req, res) => {
-  let fileId = req.params.fileId
-  let user = req.user.userLogedIn._id
+  let fileId = req.params.fileId;
+  let user = req.user.userLogedIn._id;
   try {
     let file = await pullLikeService(fileId, user);
     res.status(200).json(file);
@@ -41,7 +62,7 @@ exports.pullLike = async (req, res) => {
 };
 
 exports.userLibrary = async (req, res) => {
-  user = req.user.userLogedIn._id
+  user = req.user.userLogedIn._id;
   try {
     let userFiles = await getUserLibrary(user);
     res.status(200).json(userFiles);
@@ -59,13 +80,23 @@ exports.getLibrary = async (req, res) => {
   }
 };
 
+exports.getSingleFile = async (req, res) => {
+  let fileId = req.params.fileId;
+  try {
+    let file = await getingSingleFile(fileId);
+    res.status(200).json(file);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 exports.deleteFile = async (req, res) => {
-  let userId = await req.user.userLogedIn._id;
-  let fileToDelete = await req.body.fileToDelete._id;
+  let userId = req.user.userLogedIn._id;
+  let fileToDelete = req.body.fileId;
 
   try {
-    let file = fileDelete(userId, fileToDelete);
-    res.status(200).json({ message: "File deleted", file });
+    let file = await fileDelete(userId, fileToDelete);
+    res.status(200).json(file);
   } catch (error) {
     throw new Error(error.message);
   }

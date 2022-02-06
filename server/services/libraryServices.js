@@ -4,12 +4,29 @@ const {
   getingLibrary,
   fileDeleting,
   addLikeToFileDb,
-  pullLikeToFileDb
+  pullLikeToFileDb,
+  getingSingleFileDB,
 } = require("../db/libraryDb");
 
-exports.createFile = async (title, category, subject, isPrivate, fileUrl, owner) => {
+exports.createFile = async (
+  title,
+  category,
+  subject,
+  isPrivate,
+  fileUrl,
+  tags,
+  owner
+) => {
   try {
-    let file = await creatingFile(title, category, subject, isPrivate, fileUrl, owner);
+    let file = await creatingFile(
+      title,
+      category,
+      subject,
+      isPrivate,
+      fileUrl,
+      tags,
+      owner
+    );
     return file;
   } catch (error) {
     throw new Error(error.message);
@@ -18,23 +35,31 @@ exports.createFile = async (title, category, subject, isPrivate, fileUrl, owner)
 
 exports.addLikeService = async (fileId, user) => {
   try {
-    return await addLikeToFileDb(fileId, user)
+    return await addLikeToFileDb(fileId, user);
   } catch (error) {
     throw new Error(error.message);
   }
-}
+};
 
 exports.pullLikeService = async (fileId, user) => {
   try {
-    return await pullLikeToFileDb(fileId, user)
+    return await pullLikeToFileDb(fileId, user);
   } catch (error) {
     throw new Error(error.message);
   }
-}
+};
 
 exports.getUserLibrary = async (user) => {
   try {
     return getingUserLibrary(user);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.getingSingleFile = async (fileId) => {
+  try {
+    return getingSingleFileDB(fileId);
   } catch (error) {
     throw new Error(error.message);
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -13,22 +14,39 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Topics from "./pages/Topics"
 import Library from "./pages/Library"
+import Courses from "./pages/Courses"
 import Events from "./pages/Events"
-// import Topic from "./routes/topic"
+import CourseDetailPage from "./pages/CourseDetailPage"
+import EventDetailsPage from "./pages/EventDetailsPage"
+import ScrollToTop from "./hooks/ScrollToTop"
+import NotFound from "./pages/NotFound"
+import Profile from "./pages/Profile"
+import NewPassword from "./pages/NewPassword"
+import ForgotPassword from "./pages/ForgotPassword"
+import AdminPanel from "./pages/AdminPanel"
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="forgot" element={<ForgotPassword />} />
+        <Route path="new-password/:token" element={<NewPassword />} />
         <Route path="/" element={<App />}>
           <Route path="home" element={<Home />} />
           <Route path="topics" element={<Topics />} />
           <Route path="topics/:topicId" element={<TopicDetailPage />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="library" element={<Library />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="courses/:courseId" element={<CourseDetailPage />} />
+          <Route path="events" element={<Events />} />
+          <Route path="events/:eventId" element={<EventDetailsPage />} />
+          <Route path="profile/:userId" element={<Profile />} />
+          <Route path="admin" element={<AdminPanel />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </Provider>,

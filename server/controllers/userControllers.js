@@ -10,7 +10,7 @@ exports.getUser = async (req, res) => {
   const { userid } = req.params;
   try {
     let user = await getTheUser(userid);
-    res.status(200).json({ message: "Here's the user", user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({
       message:
@@ -21,21 +21,23 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const { userid } = req.params;
-  const { firstName, lastName, email, imageUrl } = req.body;
+  const { firstName, lastName, email, imageUrl, role } = req.body;
   let password = req.body.password;
+
   try {
-    await updateTheUser(userid, firstName, lastName, email, imageUrl, password);
-    res.status(200).json({ message: `User ${userid} has been updated` });
+    const updatedUser = await updateTheUser(userid, firstName, lastName, email, imageUrl, role, password);
+    res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong updating the user" });
   }
 };
 
 exports.followUser = async (req, res) => {
-  let theUser = req.body.userid
+  let theUser = req.user.userLogedIn._id
   let userToFollow = req.params.userid
   try {
     await followTheUser(theUser,userToFollow)
+    res.status(200).json({ message: "Successfully followed the user" })
   } catch (error) {
     res.status(500).json(error)
   }

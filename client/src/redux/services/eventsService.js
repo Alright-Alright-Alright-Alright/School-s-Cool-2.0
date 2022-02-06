@@ -9,5 +9,15 @@ export const createEvent = (eventData) =>
 
 export const getEvent = (eventId) =>
   service
-    .get(`/event/${eventId}`, configHeaders())
-    .then((responseFromAPI) => responseFromAPI.data)
+    .get(`/events/${eventId}`, configHeaders())
+    .then((responseFromAPI) => responseFromAPI.data[0])
+
+export const joinEventService = (eventId, user) =>
+  service
+    .put(`/events/${eventId}/join`, user, configHeaders())
+    .then((response) => response.data)
+
+export const leaveEventService = (eventId, user) =>
+  service
+    .put(`/events/${eventId}/leave`, user, configHeaders())
+    .then((response) => response.data)

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
 import DropDownMenu from "../DropDownMenu"
@@ -36,23 +37,25 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item._id}
-        linkId={item._id}
+        key={item?._id}
+        linkId={item?._id || item?.sys?.id}
         listItemTitle={item?.title}
-        listItemDate={item?.date}
+        listItemDate={item?.dateStart}
         listItemComments={item?.posts}
-        listItemUsers={item?.members}
+        listItemUsers={item?.members || item?.attendees}
+        listItemType={dashCardTitle}
       />
     ))
 
   const allItems = filteredItems.map((item) => (
     <DashCardListItem
-      key={item._id}
-      linkId={item._id}
+      key={item?._id}
+      linkId={item?._id || item?.sys?.id}
       listItemTitle={item?.title}
-      listItemDate={item?.date}
+      listItemDate={item?.dateStart}
       listItemComments={item?.posts}
-      listItemUsers={item?.members}
+      listItemUsers={item?.members || item?.attendees}
+      listItemType={dashCardTitle}
     />
   ))
 
@@ -61,13 +64,17 @@ export default function Dashcard({
   }
 
   return (
-    <div className="w-full">
-      <div className="flex flex-col relative w-full m-3 shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+    <div className="w-full py-3">
+      <div className="flex flex-col relative w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
-            <p className="text-lg pl-4">{dashCardTitle}</p>
+            <p className="text-lg pl-4">
+              <Link to={`/${dashCardTitle.toLowerCase()}`}>
+                {dashCardTitle}
+              </Link>
+            </p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">{filter}</h2>
               <DropDownMenu

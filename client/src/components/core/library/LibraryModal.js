@@ -1,13 +1,18 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from "react"
-import { useDispatch } from "react-redux"
+import React, { useState, useRef, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
+import TagsInput from "../TagsInput"
+import MessageHandler from "../MessageHandler"
 
 const Modal = ({ handleShowModal, singleTopic }) => {
   const [title, seTitle] = useState("")
@@ -16,9 +21,34 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const [fileUrl, setFilUrl] = useState("")
   const [imgPreview, setImgPreview] = useState("")
   const [privacy, setPrivacy] = useState(false)
+  const [tags, setTags] = useState([])
   const hiddenFileInput = useRef(null)
-
+  const topics = useSelector((state) => state.topics.allTopics)
+  const UI = useSelector((state) => state.UI)
+  const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAlltopics())
+  }, [dispatch])
+
+  const filterCategory = () => {
+    const arr = []
+    topics.map(
+      (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
+    )
+    return arr
+  }
+
+  const findFunction = (cat) => topics.filter((topic) => topic.category === cat)
+
+  const filterSubject = (cat) => {
+    const arr = []
+    findFunction(cat).map(
+      (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
+    )
+    return arr
+  }
 
   const handleClick = () => {
     hiddenFileInput.current.click()
@@ -55,8 +85,14 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       subject: singleTopic ? singleTopic.subject : subject,
       fileUrl: image,
       isPrivate: privacy,
+      tags,
     }
-    handleShowModal()
+    if (
+      fileData.tags.length > 0 &&
+      fileData.category.length > 0 &&
+      fileData.subject.length > 0
+    )
+      handleShowModal()
     dispatch(addFileToLibrary(fileData))
   }
 
@@ -66,6 +102,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
+        {UI.errors && <MessageHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"
@@ -80,6 +117,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             <Icon iconName="close" />
           </button>
         </section>
+        <section>
+          <TagsInput selectedTags={selectedTags} />
+        </section>
         <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
           {singleTopic ? (
             <div>
@@ -88,6 +128,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </div>
           ) : (
             <select
+              required
               onChange={chooseCategory}
               name="category"
               id=""
@@ -96,12 +137,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a category
               </option>
-              <option value="School work">School work</option>
-              <option value="Sports">Sports</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Psychology">Psychology</option>
-              <option value="Home work">Home work</option>
-              <option value="Doubts">Doubts</option>
+              {filterCategory().map((cat) => (
+                <option value={cat}>{cat}</option>
+              ))}
             </select>
           )}
           {singleTopic ? (
@@ -111,6 +149,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </div>
           ) : (
             <select
+              required
               onChange={chooseSubject}
               name="subject"
               id=""
@@ -119,22 +158,12 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               <option disabled selected>
                 Choose a subject
               </option>
-              <option value="Biology">Biology</option>
-              <option value="Physics">Physics</option>
-              <option value="Technology">Technology</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Literature">Literature</option>
-              <option value="Football">Football</option>
+              {filterSubject(category).map((sub) => (
+                <option value={sub}>{sub}</option>
+              ))}
             </select>
           )}
           <div className="flex justify-end items-center w-2/7">
-            {imgPreview && (
-              <img
-                src={imgPreview}
-                alt="Preview"
-                className="w-10 h-10 rounded-sm mr-2"
-              />
-            )}
             <div>
               <button
                 type="button"
@@ -142,7 +171,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 className="flex items-center"
               >
                 <span className="text-sm pr-3">
-                  {imgPreview ? "File preview" : "Select your File"}
+                  {imgPreview
+                    ? "File successfully uploaded"
+                    : "Select your File"}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>

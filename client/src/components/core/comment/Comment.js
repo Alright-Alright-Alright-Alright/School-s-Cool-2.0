@@ -1,9 +1,15 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
+import { deleteComment } from "../../../redux/actions/libraryActions"
 
-function Comment({ comment }) {
+function Comment({ comment, id }) {
+  const user = useSelector((state) => state.user.singleUser)
+  const dispatch = useDispatch()
   return (
     <div className="flex px-5 pb-1 pt-3 items-center">
       <img
@@ -13,7 +19,14 @@ function Comment({ comment }) {
       />
       <div className="flex justify-between bg-grey-super_light w-full rounded-full items-center p-2">
         <p className="text-sm text-grey-dark pl-1">{comment?.body}</p>
-        <Icon iconName="close" iconStyle="text-grey-dark" />
+        <button
+          type="button"
+          onClick={() => dispatch(deleteComment(comment._id, id))}
+        >
+          {user._id === comment.owner._id && (
+            <Icon iconName="close" iconStyle="text-grey-dark" />
+          )}
+        </button>
       </div>
     </div>
   )
