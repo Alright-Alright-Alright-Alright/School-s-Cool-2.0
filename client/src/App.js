@@ -25,6 +25,7 @@ function App() {
       (!loggedIn && !token)
     ) {
       localStorage.removeItem("Authorization")
+      localStorage.removeItem("user")
       console.log("token expired!")
       navigate("/login")
     } else {
