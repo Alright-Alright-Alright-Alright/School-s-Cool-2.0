@@ -5,14 +5,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DatePicker from "react-datepicker"
 import fileUploadHandler from "../../../middleware/UploadFile"
-<<<<<<< HEAD
-import {
-  createNewEvent,
-  getAllEvents,
-} from "../../../redux/actions/eventActions"
-=======
 import { createNewEvent } from "../../../redux/actions/eventActions"
->>>>>>> dev
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -64,15 +57,9 @@ const Modal = ({ handleShowModal }) => {
       bannerImage: image,
       isPrivate: privacy,
     }
-<<<<<<< HEAD
-    dispatch(createNewEvent(eventData))
-    dispatch(getAllEvents())
-    handleShowModal()
-=======
     if (eventData.title.length > 0 && eventData.location.length > 0)
       handleShowModal()
     dispatch(createNewEvent(eventData))
->>>>>>> dev
   }
 
   return (

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { POST_EVENT, SET_EVENTS } from "../types/events"
-import { getEvents, createEvent } from "../services/eventsService"
-=======
 import {
   POST_EVENT,
   SET_EVENTS,
@@ -9,6 +5,7 @@ import {
   JOIN_EVENT,
   LEAVE_EVENT,
 } from "../types/events"
+
 import {
   getEvents,
   createEvent,
@@ -16,7 +13,6 @@ import {
   joinEventService,
   leaveEventService,
 } from "../services/eventsService"
->>>>>>> dev
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 
@@ -34,13 +30,8 @@ export const getAllEvents = () => async (dispatch) => {
 }
 
 export const createNewEvent = (eventData) => async (dispatch) => {
-<<<<<<< HEAD
-  const addEvent = await createEvent(eventData)
-  try {
-=======
   try {
     const addEvent = await createEvent(eventData)
->>>>>>> dev
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: POST_EVENT, payload: addEvent })
   } catch (error) {
@@ -49,8 +40,6 @@ export const createNewEvent = (eventData) => async (dispatch) => {
       payload: error.response,
     })
   }
-<<<<<<< HEAD
-=======
 }
 
 export const getOneEvent = (eventId) => async (dispatch) => {
@@ -96,5 +85,4 @@ export const leaveEvent = (eventId, user) => async (dispatch) => {
       payload: error.response,
     })
   }
->>>>>>> dev
 }

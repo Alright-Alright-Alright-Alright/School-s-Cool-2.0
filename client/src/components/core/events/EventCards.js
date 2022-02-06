@@ -38,11 +38,6 @@ const EventCards = ({ event }) => {
             {/* <p className="text-base w-3/4 pl-2">{event.description}</p> */}
           </div>
           <div className="flex justify-around">
-<<<<<<< HEAD
-            <p className="text-sm">{events.location}</p>
-            <p className="text-sm">{events?.dateStart.slice(0, 10)}</p>
-            <p className="text-sm">{events?.dateEnd.slice(0, 10)}</p>
-=======
             <p className="text-sm">{event?.location}</p>
             <p className="text-sm">
               {" "}
@@ -52,7 +47,6 @@ const EventCards = ({ event }) => {
               {" "}
               {dayjs(event?.dateEnd).format("MMM DD, YYYY")}
             </p>
->>>>>>> dev
           </div>
         </section>
       </Link>
@@ -61,11 +55,7 @@ const EventCards = ({ event }) => {
         <div className="flex justify-between">
           <div className="flex p-3">
             <Icon iconName="member" iconStyle="fill-inactive text-grey-dark" />
-<<<<<<< HEAD
-            <span>{events?.attendees.length}</span>
-=======
             <span>{event?.attendees.length}</span>
->>>>>>> dev
           </div>
           <div className="p-3">
             {join ? (
