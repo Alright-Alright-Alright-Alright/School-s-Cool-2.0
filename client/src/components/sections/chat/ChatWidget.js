@@ -60,6 +60,7 @@ function ChatWidget({ user }) {
 
     const channelWatch = await channel.current.watch()
     setMessages(channelWatch.messages)
+    console.log(channelWatch)
 
     return async () => {
       await channelWatch.stopWatching()
@@ -75,13 +76,14 @@ function ChatWidget({ user }) {
   )
 
   const handleNewChannel = useCallback(async (userToChatWith) => {
-    console.log(userToChatWith)
     channel.current = client.channel("messaging", {
       members: [userToChatWith._id, currentUser._id],
     })
 
     const channelWatch = await channel.current.watch()
     setMessages(channelWatch.messages)
+
+    console.log(channelWatch)
 
     return async () => {
       await channelWatch.stopWatching()
@@ -117,8 +119,17 @@ function ChatWidget({ user }) {
   )
 
   useEffect(() => {
-    addResponseMessage("Welcome to this chat!")
-  }, [])
+    messages?.map(
+      (message) =>
+        // if (message.user.id === currentUser?._id) {
+        //   addResponseMessage(message.text)
+        // }
+        message.user.id !== currentUser?._id && addResponseMessage(message.text)
+    )
+    // addResponseMessage("Welcome to this chat!")
+  }, [messages])
+
+  console.log(messages)
 
   return (
     <div className="Chatwidget">
