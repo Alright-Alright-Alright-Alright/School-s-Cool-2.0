@@ -33,8 +33,8 @@ app.use(
     resave: false,
     cookie: {
       secure: false,
-      maxAge: 3600000 //1 hour
-  },
+      maxAge: 3600000, //1 hour
+    },
     rolling: false, //session gets refreshed
   })
 );
@@ -61,7 +61,7 @@ const activityRoutes = require("./routes/activityRoutes");
 app.use("/api", jwtAuthorization, activityRoutes);
 
 const userRoutes = require("./routes/userRoutes");
-app.use("/api",jwtAuthorization, userRoutes);
+app.use("/api", jwtAuthorization, userRoutes);
 
 const eventRoutes = require("./routes/eventRoutes");
 app.use("/api", jwtAuthorization, eventRoutes);
