@@ -81,6 +81,9 @@ app.use("/api", jwtAuthorization, commentRoutes);
 const courseRoutes = require("./routes/courseRoutes");
 app.use("/api", jwtAuthorization, courseRoutes);
 
+const chatRoutes = require("./routes/chatRoutes");
+app.use("/api", jwtAuthorization, chatRoutes);
+
 //Server =====================================
 app.listen(process.env.PORT, () =>
   console.log(`Server started at port: ${process.env.PORT}`)
