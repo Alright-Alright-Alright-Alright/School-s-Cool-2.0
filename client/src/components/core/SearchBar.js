@@ -63,7 +63,7 @@ function SearchBar({ placeholder }) {
 
   return (
     <div>
-      <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
+      <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight text-base">
         <input
           type="search"
           placeholder={placeholder}

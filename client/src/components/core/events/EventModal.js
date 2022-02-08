@@ -52,7 +52,7 @@ const Modal = ({ handleShowModal }) => {
       title,
       description,
       dateStart: startDate,
-      dateEnd: endDate === null && startDate,
+      dateEnd: !endDate && startDate,
       location,
       bannerImage: image,
       isPrivate: privacy,
