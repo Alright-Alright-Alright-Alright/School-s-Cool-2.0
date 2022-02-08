@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from "react"
 import { StreamChat } from "stream-chat"
 import {
+  Avatar,
   Chat,
   Channel,
   ChannelHeader,
@@ -23,11 +24,11 @@ import { useSelector } from "react-redux"
 import ChatUserList from "./ChatUserList"
 
 import "stream-chat-react/dist/css/index.css"
+import "./ChatIndexStyles.css"
+import UserItem from "../../core/chat/UserItem"
+import Icon from "../../core/Icon"
 
 const STREAM_API = process.env.REACT_APP_STREAM_API_SECRET
-
-const userToken =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoibGluZ2VyaW5nLXdvb2QtOSJ9.PJr1U8ujbLF-NPlqDaWJGntcp5TViLlDPwz7oBDYSQM"
 
 const CustomChannelPreview = (props) => {
   const { channel, setActiveChannel } = props
@@ -43,16 +44,6 @@ const CustomChannelPreview = (props) => {
   )
 }
 
-const CustomChannelList = (props) => (
-  <div>
-    <h1>Custom Channel List</h1>
-    {/* <CustomChannelPreview /> */}
-    <h1>User</h1>
-    <h1>User</h1>
-    <h1>User</h1>
-  </div>
-)
-
 const CustomMessage = () => {
   const { message } = useMessageContext()
 
@@ -63,8 +54,17 @@ const CustomMessage = () => {
   )
 }
 
-const App = () => {
+const CustomErrorIndicator = (props) => {
+  const { text } = props
+
+  return <div>{text}</div>
+}
+
+const CustomLoadingIndicator = () => <div>Loading, loading, loading...</div>
+
+const ChatIndex = ({ handleShowModal }) => {
   const [chatClient, setChatClient] = useState(null)
+  const [users, setUsers] = useState([])
   const currentUser = useSelector((state) => state.user.singleUser)
 
   const id = currentUser?._id
@@ -73,19 +73,62 @@ const App = () => {
   const filters = { type: "messaging" }
   const sort = { last_message_at: -1 }
 
-  const customClasses = {
-    chat: " shadow-lg rounded-lg",
-    channel: " shadow-lg rounded-lg",
-    channelList: "shadow-lg rounded-lg",
-    chatContainer: "bg-white flex  mx-auto bottom-20",
+  const handleCloseModal = () => {
+    handleShowModal()
   }
 
-  const customStyles = {
-    "--primary-color": "green",
-    "--md-font": "1.2rem",
-    "--xs-m": "1.2rem",
-    "--xs-p": "1.2rem",
-    "height:": "100%",
+  const createChannel = async (event) => {
+    event.preventDefault()
+    try {
+      const newChannel = await chatClient.channel("messaging", {
+        members: [id, event.id],
+      })
+
+      await newChannel.watch()
+
+      //   setChannelName("")
+      //   setIsCreating(false)
+      //   setSelectedUsers([client.userID])
+      //   setActiveChannel(newChannel)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const CustomList = (props) => {
+    const { children, error, loading, LoadingErrorIndicator } = props
+
+    if (error) {
+      return <LoadingErrorIndicator type="connection" />
+    }
+
+    if (loading) {
+      return <LoadingIndicator />
+    }
+
+    return (
+      <div>
+        <button type="button" onClick={handleCloseModal}>
+          <Icon iconName="close" />
+        </button>
+        <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
+          <div className="flex justify-between py-3 text-white">
+            <p className="text-lg pl-4"> Current Chats</p>
+          </div>
+        </div>
+        {children}
+        <div>
+          <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
+            <div className="flex justify-between py-3 text-white">
+              <p className="text-lg pl-4"> Other users</p>
+            </div>
+          </div>
+          {users.users.map((user) => (
+            <UserItem user={user} createChannel={createChannel} />
+          ))}
+        </div>
+      </div>
+    )
   }
 
   useEffect(() => {
@@ -94,13 +137,12 @@ const App = () => {
 
       await client.connectUser({ id, name }, client.devToken(id))
 
-      const users = await client.queryUsers(
+      const allUsers = await client.queryUsers(
         { id: { $ne: client.userID } },
         { id: 1 },
         { limit: 8 }
       )
-      console.log(users)
-
+      setUsers(allUsers)
       setChatClient(client)
     }
 
@@ -112,24 +154,18 @@ const App = () => {
   }
 
   return (
-    <Chat
-      client={chatClient}
-      //   customStyles={customStyles}
-      theme="messaging light"
-      //   customClasses={customClasses}
-      // customStyles={{
-      //   chat: " shadow-lg rounded-lg bg-yellow",
-      //   channel: "bg-white shadow-lg rounded-lg",
-      //   channelList: "bg-yellow shadow-lg rounded-lg w-full",
-      //   threadList: "bg-yellow shadow-lg rounded-lg w-full",
-      //   chatContainer: "bg-yellow shadow-lg rounded-lg w-full",
-      // }}
-    >
+    <Chat client={chatClient} theme="messaging light">
       <ChannelList
         filters={filters}
         sort={sort}
-        // List={CustomChannelList}
-        // Preview={CustomChannelPreview}
+        List={CustomList}
+        LoadingErrorIndicator={() => (
+          <CustomErrorIndicator
+            text="Loading Error - check your connection."
+            type="connection"
+          />
+        )}
+        LoadingIndicator={CustomLoadingIndicator}
       />
       <Channel>
         <Window>
@@ -143,4 +179,4 @@ const App = () => {
   )
 }
 
-export default App
+export default ChatIndex

@@ -166,7 +166,7 @@ function NavBar() {
               <ul className="py-1" aria-labelledby="dropdownButton">
                 <li>
                   <Link
-                    to={`/profile/${user._id}`}
+                    to={`/profile/${user?._id}`}
                     onClick={() => setShowDropDown(false)}
                     className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
                   >
