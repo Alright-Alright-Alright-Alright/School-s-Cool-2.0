@@ -34,8 +34,8 @@ exports.register = async (req, res) => {
   try {
     const user = await newUser(req.body);
     const chatToken = await chatSignupToken(firstName);
-    
-    await Promise.all({user, chatToken});
+
+    await Promise.all({ user, chatToken });
     res.status(201).json({ user, chatToken });
 
     // await newUser(firstName, lastName, email, password).chatSignupToken(firstname);
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
   }
 
   const chatToken = await chatLoginToken(email);
-  console.log(chatToken)
+  console.log(chatToken);
 
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
@@ -75,14 +75,11 @@ exports.login = async (req, res) => {
       return;
     }
 
-
-
     req.login(user, (err) => {
       if (err) {
         res.status(500).json({ message: "Session save went bad." });
         return;
       }
-
 
       const userLogedIn = { _id: user._id };
       const accessToken = JWT.sign(
@@ -90,7 +87,6 @@ exports.login = async (req, res) => {
         process.env.JWT_SECRETORKEY,
         { expiresIn: "1h" }
       );
-
 
       res.status(200).json({ user, accessToken, chatToken });
     });
