@@ -5,6 +5,7 @@ import {
   JOIN_EVENT,
   LEAVE_EVENT,
 } from "../types/events"
+
 import {
   getEvents,
   createEvent,

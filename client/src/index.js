@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound"
 import Profile from "./pages/Profile"
 import NewPassword from "./pages/NewPassword"
 import ForgotPassword from "./pages/ForgotPassword"
+import AdminPanel from "./pages/AdminPanel"
 
 ReactDOM.render(
   <Provider store={store}>
@@ -43,6 +44,7 @@ ReactDOM.render(
           <Route path="events" element={<Events />} />
           <Route path="events/:eventId" element={<EventDetailsPage />} />
           <Route path="profile/:userId" element={<Profile />} />
+          <Route path="admin" element={<AdminPanel />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

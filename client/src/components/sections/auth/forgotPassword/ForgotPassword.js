@@ -70,7 +70,7 @@ const ForgotPassword = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-3/6 rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-2/6 rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
           <div className="lg:h-2/5 flex flex-col px-8 justify-around">
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
               checked={email}
               onChange={chooseEmail}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-              placeholder="Enter your email"
+              placeholder="Enter your existing account email"
             />
           </div>
           <div className="flex justify-between px-8">

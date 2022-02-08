@@ -22,6 +22,9 @@ function App() {
       jwt.decode(token?.slice(7, token.length))?.exp < Number(currentTime) ||
       (!loggedIn && !token)
     ) {
+      localStorage.removeItem("Authorization")
+      localStorage.removeItem("user")
+      console.log("token expired!")
       navigate("/login")
     } else {
       dispatch(loggedInUser())

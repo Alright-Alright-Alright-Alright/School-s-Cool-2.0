@@ -2,7 +2,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
-
 import {
   ADD_COMMENT,
   DELETE_COMMENT,
@@ -15,6 +14,8 @@ import {
   GET_USER_LIBRARY,
   LIKE_FILE,
   POST_FILE,
+  SORT_BY,
+  SORT_BY_NAME,
   UNLIKE_FILE,
 } from "../types/library"
 
@@ -28,7 +29,9 @@ const libraryReducer = (state = initialState, action) => {
     case GET_LIBRARY:
       return {
         ...state,
-        allFiles: action.payload,
+        allFiles: action.payload.sort(
+          (a, b) => b.likedBy.length - a.likedBy.length
+        ),
       }
     case GET_FILE:
       return {
@@ -65,9 +68,6 @@ const libraryReducer = (state = initialState, action) => {
     case ADD_COMMENT:
     case DELETE_COMMENT:
       return {
-        // allFiles: state.allFiles.map((eachFile) =>
-        //   eachFile._id === action.payload._id ? action.payload : eachFile
-        // ),
         ...state,
         singleFile:
           state.singleFile._id === action.payload._id
@@ -80,6 +80,40 @@ const libraryReducer = (state = initialState, action) => {
         allFiles: state.allFiles.filter(
           (eachFile) => eachFile._id !== action.payload
         ),
+      }
+    case SORT_BY:
+      return {
+        ...state,
+        allFiles: [...state.allFiles].sort((a, b) => {
+          if (
+            a[action.payload].toLowerCase() > b[action.payload].toLowerCase()
+          ) {
+            return 1
+          }
+          if (
+            a[action.payload].toLowerCase() < b[action.payload].toLowerCase()
+          ) {
+            return -1
+          }
+          return 0
+        }),
+      }
+    case SORT_BY_NAME:
+      return {
+        ...state,
+        allFiles: [...state.allFiles].sort((a, b) => {
+          if (
+            a.owner.firstName.toLowerCase() > b.owner.firstName.toLowerCase()
+          ) {
+            return 1
+          }
+          if (
+            a.owner.firstName.toLowerCase() < b.owner.firstName.toLowerCase()
+          ) {
+            return -1
+          }
+          return 0
+        }),
       }
     default:
       return state
