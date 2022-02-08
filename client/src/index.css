@@ -54,7 +54,7 @@
 
 .react-calendar {
   width: 250px;
-  color: #A7B8C5;
+  color: #757575;
 }
 
 .react-calendar__navigation {
@@ -65,9 +65,9 @@
   display: none !important
 }
 
-.react-calendar__month-view__days__day--neighboringMonth {
+/* .react-calendar__month-view__days__day--neighboringMonth {
   display: none;
-}
+} */
 
 .react-calendar,
 .react-calendar *,
@@ -90,7 +90,7 @@
   color: #DE2F6E;
 }
 .react-calendar__month-view__days__day--neighboringMonth {
-  color: #757575;
+  color: #c5d1db;
 }
 
 .react-calendar__tile {
