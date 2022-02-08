@@ -68,9 +68,9 @@ const ChatIndex = ({ handleShowModal }) => {
   const currentUser = useSelector((state) => state.user.singleUser)
 
   const id = currentUser?._id
-  const name = currentUser?.firstName
+  const name = `${currentUser?.firstName} ${currentUser?.lastName}`
 
-  const filters = { type: "messaging" }
+  const filters = { type: "messaging", members: { $in: [currentUser?._id] } }
   const sort = { last_message_at: -1 }
 
   const handleCloseModal = () => {
@@ -136,6 +136,17 @@ const ChatIndex = ({ handleShowModal }) => {
       const client = new StreamChat(STREAM_API)
 
       await client.connectUser({ id, name }, client.devToken(id))
+
+      const channels = await client.queryChannels(filters, sort, {
+        watch: true, // this is the default
+        state: true,
+      })
+
+      channels.map((channel) =>
+        channel.state.unreadCount > 0
+          ? console.log("unread")
+          : console.log("read")
+      )
 
       const allUsers = await client.queryUsers(
         { id: { $ne: client.userID } },
