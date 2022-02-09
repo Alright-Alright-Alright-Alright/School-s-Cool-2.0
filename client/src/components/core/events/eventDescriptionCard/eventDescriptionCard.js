@@ -39,7 +39,7 @@ function EventDescriptionCard({ event, user }) {
       </div>
 
       <div className="flex justify-end p-3 relative">
-        {event?.attendees?.some((attendee) => attendee._id === user._id) ||
+        {event?.attendees?.some((attendee) => attendee?._id === user?._id) ||
         attendEvent ? (
           <Button
             buttonName="Leave this event"
