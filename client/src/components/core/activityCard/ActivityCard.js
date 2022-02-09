@@ -91,9 +91,9 @@ function ActivityCard({ activity }) {
         </div>
       </div>
       <div className="">
-        <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
+        <div className="border-b-2 border-grey-light m-3 pb-3 text-base">
           {ReactHtmlParser(activity.body)}
-        </p>
+        </div>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
         <div className="flex">

@@ -18,6 +18,11 @@ export default function TopicDashcard({
   users,
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
+  const [filter, setFilter] = useState(dropdownMenuData?.dropDownItems[0])
+
+  const onSelectFilter = (item) => {
+    setFilter(item)
+  }
 
   const firstThreeItems = users
     .slice(0, 3)
@@ -51,7 +56,11 @@ export default function TopicDashcard({
             <p className="text-lg pl-4">{topicDashCardTitle}</p>
             <div className="flex flex-row">
               <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu data={dropdownMenuData} />
+              <DropDownMenu
+                data={dropdownMenuData}
+                filter={filter}
+                selectFilter={onSelectFilter}
+              />
             </div>
           </div>
         </div>
@@ -84,9 +93,12 @@ TopicDashcard.defaultProps = {
 }
 
 TopicDashcard.propTypes = {
-  topicDashCardData: PropTypes.arrayOf.isRequired,
+  topicDashCardData: PropTypes.array,
   topicDashCardTitle: PropTypes.string.isRequired,
   topicDashCardStyle: PropTypes.string.isRequired,
-  dropdownMenuData: PropTypes.shape.isRequired,
-  users: PropTypes.arrayOf.isRequired,
+  dropdownMenuData: PropTypes.shape({
+    bgColorOnHover: PropTypes.string,
+    dropDownItems: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  users: PropTypes.arrayOf(PropTypes.object),
 }

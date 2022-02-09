@@ -153,9 +153,7 @@ function NavBar() {
             <img
               alt="profile"
               src={user?.imageUrl}
-              width="36"
-              height="36"
-              className="rounded-full"
+              className="rounded-full object-fill h-7 w-7"
             />
           </button>
           {showDropDown && (
@@ -164,18 +162,20 @@ function NavBar() {
               className="w-fit list-none divide-y shadow absolute right-1 top-8 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
             >
               <ul className="py-1" aria-labelledby="dropdownButton">
+                {user?.role === "ADMIN" && (
+                  <li>
+                    <Link
+                      to="/admin"
+                      onClick={() => setShowDropDown(false)}
+                      className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
+                    >
+                      Admin
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link
-                    to="/admin"
-                    onClick={() => setShowDropDown(false)}
-                    className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
-                  >
-                    Admin
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={`/profile/${user._id}`}
+                    to={`/profile/${user?._id}`}
                     onClick={() => setShowDropDown(false)}
                     className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
                   >
@@ -201,59 +201,13 @@ function NavBar() {
       </div>
       <div className="-mr-2 flex md:hidden">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <button
-            type="button"
-            className=""
-            data-dropdown-toggle="dropdown"
-            onClick={() => setShowDropDown(!showDropDown)}
-          >
+          <Link to={`/profile/${user?._id}`}>
             <img
               alt="profile"
               src={user?.imageUrl}
-              width="36"
-              height="36"
-              className="rounded-full"
+              className="rounded-full object-fill h-7 w-7"
             />
-          </button>
-          {showDropDown && (
-            <div
-              id="dropdown"
-              className="w-44 list-none  divide-y shadow absolute right-1/5 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
-            >
-              <ul className="py-1" aria-labelledby="dropdownButton">
-                <li>
-                  <Link
-                    to="/admin"
-                    onClick={() => setShowDropDown(false)}
-                    className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
-                  >
-                    Admin
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={`/profile/${user._id}`}
-                    onClick={() => setShowDropDown(false)}
-                    className="block px-4 py-2 text-grey-darker text-base hover:bg-grey-light hover:text-grey-darkest"
-                  >
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    className=" w-full text-left block py-2 px-4 text-base bg-grey-super_light hover:bg-grey-light"
-                    onClick={() => {
-                      setShowDropDown(false)
-                      handleLogout()
-                    }}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
+          </Link>
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -310,6 +264,25 @@ function NavBar() {
                   {item.title}
                 </Link>
               ))}
+              <button
+                type="button"
+                className="block mt-4 lg:inline-block lg:mt-0  mr-4"
+                onClick={() => {
+                  setIsOpen(!isOpen)
+                  handleLogout()
+                }}
+              >
+                Logout
+              </button>
+              {user?.role === "admin" && (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="block mt-4 lg:inline-block lg:mt-0  mr-4"
+                >
+                  Admin
+                </Link>
+              )}
             </div>
             <div className="flex items-center ">
               <div className="flex place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
