@@ -65,7 +65,7 @@ const Modal = ({ handleShowModal }) => {
   return (
     <div className="flex justify-center content-center">
       <form
-        className="h-72 w-5/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
+        className="h-72 w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
