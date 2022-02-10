@@ -13,12 +13,12 @@ const EventCards = ({ event }) => {
   const dispatch = useDispatch()
 
   const joinEventHandler = () => {
-    dispatch(joinEvent(event?._id, user._id))
+    dispatch(joinEvent(event?._id, user?._id))
     setJoin(!join)
   }
 
   const leaveEventHandler = () => {
-    dispatch(leaveEvent(event?._id, user._id))
+    dispatch(leaveEvent(event?._id, user?._id))
     setJoin(!join)
   }
 
