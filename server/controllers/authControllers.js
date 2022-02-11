@@ -33,7 +33,9 @@ exports.register = async (req, res) => {
 
   try {
     const user = await newUser(req.body);
-    const chatToken = await chatSignupToken(firstName);
+    console.log(user)
+    const chatToken = await chatSignupToken(user._id);
+    console.log(chatToken)
 
     await Promise.all({ user, chatToken });
     res.status(201).json({ user, chatToken });
@@ -82,6 +84,7 @@ exports.login = async (req, res) => {
       }
 
       const userLogedIn = { _id: user._id };
+      
       const accessToken = JWT.sign(
         { userLogedIn },
         process.env.JWT_SECRETORKEY,

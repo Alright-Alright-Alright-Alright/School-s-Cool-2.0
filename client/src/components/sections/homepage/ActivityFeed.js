@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import {
   getAllActivities,
   getFollowedActivities,
+  getStreamToken,
 } from "../../../redux/actions/activityActions"
 import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
@@ -14,12 +15,16 @@ function ActivityFeed() {
   const followedActivities = useSelector(
     (state) => state.activities.followedActivities
   )
+  const user = useSelector((state) => state.user.singleUser)
+
+  // console.log(user?._id)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllActivities())
     dispatch(getFollowedActivities())
+    dispatch(getStreamToken(user?._id))
   }, [dispatch])
 
   const shownActivities = filter ? followedActivities : allActivities

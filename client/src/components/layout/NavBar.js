@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { StreamChat } from "stream-chat"
+import { NotificationDropdown } from "react-activity-feed"
 import { logoutUser } from "../../redux/actions/userActions"
 import SearchBar from "../core/SearchBar"
 
@@ -125,6 +126,10 @@ function NavBar() {
         </div>
       </div>
       <div className="flex">
+        <div className="flex justify-center items-center pr-3">
+          <NotificationDropdown notify right width={350} />
+        </div>
+
         <div className="items-center hidden md:block">
           {/* <div className="flex place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
             <input
@@ -141,6 +146,7 @@ function NavBar() {
               <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
           </div> */}
+
           <SearchBar placeholder="What are you looking for?" />
         </div>
         <div className="hidden md:block pl-2 relative z-20 top-2">

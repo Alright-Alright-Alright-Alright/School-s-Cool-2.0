@@ -4,6 +4,7 @@
 import {
   GET_ALL_ACTIVITIES,
   GET_FOLLOWED_ACTIVITIES,
+  SET_STREAM_TOKEN,
 } from "../types/activities"
 
 const initialState = {
@@ -22,6 +23,11 @@ const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         followedActivities: action.payload,
+      }
+    case SET_STREAM_TOKEN:
+      return {
+        ...state,
+        streamToken: action.payload,
       }
     default:
       return state

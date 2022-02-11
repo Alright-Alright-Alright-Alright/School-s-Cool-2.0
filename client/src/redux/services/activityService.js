@@ -9,3 +9,12 @@ export const getFollowedActivityService = () =>
   service
     .get(`/followedActivities`, configHeaders())
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const getStreamTokenService = (userId) =>
+  service
+    .post("/getStreamToken", userId, configHeaders())
+    .then((responseFromAPI) => {
+      localStorage.setItem("StreamToken", responseFromAPI.data)
+
+      return responseFromAPI.data
+    })
