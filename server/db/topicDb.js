@@ -77,24 +77,24 @@ const addUserToTopicDb = async (topicId, user) => {
         $push: { members: user },
       },
       { new: true }
-    ) 
-    .populate("owner", "firstName lastName imageUrl")
-    .populate("members", "_id firstName lastName imageUrl")
-    .populate({
-      path: "posts",
-      populate: {
-        path: "owner",
-        select: "firstName, lastName, imageUrl",
-      },
-      populate: {
-        path: "comments",
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("members", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
         populate: {
           path: "owner",
           select: "firstName, lastName, imageUrl",
         },
-      },
-    })
-    .populate("resources");
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      })
+      .populate("resources");
   } catch (error) {
     throw new Error(error);
   }
@@ -109,23 +109,23 @@ const takeOutUserFromTopicDb = async (topicId, user) => {
       },
       { new: true }
     )
-    .populate("owner", "firstName lastName imageUrl")
-    .populate("members", "_id firstName lastName imageUrl")
-    .populate({
-      path: "posts",
-      populate: {
-        path: "owner",
-        select: "firstName, lastName, imageUrl",
-      },
-      populate: {
-        path: "comments",
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("members", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
         populate: {
           path: "owner",
           select: "firstName, lastName, imageUrl",
         },
-      },
-    })
-    .populate("resources");
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      })
+      .populate("resources");
   } catch (error) {
     throw new Error(error);
   }
@@ -139,6 +139,29 @@ const deleteTopicFromdb = async (topicId) => {
   }
 };
 
+const editTopicDb = async (
+  topicId,
+  title,
+  description,
+  category,
+  subject,
+  bannerImage,
+  isPrivate
+) => {
+  try {
+    return await Topic.findByIdAndUpdate(topicId, {
+      title,
+      description,
+      category,
+      subject,
+      bannerImage,
+      isPrivate,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllTopicsDb,
   addTopicToDb,
@@ -147,4 +170,5 @@ module.exports = {
   updateTopicDb,
   takeOutUserFromTopicDb,
   deleteTopicFromdb,
+  editTopicDb,
 };

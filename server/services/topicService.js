@@ -16,9 +16,25 @@ const getAllTopicsService = async () => {
   }
 };
 
-const createNewTopicService = async (title, description, category, subject, bannerImage, isPrivate, owner) => {
+const createNewTopicService = async (
+  title,
+  description,
+  category,
+  subject,
+  bannerImage,
+  isPrivate,
+  owner
+) => {
   try {
-    return await addTopicToDb(title, description, category, subject, bannerImage, isPrivate, owner);
+    return await addTopicToDb(
+      title,
+      description,
+      category,
+      subject,
+      bannerImage,
+      isPrivate,
+      owner
+    );
   } catch (error) {
     throw new Error(error);
   }
@@ -80,6 +96,30 @@ const deleteTopicService = async (topicId) => {
   }
 };
 
+const editTopicService = async (
+  topicId,
+  title,
+  description,
+  category,
+  subject,
+  bannerImage,
+  isPrivate
+) => {
+  try {
+    return await editTopicDb(
+      topicId,
+      title,
+      description,
+      category,
+      subject,
+      bannerImage,
+      isPrivate
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllTopicsService,
   createNewTopicService,
@@ -90,4 +130,5 @@ module.exports = {
   inviteForTopicService,
   removeInviteForTopicService,
   deleteTopicService,
+  editTopicService,
 };
