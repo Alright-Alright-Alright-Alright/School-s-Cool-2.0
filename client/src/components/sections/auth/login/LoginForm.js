@@ -32,10 +32,7 @@ const LoginForm = () => {
     dispatch(loginUser(userLogin))
   }
 
-  useEffect(
-    () => user !== null && setTimeout(() => navigate("/home"), 1500),
-    [user]
-  )
+  useEffect(() => user && setTimeout(() => navigate("/home"), 1500), [user])
 
   const logo = (
     <svg
