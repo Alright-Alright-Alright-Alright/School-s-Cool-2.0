@@ -19,6 +19,7 @@ import {
   SET_USERLOGGED_IN,
   SET_USERS,
   SET_USER_PROFILE,
+  UPDATE_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -29,7 +30,8 @@ export const setAuthorizationHeader = (token) => {
   localStorage.setItem("Authorization", Authorization);
 };
 
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
+
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
@@ -44,7 +46,8 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err.response.data.message,
       });
     });
-};
+  }
+
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -104,7 +107,7 @@ export const updateUser = (userData) => async (dispatch) => {
   console.log(updatedUser);
   try {
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: SET_USER, payload: updatedUser });
+    dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

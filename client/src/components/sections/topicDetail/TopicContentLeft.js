@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
+
 import React from "react"
 import { Link } from "react-router-dom"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"

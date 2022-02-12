@@ -2,8 +2,8 @@
 import React from "react"
 
 const TopicsCard = ({ cardTitle, color }) => (
-  <div className="flex flex-col content-center w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
-    <section style={{ margin: "51px 32px 15px" }}>
+  <div className="flex flex-col justify-center items-center w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
+    <section>
       <svg
         width="138"
         height="138"
@@ -21,7 +21,7 @@ const TopicsCard = ({ cardTitle, color }) => (
         />
       </svg>
     </section>
-    <section className="font-sans font-semibold text-lg text-center">
+    <section className="font-sans font-semibold text-lg text-center pt-3">
       {cardTitle}
     </section>
   </div>

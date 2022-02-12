@@ -6,6 +6,8 @@ const {
 } = require("../services/authServices");
 const passport = require("passport");
 const JWT = require("jsonwebtoken");
+// const { passportAuthenticate } = require("../middleware/passportMiddleware");
+const { chatSignupToken, chatLoginToken } = require("../services/chatService");
 
 // Register
 exports.register = async (req, res) => {
@@ -30,16 +32,24 @@ exports.register = async (req, res) => {
   }
 
   try {
-    await newUser(firstName, lastName, email, password);
-    res.status(200).json({ message: "Registration sucessfull, please login" });
+    const user = await newUser(firstName, lastName, email, password);
+    // const chatToken = await chatSignupToken(firstName);
+
+    // await Promise.all({ user, chatToken });
+    res.status(201).json({ user });
+
+    // await newUser(firstName, lastName, email, password).chatSignupToken(firstname);
+    // res.status(200).json({ message: "Registration sucessfull, please login" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
 // Login
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
+
+  console.log(email, password);
 
   if (isEmpty(email)) {
     res.status(400).json({ message: "Email must not be empty" });
@@ -50,6 +60,9 @@ exports.login = (req, res) => {
     res.status(400).json({ message: "Password must not be empty" });
     return;
   }
+
+  // const chatToken = await chatLoginToken(email);
+  // console.log(chatToken);
 
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
@@ -69,12 +82,14 @@ exports.login = (req, res) => {
         res.status(500).json({ message: "Session save went bad." });
         return;
       }
+
       const userLogedIn = { _id: user._id };
       const accessToken = JWT.sign(
         { userLogedIn },
         process.env.JWT_SECRETORKEY,
         { expiresIn: "1h" }
       );
+
       res.status(200).json({ user, accessToken });
     });
   })(req, res);

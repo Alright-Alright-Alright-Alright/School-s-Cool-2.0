@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-anonymous-default-export */
 import {
   SET_USER,
@@ -6,6 +7,7 @@ import {
   SET_USERLOGGED_IN,
   SET_USERS,
   SET_USER_PROFILE,
+  UPDATE_USER,
 } from "../types/user"
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
@@ -24,6 +26,7 @@ const userReducer = (state = initialState, action) => {
         token: `Bearer ${action.payload.accessToken}`,
         singleUser: action.payload.user,
         isLoggedIn: true,
+        // chatToken: action.payload.chatToken.token,
       }
     case SET_USER:
     case SET_USERLOGGED_IN:
@@ -46,6 +49,13 @@ const userReducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
         isLoggedIn: true,
+      }
+    case UPDATE_USER:
+      console.log(action.payload)
+      return {
+        users: state.users.users.map((eachUser) =>
+          eachUser._id === action.payload._id ? action.payload : eachUser
+        ),
       }
     default:
       return state

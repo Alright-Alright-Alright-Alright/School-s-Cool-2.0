@@ -5,7 +5,7 @@ const {
   updateEventService,
   joinEventService,
   leaveEventService,
-  deleteEventService
+  deleteEventService,
 } = require("../services/eventService");
 
 const getAllEvents = async (req, res, next) => {
@@ -23,9 +23,9 @@ const createNewEvent = async (req, res, next) => {
   const { _id } = req.user.userLogedIn;
   try {
     if (!title) {
-      throw new Error("Please write a title for the Event")
+      throw new Error("Please write a title for the Event");
     } else if (!location) {
-      throw new Error("Please write a Event location")
+      throw new Error("Please write a Event location");
     } else {
       const event = await createEventService(
         _id,

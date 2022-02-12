@@ -59,7 +59,7 @@ function MainTopicsContent() {
           onClick={() => setFilter("My topics")}
         />
       </div>
-      <div className="relative">
+      <div className="">
         {showModal && <TopicModal handleShowModal={handleShowModal} />}
         <div
           className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
