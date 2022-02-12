@@ -21,20 +21,27 @@ const MainEventsContent = ({ events }) => {
   switch (filter) {
     case "My events":
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-      filterRule = (item) => item.owner === user._id
+      filterRule = (item) => item.owner === user?._id
       break
     case "Attended events":
       filterRule = (item) =>
-        item.attendees.find((attendee) => attendee._id === user._id)
+        item.attendees.find((attendee) => attendee._id === user?._id)
+      break
+    case "Past events":
+      filterRule = (item) =>
+        new Date(item.dateStart) < new Date() &&
+        new Date(item.dateEnd) < new Date()
       break
     default:
-      filterRule = (item) => item
+      filterRule = (item) => new Date(item.dateStart) > new Date()
   }
 
   const filteredEvents = events.filter(filterRule)
 
+  console.log(filteredEvents)
+
   return (
-    <div className="relative">
+    <div className="">
       <div className="flex pt-5 justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
         <Button
           buttonName="All events"
@@ -50,6 +57,11 @@ const MainEventsContent = ({ events }) => {
           buttonName="My events"
           buttonStyle="btnEventStyle"
           onClick={() => setFilter("My events")}
+        />
+        <Button
+          buttonName="Past events"
+          buttonStyle="btnEventStyle"
+          onClick={() => setFilter("Past events")}
         />
       </div>
       {showModal && <EventModal handleShowModal={handleShowModal} />}

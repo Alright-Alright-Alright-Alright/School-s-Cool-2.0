@@ -32,11 +32,11 @@ exports.register = async (req, res) => {
   }
 
   try {
-    const user = await newUser(req.body);
-    const chatToken = await chatSignupToken(firstName);
+    const user = await newUser(firstName, lastName, email, password);
+    // const chatToken = await chatSignupToken(firstName);
 
-    await Promise.all({ user, chatToken });
-    res.status(201).json({ user, chatToken });
+    // await Promise.all({ user, chatToken });
+    res.status(201).json({ user });
 
     // await newUser(firstName, lastName, email, password).chatSignupToken(firstname);
     // res.status(200).json({ message: "Registration sucessfull, please login" });
@@ -49,6 +49,8 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(email, password);
+
   if (isEmpty(email)) {
     res.status(400).json({ message: "Email must not be empty" });
     return;
@@ -59,8 +61,8 @@ exports.login = async (req, res) => {
     return;
   }
 
-  const chatToken = await chatLoginToken(email);
-  console.log(chatToken);
+  // const chatToken = await chatLoginToken(email);
+  // console.log(chatToken);
 
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) {
@@ -88,7 +90,7 @@ exports.login = async (req, res) => {
         { expiresIn: "1h" }
       );
 
-      res.status(200).json({ user, accessToken, chatToken });
+      res.status(200).json({ user, accessToken });
     });
   })(req, res);
 };

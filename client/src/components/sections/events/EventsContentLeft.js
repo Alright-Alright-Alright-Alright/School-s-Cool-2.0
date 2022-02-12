@@ -12,7 +12,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 0 || value.toDateString().slice(4, 7) === "Jan") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -30,7 +30,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 1 || value.toDateString().slice(4, 7) === "Feb") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -48,7 +48,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 2 || value.toDateString().slice(4, 7) === "Mar") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -66,7 +66,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 3 || value.toDateString().slice(4, 7) === "Apr") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -84,7 +84,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 4 || value.toDateString().slice(4, 7) === "May") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -102,7 +102,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 5 || value.toDateString().slice(4, 7) === "Jun") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -120,7 +120,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 6 || value.toDateString().slice(4, 7) === "Jul") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -138,7 +138,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 7 || value.toDateString().slice(4, 7) === "Aug") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -156,7 +156,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 8 || value.toDateString().slice(4, 7) === "Sep") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -174,7 +174,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 9 || value.toDateString().slice(4, 7) === "Oct") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -192,7 +192,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 10 || value.toDateString().slice(4, 7) === "Nov") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"
@@ -210,7 +210,7 @@ const EventsContentLeft = () => {
         className={`${
           (currentMonth === 11 || value.toDateString().slice(4, 7) === "Dec") &&
           "text-sky"
-        } py-4`}
+        } py-3`}
       >
         <button
           type="button"

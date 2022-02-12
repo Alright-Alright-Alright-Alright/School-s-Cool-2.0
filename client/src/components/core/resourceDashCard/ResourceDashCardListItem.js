@@ -41,5 +41,5 @@ TopicDashCardListItem.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   listItemFirstName: PropTypes.string.isRequired,
   listItemLastName: PropTypes.string.isRequired,
-  topicDashCardData: PropTypes.array.isRequired,
+  topicDashCardData: PropTypes.arrayOf.isRequired,
 }

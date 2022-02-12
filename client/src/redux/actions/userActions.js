@@ -19,6 +19,7 @@ import {
   SET_USERLOGGED_IN,
   SET_USERS,
   SET_USER_PROFILE,
+  UPDATE_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -106,7 +107,7 @@ export const updateUser = (userData) => async (dispatch) => {
   console.log(updatedUser);
   try {
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: SET_USER, payload: updatedUser });
+    dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

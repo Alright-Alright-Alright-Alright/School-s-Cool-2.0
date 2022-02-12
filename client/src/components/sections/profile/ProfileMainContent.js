@@ -68,7 +68,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   return (
     <div className="flex flex-col items-center px-3">
       <img
-        className="p-6 w-1/2 h-auto"
+        className="p-6 w-40 lg:w-80 h-40 lg:h-80 rounded-full object-cover"
         src={profileImage || user.imageUrl}
         alt="profile"
       />
