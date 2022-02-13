@@ -135,7 +135,7 @@ const editTopic = async (req, res) => {
     req.body.topicData;
   const { topicId } = req.params;
   try {
-    await editTopicService(
+    const topic = await editTopicService(
       topicId,
       title,
       description,
@@ -144,7 +144,7 @@ const editTopic = async (req, res) => {
       bannerImage,
       isPrivate
     );
-    return res.status(201).json({ message: "The topic has been edited" });
+    return res.status(201).json(topic);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
