@@ -149,14 +149,18 @@ const editTopicDb = async (
   isPrivate
 ) => {
   try {
-    return await Topic.findByIdAndUpdate(topicId, {
-      title,
-      description,
-      category,
-      subject,
-      bannerImage,
-      isPrivate,
-    });
+    return await Topic.findByIdAndUpdate(
+      topicId,
+      {
+        title,
+        description,
+        category,
+        subject,
+        bannerImage,
+        isPrivate,
+      },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }
