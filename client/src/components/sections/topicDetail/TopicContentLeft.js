@@ -6,6 +6,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
+import Button from "../../core/Button"
 
 function TopicContentLeft({ topic }) {
   return (
@@ -46,6 +47,11 @@ function TopicContentLeft({ topic }) {
               </p>
             </div>
           </Link>
+          <Button
+            buttonName="Edit Topic"
+            buttonStyle="btnTopicStyle"
+            buttonSubmit
+          />
         </div>
       </div>
     </div>
