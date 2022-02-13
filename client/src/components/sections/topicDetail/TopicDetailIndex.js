@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import Main from "../../layout/Main"
@@ -13,6 +13,8 @@ import { getAllTheUsers } from "../../../redux/actions/userActions"
 const TopicDetailIndex = () => {
   const topic = useSelector((state) => state.topics)
   const allUsers = useSelector((state) => state.user.users)
+  const [showModal, setshowModal] = useState(false)
+  const [editModal, seteditModal] = useState(false)
   const { topicId } = useParams()
   const dispatch = useDispatch()
 
@@ -21,11 +23,28 @@ const TopicDetailIndex = () => {
     dispatch(getOneTopic(topicId))
   }, [dispatch, topicId])
 
+  const showEditModel = () => {
+    setshowModal(!showModal)
+    seteditModal(!editModal)
+  }
+
   return (
     <>
       <Main
-        main={<MainContent topic={topic.singleTopic} />}
-        contentLeft={<TopicContentLeft topic={topic.singleTopic} />}
+        main={
+          <MainContent
+            topic={topic.singleTopic}
+            showModal={showModal}
+            showEditModel={showEditModel}
+            editModal={editModal}
+          />
+        }
+        contentLeft={
+          <TopicContentLeft
+            topic={topic.singleTopic}
+            showEditModel={showEditModel}
+          />
+        }
         contentRight={<TopicContentRight topic={topic} users={allUsers} />}
       />
     </>

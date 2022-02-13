@@ -132,7 +132,7 @@ const deleteTopic = async (req, res, next) => {
 
 const editTopic = async (req, res) => {
   const { title, description, category, subject, bannerImage, isPrivate } =
-    req.body;
+    req.body.topicData;
   const { topicId } = req.params;
   try {
     await editTopicService(
@@ -146,7 +146,7 @@ const editTopic = async (req, res) => {
     );
     return res.status(201).json({ message: "The topic has been edited" });
   } catch (error) {
-    res.status(500).json({ message: e.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

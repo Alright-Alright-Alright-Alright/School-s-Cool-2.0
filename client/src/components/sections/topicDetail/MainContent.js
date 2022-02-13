@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
@@ -9,8 +10,9 @@ import { createPost, getAllPosts } from "../../../redux/actions/postActions"
 import TopicHeaderCard from "../../core/topics/topicHeaderCard/TopicHeaderCard"
 import TopicPost from "../../core/topics/TopicPost/TopicPost"
 import RichTextToolbar from "../../core/richtText/RichTextToolbar"
+import TopicModal from "../../core/topics/TopicModal"
 
-function MainContent({ topic }) {
+function MainContent({ topic, showModal, editModal, showEditModel }) {
   const [body, setPostBody] = useState("")
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
@@ -23,11 +25,11 @@ function MainContent({ topic }) {
     owner: user?._id,
   }
 
-  const createNewPost = () => {
-    dispatch(createPost(newPost))
-    setPostBody("")
-    dispatch(getAllPosts(params.topicId))
-  }
+  // const createNewPost = () => {
+  //   dispatch(createPost(newPost))
+  //   setPostBody("")
+  //   dispatch(getAllPosts(params.topicId))
+  // }
 
   const handleDeletePost = () => {
     dispatch(getAllPosts(params.topicId))
@@ -45,6 +47,9 @@ function MainContent({ topic }) {
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
       /> */}
+      {showModal && (
+        <TopicModal editModal={editModal} handleShowModal={showEditModel} />
+      )}
       {posts?.map((post) => (
         <TopicPost
           key={post?._id}

@@ -6,6 +6,7 @@ const {
   updateTopicDb,
   takeOutUserFromTopicDb,
   deleteTopicFromdb,
+  editTopicDb
 } = require("../db/topicDb");
 
 const getAllTopicsService = async () => {
