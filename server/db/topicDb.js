@@ -160,7 +160,24 @@ const editTopicDb = async (
         isPrivate,
       },
       { new: true }
-    );
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("members", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      })
+      .populate("resources");
   } catch (error) {
     throw new Error(error);
   }
