@@ -46,7 +46,7 @@ function TopicContentLeft({ topic, showEditModel, user }) {
               </p>
             </div>
           </Link>
-          {topic.owner._id === user._id && (
+          {topic?.owner?._id === user?._id && (
             <Button
               buttonName="Edit Topic"
               buttonStyle="btnTopicStyle"
