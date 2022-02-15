@@ -48,7 +48,11 @@ function MainContent({ topic, showModal, editModal, showEditModel }) {
         postBody={(e) => setPostBody(e)}
       /> */}
       {showModal && (
-        <TopicModal editModal={editModal} handleShowModal={showEditModel} />
+        <TopicModal
+          editModal={editModal}
+          handleShowModal={showEditModel}
+          singleTopic={topic}
+        />
       )}
       {posts?.map((post) => (
         <TopicPost

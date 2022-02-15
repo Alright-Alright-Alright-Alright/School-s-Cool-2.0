@@ -7,7 +7,7 @@ import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
 import Button from "../../core/Button"
 
-function TopicContentLeft({ topic, showEditModel }) {
+function TopicContentLeft({ topic, showEditModel, user }) {
   return (
     <div className="flex flex-col max-w-sm float-right">
       <div className="p-3">
@@ -46,11 +46,13 @@ function TopicContentLeft({ topic, showEditModel }) {
               </p>
             </div>
           </Link>
-          <Button
-            buttonName="Edit Topic"
-            buttonStyle="btnTopicStyle"
-            onClick={showEditModel}
-          />
+          {topic.owner._id === user._id && (
+            <Button
+              buttonName="Edit Topic"
+              buttonStyle="btnTopicStyle"
+              onClick={showEditModel}
+            />
+          )}
         </div>
       </div>
     </div>

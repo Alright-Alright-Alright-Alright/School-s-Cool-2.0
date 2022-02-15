@@ -12,7 +12,7 @@ import { getAllTheUsers } from "../../../redux/actions/userActions"
 
 const TopicDetailIndex = () => {
   const topic = useSelector((state) => state.topics)
-  const allUsers = useSelector((state) => state.user.users)
+  const user = useSelector((state) => state.user)
   const [showModal, setshowModal] = useState(false)
   const [editModal, seteditModal] = useState(false)
   const { topicId } = useParams()
@@ -43,9 +43,10 @@ const TopicDetailIndex = () => {
           <TopicContentLeft
             topic={topic.singleTopic}
             showEditModel={showEditModel}
+            user={user.singleUser}
           />
         }
-        contentRight={<TopicContentRight topic={topic} users={allUsers} />}
+        contentRight={<TopicContentRight topic={topic} users={user.users} />}
       />
     </>
   )

@@ -12,7 +12,7 @@ import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 
-const Modal = ({ handleShowModal, editModal }) => {
+const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const [title, seTitle] = useState("")
   const [category, setCategory] = useState("")
   const [subject, setSubject] = useState("")
@@ -52,11 +52,11 @@ const Modal = ({ handleShowModal, editModal }) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const topicData = {
-      title,
-      description,
-      category,
-      subject,
-      bannerImage: image,
+      title: title || singleTopic.title,
+      description: description || singleTopic.description,
+      category: category || singleTopic.category,
+      subject: subject || singleTopic.subject,
+      bannerImage: image || singleTopic.bannerImage,
       isPrivate: privacy,
     }
     if (
