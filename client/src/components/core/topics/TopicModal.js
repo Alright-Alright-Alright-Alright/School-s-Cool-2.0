@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { addAtopic } from "../../../redux/actions/topicActions"
+import { addAtopic, editTopic } from "../../../redux/actions/topicActions"
 import MessageHandler from "../MessageHandler"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 
-const Modal = ({ handleShowModal }) => {
+const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const [title, seTitle] = useState("")
   const [category, setCategory] = useState("")
   const [subject, setSubject] = useState("")
@@ -19,7 +21,7 @@ const Modal = ({ handleShowModal }) => {
   const [privacy, setPrivacy] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
-
+  const { topicId } = useParams()
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -50,11 +52,11 @@ const Modal = ({ handleShowModal }) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const topicData = {
-      title,
-      description,
-      category,
-      subject,
-      bannerImage: image,
+      title: title || singleTopic.title,
+      description: description || singleTopic.description,
+      category: category || singleTopic.category,
+      subject: subject || singleTopic.subject,
+      bannerImage: image || singleTopic.bannerImage,
       isPrivate: privacy,
     }
     if (
@@ -64,7 +66,9 @@ const Modal = ({ handleShowModal }) => {
       topicData.subject.length > 0
     )
       handleShowModal()
-    dispatch(addAtopic(topicData))
+    editModal
+      ? dispatch(editTopic(topicId, topicData))
+      : dispatch(addAtopic(topicData))
   }
 
   return (
@@ -152,7 +156,7 @@ const Modal = ({ handleShowModal }) => {
             toogle={() => setPrivacy(!privacy)}
           />
           <Button
-            buttonName="Create Topic"
+            buttonName={editModal ? "Edit Topic" : "Create Topic"}
             buttonStyle="btnTopicStyle"
             buttonSubmit
           />
