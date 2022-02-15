@@ -34,3 +34,10 @@ export const removeInviteForTopicService = (topicId, userId) =>
   service
     .put(`/topics/${topicId}/removeInvite`, { userId })
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const editTopicService = (topicId, topicData) =>
+  service
+    .patch(`/topics/${topicId}`, {
+      topicData,
+    })
+    .then((responseFromAPI) => responseFromAPI.data)

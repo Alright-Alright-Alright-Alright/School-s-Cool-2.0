@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-
 import React from "react"
 import { Link } from "react-router-dom"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
+import Button from "../../core/Button"
 
-function TopicContentLeft({ topic }) {
+function TopicContentLeft({ topic, showEditModel, user }) {
   return (
     <div className="flex flex-col max-w-sm float-right">
       <div className="p-3">
@@ -46,6 +46,13 @@ function TopicContentLeft({ topic }) {
               </p>
             </div>
           </Link>
+          {topic?.owner?._id === user?._id && (
+            <Button
+              buttonName="Edit Topic"
+              buttonStyle="btnTopicStyle"
+              onClick={showEditModel}
+            />
+          )}
         </div>
       </div>
     </div>

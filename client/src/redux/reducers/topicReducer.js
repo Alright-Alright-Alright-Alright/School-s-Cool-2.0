@@ -10,6 +10,7 @@ import {
   GET_TOPIC,
   INVITE_FOR_TOPIC,
   REMOVE_INVITE,
+  EDIT_TOPIC,
 } from "../types/topics"
 
 const initialState = {
@@ -25,6 +26,7 @@ const topicReducer = (state = initialState, action) => {
         allTopics: action.payload,
       }
     case GET_TOPIC:
+    case EDIT_TOPIC:
       return {
         ...state,
         singleTopic: action.payload,
