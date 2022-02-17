@@ -49,8 +49,6 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(email, password);
-
   if (isEmpty(email)) {
     res.status(400).json({ message: "Email must not be empty" });
     return;
