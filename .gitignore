@@ -30,3 +30,5 @@ yarn-error.log*
 .eslint*
 
 mikesNotes.txt
+client/package-lock.json
+server/package-lock.json
