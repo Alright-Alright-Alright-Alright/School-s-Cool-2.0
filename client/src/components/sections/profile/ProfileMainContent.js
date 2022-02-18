@@ -6,6 +6,7 @@ import Dashcard from "../../core/dashcard/Dashcard"
 import { updateUser } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
+import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [fileUrl, setFileUrl] = useState("")
@@ -188,7 +189,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               dashCardData={filteredTopics}
               dashCardTitle="Topics"
               dashCardStyle="bg-aqua"
-              // dropdownMenuData={dashcardDropdownMenu.topics}
+              dropdownMenuData={dashcardDropdownMenu.topics}
             />
           </div>
           <div className="lg:w-1/2">
@@ -196,7 +197,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               dashCardData={courses}
               dashCardTitle="Courses"
               dashCardStyle="bg-yellow"
-              // dropdownMenuData={dashcardDropdownMenu.courses}
+              dropdownMenuData={dashcardDropdownMenu.courses}
             />
           </div>
         </div>
@@ -207,7 +208,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
             dashCardData={filteredEvents}
             dashCardTitle="Events"
             dashCardStyle="bg-sky"
-            // dropdownMenuData={dashcardDropdownMenu.events}
+            dropdownMenuData={dashcardDropdownMenu.events}
           />
         </div>
         <div className="lg:w-1/2">
@@ -215,7 +216,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
             dashCardData={filteredFiles}
             dashCardTitle="Files"
             dashCardStyle="bg-pink"
-            // dropdownMenuData={dashcardDropdownMenu.files}
+            dropdownMenuData={dashcardDropdownMenu.files}
           />
         </div>
       </div>
