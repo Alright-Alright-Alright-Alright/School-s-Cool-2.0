@@ -9,7 +9,6 @@ function ChatWidgetNew() {
   const [showChatWidget, setShowChatWidget] = useState(false)
 
   const handleShowModal = () => {
-    console.log("first")
     setShowChatWidget(!showChatWidget)
   }
 

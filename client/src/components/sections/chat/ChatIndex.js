@@ -64,13 +64,13 @@ const CustomLoadingIndicator = () => <div>Loading, loading, loading...</div>
 
 const ChatIndex = ({ handleShowModal }) => {
   const [chatClient, setChatClient] = useState(null)
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState(null)
   const currentUser = useSelector((state) => state.user.singleUser)
 
   const id = currentUser?._id
   const name = currentUser?.firstName
 
-  const filters = { type: "messaging" }
+  const filters = { type: "messaging", members: { $in: [id] } }
   const sort = { last_message_at: -1 }
 
   const handleCloseModal = () => {
@@ -78,7 +78,7 @@ const ChatIndex = ({ handleShowModal }) => {
   }
 
   const createChannel = async (event) => {
-    event.preventDefault()
+    // event.preventDefault()
     try {
       const newChannel = await chatClient.channel("messaging", {
         members: [id, event.id],
@@ -113,19 +113,21 @@ const ChatIndex = ({ handleShowModal }) => {
         </button>
         <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
           <div className="flex justify-between py-3 text-white">
-            <p className="text-lg pl-4"> Current Chats</p>
+            <p className="text-lg px-4"> Current Chats</p>
           </div>
         </div>
         {children}
         <div>
           <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
             <div className="flex justify-between py-3 text-white">
-              <p className="text-lg pl-4"> Other users</p>
+              <p className="text-lg px-4"> Other users</p>
             </div>
           </div>
-          {users.users.map((user) => (
-            <UserItem user={user} createChannel={createChannel} />
-          ))}
+          <div className=" overflow-scroll max-h-64">
+            {users.users.map((user) => (
+              <UserItem user={user} createChannel={createChannel} />
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -142,11 +144,13 @@ const ChatIndex = ({ handleShowModal }) => {
         { id: 1 },
         { limit: 8 }
       )
+
       setUsers(allUsers)
       setChatClient(client)
     }
 
     initChat()
+    // return () => chatClient.disconnectUser()
   }, [])
 
   if (!chatClient) {
