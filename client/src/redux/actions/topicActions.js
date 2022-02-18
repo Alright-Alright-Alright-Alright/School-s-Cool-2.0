@@ -6,6 +6,7 @@ import {
   LEAVE_TOPIC,
   INVITE_FOR_TOPIC,
   REMOVE_INVITE,
+  EDIT_TOPIC,
 } from "../types/topics"
 
 import {
@@ -16,6 +17,7 @@ import {
   leaveTopic,
   inviteForTopicService,
   removeInviteForTopicService,
+  editTopicService,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -116,6 +118,21 @@ export const removeInvite = (topicId, userId) => async (dispatch) => {
     const removeInviteDb = await removeInviteForTopicService(topicId, userId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: REMOVE_INVITE, payload: removeInviteDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const editTopic = (topicId, topicData) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const topicEdited = await editTopicService(topicId, topicData)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: EDIT_TOPIC, payload: topicEdited })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

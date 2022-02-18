@@ -28,7 +28,7 @@ import "./ChatIndexStyles.css"
 import UserItem from "../../core/chat/UserItem"
 import Icon from "../../core/Icon"
 
-const STREAM_API = process.env.REACT_APP_STREAM_API_SECRET
+const STREAM_API = process.env.REACT_APP_STREAM_API_KEY
 
 const CustomChannelPreview = (props) => {
   const { channel, setActiveChannel } = props

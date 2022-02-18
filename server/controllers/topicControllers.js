@@ -9,6 +9,7 @@ const {
   inviteForTopicService,
   removeInviteForTopicService,
   deleteTopicService,
+  editTopicService
 } = require("../services/topicService");
 
 const getAllTopics = async (req, res, next) => {
@@ -129,6 +130,26 @@ const deleteTopic = async (req, res, next) => {
   }
 };
 
+const editTopic = async (req, res) => {
+  const { title, description, category, subject, bannerImage, isPrivate } =
+    req.body.topicData;
+  const { topicId } = req.params;
+  try {
+    const topic = await editTopicService(
+      topicId,
+      title,
+      description,
+      category,
+      subject,
+      bannerImage,
+      isPrivate
+    );
+    return res.status(201).json(topic);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllTopics,
   createNewTopic,
@@ -139,4 +160,5 @@ module.exports = {
   inviteForTopic,
   removeInviteForTopic,
   deleteTopic,
+  editTopic,
 };
