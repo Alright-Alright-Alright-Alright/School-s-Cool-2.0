@@ -51,8 +51,8 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: true,
       }
     case UPDATE_USER:
-      console.log(action.payload)
       return {
+        ...state,
         users: state.users.users.map((eachUser) =>
           eachUser._id === action.payload._id ? action.payload : eachUser
         ),
