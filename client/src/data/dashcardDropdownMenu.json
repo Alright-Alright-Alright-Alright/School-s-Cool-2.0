@@ -11,6 +11,10 @@
     "bgColorOnHover": "sky-light",
     "dropDownItems": ["All events", "Created by me", "Attending"]
   },
+  "files": {
+    "bgColorOnHover": "pink-light",
+    "dropDownItems": ["All files", "Created by me"]
+  },
   "users": {
     "bgColorOnHover": "pink-light",
     "dropDownItems": ["All users"]
