@@ -10,7 +10,7 @@ function EventDetailContentLeft({ event }) {
   dayjs.extend(calendar)
 
   return (
-    <div className="flex flex-col max-w-sm float-right">
+    <div className="flex flex-col max-w-sm">
       <div className="p-3">
         <img
           className="rounded-r-3xl rounded-b-3xl object-cover h-72"
