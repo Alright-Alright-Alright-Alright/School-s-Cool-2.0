@@ -14,6 +14,8 @@ const EventCards = ({ event }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const hardCodedTags = ["Birthday", "Wedding", "Conference"]
+
   const joinEventHandler = () => {
     dispatch(joinEvent(event?._id, user?._id))
     setJoin(!join)
@@ -27,7 +29,7 @@ const EventCards = ({ event }) => {
   return (
     <div className="flex flex-col justify-between w-full bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
       <section className="flex justify-between border-b-2 border-grey-light mx-5">
-        <div className="flex-col justify-between h-full ">
+        <div className="flex-col w-1/2 pr-3 justify-between">
           <div className="">
             <div className="py-5 flex">
               {join ? (
@@ -49,7 +51,7 @@ const EventCards = ({ event }) => {
             </div>
 
             <div>
-              <div className="flex justify-around">
+              <div className="flex justify-start">
                 <p className="text-sm pr-3 text-grey-medium_light">
                   {dayjs(event?.dateStart).format("MMM DD, YYYY")}
                 </p>
@@ -63,16 +65,26 @@ const EventCards = ({ event }) => {
             </div>
           </div>
 
-          <div className="flex items-end text-grey-medium_light ">
+          {/* <div className="flex items-end text-grey-medium_light ">
             <p className="text-sm">{event?.description}</p>
+          </div> */}
+          <div className="flex flex-wrap h-28 justify-start items-end">
+            {hardCodedTags.map((tag) => (
+              <span
+                key={tag}
+                className="mr-2 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="flex justify-end w-1/2 m-5 ">
+        <div className="flex justify-end w-1/2 my-5 ">
           <img
             src={event?.bannerImage}
             alt="event_Image"
-            className="object-cover w-full h-48 rounded-tr-3xl rounded-b-3xl"
+            className=" object-cover w-full h-48 rounded-tr-3xl rounded-b-3xl"
           />
         </div>
       </section>
