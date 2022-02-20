@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { Suspense, lazy, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Route, Routes, Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import jwt from "jsonwebtoken"
+import { ErrorBoundary } from "react-error-boundary"
 import NavBar from "./components/layout/NavBar"
 import { loggedInUser, logoutUser } from "./redux/actions/userActions"
-import ChatWidget from "./components/sections/chat/ChatWidget"
-import ChatIndex from "./components/sections/chat/ChatIndex"
 import ChatWidgetNew from "./components/sections/chat/ChatWidgetNew"
+import ErrorFallback from "./components/core/errorBoundries/ErrorFallback"
 
 function App() {
   const loggedIn = useSelector((state) => state.user.isLoggedIn)
@@ -34,14 +34,23 @@ function App() {
     }, 3000)
   }, [dispatch, token, loggedIn, navigate, currentTime])
 
+  const errorHandler = (error, errorInfo) => {
+    console.log("Logging", error, errorInfo)
+  }
+
   return (
     <div className="App">
-      <NavBar />
-      <ChatWidgetNew />
-      {/* <ChatIndex /> */}
-      {/* {showChatWidget && <ChatWidget />} */}
-      {/* <ChatWidget /> */}
-      <Outlet />
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onError={errorHandler}
+        onReset={() => {
+          navigate("/home")
+        }}
+      >
+        <NavBar />
+        <ChatWidgetNew />
+        <Outlet />
+      </ErrorBoundary>
     </div>
   )
 }
