@@ -43,23 +43,11 @@ const addPostToDb = async (body, owner, topicId, eventId) => {
   });
 
   try {
-    if (topicId === undefined) {
-      Event.findByIdAndUpdate(
-        eventId,
-        { $push: { posts: newPost } },
-        { new: true }
-      ).then((event) => {
-        console.log(event);
-      });
-      return newPost;
-    } else {
-      Topic.findByIdAndUpdate(
-        topicId,
-        { $push: { posts: newPost } },
-        { new: true }
-      );
-      return newPost;
-    }
+    topicId
+      ? await Topic.findByIdAndUpdate(topicId, { $push: { posts: newPost } })
+      : await Event.findByIdAndUpdate(eventId, { $push: { posts: newPost } });
+
+    return newPost;
   } catch (error) {
     throw new Error(error);
   }
@@ -129,11 +117,11 @@ const unlikePostDb = async (postId, userId) => {
 
 const deletePostDb = async (postId) => {
   try {
-    await Post.findByIdAndRemove(postId)
+    await Post.findByIdAndRemove(postId);
   } catch (error) {
     throw new Error(error);
   }
-}
+};
 
 module.exports = {
   getAllPostsDb,
