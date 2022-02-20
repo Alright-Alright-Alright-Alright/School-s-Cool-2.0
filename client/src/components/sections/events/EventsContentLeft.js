@@ -7,7 +7,7 @@ const EventsContentLeft = () => {
   const [currentMonth, setCurrentMonth] = useState(value.getMonth())
 
   return (
-    <div className="min-h-screen pl-8 pt-2">
+    <div className="hidden lg:block min-h-screen pl-8 pt-2">
       <h1
         className={`${
           (currentMonth === 0 || value.toDateString().slice(4, 7) === "Jan") &&

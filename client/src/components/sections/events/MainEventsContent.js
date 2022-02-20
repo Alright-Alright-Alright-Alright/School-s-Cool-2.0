@@ -7,6 +7,7 @@ import EventCards from "../../core/events/EventCards"
 import AddCard from "../../core/AddCard"
 import EventModal from "../../core/events/EventModal"
 import Button from "../../core/Button"
+import Icon from "../../core/Icon"
 
 const MainEventsContent = ({ events }) => {
   const [showModal, setShowModal] = useState(false)
@@ -38,31 +39,48 @@ const MainEventsContent = ({ events }) => {
 
   const filteredEvents = events.filter(filterRule)
 
-  console.log(filteredEvents)
-
   return (
     <div className="">
-      <div className="flex pt-5 justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
-        <Button
-          buttonName="All events"
-          buttonStyle="btnEventStyle"
-          onClick={() => setFilter("All events")}
-        />
-        <Button
-          buttonName="Attended events"
-          buttonStyle="btnEventStyle"
-          onClick={() => setFilter("Attended events")}
-        />
-        <Button
-          buttonName="My events"
-          buttonStyle="btnEventStyle"
-          onClick={() => setFilter("My events")}
-        />
-        <Button
-          buttonName="Past events"
-          buttonStyle="btnEventStyle"
-          onClick={() => setFilter("Past events")}
-        />
+      <div className="flex flex-wrap lg:flex pt-5 justify-evenly lg:justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
+        <button
+          className="flex text-lg items-center pb-3 lg:pb-0"
+          type="button"
+          onClick={handleShowModal}
+        >
+          <Icon iconName="add" iconStyle="fill-inactive text-sky" />
+          <p className="pl-3">New Event</p>
+        </button>
+
+        <div className="pb-3 lg:pb-0">
+          <Button
+            buttonName="All events"
+            buttonStyle="btnEventStyle"
+            onClick={() => setFilter("All events")}
+          />
+        </div>
+        <div className="pb-3 lg:pb-0">
+          <Button
+            buttonName="Attended events"
+            buttonStyle="btnEventStyle"
+            onClick={() => setFilter("Attended events")}
+          />
+        </div>
+
+        <div className="pb-3 lg:pb-0">
+          <Button
+            buttonName="My events"
+            buttonStyle="btnEventStyle"
+            onClick={() => setFilter("My events")}
+          />
+        </div>
+
+        <div className="pb-3 lg:pb-0">
+          <Button
+            buttonName="Past events"
+            buttonStyle="btnEventStyle"
+            onClick={() => setFilter("Past events")}
+          />
+        </div>
       </div>
       {showModal && <EventModal handleShowModal={handleShowModal} />}
       <div
@@ -70,9 +88,6 @@ const MainEventsContent = ({ events }) => {
           showModal && "blur-md"
         }`}
       >
-        <button type="button" onClick={handleShowModal}>
-          <AddCard cardTitle="New event" color="#27A8DF" />
-        </button>
         {filteredEvents.map((event) => (
           <EventCards key={event._id} event={event} />
         ))}
