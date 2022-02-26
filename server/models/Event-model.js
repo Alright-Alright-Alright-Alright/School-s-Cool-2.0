@@ -37,6 +37,11 @@ const eventSchema = new Schema(
       default:
         "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg",
     },
+    tags: {
+      type: [String],
+      validate: [arrayLimit, "Exceeds the limit of 5"],
+      required: true,
+    },
     posts: [
       {
         type: Schema.Types.ObjectId,
@@ -48,5 +53,9 @@ const eventSchema = new Schema(
     timestamps: true,
   }
 );
+
+function arrayLimit(val) {
+  return val.length <= 5;
+}
 
 module.exports = model("Event", eventSchema);

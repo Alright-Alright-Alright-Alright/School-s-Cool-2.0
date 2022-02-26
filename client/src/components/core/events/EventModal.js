@@ -3,14 +3,18 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import DatePicker from "react-datepicker"
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
+import nl from "date-fns/locale/nl"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import { createNewEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import "react-datepicker/dist/react-datepicker.css"
+import TagsInput from "../TagsInput"
 import MessageHandler from "../MessageHandler"
+
+registerLocale("nl", nl)
 
 const Modal = ({ handleShowModal }) => {
   const [title, seTitle] = useState("")
@@ -18,6 +22,8 @@ const Modal = ({ handleShowModal }) => {
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
+  const [tags, setTags] = useState([])
+  const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
   const hiddenFileInput = useRef(null)
@@ -56,6 +62,7 @@ const Modal = ({ handleShowModal }) => {
       location,
       bannerImage: image,
       isPrivate: privacy,
+      tags,
     }
     if (eventData.title.length > 0 && eventData.location.length > 0)
       handleShowModal()
@@ -82,7 +89,7 @@ const Modal = ({ handleShowModal }) => {
             <Icon iconName="close" />
           </button>
         </section>
-        <section className="flex-col lg:flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
+        <section className="flex-col lg:flex-row flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
           <div>
             <DatePicker
               selectsRange
@@ -93,6 +100,8 @@ const Modal = ({ handleShowModal }) => {
               }}
               placeholderText="Select event dates"
               withPortal
+              locale="nl"
+              dateFormat="dd/MM/yyyy"
             />
           </div>
           <input
@@ -115,6 +124,9 @@ const Modal = ({ handleShowModal }) => {
             ref={hiddenFileInput}
             onChange={chooseBannerImage}
           />
+        </section>
+        <section>
+          <TagsInput selectedTags={selectedTags} />
         </section>
         <section className="flex justify-center border-b-2 border-grey-super_light px-1 py-3 mx-5">
           <input
