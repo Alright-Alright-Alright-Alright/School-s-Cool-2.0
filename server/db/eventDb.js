@@ -17,7 +17,8 @@ const createEventDb = async (
   dateEnd,
   description,
   location,
-  bannerImage
+  bannerImage,
+  tags
 ) => {
   try {
     return await Event.create({
@@ -28,6 +29,7 @@ const createEventDb = async (
       description,
       location,
       bannerImage,
+      tags
     });
   } catch (e) {
     throw new Error(e.message);
