@@ -3,7 +3,8 @@
     padding: 10px;
     background-color: khaki;
     border-radius: 50%;
-
+    z-index: 1;
+    /* position: relative; */
 }
 
 .str-chat.messaging, .str-chat.commerce{
