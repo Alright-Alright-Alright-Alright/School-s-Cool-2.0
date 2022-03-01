@@ -1,9 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React from "react"
+import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import "./index.css"
 import { Provider } from "react-redux"
+
+import i18next from "i18next"
+import { initReactI18next } from "react-i18next"
+import HttpApi from "i18next-http-backend"
+import LanguageDetector from "i18next-browser-languagedetector"
+
 import App from "./App"
 // import Topics from "./routes/topics"
 import store from "./redux/store"
@@ -25,30 +31,51 @@ import NewPassword from "./pages/NewPassword"
 import ForgotPassword from "./pages/ForgotPassword"
 import AdminPanel from "./pages/AdminPanel"
 
+i18next
+  .use(HttpApi)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    supportedLngs: ["en", "nl"],
+    fallbackLng: "en",
+    debug: false,
+    // Options for language detector
+    detection: {
+      order: ["htmlTag", "path", "cookie"],
+      caches: ["cookie"],
+    },
+    // react: { useSuspense: false },
+    backend: {
+      loadPath: "/assets/locales/{{lng}}/translation.json",
+    },
+  })
+
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="forgot" element={<ForgotPassword />} />
-        <Route path="new-password/:token" element={<NewPassword />} />
-        <Route path="/" element={<App />}>
-          <Route path="home" element={<Home />} />
-          <Route path="topics" element={<Topics />} />
-          <Route path="topics/:topicId" element={<TopicDetailPage />} />
-          <Route path="library" element={<Library />} />
-          <Route path="courses" element={<Courses />} />
-          <Route path="courses/:courseId" element={<CourseDetailPage />} />
-          <Route path="events" element={<Events />} />
-          <Route path="events/:eventId" element={<EventDetailsPage />} />
-          <Route path="profile/:userId" element={<Profile />} />
-          <Route path="admin" element={<AdminPanel />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </Provider>,
+  <Suspense fallback={<div>Loading...</div>}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="new-password/:token" element={<NewPassword />} />
+          <Route path="/" element={<App />}>
+            <Route path="home" element={<Home />} />
+            <Route path="topics" element={<Topics />} />
+            <Route path="topics/:topicId" element={<TopicDetailPage />} />
+            <Route path="library" element={<Library />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="courses/:courseId" element={<CourseDetailPage />} />
+            <Route path="events" element={<Events />} />
+            <Route path="events/:eventId" element={<EventDetailsPage />} />
+            <Route path="profile/:userId" element={<Profile />} />
+            <Route path="admin" element={<AdminPanel />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </Suspense>,
   document.getElementById("root")
 )

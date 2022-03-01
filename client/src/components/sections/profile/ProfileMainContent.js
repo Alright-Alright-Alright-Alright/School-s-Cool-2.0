@@ -10,7 +10,8 @@ import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
-const truncate = (str) => (str.length > 25 ? `${str.substring(0, 25)}...` : str)
+const truncate = (str) =>
+  str?.length > 25 ? `${str.substring(0, 25)}...` : str
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [fileUrl, setFileUrl] = useState("")
@@ -135,6 +136,18 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <div>
+                <select
+                  id="roles"
+                  name="role"
+                  // onChange={handleEditFormChange}
+                  // value={editFormData.role}
+                  className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
+                >
+                  <option value="ADMIN">Admin</option>
+                  <option value="USER">User</option>
+                </select>
+              </div>
               <div className="flex justify-end items-center">
                 <div>
                   <button

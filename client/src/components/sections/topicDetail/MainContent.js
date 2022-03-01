@@ -32,7 +32,8 @@ function MainContent({ topic, showModal, editModal, showEditModel }) {
   // }
 
   const handleDeletePost = () => {
-    dispatch(getAllPosts(params.topicId))
+    // dispatch(getAllPosts(params.topicId))
+    console.log("hello")
   }
 
   useEffect(() => {
