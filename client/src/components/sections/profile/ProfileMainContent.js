@@ -138,18 +138,18 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               />
               <div>
                 <select
-                  id="roles"
-                  name="role"
+                  id="language"
+                  name="language"
                   // onChange={handleEditFormChange}
                   // value={editFormData.role}
                   className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
                 >
-                  <option value="ADMIN">Admin</option>
-                  <option value="USER">User</option>
+                  <option value="en">English</option>
+                  <option value="nl">Nederlands</option>
                 </select>
               </div>
-              <div className="flex justify-end items-center">
-                <div>
+              <div className="flex justify-end items-center pt-3">
+                <div className="">
                   <button
                     type="button"
                     onClick={handleClick}
