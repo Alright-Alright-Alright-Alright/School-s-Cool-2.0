@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { service, configHeaders } from "../api/axios"
 
 export const getAllPostService = (topicId) =>
@@ -35,10 +36,17 @@ export const unlikePostService = (postId, userId) =>
     .put(`/posts/${postId}/unlikepost`, userId)
     .then((responseFromAPI) => responseFromAPI.data)
 
-export const deletePostService = (postId) =>
-  service
-    .delete(`/posts/${postId}`)
-    .then((responseFromAPI) => responseFromAPI.data)
+export const deletePostService = async (postId) => {
+  try {
+    const deletingPost = await service.delete(
+      `/posts/${postId}`,
+      configHeaders()
+    )
+    return deletingPost
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const editPostService = (postId, newPost) =>
   service

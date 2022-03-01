@@ -51,7 +51,7 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         allPosts: state.allPosts.filter(
-          (eachPost) => eachPost._id !== action.payload._id
+          (eachPost) => eachPost._id !== action.payload
         ),
       }
     case SUBMIT_COMMENT:

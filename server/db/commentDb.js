@@ -79,6 +79,7 @@ const getCommentByIdDb = async (commentId) => {
 
 const deletingCommentFromDb = async (commentId, id) => {
   try {
+    await Comment.findByIdAndDelete(commentId)
     let post = await Post.findByIdAndUpdate(
       id,
       {

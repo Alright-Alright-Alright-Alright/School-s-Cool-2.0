@@ -5,7 +5,7 @@ const {
   getPostByIdService,
   likePostService,
   unlikePostService,
-  deletePostService
+  deletePostService,
 } = require("../services/postService");
 
 const getAllPosts = async (req, res, next) => {
@@ -78,11 +78,11 @@ const deletePost = async (req, res, next) => {
 
   try {
     await deletePostService(postId);
-    return res.status(200);
+    return res.status(200).json({ message: "Post has been deleted" });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }
-}
+};
 
 module.exports = {
   getAllPosts,
@@ -91,6 +91,6 @@ module.exports = {
   getPostsByTopicId,
   likePost,
   unlikePost,
-  deletePost
+  deletePost,
   // updatePost
 };

@@ -121,8 +121,8 @@ export const likePost = (postId, userId) => async (dispatch) => {
 
 export const unlikePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const unlikePostDb = await unlikePostService(postId, { userId })
   try {
+    const unlikePostDb = await unlikePostService(postId, { userId })
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_POST, payload: unlikePostDb })
   } catch (error) {
@@ -134,11 +134,11 @@ export const unlikePost = (postId, userId) => async (dispatch) => {
 }
 
 export const deletePost = (postId) => async (dispatch) => {
-  dispatch({ type: LOADING_UI })
-  const deletePostDb = await deletePostService(postId)
   try {
+    dispatch({ type: LOADING_UI })
+    await deletePostService(postId)
     dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: DELETE_POST, payload: deletePostDb })
+    dispatch({ type: DELETE_POST, payload: postId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
