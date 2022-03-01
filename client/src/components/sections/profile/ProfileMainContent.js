@@ -1,40 +1,48 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
+import { useParams } from "react-router-dom"
 import Dashcard from "../../core/dashcard/Dashcard"
-import { updateUser } from "../../../redux/actions/userActions"
+import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+
+const truncate = (str) => (str.length > 25 ? `${str.substring(0, 25)}...` : str)
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [fileUrl, setFileUrl] = useState("")
   const [imagePreview, setImagePreview] = useState("")
   const [profileImage, setProfileImage] = useState(userProfile?.imageUrl)
   const [showEditForm, setShowEditForm] = useState(false)
+  const { userId } = useParams()
   const hiddenFileInput = useRef(null)
 
   const user = useSelector((state) => state.user.singleUser)
+  const userProfilePage = useSelector((state) => state.user.userProfile)
   const dispatch = useDispatch()
 
-  const [firstName, setFirstName] = useState(user.firstName)
-  const [lastName, setLastName] = useState(user.lastName)
-  const [email, setEmail] = useState(user.email)
+  const [firstName, setFirstName] = useState(user?.firstName)
+  const [lastName, setLastName] = useState(user?.lastName)
+  const [email, setEmail] = useState(user?.email)
 
   const filteredTopics = topics.filter((item) =>
-    item.members.find((member) => member._id === user._id)
+    item.members.find((member) => member._id === user?._id)
   )
 
   const filteredEvents = events.filter((item) =>
-    item.attendees.find((member) => member._id === user._id)
+    item.attendees.find((member) => member._id === user?._id)
   )
 
   const filteredFiles = files?.filter(
     (item) => item?.owner?._id === userProfile._id
   )
 
-  useEffect(() => {}, [dispatch])
+  useEffect(() => {
+    dispatch(getUserProfile(userId))
+  }, [dispatch, userId])
 
   const handleImagePreview = async (img) => {
     const image = await fileUploadHandler(img)
@@ -56,7 +64,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
     const image = await fileUploadHandler(fileUrl)
 
     const userData = {
-      id: user._id,
+      id: user?._id,
       firstName,
       lastName,
       email,
@@ -70,12 +78,12 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
     <div className="flex flex-col items-center px-3">
       <img
         className="p-6 w-40 lg:w-80 h-40 lg:h-80 rounded-full object-cover"
-        src={profileImage || user.imageUrl}
+        src={userProfilePage?.imageUrl}
         alt="profile"
       />
       {/* <img className="p-6 w-1/2 h-auto" src={imagePreview} alt="profile" /> */}
       <div className="flex">
-        {userProfile?._id === user._id ? (
+        {userProfile?._id === user?._id ? (
           <div className="p-3">
             <Button
               buttonName="Edit Profile"
@@ -172,7 +180,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 {userProfile?.lastName}
               </p>
               <p className="border-b-2 border-grey-light w-full pl-2 my-1">
-                {userProfile?.email}
+                {truncate(userProfile?.email)}
               </p>
             </>
           )}

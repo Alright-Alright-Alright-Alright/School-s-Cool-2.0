@@ -32,4 +32,6 @@ export const updateUserService = (userData) =>
     .then((response) => response.data)
 
 export const getUserProfileService = (user) =>
-  service.get(`/profile/${user}`).then((response) => response.data)
+  service
+    .get(`/profile/${user}`, configHeaders())
+    .then((response) => response.data)

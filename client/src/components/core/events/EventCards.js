@@ -14,8 +14,6 @@ const EventCards = ({ event }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const hardCodedTags = ["Birthday", "Wedding", "Conference"]
-
   const joinEventHandler = () => {
     dispatch(joinEvent(event?._id, user?._id))
     setJoin(!join)
@@ -69,7 +67,7 @@ const EventCards = ({ event }) => {
             <p className="text-sm">{event?.description}</p>
           </div> */}
           <div className="flex flex-wrap h-28 justify-start items-end">
-            {hardCodedTags.map((tag) => (
+            {event?.tags.map((tag) => (
               <span
                 key={tag}
                 className="mr-2 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
