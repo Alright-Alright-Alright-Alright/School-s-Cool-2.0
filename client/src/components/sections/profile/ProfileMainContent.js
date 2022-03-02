@@ -10,7 +10,8 @@ import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 
-const truncate = (str) => (str.length > 25 ? `${str.substring(0, 25)}...` : str)
+const truncate = (str) =>
+  str?.length > 25 ? `${str.substring(0, 25)}...` : str
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [fileUrl, setFileUrl] = useState("")
