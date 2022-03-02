@@ -27,7 +27,7 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_SUCCESS } from "../types/ui";
 
 export const setAuthorizationHeader = (token) => {
   const Authorization = `Bearer ${token}`;
-  localStorage.setItem("Authorization", Authorization);
+  JSON.stringify(localStorage.setItem("Authorization", Authorization));
 };
 
 export const loginUser = (userData) => async (dispatch) => {
@@ -35,7 +35,7 @@ export const loginUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
-      localStorage.setItem("user", JSON.stringify(response.user));
+      JSON.stringify(localStorage.setItem("user", response.user));
       setAuthorizationHeader(response.accessToken);
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SET_AUTHENTICATED, payload: response });
