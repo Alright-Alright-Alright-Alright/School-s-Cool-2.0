@@ -13,7 +13,7 @@ import ErrorFallback from "./components/core/errorBoundries/ErrorFallback"
 function App() {
   const loggedIn = useSelector((state) => state.user.isLoggedIn)
   const [showChatWidget, setShowChatWidget] = useState(false)
-  const token = JSON.parse(localStorage.getItem("Authorization"))
+  const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentTime = new Date().getTime().toString().slice(0, 10)
