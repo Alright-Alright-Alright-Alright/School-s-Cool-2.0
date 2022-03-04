@@ -35,7 +35,7 @@ export const loginUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
-      JSON.stringify(localStorage.setItem("user", response.user));
+      localStorage.setItem("user", JSON.stringify(response.user));
       setAuthorizationHeader(response.accessToken);
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SET_AUTHENTICATED, payload: response });
