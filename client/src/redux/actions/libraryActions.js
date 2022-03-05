@@ -38,7 +38,7 @@ export const getAllFilesFromLibrary = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response,
+      payload: error.response.data.message,
     })
   }
 }
@@ -68,7 +68,7 @@ export const getComments = (fileId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response,
+      payload: error.response.data.message,
     })
   }
 }
