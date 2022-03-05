@@ -52,11 +52,11 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const topicData = {
-      title: title || singleTopic.title,
-      description: description || singleTopic.description,
-      category: category || singleTopic.category,
-      subject: subject || singleTopic.subject,
-      bannerImage: image || singleTopic.bannerImage,
+      title: singleTopic ? singleTopic.title : title,
+      description: singleTopic ? singleTopic.description : description,
+      category: singleTopic ? singleTopic.category : category,
+      subject: singleTopic ? singleTopic.subject : subject,
+      bannerImage: singleTopic ? singleTopic.bannerImage : image,
       isPrivate: privacy,
     }
     if (
