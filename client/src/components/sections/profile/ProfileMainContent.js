@@ -9,12 +9,17 @@ import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+import ErrorHandler from "../../core/ErrorHandler"
+
+const truncate = (str) =>
+  str?.length > 25 ? `${str.substring(0, 25)}...` : str
 
 const truncate = (str) => (str.length > 25 ? `${str.substring(0, 25)}...` : str)
 
 function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [fileUrl, setFileUrl] = useState("")
   const [imagePreview, setImagePreview] = useState("")
+  const [error, setError] = useState("")
   const [profileImage, setProfileImage] = useState(userProfile?.imageUrl)
   const [showEditForm, setShowEditForm] = useState(false)
   const { userId } = useParams()
@@ -48,11 +53,16 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
     const image = await fileUploadHandler(img)
     setImagePreview(image)
     setProfileImage(image)
+    setError("")
   }
 
   const chooseProfileImage = async (e) => {
     setFileUrl(e.target.files[0])
-    handleImagePreview(e.target.files[0])
+    if (e.target.files[0].name.includes("jpg" || "jpeg" || "png")) {
+      handleImagePreview(e.target.files[0])
+    } else {
+      setError("This file type is not allowed as a profile picture")
+    }
   }
 
   const handleClick = () => {
@@ -61,6 +71,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     const image = await fileUploadHandler(fileUrl)
 
     const userData = {
@@ -105,6 +116,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
           </div>
         )}
       </div>
+      <ErrorHandler error={error} />
       <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-full ">
         <div className="flex flex-col items-start w-1/2">
           <p className="border-b-2 border-grey-light w-full my-1">
@@ -164,11 +176,13 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                     required
                   />
                 </div>
-                <Button
-                  buttonName="Save changes"
-                  buttonStyle="btnPrimaryStyle"
-                  onClick={handleSubmit}
-                />
+                {!error && (
+                  <Button
+                    buttonName="Save changes"
+                    buttonStyle="btnPrimaryStyle"
+                    onClick={handleSubmit}
+                  />
+                )}
               </div>
             </form>
           ) : (

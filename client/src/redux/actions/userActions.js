@@ -27,7 +27,7 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_SUCCESS } from "../types/ui";
 
 export const setAuthorizationHeader = (token) => {
   const Authorization = `Bearer ${token}`;
-  localStorage.setItem("Authorization", Authorization);
+  JSON.stringify(localStorage.setItem("Authorization", Authorization));
 };
 
 export const loginUser = (userData) => async (dispatch) => {

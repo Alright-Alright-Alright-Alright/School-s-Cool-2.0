@@ -50,7 +50,8 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
     }
     if (actionName === "Delete") {
       dispatch(deletePost(post._id))
-      onDeletePost()
+      // onDeletePost()
+      console.log("deleting")
     }
   }
 
