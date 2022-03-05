@@ -23,7 +23,7 @@ const LibraryContentRight = ({ singleFile }) => {
   }, [dispatch, singleFile?._id])
 
   return singleFile !== null ? (
-    <div className="flex flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8">
+    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
       <div className="h-3/5 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
@@ -119,8 +119,8 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
     </div>
   ) : (
-    <div className="flex items-center justify-center w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8">
-      <h1 className="text-grey-dark font-semibold">
+    <div className="hidden w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
+      <h1 className="h-full text-grey-dark font-semibold flex items-center justify-center">
         Click on a file to see its details
       </h1>
     </div>
