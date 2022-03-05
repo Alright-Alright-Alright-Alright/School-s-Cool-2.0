@@ -194,7 +194,7 @@ const libraryItem = ({ library, showModal }) => {
           </tbody>
         </table>
       </div>
-      <MobileTable library={library} />
+      <MobileTable library={library} downloadFiles={downloadFiles} />
     </div>
   )
 }
