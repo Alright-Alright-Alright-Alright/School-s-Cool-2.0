@@ -56,7 +56,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
       description: singleTopic ? singleTopic.description : description,
       category: singleTopic ? singleTopic.category : category,
       subject: singleTopic ? singleTopic.subject : subject,
-      bannerImage: singleTopic ? singleTopic.bannerImage : image,
+      bannerImage: image || singleTopic?.bannerImage,
       isPrivate: privacy,
     }
     if (
