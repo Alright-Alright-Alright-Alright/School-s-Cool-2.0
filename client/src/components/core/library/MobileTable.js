@@ -15,7 +15,6 @@ import {
 
 const MobileTable = ({ library, selected, setSelected, user }) => {
   const dispatch = useDispatch()
-
   return (
     <div className="grid grid-cols-1 gap-3 md:hidden mx-6">
       {library().map((singleFile) => (
