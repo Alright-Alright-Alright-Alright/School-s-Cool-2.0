@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import dayjs from "dayjs"
 import PropTypes from "prop-types"
+import { t } from "i18next"
 import Icon from "../Icon"
 import { joinEvent, leaveEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
@@ -90,7 +91,7 @@ const EventCards = ({ event }) => {
       <section className="flex justify-between items-center p-5">
         <div>
           <Button
-            buttonName="More Info"
+            buttonName={t("events.button_more_info")}
             buttonStyle="btnEventStyle"
             onClick={() => {
               navigate(`/events/${event?._id}`)

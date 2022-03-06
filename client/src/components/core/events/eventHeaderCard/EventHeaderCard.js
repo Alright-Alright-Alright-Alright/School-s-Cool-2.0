@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
+import { t } from "i18next"
 import Button from "../../Button"
 import Icon from "../../Icon"
 import LibraryModal from "../../library/LibraryModal"
@@ -25,7 +26,7 @@ function EventHeaderCard({ onClick, postBody }) {
         <input
           className="bg-grey-super_light w-full rounded-full text-base pl-3"
           type="text"
-          placeholder="Add a post"
+          placeholder={t("events.header_card_placeholder")}
           onChange={(e) => postBody(e.target.value)}
           required
         />
@@ -35,7 +36,7 @@ function EventHeaderCard({ onClick, postBody }) {
         <div className="flex items-center">
           <button type="button" onClick={handleShowModal} className="flex">
             <Icon iconName="add" iconStyle="fill-inactive text-sky" />
-            <p className="pl-3">Add a resource</p>
+            <p className="pl-3">{t("events.header_card_add_resource")}</p>
           </button>
           {showModal && (
             <LibraryModal
@@ -45,7 +46,7 @@ function EventHeaderCard({ onClick, postBody }) {
           )}
         </div>
         <Button
-          buttonName="Add post to event"
+          buttonName={t("events.header_card_add_button")}
           buttonStyle="btnEventStyle"
           buttonSubmit
           onClick={onClick}

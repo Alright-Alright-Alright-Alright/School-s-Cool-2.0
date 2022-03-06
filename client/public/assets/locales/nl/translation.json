@@ -18,17 +18,22 @@
     "dash_card_title_courses": "<0>E-learning</0>",
     "dash_card_title_events": "<0>Evenementen</0>",
     "dash_card_title_library": "<0>Bibliotheek</0>",
+    "dash_card_title_files": "Bestanden",
+    "tag_selector_placeholder": "Druk op enter om maximaal 5 tags te selecteren",
+    "tag_selector_remove_message": "Click op de tag om te verwijderen",
+    "tag_selector_max_tags_message": "Je hebt het maximale aantal tags bereikt",
     "events": {
         "button_new_event": "Nieuw evenement",
         "button_edit_event": "Pas evenement een",
         "button_delete_event": "Verwijder Event",
-        "button_join_event": "Join Event",
-        "button_leave_event": "Leave Event",
+        "button_join_event": "Deelnemen",
+        "button_leave_event": "Verlaat",
         "button_view_event": "Meer informatie",
         "button_all_events": "Alle",
         "button_attended_events": "Bijgewoond",
         "button_my_events": "Mijn evenementen",
         "button_past_events": "Afgelopen",
+        "button_more_info": "Meer informatie",
         "modal_title_new_event": "Plaats hier een naam voor je evenement",
         "modal_date_new_event": "Selecteer een datum",
         "modal_location_new_event": "Selecteer locatie",
@@ -36,6 +41,40 @@
         "modal_cover_image_new_event": "Voeg een cover plaatje toe",
         "modal_private_toggle_new_event": "Prive",
         "modal_public_toggle_new_event": "Publiek",
-        "modal_button_create_event": "Maak evenement aan"
+        "modal_button_create_event": "Maak evenement aan",
+        "header_card_placeholder": "Schrijf een bericht...",
+        "header_card_add_resource": "Voeg een bestand toe",
+        "header_card_add_button": "Plaats bericht",
+        "header_card_event_decription": "Evenement beschrijving",
+        "dash_card_attendees": "Deelnemers",
+        "dash_card_resources_no_files_placeholder": "Nog geen bestanden toegevoegd ",
+        "public_event_organized_by": "Openbaar evenement georganiseerd door ",
+        "private_event_organized_by": "Prive evenement georganiseerd door "
+    },
+    "date" : {
+        "month_names": [
+            "Januari",
+            "Februari",
+            "Maart",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Augustus",
+            "September",
+            "Oktober",
+            "November",
+            "December"
+        ],
+        "day_names": [
+            "Zondag",
+            "Maandag",
+            "Dinsdag",
+            "Woensdag",
+            "Donderdag",
+            "Vrijdag",
+            "Zaterdag"
+        ]
     }
+    
   }

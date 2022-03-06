@@ -74,7 +74,7 @@ const Modal = ({ handleShowModal }) => {
   return (
     <div className="flex justify-center content-center">
       <form
-        className="h-72 w-5/6 lg:w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
+        className="h-72 w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
@@ -92,7 +92,7 @@ const Modal = ({ handleShowModal }) => {
           </button>
         </section>
         <section className="flex-col lg:flex-row flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
-          <div>
+          <div className="">
             <DatePicker
               selectsRange
               startDate={startDate}
@@ -104,11 +104,12 @@ const Modal = ({ handleShowModal }) => {
               withPortal
               locale="nl"
               dateFormat="dd/MM/yyyy"
+              className="mr-3"
             />
           </div>
           <input
             type="text"
-            placeholderText={t("events.modal_location_new_event")}
+            placeholder={t("events.modal_location_new_event")}
             onChange={chooseLocation}
             className="w-2/3 placeholder-grey-medium text-md"
           />

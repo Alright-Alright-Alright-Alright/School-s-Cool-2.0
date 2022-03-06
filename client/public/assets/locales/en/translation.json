@@ -18,6 +18,10 @@
     "dash_card_title_courses": "<0>Courses</0>",
     "dash_card_title_events": "<0>Events</0>",
     "dash_card_title_library": "<0>Library</0>",
+    "dash_card_title_files": "Bestanden",
+    "tag_selector_placeholder": "Press enter to add up to 5 taga",
+    "tag_selector_remove_message": "Click to remove",
+    "tag_selector_max_tags_message": "You can not add more tags",
     "events": {
         "button_new_event": "New Event",
         "button_edit_event": "Edit Event",
@@ -29,6 +33,7 @@
         "button_attended_events": "Attended Events",
         "button_my_events": "My Events",
         "button_past_events": "Past Events",
+        "button_more_info": "More info",
         "modal_title_new_event": "Add your event name",
         "modal_date_new_event": "Select event dates",
         "modal_location_new_event": "Select location",
@@ -36,6 +41,41 @@
         "modal_cover_image_new_event": "Add cover image",
         "modal_private_toggle_new_event": "Private",
         "modal_public_toggle_new_event": "Public",
-        "modal_button_create_event": "Create Event"
+        "modal_button_create_event": "Create Event",
+        "header_card_placeholder": "Write something...",
+        "header_card_add_resource": "Add a resource",
+        "header_card_add_button": "Add post to event",
+        "header_card_event_decription": "Event description",
+        "dash_card_attendees": "Event attendees",
+        "dash_card_resources_no_files_placeholder": "No resources added yet",
+        "public_event_organized_by": "Public event organized by",
+        "private_event_organized_by": "Private event organized by"
+    },
+    "date" : {
+        "month_names": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+
+        "day_names": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        
     }
   }

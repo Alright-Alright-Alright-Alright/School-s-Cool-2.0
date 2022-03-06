@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
 import { useParams } from "react-router-dom"
+import i18n from "i18next"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
@@ -28,6 +29,14 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const [firstName, setFirstName] = useState(user?.firstName)
   const [lastName, setLastName] = useState(user?.lastName)
   const [email, setEmail] = useState(user?.email)
+
+  const [language, setLanguage] = useState("en")
+
+  const handleChangeLanguage = (e) => {
+    e.preventDefault()
+    setLanguage(e.target.value)
+    i18n.changeLanguage(e.target.value)
+  }
 
   const filteredTopics = topics.filter((item) =>
     item.members.find((member) => member._id === user?._id)
@@ -140,8 +149,8 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 <select
                   id="language"
                   name="language"
-                  // onChange={handleEditFormChange}
-                  // value={editFormData.role}
+                  onChange={handleChangeLanguage}
+                  value={language}
                   className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
                 >
                   <option value="en">English</option>
