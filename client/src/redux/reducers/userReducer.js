@@ -13,7 +13,7 @@ import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
 const initialState = {
   token: localStorage.getItem("Authorization"),
-  singleUser: null,
+  singleUser: null || localStorage.getItem("user"),
   users: [],
   isLoggedIn: false,
 }
