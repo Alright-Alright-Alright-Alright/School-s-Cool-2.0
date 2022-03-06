@@ -5,6 +5,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import ReactHtmlParser from "react-html-parser"
 import { useSelector, useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
 import { likePost, unlikePost } from "../../../redux/actions/postActions"
@@ -18,6 +19,7 @@ dayjs.extend(relativeTime)
 
 function ActivityCard({ activity }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
+  const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
@@ -72,7 +74,9 @@ function ActivityCard({ activity }) {
             <p className="text-base">
               {activity.owner?.firstName} {activity.owner?.lastName}
             </p>
-            <p className="text-base pl-3 text-grey-medium_light">Posted on</p>
+            <p className="text-base pl-3 text-grey-medium_light">
+              {t("activity_feed_card_action_type")}
+            </p>
             <Link
               to={`/${activityType}s/${activity[activityType]?._id}`}
               className="text-base pl-3"

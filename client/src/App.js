@@ -5,10 +5,25 @@ import { useDispatch, useSelector } from "react-redux"
 import { Outlet, useNavigate } from "react-router-dom"
 import jwt from "jsonwebtoken"
 import { ErrorBoundary } from "react-error-boundary"
+import { useTranslation } from "react-i18next"
+import i18next from "i18next"
 import NavBar from "./components/layout/NavBar"
 import { loggedInUser, logoutUser } from "./redux/actions/userActions"
 import ChatWidgetNew from "./components/sections/chat/ChatWidgetNew"
 import ErrorFallback from "./components/core/errorBoundries/ErrorFallback"
+
+const languages = [
+  {
+    code: "nl",
+    name: "Nederlands",
+    country_code: "nl",
+  },
+  {
+    code: "en",
+    name: "English",
+    country_code: "gb",
+  },
+]
 
 function App() {
   const loggedIn = useSelector((state) => state.user.isLoggedIn)
@@ -16,6 +31,7 @@ function App() {
   const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const currentTime = (new Date().getTime() / 1000).toString()
   const now = parseInt(currentTime.split(".")[0], 10)
 

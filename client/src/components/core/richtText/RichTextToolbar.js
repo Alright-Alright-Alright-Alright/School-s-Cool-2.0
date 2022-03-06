@@ -9,6 +9,7 @@ import { Editor } from "react-draft-wysiwyg"
 import { convertToHTML } from "draft-convert"
 import DOMPurify from "dompurify"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+import { t } from "i18next"
 import Button from "../Button"
 import Icon from "../Icon"
 import LibraryModal from "../library/LibraryModal"
@@ -74,7 +75,7 @@ const RichTextToolbar = () => {
               wrapperClassName="flex-col "
               editorClassName=" bg-grey-super_light text-center text-base pl-3 rounded-l-2xl rounded-b-2xl rounded-r-2xl"
               toolbarClassName="flex"
-              placeholder="Add a post"
+              placeholder={t("topics.header_card_placeholder")}
               toolbar={{
                 options: ["inline", "list", "link"],
                 inline: {
@@ -97,7 +98,7 @@ const RichTextToolbar = () => {
           <div className="flex items-center">
             <button type="button" onClick={handleShowModal} className="flex">
               <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
-              <p className="pl-3">Add a resource</p>
+              <p className="pl-3">{t("topics.header_card_add_resource")}</p>
             </button>
             {showModal && (
               <LibraryModal
@@ -107,7 +108,7 @@ const RichTextToolbar = () => {
             )}
           </div>
           <Button
-            buttonName="Add post to topic"
+            buttonName={t("topics.header_card_add_button")}
             buttonStyle="btnTopicStyle"
             buttonSubmit
             onClick={handleSubmit}
