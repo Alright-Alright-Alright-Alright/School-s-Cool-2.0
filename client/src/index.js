@@ -41,7 +41,11 @@ i18next
     debug: false,
     // Options for language detector
     detection: {
+<<<<<<< HEAD
       order: ["cookie", "htmlTag", "path"],
+=======
+      order: ["htmlTag", "path", "cookie"],
+>>>>>>> f6eaf23 (Started on first translations for Dutch)
       caches: ["cookie"],
     },
     // react: { useSuspense: false },
