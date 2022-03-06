@@ -80,7 +80,6 @@ export const loggedInUser = () => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("Authorization");
   localStorage.removeItem("user");
   logout();
   dispatch({ type: SET_UNAUTHENTICATED });
@@ -102,10 +101,9 @@ export const getAllTheUsers = () => (dispatch) => {
 
 export const updateUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
-
-  const updatedUser = await updateUserService(userData);
-  console.log(updatedUser);
+  
   try {
+    const updatedUser = await updateUserService(userData);
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {

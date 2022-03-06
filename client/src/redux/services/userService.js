@@ -11,7 +11,6 @@ export const loggedin = () =>
   service.get("/loggedin", configHeaders()).then((response) => response.data)
 
 export const logout = () => {
-  localStorage.removeItem("Authorization")
   service.post("/logout", {}).then((response) => response.data)
 }
 
