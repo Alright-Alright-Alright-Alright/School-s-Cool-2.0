@@ -31,10 +31,9 @@ function MainContent({ topic, showModal, editModal, showEditModel }) {
   //   dispatch(getAllPosts(params.topicId))
   // }
 
-  const handleDeletePost = () => {
-    // dispatch(getAllPosts(params.topicId))
-    console.log("hello")
-  }
+  // const handleDeletePost = () => {
+  //   dispatch(getAllPosts(params.topicId))
+  // }
 
   useEffect(() => {
     dispatch(getAllPosts(params.topicId))
@@ -61,7 +60,7 @@ function MainContent({ topic, showModal, editModal, showEditModel }) {
           post={post}
           topicId={params.topicId}
           comments={post?.comments}
-          onDeletePost={handleDeletePost}
+          // onDeletePost={handleDeletePost}
         />
       ))}
     </div>

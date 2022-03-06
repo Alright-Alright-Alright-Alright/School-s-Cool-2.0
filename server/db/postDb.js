@@ -117,7 +117,7 @@ const unlikePostDb = async (postId, userId) => {
 
 const deletePostDb = async (postId) => {
   try {
-    await Post.findByIdAndRemove(postId);
+    await Post.findByIdAndDelete(postId);
   } catch (error) {
     throw new Error(error);
   }
