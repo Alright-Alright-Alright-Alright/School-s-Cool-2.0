@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
@@ -13,10 +16,12 @@ import {
   GET_LIBRARY,
   GET_USER_LIBRARY,
   LIKE_FILE,
+  LIKE_FILE_MOBIL,
   POST_FILE,
   SORT_BY,
   SORT_BY_NAME,
   UNLIKE_FILE,
+  UNLIKE_FILE_MOBIL,
 } from "../types/library"
 
 const initialState = {
@@ -62,11 +67,19 @@ const libraryReducer = (state = initialState, action) => {
           (file) => file.subject === action.payload
         ),
       }
-    case LIKE_FILE:
-    case UNLIKE_FILE:
+    case LIKE_FILE_MOBIL:
+    case UNLIKE_FILE_MOBIL:
+      return {
+        ...state,
+        allFiles: state.allFiles.map((eachFile) =>
+          eachFile._id === action.payload._id ? action.payload : eachFile
+        ),
+      }
     case GET_COMMENTS:
     case ADD_COMMENT:
     case DELETE_COMMENT:
+    case LIKE_FILE:
+    case UNLIKE_FILE:
       return {
         ...state,
         singleFile:

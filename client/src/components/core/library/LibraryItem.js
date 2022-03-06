@@ -195,9 +195,10 @@ const libraryItem = ({ library, showModal }) => {
         </table>
       </div>
       <MobileTable
-        library={library}
+        library={isItprivate}
         selected={selected}
         setSelected={setSelected}
+        user={user}
       />
     </div>
   )

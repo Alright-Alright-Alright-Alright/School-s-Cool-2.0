@@ -4,7 +4,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import Icon from "../Icon"
 import PdfFile from "../PdfFile"
 import {
@@ -13,13 +13,12 @@ import {
   iLikedAfile,
 } from "../../../redux/actions/libraryActions"
 
-const MobileTable = ({ library, selected, setSelected }) => {
+const MobileTable = ({ library, selected, setSelected, user }) => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user.singleUser)
 
   return (
     <div className="grid grid-cols-1 gap-3 md:hidden mx-6">
-      {library.map((singleFile) => (
+      {library().map((singleFile) => (
         <div className="bg-white shadow-xl rounded-3xl">
           <div className="flex justify-around p-4">
             <section className="w-1/2">
