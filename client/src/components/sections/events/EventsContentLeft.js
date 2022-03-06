@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react"
 import Calendar from "react-calendar"
+import { useTranslation } from "react-i18next"
 
 const EventsContentLeft = () => {
   const [value, onChange] = useState(new Date())
   const [currentMonth, setCurrentMonth] = useState(value.getMonth())
+  const { t } = useTranslation()
 
   return (
     <div className="hidden lg:block min-h-screen pl-8 pt-2">
@@ -20,7 +22,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(0))
           }}
         >
-          January
+          {t("date.month_names.0")}
         </button>
       </h1>
       {(currentMonth === 0 || value.toDateString().slice(4, 7) === "Jan") && (
@@ -38,7 +40,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(1))
           }}
         >
-          February
+          {t("date.month_names.1")}
         </button>
       </h1>
       {(currentMonth === 1 || value.toDateString().slice(4, 7) === "Feb") && (
@@ -56,7 +58,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(2))
           }}
         >
-          March
+          {t("date.month_names.2")}
         </button>
       </h1>
       {(currentMonth === 2 || value.toDateString().slice(4, 7) === "Mar") && (
@@ -74,7 +76,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(3))
           }}
         >
-          April
+          {t("date.month_names.3")}
         </button>
       </h1>
       {(currentMonth === 3 || value.toDateString().slice(4, 7) === "Apr") && (
@@ -92,7 +94,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(4))
           }}
         >
-          May
+          {t("date.month_names.4")}
         </button>
       </h1>
       {(currentMonth === 4 || value.toDateString().slice(4, 7) === "May") && (
@@ -110,7 +112,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(5))
           }}
         >
-          June
+          {t("date.month_names.5")}
         </button>
       </h1>
       {(currentMonth === 5 || value.toDateString().slice(4, 7) === "Jun") && (
@@ -128,7 +130,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(6))
           }}
         >
-          July
+          {t("date.month_names.6")}
         </button>
       </h1>
       {(currentMonth === 6 || value.toDateString().slice(4, 7) === "Jul") && (
@@ -146,7 +148,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(7))
           }}
         >
-          August
+          {t("date.month_names.7")}
         </button>
       </h1>
       {(currentMonth === 7 || value.toDateString().slice(4, 7) === "Aug") && (
@@ -164,7 +166,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(8))
           }}
         >
-          September
+          {t("date.month_names.8")}
         </button>
       </h1>
       {(currentMonth === 8 || value.toDateString().slice(4, 7) === "Sep") && (
@@ -182,7 +184,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(9))
           }}
         >
-          October
+          {t("date.month_names.9")}
         </button>
       </h1>
       {(currentMonth === 9 || value.toDateString().slice(4, 7) === "Oct") && (
@@ -200,7 +202,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(10))
           }}
         >
-          November
+          {t("date.month_names.10")}
         </button>
       </h1>
       {(currentMonth === 10 || value.toDateString().slice(4, 7) === "Nov") && (
@@ -218,7 +220,7 @@ const EventsContentLeft = () => {
             setCurrentMonth(() => value.setMonth(11))
           }}
         >
-          December
+          {t("date.month_names.11")}
         </button>
       </h1>
       {(currentMonth === 11 || value.toDateString().slice(4, 7) === "Dec") && (

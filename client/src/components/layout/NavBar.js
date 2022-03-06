@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { StreamChat } from "stream-chat"
+import { useTranslation } from "react-i18next"
 import { logoutUser } from "../../redux/actions/userActions"
 import SearchBar from "../core/SearchBar"
 
@@ -12,40 +13,10 @@ const STREAM_API = process.env.REACT_APP_STREAM_API_SECRET
 
 const client = new StreamChat(STREAM_API)
 
-const navItems = [
-  {
-    id: "navItemTopics",
-    ref: "navItemTopicRef",
-    title: "Topics",
-    href: "/topics",
-    color: "aqua",
-  },
-  {
-    id: "navItemCourses",
-    ref: "navItemCoursesRef",
-    title: "Courses",
-    href: "/courses",
-    color: "yellow",
-  },
-  {
-    id: "navItemEvents",
-    ref: "navItemEventsRef",
-    title: "Events",
-    href: "/events",
-    color: "sky",
-  },
-  {
-    id: "navItemLibrary",
-    ref: "navItemLibraryRef",
-    title: "Library",
-    href: "/library",
-    color: "pink",
-  },
-]
-
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
   const [showDropDown, setShowDropDown] = useState(false)
+  const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -55,6 +26,37 @@ function NavBar() {
     dispatch(logoutUser())
     navigate("/login")
   }
+
+  const navItems = [
+    {
+      id: "navItemTopics",
+      ref: "navItemTopicRef",
+      title: `${t("nav_item_topics")}`,
+      href: "/topics",
+      color: "aqua",
+    },
+    {
+      id: "navItemCourses",
+      ref: "navItemCoursesRef",
+      title: `${t("nav_item_courses")}`,
+      href: "/courses",
+      color: "yellow",
+    },
+    {
+      id: "navItemEvents",
+      ref: "navItemEventsRef",
+      title: `${t("nav_item_events")}`,
+      href: "/events",
+      color: "sky",
+    },
+    {
+      id: "navItemLibrary",
+      ref: "navItemLibraryRef",
+      title: `${t("nav_item_library")}`,
+      href: "/library",
+      color: "pink",
+    },
+  ]
 
   return (
     <nav className="flex justify-between bg-grey-super_light shadow-md sticky top-0 z-50 p-5">
@@ -141,7 +143,7 @@ function NavBar() {
               <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
             </svg>
           </div> */}
-          <SearchBar placeholder="What are you looking for?" />
+          <SearchBar placeholder={t("search_bar_placeholder")} />
         </div>
         <div className="hidden md:block pl-2 relative z-20 top-2">
           <button

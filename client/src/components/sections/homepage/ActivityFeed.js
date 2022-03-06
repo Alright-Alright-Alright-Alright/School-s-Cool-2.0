@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import {
   getAllActivities,
   getFollowedActivities,
@@ -9,7 +10,7 @@ import Button from "../../core/Button"
 
 function ActivityFeed() {
   const [filter, setFilter] = useState(false)
-
+  const { t } = useTranslation()
   const allActivities = useSelector((state) => state.activities.allActivities)
   const followedActivities = useSelector(
     (state) => state.activities.followedActivities
@@ -29,17 +30,17 @@ function ActivityFeed() {
       <div className="sm:flex md:place-content-between ">
         <div>
           <h1 className="text-lg text-center mb-3 md:mb-0 pl-3">
-            Activity Feed
+            {t("activity_feed")}
           </h1>
         </div>
         <div className="space-x-4 md:place-content-between text-center pr-3">
           <Button
-            buttonName="All activity"
+            buttonName={t("button_all_activity_feed")}
             buttonStyle={filter ? "btnPrimaryStyle" : "btnSecondaryStyle"}
             onClick={() => setFilter(false)}
           />
           <Button
-            buttonName="Followed activity"
+            buttonName={t("button_followed_activity_feed")}
             buttonStyle={filter ? "btnSecondaryStyle" : "btnPrimaryStyle"}
             onClick={() => setFilter(true)}
           />

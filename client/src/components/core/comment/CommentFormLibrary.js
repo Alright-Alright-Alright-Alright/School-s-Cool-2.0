@@ -4,10 +4,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from "react-i18next"
 import { submitComment } from "../../../redux/actions/libraryActions"
 
 function CommentForm({ singleFile }) {
   const [commentBody, setCommentBody] = useState("")
+  const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
@@ -27,7 +29,7 @@ function CommentForm({ singleFile }) {
       <input
         className=" border-grey-super_light border-2 bg-white w-full rounded-full text-sm pl-3 placeholder-grey-dark"
         type="text"
-        placeholder="Write a comment"
+        placeholder={t("comment_reaction_field_placeholder")}
         value={commentBody}
         onChange={(e) => setCommentBody(e.target.value)}
       />

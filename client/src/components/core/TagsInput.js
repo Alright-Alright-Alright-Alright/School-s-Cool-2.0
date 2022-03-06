@@ -2,9 +2,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 const TagsInput = ({ selectedTags }) => {
   const [tags, setTags] = useState([])
+  const { t } = useTranslation()
 
   const addTags = (event) => {
     if (event.keyCode === 13 && event.target.value !== "") {
@@ -35,7 +37,7 @@ const TagsInput = ({ selectedTags }) => {
       </ul>
       {tags.length >= 5 ? (
         <p className="text-base text-pink flex items-center pl-4">
-          You can not add more tags
+          {t("tag_selector_max_tags_message")}
         </p>
       ) : (
         <input
@@ -43,8 +45,8 @@ const TagsInput = ({ selectedTags }) => {
           onKeyUp={(event) => addTags(event)}
           placeholder={`${
             tags.length > 0
-              ? "Click on the tag to remove it"
-              : "Press enter to add up to 5 tags"
+              ? t("tag_selector_remove_message")
+              : t("tag_selector_placeholder")
           } `}
           className="w-6/7 flex-1 focus:outline-none text-base"
         />

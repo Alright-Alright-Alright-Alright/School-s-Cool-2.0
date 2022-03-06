@@ -5,6 +5,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import nl from "date-fns/locale/nl"
+import { useTranslation } from "react-i18next"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import { createNewEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
@@ -28,6 +29,7 @@ const Modal = ({ handleShowModal }) => {
   const [startDate, endDate] = dateRange
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
+  const { t } = useTranslation()
 
   const dispatch = useDispatch()
 
@@ -72,7 +74,7 @@ const Modal = ({ handleShowModal }) => {
   return (
     <div className="flex justify-center content-center">
       <form
-        className="h-72 w-5/6 lg:w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
+        className="h-72 w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
@@ -81,7 +83,7 @@ const Modal = ({ handleShowModal }) => {
             type="text"
             name=""
             id=""
-            placeholder="Add your event name"
+            placeholder={t("events.modal_title_new_event")}
             className="w-2/3 placeholder-grey-medium text-md"
             onChange={chooseTitle}
           />
@@ -90,7 +92,7 @@ const Modal = ({ handleShowModal }) => {
           </button>
         </section>
         <section className="flex-col lg:flex-row flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
-          <div>
+          <div className="">
             <DatePicker
               selectsRange
               startDate={startDate}
@@ -98,23 +100,27 @@ const Modal = ({ handleShowModal }) => {
               onChange={(update) => {
                 setDateRange(update)
               }}
-              placeholderText="Select event dates"
+              placeholderText={t("events.modal_date_new_event")}
               withPortal
               locale="nl"
               dateFormat="dd/MM/yyyy"
+              className="mr-3"
             />
           </div>
           <input
             type="text"
-            placeholder="Select location"
+            placeholder={t("events.modal_location_new_event")}
             onChange={chooseLocation}
+            className="w-2/3 placeholder-grey-medium text-md"
           />
           <button
             type="button"
             onClick={handleClick}
             className="flex justify-around items-center w-2/7"
           >
-            <span className="text-sm">Add Cover Image</span>
+            <span className="text-sm">
+              {t("events.modal_cover_image_new_event")}
+            </span>
             <Icon iconName="add" iconStyle="fill-inactive text-sky" />
           </button>
           <input
@@ -131,19 +137,19 @@ const Modal = ({ handleShowModal }) => {
         <section className="flex justify-center border-b-2 border-grey-super_light px-1 py-3 mx-5">
           <input
             type="text"
-            placeholder="Briefly explain what your event is about"
+            placeholder={t("events.modal_description_new_event")}
             className="w-full placeholder-grey-medium text-base h-10"
             onChange={chooseDescription}
           />
         </section>
         <section className="flex justify-between px-5">
           <SwitchButton
-            nameLeft="PUBLIC"
-            nameRight="PRIVATE"
+            nameLeft={t("events.modal_public_toggle_new_event")}
+            nameRight={t("events.modal_private_toggle_new_event")}
             toogle={() => setPrivacy(!privacy)}
           />
           <Button
-            buttonName="Create Event"
+            buttonName={t("events.modal_button_create_event")}
             buttonStyle="btnEventStyle"
             buttonSubmit
           />

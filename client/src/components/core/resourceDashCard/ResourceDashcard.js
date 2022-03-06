@@ -5,6 +5,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
+import { t } from "i18next"
 import Icon from "../Icon"
 import ResourceDashCardListItem from "./ResourceDashCardListItem"
 import DropDownMenu from "../DropDownMenu"
@@ -42,7 +43,9 @@ export default function ResourceDashcard({
   const noDataPlaceholder = (
     <>
       <div className="flex-col pl-4 pr-4 max-h-96">
-        <p className="px-4 py-5">No resources have been added yet</p>
+        <p className="px-4 py-5">
+          {t("events.dash_card_resources_no_files_placeholder")}
+        </p>
       </div>
     </>
   )
@@ -79,10 +82,10 @@ export default function ResourceDashcard({
           className={`w-full ${resourceDashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
-            <p className="text-lg pl-4">{resourceDashCardTitle}</p>
+            <p className="text-lg pl-4 pb-3">{resourceDashCardTitle}</p>
             <div className="flex flex-row">
-              <h2 className="text-base pr-4">Filter</h2>
-              <DropDownMenu data={dropdownMenuData} />
+              {/* <h2 className="text-base pr-4">Filter</h2> */}
+              {/* <DropDownMenu data={dropdownMenuData} /> */}
             </div>
           </div>
         </div>
