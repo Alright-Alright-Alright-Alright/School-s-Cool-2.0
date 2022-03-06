@@ -3,13 +3,18 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
 import Icon from "../Icon"
 import PdfFile from "../PdfFile"
+import {
+  deleteFile,
+  iUnlikedAfile,
+  iLikedAfile,
+} from "../../../redux/actions/libraryActions"
 
-const MobileTable = ({ library, downloadFiles }) => {
-  const [selected, setSelected] = useState([])
+const MobileTable = ({ library, selected, setSelected }) => {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.user.singleUser)
   return (
     <div className="grid grid-cols-1 gap-3 md:hidden mx-6">
@@ -40,7 +45,7 @@ const MobileTable = ({ library, downloadFiles }) => {
                 </p>
               </div>
             </section>
-            <section className="w-1/2 flex justify-evenly flex-col">
+            <section className="w-1/2 flex justify-between flex-col">
               <div>
                 <p className="text-grey-medium font-semibold text-center">
                   {singleFile.category}: {singleFile.subject}
@@ -56,8 +61,27 @@ const MobileTable = ({ library, downloadFiles }) => {
                   </span>
                 ))}
               </div>
-              <div className="flex justify-around items-center w-1/3">
-                <div className="w-1/2">
+              <div className="flex justify-end space-x-1">
+                <div>
+                  {singleFile.likedBy.includes(user._id) ? (
+                    <button
+                      type="button"
+                      className="pt-1"
+                      onClick={() => dispatch(iUnlikedAfile(singleFile._id))}
+                    >
+                      <Icon iconName="like" iconStyle="fill-active text-pink" />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="pt-1"
+                      onClick={() => dispatch(iLikedAfile(singleFile._id))}
+                    >
+                      <Icon iconName="like" iconStyle="fill-inactive" />
+                    </button>
+                  )}
+                </div>
+                <div>
                   {selected?.includes(singleFile.fileUrl) ? (
                     <button
                       type="button"
@@ -81,7 +105,6 @@ const MobileTable = ({ library, downloadFiles }) => {
                   ) : (
                     <button
                       type="button"
-                      className="pt-1"
                       onClick={() =>
                         setSelected([...selected, singleFile.fileUrl])
                       }
@@ -93,11 +116,11 @@ const MobileTable = ({ library, downloadFiles }) => {
                     </button>
                   )}
                 </div>
-                <div className="w-1/2">
+                <div>
                   <button
                     type="button"
-                    className="pt-2"
-                    onClick={() => dispatch(deleteFile(item._id))}
+                    className="pt-1"
+                    onClick={() => dispatch(deleteFile(singleFile._id))}
                   >
                     {user._id === singleFile.owner._id && (
                       <Icon iconName="trash" />
