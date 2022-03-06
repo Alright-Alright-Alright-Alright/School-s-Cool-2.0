@@ -18,7 +18,7 @@
     "dash_card_title_courses": "<0>Courses</0>",
     "dash_card_title_events": "<0>Events</0>",
     "dash_card_title_library": "<0>Library</0>",
-    "dash_card_title_files": "Bestanden",
+    "dash_card_title_files": "Resources",
     "tag_selector_placeholder": "Press enter to add up to 5 taga",
     "tag_selector_remove_message": "Click to remove",
     "tag_selector_max_tags_message": "You can not add more tags",
@@ -77,5 +77,16 @@
             "Saturday"
         ]
         
+    },
+    "topics" : {
+        "add_topic_card_title": "New topic",
+        "button_all_topics": "All topics",
+        "button_my_topics": "My topics",
+        "button_followed_topics": "Followed topics",
+        "header_card_placeholder": "Write something...",
+        "header_card_add_resource": "Add a resource",
+        "header_card_add_button": "Add post to topic",
+        "topic_post_commentted_on": "commentted on",
+        "dash_card_members": "Topic members"
     }
   }

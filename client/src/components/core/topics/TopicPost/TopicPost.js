@@ -9,6 +9,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
 import ReactHtmlParser from "react-html-parser"
+import { t } from "i18next"
 import Comment from "../../comment/Comment"
 import CommentForm from "../../comment/CommentForm"
 import {
@@ -78,7 +79,7 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
               {post?.owner?.firstName} {post?.owner?.lastName}
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
-              Commented on
+              {t("topics.topic_post_commentted_on")}
             </p>
             <Link to={`/topics/${post?.topic?._id}`} className="text-base pl-3">
               {post.topic?.title || post.event?.title}

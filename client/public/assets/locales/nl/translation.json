@@ -75,6 +75,20 @@
             "Vrijdag",
             "Zaterdag"
         ]
+    },
+    "topics" : {
+        "add_topic_card_title": "Nieuw topic",
+        "button_all_topics": "Alle topics",
+        "button_my_topics": "Mijn topics",
+        "button_followed_topics": "Volgend",
+        "public_topic_created_by": "Openbaar topic gemaakt door ",
+        "private_topic_created_by": "Prive topic gemaakt door ",
+        "header_card_placeholder": "Schrijf een bericht...",
+        "header_card_add_resource": "Voeg een bestand toe",
+        "header_card_add_button": "Plaats bericht",
+        "topic_post_commentted_on": "heeft een reactie geplaatst in",
+        "dash_card_members": "Leden"
+
     }
     
   }

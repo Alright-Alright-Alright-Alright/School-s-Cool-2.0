@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
+import { t } from "i18next"
 import Button from "../../Button"
 import Icon from "../../Icon"
 import LibraryModal from "../../library/LibraryModal"
@@ -34,18 +35,17 @@ function TopicHeaderCard({ onClick, postBody }) {
         <input
           className="bg-grey-super_light w-full rounded-full text-base pl-3"
           type="text"
-          placeholder="Add a post"
+          placeholder={t("topics.header_card_placeholder")}
           onChange={(e) => postBody(e.target.value)}
           required
         />
-        {/* <RichTextToolbar /> */}
       </div>
 
       <div className="flex justify-between p-3 ">
         <div className="flex items-center">
           <button type="button" onClick={handleShowModal} className="flex">
             <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
-            <p className="pl-3">Add a resource</p>
+            <p className="pl-3">{t("topics.header_card_add_resource")}</p>
           </button>
           {showModal && (
             <LibraryModal
@@ -55,7 +55,7 @@ function TopicHeaderCard({ onClick, postBody }) {
           )}
         </div>
         <Button
-          buttonName="Add post to topic"
+          buttonName={t("topics.header_card_add_button")}
           buttonStyle="btnTopicStyle"
           buttonSubmit
           onClick={onClick}
