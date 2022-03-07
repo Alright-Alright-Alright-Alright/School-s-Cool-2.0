@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
 import { useParams } from "react-router-dom"
-import i18n from "i18next"
+import i18n, { t } from "i18next"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
@@ -65,7 +65,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   const chooseProfileImage = async (e) => {
     setFileUrl(e.target.files[0])
-    if (e.target.files[0].name.includes("jpg" || "jpeg" || "png")) {
+    if (e.target.files[0].type.includes("image")) {
       handleImagePreview(e.target.files[0])
     } else {
       setError("This file type is not allowed as a profile picture")
@@ -104,7 +104,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
         {userProfile?._id === user?._id ? (
           <div className="p-3">
             <Button
-              buttonName="Edit Profile"
+              buttonName={t("profile.button_edit_profile")}
               buttonStyle="btnSecondaryStyle"
               onClick={() => {
                 setShowEditForm(!showEditForm)
@@ -127,10 +127,16 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
       <div className="flex bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl m-3 p-6 w-full ">
         <div className="flex flex-col items-start w-1/2">
           <p className="border-b-2 border-grey-light w-full my-1">
-            First name:
+            {t("profile.user_profile_first_name")}:
           </p>
-          <p className="border-b-2 border-grey-light w-full my-1">Last name:</p>
-          <p className="border-b-2 border-grey-light w-full my-1">E-mail:</p>
+          <p className="border-b-2 border-grey-light w-full my-1">
+            {" "}
+            {t("profile.user_profile_last_name")}:
+          </p>
+          <p className="border-b-2 border-grey-light w-full my-1">
+            {" "}
+            {t("profile.user_profile_email")}:
+          </p>
         </div>
 
         <div className="flex flex-col items-start pl-6 w-full">
@@ -166,19 +172,21 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                   <option value="nl">Nederlands</option>
                 </select>
               </div>
-              <div className="flex justify-end items-center pt-3">
+              <div className="block lg:flex justify-end items-center pt-3">
                 <div className="">
                   <button
                     type="button"
                     onClick={handleClick}
-                    className="flex items-center"
+                    className="flex items-center pb-3"
                   >
                     <span className="text-sm pr-3">
                       {imagePreview ? (
                         "File successfully uploaded"
                       ) : (
                         <Button
-                          buttonName="Change Profile Picture"
+                          buttonName={t(
+                            "profile.button_change_profile_picture"
+                          )}
                           buttonStyle="btnSecondaryStyle"
                         />
                       )}
@@ -196,11 +204,13 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                   />
                 </div>
                 {!error && (
-                  <Button
-                    buttonName="Save changes"
-                    buttonStyle="btnPrimaryStyle"
-                    onClick={handleSubmit}
-                  />
+                  <span className="pb-3">
+                    <Button
+                      buttonName={t("profile.button_save_changes")}
+                      buttonStyle="btnPrimaryStyle"
+                      onClick={handleSubmit}
+                    />
+                  </span>
                 )}
               </div>
             </form>
@@ -222,7 +232,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
       <div className="flex-col w-full gap-6 ">
         <h1 className=" text-center text-lg">
-          {`${userProfile?.firstName}'s`} activities
+          {`${userProfile?.firstName}'s`} {t("profile.user_profile_activities")}
         </h1>
         <div className="block lg:flex gap-6">
           <div className="lg:w-1/2">

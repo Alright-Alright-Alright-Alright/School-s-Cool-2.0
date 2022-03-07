@@ -111,6 +111,37 @@
         "download_selected_files": "Download geselecteerde bestanden",
         "file_more_info_placeholder": " Klik op een bestand om meer informatie te zien",
         "file_more_info_no_comments_placeholder": "Er zijn nog geen reacties"
+    },
+    "profile" : {
+        "user_profile_activities": "activiteiten",
+        "user_profile_followers": "volgers",
+        "user_profile_following": "volgend",
+        "user_profile_follow": "volg",
+        "user_profile_unfollow": "volg niet meer",
+        "user_profile_first_name": "Voornaam",
+        "user_profile_last_name": "Achternaam",
+        "user_profile_email": "Email",
+        "button_edit_profile": "Pas profiel aan",
+        "button_change_profile_picture": "Verander profiel foto",
+        "button_change_password": "Verander wachtwoord",
+        "button_save_changes": "Bewaar wijzigingen"
+
+    },
+    "dropdownmenu" : {
+        "all_events": "Alle evenementen",
+        "my_events": "Mijn evenementen",
+        "attended_events": "Bijgewoond",
+        "all_topics": "Alle topics",
+        "my_topics": "Mijn topics",
+        "followed_topics": "Volgend",
+        "all_courses": "Alle cursussen",
+        "my_courses": "Mijn cursussen",
+        "followed_courses": "Volgend",
+        "completed_courses": "Afgerond",
+        "all_files": "Alle bestanden",
+        "my_files": "Mijn bestanden",
+        "all_users": "Alle gebruikers",
+        "all_attendees": "Alle deelnemers"
     }
     
   }

@@ -1,19 +1,19 @@
 {
   "topics": {
     "bgColorOnHover": "aqua-light",
-    "dropDownItems": ["All topics", "Created by me", "Followed by me"]
+    "dropDownItems": ["all_topics", "my_topics", "followed_topics"]
   },
   "courses": {
     "bgColorOnHover": "yellow-light",
-    "dropDownItems": ["All courses", "Created by me", "In progress", "Completed"]
+    "dropDownItems": ["all_courses", "my_courses", "followed_courses", "completed_courses"]
   },
   "events": {
     "bgColorOnHover": "sky-light",
-    "dropDownItems": ["All events", "Created by me", "Attending"]
+    "dropDownItems": ["all_events", "my_events", "attended_events"]
   },
   "files": {
     "bgColorOnHover": "pink-light",
-    "dropDownItems": ["All files", "Created by me"]
+    "dropDownItems": ["all_files", "my_files"]
   },
   "users": {
     "bgColorOnHover": "pink-light",
@@ -21,14 +21,14 @@
   },
   "topicMembers": {
     "bgColorOnHover": "aqua-light",
-    "dropDownItems": ["All users", "Amsterdam Mentors"]
+    "dropDownItems": ["all_users", "Amsterdam Mentors"]
   },
   "eventMembers": {
     "bgColorOnHover": "sky-light",
-    "dropDownItems": ["All attendees", "Invite other users"]
+    "dropDownItems": ["all_attendees", "Invite other users"]
   },
   "resources": {
     "bgColorOnHover": "aqua-light",
-    "dropDownItems": ["All files", "Created by me", "Followed by me"]
+    "dropDownItems": ["all_files", "my_files"]
   }
 }
