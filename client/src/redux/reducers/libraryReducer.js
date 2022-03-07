@@ -3,28 +3,21 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
 import {
   ADD_COMMENT,
-  ADD_COMMENT_MOBIL,
   DELETE_COMMENT,
-  DELETE_COMMENT_MOBIL,
   DELETE_FILE,
   FILTER_CATEGORY,
   FILTER_SUBJECT,
   GET_COMMENTS,
-  GET_COMMENTS_MOBIL,
   GET_FILE,
   GET_LIBRARY,
   GET_USER_LIBRARY,
   LIKE_FILE,
-  LIKE_FILE_MOBIL,
   POST_FILE,
   SORT_BY,
   SORT_BY_NAME,
   UNLIKE_FILE,
-  UNLIKE_FILE_MOBIL,
 } from "../types/library"
 
 const initialState = {
