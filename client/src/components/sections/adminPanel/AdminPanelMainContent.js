@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getAllTheUsers, updateUser } from "../../../redux/actions/userActions"
-import "./AdminPanelContent.css"
 import ReadOnlyRow from "../../core/admin/ReadOnlyRow"
 import EditableRow from "../../core/admin/EditableRow"
 
