@@ -9,10 +9,6 @@
     "button_followed_activity_feed": "Volgend",
     "activity_feed_card_action_type": "Geplaatst in",
     "comment_reaction_field_placeholder": "Schrijf een reactie...",
-    "nav_item_topics": "Topics",
-    "nav_item_courses": "E-learning",
-    "nav_item_events": "Evenementen",
-    "nav_item_library": "Bibliotheek",
     "search_bar_placeholder": "Waar ben je naar op zoek?",
     "dash_card_title_topics": "<0>Topics</0>",
     "dash_card_title_courses": "<0>E-learning</0>",
@@ -142,6 +138,15 @@
         "my_files": "Mijn bestanden",
         "all_users": "Alle gebruikers",
         "all_attendees": "Alle deelnemers"
+    },
+    "navbar" : {
+        "navbar_home": "Home",
+        "navbar_events": "Evenementen",
+        "navbar_topics": "Topics",
+        "navbar_courses": "E-learning",
+        "navbar_library": "Bibliotheek",
+        "navbar_profile": "Profiel",
+        "navbar_logout": "Uitloggen"
     }
     
   }

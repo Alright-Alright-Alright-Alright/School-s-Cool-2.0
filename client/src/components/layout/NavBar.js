@@ -31,28 +31,28 @@ function NavBar() {
     {
       id: "navItemTopics",
       ref: "navItemTopicRef",
-      title: `${t("nav_item_topics")}`,
+      title: `${t("navbar.navbar_topics")}`,
       href: "/topics",
       color: "aqua",
     },
     {
       id: "navItemCourses",
       ref: "navItemCoursesRef",
-      title: `${t("nav_item_courses")}`,
+      title: `${t("navbar.navbar_courses")}`,
       href: "/courses",
       color: "yellow",
     },
     {
       id: "navItemEvents",
       ref: "navItemEventsRef",
-      title: `${t("nav_item_events")}`,
+      title: `${t("navbar.navbar_events")}`,
       href: "/events",
       color: "sky",
     },
     {
       id: "navItemLibrary",
       ref: "navItemLibraryRef",
-      title: `${t("nav_item_library")}`,
+      title: `${t("navbar.navbar_library")}`,
       href: "/library",
       color: "pink",
     },
@@ -181,7 +181,7 @@ function NavBar() {
                     onClick={() => setShowDropDown(false)}
                     className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
                   >
-                    Profile
+                    {t("navbar.navbar_profile")}
                   </Link>
                 </li>
                 <li>
@@ -193,7 +193,7 @@ function NavBar() {
                       handleLogout()
                     }}
                   >
-                    Logout
+                    {t("navbar.navbar_logout")}
                   </button>
                 </li>
               </ul>

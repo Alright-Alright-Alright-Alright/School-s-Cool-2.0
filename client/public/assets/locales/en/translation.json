@@ -140,5 +140,14 @@
         "my_files": "My resources",
         "all_users": "All users",
         "all_attendees": "All attendees"
+    },
+    "navbar" : {
+        "navbar_home": "Home",
+        "navbar_events": "Events",
+        "navbar_topics": "Topics",
+        "navbar_courses": "Courses",
+        "navbar_library": "Library",
+        "navbar_profile": "Profile",
+        "navbar_logout": "Logout"
     }
   }
