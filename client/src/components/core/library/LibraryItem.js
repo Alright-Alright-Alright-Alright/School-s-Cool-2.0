@@ -55,7 +55,7 @@ const libraryItem = ({ library, showModal }) => {
         <table className="w-full">
           <thead className="flex w-full">
             <tr className="flex text-left w-full">
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/6 flex">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/4 flex">
                 <button
                   type="button"
                   onClick={() => dispatch(getSortedBy("title"))}
@@ -64,7 +64,7 @@ const libraryItem = ({ library, showModal }) => {
                   Name
                 </button>
               </th>
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 ">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/4 ">
                 <button
                   type="button"
                   onClick={() => dispatch(getSortedBy("category"))}
@@ -73,7 +73,7 @@ const libraryItem = ({ library, showModal }) => {
                   Category
                 </button>
               </th>
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 hidden xl:block ">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/4 hidden xl:block ">
                 <button
                   type="button"
                   onClick={() => dispatch(getSortedBy("createdAt"))}
@@ -82,7 +82,7 @@ const libraryItem = ({ library, showModal }) => {
                   Date added
                 </button>
               </th>
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/6 flex">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/4 flex">
                 <button
                   type="button"
                   onClick={() => dispatch(sortedByUser())}
@@ -107,7 +107,7 @@ const libraryItem = ({ library, showModal }) => {
                     tableRowClicked.includes(item._id) && "bg-pink-light"
                   }`}
                 >
-                  <td className="flex w-2/6 h-16 justify-start items-center pl-3">
+                  <td className="flex w-2/4 h-16 justify-start items-center pl-3">
                     <div>
                       {item?.fileUrl?.includes("pdf") ? (
                         <Icon iconName="pdf" iconStyle="fill-inactive" />
@@ -122,11 +122,11 @@ const libraryItem = ({ library, showModal }) => {
                       </span>
                     </div>
                   </td>
-                  <td className="font-semibold pl-3 w-1/6 ">{item.category}</td>
-                  <td className="text-grey-medium_light pl-3 w-1/6 hidden xl:block">
+                  <td className="font-semibold pl-1 w-1/4 ">{item.category}</td>
+                  <td className="text-grey-medium_light pl-3 w-1/4 hidden xl:block">
                     {dayjs(item.createdAt).fromNow()}
                   </td>
-                  <td className="px-3 h-16 flex items-center w-2/6">
+                  <td className="px-3 h-16 flex items-center w-2/4">
                     <div className="flex items-center py-3 w-2/3">
                       <img
                         className="w-10 h-10 rounded-full mr-2"
