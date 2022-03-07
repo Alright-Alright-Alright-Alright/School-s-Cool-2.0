@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react"
 import PropTypes from "prop-types"
+import { useTranslation } from "react-i18next"
 import Icon from "./Icon"
 
 function DropDownMenu({ data, selectFilter, position, filter }) {
   const node = useRef()
-
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = (e) => {
@@ -43,7 +45,7 @@ function DropDownMenu({ data, selectFilter, position, filter }) {
                   iconName="select"
                   iconStyle={filter === item ? "" : "invisible"}
                 />
-                <p>{item}</p>
+                <p>{t(`dropdownmenu.${item}`)}</p>
               </div>
             </button>
           ))}

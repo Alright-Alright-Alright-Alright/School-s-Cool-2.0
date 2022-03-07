@@ -67,7 +67,7 @@ function Dashcard({
 
   return (
     <div className="w-full py-3">
-      <div className="flex flex-col relative w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+      <div className="flex relative flex-col w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
@@ -80,7 +80,7 @@ function Dashcard({
               </Trans>
             </p>
             <div className="flex flex-row">
-              <h2 className="text-base pr-4">{filter}</h2>
+              <h2 className="text-base pr-4">{t(`dropdownmenu.${filter}`)}</h2>
               <DropDownMenu
                 data={dropdownMenuData}
                 filter={filter}
