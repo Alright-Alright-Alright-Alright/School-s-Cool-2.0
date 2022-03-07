@@ -2,6 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
+import "./AdminPanelContent.css"
 
 const truncate = (str) => (str.length > 25 ? `${str.substring(0, 25)}...` : str)
 

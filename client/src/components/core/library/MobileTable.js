@@ -4,21 +4,22 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import Icon from "../Icon"
 import PdfFile from "../PdfFile"
+import Comment from "../comment/Comment"
+import CommentFormLibrary from "../comment/CommentFormLibrary"
 import {
   deleteFile,
   iUnlikedAfile,
   iLikedAfile,
 } from "../../../redux/actions/libraryActions"
 
-const MobileTable = ({ library, selected, setSelected }) => {
+const MobileTable = ({ library, selected, setSelected, user }) => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user.singleUser)
   return (
-    <div className="grid grid-cols-1 gap-3 md:hidden mx-6">
-      {library.map((singleFile) => (
+    <div className="grid grid-cols-1 gap-3 lg:hidden mx-6">
+      {library().map((singleFile) => (
         <div className="bg-white shadow-xl rounded-3xl">
           <div className="flex justify-around p-4">
             <section className="w-1/2">
@@ -60,6 +61,29 @@ const MobileTable = ({ library, selected, setSelected }) => {
                     {tag}
                   </span>
                 ))}
+              </div>
+              <hr className="ml-8 w-5/6 text-grey-light hidden md:block" />
+              <div className="h-2/5 hidden md:block">
+                <section className="ml-1 h-full flex flex-col">
+                  <div className="h-3/4 overflow-y-auto scrollBar">
+                    {singleFile.comments.length === 0 ? (
+                      <p className="h-full text-grey-medium text-base flex items-center justify-center">
+                        No comments yet on this file
+                      </p>
+                    ) : (
+                      singleFile.comments.map((comment) => (
+                        <Comment
+                          comment={comment}
+                          key={comment._id}
+                          id={singleFile._id}
+                        />
+                      ))
+                    )}
+                  </div>
+                  <div className="h-1/4 mb-2">
+                    <CommentFormLibrary singleFile={singleFile} />
+                  </div>
+                </section>
               </div>
               <div className="flex justify-end space-x-1">
                 <div>
