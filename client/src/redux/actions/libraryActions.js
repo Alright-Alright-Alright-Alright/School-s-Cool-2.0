@@ -9,12 +9,10 @@ import {
   GET_FILE,
   GET_LIBRARY,
   LIKE_FILE,
-  LIKE_FILE_MOBIL,
   POST_FILE,
   SORT_BY,
   SORT_BY_NAME,
   UNLIKE_FILE,
-  UNLIKE_FILE_MOBIL,
 } from "../types/library"
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
 import {
@@ -173,7 +171,6 @@ export const iLikedAfile = (fileId) => async (dispatch) => {
     const like = await iLikeThisFile(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LIKE_FILE, payload: like })
-    dispatch({ type: LIKE_FILE_MOBIL, payload: like })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -189,7 +186,6 @@ export const iUnlikedAfile = (fileId) => async (dispatch) => {
     const unlike = await iUnlikeThisFile(fileId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_FILE, payload: unlike })
-    dispatch({ type: UNLIKE_FILE_MOBIL, payload: unlike })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

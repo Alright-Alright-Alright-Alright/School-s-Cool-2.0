@@ -112,6 +112,13 @@ exports.getingLibrary = async () => {
   try {
     return await File.find()
       .populate("owner")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      })
       .then((allFiles) => {
         return allFiles;
       });

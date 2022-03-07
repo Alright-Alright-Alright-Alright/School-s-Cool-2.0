@@ -51,7 +51,7 @@ const libraryItem = ({ library, showModal }) => {
           </button>
         </div>
       )}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <table className="w-full">
           <thead className="flex w-full">
             <tr className="flex text-left w-full">
@@ -64,7 +64,7 @@ const libraryItem = ({ library, showModal }) => {
                   Name
                 </button>
               </th>
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 hidden xl:block">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 ">
                 <button
                   type="button"
                   onClick={() => dispatch(getSortedBy("category"))}
@@ -73,7 +73,7 @@ const libraryItem = ({ library, showModal }) => {
                   Category
                 </button>
               </th>
-              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 flex">
+              <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/6 hidden xl:block ">
                 <button
                   type="button"
                   onClick={() => dispatch(getSortedBy("createdAt"))}
@@ -122,10 +122,8 @@ const libraryItem = ({ library, showModal }) => {
                       </span>
                     </div>
                   </td>
-                  <td className="font-semibold pl-3 w-1/6 hidden xl:block">
-                    {item.category}
-                  </td>
-                  <td className="text-grey-medium_light pl-3 w-1/6">
+                  <td className="font-semibold pl-3 w-1/6 ">{item.category}</td>
+                  <td className="text-grey-medium_light pl-3 w-1/6 hidden xl:block">
                     {dayjs(item.createdAt).fromNow()}
                   </td>
                   <td className="px-3 h-16 flex items-center w-2/6">
