@@ -3,6 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import {
   filterLibraryByCategory,
   getAllFilesFromLibrary,
@@ -12,6 +13,7 @@ import {
 const LibraryContentLeft = ({ library, handleShowModal }) => {
   const dispatch = useDispatch()
   const [color, setColor] = useState(false)
+  const { t } = useTranslation()
 
   const handleFilter = (item) => {
     dispatch(filterLibraryByCategory(item))
@@ -70,12 +72,12 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
       <section className="flex">
         <span className="pr-2">{add}</span>{" "}
         <button type="button" className="text-lg" onClick={handleShowModal}>
-          Add a resource
+          {t("library.button_upload_file")}
         </button>
       </section>
       <section className="pt-2">
         <button type="button" className="text-lg" onClick={handleMyFiles}>
-          View my resources
+          {t("library.button_my_files")}
         </button>
       </section>
       <hr className="mt-8 w-52 text-grey-light" />
@@ -86,7 +88,7 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
           type="button"
           onClick={getFiles}
         >
-          All resources
+          {t("library.button_all_files")}
         </button>
       </section>
     </div>

@@ -88,5 +88,29 @@
         "header_card_add_button": "Add post to topic",
         "topic_post_commentted_on": "commentted on",
         "dash_card_members": "Topic members"
+    },
+    "library" : {
+        "button_all_files": "All resources",
+        "button_my_files": "My resources",
+        "button_upload_file": "Add a resource",
+        "button_upload_file_modal_title": "Add your file's name",
+        "button_upload_file_modal_description": "Select your file",
+        "button_upload_file_modal_success": "File uploaded successfully",
+        "button_upload_file_modal_button": "Add file",
+        "button_upload_file_modal_cancel": "Cancel",
+        "modal_choose_file_name": "Add your file's name",
+        "modal_select_file": "Select your file",
+        "modal_private_toggle_new_file": "Private",
+        "modal_public_toggle_new_file": "Public",
+        "modal_choose_category_new_file": "Select a category",
+        "modal_choose_subject_new_file": "Select a subject",
+        "table_header_name": "File name",
+        "table_header_description": "Description",
+        "table_header_category": "Category",
+        "table_header_date": "Date",
+        "table_header_owner": "User",
+        "download_selected_files": "Download selected files",
+        "file_more_info_placeholder": "Click on a file to see more info",
+        "file_more_info_no_comments_placeholder": "No comments yet on this file"     
     }
   }
