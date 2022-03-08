@@ -101,12 +101,14 @@ export const getAllTheUsers = () => (dispatch) => {
 
 export const updateUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
-  
+  console.log(userData)
   try {
+    console.log(userData)
     const updatedUser = await updateUserService(userData);
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {
+    console.log(error)
     dispatch({
       type: SET_ERRORS,
       payload: error.response,

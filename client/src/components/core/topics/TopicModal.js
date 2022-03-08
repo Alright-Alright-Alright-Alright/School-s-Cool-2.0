@@ -52,13 +52,32 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const topicData = {
-      title: singleTopic ? singleTopic.title : title,
-      description: singleTopic ? singleTopic.description : description,
-      category: singleTopic ? singleTopic.category : category,
-      subject: singleTopic ? singleTopic.subject : subject,
+      title:
+        title ||
+        (typeof singleTopic.title === "undefined" ? "" : singleTopic.title),
+      description:
+        description ||
+        (typeof singleTopic?.description === "undefined"
+          ? ""
+          : singleTopic.description),
+      category:
+        category ||
+        (typeof singleTopic?.category === "undefined"
+          ? ""
+          : singleTopic.category),
+      subject:
+        subject ||
+        (typeof singleTopic?.subject === "undefined"
+          ? ""
+          : singleTopic.subject),
       bannerImage: image || singleTopic?.bannerImage,
-      isPrivate: privacy,
+      isPrivate:
+        privacy ||
+        (typeof singleTopic?.privacy === "undefined"
+          ? false
+          : singleTopic.privacy),
     }
+
     if (
       topicData.title.length > 0 &&
       topicData.description.length > 0 &&
@@ -79,15 +98,26 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
       >
         {UI.errors && <MessageHandler error={UI.errors} />}
         <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
-          <input
-            required
-            type="text"
-            name=""
-            id=""
-            placeholder="Add your descriptive topic name"
-            className="w-2/3 placeholder-grey-medium text-md"
-            onChange={chooseTitle}
-          />
+          {singleTopic ? (
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Add your descriptive topic name"
+              className="w-2/3 placeholder-grey-medium text-md"
+              onChange={chooseTitle}
+            />
+          ) : (
+            <input
+              required
+              type="text"
+              name=""
+              id=""
+              placeholder="Add your descriptive topic name"
+              className="w-2/3 placeholder-grey-medium text-md"
+              onChange={chooseTitle}
+            />
+          )}
           <button type="button" onClick={handleShowModal}>
             <Icon iconName="close" />
           </button>

@@ -53,9 +53,7 @@ const userReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return {
         ...state,
-        users: state.users.users.map((eachUser) =>
-          eachUser._id === action.payload._id ? action.payload : eachUser
-        ),
+        singleUser: action.payload,
       }
     default:
       return state
