@@ -7,6 +7,7 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { useTranslation } from "react-i18next"
 import Icon from "../Icon"
 import {
   deleteFile,
@@ -20,6 +21,7 @@ const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
   const [tableRowClicked, setTableRowClicked] = useState([])
   const [selected, setSelected] = useState([])
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   dayjs.extend(relativeTime)
 
@@ -46,7 +48,7 @@ const libraryItem = ({ library, showModal }) => {
             className="border-2 rounded-full border-pink bg-pink text-white"
           >
             <p className="ml-5 mr-5 mt-2 mb-2 text-base">
-              Download selected files
+              {t("library.download_selected_files")}
             </p>
           </button>
         </div>
@@ -61,7 +63,7 @@ const libraryItem = ({ library, showModal }) => {
                   onClick={() => dispatch(getSortedBy("title"))}
                   className="font-semibold"
                 >
-                  Name
+                  {t("library.table_header_name")}
                 </button>
               </th>
               <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/4 ">
@@ -70,7 +72,7 @@ const libraryItem = ({ library, showModal }) => {
                   onClick={() => dispatch(getSortedBy("category"))}
                   className="font-semibold"
                 >
-                  Category
+                  {t("library.table_header_category")}
                 </button>
               </th>
               <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-1/4 hidden xl:block ">
@@ -79,7 +81,7 @@ const libraryItem = ({ library, showModal }) => {
                   onClick={() => dispatch(getSortedBy("createdAt"))}
                   className="font-semibold"
                 >
-                  Date added
+                  {t("library.table_header_date")}
                 </button>
               </th>
               <th className="border-l-2 border-b-2 border-grey-medium_light pl-3 w-2/4 flex">
@@ -88,7 +90,7 @@ const libraryItem = ({ library, showModal }) => {
                   onClick={() => dispatch(sortedByUser())}
                   className="font-semibold"
                 >
-                  User
+                  {t("library.table_header_owner")}
                 </button>
               </th>
             </tr>
