@@ -86,7 +86,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
       firstName,
       lastName,
       email,
-      imageUrl: image,
+      imageUrl: image || profileImage,
     }
     dispatch(updateUser(userData))
     setShowEditForm(false)
