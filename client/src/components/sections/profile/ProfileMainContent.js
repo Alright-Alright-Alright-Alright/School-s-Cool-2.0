@@ -28,9 +28,9 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
   const userProfilePage = useSelector((state) => state.user.userProfile)
   const dispatch = useDispatch()
 
-  const [firstName, setFirstName] = useState(user?.firstName)
-  const [lastName, setLastName] = useState(user?.lastName)
-  const [email, setEmail] = useState(user?.email)
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
 
   const [language, setLanguage] = useState("en")
 
@@ -54,7 +54,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
   useEffect(() => {
     dispatch(getUserProfile(userId))
-  }, [dispatch, userId])
+  }, [dispatch, userId, showEditForm])
 
   const handleImagePreview = async (img) => {
     const image = await fileUploadHandler(img)
@@ -83,10 +83,10 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
 
     const userData = {
       id: user?._id,
-      firstName,
-      lastName,
-      email,
-      imageUrl: image,
+      firstName: firstName || user.firstName,
+      lastName: lastName || user.lastName,
+      email: email || user.email,
+      imageUrl: image || profileImage,
     }
     dispatch(updateUser(userData))
     setShowEditForm(false)
