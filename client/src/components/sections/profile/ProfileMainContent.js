@@ -5,12 +5,19 @@ import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
 import { useParams } from "react-router-dom"
 import i18n, { t } from "i18next"
+import dayjs from "dayjs"
+import localeNl from "dayjs/locale/nl"
 import Dashcard from "../../core/dashcard/Dashcard"
 import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 import ErrorHandler from "../../core/ErrorHandler"
+
+const locales = {
+  nl: () => import("dayjs/locale/nl"),
+  en: () => import("dayjs/locale/en"),
+}
 
 const truncate = (str) =>
   str?.length > 25 ? `${str.substring(0, 25)}...` : str
@@ -38,6 +45,8 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
     e.preventDefault()
     setLanguage(e.target.value)
     i18n.changeLanguage(e.target.value)
+
+    locales[language]().then(() => dayjs.locale(language))
   }
 
   const filteredTopics = topics.filter((item) =>
