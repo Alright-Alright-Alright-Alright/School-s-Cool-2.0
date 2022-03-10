@@ -16,16 +16,27 @@ import {
   likePost,
   unlikePost,
   deletePost,
+  updatePost,
 } from "../../../../redux/actions/postActions"
 import Icon from "../../Icon"
 import DropDownMenu from "../../DropDownMenu"
+import ReadOnlyPostRow from "./ReadOnlyPostRow"
+import EditablePostRow from "./EditablePostRow"
 
 function TopicPost({ post, topicId, comments, onDeletePost }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
+  const [showEditPost, setShowEditPost] = useState(false)
+  const [newPostBody, setNewPostBody] = useState(post.body)
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
   dayjs.extend(relativeTime)
+
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
 
   const handleLike = () => {
     dispatch(likePost(post._id, user._id))
@@ -33,6 +44,19 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
 
   const handleUnlike = () => {
     dispatch(unlikePost(post._id, user._id))
+  }
+
+  const handleEditPost = (e) => {
+    setNewPostBody(e.target.value)
+  }
+
+  const handleSubmitEditPost = () => {
+    dispatch(
+      updatePost(post._id, {
+        body: newPostBody,
+      })
+    )
+    setShowEditPost(false)
   }
 
   const firstThreeComments = comments
@@ -46,10 +70,10 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
   ))
 
   const handleSelectAction = (actionName) => {
-    if (actionName === "Edit") {
-      console.log("edit")
+    if (actionName === "edit") {
+      setShowEditPost(!showEditPost)
     }
-    if (actionName === "Delete") {
+    if (actionName === "delete") {
       dispatch(deletePost(post._id))
       // onDeletePost()
       console.log("deleting")
@@ -57,13 +81,13 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
   }
 
   return (
-    <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
+    <div className="relative rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       {user._id === post.owner._id && (
         <DropDownMenu
           position="absolute top-6 right-0"
           data={{
             bgColorOnHover: "aqua-light",
-            dropDownItems: ["Edit", "Delete"],
+            dropDownItems: ["edit", "delete"],
           }}
           selectFilter={handleSelectAction}
         />
@@ -87,15 +111,25 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
             </Link>
           </div>
           <div className="flex items-center mt-2 sm:mt-0">
-            <p className="text-base">{dayjs(post.createdAt).fromNow()}</p>
+            <p className="text-base">
+              {dayjs(post.createdAt).locale(localeFromCookies).fromNow()}
+            </p>
           </div>
         </div>
       </div>
       <div className="">
-        <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
-          {/* {post.body} */}
+        {/* <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
           {ReactHtmlParser(post.body)}
-        </p>
+        </p> */}
+        {showEditPost ? (
+          <EditablePostRow
+            postBody={post.body}
+            handleEditPost={handleEditPost}
+            handleSubmitEditPost={handleSubmitEditPost}
+          />
+        ) : (
+          <ReadOnlyPostRow postBody={post.body} />
+        )}
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
         {/* <div className="flex">

@@ -12,7 +12,7 @@ function TopicContentRight({ topic, users }) {
       <TopicDashcard
         topicDashCardTitle={t("topics.dash_card_members")}
         topicDashCardStyle="bg-aqua"
-        topicDashCardData={topic?.members}
+        topicDashCardData={topic?.singleTopic?.members}
         users={users?.users}
         dropdownMenuData={dashcardDropdownMenu.topicMembers}
       />

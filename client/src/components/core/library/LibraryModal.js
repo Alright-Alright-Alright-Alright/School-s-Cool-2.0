@@ -100,7 +100,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   return (
     <div className="absolute inset-0 flex justify-center pt-12 z-50">
       <form
-        className="h-72 w-6/7 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
+        className=" h-80 lg:h-72 w-6/7 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors} />}
@@ -118,10 +118,10 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             <Icon iconName="close" />
           </button>
         </section>
-        <section>
+        <section className="px-1 mx-5">
           <TagsInput selectedTags={selectedTags} />
         </section>
-        <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
+        <section className="lg:flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
           {singleTopic ? (
             <div>
               <p className="text-sm">
@@ -146,7 +146,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </select>
           )}
           {singleTopic ? (
-            <div>
+            <div className="py-3 lg:py-0">
               <p className="text-sm">Subject:</p>
               <p>{singleTopic.subject}</p>
             </div>
@@ -166,7 +166,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               ))}
             </select>
           )}
-          <div className="flex justify-end items-center w-2/7">
+          <div className="flex lg:justify-end items-center lg:w-2/7 py-3 lg:py-0">
             <div>
               <button
                 type="button"
