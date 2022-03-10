@@ -27,6 +27,7 @@ const Modal = ({ handleShowModal }) => {
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
+  const [startTime, setStartTime] = useState(null)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
@@ -61,6 +62,7 @@ const Modal = ({ handleShowModal }) => {
       description,
       dateStart: startDate,
       dateEnd: endDate,
+      timeStart: startTime,
       location,
       bannerImage: image,
       isPrivate: privacy,
@@ -71,88 +73,120 @@ const Modal = ({ handleShowModal }) => {
     dispatch(createNewEvent(eventData))
   }
 
+  console.log(bannerImage)
+
   return (
     <div className="flex justify-center content-center">
       <form
-        className="h-72 w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl"
+        className="w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl py-3"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
-        <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
+        <section className="flex justify-between border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"
             name=""
             id=""
             placeholder={t("events.modal_title_new_event")}
-            className="w-2/3 placeholder-grey-medium text-md"
+            className="w-full placeholder-grey-medium text-lg"
             onChange={chooseTitle}
           />
           <button type="button" onClick={handleShowModal}>
             <Icon iconName="close" />
           </button>
         </section>
-        <section className="flex-col lg:flex-row flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
-          <div className="">
+        <section className="flex-col lg:flex-row flex justify-start  ">
+          <DatePicker
+            selectsRange
+            startDate={startDate}
+            endDate={endDate}
+            onChange={(update) => {
+              setDateRange(update)
+            }}
+            placeholderText={t("events.modal_date_new_event")}
+            withPortal
+            locale="nl"
+            dateFormat="dd/MM/yyyy"
+            className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
+            minDate={new Date()}
+          />
+        </section>
+        <section className="">
+          <div className="text-base">
             <DatePicker
-              selectsRange
-              startDate={startDate}
-              endDate={endDate}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              selected={startTime}
               onChange={(update) => {
-                setDateRange(update)
+                setStartTime(update)
               }}
-              placeholderText={t("events.modal_date_new_event")}
+              placeholderText={t("events.modal_time_new_event")}
+              // placeholderText={t("events.modal_date_new_event")}
               withPortal
               locale="nl"
-              dateFormat="dd/MM/yyyy"
-              className="mr-3"
+              timeCaption="Time"
+              dateFormat="hh:mm"
+              className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
             />
           </div>
-          <input
-            type="text"
-            placeholder={t("events.modal_location_new_event")}
-            onChange={chooseLocation}
-            className="w-2/3 placeholder-grey-medium text-md"
-          />
-          <button
-            type="button"
-            onClick={handleClick}
-            className="flex justify-around items-center w-2/7"
-          >
-            <span className="text-sm">
-              {t("events.modal_cover_image_new_event")}
-            </span>
-            <Icon iconName="add" iconStyle="fill-inactive text-sky" />
-          </button>
-          <input
-            type="file"
-            size="60"
-            className="hidden"
-            ref={hiddenFileInput}
-            onChange={chooseBannerImage}
-          />
         </section>
-        <section>
-          <TagsInput selectedTags={selectedTags} />
+        <section className="lg:flex justify-between border-b-2 border-grey-super_light py-3 mx-5">
+          <div className="">
+            <input
+              type="text"
+              placeholder={t("events.modal_location_new_event")}
+              onChange={chooseLocation}
+              className=" placeholder-grey-medium_light text-base h-10"
+            />
+          </div>
+          <div className="pt-5 lg:pt-0">
+            <button
+              type="button"
+              onClick={handleClick}
+              className="flex justify-around items-center "
+            >
+              <span className="text-base pr-3 ">
+                {bannerImage
+                  ? "File successfully uploaded"
+                  : t("events.modal_cover_image_new_event")}
+              </span>
+              <Icon iconName="add" iconStyle="fill-inactive text-sky" />
+            </button>
+            <input
+              type="file"
+              size="60"
+              className="hidden"
+              ref={hiddenFileInput}
+              onChange={chooseBannerImage}
+            />
+          </div>
         </section>
-        <section className="flex justify-center border-b-2 border-grey-super_light px-1 py-3 mx-5">
+
+        <section className="py-3 mx-5">
           <input
             type="text"
             placeholder={t("events.modal_description_new_event")}
-            className="w-full placeholder-grey-medium text-base h-10"
+            className="w-full placeholder-grey-medium_light text-base h-10"
             onChange={chooseDescription}
           />
         </section>
-        <section className="flex justify-between px-5">
+        <section className="flex justify-center border-t-2 border-grey-super_light py-3 mx-5">
+          <TagsInput selectedTags={selectedTags} />
+        </section>
+        <section className="lg:flex justify-between px-5">
           <SwitchButton
             nameLeft={t("events.modal_public_toggle_new_event")}
             nameRight={t("events.modal_private_toggle_new_event")}
             toogle={() => setPrivacy(!privacy)}
           />
-          <Button
-            buttonName={t("events.modal_button_create_event")}
-            buttonStyle="btnEventStyle"
-            buttonSubmit
-          />
+          <div className="py-3 lg:pt-0">
+            <Button
+              buttonName={t("events.modal_button_create_event")}
+              buttonStyle="btnEventStyle"
+              buttonSubmit
+            />
+          </div>
         </section>
       </form>
     </div>

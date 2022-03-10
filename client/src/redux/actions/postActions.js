@@ -6,6 +6,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   DELETE_POST,
+  UPDATE_POST,
 } from "../types/posts"
 
 import {
@@ -17,6 +18,7 @@ import {
   likePostService,
   unlikePostService,
   deletePostService,
+  updatePostService,
 } from "../services/postService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -70,8 +72,6 @@ export const createPost = (newPost) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const addNewPostDb = await createPostService(newPost)
-  console.log("New Post", newPost)
-  console.log("New Post DB", addNewPostDb)
 
   try {
     dispatch({ type: CLEAR_ERRORS })
@@ -125,6 +125,20 @@ export const unlikePost = (postId, userId) => async (dispatch) => {
     const unlikePostDb = await unlikePostService(postId, { userId })
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_POST, payload: unlikePostDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const updatePost = (postId, body) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  try {
+    const updatedPostDb = await updatePostService(postId, body)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: UPDATE_POST, payload: updatedPostDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

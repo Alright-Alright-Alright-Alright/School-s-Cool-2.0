@@ -18,7 +18,7 @@ const getAllEvents = async (req, res, next) => {
 };
 
 const createNewEvent = async (req, res, next) => {
-  const { title, dateStart, dateEnd, description, location, bannerImage, tags } =
+  const { title, dateStart, dateEnd, timeStart, description, location, bannerImage, tags } =
     req.body;
   const { _id } = req.user.userLogedIn;
   try {
@@ -32,6 +32,7 @@ const createNewEvent = async (req, res, next) => {
         title,
         dateStart,
         dateEnd,
+        timeStart,
         description,
         location,
         bannerImage,

@@ -36,6 +36,7 @@
         "button_more_info": "More info",
         "modal_title_new_event": "Add your event name",
         "modal_date_new_event": "Select event dates",
+        "modal_time_new_event": "Select event time",
         "modal_location_new_event": "Select location",
         "modal_description_new_event": "Briefly explain what your event is about",
         "modal_cover_image_new_event": "Add cover image",
@@ -139,7 +140,9 @@
         "all_files": "All resources",
         "my_files": "My resources",
         "all_users": "All users",
-        "all_attendees": "All attendees"
+        "all_attendees": "All attendees",
+        "edit": "Edit",
+        "delete": "Delete"
     },
     "navbar" : {
         "navbar_home": "Home",

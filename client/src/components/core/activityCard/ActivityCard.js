@@ -23,6 +23,12 @@ function ActivityCard({ activity }) {
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
+
   const handleLike = () => {
     dispatch(likePost(activity._id, user._id))
     dispatch(getAllActivities())
@@ -85,12 +91,14 @@ function ActivityCard({ activity }) {
             </Link>
           </div>
           <div className="hidden lg:block items-center">
-            <p className="text-base">{dayjs(activity.createdAt).fromNow()}</p>
+            <p className="text-base">
+              {dayjs(activity.createdAt).locale(localeFromCookies).fromNow()}
+            </p>
           </div>
         </div>
         <div className="flex items-center lg:hidden pl-3 pt-3">
           <p className="text-base text-grey-medium_light">
-            {dayjs(activity.createdAt).fromNow()}
+            {dayjs(activity.createdAt).locale(localeFromCookies).fromNow()}
           </p>
         </div>
       </div>
