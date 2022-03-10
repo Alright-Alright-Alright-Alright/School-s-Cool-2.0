@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import dayjs from "dayjs"
+import calendar from "dayjs/plugin/calendar"
 import PropTypes from "prop-types"
 import { t } from "i18next"
 import Icon from "../Icon"
@@ -14,6 +15,13 @@ const EventCards = ({ event }) => {
   const [join, setJoin] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  dayjs.extend(calendar)
+
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
 
   const joinEventHandler = () => {
     dispatch(joinEvent(event?._id, user?._id))
@@ -60,6 +68,11 @@ const EventCards = ({ event }) => {
               </div>
               <p className="text-sm text-grey-medium_light">
                 {event?.location}
+              </p>
+              <p className="text-sm text-grey-medium_light">
+                {event?.timeStart
+                  ? dayjs(event?.timeStart).locale(localeFromCookies).calendar()
+                  : null}
               </p>
             </div>
           </div>

@@ -26,6 +26,9 @@ const eventSchema = new Schema(
     dateEnd: {
       type: Date,
     },
+    timeStart: {
+      type: Date,
+    },
     location: {
       type: String,
     },
