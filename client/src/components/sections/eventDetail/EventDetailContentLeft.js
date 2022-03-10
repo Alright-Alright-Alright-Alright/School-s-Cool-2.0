@@ -10,6 +10,12 @@ import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 function EventDetailContentLeft({ event }) {
   dayjs.extend(calendar)
 
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
+
   return (
     <div className="flex flex-col max-w-sm">
       <div className="p-3">
@@ -23,10 +29,21 @@ function EventDetailContentLeft({ event }) {
           <h1 className="text-xl pb-2">{event?.title}</h1>
           <p className="text-lg pb-2">{event?.location}</p>
           <p className="text-base pb-2">
-            {dayjs(event?.dateStart).locale("nl").format("DD MMMM , YYYY")} -{" "}
-            {dayjs(event?.dateEnd).locale("nl").format("DD MMMM, YYYY")}
+            {dayjs(event?.dateStart)
+              .locale(localeFromCookies)
+              .format("DD MMMM , YYYY")}{" "}
+            -{" "}
+            {dayjs(event?.dateEnd)
+              .locale(localeFromCookies)
+              .format("DD MMMM, YYYY")}
+          </p>
+          <p className="text-base pb-2">
+            {event?.timeStart
+              ? dayjs(event?.timeStart).locale(localeFromCookies).calendar()
+              : null}
           </p>
         </div>
+
         <div className="place-items-end">
           <ResourceDashcard
             resourceDashCardTitle={t("dash_card_title_files")}
