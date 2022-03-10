@@ -19,6 +19,7 @@ import {
   SET_USERLOGGED_IN,
   SET_USERS,
   SET_USER_PROFILE,
+  UPDATE_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -26,10 +27,11 @@ import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_SUCCESS } from "../types/ui";
 
 export const setAuthorizationHeader = (token) => {
   const Authorization = `Bearer ${token}`;
-  localStorage.setItem("Authorization", Authorization);
+  JSON.stringify(localStorage.setItem("Authorization", Authorization));
 };
 
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData) => async (dispatch) => {
+
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
@@ -44,7 +46,8 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err.response.data.message,
       });
     });
-};
+  }
+
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -77,7 +80,6 @@ export const loggedInUser = () => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("Authorization");
   localStorage.removeItem("user");
   logout();
   dispatch({ type: SET_UNAUTHENTICATED });
@@ -99,12 +101,14 @@ export const getAllTheUsers = () => (dispatch) => {
 
 export const updateUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
-
-  const updatedUser = await updateUserService(userData);
+  console.log(userData)
   try {
+    console.log(userData)
+    const updatedUser = await updateUserService(userData);
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: SET_USER, payload: updatedUser });
+    dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {
+    console.log(error)
     dispatch({
       type: SET_ERRORS,
       payload: error.response,

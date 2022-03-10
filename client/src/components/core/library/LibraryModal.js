@@ -5,6 +5,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { t } from "i18next"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
@@ -97,9 +98,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   }
 
   return (
-    <div className="absolute inset-0 flex justify-center pt-28 z-50">
+    <div className="absolute inset-0 flex justify-center pt-12 z-50">
       <form
-        className="h-72 w-6/8 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
+        className=" h-80 lg:h-72 w-6/7 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors} />}
@@ -108,7 +109,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             type="text"
             name=""
             id=""
-            placeholder="Add your file name"
+            placeholder={t("library.modal_choose_file_name")}
             className="w-2/3 placeholder-grey-medium text-md"
             onChange={chooseTitle}
             required
@@ -117,13 +118,15 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             <Icon iconName="close" />
           </button>
         </section>
-        <section>
+        <section className="px-1 mx-5">
           <TagsInput selectedTags={selectedTags} />
         </section>
-        <section className="flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
+        <section className="lg:flex justify-between border-b-2 border-grey-super_light px-1 py-3 mx-5">
           {singleTopic ? (
             <div>
-              <p className="text-sm">Category:</p>
+              <p className="text-sm">
+                {t("library.modal_choose_category_new_file")}:
+              </p>
               <p>{singleTopic.category}</p>
             </div>
           ) : (
@@ -135,7 +138,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
             >
               <option disabled selected>
-                Choose a category
+                {t("library.modal_choose_category_new_file")}
               </option>
               {filterCategory().map((cat) => (
                 <option value={cat}>{cat}</option>
@@ -143,7 +146,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
             </select>
           )}
           {singleTopic ? (
-            <div>
+            <div className="py-3 lg:py-0">
               <p className="text-sm">Subject:</p>
               <p>{singleTopic.subject}</p>
             </div>
@@ -156,14 +159,14 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
             >
               <option disabled selected>
-                Choose a subject
+                {t("library.modal_choose_subject_new_file")}
               </option>
               {filterSubject(category).map((sub) => (
                 <option value={sub}>{sub}</option>
               ))}
             </select>
           )}
-          <div className="flex justify-end items-center w-2/7">
+          <div className="flex lg:justify-end items-center lg:w-2/7 py-3 lg:py-0">
             <div>
               <button
                 type="button"
@@ -172,8 +175,8 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               >
                 <span className="text-sm pr-3">
                   {imgPreview
-                    ? "File successfully uploaded"
-                    : "Select your File"}
+                    ? `${t("library.button_upload_file_modal_success")}`
+                    : `${t("library.button_upload_file_modal_description")}`}
                 </span>
                 <Icon iconName="add" iconStyle="fill-inactive text-pink" />
               </button>
@@ -191,12 +194,12 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         </section>
         <section className="flex justify-between px-5">
           <SwitchButton
-            nameLeft="PUBLIC"
-            nameRight="PRIVATE"
+            nameLeft={t("library.modal_public_toggle_new_file")}
+            nameRight={t("library.modal_private_toggle_new_file")}
             toogle={() => setPrivacy(!privacy)}
           />
           <Button
-            buttonName="Add a File"
+            buttonName={t("library.button_upload_file_modal_button")}
             buttonStyle="btnLibraryStyle"
             buttonSubmit
           />

@@ -5,6 +5,7 @@ import {
   JOIN_EVENT,
   LEAVE_EVENT,
 } from "../types/events"
+
 import {
   getEvents,
   createEvent,
@@ -23,7 +24,7 @@ export const getAllEvents = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response,
+      payload: error.response.data.message,
     })
   }
 }

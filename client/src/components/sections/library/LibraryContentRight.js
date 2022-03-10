@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { t } from "i18next"
 import Icon from "../../core/Icon"
 import {
   iLikedAfile,
@@ -23,7 +24,7 @@ const LibraryContentRight = ({ singleFile }) => {
   }, [dispatch, singleFile?._id])
 
   return singleFile !== null ? (
-    <div className="flex flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8">
+    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
       <div className="h-3/5 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
@@ -100,7 +101,7 @@ const LibraryContentRight = ({ singleFile }) => {
           <div className="h-3/4 overflow-y-auto scrollBar">
             {singleFile.comments.length === 0 ? (
               <p className="h-full text-grey-medium text-base flex items-center justify-center">
-                No comments yet on this file
+                {t("library.file_more_info_no_comments_placeholder")}
               </p>
             ) : (
               singleFile.comments.map((comment) => (
@@ -119,9 +120,9 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
     </div>
   ) : (
-    <div className="flex items-center justify-center w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8">
-      <h1 className="text-grey-dark font-semibold">
-        Click on a file to see its details
+    <div className="hidden w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
+      <h1 className="h-full text-grey-dark font-semibold flex items-center justify-center text-center">
+        {t("library.file_more_info_placeholder")}
       </h1>
     </div>
   )

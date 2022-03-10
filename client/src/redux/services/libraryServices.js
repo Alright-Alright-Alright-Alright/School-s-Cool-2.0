@@ -45,5 +45,5 @@ export const submitCommentService = (commentBody, fileId) =>
 
 export const deleteCommentService = (commentId, id) =>
   service
-    .put(`/library/deleteComment`, commentId, id)
+    .put(`/deleteComment`, commentId, id)
     .then((responseFromAPI) => responseFromAPI.data)

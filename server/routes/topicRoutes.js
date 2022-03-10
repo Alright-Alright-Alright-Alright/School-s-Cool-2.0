@@ -11,10 +11,12 @@ const {
   inviteForTopic,
   removeInviteForTopic,
   deleteTopic,
+  editTopic,
 } = require("../controllers/topicControllers");
 
 topicRoutes.get("/topics", getAllTopics);
 topicRoutes.post("/topics", createNewTopic);
+topicRoutes.patch("/topics/:topicId", editTopic);
 topicRoutes.get("/topics/:topicId", getTopic);
 topicRoutes.put("/topics/:topicId", updateTopic);
 topicRoutes.put("/topics/:topicId/join", joinTopic);

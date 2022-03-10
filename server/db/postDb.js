@@ -43,23 +43,11 @@ const addPostToDb = async (body, owner, topicId, eventId) => {
   });
 
   try {
-    if (topicId === undefined) {
-      Event.findByIdAndUpdate(
-        eventId,
-        { $push: { posts: newPost } },
-        { new: true }
-      ).then((event) => {
-        console.log(event);
-      });
-      return newPost;
-    } else {
-      Topic.findByIdAndUpdate(
-        topicId,
-        { $push: { posts: newPost } },
-        { new: true }
-      );
-      return newPost;
-    }
+    topicId
+      ? await Topic.findByIdAndUpdate(topicId, { $push: { posts: newPost } })
+      : await Event.findByIdAndUpdate(eventId, { $push: { posts: newPost } });
+
+    return newPost;
   } catch (error) {
     throw new Error(error);
   }
@@ -127,13 +115,31 @@ const unlikePostDb = async (postId, userId) => {
   }
 };
 
-const deletePostDb = async (postId) => {
+const updatePostDb = async (postId, body) => {
   try {
-    await Post.findByIdAndRemove(postId)
+    let post = await Post.findByIdAndUpdate(postId, { body }, { new: true })
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("topic", "title")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+    return post;
   } catch (error) {
     throw new Error(error);
   }
-}
+};
+
+const deletePostDb = async (postId) => {
+  try {
+    await Post.findByIdAndDelete(postId);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 module.exports = {
   getAllPostsDb,
@@ -142,4 +148,5 @@ module.exports = {
   likePostDb,
   unlikePostDb,
   deletePostDb,
+  updatePostDb,
 };

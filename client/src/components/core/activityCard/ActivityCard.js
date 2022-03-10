@@ -5,6 +5,7 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import ReactHtmlParser from "react-html-parser"
 import { useSelector, useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
 import { likePost, unlikePost } from "../../../redux/actions/postActions"
@@ -18,8 +19,15 @@ dayjs.extend(relativeTime)
 
 function ActivityCard({ activity }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
+  const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
+
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
 
   const handleLike = () => {
     dispatch(likePost(activity._id, user._id))
@@ -72,7 +80,9 @@ function ActivityCard({ activity }) {
             <p className="text-base">
               {activity.owner?.firstName} {activity.owner?.lastName}
             </p>
-            <p className="text-base pl-3 text-grey-medium_light">Posted on</p>
+            <p className="text-base pl-3 text-grey-medium_light">
+              {t("activity_feed_card_action_type")}
+            </p>
             <Link
               to={`/${activityType}s/${activity[activityType]?._id}`}
               className="text-base pl-3"
@@ -81,19 +91,21 @@ function ActivityCard({ activity }) {
             </Link>
           </div>
           <div className="hidden lg:block items-center">
-            <p className="text-base">{dayjs(activity.createdAt).fromNow()}</p>
+            <p className="text-base">
+              {dayjs(activity.createdAt).locale(localeFromCookies).fromNow()}
+            </p>
           </div>
         </div>
         <div className="flex items-center lg:hidden pl-3 pt-3">
           <p className="text-base text-grey-medium_light">
-            {dayjs(activity.createdAt).fromNow()}
+            {dayjs(activity.createdAt).locale(localeFromCookies).fromNow()}
           </p>
         </div>
       </div>
       <div className="">
-        <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
+        <div className="border-b-2 border-grey-light m-3 pb-3 text-base">
           {ReactHtmlParser(activity.body)}
-        </p>
+        </div>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
         <div className="flex">
@@ -102,7 +114,7 @@ function ActivityCard({ activity }) {
         </div>
         <div className="flex">
           {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
-          {activity.likedBy?.includes(user._id) ? (
+          {activity.likedBy?.includes(user?._id) ? (
             <button type="button" onClick={handleUnlike}>
               <Icon iconName="like" iconStyle="fill-active" />
             </button>

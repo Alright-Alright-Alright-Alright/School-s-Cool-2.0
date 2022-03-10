@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
 import React from "react"
 import { Link } from "react-router-dom"
+import { t } from "i18next"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
+import Button from "../../core/Button"
 
-function TopicContentLeft({ topic }) {
+function TopicContentLeft({ topic, showEditModel, user }) {
   return (
     <div className="flex flex-col max-w-sm float-right">
       <div className="p-3">
@@ -25,14 +27,18 @@ function TopicContentLeft({ topic }) {
         </div>
         <div className="place-items-end">
           <ResourceDashcard
-            resourceDashCardTitle="Resources"
+            resourceDashCardTitle={t("dash_card_title_files")}
             resourceDashCardStyle="bg-aqua"
             resourceDashCardData={topic?.resources}
             dropdownMenuData={data.resources}
           />
         </div>
         <div className="p-3 w-full">
-          <p>{topic?.isPrivate ? "Private" : "Public"} topic created by </p>
+          <p>
+            {topic?.isPrivate
+              ? `${t("topics.private_topic_created_by")}`
+              : `${t("topics.public_topic_created_by")}`}
+          </p>
           <Link to={`/profile/${topic?.owner?._id}`}>
             <div className="flex items-center py-3">
               <img
@@ -45,6 +51,13 @@ function TopicContentLeft({ topic }) {
               </p>
             </div>
           </Link>
+          {topic?.owner?._id === user?._id && (
+            <Button
+              buttonName="Edit Topic"
+              buttonStyle="btnTopicStyle"
+              onClick={showEditModel}
+            />
+          )}
         </div>
       </div>
     </div>

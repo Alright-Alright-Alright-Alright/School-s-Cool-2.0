@@ -5,7 +5,7 @@ const {
   updateEventService,
   joinEventService,
   leaveEventService,
-  deleteEventService
+  deleteEventService,
 } = require("../services/eventService");
 
 const getAllEvents = async (req, res, next) => {
@@ -18,23 +18,25 @@ const getAllEvents = async (req, res, next) => {
 };
 
 const createNewEvent = async (req, res, next) => {
-  const { title, dateStart, dateEnd, description, location, bannerImage } =
+  const { title, dateStart, dateEnd, timeStart, description, location, bannerImage, tags } =
     req.body;
   const { _id } = req.user.userLogedIn;
   try {
     if (!title) {
-      throw new Error("Please write a title for the Event")
+      throw new Error("Please write a title for the Event");
     } else if (!location) {
-      throw new Error("Please write a Event location")
+      throw new Error("Please write a Event location");
     } else {
       const event = await createEventService(
         _id,
         title,
         dateStart,
         dateEnd,
+        timeStart,
         description,
         location,
-        bannerImage
+        bannerImage,
+        tags
       );
       res.status(201).json(event);
     }

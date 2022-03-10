@@ -8,6 +8,6 @@ commentRoutes.get("/library/:fileId/comments", getAllComments);
 commentRoutes.post("/posts/:postId/comments", createComment);
 commentRoutes.post("/library/:fileId/comments", createComment);
 commentRoutes.get("/posts/:postId", getCommentById);
-commentRoutes.put("/library/deleteComment", deleteComment);
+commentRoutes.put("/deleteComment", deleteComment);
 
 module.exports = commentRoutes;

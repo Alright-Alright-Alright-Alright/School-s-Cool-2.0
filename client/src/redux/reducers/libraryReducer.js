@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
 import {
   ADD_COMMENT,
   DELETE_COMMENT,
@@ -62,17 +63,23 @@ const libraryReducer = (state = initialState, action) => {
           (file) => file.subject === action.payload
         ),
       }
-    case LIKE_FILE:
-    case UNLIKE_FILE:
     case GET_COMMENTS:
     case ADD_COMMENT:
     case DELETE_COMMENT:
+    case LIKE_FILE:
+    case UNLIKE_FILE:
+      // return {
+      //   ...state,
+      //   singleFile:
+      //     state.singleFile._id === action.payload._id
+      //       ? action.payload
+      //       : state.singleFile,
+      // }
       return {
         ...state,
-        singleFile:
-          state.singleFile._id === action.payload._id
-            ? action.payload
-            : state.singleFile,
+        allFiles: state.allFiles.map((eachFile) =>
+          eachFile._id === action.payload._id ? action.payload : eachFile
+        ),
       }
     case DELETE_FILE:
       return {

@@ -6,6 +6,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   DELETE_POST,
+  UPDATE_POST,
 } from "../types/posts"
 
 import {
@@ -17,6 +18,7 @@ import {
   likePostService,
   unlikePostService,
   deletePostService,
+  updatePostService,
 } from "../services/postService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -70,8 +72,6 @@ export const createPost = (newPost) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   const addNewPostDb = await createPostService(newPost)
-  console.log("New Post", newPost)
-  console.log("New Post DB", addNewPostDb)
 
   try {
     dispatch({ type: CLEAR_ERRORS })
@@ -121,8 +121,8 @@ export const likePost = (postId, userId) => async (dispatch) => {
 
 export const unlikePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const unlikePostDb = await unlikePostService(postId, { userId })
   try {
+    const unlikePostDb = await unlikePostService(postId, { userId })
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: UNLIKE_POST, payload: unlikePostDb })
   } catch (error) {
@@ -133,12 +133,26 @@ export const unlikePost = (postId, userId) => async (dispatch) => {
   }
 }
 
-export const deletePost = (postId) => async (dispatch) => {
+export const updatePost = (postId, body) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  const deletePostDb = await deletePostService(postId)
   try {
+    const updatedPostDb = await updatePostService(postId, body)
     dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: DELETE_POST, payload: deletePostDb })
+    dispatch({ type: UPDATE_POST, payload: updatedPostDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deletePost = (postId) => async (dispatch) => {
+  try {
+    dispatch({ type: LOADING_UI })
+    await deletePostService(postId)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_POST, payload: postId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import { Trans, withTranslation, useTranslation } from "react-i18next"
 import Icon from "../Icon"
 import DashCardListItem from "./DashCardListItem"
 import DropDownMenu from "../DropDownMenu"
 
-export default function Dashcard({
+function Dashcard({
   dashCardData,
   dashCardTitle,
   dashCardStyle,
@@ -14,7 +16,7 @@ export default function Dashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
   const [filter, setFilter] = useState(dropdownMenuData?.dropDownItems[0])
-
+  const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
 
   let filterRule
@@ -37,7 +39,7 @@ export default function Dashcard({
     .slice(0, 3)
     .map((item) => (
       <DashCardListItem
-        key={item?._id}
+        key={item?._id || item?.sys?.id}
         linkId={item?._id || item?.sys?.id}
         listItemTitle={item?.title}
         listItemDate={item?.dateStart}
@@ -49,7 +51,7 @@ export default function Dashcard({
 
   const allItems = filteredItems.map((item) => (
     <DashCardListItem
-      key={item?._id}
+      key={item?._id || item?.sys?.id}
       linkId={item?._id || item?.sys?.id}
       listItemTitle={item?.title}
       listItemDate={item?.dateStart}
@@ -65,18 +67,20 @@ export default function Dashcard({
 
   return (
     <div className="w-full py-3">
-      <div className="flex flex-col relative w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+      <div className="flex relative flex-col w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
         <div
           className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
         >
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4">
-              <Link to={`/${dashCardTitle.toLowerCase()}`}>
-                {dashCardTitle}
-              </Link>
+              <Trans i18nKey={`dash_card_title_${dashCardTitle.toLowerCase()}`}>
+                <Link to={`/${dashCardTitle.toLowerCase()}`}>
+                  {dashCardTitle}
+                </Link>
+              </Trans>
             </p>
             <div className="flex flex-row">
-              <h2 className="text-base pr-4">{filter}</h2>
+              <h2 className="text-base pr-4">{t(`dropdownmenu.${filter}`)}</h2>
               <DropDownMenu
                 data={dropdownMenuData}
                 filter={filter}
@@ -122,3 +126,5 @@ Dashcard.propTypes = {
     dropDownItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 }
+
+export default withTranslation()(Dashcard)

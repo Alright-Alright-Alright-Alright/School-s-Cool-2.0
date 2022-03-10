@@ -3,6 +3,7 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 import AddCard from "../../core/AddCard"
 import TopicCard from "../../core/topics/topicsCards/TopicCard"
 import TopicModal from "../../core/topics/TopicModal"
@@ -14,6 +15,7 @@ function MainTopicsContent() {
   const [filter, setFilter] = useState("All topics")
   const user = useSelector((state) => state.user.singleUser)
   const [showModal, setShowModal] = useState(false)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const handleShowModal = () => {
@@ -44,22 +46,22 @@ function MainTopicsContent() {
     <div>
       <div className="flex pt-5 justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
         <Button
-          buttonName="All topics"
+          buttonName={t("topics.button_all_topics")}
           buttonStyle="btnTopicStyle"
           onClick={() => setFilter("All topics")}
         />
         <Button
-          buttonName="Followed topics"
+          buttonName={t("topics.button_followed_topics")}
           buttonStyle="btnTopicStyle"
           onClick={() => setFilter("Followed topics")}
         />
         <Button
-          buttonName="My topics"
+          buttonName={t("topics.button_my_topics")}
           buttonStyle="btnTopicStyle"
           onClick={() => setFilter("My topics")}
         />
       </div>
-      <div className="relative">
+      <div className="">
         {showModal && <TopicModal handleShowModal={handleShowModal} />}
         <div
           className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
@@ -67,7 +69,10 @@ function MainTopicsContent() {
           }`}
         >
           <button type="button" onClick={handleShowModal}>
-            <AddCard cardTitle="New topic" color="#18C7BB" />
+            <AddCard
+              cardTitle={t("topics.add_topic_card_title")}
+              color="#18C7BB"
+            />
           </button>
           {filteredTopics?.map((topic) => (
             <TopicCard key={topic._id} topics={topic} />

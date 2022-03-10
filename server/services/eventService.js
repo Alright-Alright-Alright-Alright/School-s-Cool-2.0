@@ -21,9 +21,11 @@ const createEventService = async (
   title,
   dateStart,
   dateEnd,
+  timeStart,
   description,
   location,
-  bannerImage
+  bannerImage,
+  tags,
 ) => {
   // passing info to the DB
   try {
@@ -32,9 +34,11 @@ const createEventService = async (
       title,
       dateStart,
       dateEnd,
+      timeStart,
       description,
       location,
-      bannerImage
+      bannerImage,
+      tags
     );
   } catch (e) {
     throw new Error(e.message);

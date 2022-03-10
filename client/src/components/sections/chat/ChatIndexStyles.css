@@ -1,0 +1,15 @@
+.str-chat {
+    height: 100%;
+    padding: 10px;
+    background-color: khaki;
+    border-radius: 50%;
+    z-index: 100;
+    /* position: relative; */
+}
+
+.str-chat.messaging, .str-chat.commerce{
+    border-radius: 15px;
+    /* background-color: khaki; */
+    @apply bg-grey-medium_light;
+    /* @apply text-white; */
+}

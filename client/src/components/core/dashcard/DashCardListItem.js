@@ -60,13 +60,15 @@ export default function DashCardListItem({
 
 DashCardListItem.defaultProps = {
   listItemDate: "",
+  listItemComments: [],
+  listItemUsers: [],
 }
 
 DashCardListItem.propTypes = {
   linkId: PropTypes.string.isRequired,
   listItemTitle: PropTypes.string.isRequired,
   listItemDate: PropTypes.string,
-  listItemComments: PropTypes.arrayOf.isRequired,
-  listItemUsers: PropTypes.arrayOf.isRequired,
+  listItemComments: PropTypes.arrayOf(PropTypes.shape),
+  listItemUsers: PropTypes.arrayOf(PropTypes.shape),
   listItemType: PropTypes.string.isRequired,
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
+import { t } from "i18next"
 import Button from "../../Button"
 import {
   getOneEvent,
@@ -32,24 +33,26 @@ function EventDescriptionCard({ event, user }) {
   return (
     <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
       <div>
-        <h1 className="p-3 text-lg">Event description</h1>
+        <h1 className="p-3 text-lg">
+          {t("events.header_card_event_decription")}
+        </h1>
       </div>
       <div className="flex justify-between px-3 pb-3 text-base">
         <p>{event?.description}</p>
       </div>
 
       <div className="flex justify-end p-3 relative">
-        {event?.attendees?.some((attendee) => attendee._id === user._id) ||
+        {event?.attendees?.some((attendee) => attendee?._id === user?._id) ||
         attendEvent ? (
           <Button
-            buttonName="Leave this event"
+            buttonName={t("events.button_leave_event")}
             buttonStyle="btnEventStyleActive"
             buttonSubmit
             onClick={handleAttendEvent}
           />
         ) : (
           <Button
-            buttonName="Join this event"
+            buttonName={t("events.button_join_event")}
             buttonStyle="btnEventStyle"
             buttonSubmit
             onClick={handleAttendEvent}

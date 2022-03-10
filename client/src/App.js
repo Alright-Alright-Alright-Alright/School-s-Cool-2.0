@@ -1,50 +1,70 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React, { Suspense, lazy, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Route, Routes, Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import jwt from "jsonwebtoken"
+import { ErrorBoundary } from "react-error-boundary"
+import { useTranslation } from "react-i18next"
+import i18next from "i18next"
 import NavBar from "./components/layout/NavBar"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Topics from "./pages/Topics"
-import TopicDetailPage from "./pages/TopicDetailPage"
-import Home from "./pages/Home"
-import { loggedInUser } from "./redux/actions/userActions"
-// const Home = lazy(() => import("./pages/Home"))
+import { loggedInUser, logoutUser } from "./redux/actions/userActions"
+import ChatWidgetNew from "./components/sections/chat/ChatWidgetNew"
+import ErrorFallback from "./components/core/errorBoundries/ErrorFallback"
+
+const languages = [
+  {
+    code: "nl",
+    name: "Nederlands",
+    country_code: "nl",
+  },
+  {
+    code: "en",
+    name: "English",
+    country_code: "gb",
+  },
+]
 
 function App() {
   const loggedIn = useSelector((state) => state.user.isLoggedIn)
+  const [showChatWidget, setShowChatWidget] = useState(false)
   const token = localStorage.getItem("Authorization")
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const currentTime = new Date().getTime().toString().slice(0, 10)
+  const { t } = useTranslation()
+  const currentTime = (new Date().getTime() / 1000).toString()
+  const now = parseInt(currentTime.split(".")[0], 10)
 
   useEffect(() => {
-    if (
-      jwt.decode(token?.slice(7, token.length))?.exp < Number(currentTime) ||
-      (!loggedIn && !token)
-    ) {
-      navigate("/login")
-    } else {
+    if (jwt.decode(token.replace("Bearer ", ""))?.exp > now) {
       dispatch(loggedInUser())
+    } else {
+      dispatch(logoutUser())
+      console.log("token expired!")
+      navigate("/login")
     }
-  }, [dispatch, token, loggedIn, navigate, currentTime])
+    setTimeout(() => {
+      setShowChatWidget(true)
+    }, 3000)
+  }, [dispatch, token, loggedIn, navigate, currentTime, now])
+
+  const errorHandler = (error, errorInfo) => {
+    console.log("Logging", error, errorInfo)
+  }
 
   return (
     <div className="App">
-      <NavBar />
-      {/* <Home /> */}
-      <Outlet />
-      {/* <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route path="/topics" element={<Topics />}>
-            <Route path=":topicId" element={<TopicDetailPage />} />
-          </Route>
-        </Routes>
-      </Suspense> */}
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onError={errorHandler}
+        onReset={() => {
+          navigate("/home")
+        }}
+      >
+        <NavBar />
+        <ChatWidgetNew />
+        <Outlet />
+      </ErrorBoundary>
     </div>
   )
 }
