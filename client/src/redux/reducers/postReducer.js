@@ -9,6 +9,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   DELETE_POST,
+  UPDATE_POST,
 } from "../types/posts"
 // import {
 //   SET_ERRORS,
@@ -55,6 +56,13 @@ const postsReducer = (state = initialState, action) => {
         ),
       }
     case SUBMIT_COMMENT:
+      return {
+        ...state,
+        allPosts: state.allPosts.map((eachPost) =>
+          eachPost._id === action.payload._id ? action.payload : eachPost
+        ),
+      }
+    case UPDATE_POST:
       return {
         ...state,
         allPosts: state.allPosts.map((eachPost) =>

@@ -115,6 +115,24 @@ const unlikePostDb = async (postId, userId) => {
   }
 };
 
+const updatePostDb = async (postId, body) => {
+  try {
+    let post = await Post.findByIdAndUpdate(postId, { body }, { new: true })
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("topic", "title")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          select: "firstName lastName imageUrl",
+        },
+      });
+    return post;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const deletePostDb = async (postId) => {
   try {
     await Post.findByIdAndDelete(postId);
@@ -130,4 +148,5 @@ module.exports = {
   likePostDb,
   unlikePostDb,
   deletePostDb,
+  updatePostDb,
 };

@@ -25,7 +25,7 @@ function ChatWidgetNew() {
       </button>
       {showChatWidget && (
         <>
-          <div className=" h-5/6 w-5/7 rounded-2xl bg-white justify-evenly absolute inset-y-0 right-0 top-20 mb-20 shadow-xl ">
+          <div className=" z-50 h-5/6 w-5/7 rounded-2xl bg-white justify-evenly absolute inset-y-0 right-0 top-20 mb-20 shadow-xl ">
             {/* {UI.errors && <MessageHandler error={UI.errors.data.message} />} */}
             <ChatIndex handleShowModal={handleShowModal} />
           </div>

@@ -48,7 +48,7 @@ export const deletePostService = async (postId) => {
   }
 }
 
-export const editPostService = (postId, newPost) =>
+export const updatePostService = (postId, newPost) =>
   service
     .put(`/posts/${postId}`, newPost)
     .then((responseFromAPI) => responseFromAPI.data)

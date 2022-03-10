@@ -138,7 +138,9 @@
         "all_files": "Alle bestanden",
         "my_files": "Mijn bestanden",
         "all_users": "Alle gebruikers",
-        "all_attendees": "Alle deelnemers"
+        "all_attendees": "Alle deelnemers",
+        "edit": "Bewerk",
+        "delete": "Verwijder"
     },
     "navbar" : {
         "navbar_home": "Home",

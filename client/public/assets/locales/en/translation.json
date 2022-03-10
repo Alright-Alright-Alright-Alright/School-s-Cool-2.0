@@ -140,7 +140,9 @@
         "all_files": "All resources",
         "my_files": "My resources",
         "all_users": "All users",
-        "all_attendees": "All attendees"
+        "all_attendees": "All attendees",
+        "edit": "Edit",
+        "delete": "Delete"
     },
     "navbar" : {
         "navbar_home": "Home",
