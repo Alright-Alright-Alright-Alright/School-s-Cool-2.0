@@ -25,12 +25,12 @@ export default function TopicDashCardListItem({
               iconStyle="fill-inactive text-grey-dark"
             />
           </button>
-          <p>{listItemComments?.length}</p>
+          <p>{listItemLikes?.length}</p>
         </div>
         <button type="button">
           <Icon iconName="message" iconStyle="fill-inactive text-grey-dark" />
         </button>
-        <p>{listItemLikes?.length}</p>
+        <p>{listItemComments?.length}</p>
       </div>
     </div>
   </>
