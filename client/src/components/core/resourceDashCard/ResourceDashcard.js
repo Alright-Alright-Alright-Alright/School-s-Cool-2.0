@@ -34,8 +34,9 @@ export default function ResourceDashcard({
   const allItems = resourceDashCardData.map((item) => (
     <ResourceDashCardListItem
       key={item?._id}
-      listItemFirstName={item?.firstName}
-      listItemLastName={item?.lastName}
+      listItemName={item?.title}
+      listItemLikes={item?.likedBy}
+      listItemComments={item?.comments}
       resourceDashCardData={resourceDashCardData}
     />
   ))
