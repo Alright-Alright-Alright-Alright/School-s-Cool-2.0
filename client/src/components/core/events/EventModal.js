@@ -62,6 +62,7 @@ const Modal = ({ handleShowModal }) => {
       description,
       dateStart: startDate,
       dateEnd: endDate,
+      timeStart: startTime,
       location,
       bannerImage: image,
       isPrivate: privacy,
@@ -77,7 +78,7 @@ const Modal = ({ handleShowModal }) => {
   return (
     <div className="flex justify-center content-center">
       <form
-        className="w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl pb-3"
+        className="w-5/6 lg:w-3/7 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 inset-1/7 md:inset-y-1/4 shadow-xl py-3"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
@@ -107,6 +108,7 @@ const Modal = ({ handleShowModal }) => {
             locale="nl"
             dateFormat="dd/MM/yyyy"
             className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
+            minDate={new Date()}
           />
         </section>
         <section className="">
