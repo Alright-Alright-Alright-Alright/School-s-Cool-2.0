@@ -21,7 +21,7 @@ const TagsInput = ({ selectedTags }) => {
   }
 
   return (
-    <div className="w-full px-6 flex content-start flex-wrap">
+    <div className="w-full flex content-start flex-wrap">
       <ul className="w-auto flex content-center justify-center border-sky">
         {tags.map((tag, index) => (
           <li key={index} className="mr-1 bg-grey-light rounded-full px-3">
@@ -48,7 +48,7 @@ const TagsInput = ({ selectedTags }) => {
               ? t("tag_selector_remove_message")
               : t("tag_selector_placeholder")
           } `}
-          className="w-6/7 flex-1 focus:outline-none text-base"
+          className="w-6/7 flex-1 focus:outline-none text-base text-grey-medium_light"
         />
       )}
     </div>

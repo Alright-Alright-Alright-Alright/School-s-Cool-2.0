@@ -32,6 +32,7 @@
         "button_more_info": "Meer informatie",
         "modal_title_new_event": "Plaats hier een naam voor je evenement",
         "modal_date_new_event": "Selecteer een datum",
+        "modal_time_new_event": "Selecteer een tijd",
         "modal_location_new_event": "Selecteer locatie",
         "modal_description_new_event": "Vertel kort waar je evenement over gaat",
         "modal_cover_image_new_event": "Voeg een cover plaatje toe",
