@@ -75,14 +75,12 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
     }
     if (actionName === "delete") {
       dispatch(deletePost(post._id))
-      // onDeletePost()
-      console.log("deleting")
     }
   }
 
   return (
     <div className="relative rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
-      {user._id === post.owner._id && (
+      {user._id === post.owner._id || user.role === "ADMIN" ? (
         <DropDownMenu
           position="absolute top-6 right-0"
           data={{
@@ -91,7 +89,7 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
           }}
           selectFilter={handleSelectAction}
         />
-      )}
+      ) : null}
       <div>
         <div className="flex justify-between flex-wrap p-3 mr-6">
           <div className="flex items-center">

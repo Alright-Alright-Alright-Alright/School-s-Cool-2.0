@@ -5,6 +5,8 @@ import {
   SET_EVENTS,
   JOIN_EVENT,
   LEAVE_EVENT,
+  EDIT_EVENT,
+  DELETE_EVENT,
 } from "../types/events"
 
 const initialState = {
@@ -23,6 +25,7 @@ const eventReducer = (state = initialState, action) => {
       return {
         allEvents: [...state.allEvents, action.payload],
       }
+    case EDIT_EVENT:
     case GET_EVENT:
       return {
         ...state,
@@ -33,6 +36,13 @@ const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         singleEvent: action.payload,
+      }
+    case DELETE_EVENT:
+      return {
+        ...state,
+        allEvents: state.allEvents.filter(
+          (event) => event._id !== action.payload
+        ),
       }
     default:
       return state

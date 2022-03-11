@@ -4,6 +4,8 @@ import {
   GET_EVENT,
   JOIN_EVENT,
   LEAVE_EVENT,
+  EDIT_EVENT,
+  DELETE_EVENT,
 } from "../types/events"
 
 import {
@@ -12,6 +14,8 @@ import {
   getEvent,
   joinEventService,
   leaveEventService,
+  editEventService,
+  deleteEventService,
 } from "../services/eventsService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -79,6 +83,37 @@ export const leaveEvent = (eventId, user) => async (dispatch) => {
     const leaveEventDb = await leaveEventService(eventId, user)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: LEAVE_EVENT, payload: leaveEventDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const editEvent = (eventId, eventData) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const eventEdited = await editEventService(eventId, eventData)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: EDIT_EVENT, payload: eventEdited })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deleteEvent = (eventId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const eventDeleted = await deleteEventService(eventId)
+    console.log(eventDeleted)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_EVENT, payload: eventId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

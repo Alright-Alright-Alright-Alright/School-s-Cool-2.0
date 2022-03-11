@@ -23,7 +23,7 @@ const TopicDetailIndex = () => {
     dispatch(getOneTopic(topicId))
   }, [dispatch, topicId])
 
-  const showEditModel = () => {
+  const showEditModal = () => {
     setshowModal(!showModal)
     seteditModal(!editModal)
   }
@@ -35,14 +35,14 @@ const TopicDetailIndex = () => {
           <MainContent
             topic={topic.singleTopic}
             showModal={showModal}
-            showEditModel={showEditModel}
+            showEditModal={showEditModal}
             editModal={editModal}
           />
         }
         contentLeft={
           <TopicContentLeft
             topic={topic.singleTopic}
-            showEditModel={showEditModel}
+            showEditModal={showEditModal}
             user={user.singleUser}
           />
         }

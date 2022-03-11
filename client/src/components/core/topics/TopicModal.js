@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/no-onchange */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import PropTypes from "prop-types"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { addAtopic, editTopic } from "../../../redux/actions/topicActions"
+import {
+  addAtopic,
+  editTopic,
+  deleteTopic,
+} from "../../../redux/actions/topicActions"
 import MessageHandler from "../MessageHandler"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
@@ -23,6 +25,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const UI = useSelector((state) => state.UI)
   const { topicId } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleClick = () => {
     hiddenFileInput.current.click()
@@ -46,6 +49,11 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
 
   const chooseSubject = (e) => {
     setSubject(e.target.value)
+  }
+
+  const deleteTopicHandler = () => {
+    dispatch(deleteTopic(topicId))
+    navigate("/topics")
   }
 
   const handleFormSubmit = async (e) => {
@@ -178,6 +186,15 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               buttonSubmit
             />
           </section>
+          <div>
+            <button
+              className="flex mx-5"
+              type="button"
+              onClick={deleteTopicHandler}
+            >
+              <Icon iconName="trash" /> Delete topic
+            </button>
+          </div>
         </form>
       ) : (
         <form
@@ -273,6 +290,12 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
       )}
     </div>
   )
+}
+
+Modal.propTypes = {
+  editModal: PropTypes.bool.isRequired,
+  handleShowModal: PropTypes.func.isRequired,
+  singleTopic: PropTypes.shape.isRequired,
 }
 
 export default Modal

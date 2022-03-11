@@ -19,14 +19,14 @@ function Comment({ comment, id }) {
       />
       <div className="flex justify-between bg-grey-super_light w-full rounded-full items-center p-2">
         <p className="text-sm text-grey-dark pl-1">{comment?.body}</p>
-        <button
-          type="button"
-          onClick={() => dispatch(deleteComment(comment?._id, id))}
-        >
-          {user?._id === comment?.owner?._id && (
+        {user?._id === comment?.owner?._id || user?.role === "ADMIN" ? (
+          <button
+            type="button"
+            onClick={() => dispatch(deleteComment(comment?._id, id))}
+          >
             <Icon iconName="close" iconStyle="text-grey-dark" />
-          )}
-        </button>
+          </button>
+        ) : null}
       </div>
     </div>
   )

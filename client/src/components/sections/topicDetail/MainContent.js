@@ -12,7 +12,7 @@ import TopicPost from "../../core/topics/TopicPost/TopicPost"
 import RichTextToolbar from "../../core/richtText/RichTextToolbar"
 import TopicModal from "../../core/topics/TopicModal"
 
-function MainContent({ topic, showModal, editModal, showEditModel }) {
+function MainContent({ topic, showModal, editModal, showEditModal }) {
   const [body, setPostBody] = useState("")
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user)
@@ -50,7 +50,7 @@ function MainContent({ topic, showModal, editModal, showEditModel }) {
       {showModal && (
         <TopicModal
           editModal={editModal}
-          handleShowModal={showEditModel}
+          handleShowModal={showEditModal}
           singleTopic={topic}
         />
       )}

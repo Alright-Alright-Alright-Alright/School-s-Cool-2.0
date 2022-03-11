@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React from "react"
 import { Link } from "react-router-dom"
 import { t } from "i18next"
+import PropTypes from "prop-types"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
 import data from "../../../data/dashcardDropdownMenu.json"
-import Button from "../../core/Button"
+import Icon from "../../core/Icon"
 
-function TopicContentLeft({ topic, showEditModel, user }) {
+function TopicContentLeft({ topic, showEditModal, user }) {
   return (
     <div className="flex flex-col max-w-sm float-right">
       <div className="p-3">
@@ -18,8 +17,15 @@ function TopicContentLeft({ topic, showEditModel, user }) {
           alt="placeholder"
           width="400"
         />
-        <div className="p-3 flex-col  place-items-end content-end max-w-xs">
-          <h1 className="text-xl pb-2">{topic?.title}</h1>
+        <div className=" flex-col  place-items-end content-end  py-5">
+          <div className="flex justify-between">
+            <h1 className="text-xl pb-2">{topic?.title}</h1>
+            {topic?.owner?._id === user?._id || user?.role === "ADMIN" ? (
+              <button type="button" onClick={showEditModal}>
+                <Icon iconName="edit" iconStyle="text-grey-dark" />
+              </button>
+            ) : null}
+          </div>
           <p className="text-lg pb-2">
             {topic?.category}: {topic?.subject}
           </p>
@@ -51,17 +57,16 @@ function TopicContentLeft({ topic, showEditModel, user }) {
               </p>
             </div>
           </Link>
-          {topic?.owner?._id === user?._id && (
-            <Button
-              buttonName="Edit Topic"
-              buttonStyle="btnTopicStyle"
-              onClick={showEditModel}
-            />
-          )}
         </div>
       </div>
     </div>
   )
+}
+
+TopicContentLeft.propTypes = {
+  topic: PropTypes.shape.isRequired,
+  showEditModal: PropTypes.func.isRequired,
+  user: PropTypes.shape.isRequired,
 }
 
 export default TopicContentLeft
