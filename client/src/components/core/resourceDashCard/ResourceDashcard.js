@@ -19,8 +19,6 @@ export default function ResourceDashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  console.log(resourceDashCardData)
-
   const firstThreeItems = resourceDashCardData
     .slice(0, 3)
     .map((item) => (
