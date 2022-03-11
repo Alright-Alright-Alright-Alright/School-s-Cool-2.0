@@ -20,7 +20,7 @@
     "tag_selector_max_tags_message": "Je hebt het maximale aantal tags bereikt",
     "events": {
         "button_new_event": "Nieuw evenement",
-        "button_edit_event": "Pas evenement een",
+        "button_edit_event": "Pas evenement aan",
         "button_delete_event": "Verwijder Event",
         "button_join_event": "Deelnemen",
         "button_leave_event": "Verlaat",

@@ -3,13 +3,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
-import calendar from "dayjs/plugin/calendar"
 import { t } from "i18next"
 import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
+import Icon from "../../core/Icon"
 
-function EventDetailContentLeft({ event }) {
-  dayjs.extend(calendar)
-
+function EventDetailContentLeft({ event, showEditModal, user }) {
   // Get i18Next locale from cookies
   const localeFromCookies = `; ${document.cookie}`
     .split(`; i18next=`)
@@ -25,9 +23,19 @@ function EventDetailContentLeft({ event }) {
           alt="placeholder"
           width="400"
         />
-        <div className="p-3 flex-col  place-items-end content-end max-w-xs">
-          <h1 className="text-xl pb-2">{event?.title}</h1>
-          <p className="text-lg pb-2">{event?.location}</p>
+        <div className=" py-5 flex-col  place-items-end content-end ">
+          <div className="flex justify-between">
+            <h1 className="text-xl pb-2">{event?.title}</h1>
+            {event?.owner?._id === user?._id || user?.role === "ADMIN" ? (
+              <button type="button" onClick={showEditModal}>
+                <Icon iconName="edit" iconStyle="text-grey-dark" />
+              </button>
+            ) : null}
+          </div>
+          <p className="flex text-lg pb-2">
+            <Icon iconName="location" iconStyle="text-grey-dark" />{" "}
+            {event?.location}
+          </p>
           <p className="text-base pb-2">
             {dayjs(event?.dateStart)
               .locale(localeFromCookies)
@@ -39,7 +47,9 @@ function EventDetailContentLeft({ event }) {
           </p>
           <p className="text-base pb-2">
             {event?.timeStart
-              ? dayjs(event?.timeStart).locale(localeFromCookies).calendar()
+              ? dayjs(event?.timeStart)
+                  .locale(localeFromCookies)
+                  .format("HH:mm")
               : null}
           </p>
         </div>
@@ -78,6 +88,8 @@ function EventDetailContentLeft({ event }) {
 
 EventDetailContentLeft.propTypes = {
   event: PropTypes.shape.isRequired,
+  showEditModal: PropTypes.func.isRequired,
+  user: PropTypes.shape.isRequired,
 }
 
 export default EventDetailContentLeft

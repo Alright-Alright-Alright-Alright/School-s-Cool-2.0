@@ -31,7 +31,7 @@ const createEventDb = async (
       description,
       location,
       bannerImage,
-      tags
+      tags,
     });
   } catch (e) {
     throw new Error(e.message);
@@ -53,16 +53,29 @@ const updateEventDb = async (
   title,
   dateStart,
   dateEnd,
+  timeStart,
   description,
   location,
-  bannerImage
+  bannerImage,
+  tags
 ) => {
   try {
     return await Event.findByIdAndUpdate(
       eventId,
-      { title, dateStart, dateEnd, description, location, bannerImage },
+      {
+        title,
+        dateStart,
+        dateEnd,
+        timeStart,
+        description,
+        location,
+        bannerImage,
+        tags,
+      },
       { new: true }
-    );
+    )
+      .populate("attendees")
+      .populate("owner", "firstName lastName imageUrl");
   } catch (e) {
     throw new Error(e.message);
   }

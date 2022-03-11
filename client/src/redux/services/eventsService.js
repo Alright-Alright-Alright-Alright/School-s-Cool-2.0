@@ -21,3 +21,8 @@ export const leaveEventService = (eventId, user) =>
   service
     .put(`/events/${eventId}/leave`, user, configHeaders())
     .then((response) => response.data)
+
+export const editEventService = (eventId, eventData) =>
+  service
+    .put(`/events/${eventId}`, eventData, configHeaders())
+    .then((response) => response.data)
