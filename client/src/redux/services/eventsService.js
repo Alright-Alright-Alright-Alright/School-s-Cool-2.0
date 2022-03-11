@@ -26,3 +26,8 @@ export const editEventService = (eventId, eventData) =>
   service
     .put(`/events/${eventId}`, eventData, configHeaders())
     .then((response) => response.data)
+
+export const deleteEventService = (eventId) =>
+  service
+    .delete(`/events/${eventId}`, configHeaders())
+    .then((response) => response.data)
