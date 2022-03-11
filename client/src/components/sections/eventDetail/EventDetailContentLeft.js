@@ -14,6 +14,12 @@ function EventDetailContentLeft({ event, showEditModal, user }) {
     .pop()
     .split(";")[0]
 
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
+
   return (
     <div className="flex flex-col max-w-sm">
       <div className="p-3">

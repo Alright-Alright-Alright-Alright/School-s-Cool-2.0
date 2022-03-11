@@ -73,6 +73,8 @@ const Modal = ({ handleShowModal }) => {
     dispatch(createNewEvent(eventData))
   }
 
+  console.log(bannerImage)
+
   return (
     <div className="flex justify-center content-center">
       <form
