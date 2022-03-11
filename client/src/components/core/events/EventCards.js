@@ -71,7 +71,9 @@ const EventCards = ({ event }) => {
               </p>
               <p className="text-sm text-grey-medium_light">
                 {event?.timeStart
-                  ? dayjs(event?.timeStart).locale(localeFromCookies).calendar()
+                  ? dayjs(event?.timeStart)
+                      .locale(localeFromCookies)
+                      .format("HH:mm")
                   : null}
               </p>
             </div>

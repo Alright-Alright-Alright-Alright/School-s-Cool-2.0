@@ -2,6 +2,9 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const icons = {
+  edit: '<svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M3.53661 18.4976L3.53289 18.5013H0.5V15.4613C0.5 15.4602 0.500018 15.4593 0.500047 15.4585C0.500938 15.4575 0.502091 15.4563 0.503553 15.4548L11.06 4.89839L14.1027 7.94112L3.53661 18.4976ZM17.3564 4.68773L15.88 6.16417L12.8371 3.12128L14.3136 1.64483C14.5083 1.45009 14.8217 1.45009 15.0164 1.64483L17.3564 3.98483C17.5512 4.17957 17.5512 4.49299 17.3564 4.68773Z" stroke="#0F2331"/> </svg>',
+  location:
+    '<svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M6 17.216C5.85299 17.0344 5.66897 16.8034 5.4581 16.5306C4.9018 15.8108 4.16077 14.8034 3.42064 13.6516C2.67965 12.4984 1.94521 11.2092 1.39739 9.92526C0.846969 8.63522 0.5 7.38488 0.5 6.3C0.5 3.06987 2.98171 0.5 6 0.5C9.01829 0.5 11.5 3.06987 11.5 6.3C11.5 7.38488 11.153 8.63522 10.6026 9.92526C10.0548 11.2092 9.32035 12.4984 8.57936 13.6516C7.83923 14.8034 7.0982 15.8108 6.5419 16.5306C6.33103 16.8034 6.147 17.0344 6 17.216ZM3.35714 6.3C3.35714 7.79487 4.51829 9.05 6 9.05C7.48171 9.05 8.64286 7.79487 8.64286 6.3C8.64286 4.80513 7.48171 3.55 6 3.55C4.51829 3.55 3.35714 4.80513 3.35714 6.3Z" stroke="#0F2331"/> </svg>',
   add: '<circle cx="12" cy="12" r="10.7" stroke="var(--color-counter)" fill="var(--color-bg)"/><path d="M12 6V18" stroke="var(--color-content)" stroke-linecap="round"/><path d="M6 12H18" stroke="var(--color-content)" stroke-linecap="round"/>',
   collapse:
     '<path d="M3 13L13 3L23 13" stroke="currentColor" fill="transparent" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>',

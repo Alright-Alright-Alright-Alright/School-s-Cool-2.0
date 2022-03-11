@@ -18,8 +18,16 @@ const getAllEvents = async (req, res, next) => {
 };
 
 const createNewEvent = async (req, res, next) => {
-  const { title, dateStart, dateEnd, timeStart, description, location, bannerImage, tags } =
-    req.body;
+  const {
+    title,
+    dateStart,
+    dateEnd,
+    timeStart,
+    description,
+    location,
+    bannerImage,
+    tags,
+  } = req.body;
   const { _id } = req.user.userLogedIn;
   try {
     if (!title) {
@@ -57,19 +65,29 @@ const getEvent = async (req, res, next) => {
 
 const updateEvent = async (req, res, next) => {
   const { eventId } = req.params;
-  const { title, dateStart, dateEnd, description, location, bannerImage } =
-    req.body;
+  const {
+    title,
+    dateStart,
+    dateEnd,
+    timeStart,
+    description,
+    location,
+    bannerImage,
+    tags,
+  } = req.body;
   try {
-    await updateEventService(
+    const updatedEvent = await updateEventService(
       eventId,
       title,
       dateStart,
       dateEnd,
+      timeStart,
       description,
       location,
-      bannerImage
+      bannerImage,
+      tags
     );
-    return res.status(201).json({ message: "Event had been updated" });
+    return res.status(201).json(updatedEvent);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
   }

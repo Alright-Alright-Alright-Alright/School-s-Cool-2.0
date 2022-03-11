@@ -7,7 +7,6 @@ import { EditorState } from "draft-js"
 import { useParams } from "react-router-dom"
 import { Editor } from "react-draft-wysiwyg"
 import { convertToHTML } from "draft-convert"
-import DOMPurify from "dompurify"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { t } from "i18next"
 import Button from "../Button"
@@ -45,10 +44,6 @@ const RichTextToolbar = () => {
     const currentContentAsHTML = convertToHTML(editorState.getCurrentContent())
     setConvertedContent(currentContentAsHTML)
   }
-
-  const createMarkup = (html) => ({
-    __html: DOMPurify.sanitize(html),
-  })
 
   const handleSubmit = (e) => {
     e.preventDefault()

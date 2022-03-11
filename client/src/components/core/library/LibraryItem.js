@@ -182,9 +182,10 @@ const libraryItem = ({ library, showModal }) => {
                           className="pt-2"
                           onClick={() => dispatch(deleteFile(item._id))}
                         >
-                          {user._id === item.owner._id && (
+                          {user._id === item.owner._id ||
+                          user?.role === "ADMIN" ? (
                             <Icon iconName="trash" />
-                          )}
+                          ) : null}
                         </button>
                       </div>
                     </div>
