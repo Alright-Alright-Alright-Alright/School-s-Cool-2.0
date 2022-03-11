@@ -11,8 +11,14 @@ import {
 } from "../../../redux/actions/postActions"
 import EventDescriptionCard from "../../core/events/eventDescriptionCard/eventDescriptionCard"
 import TopicPost from "../../core/topics/TopicPost/TopicPost"
+import EditEventModal from "../../core/events/EditEventModal"
 
-function EventDetailMainContent({ event }) {
+function EventDetailMainContent({
+  event,
+  showModal,
+  editModal,
+  showEditModel,
+}) {
   const [body, setPostBody] = useState("")
   const UI = useSelector((state) => state.UI)
   const user = useSelector((state) => state.user.singleUser)
@@ -41,6 +47,13 @@ function EventDetailMainContent({ event }) {
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}
       />
+      {showModal && (
+        <EditEventModal
+          editModal={editModal}
+          handleShowModal={showEditModel}
+          event={event}
+        />
+      )}
       {posts?.map((post) => (
         <TopicPost
           key={post._id}
@@ -55,6 +68,9 @@ function EventDetailMainContent({ event }) {
 
 EventDetailMainContent.propTypes = {
   event: PropTypes.shape.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  editModal: PropTypes.bool.isRequired,
+  showEditModel: PropTypes.func.isRequired,
 }
 
 export default EventDetailMainContent

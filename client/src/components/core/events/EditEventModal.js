@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux"
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import nl from "date-fns/locale/nl"
 import { useTranslation } from "react-i18next"
+import dayjs from "dayjs"
+import { useParams } from "react-router-dom"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { createNewEvent } from "../../../redux/actions/eventActions"
+import { editEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -17,13 +19,13 @@ import MessageHandler from "../MessageHandler"
 
 registerLocale("nl", nl)
 
-const Modal = ({ handleShowModal }) => {
+const EditEventModal = ({ handleShowModal, event }) => {
   const [title, seTitle] = useState("")
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState(event?.tags)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const [dateRange, setDateRange] = useState([null, null])
   const [startDate, endDate] = dateRange
@@ -31,6 +33,7 @@ const Modal = ({ handleShowModal }) => {
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
+  const { eventId } = useParams()
 
   const dispatch = useDispatch()
 
@@ -58,19 +61,30 @@ const Modal = ({ handleShowModal }) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
     const eventData = {
-      title,
-      description,
-      dateStart: startDate,
-      dateEnd: endDate,
-      timeStart: startTime,
-      location,
-      bannerImage: image,
-      isPrivate: privacy,
-      tags,
+      title: title || (typeof event.title === "undefined" ? "" : event.title),
+      description:
+        description ||
+        (typeof event.description === "undefined" ? "" : event.description),
+      dateStart:
+        startDate ||
+        (typeof event.dateStart === "undefined" ? "" : event.dateStart),
+      dateEnd:
+        endDate || (typeof event.dateEnd === "undefined" ? "" : event.dateEnd),
+      timeStart:
+        startTime ||
+        (typeof event.timeStart === "undefined" ? "" : event.timeStart),
+      location:
+        location ||
+        (typeof event.location === "undefined" ? "" : event.location),
+      bannerImage: image || event.bannerImage,
+      isPrivate:
+        privacy ||
+        (typeof event?.privacy === "undefined" ? false : event.privacy),
+      tags: tags || event.tags,
     }
     if (eventData.title.length > 0 && eventData.location.length > 0)
       handleShowModal()
-    dispatch(createNewEvent(eventData))
+    dispatch(editEvent(eventId, eventData))
   }
 
   return (
@@ -85,7 +99,7 @@ const Modal = ({ handleShowModal }) => {
             type="text"
             name=""
             id=""
-            placeholder={t("events.modal_title_new_event")}
+            placeholder={event.title}
             className="w-full placeholder-grey-medium text-lg"
             onChange={chooseTitle}
           />
@@ -101,7 +115,7 @@ const Modal = ({ handleShowModal }) => {
             onChange={(update) => {
               setDateRange(update)
             }}
-            placeholderText={t("events.modal_date_new_event")}
+            placeholderText={dayjs(event.dateStart).format("DD-MM-YYYY")}
             withPortal
             locale="nl"
             dateFormat="dd/MM/yyyy"
@@ -119,8 +133,7 @@ const Modal = ({ handleShowModal }) => {
               onChange={(update) => {
                 setStartTime(update)
               }}
-              placeholderText={t("events.modal_time_new_event")}
-              // placeholderText={t("events.modal_date_new_event")}
+              placeholderText={dayjs(event.timeStart).format("HH:mm")}
               withPortal
               locale="nl"
               timeCaption="Time"
@@ -133,7 +146,7 @@ const Modal = ({ handleShowModal }) => {
           <div className="">
             <input
               type="text"
-              placeholder={t("events.modal_location_new_event")}
+              placeholder={event?.location}
               onChange={chooseLocation}
               className=" placeholder-grey-medium_light text-base h-10"
             />
@@ -164,7 +177,7 @@ const Modal = ({ handleShowModal }) => {
         <section className="py-3 mx-5">
           <input
             type="text"
-            placeholder={t("events.modal_description_new_event")}
+            placeholder={event?.description}
             className="w-full placeholder-grey-medium_light text-base h-10"
             onChange={chooseDescription}
           />
@@ -180,7 +193,7 @@ const Modal = ({ handleShowModal }) => {
           />
           <div className="py-3 lg:pt-0">
             <Button
-              buttonName={t("events.modal_button_create_event")}
+              buttonName={t("events.button_edit_event")}
               buttonStyle="btnEventStyle"
               buttonSubmit
             />
@@ -191,4 +204,4 @@ const Modal = ({ handleShowModal }) => {
   )
 }
 
-export default Modal
+export default EditEventModal
