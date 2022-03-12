@@ -167,5 +167,20 @@
         "navbar_library": "Library",
         "navbar_profile": "Profile",
         "navbar_logout": "Logout"
+    },
+    "auth" : {
+        "login_button": "Login",
+        "login_forgot_password": "Forgot password?",
+        "login_register": "Register",
+        "login_register_first_name": "First name",
+        "login_register_last_name": "Last name",
+        "login_register_email": "Email",
+        "login_register_enter_email": "Enter email",
+        "login_register_password": "Password",
+        "login_register_enter_password": "Enter password",
+        "login_register_password_confirm": "Confirm password",
+        "login_register_button": "Register",
+        "login_register_back_to_login": "Or login",
+        "login_register_reset_password": "Reset password"
     }
   }

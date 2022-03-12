@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { t } from "i18next"
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
@@ -88,27 +89,31 @@ const LoginForm = () => {
         >
           <div className="flex justify-center">{logo}</div>
           <div className="lg:h-2/5 flex flex-col px-8 justify-around">
-            <label className="text-sm my-2">Email: </label>
+            <label className="text-sm my-2">
+              {t("auth.login_register_email")}:
+            </label>
             <input
               type="email"
               name="email"
               checked={email}
               onChange={chooseEmail}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-              placeholder="Enter your email"
+              placeholder={t("auth.login_register_enter_email")}
             />
 
-            <label className="text-sm my-2">Password: </label>
+            <label className="text-sm my-2">
+              {t("auth.login_register_password")}:{" "}
+            </label>
             <input
               type="password"
               name="password"
               value={password}
               onChange={choosePassword}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
-              placeholder="Enter your password"
+              placeholder={t("auth.login_register_enter_password")}
             />
             <p className="text-sm flex justify-end">
-              <Link to="/forgot">Forgot password?</Link>
+              <Link to="/forgot">{t("auth.login_forgot_password")}</Link>
             </p>
           </div>
           <div className="flex justify-between px-8">
@@ -119,7 +124,7 @@ const LoginForm = () => {
             />
             <Link to="/register">
               <Button
-                buttonName="Sign up"
+                buttonName={t("auth.login_register")}
                 buttonSubmit
                 buttonStyle="btnPrimaryStyle"
               />

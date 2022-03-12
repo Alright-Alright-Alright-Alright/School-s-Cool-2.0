@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { t } from "i18next"
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
@@ -102,7 +103,9 @@ const RegisterForm = () => {
         >
           <div className="flex justify-center">{logo}</div>
           <div className="h-2/5 flex flex-col px-8 justify-around">
-            <label className="text-sm my-2">First Name:</label>
+            <label className="text-sm my-2">
+              {t("auth.login_register_first_name")}:
+            </label>
             <input
               type="text"
               name="firstName"
@@ -111,7 +114,9 @@ const RegisterForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
             />
 
-            <label className="text-sm my-2">Last Name: </label>
+            <label className="text-sm my-2">
+              {t("auth.login_register_last_name")}:
+            </label>
             <input
               type="text"
               name="lastName"
@@ -129,7 +134,9 @@ const RegisterForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
             />
 
-            <label className="text-sm my-2">Password: </label>
+            <label className="text-sm my-2">
+              {t("auth.login_register_password")}:{" "}
+            </label>
             <input
               type="password"
               name="password"
@@ -142,13 +149,13 @@ const RegisterForm = () => {
           <div className="flex justify-between px-8">
             <Link to="/login">
               <Button
-                buttonName="Or login"
+                buttonName={t("auth.login_register_back_to_login")}
                 buttonSubmit
                 buttonStyle="btnPrimaryStyle"
               />
             </Link>
             <Button
-              buttonName="Register"
+              buttonName={t("auth.login_register")}
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />

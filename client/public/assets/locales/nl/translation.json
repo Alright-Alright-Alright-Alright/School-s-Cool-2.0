@@ -91,8 +91,9 @@
         "modal_private_toggle_new_topic": "Prive",
         "modal_public_toggle_new_topic": "Publiek",
         "modal_button_create_topic": "Maak topic aan",
-        "modal_choose_category_new_file": "Selecteer een categorie",
-        "modal_choose_subject_new_file": "Selecteer een onderwerp"
+        "modal_button_edit_topic": "Pas topic aan",
+        "modal_choose_category_new_topic": "Selecteer een categorie",
+        "modal_choose_subject_new_topic": "Selecteer een onderwerp"
     },
     "library" : {
         "button_all_files": "Alle bestanden",
@@ -158,6 +159,21 @@
         "navbar_library": "Bibliotheek",
         "navbar_profile": "Profiel",
         "navbar_logout": "Uitloggen"
+    },
+    "auth" : {
+        "login_button": "Inloggen",
+        "login_forgot_password": "Wachtwoord vergeten?",
+        "login_register": "Registreer",
+        "login_register_first_name": "Voornaam",
+        "login_register_last_name": "Achternaam",
+        "login_register_email": "Email",
+        "login_register_enter_email": "Voer een email in",
+        "login_register_password": "Wachtwoord",
+        "login_register_enter_password": "Voer een wachtwoord in",
+        "login_register_password_confirm": "Bevestig wachtwoord",
+        "login_register_button": "Registreer",
+        "login_register_back_to_login": "Of log in",
+        "login_register_reset_password": "Reset wachtwoord"
     }
     
   }
