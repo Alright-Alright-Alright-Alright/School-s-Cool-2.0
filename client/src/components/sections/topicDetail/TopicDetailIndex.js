@@ -24,7 +24,6 @@ const TopicDetailIndex = () => {
   }, [dispatch, topicId])
 
   const showEditModal = () => {
-    console.log("hello")
     setshowModal(!showModal)
     seteditModal(!editModal)
   }

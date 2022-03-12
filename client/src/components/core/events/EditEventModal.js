@@ -1,15 +1,13 @@
-/* eslint-disable jsx-a11y/no-onchange */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
+import DatePicker, { registerLocale } from "react-datepicker"
 import nl from "date-fns/locale/nl"
 import { useTranslation } from "react-i18next"
 import dayjs from "dayjs"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+import PropTypes from "prop-types"
 import fileUploadHandler from "../../../middleware/UploadFile"
-import { editEvent } from "../../../redux/actions/eventActions"
+import { editEvent, deleteEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
@@ -34,6 +32,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
   const { eventId } = useParams()
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -55,6 +54,11 @@ const EditEventModal = ({ handleShowModal, event }) => {
 
   const chooseLocation = (e) => {
     setLocation(e.target.value)
+  }
+
+  const deleteEventHandler = () => {
+    dispatch(deleteEvent(eventId))
+    navigate("/events")
   }
 
   const handleFormSubmit = async (e) => {
@@ -199,9 +203,23 @@ const EditEventModal = ({ handleShowModal, event }) => {
             />
           </div>
         </section>
+        <div>
+          <button
+            className="flex mx-5"
+            type="button"
+            onClick={deleteEventHandler}
+          >
+            <Icon iconName="trash" /> Delete event
+          </button>
+        </div>
       </form>
     </div>
   )
+}
+
+EditEventModal.propTypes = {
+  event: PropTypes.shape.isRequired,
+  handleShowModal: PropTypes.func.isRequired,
 }
 
 export default EditEventModal

@@ -68,7 +68,7 @@ export const getComments = (fileId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response.data.message,
+      payload: error.response,
     })
   }
 }

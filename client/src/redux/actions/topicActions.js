@@ -7,6 +7,7 @@ import {
   INVITE_FOR_TOPIC,
   REMOVE_INVITE,
   EDIT_TOPIC,
+  DELETE_TOPIC,
 } from "../types/topics"
 
 import {
@@ -18,6 +19,7 @@ import {
   inviteForTopicService,
   removeInviteForTopicService,
   editTopicService,
+  deleteTopicService,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -133,6 +135,22 @@ export const editTopic = (topicId, topicData) => async (dispatch) => {
     const topicEdited = await editTopicService(topicId, topicData)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: EDIT_TOPIC, payload: topicEdited })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const deleteTopic = (topicId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const topicDeleted = await deleteTopicService(topicId)
+    console.log(topicDeleted)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_TOPIC, payload: topicId })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

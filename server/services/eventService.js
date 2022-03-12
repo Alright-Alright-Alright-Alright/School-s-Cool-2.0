@@ -5,6 +5,7 @@ const {
   updateEventDb,
   userJoinEventDb,
   userLeaveEventDb,
+  deleteEventFromDb,
 } = require("../db/eventDb");
 
 // getting info from controller

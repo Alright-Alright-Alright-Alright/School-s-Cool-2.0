@@ -41,3 +41,8 @@ export const editTopicService = (topicId, topicData) =>
       topicData,
     })
     .then((responseFromAPI) => responseFromAPI.data)
+
+export const deleteTopicService = (topicId) =>
+  service
+    .delete(`/topics/${topicId}`)
+    .then((responseFromAPI) => responseFromAPI.data)

@@ -36,12 +36,12 @@ function App() {
   const now = parseInt(currentTime.split(".")[0], 10)
 
   useEffect(() => {
-    if (jwt.decode(token.replace("Bearer ", ""))?.exp > now) {
-      dispatch(loggedInUser())
-    } else {
+    if (!token || jwt.decode(token.replace("Bearer ", ""))?.exp < now) {
       dispatch(logoutUser())
       console.log("token expired!")
       navigate("/login")
+    } else {
+      dispatch(loggedInUser())
     }
     setTimeout(() => {
       setShowChatWidget(true)
