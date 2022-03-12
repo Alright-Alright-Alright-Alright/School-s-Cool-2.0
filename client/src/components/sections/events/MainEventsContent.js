@@ -22,6 +22,9 @@ const MainEventsContent = ({ events }) => {
 
   let filterRule
   switch (filter) {
+    case "All events":
+      filterRule = (item) => item
+      break
     case "My events":
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
       filterRule = (item) => item.owner === user?._id
@@ -36,7 +39,7 @@ const MainEventsContent = ({ events }) => {
         new Date(item.dateEnd) < new Date()
       break
     default:
-      filterRule = (item) => new Date(item.dateStart) > new Date()
+      filterRule = (item) => item.dateStart >= new Date()
   }
 
   const filteredEvents = events.filter(filterRule)
