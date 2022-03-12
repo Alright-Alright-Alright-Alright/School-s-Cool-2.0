@@ -75,12 +75,22 @@ const libraryReducer = (state = initialState, action) => {
       //       ? action.payload
       //       : state.singleFile,
       // }
-      return {
-        ...state,
-        allFiles: state.allFiles.map((eachFile) =>
-          eachFile._id === action.payload._id ? action.payload : eachFile
-        ),
-      }
+      return !state.singleFile
+        ? {
+            ...state,
+            allFiles: state.allFiles.map((eachFile) =>
+              eachFile._id === action.payload._id ? action.payload : eachFile
+            ),
+          }
+        : {
+            singleFile:
+              state.singleFile._id === action.payload._id
+                ? action.payload
+                : state.singleFile,
+            allFiles: state.allFiles.map((eachFile) =>
+              eachFile._id === action.payload._id ? action.payload : eachFile
+            ),
+          }
     case DELETE_FILE:
       return {
         ...state,
