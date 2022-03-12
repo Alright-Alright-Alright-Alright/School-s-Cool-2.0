@@ -5,7 +5,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PropTypes from "prop-types"
 import Icon from "../Icon"
-import { deleteComment } from "../../../redux/actions/libraryActions"
+import { deleteComment } from "../../../redux/actions/postActions"
 
 function Comment({ comment, id }) {
   const user = useSelector((state) => state.user.singleUser)

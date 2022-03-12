@@ -62,11 +62,11 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
   const firstThreeComments = comments
     .slice(0, 3)
     .map((commentData) => (
-      <Comment key={commentData._id} comment={commentData} />
+      <Comment key={commentData._id} comment={commentData} id={post._id} />
     ))
 
   const allComments = comments.map((commentData) => (
-    <Comment key={commentData._id} comment={commentData} />
+    <Comment key={commentData._id} comment={commentData} id={post._id} />
   ))
 
   const handleSelectAction = (actionName) => {
