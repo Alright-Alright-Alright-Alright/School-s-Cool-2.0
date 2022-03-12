@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import PropTypes from "prop-types"
+import { useTranslation } from "react-i18next"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import {
   addAtopic,
@@ -26,6 +27,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const { topicId } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleClick = () => {
     hiddenFileInput.current.click()
@@ -110,7 +112,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
             <input
               type="text"
               defaultValue={singleTopic.title}
-              placeholder="Add your descriptive topic name"
+              placeholder={t("topics.modal_title_new_topic")}
               className="w-2/3 placeholder-grey-medium text-md"
               onChange={chooseTitle}
             />
@@ -168,7 +170,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
           <section className="flex justify-center border-b-2 border-grey-super_light px-1 py-3 mx-5">
             <input
               type="text"
-              placeholder="Briefly explain what your topic is about"
+              placeholder={t("topics.modal_description_new_topic")}
               className="w-full placeholder-grey-medium text-base h-10"
               onChange={chooseDescription}
               defaultValue={singleTopic.description}
@@ -208,11 +210,10 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               type="text"
               name=""
               id=""
-              placeholder="Add your descriptive topic name"
+              placeholder={t("topics.modal_title_new_topic")}
               className="w-2/3 placeholder-grey-medium text-md"
               onChange={chooseTitle}
             />
-            )
             <button type="button" onClick={handleShowModal}>
               <Icon iconName="close" />
             </button>
@@ -225,7 +226,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
             >
               <option disabled selected>
-                Choose a category
+                {t("topics.modal_choose_category_new_topic")}
               </option>
               <option value="School work">School work</option>
               <option value="Sports">Sports</option>
@@ -241,7 +242,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
             >
               <option disabled selected>
-                Choose a subject
+                {t("topics.modal_choose_subject_new_topic")}
               </option>
               <option value="Biology">Biology</option>
               <option value="Physics">Physics</option>
@@ -255,7 +256,9 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               onClick={handleClick}
               className="flex justify-around items-center w-2/7"
             >
-              <span className="text-sm">Add Cover Image</span>
+              <span className="text-sm">
+                {t("topics.modal_cover_image_new_topic")}
+              </span>
               <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
             </button>
             <input
@@ -269,19 +272,23 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
           <section className="flex justify-center border-b-2 border-grey-super_light px-1 py-3 mx-5">
             <input
               type="text"
-              placeholder="Briefly explain what your topic is about"
+              placeholder={t("topics.modal_description_new_topic")}
               className="w-full placeholder-grey-medium text-base h-10"
               onChange={chooseDescription}
             />
           </section>
           <section className="flex justify-between px-5">
             <SwitchButton
-              nameLeft="PUBLIC"
-              nameRight="PRIVATE"
+              nameLeft={t("topics.modal_public_toggle_new_topic")}
+              nameRight={t("topics.modal_private_toggle_new_topic")}
               toogle={() => setPrivacy(!privacy)}
             />
             <Button
-              buttonName={editModal ? "Edit Topic" : "Create Topic"}
+              buttonName={
+                editModal
+                  ? `${t("topics.modal_button_edit_topic")}`
+                  : `${t("topics.modal_button_create_topic")}`
+              }
               buttonStyle="btnTopicStyle"
               buttonSubmit
             />
