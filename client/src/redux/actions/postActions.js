@@ -1,12 +1,13 @@
 import {
   SET_POSTS,
   GET_POST,
-  SET_POST,
   SUBMIT_COMMENT,
   LIKE_POST,
   UNLIKE_POST,
   DELETE_POST,
   UPDATE_POST,
+  ADD_POST,
+  DELETE_COMMENT,
 } from "../types/posts"
 
 import {
@@ -19,6 +20,7 @@ import {
   unlikePostService,
   deletePostService,
   updatePostService,
+  deleteCommentService,
 } from "../services/postService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -75,7 +77,7 @@ export const createPost = (newPost) => async (dispatch) => {
 
   try {
     dispatch({ type: CLEAR_ERRORS })
-    dispatch({ type: SET_POST, payload: addNewPostDb })
+    dispatch({ type: ADD_POST, payload: addNewPostDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -104,6 +106,24 @@ export const submitComment =
       })
     }
   }
+
+export const deleteComment = (commentId, id) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  console.log(commentId, id)
+  try {
+    const deleteCommentDb = await deleteCommentService({
+      commentId,
+      id,
+    })
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: DELETE_COMMENT, payload: deleteCommentDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
 
 export const likePost = (postId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })

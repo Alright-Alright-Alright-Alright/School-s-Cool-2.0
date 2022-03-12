@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react"
-import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
@@ -17,7 +17,7 @@ import Icon from "../Icon"
 
 dayjs.extend(relativeTime)
 
-function ActivityCard({ activity }) {
+function ActivityCard({ activity, commentFather }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
   const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
@@ -49,11 +49,11 @@ function ActivityCard({ activity }) {
   const firstThreeComments = activity.comments
     .slice(0, 3)
     .map((commentData) => (
-      <Comment key={commentData._id} comment={commentData} />
+      <Comment key={commentData._id} comment={commentData} id={commentFather} />
     ))
 
   const allComments = activity.comments.map((commentData) => (
-    <Comment key={commentData._id} comment={commentData} />
+    <Comment key={commentData._id} comment={commentData} id={commentFather} />
   ))
 
   const activityType = activity.topic ? "topic" : "event"
@@ -154,12 +154,3 @@ function ActivityCard({ activity }) {
 }
 
 export default ActivityCard
-
-ActivityCard.defaultProps = {
-  activity: {},
-}
-
-ActivityCard.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  activity: PropTypes.object,
-}

@@ -49,7 +49,11 @@ function ActivityFeed() {
       {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
       <div className="h-screen overflow-y-auto scrollBar">
         {shownActivities.map((activity) => (
-          <ActivityCard key={activity._id} activity={activity} />
+          <ActivityCard
+            key={activity._id}
+            activity={activity}
+            commentFather={activity._id}
+          />
         ))}
       </div>
     </div>

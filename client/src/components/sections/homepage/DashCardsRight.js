@@ -14,7 +14,7 @@ function DashCardsRight() {
   }, [dispatch])
 
   return (
-    <div className="max-w-xs hidden lg:block">
+    <div className="max-w-md px-6 hidden lg:block ">
       <TopicDashCard
         topicDashCardTitle="Community"
         topicDashCardStyle="bg-pink"

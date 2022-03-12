@@ -229,110 +229,102 @@ function NavBar() {
           )}
         </div>
       </div>
-      <div className="-mr-2 flex md:hidden">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to={`/profile/${user?._id}`}>
-            <img
-              alt="profile"
-              src={user?.imageUrl}
-              className="rounded-full object-fill h-7 w-7"
-            />
-          </Link>
-        </div>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          type="button"
-          className="inline-flex items-center justify-center p-2 rounded-md"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-        >
-          <span className="sr-only">Open main menu</span>
-          {!isOpen ? (
-            <svg
-              className="block h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
+      <div className="md:hidden flex items-center text-right">
+        {!isOpen && (
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <Link to={`/profile/${user?._id}`}>
+              <img
+                alt="profile"
+                src={user?.imageUrl}
+                className="rounded-full object-fill h-7 w-7"
               />
-            </svg>
-          ) : (
-            <svg
-              className="block h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          )}
-        </button>
-        {isOpen && (
-          <div className="md:hidden" id="mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navItems.map((item) => (
-                <Link
-                  to={item.href}
-                  key={item.id}
-                  className={`block mt-4 lg:inline-block lg:mt-0 hover:text-${item.color} mr-4`}
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  {item.title}
-                </Link>
-              ))}
-              <button
-                type="button"
-                className="block mt-4 lg:inline-block lg:mt-0  mr-4"
-                onClick={() => {
-                  setIsOpen(!isOpen)
-                  handleLogout()
-                }}
-              >
-                Logout
-              </button>
-              {user?.role === "admin" && (
-                <Link
-                  to="/admin"
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="block mt-4 lg:inline-block lg:mt-0  mr-4"
-                >
-                  Admin
-                </Link>
-              )}
-            </div>
-            <div className="flex items-center ">
-              <div className="flex place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
-                <input
-                  className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-60"
-                  type="text"
-                  placeholder="What are you looking for?"
-                />
-
-                <svg
-                  className="fill-current text-grey-darker h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
-                </svg>
-              </div>
-            </div>
+            </Link>
           </div>
         )}
+        <div className="flex flex-col">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            className="inline-flex items-end justify-end p-2 rounded-md"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span className="sr-only">Open main menu</span>
+            {!isOpen ? (
+              <svg
+                className="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            )}
+          </button>
+          {isOpen && (
+            <div className="md:hidden" id="mobile-menu">
+              <div className="px-2 pb-3 space-y-1 sm:px-3">
+                {navItems.map((item) => (
+                  <Link
+                    to={item.href}
+                    key={item.id}
+                    className={`block mt-4 lg:inline-block lg:mt-0 hover:text-${item.color} `}
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => {
+                      setIsOpen(!isOpen)
+                      handleLogout()
+                    }}
+                  >
+                    {t("navbar.navbar_logout")}
+                  </button>
+                </div>
+                {user?.role === "admin" && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="block mt-4 lg:inline-block lg:mt-0  mr-4"
+                  >
+                    Admin
+                  </Link>
+                )}
+              </div>
+              <div className="flex items-center">
+                <SearchBar placeholder={t("search_bar_placeholder")} />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   )

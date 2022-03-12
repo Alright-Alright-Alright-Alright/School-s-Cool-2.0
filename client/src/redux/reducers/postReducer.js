@@ -3,13 +3,14 @@
 /* eslint-disable no-case-declarations */
 import {
   SET_POSTS,
-  SET_POST,
+  ADD_POST,
   GET_POST,
   SUBMIT_COMMENT,
   LIKE_POST,
   UNLIKE_POST,
   DELETE_POST,
   UPDATE_POST,
+  DELETE_COMMENT,
 } from "../types/posts"
 // import {
 //   SET_ERRORS,
@@ -43,7 +44,7 @@ const postsReducer = (state = initialState, action) => {
           eachPost._id === action.payload._id ? action.payload : eachPost
         ),
       }
-    case SET_POST:
+    case ADD_POST:
       return {
         ...state,
         allPosts: [action.payload, ...state.allPosts],
@@ -56,6 +57,7 @@ const postsReducer = (state = initialState, action) => {
         ),
       }
     case SUBMIT_COMMENT:
+    case DELETE_COMMENT:
       return {
         ...state,
         allPosts: state.allPosts.map((eachPost) =>
