@@ -20,7 +20,7 @@ export const getAllActivities = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response.data.message,
+      payload: error.response,
     })
   }
 }
@@ -38,7 +38,7 @@ export const getFollowedActivities = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
-      payload: error.response.data.message,
+      payload: error.response,
     })
   }
 }
