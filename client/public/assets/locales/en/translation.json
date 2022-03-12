@@ -84,11 +84,22 @@
         "button_all_topics": "All topics",
         "button_my_topics": "My topics",
         "button_followed_topics": "Followed topics",
+        "public_topic_created_by": "Public topic created by",
+        "private_topic_created_by": "Private topic created by",
         "header_card_placeholder": "Write something...",
         "header_card_add_resource": "Add a resource",
         "header_card_add_button": "Add post to topic",
         "topic_post_commentted_on": "commentted on",
-        "dash_card_members": "Topic members"
+        "dash_card_members": "Topic members",
+        "modal_title_new_topic": "Add your topic name",
+        "modal_description_new_topic": "Briefly explain what your topic is about",
+        "modal_cover_image_new_topic": "Add cover image",
+        "modal_private_toggle_new_topic": "Private",
+        "modal_public_toggle_new_topic": "Public",
+        "modal_button_create_topic": "Create Topic",
+        "modal_choose_category_new_file": "Select a category",
+        "modal_choose_subject_new_file": "Select a subject"
+
     },
     "library" : {
         "button_all_files": "All resources",
@@ -123,7 +134,11 @@
         "user_profile_first_name": "First name",
         "user_profile_last_name": "Last name",
         "user_profile_email": "Email",
-        "button_edit_profile": "Edit profile"
+        "button_edit_profile": "Edit profile",
+        "button_change_profile_picture": "Change profile picture",
+        "button_change_password": "Change password",
+        "button_save_changes": "Save changes"
+
 
     },
     "dropdownmenu" : {
@@ -152,5 +167,20 @@
         "navbar_library": "Library",
         "navbar_profile": "Profile",
         "navbar_logout": "Logout"
+    },
+    "auth" : {
+        "login_button": "Login",
+        "login_forgot_password": "Forgot password?",
+        "login_register": "Register",
+        "login_register_first_name": "First name",
+        "login_register_last_name": "Last name",
+        "login_register_email": "Email",
+        "login_register_enter_email": "Enter email",
+        "login_register_password": "Password",
+        "login_register_enter_password": "Enter password",
+        "login_register_password_confirm": "Confirm password",
+        "login_register_button": "Register",
+        "login_register_back_to_login": "Or login",
+        "login_register_reset_password": "Reset password"
     }
   }

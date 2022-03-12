@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { t } from "i18next"
 import Button from "../../../core/Button"
 import MessageHandler from "../../../core/MessageHandler"
 import { forgetAction } from "../../../../redux/actions/userActions"
@@ -81,12 +82,12 @@ const ForgotPassword = () => {
               checked={email}
               onChange={chooseEmail}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-              placeholder="Enter your existing account email"
+              placeholder={t("auth.login_register_enter_email")}
             />
           </div>
           <div className="flex justify-between px-8">
             <Button
-              buttonName="Submit"
+              buttonName={t("auth.login_register_reset_password")}
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />
