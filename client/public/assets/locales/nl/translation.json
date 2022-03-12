@@ -84,7 +84,15 @@
         "header_card_add_resource": "Voeg een bestand toe",
         "header_card_add_button": "Plaats bericht",
         "topic_post_commentted_on": "heeft een reactie geplaatst in",
-        "dash_card_members": "Leden"
+        "dash_card_members": "Leden",
+        "modal_title_new_topic": "Geef een naam voor je topic",
+        "modal_description_new_topic": "Vertel kort waar je topic over gaat",
+        "modal_cover_image_new_topic": "Voeg een cover plaatje toe",
+        "modal_private_toggle_new_topic": "Prive",
+        "modal_public_toggle_new_topic": "Publiek",
+        "modal_button_create_topic": "Maak topic aan",
+        "modal_choose_category_new_file": "Selecteer een categorie",
+        "modal_choose_subject_new_file": "Selecteer een onderwerp"
     },
     "library" : {
         "button_all_files": "Alle bestanden",

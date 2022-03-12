@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import PropTypes from "prop-types"
+import { useTranslation } from "react-i18next"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import {
   addAtopic,
@@ -26,6 +27,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const { topicId } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleClick = () => {
     hiddenFileInput.current.click()
@@ -110,7 +112,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
             <input
               type="text"
               defaultValue={singleTopic.title}
-              placeholder="Add your descriptive topic name"
+              placeholder={t("topics.modal_title_new_topic")}
               className="w-2/3 placeholder-grey-medium text-md"
               onChange={chooseTitle}
             />
