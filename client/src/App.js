@@ -48,12 +48,6 @@ function App() {
     }, 3000)
   }, [dispatch, token, loggedIn, navigate, currentTime, now])
 
-  useEffect(() => {
-    if (jwt.decode(token?.replace("Bearer ", ""))?.exp > now) {
-      navigate("/home")
-    }
-  }, [])
-
   const errorHandler = (error, errorInfo) => {
     console.log("Logging", error, errorInfo)
   }

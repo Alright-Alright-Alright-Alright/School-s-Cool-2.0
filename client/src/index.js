@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import "./index.css"
 import { Provider } from "react-redux"
 
@@ -61,6 +61,7 @@ ReactDOM.render(
           <Route path="forgot" element={<ForgotPassword />} />
           <Route path="new-password/:token" element={<NewPassword />} />
           <Route path="/" element={<App />}>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="home" element={<Home />} />
             <Route path="topics" element={<Topics />} />
             <Route path="topics/:topicId" element={<TopicDetailPage />} />
