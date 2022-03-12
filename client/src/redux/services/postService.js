@@ -26,6 +26,11 @@ export const submitCommentService = (owner, commentBody, postId) =>
     .post(`/posts/${postId}/comments`, owner, commentBody, postId)
     .then((responseFromAPI) => responseFromAPI.data)
 
+export const deleteCommentService = (commentId, id) =>
+  service
+    .put(`/deleteComment`, commentId, id)
+    .then((responseFromAPI) => responseFromAPI.data)
+
 export const likePostService = (postId, userId) =>
   service
     .put(`/posts/${postId}/likepost`, userId)
