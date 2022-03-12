@@ -2,8 +2,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
 import {
+  DELETE_COMMENT,
   GET_ALL_ACTIVITIES,
   GET_FOLLOWED_ACTIVITIES,
+  SUBMIT_COMMENT,
 } from "../types/activities"
 
 const initialState = {
@@ -22,6 +24,14 @@ const activitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         followedActivities: action.payload,
+      }
+    case SUBMIT_COMMENT:
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        allActivities: state.allActivities.map((eachFile) =>
+          eachFile._id === action.payload._id ? action.payload : eachFile
+        ),
       }
     default:
       return state

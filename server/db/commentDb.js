@@ -36,6 +36,7 @@ const addCommentToDb = async (owner, body, id) => {
       { new: true }
     )
       .populate("owner", "firstName lastName imageUrl")
+      .populate("topic")
       .populate({
         path: "comments",
         populate: {
@@ -88,6 +89,7 @@ const deletingCommentFromDb = async (commentId, id) => {
       { new: true }
     )
       .populate("owner", "firstName lastName imageUrl")
+      .populate("topic")
       .populate({
         path: "comments",
         populate: {
