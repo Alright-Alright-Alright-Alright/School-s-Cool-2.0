@@ -63,13 +63,13 @@ function SearchBar({ placeholder }) {
 
   return (
     <div>
-      <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight text-base">
+      <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight text-base m-0">
         <input
           type="search"
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
-          className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-60"
+          className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-56"
         />
         <div>
           {filteredData.length === 0 && (
