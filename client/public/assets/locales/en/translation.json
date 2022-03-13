@@ -99,7 +99,6 @@
         "modal_button_create_topic": "Create Topic",
         "modal_choose_category_new_topic": "Select a category",
         "modal_choose_subject_new_topic": "Select a subject"
-
     },
     "library" : {
         "button_all_files": "All resources",
