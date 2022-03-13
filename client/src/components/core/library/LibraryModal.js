@@ -6,12 +6,13 @@
 import React, { useState, useRef, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { t } from "i18next"
+import { useParams } from "react-router-dom"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import { addFileToLibrary } from "../../../redux/actions/libraryActions"
-import { getAlltopics } from "../../../redux/actions/topicActions"
+import { getAlltopics, getOneTopic } from "../../../redux/actions/topicActions"
 import TagsInput from "../TagsInput"
 import MessageHandler from "../MessageHandler"
 
@@ -28,6 +29,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   const UI = useSelector((state) => state.UI)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const dispatch = useDispatch()
+  const { topicId } = useParams()
 
   useEffect(() => {
     dispatch(getAlltopics())
@@ -95,6 +97,8 @@ const Modal = ({ handleShowModal, singleTopic }) => {
     )
       handleShowModal()
     dispatch(addFileToLibrary(fileData))
+
+    setTimeout(() => topicId && dispatch(getOneTopic(topicId)), 1000)
   }
 
   return (
