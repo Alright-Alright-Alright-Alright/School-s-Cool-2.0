@@ -104,7 +104,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
     <div className="flex justify-center content-center">
       {singleTopic ? (
         <form
-          className="h-72 w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-60 shadow-xl"
+          className="h-72 lg:w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-60 shadow-xl"
           onSubmit={handleFormSubmit}
         >
           {UI.errors && <MessageHandler error={UI.errors} />}
@@ -200,7 +200,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
         </form>
       ) : (
         <form
-          className="h-72 w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-60 shadow-xl"
+          className="h-72 lg:w-2/6 rounded-2xl bg-white flex flex-col justify-evenly absolute z-50 top-60 shadow-xl"
           onSubmit={handleFormSubmit}
         >
           {UI.errors && <MessageHandler error={UI.errors} />}

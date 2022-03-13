@@ -97,8 +97,8 @@
         "modal_private_toggle_new_topic": "Private",
         "modal_public_toggle_new_topic": "Public",
         "modal_button_create_topic": "Create Topic",
-        "modal_choose_category_new_file": "Select a category",
-        "modal_choose_subject_new_file": "Select a subject"
+        "modal_choose_category_new_topic": "Select a category",
+        "modal_choose_subject_new_topic": "Select a subject"
 
     },
     "library" : {
