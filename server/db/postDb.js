@@ -73,7 +73,7 @@ const likePostDb = async (postId, userId) => {
   try {
     let post = await Post.findById(postId)
       .populate("owner", "firstName lastName imageUrl")
-      .populate("topic", "title")
+      .populate("topic")
       .populate({
         path: "comments",
         populate: {
@@ -97,7 +97,7 @@ const unlikePostDb = async (postId, userId) => {
   try {
     let post = await Post.findById(postId)
       .populate("owner", "firstName lastName imageUrl")
-      .populate("topic", "title")
+      .populate("topic")
       .populate({
         path: "comments",
         populate: {

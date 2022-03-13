@@ -5,7 +5,9 @@ import {
   DELETE_COMMENT,
   GET_ALL_ACTIVITIES,
   GET_FOLLOWED_ACTIVITIES,
+  LIKE_POST,
   SUBMIT_COMMENT,
+  UNLIKE_POST,
 } from "../types/activities"
 
 const initialState = {
@@ -27,6 +29,8 @@ const activitiesReducer = (state = initialState, action) => {
       }
     case SUBMIT_COMMENT:
     case DELETE_COMMENT:
+    case LIKE_POST:
+    case UNLIKE_POST:
       return {
         ...state,
         allActivities: state.allActivities.map((eachFile) =>
