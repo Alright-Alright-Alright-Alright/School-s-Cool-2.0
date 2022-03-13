@@ -12,7 +12,7 @@ import Icon from "../../core/Icon"
 
 const MainEventsContent = ({ events }) => {
   const [showModal, setShowModal] = useState(false)
-  const [filter, setFilter] = useState("All events")
+  const [filter, setFilter] = useState("")
   const { t } = useTranslation()
   const user = useSelector((state) => state.user.singleUser)
 
@@ -39,7 +39,7 @@ const MainEventsContent = ({ events }) => {
         new Date(item.dateEnd) < new Date()
       break
     default:
-      filterRule = (item) => item.dateStart >= new Date()
+      filterRule = (item) => new Date(item.dateEnd) >= new Date()
   }
 
   const filteredEvents = events.filter(filterRule)
