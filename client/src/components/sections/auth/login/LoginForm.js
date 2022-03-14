@@ -12,12 +12,14 @@ const LoginForm = () => {
   const user = useSelector((state) => state.user.singleUser)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [remember, setRemember] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const userLogin = {
     email,
     password,
+    remember,
   }
 
   const chooseEmail = (e) => {
@@ -26,6 +28,10 @@ const LoginForm = () => {
 
   const choosePassword = (e) => {
     setPassword(e.target.value)
+  }
+
+  const rememberMe = (e) => {
+    setRemember(e.target.value)
   }
 
   const handleFormSubmit = async (e) => {
@@ -112,6 +118,11 @@ const LoginForm = () => {
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
               placeholder={t("auth.login_register_enter_password")}
             />
+            <br />
+            <div className="flex items-center space-x-1">
+              <input type="radio" value="yes" onChange={rememberMe} />
+              <label className="text-sm">Remember me</label>
+            </div>
             <p className="text-sm flex justify-end">
               <Link to="/forgot">{t("auth.login_forgot_password")}</Link>
             </p>
