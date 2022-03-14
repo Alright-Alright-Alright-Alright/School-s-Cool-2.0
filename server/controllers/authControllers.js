@@ -15,10 +15,10 @@ exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (zohoCheck(email)) {
-     res.status(400).json({
+    res.status(400).json({
       message: "This email is not registered in Zoho",
     });
-    return
+    return;
   }
 
   if (isEmpty(email, firstName, lastName, password)) {
@@ -55,14 +55,14 @@ exports.register = async (req, res) => {
 
 // Login
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, remember } = req.body;
 
   if (!zohoCheck(email)) {
     res.status(400).json({
-     message: "This email is not registered in Zoho",
-   });
-   return
- }
+      message: "This email is not registered in Zoho",
+    });
+    return;
+  }
 
   if (isEmpty(email)) {
     res.status(400).json({ message: "Email must not be empty" });
@@ -97,11 +97,18 @@ exports.login = async (req, res) => {
       }
 
       const userLogedIn = { _id: user._id };
-      const accessToken = JWT.sign(
-        { userLogedIn },
-        process.env.JWT_SECRETORKEY,
-        { expiresIn: "1h" }
-      );
+      let accessToken;
+      if (remember === "yes") {
+        accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
+          expiresIn: "7d",
+        });
+        // console.log('remember for 7 days')
+      } else {
+        accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
+          expiresIn: "1h",
+        });
+        // console.log('remember for 1 hour')
+      }
 
       res.status(200).json({ user, accessToken });
     });
