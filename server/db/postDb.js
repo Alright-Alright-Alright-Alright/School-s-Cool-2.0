@@ -35,14 +35,13 @@ const getAllPostsDb = async (topicId, eventId) => {
 };
 
 const addPostToDb = async (body, owner, topicId, eventId) => {
-  let newPost = await Post.create({
-    body,
-    owner,
-    topic: topicId,
-    event: eventId,
-  });
-
   try {
+    let newPost = await Post.create({
+      body,
+      owner,
+      topic: topicId,
+      event: eventId,
+    });
     topicId
       ? await Topic.findByIdAndUpdate(topicId, { $push: { posts: newPost } })
       : await Event.findByIdAndUpdate(eventId, { $push: { posts: newPost } });
@@ -133,9 +132,17 @@ const updatePostDb = async (postId, body) => {
   }
 };
 
-const deletePostDb = async (postId) => {
+const deletePostDb = async (postId, topicId) => {
   try {
     await Post.findByIdAndDelete(postId);
+
+    await Topic.findByIdAndUpdate(
+      topicId,
+      {
+        $pull: { posts: postId },
+      },
+      { new: true }
+    );
   } catch (error) {
     throw new Error(error);
   }

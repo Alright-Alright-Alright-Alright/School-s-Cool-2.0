@@ -86,10 +86,10 @@ const unlikePost = async (req, res, next) => {
 };
 
 const deletePost = async (req, res, next) => {
-  const { postId } = req.params;
+  const { postId, topicId } = req.body;
 
   try {
-    await deletePostService(postId);
+    await deletePostService(postId, topicId);
     return res.status(200).json({ message: "Post has been deleted" });
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -104,5 +104,5 @@ module.exports = {
   likePost,
   unlikePost,
   deletePost,
-  updatePost
+  updatePost,
 };

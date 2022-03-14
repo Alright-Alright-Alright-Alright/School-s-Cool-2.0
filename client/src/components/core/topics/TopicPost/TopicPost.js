@@ -74,7 +74,7 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
       setShowEditPost(!showEditPost)
     }
     if (actionName === "delete") {
-      dispatch(deletePost(post._id))
+      dispatch(deletePost(post._id, topicId))
     }
   }
 
