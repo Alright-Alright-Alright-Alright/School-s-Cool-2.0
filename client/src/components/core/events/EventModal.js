@@ -64,7 +64,9 @@ const Modal = ({ handleShowModal }) => {
       dateEnd: endDate,
       timeStart: startTime,
       location,
-      bannerImage: image,
+      bannerImage:
+        image ||
+        "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg",
       isPrivate: privacy,
       tags,
     }
