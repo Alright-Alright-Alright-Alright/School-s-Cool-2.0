@@ -30,6 +30,7 @@ import Profile from "./pages/Profile"
 import NewPassword from "./pages/NewPassword"
 import ForgotPassword from "./pages/ForgotPassword"
 import AdminPanel from "./pages/AdminPanel"
+import Faq from "./pages/Faq"
 
 i18next
   .use(HttpApi)
@@ -72,6 +73,7 @@ ReactDOM.render(
             <Route path="events/:eventId" element={<EventDetailsPage />} />
             <Route path="profile/:userId" element={<Profile />} />
             <Route path="admin" element={<AdminPanel />} />
+            <Route path="faq" element={<Faq />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
