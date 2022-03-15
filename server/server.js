@@ -37,7 +37,7 @@ app.use(
     resave: false,
     cookie: {
       secure: false,
-      maxAge: 3600000, //1 hour
+      maxAge: 3600000*24*7, //1 week
     },
     rolling: false, //session gets refreshed
   })
