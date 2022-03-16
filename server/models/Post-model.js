@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// require("./User-model");
-// require("./Channel-model");
-// require("./Comment-model")
-
 const postSchema = new Schema(
   {
     body: {
