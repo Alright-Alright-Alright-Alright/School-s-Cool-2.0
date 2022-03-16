@@ -1,6 +1,7 @@
 const Post = require("../models/Post-model");
 const Topic = require("../models/Topic-model");
 const Event = require("../models/Event-model");
+const Comment = require("../models/Comment-model");
 
 const getAllPostsDb = async (topicId, eventId) => {
   try {
@@ -73,6 +74,7 @@ const likePostDb = async (postId, userId) => {
     let post = await Post.findById(postId)
       .populate("owner", "firstName lastName imageUrl")
       .populate("topic")
+      .populate("event")
       .populate({
         path: "comments",
         populate: {
@@ -97,6 +99,7 @@ const unlikePostDb = async (postId, userId) => {
     let post = await Post.findById(postId)
       .populate("owner", "firstName lastName imageUrl")
       .populate("topic")
+      .populate("event")
       .populate({
         path: "comments",
         populate: {
@@ -134,8 +137,7 @@ const updatePostDb = async (postId, body) => {
 
 const deletePostDb = async (postId, topicId) => {
   try {
-    await Post.findByIdAndDelete(postId);
-
+    await Post.findById(postId).deleteOne();
     await Topic.findByIdAndUpdate(
       topicId,
       {

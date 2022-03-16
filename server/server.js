@@ -31,13 +31,13 @@ app.use(
   session({
     store:  MongoStore.create({
       mongoUrl:process.env.DATABASE_URL,
-      ttl: 3600000}),
+      ttl: 3600000*24*7}),
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
     cookie: {
       secure: false,
-      maxAge: 3600000, //1 hour
+      maxAge: 3600000*24*7, //1 week
     },
     rolling: false, //session gets refreshed
   })

@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
+const CommentModel = require("./Comment-model");
 const Schema = mongoose.Schema;
-
-// require("./User-model");
-// require("./Channel-model");
-// require("./Comment-model")
 
 const postSchema = new Schema(
   {
@@ -36,6 +33,11 @@ const postSchema = new Schema(
     timestamps: true,
   }
 );
+
+postSchema.pre("deleteOne", function(next) {
+  CommentModel.deleteMany({ post: this._conditions._id }).exec();
+  next();
+})
 
 const Post = mongoose.model("Post", postSchema);
 module.exports = Post;

@@ -213,6 +213,15 @@ function NavBar() {
                   </Link>
                 </li>
                 <li>
+                  <Link
+                    to="/faq"
+                    onClick={() => setShowDropDown(false)}
+                    className="block px-4 py-2 text-grey-darker text-base text-sky hover:underline hover:text-grey-darkest"
+                  >
+                    FAQ
+                  </Link>
+                </li>
+                <li>
                   <button
                     type="button"
                     className=" w-full block py-2 px-4 text-base text-pink bg-grey-super_light hover:underline"
