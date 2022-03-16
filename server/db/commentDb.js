@@ -26,7 +26,7 @@ const getAllCommentsDb = async (id) => {
 };
 
 const addCommentToDb = async (owner, body, id) => {
-  let newComment = await Comment.create({ body, owner });
+  let newComment = await Comment.create({ body, owner, post: id });
   try {
     let updatedPost = await Post.findByIdAndUpdate(
       id,
