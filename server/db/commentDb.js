@@ -37,6 +37,7 @@ const addCommentToDb = async (owner, body, id) => {
     )
       .populate("owner", "firstName lastName imageUrl")
       .populate("topic")
+      .populate("event")
       .populate({
         path: "comments",
         populate: {
