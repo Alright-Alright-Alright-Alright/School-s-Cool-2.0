@@ -145,7 +145,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 {t("library.modal_choose_category_new_file")}
               </option>
               {filterCategory().map((cat) => (
-                <option value={cat}>{cat}</option>
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           )}
@@ -166,7 +168,9 @@ const Modal = ({ handleShowModal, singleTopic }) => {
                 {t("library.modal_choose_subject_new_file")}
               </option>
               {filterSubject(category).map((sub) => (
-                <option value={sub}>{sub}</option>
+                <option key={sub} value={sub}>
+                  {sub}
+                </option>
               ))}
             </select>
           )}
