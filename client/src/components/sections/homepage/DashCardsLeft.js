@@ -25,7 +25,7 @@ function DashCardsLeft() {
     dispatch(getAllFilesFromLibrary())
     dispatch(getAllEvents())
     dispatch(getAllCourses())
-    dispatch(getUserProfile(user?._id))
+    // dispatch(getUserProfile(user?._id))
   }, [dispatch])
 
   return (

@@ -19,9 +19,10 @@ const LibraryContentRight = ({ singleFile }) => {
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getComments(singleFile?._id))
-  }, [dispatch, singleFile?._id])
+  useEffect(
+    () => singleFile?._id && dispatch(getComments(singleFile?._id)),
+    [dispatch, singleFile?._id]
+  )
 
   return singleFile !== null ? (
     <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">

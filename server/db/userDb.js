@@ -2,13 +2,17 @@ const User = require("../models/User-model");
 
 exports.getingTheUser = async (userid) => {
   try {
-    return await User.findByIdAndUpdate(userid, { lastLoginDate: Date.now() }, { new: true });
+    return await User.findByIdAndUpdate(
+      userid,
+      { lastLoginDate: Date.now() },
+      { new: true }
+    );
 
     // return await User.findById(userid);
-  } catch (error) {  
+  } catch (error) {
     throw new Error(error.message);
   }
-}
+};
 
 exports.updatingTheUser = async (
   userid,
@@ -17,16 +21,9 @@ exports.updatingTheUser = async (
   email,
   imageUrl,
   role,
-  password,
+  password
 ) => {
-  console.log(userid,
-    firstName,
-    lastName,
-    email,
-    imageUrl,
-    role,
-    password,
-    )
+  console.log(userid, firstName, lastName, email, imageUrl, role, password);
   try {
     return await User.findByIdAndUpdate(
       userid,
@@ -41,7 +38,7 @@ exports.updatingTheUser = async (
       { new: true }
     );
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 };
 
@@ -63,20 +60,20 @@ exports.followingTheUser = async (theUser, userToFollow) => {
   } else {
     throw new Error("you cant follow yourself");
   }
-}
+};
 
 exports.deletingTheUser = async (userid) => {
   try {
-    return await User.findByIdAndDelete(userid)
+    return await User.findByIdAndDelete(userid);
   } catch (error) {
-    throw new Error(error.message)
-  }  
-}
+    throw new Error(error.message);
+  }
+};
 
 exports.getingAllTheUsers = async () => {
   try {
     return await User.find({}, "firstName lastName imageUrl role email");
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
