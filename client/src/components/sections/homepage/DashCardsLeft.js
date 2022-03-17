@@ -25,8 +25,8 @@ function DashCardsLeft() {
     dispatch(getAllFilesFromLibrary())
     dispatch(getAllEvents())
     dispatch(getAllCourses())
-    dispatch(getUserProfile(user?._id))
-  }, [dispatch])
+    return user?._id && dispatch(getUserProfile(user?._id))
+  }, [dispatch, user?._id])
 
   return (
     <div className="max-w-md float-right px-6 hidden lg:block">
