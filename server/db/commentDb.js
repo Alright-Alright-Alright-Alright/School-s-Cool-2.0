@@ -91,6 +91,7 @@ const deletingCommentFromDb = async (commentId, id) => {
     )
       .populate("owner", "firstName lastName imageUrl")
       .populate("topic")
+      .populate("event")
       .populate({
         path: "comments",
         populate: {

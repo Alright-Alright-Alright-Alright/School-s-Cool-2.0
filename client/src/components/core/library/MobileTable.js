@@ -20,7 +20,7 @@ const MobileTable = ({ library, selected, setSelected, user }) => {
   return (
     <div className="grid grid-cols-1 gap-3 lg:hidden mx-6">
       {library().map((singleFile) => (
-        <div className="bg-white shadow-xl rounded-3xl">
+        <div key={singleFile._id} className="bg-white shadow-xl rounded-3xl">
           <div className="flex justify-around p-4">
             <section className="w-1/2">
               <div className="flex flex-col justify-around">
