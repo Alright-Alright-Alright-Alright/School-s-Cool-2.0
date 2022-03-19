@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import AddCard from "../../core/AddCard"
@@ -26,6 +26,8 @@ function MainTopicsContent() {
     dispatch(getAlltopics())
   }, [dispatch])
 
+  const topicsMemo = useMemo(() => topics, [topics])
+
   let filterRule
   switch (filter) {
     case "My topics":
@@ -40,7 +42,7 @@ function MainTopicsContent() {
       filterRule = (item) => item
   }
 
-  const filteredTopics = topics.filter(filterRule)
+  const filteredTopics = topicsMemo.filter(filterRule)
 
   return (
     <div>

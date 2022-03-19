@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import EventsContentLeft from "./EventsContentLeft"
 
@@ -14,10 +14,12 @@ const Index = () => {
     dispatch(getAllEvents())
   }, [dispatch])
 
+  const eventsMemo = useMemo(() => events, [events])
+
   return (
     <div>
       <Main
-        main={<MainEventsContent events={events} />}
+        main={<MainEventsContent events={eventsMemo} />}
         contentLeft={<EventsContentLeft />}
       />
     </div>
