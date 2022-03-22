@@ -33,7 +33,7 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.followUser = async (req, res) => {
-  let theUser = req.user.userLogedIn._id
+  let theUser = req.user.userLogedIn
   let userToFollow = req.params.userid
   try {
     await followTheUser(theUser,userToFollow)
