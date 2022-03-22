@@ -9,7 +9,7 @@ const {
   inviteForTopicService,
   removeInviteForTopicService,
   deleteTopicService,
-  editTopicService
+  editTopicService,
 } = require("../services/topicService");
 
 const getAllTopics = async (req, res, next) => {
@@ -24,8 +24,7 @@ const getAllTopics = async (req, res, next) => {
 const createNewTopic = async (req, res, next) => {
   const { title, description, category, subject, bannerImage, isPrivate } =
     req.body;
-  const owner = req.user.userLogedIn;
-
+  const owner = req.user.userLogedIn._id._id;
   try {
     if (isEmpty(category)) {
       throw new Error("Please choose a category");
@@ -71,7 +70,8 @@ const updateTopic = async (req, res, next) => {
 };
 
 const joinTopic = async (req, res, next) => {
-  const user = req.user.userLogedIn;
+  const user = req.user.userLogedIn._id._id;
+
   const topicId = req.params.topicId;
   try {
     let topic = await joinTopicService(topicId, user);
@@ -84,7 +84,8 @@ const joinTopic = async (req, res, next) => {
 };
 
 const leaveTopic = async (req, res, next) => {
-  const user = req.user.userLogedIn;
+  const user = req.user.userLogedIn._id._id;
+
   const topicId = req.params.topicId;
   try {
     let topic = await leaveTopicService(topicId, user);

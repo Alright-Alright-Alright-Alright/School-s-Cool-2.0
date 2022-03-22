@@ -1,7 +1,7 @@
 const { joinCourseService, leaveCourseService } = require('../services/courseService');
 
 const joinCourse = async (req, res, next) => {
-    const user = req.user.userLogedIn;
+    const user = req.user.userLogedIn._id;
     const courseId = req.body.courseId;
     try {
       let updatedUser = await joinCourseService(courseId, user);
@@ -12,7 +12,7 @@ const joinCourse = async (req, res, next) => {
   };
   
 const leaveCourse = async (req, res, next) => {
-    const user = req.user.userLogedIn;
+    const user = req.user.userLogedIn._id;
     const courseId = req.body.courseId;
     try {
       let updatedUser = await leaveCourseService(courseId, user);

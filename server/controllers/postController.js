@@ -22,7 +22,6 @@ const getAllPosts = async (req, res, next) => {
 const createPost = async (req, res, next) => {
   const { body, topicId, eventId } = req.body;
   const owner = req.user.userLogedIn._id;
-
   try {
     const newPost = await createPostService(body, owner, topicId, eventId);
     return res.status(201).json(newPost);
