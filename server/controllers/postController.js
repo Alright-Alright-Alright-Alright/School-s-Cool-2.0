@@ -21,7 +21,7 @@ const getAllPosts = async (req, res, next) => {
 
 const createPost = async (req, res, next) => {
   const { body, topicId, eventId } = req.body;
-  const owner = req.user.userLogedIn;
+  const owner = req.user.userLogedIn._id;
 
   try {
     const newPost = await createPostService(body, owner, topicId, eventId);
@@ -62,7 +62,7 @@ const updatePost = async (req, res, next) => {
 };
 
 const likePost = async (req, res, next) => {
-  const userId = req.user.userLogedIn;
+  const userId = req.user.userLogedIn._id;
   const { postId } = req.params;
 
   try {
@@ -74,7 +74,7 @@ const likePost = async (req, res, next) => {
 };
 
 const unlikePost = async (req, res, next) => {
-  const userId = req.user.userLogedIn;
+  const userId = req.user.userLogedIn._id;
   const { postId } = req.params;
 
   try {
