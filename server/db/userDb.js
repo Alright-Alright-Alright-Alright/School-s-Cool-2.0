@@ -23,7 +23,6 @@ exports.updatingTheUser = async (
   role,
   password
 ) => {
-  console.log(userid, firstName, lastName, email, imageUrl, role, password);
   try {
     return await User.findByIdAndUpdate(
       userid,
