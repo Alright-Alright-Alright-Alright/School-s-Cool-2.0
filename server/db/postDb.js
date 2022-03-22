@@ -36,6 +36,7 @@ const getAllPostsDb = async (topicId, eventId) => {
 };
 
 const addPostToDb = async (body, owner, topicId, eventId) => {
+  console.log(owner);
   try {
     let newPost = await Post.create({
       body,

@@ -24,7 +24,7 @@ const getAllTopics = async (req, res, next) => {
 const createNewTopic = async (req, res, next) => {
   const { title, description, category, subject, bannerImage, isPrivate } =
     req.body;
-  const owner = req.user.userLogedIn._id;
+  const owner = req.user.userLogedIn;
   try {
     if (isEmpty(category)) {
       throw new Error("Please choose a category");
@@ -70,7 +70,7 @@ const updateTopic = async (req, res, next) => {
 };
 
 const joinTopic = async (req, res, next) => {
-  const user = req.user.userLogedIn._id;
+  const user = req.user.userLogedIn;
 
   const topicId = req.params.topicId;
   try {
@@ -84,7 +84,7 @@ const joinTopic = async (req, res, next) => {
 };
 
 const leaveTopic = async (req, res, next) => {
-  const user = req.user.userLogedIn._id;
+  const user = req.user.userLogedIn;
 
   const topicId = req.params.topicId;
   try {

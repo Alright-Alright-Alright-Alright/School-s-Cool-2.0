@@ -11,7 +11,7 @@ const {
 
 exports.addFile = async (req, res) => {
   const { title, category, subject, isPrivate, fileUrl, tags } = req.body;
-  const owner = req.user.userLogedIn._id;
+  const owner = req.user.userLogedIn;
   try {
     if (tags.length < 1) {
       res.status(400).json({ message: "Please add at least one tag" });
@@ -41,7 +41,7 @@ exports.addFile = async (req, res) => {
 
 exports.addLike = async (req, res) => {
   let fileId = req.params.fileId;
-  let user = req.user.userLogedIn._id;
+  let user = req.user.userLogedIn;
   try {
     let file = await addLikeService(fileId, user);
     res.status(200).json(file);
@@ -52,7 +52,7 @@ exports.addLike = async (req, res) => {
 
 exports.pullLike = async (req, res) => {
   let fileId = req.params.fileId;
-  let user = req.user.userLogedIn._id;
+  let user = req.user.userLogedIn;
   try {
     let file = await pullLikeService(fileId, user);
     res.status(200).json(file);
@@ -62,7 +62,7 @@ exports.pullLike = async (req, res) => {
 };
 
 exports.userLibrary = async (req, res) => {
-  user = req.user.userLogedIn._id;
+  user = req.user.userLogedIn;
   try {
     let userFiles = await getUserLibrary(user);
     res.status(200).json(userFiles);
@@ -91,7 +91,7 @@ exports.getSingleFile = async (req, res) => {
 };
 
 exports.deleteFile = async (req, res) => {
-  let userId = req.user.userLogedIn._id;
+  let userId = req.user.userLogedIn;
   let fileToDelete = req.body.fileId;
 
   try {
