@@ -3,7 +3,7 @@ const {
   updateTheUser,
   deleteTheUser,
   followTheUser,
-  getAllTheUsers
+  getAllTheUsers,
 } = require("../services/userServices");
 
 exports.getUser = async (req, res) => {
@@ -25,7 +25,15 @@ exports.updateUser = async (req, res) => {
   let password = req.body.password;
 
   try {
-    const updatedUser = await updateTheUser(userid, firstName, lastName, email, imageUrl, role, password);
+    const updatedUser = await updateTheUser(
+      userid,
+      firstName,
+      lastName,
+      email,
+      imageUrl,
+      role,
+      password
+    );
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong updating the user" });
@@ -33,15 +41,15 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.followUser = async (req, res) => {
-  let theUser = req.user.userLogedIn._id
-  let userToFollow = req.params.userid
+  let theUser = req.user.userLogedIn;
+  let userToFollow = req.params.userid;
   try {
-    await followTheUser(theUser,userToFollow)
-    res.status(200).json({ message: "Successfully followed the user" })
+    await followTheUser(theUser, userToFollow);
+    res.status(200).json({ message: "Successfully followed the user" });
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
-}
+};
 
 exports.deleteUser = async (req, res) => {
   const { userid } = req.params;
@@ -65,4 +73,4 @@ exports.getAllUsers = async (req, res) => {
         "We can not find you. Please, make sure you are registered and logged in.",
     });
   }
-}
+};

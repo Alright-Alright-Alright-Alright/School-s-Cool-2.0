@@ -28,7 +28,7 @@ const createNewEvent = async (req, res, next) => {
     bannerImage,
     tags,
   } = req.body;
-  const _id  = req.user.userLogedIn._id;
+  const _id  = req.user.userLogedIn;
   try {
     if (!title) {
       throw new Error("Please write a title for the Event");
@@ -95,7 +95,7 @@ const updateEvent = async (req, res, next) => {
 
 const joinEvent = async (req, res, next) => {
   const { eventId } = req.params;
-  const _id = req.user.userLogedIn._id;
+  const _id = req.user.userLogedIn;
   try {
     let event = await joinEventService(eventId, _id);
     return res.status(201).json(event);
@@ -106,7 +106,7 @@ const joinEvent = async (req, res, next) => {
 
 const leaveEvent = async (req, res, next) => {
   const { eventId } = req.params;
-  const _id = req.user.userLogedIn._id;
+  const _id = req.user.userLogedIn;
   try {
     let event = await leaveEventService(eventId, _id);
     return res.status(201).json(event);
