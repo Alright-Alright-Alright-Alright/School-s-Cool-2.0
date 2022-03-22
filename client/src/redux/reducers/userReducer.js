@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-anonymous-default-export */
 import {
