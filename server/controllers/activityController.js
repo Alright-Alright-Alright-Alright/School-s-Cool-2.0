@@ -4,7 +4,7 @@ const {
 } = require("../services/activityService");
 
 const getAllActivities = async (req, res, next) => {
-  const userId = req.user.userLogedIn._id;
+  const userId = req.user.userLogedIn;
   try {
     const activities = await getAllActivitiesService(userId);
     return res.status(201).json(activities);
@@ -14,7 +14,7 @@ const getAllActivities = async (req, res, next) => {
 };
 
 const getFollowedActivities = async (req, res, next) => {
-  const userId = req.user.userLogedIn._id;
+  const userId = req.user.userLogedIn;
   try {
     const activities = await getFollowedActivitiesService(userId);
     return res.status(201).json(activities);
