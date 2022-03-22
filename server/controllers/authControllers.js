@@ -3,23 +3,24 @@ const {
   newUser,
   forgetPasswordService,
   newPasswordService,
+  loginUserService,
 } = require("../services/authServices");
-const passport = require("passport");
+const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
-// const { passportAuthenticate } = require("../middleware/passportMiddleware");
 const { chatSignupToken, chatLoginToken } = require("../services/chatService");
 const { zohoCheck } = require("../middleware/zohoMiddleware");
+const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 
 // Register
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (zohoCheck(email)) {
-    res.status(400).json({
-      message: "This email is not registered in Zoho",
-    });
-    return;
-  }
+  // if (zohoCheck(email)) {
+  //   res.status(400).json({
+  //     message: "This email is not registered in Zoho",
+  //   });
+  //   return;
+  // }
 
   if (isEmpty(email, firstName, lastName, password)) {
     res
@@ -40,7 +41,9 @@ exports.register = async (req, res) => {
   }
 
   try {
-    const user = await newUser(firstName, lastName, email, password);
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(password, salt);
+    const user = await newUser(firstName, lastName, email, hashedpassword);
     // const chatToken = await chatSignupToken(firstName);
 
     // await Promise.all({ user, chatToken });
@@ -55,78 +58,56 @@ exports.register = async (req, res) => {
 
 // Login
 exports.login = async (req, res) => {
-  const { email, password, remember } = req.body;
+  try {
+    const { email, password, remember } = req.body;
 
-  if (!zohoCheck(email)) {
-    res.status(400).json({
-      message: "This email is not registered in Zoho",
-    });
-    return;
-  }
-
-  if (isEmpty(email)) {
-    res.status(400).json({ message: "Email must not be empty" });
-    return;
-  }
-
-  if (isEmpty(password)) {
-    res.status(400).json({ message: "Password must not be empty" });
-    return;
-  }
-
-  // const chatToken = await chatLoginToken(email);
-  // console.log(chatToken);
-
-  passport.authenticate("local", (err, user, failureDetails) => {
-    if (err) {
-      res
-        .status(500)
-        .json({ message: "Something went wrong authenticating user" });
+    if (!zohoCheck(email)) {
+      res.status(400).json({
+        message: "This email is not registered in Zoho",
+      });
       return;
     }
 
-    if (!user) {
-      res.status(401).json(failureDetails);
+    if (isEmpty(email)) {
+      res.status(400).json({ message: "Email must not be empty" });
       return;
     }
 
-    req.login(user, (err) => {
-      if (err) {
-        res.status(500).json({ message: "Session save went bad." });
-        return;
-      }
+    if (isEmpty(password)) {
+      res.status(400).json({ message: "Password must not be empty" });
+      return;
+    }
 
-      const userLogedIn = { _id: user._id };
-      let accessToken;
-      if (remember === "yes") {
-        accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
-          expiresIn: "7d",
-        });
-        // console.log('remember for 7 days')
-      } else {
-        accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
-          expiresIn: "1h",
-        });
-        // console.log('remember for 1 hour')
-      }
-
-      res.status(200).json({ user, accessToken });
-    });
-  })(req, res);
+    const user = await loginUserService(email, password);
+    const userLogedIn = user._id;
+    let accessToken;
+    if (remember === "yes") {
+      accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
+        expiresIn: "7d",
+      });
+      // console.log('remember for 7 days')
+    } else {
+      accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
+        expiresIn: "1h",
+      });
+    }
+    res.status(200).json({ user, accessToken });
+    // const chatToken = await chatLoginToken(email);
+    // console.log(chatToken);
+  } catch (error) {
+    console.log(error.message);
+    res.status(403).json({ message: error.message });
+  }
 };
 
 // Keep user logged in
 exports.loggedIn = (req, res) => {
-  if (req.isAuthenticated()) {
-    res.status(200).json(req.user);
-    return;
-  }
-  res.status(403).json({ message: "Unauthorized" });
+  // console.log(req.session.passport.user)
+  //res.status(200).json({ message: "You're logged in" });
 };
 
 // logout
 exports.logout = (req, res) => {
-  req.logout();
   res.status(200).json({ message: "Log out success!" });
 };
 

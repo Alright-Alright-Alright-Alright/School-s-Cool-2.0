@@ -4,6 +4,7 @@ const {
   createNewUser,
   forgetPasswordDb,
   newPasswordDb,
+  loginUser,
 } = require("../db/authDb");
 const crypto = require("crypto");
 
@@ -24,6 +25,14 @@ exports.newUser = async (firstName, lastName, email, password) => {
     throw new Error(error.message);
   }
 };
+
+exports.loginUserService = async (email, password) => {
+  try {
+    return await loginUser(email, password)
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 exports.forgetPasswordService = async (email) => {
   try {

@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { jwtAuthorization } = require("./middleware/JWTmiddleware");
+const { jwtAuthorization, getUser } = require("./middleware/JWTmiddleware");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -21,31 +21,28 @@ mongoose
 app.use(express.json());
 
 // auth ================================
-const passport = require("passport");
+
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
-require("./configs/passport");
+const MongoStore = require("connect-mongo");
 
 // auth session =============================
-app.use(
-  session({
-    store:  MongoStore.create({
-      mongoUrl:process.env.DATABASE_URL,
-      ttl: 3600000*24*7}),
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
-    resave: false,
-    cookie: {
-      secure: false,
-      maxAge: 3600000*24*7, //1 week
-    },
-    rolling: false, //session gets refreshed
-  })
-);
+// app.use(
+//   session({
+//     store: MongoStore.create({
+//       mongoUrl: process.env.DATABASE_URL,
+//       ttl: 3600000 * 24 * 7,
+//     }),
+//     secret: process.env.SESSION_SECRET,
+//     saveUninitialized: true,
+//     resave: false,
+//     cookie: {
+//       secure: false,
+//       maxAge: 3600000 * 24 * 7, //1 week
+//     },
+//     rolling: false, //session gets refreshed
+//   })
+// );
 app.set("trust proxy", 1); // trust first proxy
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // ==========================================
 
