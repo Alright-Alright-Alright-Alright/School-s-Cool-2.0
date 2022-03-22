@@ -100,17 +100,6 @@ exports.login = async (req, res) => {
   }
 };
 
-// Keep user logged in
-exports.loggedIn = (req, res) => {
-  // console.log(req.session.passport.user)
-  //res.status(200).json({ message: "You're logged in" });
-};
-
-// logout
-exports.logout = (req, res) => {
-  res.status(200).json({ message: "Log out success!" });
-};
-
 // Forget password
 exports.forgetPassword = async (req, res) => {
   try {
