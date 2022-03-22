@@ -42,6 +42,9 @@ const addPostToDb = async (body, owner, topicId, eventId) => {
       owner,
       topic: topicId,
       event: eventId,
+    }).then(async (postToPopulate) => {
+      const result = await Post.findById(postToPopulate._id).populate("owner");
+      return result;
     });
     topicId
       ? await Topic.findByIdAndUpdate(topicId, { $push: { posts: newPost } })
