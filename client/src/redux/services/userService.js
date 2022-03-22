@@ -7,13 +7,6 @@ export const login = (loginUser) =>
 export const register = (registerNewUser) =>
   service.post("/register", registerNewUser).then((response) => response.data)
 
-export const loggedin = () =>
-  service.get("/loggedin", configHeaders()).then((response) => response.data)
-
-export const logout = () => {
-  service.post("/logout", {}).then((response) => response.data)
-}
-
 export const getAllUsers = () =>
   service.get("/users", configHeaders()).then((response) => response.data)
 

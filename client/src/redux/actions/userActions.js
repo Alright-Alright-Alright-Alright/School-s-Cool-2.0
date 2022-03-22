@@ -3,8 +3,6 @@
 import {
   login,
   register,
-  loggedin,
-  logout,
   getAllUsers,
   updateUserService,
   getUserProfileService,
@@ -65,24 +63,22 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 };
 
 export const loggedInUser = () => (dispatch) => {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
   dispatch({ type: LOADING_UI });
-  loggedin()
-    .then((response) => {
-      dispatch({ type: CLEAR_ERRORS });
-      dispatch({ type: SET_USERLOGGED_IN, payload: response });
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response?.data,
-      });
+  dispatch({ type: CLEAR_ERRORS });
+  dispatch({ type: SET_USERLOGGED_IN, payload: user });  
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response?.data,
     });
+  }
 };
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("user");
   localStorage.removeItem("Authorization");
-  logout();
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 

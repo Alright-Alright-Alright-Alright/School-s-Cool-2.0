@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import Main from "../../layout/Main"
 import MainLibraryContent from "./MainLibraryContent"
@@ -21,19 +21,21 @@ const Index = () => {
     dispatch(getAllFilesFromLibrary())
   }, [dispatch])
 
+  const libraryMemo = useMemo(() => library, [library])
+
   return (
     <div className="">
       <Main
         main={
           <MainLibraryContent
-            library={library}
+            library={libraryMemo}
             showModal={showModal}
             handleShowModal={handleShowModal}
           />
         }
         contentLeft={
           <LibraryContentLeft
-            library={library}
+            library={libraryMemo}
             handleShowModal={handleShowModal}
           />
         }

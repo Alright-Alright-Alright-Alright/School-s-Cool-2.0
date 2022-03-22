@@ -46,7 +46,7 @@ const RegisterForm = () => {
     setLastName("")
     setEmail("")
     setPassword("")
-    setTimeout(() => navigate("/login"), 1500)
+    // setTimeout(() => navigate("/login"), 1500)
   }
 
   const logo = (

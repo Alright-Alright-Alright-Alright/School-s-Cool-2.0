@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import {
@@ -23,7 +23,9 @@ function ActivityFeed() {
     dispatch(getFollowedActivities())
   }, [dispatch])
 
-  const shownActivities = filter ? followedActivities : allActivities
+  const activitiesMemo = useMemo(() => allActivities, [allActivities])
+
+  const shownActivities = filter ? followedActivities : activitiesMemo
 
   return (
     <div className="mt-3">

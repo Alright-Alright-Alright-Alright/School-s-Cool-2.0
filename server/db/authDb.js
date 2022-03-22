@@ -1,4 +1,5 @@
 const User = require("../models/User-model");
+const bcrypt = require("bcryptjs")
 
 exports.createNewUser = async (firstName, lastName, email, password) => {
   try {
@@ -22,6 +23,22 @@ exports.createNewUser = async (firstName, lastName, email, password) => {
     throw new Error(error.message);
   }
 };
+
+exports.loginUser = async (email, password) => {
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new Error("User does not exists!")
+    }
+    if (user && await bcrypt.compare(password, user.password)) {
+      return user
+    } else {
+      throw new Error("Invalid credentials.")
+    }
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
 
 exports.forgetPasswordDb = async (email, forgetPasswordToken) => {
   try {

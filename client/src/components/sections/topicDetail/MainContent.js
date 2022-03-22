@@ -25,16 +25,6 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
     owner: user?._id,
   }
 
-  // const createNewPost = () => {
-  //   dispatch(createPost(newPost))
-  //   setPostBody("")
-  //   dispatch(getAllPosts(params.topicId))
-  // }
-
-  // const handleDeletePost = () => {
-  //   dispatch(getAllPosts(params.topicId))
-  // }
-
   useEffect(() => {
     dispatch(getAllPosts(params.topicId))
   }, [dispatch, params.topicId])
