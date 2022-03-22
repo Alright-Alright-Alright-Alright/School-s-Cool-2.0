@@ -36,13 +36,15 @@ const getAllPostsDb = async (topicId, eventId) => {
 };
 
 const addPostToDb = async (body, owner, topicId, eventId) => {
-  console.log(owner);
   try {
     let newPost = await Post.create({
       body,
       owner,
       topic: topicId,
       event: eventId,
+    }).then(async (postToPopulate) => {
+      const result = await Post.findById(postToPopulate._id).populate("owner");
+      return result;
     });
     topicId
       ? await Topic.findByIdAndUpdate(topicId, { $push: { posts: newPost } })
