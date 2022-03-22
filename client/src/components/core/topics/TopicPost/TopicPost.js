@@ -80,7 +80,7 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
 
   return (
     <div className="relative rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
-      {user._id === post.owner._id || user.role === "ADMIN" ? (
+      {user?._id === post?.owner?._id || user.role === "ADMIN" ? (
         <DropDownMenu
           position="absolute top-6 right-0"
           data={{

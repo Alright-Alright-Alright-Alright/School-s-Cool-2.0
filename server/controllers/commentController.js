@@ -19,7 +19,7 @@ const getAllComments = async (req, res, next) => {
 const createComment = async (req, res, next) => {
   const { commentBody } = req.body;
   const id = req.body.postId ? req.body.postId : req.body.fileId;
-  const owner = req.user.userLogedIn;
+  const owner = req.user.userLogedIn._id;
   try {
     const comment = await createCommentService(owner, commentBody, id);
     return res.status(201).json(comment);
