@@ -21,7 +21,6 @@ mongoose
 app.use(express.json());
 
 // auth ================================
-
 app.set("trust proxy", 1); // trust first proxy
 
 // ==========================================
