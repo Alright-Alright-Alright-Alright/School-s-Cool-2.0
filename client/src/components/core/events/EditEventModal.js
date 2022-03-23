@@ -18,16 +18,16 @@ import MessageHandler from "../MessageHandler"
 registerLocale("nl", nl)
 
 const EditEventModal = ({ handleShowModal, event }) => {
-  const [title, seTitle] = useState("")
-  const [location, setLocation] = useState("")
-  const [description, setDescription] = useState("")
+  const [title, seTitle] = useState(event?.title)
+  const [location, setLocation] = useState(event?.location)
+  const [description, setDescription] = useState(event?.description)
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
   const [tags, setTags] = useState(event?.tags)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const [startTime, setStartTime] = useState(null)
+  const [startDate, setStartDate] = useState(dayjs(event?.dateStart).toDate())
+  const [endDate, setEndDate] = useState(dayjs(event?.dateEnd).toDate())
+  const [startTime, setStartTime] = useState(dayjs(event?.timeStart).toDate())
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
@@ -111,7 +111,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
             type="text"
             name=""
             id=""
-            placeholder={event.title}
+            value={title}
             className="w-full placeholder-grey-medium text-lg"
             onChange={chooseTitle}
           />
@@ -164,7 +164,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
           <div className="">
             <input
               type="text"
-              placeholder={event?.location}
+              value={location}
               onChange={chooseLocation}
               className=" placeholder-grey-medium_light text-base h-10"
             />
@@ -195,13 +195,21 @@ const EditEventModal = ({ handleShowModal, event }) => {
         <section className="py-3 mx-5">
           <input
             type="text"
-            placeholder={event?.description}
+            value={description}
             className="w-full placeholder-grey-medium_light text-base h-10"
             onChange={chooseDescription}
           />
         </section>
         <section className="flex justify-center border-t-2 border-grey-super_light py-3 mx-5">
           <TagsInput selectedTags={selectedTags} />
+          {event?.tags.map((tag) => (
+            <span
+              key={tag}
+              className="mr-2 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+            >
+              {tag}
+            </span>
+          ))}
         </section>
         <section className="lg:flex justify-between px-5">
           <SwitchButton
@@ -209,22 +217,22 @@ const EditEventModal = ({ handleShowModal, event }) => {
             nameRight={t("events.modal_private_toggle_new_event")}
             toogle={() => setPrivacy(!privacy)}
           />
-          <div className="py-3 lg:pt-0">
+        </section>
+        <div className="flex justify-between px-5 py-3 lg:py-0">
+          <button
+            className="flex items-center"
+            type="button"
+            onClick={deleteEventHandler}
+          >
+            <Icon iconName="trash" /> Delete
+          </button>
+          <div>
             <Button
               buttonName={t("events.button_edit_event")}
               buttonStyle="btnEventStyle"
               buttonSubmit
             />
           </div>
-        </section>
-        <div>
-          <button
-            className="flex mx-5"
-            type="button"
-            onClick={deleteEventHandler}
-          >
-            <Icon iconName="trash" /> Delete event
-          </button>
         </div>
       </form>
     </div>
