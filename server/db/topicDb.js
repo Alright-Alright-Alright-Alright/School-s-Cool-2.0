@@ -133,7 +133,7 @@ const takeOutUserFromTopicDb = async (topicId, user) => {
 
 const deleteTopicFromdb = async (topicId) => {
   try {
-    return await Topic.findByIdAndDelete(topicId);
+    return await Topic.findById(topicId).deleteOne();
   } catch (error) {
     throw new Error(error);
   }

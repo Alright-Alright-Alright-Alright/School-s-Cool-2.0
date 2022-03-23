@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("./Post-model");
 const { Schema, model } = mongoose;
 
 const eventSchema = new Schema(
@@ -60,5 +61,10 @@ const eventSchema = new Schema(
 function arrayLimit(val) {
   return val.length <= 5;
 }
+
+eventSchema.pre("deleteOne", function(next) {
+  Post.deleteMany({ event: this._conditions._id }).exec();
+  next();
+})
 
 module.exports = model("Event", eventSchema);
