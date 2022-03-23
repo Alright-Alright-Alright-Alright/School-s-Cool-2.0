@@ -10,7 +10,7 @@ import {
   getAllEventPosts,
 } from "../../../redux/actions/postActions"
 import EventDescriptionCard from "../../core/events/eventDescriptionCard/eventDescriptionCard"
-import TopicPost from "../../core/topics/TopicPost/TopicPost"
+import Post from "../../core/post/Post"
 import EditEventModal from "../../core/events/EditEventModal"
 
 function EventDetailMainContent({
@@ -55,10 +55,10 @@ function EventDetailMainContent({
         />
       )}
       {posts?.map((post) => (
-        <TopicPost
+        <Post
           key={post._id}
           post={post}
-          topicId={params.eventId}
+          parentId={params.eventId}
           comments={post?.comments}
         />
       ))}

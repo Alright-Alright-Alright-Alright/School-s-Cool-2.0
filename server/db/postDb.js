@@ -138,18 +138,18 @@ const updatePostDb = async (postId, body) => {
   }
 };
 
-const deletePostDb = async (postId, topicId) => {
+const deletePostDb = async (postId, parentId) => {
   try {
     await Post.findById(postId).deleteOne();
     await Topic.findByIdAndUpdate(
-      topicId,
+      parentId,
       {
         $pull: { posts: postId },
       },
       { new: true }
     );
     await Event.findByIdAndUpdate(
-      topicId,
+      parentId,
       {
         $pull: { posts: postId },
       },

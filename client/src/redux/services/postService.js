@@ -41,11 +41,11 @@ export const unlikePostService = (postId, userId) =>
     .put(`/posts/${postId}/unlikepost`, userId)
     .then((responseFromAPI) => responseFromAPI.data)
 
-export const deletePostService = async (postId, topicId) => {
+export const deletePostService = async (postId, parentId) => {
   try {
     const deletingPost = await service.put(
       "/deletePost",
-      { postId, topicId },
+      { postId, parentId },
       configHeaders()
     )
     return deletingPost

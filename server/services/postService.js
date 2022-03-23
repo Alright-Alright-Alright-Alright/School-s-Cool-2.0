@@ -65,9 +65,9 @@ const unlikePostService = async (postId, userId) => {
     }
 };
 
-const deletePostService = async (postId, topicId) => {
+const deletePostService = async (postId, parentId) => {
     try {
-        return await deletePostDb(postId, topicId);
+        return await deletePostDb(postId, parentId);
     } catch (e) {
         throw new Error(e.message)
     }

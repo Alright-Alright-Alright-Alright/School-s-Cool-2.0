@@ -6,9 +6,8 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import PropTypes from "prop-types"
-import { createPost, getAllPosts } from "../../../redux/actions/postActions"
-import TopicHeaderCard from "../../core/topics/topicHeaderCard/TopicHeaderCard"
-import TopicPost from "../../core/topics/TopicPost/TopicPost"
+import { getAllPosts } from "../../../redux/actions/postActions"
+import Post from "../../core/post/Post"
 import RichTextToolbar from "../../core/richtText/RichTextToolbar"
 import TopicModal from "../../core/topics/TopicModal"
 
@@ -19,11 +18,6 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
   const posts = useSelector((state) => state.posts.allPosts)
   const params = useParams()
   const dispatch = useDispatch()
-  const newPost = {
-    body,
-    topicId: params.topicId,
-    owner: user?._id,
-  }
 
   useEffect(() => {
     dispatch(getAllPosts(params.topicId))
@@ -45,10 +39,10 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
         />
       )}
       {posts?.map((post) => (
-        <TopicPost
+        <Post
           key={post?._id}
           post={post}
-          topicId={params.topicId}
+          parentId={params.topicId}
           comments={post?.comments}
           // onDeletePost={handleDeletePost}
         />
