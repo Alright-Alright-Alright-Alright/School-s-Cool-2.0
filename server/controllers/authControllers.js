@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
     const user = await loginUserService(email, password);
     const userLogedIn = user._id;
     let accessToken;
-    if (remember === "yes") {
+    if (remember === true) {
       accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
         expiresIn: "7d",
       });
