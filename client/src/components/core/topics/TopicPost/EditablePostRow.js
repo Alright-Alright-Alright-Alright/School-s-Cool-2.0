@@ -8,7 +8,7 @@ function ReadOnlyPostRow({ postBody, handleEditPost, handleSubmitEditPost }) {
       <input
         className="text-base w-full"
         type="text"
-        placeholder={postBody}
+        defaultValue={postBody}
         onChange={handleEditPost}
       />
       <Button

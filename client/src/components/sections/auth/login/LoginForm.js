@@ -30,8 +30,8 @@ const LoginForm = () => {
     setPassword(e.target.value)
   }
 
-  const rememberMe = (e) => {
-    setRemember(e.target.value)
+  const rememberMe = () => {
+    setRemember(!remember)
   }
 
   const handleFormSubmit = async (e) => {
@@ -120,7 +120,7 @@ const LoginForm = () => {
             />
             <br />
             <div className="flex items-center space-x-1">
-              <input type="radio" value="yes" onChange={rememberMe} />
+              <input type="checkbox" value={remember} onChange={rememberMe} />
               <label className="text-sm">Remember me</label>
             </div>
             <p className="text-sm flex justify-end">
