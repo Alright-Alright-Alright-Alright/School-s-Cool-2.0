@@ -52,6 +52,7 @@ const eventSchema = new Schema(
         ref: "Post",
       },
     ],
+    isPrivate: { type: Boolean, enum: [true, false], default: false },
   },
   {
     timestamps: true,
@@ -62,9 +63,9 @@ function arrayLimit(val) {
   return val.length <= 5;
 }
 
-eventSchema.pre("deleteOne", function(next) {
+eventSchema.pre("deleteOne", function (next) {
   Post.deleteMany({ event: this._conditions._id }).exec();
   next();
-})
+});
 
 module.exports = model("Event", eventSchema);
