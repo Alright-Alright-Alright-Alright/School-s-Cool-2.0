@@ -10,6 +10,7 @@ import { getAllCourses } from "../../../redux/actions/courseActions"
 import { getUserProfile } from "../../../redux/actions/userActions"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
 import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
+import DashcardSkeleton from "../../core/skeleton/DashCardSkeleton"
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics)
@@ -27,6 +28,16 @@ function DashCardsLeft() {
     dispatch(getAllCourses())
     return user?._id && dispatch(getUserProfile(user?._id))
   }, [dispatch, user?._id])
+
+  if (topics.length === 0 || courses.length === 0 || events.length === 0) {
+    return (
+      <div>
+        <DashcardSkeleton />
+        <DashcardSkeleton />
+        <DashcardSkeleton />
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-md float-right px-6 hidden lg:block">

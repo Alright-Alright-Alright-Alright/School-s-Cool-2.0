@@ -7,6 +7,7 @@ import {
 } from "../../../redux/actions/activityActions"
 import ActivityCard from "../../core/activityCard/ActivityCard"
 import Button from "../../core/Button"
+import ActivityCardSkeleton from "../../core/skeleton/ActivityCardSkeleton"
 
 function ActivityFeed() {
   const [filter, setFilter] = useState(false)
@@ -26,6 +27,15 @@ function ActivityFeed() {
   const activitiesMemo = useMemo(() => allActivities, [allActivities])
 
   const shownActivities = filter ? followedActivities : activitiesMemo
+
+  if (shownActivities.length === 0) {
+    return (
+      <div className="container">
+        <ActivityCardSkeleton />
+        <ActivityCardSkeleton />
+      </div>
+    )
+  }
 
   return (
     <div className="mt-3">
