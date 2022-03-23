@@ -25,8 +25,8 @@ const EditEventModal = ({ handleShowModal, event }) => {
   const [privacy, setPrivacy] = useState(false)
   const [tags, setTags] = useState(event?.tags)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
-  const [dateRange, setDateRange] = useState([null, null])
-  const [startDate, endDate] = dateRange
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
   const [startTime, setStartTime] = useState(null)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
@@ -54,6 +54,14 @@ const EditEventModal = ({ handleShowModal, event }) => {
 
   const chooseLocation = (e) => {
     setLocation(e.target.value)
+  }
+
+  const handleStartDateSelect = (date) => {
+    setStartDate(date)
+  }
+
+  const handleEndDateSelect = (date) => {
+    setEndDate(date)
   }
 
   const deleteEventHandler = () => {
@@ -113,13 +121,19 @@ const EditEventModal = ({ handleShowModal, event }) => {
         </section>
         <section className="flex-col lg:flex-row flex justify-start  ">
           <DatePicker
-            selectsRange
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(update) => {
-              setDateRange(update)
-            }}
-            placeholderText={dayjs(event.dateStart).format("DD-MM-YYYY")}
+            selected={startDate}
+            onSelect={handleStartDateSelect}
+            placeholderText={t("events.modal_date_new_event")}
+            withPortal
+            locale="nl"
+            dateFormat="dd/MM/yyyy"
+            className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
+            minDate={new Date()}
+          />
+          <DatePicker
+            selected={endDate}
+            onSelect={handleEndDateSelect}
+            placeholderText={t("events.modal_date_new_event")}
             withPortal
             locale="nl"
             dateFormat="dd/MM/yyyy"

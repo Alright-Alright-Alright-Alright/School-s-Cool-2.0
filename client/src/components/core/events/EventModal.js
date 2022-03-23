@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
 import nl from "date-fns/locale/nl"
 import { useTranslation } from "react-i18next"
+import PropTypes from "prop-types"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import { createNewEvent } from "../../../redux/actions/eventActions"
 import Button from "../Button"
@@ -25,8 +25,8 @@ const Modal = ({ handleShowModal }) => {
   const [privacy, setPrivacy] = useState(false)
   const [tags, setTags] = useState([])
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
-  const [dateRange, setDateRange] = useState([null, null])
-  const [startDate, endDate] = dateRange
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
   const [startTime, setStartTime] = useState(null)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
@@ -54,6 +54,14 @@ const Modal = ({ handleShowModal }) => {
     setLocation(e.target.value)
   }
 
+  const handleStartDateSelect = (date) => {
+    setStartDate(date)
+  }
+
+  const handleEndDateSelect = (date) => {
+    setEndDate(date)
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const image = await fileUploadHandler(bannerImage)
@@ -74,8 +82,6 @@ const Modal = ({ handleShowModal }) => {
       handleShowModal()
     dispatch(createNewEvent(eventData))
   }
-
-  console.log(bannerImage)
 
   return (
     <div className="flex justify-center content-center">
@@ -99,12 +105,18 @@ const Modal = ({ handleShowModal }) => {
         </section>
         <section className="flex-col lg:flex-row flex justify-start  ">
           <DatePicker
-            selectsRange
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(update) => {
-              setDateRange(update)
-            }}
+            selected={startDate}
+            onSelect={handleStartDateSelect}
+            placeholderText={t("events.modal_date_new_event")}
+            withPortal
+            locale="nl"
+            dateFormat="dd/MM/yyyy"
+            className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
+            minDate={new Date()}
+          />
+          <DatePicker
+            selected={endDate}
+            onSelect={handleEndDateSelect}
             placeholderText={t("events.modal_date_new_event")}
             withPortal
             locale="nl"
@@ -193,6 +205,10 @@ const Modal = ({ handleShowModal }) => {
       </form>
     </div>
   )
+}
+
+Modal.propTypes = {
+  handleShowModal: PropTypes.func.isRequired,
 }
 
 export default Modal
