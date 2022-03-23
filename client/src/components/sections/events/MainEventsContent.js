@@ -34,9 +34,7 @@ const MainEventsContent = ({ events }) => {
         item.attendees.find((attendee) => attendee._id === user?._id)
       break
     case "Past events":
-      filterRule = (item) =>
-        new Date(item.dateStart) < new Date() &&
-        new Date(item.dateEnd) < new Date()
+      filterRule = (item) => new Date(item.dateStart) < new Date()
       break
     default:
       filterRule = (item) => new Date(item.dateEnd) >= new Date()
