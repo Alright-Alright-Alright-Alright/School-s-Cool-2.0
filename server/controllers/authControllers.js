@@ -9,17 +9,18 @@ const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
 const { chatSignupToken, chatLoginToken } = require("../services/chatService");
 const { zohoCheck } = require("../middleware/zohoMiddleware");
+const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 
 // Register
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  if (zohoCheck(email)) {
-    res.status(400).json({
-      message: "This email is not registered in Zoho",
-    });
-    return;
-  }
+  // if (zohoCheck(email)) {
+  //   res.status(400).json({
+  //     message: "This email is not registered in Zoho",
+  //   });
+  //   return;
+  // }
 
   if (isEmpty(email, firstName, lastName, password)) {
     res
