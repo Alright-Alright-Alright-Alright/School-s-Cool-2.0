@@ -85,7 +85,6 @@ const unlikePost = async (req, res, next) => {
 
 const deletePost = async (req, res, next) => {
   const { postId, topicId } = req.body;
-
   try {
     await deletePostService(postId, topicId);
     return res.status(200).json({ message: "Post has been deleted" });

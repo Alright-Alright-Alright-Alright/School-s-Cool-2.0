@@ -58,7 +58,7 @@ function EventDetailMainContent({
         <TopicPost
           key={post._id}
           post={post}
-          //   topicId={params.topicId}
+          topicId={params.eventId}
           comments={post?.comments}
         />
       ))}

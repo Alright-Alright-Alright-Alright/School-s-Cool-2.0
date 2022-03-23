@@ -36,7 +36,6 @@ const getAllPostsDb = async (topicId, eventId) => {
 };
 
 const addPostToDb = async (body, owner, topicId, eventId) => {
-  console.log(owner);
   try {
     let newPost = await Post.create({
       body,
@@ -143,6 +142,13 @@ const deletePostDb = async (postId, topicId) => {
   try {
     await Post.findById(postId).deleteOne();
     await Topic.findByIdAndUpdate(
+      topicId,
+      {
+        $pull: { posts: postId },
+      },
+      { new: true }
+    );
+    await Event.findByIdAndUpdate(
       topicId,
       {
         $pull: { posts: postId },
