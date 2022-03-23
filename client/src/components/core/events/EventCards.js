@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import dayjs from "dayjs"
 import calendar from "dayjs/plugin/calendar"
 import PropTypes from "prop-types"
@@ -54,7 +54,9 @@ const EventCards = ({ event }) => {
                   />
                 </button>
               )}
-              <h1 className=" text-lg pl-3">{event?.title}</h1>
+              <Link to={`/events/${event?._id}`}>
+                <h1 className=" text-lg pl-3">{event?.title}</h1>
+              </Link>
             </div>
 
             <div>
@@ -79,9 +81,6 @@ const EventCards = ({ event }) => {
             </div>
           </div>
 
-          {/* <div className="flex items-end text-grey-medium_light ">
-            <p className="text-sm">{event?.description}</p>
-          </div> */}
           <div className="flex flex-wrap h-28 justify-start items-end">
             {event?.tags.map((tag) => (
               <span
@@ -95,11 +94,13 @@ const EventCards = ({ event }) => {
         </div>
 
         <div className="flex justify-end w-1/2 my-5 ">
-          <img
-            src={event?.bannerImage}
-            alt="event_Image"
-            className=" object-cover w-full h-48 rounded-tr-3xl rounded-b-3xl"
-          />
+          <Link to={`/events/${event?._id}`} className=" w-full h-48 ">
+            <img
+              src={event?.bannerImage}
+              alt="event_Image"
+              className=" object-cover w-full h-48 rounded-tr-3xl rounded-b-3xl"
+            />
+          </Link>
         </div>
       </section>
 
