@@ -35,7 +35,9 @@ function ActivityFeed() {
         post?.event?.isPrivate === false ||
         (post?.topic?.isPrivate === true &&
           post?.topic?.owner._id === user._id) ||
-        (post?.event?.isPrivate === true && post?.event?.owner._id === user._id)
+        (post?.event?.isPrivate === true &&
+          post?.event?.owner._id === user._id) ||
+        post?.comments?.owner?._id === user._id
     )
 
   const shownActivities = filter ? followedActivities : checkIfIsPrivate()
