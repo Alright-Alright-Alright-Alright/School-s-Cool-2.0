@@ -5,8 +5,20 @@ const getAllActivitiesDb = async (userId) => {
   try {
     return await Post.find()
       .sort({ createdAt: "desc" })
-      .populate('topic', "title bannerImage isPrivate")
-      .populate('event', "title bannerImage isPrivate")
+      .populate({
+        path: "topic",
+        populate: {
+          path: "owner",
+          select: "_id",
+        },
+      })
+      .populate({
+        path: "event",
+        populate: {
+          path: "owner",
+          select: "_id",
+        },
+      })
       .populate("owner", "firstName lastName imageUrl")
       .populate({
         path: "comments",
