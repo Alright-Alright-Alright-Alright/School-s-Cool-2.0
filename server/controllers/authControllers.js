@@ -61,12 +61,12 @@ exports.login = async (req, res) => {
   try {
     const { email, password, remember } = req.body;
 
-    if (!zohoCheck(email)) {
-      res.status(400).json({
-        message: "This email is not registered in Zoho",
-      });
-      return;
-    }
+    // if (!zohoCheck(email)) {
+    //   res.status(400).json({
+    //     message: "This email is not registered in Zoho",
+    //   });
+    //   return;
+    // }
 
     if (isEmpty(email)) {
       res.status(400).json({ message: "Email must not be empty" });
@@ -95,7 +95,6 @@ exports.login = async (req, res) => {
     // const chatToken = await chatLoginToken(email);
     // console.log(chatToken);
   } catch (error) {
-    console.log(error.message);
     res.status(403).json({ message: error.message });
   }
 };

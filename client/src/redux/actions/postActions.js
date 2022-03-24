@@ -167,10 +167,10 @@ export const updatePost = (postId, body) => async (dispatch) => {
   }
 }
 
-export const deletePost = (postId, topicId) => async (dispatch) => {
+export const deletePost = (postId, parentId) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_UI })
-    await deletePostService(postId, topicId)
+    await deletePostService(postId, parentId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_POST, payload: postId })
   } catch (error) {
