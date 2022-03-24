@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("./Post-model");
 const { Schema, model } = mongoose;
 
 require("./User-model");
@@ -52,5 +53,10 @@ const topicSchema = new Schema(
     timestamps: true,
   }
 );
+
+topicSchema.pre("deleteOne", function(next) {
+  Post.deleteMany({ topic: this._conditions._id }).exec();
+  next();
+})
 
 module.exports = model("Topic", topicSchema);

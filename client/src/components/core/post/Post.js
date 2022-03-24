@@ -8,22 +8,21 @@ import { Link } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { useSelector, useDispatch } from "react-redux"
-import ReactHtmlParser from "react-html-parser"
 import { t } from "i18next"
-import Comment from "../../comment/Comment"
-import CommentForm from "../../comment/CommentForm"
+import Comment from "../comment/Comment"
+import CommentForm from "../comment/CommentForm"
 import {
   likePost,
   unlikePost,
   deletePost,
   updatePost,
-} from "../../../../redux/actions/postActions"
-import Icon from "../../Icon"
-import DropDownMenu from "../../DropDownMenu"
+} from "../../../redux/actions/postActions"
+import Icon from "../Icon"
+import DropDownMenu from "../DropDownMenu"
 import ReadOnlyPostRow from "./ReadOnlyPostRow"
 import EditablePostRow from "./EditablePostRow"
 
-function TopicPost({ post, topicId, comments, onDeletePost }) {
+function Post({ post, parentId, comments }) {
   const [showMoreComments, setShowMoreComments] = useState(false)
   const [showEditPost, setShowEditPost] = useState(false)
   const [newPostBody, setNewPostBody] = useState(post.body)
@@ -74,7 +73,7 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
       setShowEditPost(!showEditPost)
     }
     if (actionName === "delete") {
-      dispatch(deletePost(post._id, topicId))
+      dispatch(deletePost(post._id, parentId))
     }
   }
 
@@ -171,16 +170,16 @@ function TopicPost({ post, topicId, comments, onDeletePost }) {
   )
 }
 
-TopicPost.defaultProps = {
-  topicId: "",
+Post.defaultProps = {
+  parentId: "",
   onDeletePost: () => {},
 }
 
-TopicPost.propTypes = {
-  topicId: PropTypes.string,
+Post.propTypes = {
+  parentId: PropTypes.string,
   post: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
   onDeletePost: PropTypes.func,
 }
 
-export default TopicPost
+export default Post

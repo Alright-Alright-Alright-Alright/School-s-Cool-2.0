@@ -103,7 +103,7 @@ const userLeaveEventDb = async (eventId, _id) => {
 
 const deleteEventFromDb = async (eventId) => {
   try {
-    return await Event.findByIdAndDelete(eventId);
+    return await Event.findById(eventId).deleteOne();
   } catch (error) {
     throw new Error(error);
   }

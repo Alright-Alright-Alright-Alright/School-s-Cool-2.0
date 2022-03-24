@@ -21,13 +21,21 @@ function Dashcard({
 
   let filterRule
   switch (filter) {
-    case "Created by me":
+    case "my_topics":
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
       filterRule = (item) => item.owner === user._id
       break
-    case "Followed by me":
+    case "my_events":
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      filterRule = (item) => item.owner === user._id
+      break
+    case "followed_topics":
       filterRule = (item) =>
         item.members.find((member) => member._id === user._id)
+      break
+    case "attended_events":
+      filterRule = (item) =>
+        item.attendees.find((attendee) => attendee._id === user._id)
       break
     default:
       filterRule = (item) => item

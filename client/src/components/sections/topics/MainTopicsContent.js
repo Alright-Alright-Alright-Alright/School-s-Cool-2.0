@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
@@ -28,6 +29,14 @@ function MainTopicsContent() {
 
   const topicsMemo = useMemo(() => topics, [topics])
 
+  const checkIfIsPrivate = () =>
+    topicsMemo.filter((topic) => {
+      if (topic.owner === user._id && topic.isPrivate === true) {
+        return topic
+      }
+      return topic.isPrivate === false
+    })
+
   let filterRule
   switch (filter) {
     case "My topics":
@@ -42,7 +51,7 @@ function MainTopicsContent() {
       filterRule = (item) => item
   }
 
-  const filteredTopics = topicsMemo.filter(filterRule)
+  const filteredTopics = checkIfIsPrivate().filter(filterRule)
 
   return (
     <div>
