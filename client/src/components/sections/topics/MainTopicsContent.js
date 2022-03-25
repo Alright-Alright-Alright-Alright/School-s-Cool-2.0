@@ -33,13 +33,16 @@ function MainTopicsContent() {
     const privateTopics = topicsMemo.filter(
       (member) => member.isPrivate === true
     )
-    const privateTopicsMembers = privateTopics.map((topic) =>
-      topic.members.map((member) => member._id === user._id && true)
-    )
+    const privateTopicsMembers = privateTopics
+      .map((topic) =>
+        topic.members.map((member) => member._id === user._id && true)
+      )
+      .flat(Infinity)
+
     return topicsMemo.filter((topic) => {
       if (
         (topic.owner === user._id && topic.isPrivate === true) ||
-        privateTopicsMembers.join().includes(true)
+        privateTopicsMembers.includes(true)
       ) {
         return true
       }

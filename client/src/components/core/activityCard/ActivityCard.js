@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import ReactHtmlParser from "react-html-parser"
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
+import Linkify from "react-linkify"
 import Comment from "../comment/Comment"
 import CommentForm from "../comment/CommentForm"
 import { likePost, unlikePost } from "../../../redux/actions/postActions"
@@ -104,7 +105,20 @@ function ActivityCard({ activity, commentFather }) {
       </div>
       <div className="">
         <div className="border-b-2 border-grey-light m-3 pb-3 text-base">
-          {ReactHtmlParser(activity.body)}
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a
+                target="blank"
+                href={decoratedHref}
+                key={key}
+                className=" text-sky hover:text-sky-light"
+              >
+                {decoratedText}
+              </a>
+            )}
+          >
+            {ReactHtmlParser(activity.body)}
+          </Linkify>
         </div>
       </div>
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">

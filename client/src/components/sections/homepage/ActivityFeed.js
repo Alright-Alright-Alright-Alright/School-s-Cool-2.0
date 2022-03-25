@@ -35,12 +35,16 @@ function ActivityFeed() {
     const privateEvents = activitiesMemo.filter(
       (activity) => activity?.event?.isPrivate === true
     )
-    const privateTopicsMembers = privateTopics.map((topic) =>
-      topic.topic.members.map((member) => member === user._id && true)
-    )
-    const privateEventsMembers = privateTopics.map((event) =>
-      event?.event?.members.map((member) => member === user._id && true)
-    )
+    const privateTopicsMembers = privateTopics
+      .map((topic) =>
+        topic.topic.members.map((member) => member === user._id && true)
+      )
+      .flat(Infinity)
+    const privateEventsMembers = privateEvents
+      .map((event) =>
+        event?.event?.members.map((member) => member === user._id && true)
+      )
+      .flat(Infinity)
     return activitiesMemo.filter(
       (post) =>
         post?.topic?.isPrivate === false ||
@@ -50,8 +54,8 @@ function ActivityFeed() {
         (post?.event?.isPrivate === true &&
           post?.event?.owner._id === user._id) ||
         post?.comments?.owner?._id === user._id ||
-        privateTopicsMembers.join().includes(true) ||
-        privateEventsMembers.join().includes(true)
+        privateTopicsMembers.includes(true) ||
+        privateEventsMembers.includes(true)
     )
   }
 
