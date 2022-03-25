@@ -29,13 +29,25 @@ function MainTopicsContent() {
 
   const topicsMemo = useMemo(() => topics, [topics])
 
-  const checkIfIsPrivate = () =>
-    topicsMemo.filter((topic) => {
-      if (topic.owner === user._id && topic.isPrivate === true) {
-        return topic
+  const checkIfIsPrivate = () => {
+    const members = topicsMemo.map((member) =>
+      member.members.map((person) => {
+        if (person._id === user._id) {
+          return true
+        }
+        return false
+      })
+    )
+    return topicsMemo.filter((topic) => {
+      if (
+        (topic.owner === user._id && topic.isPrivate === true) ||
+        members.join().includes(true)
+      ) {
+        return true
       }
       return topic.isPrivate === false
     })
+  }
 
   let filterRule
   switch (filter) {

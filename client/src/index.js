@@ -4,11 +4,11 @@ import ReactDOM from "react-dom"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import "./index.css"
 import { Provider } from "react-redux"
-
 import i18next from "i18next"
 import { initReactI18next } from "react-i18next"
 import HttpApi from "i18next-http-backend"
 import LanguageDetector from "i18next-browser-languagedetector"
+import Loader from "./components/core/Loader"
 
 import App from "./App"
 // import Topics from "./routes/topics"
@@ -52,7 +52,7 @@ i18next
   })
 
 ReactDOM.render(
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<Loader />}>
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop />
