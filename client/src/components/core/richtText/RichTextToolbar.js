@@ -35,14 +35,14 @@ const RichTextToolbar = () => {
     setShowModal(!showModal)
   }
 
-  const handleEditorChange = (state) => {
-    setEditorState(state)
-    convertContentToHTML()
-  }
-
   const convertContentToHTML = () => {
     const currentContentAsHTML = convertToHTML(editorState.getCurrentContent())
     setConvertedContent(currentContentAsHTML)
+  }
+
+  const handleEditorChange = (state) => {
+    setEditorState(state)
+    convertContentToHTML()
   }
 
   const handleSubmit = (e) => {
@@ -71,7 +71,7 @@ const RichTextToolbar = () => {
               toolbarClassName="flex"
               placeholder={t("topics.header_card_placeholder")}
               toolbar={{
-                options: ["inline", "list", "link"],
+                options: ["inline", "list", "emoji"],
                 inline: {
                   options: ["bold", "italic", "underline"],
                 },
@@ -82,7 +82,7 @@ const RichTextToolbar = () => {
                   dropdownClassName: undefined,
                   options: ["unordered", "ordered"],
                 },
-                link: { options: ["link"] },
+                // link: { options: ["link"] },
               }}
             />
           </div>
