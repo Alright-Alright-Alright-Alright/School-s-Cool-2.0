@@ -28,8 +28,20 @@ function ActivityFeed() {
 
   const activitiesMemo = useMemo(() => allActivities, [allActivities])
 
-  const checkIfIsPrivate = () =>
-    activitiesMemo.filter(
+  const checkIfIsPrivate = () => {
+    const privateTopics = activitiesMemo.filter(
+      (activity) => activity?.topic?.isPrivate === true
+    )
+    const privateEvents = activitiesMemo.filter(
+      (activity) => activity?.event?.isPrivate === true
+    )
+    const privateTopicsMembers = privateTopics.map((topic) =>
+      topic.topic.members.map((member) => member === user._id && true)
+    )
+    const privateEventsMembers = privateTopics.map((event) =>
+      event?.event?.members.map((member) => member === user._id && true)
+    )
+    return activitiesMemo.filter(
       (post) =>
         post?.topic?.isPrivate === false ||
         post?.event?.isPrivate === false ||
@@ -37,8 +49,11 @@ function ActivityFeed() {
           post?.topic?.owner._id === user._id) ||
         (post?.event?.isPrivate === true &&
           post?.event?.owner._id === user._id) ||
-        post?.comments?.owner?._id === user._id
+        post?.comments?.owner?._id === user._id ||
+        privateTopicsMembers.join().includes(true) ||
+        privateEventsMembers.join().includes(true)
     )
+  }
 
   const shownActivities = filter ? followedActivities : checkIfIsPrivate()
 
