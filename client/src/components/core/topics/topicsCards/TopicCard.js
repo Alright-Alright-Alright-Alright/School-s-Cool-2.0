@@ -24,7 +24,10 @@ const TopicCard = ({ topics }) => {
   }
 
   const checkJoinedUser = () => {
-    topics.members.map((member) => member._id === user?._id && setJoin(true))
+    topics.members.map(
+      (member) =>
+        (topics.owner === user._id || member._id === user?._id) && setJoin(true)
+    )
   }
 
   useEffect(() => {
