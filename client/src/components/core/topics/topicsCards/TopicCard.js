@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
@@ -28,7 +29,7 @@ const TopicCard = ({ topics }) => {
 
   useEffect(() => {
     checkJoinedUser()
-  }, [])
+  }, [topics.members])
 
   return (
     <div
