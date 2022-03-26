@@ -84,7 +84,7 @@ function SearchBar({ placeholder }) {
         </div>
       </div>
       {filteredData.length !== 0 && (
-        <div className="absolute bg-grey-super_light w-72 shadow-2xl pl-4 rounded-md">
+        <div className="absolute bg-grey-super_light w-64 shadow-2xl pl-2 rounded-xl">
           {filteredData.slice(0, 15).map((value) =>
             value.collectionName === "library" ? (
               <Link

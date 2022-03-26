@@ -31,7 +31,7 @@ exports.loginUser = async (email, password) => {
       throw new Error("User does not exists!")
     }
     if (user && await bcrypt.compare(password, user.password)) {
-      return user
+      return await User.findById(user._id).select('-password')
     } else {
       throw new Error("Invalid credentials.")
     }
