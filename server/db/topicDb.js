@@ -18,7 +18,7 @@ const addTopicToDb = async (
   owner
 ) => {
   try {
-    return await Topic.create({
+    const topic = await Topic.create({
       title,
       description,
       category,
@@ -27,6 +27,14 @@ const addTopicToDb = async (
       isPrivate,
       owner,
     });
+    const theTopic = await Topic.findByIdAndUpdate(
+      topic._id,
+      {
+        $push: { members: topic.owner },
+      },
+      { new: true }
+    );
+    return theTopic;
   } catch (error) {
     throw new Error(error);
   }

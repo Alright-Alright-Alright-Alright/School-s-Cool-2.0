@@ -22,6 +22,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const [description, setDescription] = useState("")
   const [bannerImage, setBannerImage] = useState("")
   const [privacy, setPrivacy] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { topicId } = useParams()
@@ -188,14 +189,32 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               buttonSubmit
             />
           </section>
-          <div>
+          <div className="flex">
             <button
-              className="flex mx-5"
+              className="flex mx-5 "
               type="button"
-              onClick={deleteTopicHandler}
+              onClick={() => setConfirmDelete(!confirmDelete)}
             >
               <Icon iconName="trash" /> Delete topic
             </button>
+            {confirmDelete && (
+              <div className="flex justify-around w-20">
+                <button
+                  type="button"
+                  onClick={deleteTopicHandler}
+                  className="text-pink font-bold transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmDelete(false)}
+                  className="text-aqua font-bold transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                >
+                  No
+                </button>
+              </div>
+            )}
           </div>
         </form>
       ) : (

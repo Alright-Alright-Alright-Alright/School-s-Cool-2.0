@@ -29,7 +29,7 @@ const TopicCard = ({ topics }) => {
 
   useEffect(() => {
     checkJoinedUser()
-  }, [topics.members])
+  }, [topics])
 
   return (
     <div

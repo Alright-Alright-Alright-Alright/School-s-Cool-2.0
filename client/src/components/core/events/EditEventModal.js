@@ -8,7 +8,6 @@ import { useParams, useNavigate } from "react-router-dom"
 import PropTypes from "prop-types"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import { editEvent, deleteEvent } from "../../../redux/actions/eventActions"
-import Button from "../Button"
 import SwitchButton from "../SwitchButton"
 import Icon from "../Icon"
 import "react-datepicker/dist/react-datepicker.css"
@@ -28,6 +27,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
   const [startDate, setStartDate] = useState(dayjs(event?.dateStart).toDate())
   const [endDate, setEndDate] = useState(dayjs(event?.dateEnd).toDate())
   const [startTime, setStartTime] = useState(dayjs(event?.timeStart).toDate())
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
@@ -218,21 +218,32 @@ const EditEventModal = ({ handleShowModal, event }) => {
             toogle={() => setPrivacy(!privacy)}
           />
         </section>
-        <div className="flex justify-between px-5 py-3 lg:py-0">
+        <div className="flex">
           <button
-            className="flex items-center"
+            className="flex mx-5 "
             type="button"
-            onClick={deleteEventHandler}
+            onClick={() => setConfirmDelete(!confirmDelete)}
           >
-            <Icon iconName="trash" /> Delete
+            <Icon iconName="trash" /> Delete topic
           </button>
-          <div>
-            <Button
-              buttonName={t("events.button_edit_event")}
-              buttonStyle="btnEventStyle"
-              buttonSubmit
-            />
-          </div>
+          {confirmDelete && (
+            <div className="flex justify-around w-20">
+              <button
+                type="button"
+                onClick={deleteEventHandler}
+                className="text-pink font-bold transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmDelete(false)}
+                className="text-sky font-bold transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              >
+                No
+              </button>
+            </div>
+          )}
         </div>
       </form>
     </div>
