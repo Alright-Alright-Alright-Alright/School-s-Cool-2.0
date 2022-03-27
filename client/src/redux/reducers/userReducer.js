@@ -25,8 +25,6 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTHENTICATED:
-    case FOLLOW_USER:
-    case UNFOLLOW_USER:
       return {
         ...state,
         token: `Bearer ${action.payload.accessToken}`,
@@ -38,6 +36,8 @@ const userReducer = (state = initialState, action) => {
     case SET_USERLOGGED_IN:
     case JOIN_COURSE:
     case LEAVE_COURSE:
+    case FOLLOW_USER:
+    case UNFOLLOW_USER:
       return {
         ...state,
         singleUser: action.payload,

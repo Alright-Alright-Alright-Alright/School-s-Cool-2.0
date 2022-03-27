@@ -166,7 +166,7 @@ export const followThisUser = ( userToFollow ) => async (dispatch) => {
     const user = await followUser(userToFollow);
     localStorage.setItem("user", JSON.stringify(user.user));
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: FOLLOW_USER, payload: user });
+    dispatch({ type: FOLLOW_USER, payload: user.user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -181,7 +181,7 @@ export const unfollowThisUser = ( userToFollow ) => async (dispatch) => {
     const user = await unfollowUser(userToFollow);
     localStorage.setItem("user", JSON.stringify(user.user));
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: UNFOLLOW_USER, payload: user });
+    dispatch({ type: UNFOLLOW_USER, payload: user.user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
