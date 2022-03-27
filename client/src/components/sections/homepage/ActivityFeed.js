@@ -72,8 +72,7 @@ function ActivityFeed() {
 
   return (
     <div className="mt-3">
-      {/* {console.log(checkIfIsPrivate())} */}
-      <div className="sm:flex md:place-content-between ">
+      <div className="sm:flex md:place-content-between pb-3">
         <div>
           <h1 className="text-lg text-center mb-3 md:mb-0 pl-3">
             {t("activity_feed")}

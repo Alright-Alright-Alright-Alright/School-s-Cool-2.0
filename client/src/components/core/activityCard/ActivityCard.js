@@ -60,7 +60,7 @@ function ActivityCard({ activity, commentFather }) {
   const activityType = activity.topic ? "topic" : "event"
 
   return (
-    <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
+    <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg mx-3 mb-3">
       <div className="p-3">
         <Link to={`/${activityType}s/${activity[activityType]?._id}`}>
           <img
