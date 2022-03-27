@@ -10,6 +10,7 @@ import {
   SET_USERS,
   SET_USER_PROFILE,
   UPDATE_USER,
+  FOLLOW_USER,
 } from "../types/user"
 import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
 
@@ -34,6 +35,7 @@ const userReducer = (state = initialState, action) => {
     case SET_USERLOGGED_IN:
     case JOIN_COURSE:
     case LEAVE_COURSE:
+    case FOLLOW_USER:
       return {
         ...state,
         singleUser: action.payload,

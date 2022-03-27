@@ -45,13 +45,16 @@ exports.followingTheUser = async (theUser, userToFollow) => {
   try {
     if (theUser !== userToFollow) {
       const user = await User.findById(userToFollow);
-      const currentUser = await User.findById(theUser);
       if (user.followers.includes(theUser)) {
         throw new Error("you allready follow this user");
       } else {
         await user.updateOne({ $push: { followers: theUser } });
-        await currentUser.updateOne({ $push: { followings: userToFollow } });
-        return "user has been followed";
+        const currentUserUpdated = await User.findByIdAndUpdate(
+          theUser,
+          { $push: { followings: userToFollow } },
+          { new: true }
+        );
+        return currentUserUpdated;
       }
     } else {
       throw new Error("you cant follow yourself");
@@ -64,10 +67,13 @@ exports.followingTheUser = async (theUser, userToFollow) => {
 exports.unfollowingTheUser = async (theUser, userToFollow) => {
   try {
     const user = await User.findById(userToFollow);
-    const currentUser = await User.findById(theUser);
     await user.updateOne({ $pull: { followers: theUser } });
-    await currentUser.updateOne({ $pull: { followings: userToFollow } });
-    return "user has been unfollowed";
+    const currentUserUpdated = await User.findByIdAndUpdate(
+      theUser,
+      { $pull: { followings: userToFollow } },
+      { new: true }
+    );
+    return currentUserUpdated;
   } catch (err) {
     throw new Error(err.message);
   }

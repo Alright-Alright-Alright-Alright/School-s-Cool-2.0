@@ -161,9 +161,9 @@ export const newPasswordAction = ( newPassword, confirmPassword, token ) => asyn
 export const followThisUser = ( userToFollow ) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
-    await followUser(userToFollow);
+    const user = await followUser(userToFollow);
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: FOLLOW_USER, payload: "You have started to follow this user" });
+    dispatch({ type: FOLLOW_USER, payload: user.user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
