@@ -79,7 +79,9 @@ function ActivityCard({ activity, commentFather }) {
               alt="profile"
             />
             <p className="text-base">
-              {activity.owner?.firstName} {activity.owner?.lastName}
+              <Link to={`/profile/${activity?.owner?._id}`}>
+                {activity.owner?.firstName} {activity.owner?.lastName}
+              </Link>
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
               {t("activity_feed_card_action_type")}
