@@ -8,7 +8,11 @@ import i18n, { t } from "i18next"
 import dayjs from "dayjs"
 import localeNl from "dayjs/locale/nl"
 import Dashcard from "../../core/dashcard/Dashcard"
-import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
+import {
+  updateUser,
+  getUserProfile,
+  followThisUser,
+} from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
@@ -126,7 +130,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
               buttonName="Follow user"
               buttonStyle="btnPrimaryStyle"
               onClick={() => {
-                console.log("follow user")
+                dispatch(followThisUser(userId))
               }}
             />
           </div>
