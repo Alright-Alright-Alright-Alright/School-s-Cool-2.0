@@ -53,7 +53,7 @@ exports.followingTheUser = async (theUser, userToFollow) => {
           theUser,
           { $push: { followings: userToFollow } },
           { new: true }
-        );
+        ).select("-password");
         return currentUserUpdated;
       }
     } else {
@@ -72,7 +72,7 @@ exports.unfollowingTheUser = async (theUser, userToFollow) => {
       theUser,
       { $pull: { followings: userToFollow } },
       { new: true }
-    );
+    ).select("-password");
     return currentUserUpdated;
   } catch (err) {
     throw new Error(err.message);
