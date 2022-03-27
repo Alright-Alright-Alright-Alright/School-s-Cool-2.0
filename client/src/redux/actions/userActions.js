@@ -9,6 +9,7 @@ import {
   newPasswordService,
   forgot,
   followUser,
+  unfollowUser
 } from "../services/userService";
 
 import {
@@ -20,6 +21,7 @@ import {
   SET_USER_PROFILE,
   UPDATE_USER,
   FOLLOW_USER,
+  UNFOLLOW_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -164,6 +166,20 @@ export const followThisUser = ( userToFollow ) => async (dispatch) => {
     const user = await followUser(userToFollow);
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: FOLLOW_USER, payload: user.user });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
+
+export const unfollowThisUser = ( userToFollow ) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    const user = await unfollowUser(userToFollow);
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: UNFOLLOW_USER, payload: user.user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

@@ -11,6 +11,7 @@ import {
   updateUser,
   getUserProfile,
   followThisUser,
+  unfollowThisUser,
 } from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
@@ -133,7 +134,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 buttonName="Unfollow user"
                 buttonStyle="btnPrimaryStyle"
                 onClick={() => {
-                  console.log("unfollow")
+                  dispatch(unfollowThisUser(userId))
                 }}
               />
             ) : (

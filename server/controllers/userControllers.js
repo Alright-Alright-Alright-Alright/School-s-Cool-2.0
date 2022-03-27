@@ -56,8 +56,8 @@ exports.unfollowUser = async (req, res) => {
   let theUser = req.user.userLogedIn;
   let userToFollow = req.params.userid;
   try {
-    await unfollowTheUser(theUser, userToFollow);
-    res.status(200).json({ message: "Successfully unfollowed the user" });
+    const user = await unfollowTheUser(theUser, userToFollow);
+    res.status(200).json({ message: "Successfully unfollowed the user", user });
   } catch (error) {
     res.status(500).json(error);
   }
