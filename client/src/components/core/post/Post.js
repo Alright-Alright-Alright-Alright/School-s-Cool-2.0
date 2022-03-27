@@ -98,7 +98,9 @@ function Post({ post, parentId, comments }) {
               alt="profile"
             />
             <p className="text-base">
-              {post?.owner?.firstName} {post?.owner?.lastName}
+              <Link to={`/profile/${post?.owner?._id}`}>
+                {post?.owner?.firstName} {post?.owner?.lastName}
+              </Link>
             </p>
             <p className="text-base pl-3 text-grey-medium_light">
               {t("topics.topic_post_commentted_on")}
