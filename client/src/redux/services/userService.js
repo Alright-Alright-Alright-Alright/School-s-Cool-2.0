@@ -32,3 +32,8 @@ export const followUser = (userToFollow) =>
   service
     .put(`/${userToFollow}/follow`, configHeaders())
     .then((response) => response.data)
+
+export const unfollowUser = (userToFollow) =>
+  service
+    .put(`/${userToFollow}/unfollow`, configHeaders())
+    .then((response) => response.data)

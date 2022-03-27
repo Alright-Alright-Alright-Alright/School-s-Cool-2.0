@@ -9,6 +9,7 @@ import {
   newPasswordService,
   forgot,
   followUser,
+  unfollowUser
 } from "../services/userService";
 
 import {
@@ -20,6 +21,7 @@ import {
   SET_USER_PROFILE,
   UPDATE_USER,
   FOLLOW_USER,
+  UNFOLLOW_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -66,7 +68,7 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 
 export const loggedInUser = () => (dispatch) => {
   try {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   dispatch({ type: LOADING_UI });
   dispatch({ type: CLEAR_ERRORS });
   dispatch({ type: SET_USERLOGGED_IN, payload: user });  
@@ -162,8 +164,24 @@ export const followThisUser = ( userToFollow ) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
     const user = await followUser(userToFollow);
+    localStorage.setItem("user", JSON.stringify(user.user));
     dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: FOLLOW_USER, payload: user.user });
+    dispatch({ type: FOLLOW_USER, payload: user });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
+
+export const unfollowThisUser = ( userToFollow ) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    const user = await unfollowUser(userToFollow);
+    localStorage.setItem("user", JSON.stringify(user.user));
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: UNFOLLOW_USER, payload: user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
