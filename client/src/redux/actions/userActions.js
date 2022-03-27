@@ -8,6 +8,7 @@ import {
   getUserProfileService,
   newPasswordService,
   forgot,
+  followUser,
 } from "../services/userService";
 
 import {
@@ -18,6 +19,7 @@ import {
   SET_USERS,
   SET_USER_PROFILE,
   UPDATE_USER,
+  FOLLOW_USER,
   //   MARK_NOTIFICATIONS_READ,
 } from "../types/user";
 
@@ -148,6 +150,20 @@ export const newPasswordAction = ( newPassword, confirmPassword, token ) => asyn
     const sucessMessage = await newPasswordService( newPassword, confirmPassword, token );
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: SET_SUCCESS, payload: sucessMessage });
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
+
+export const followThisUser = ( userToFollow ) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    const user = await followUser(userToFollow);
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: FOLLOW_USER, payload: user.user });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

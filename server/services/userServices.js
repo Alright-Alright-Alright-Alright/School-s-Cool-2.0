@@ -2,6 +2,7 @@ const {
   getingTheUser,
   updatingTheUser,
   followingTheUser,
+  unfollowingTheUser,
   deletingTheUser,
   getingAllTheUsers,
 } = require("../db/userDb");
@@ -66,6 +67,14 @@ exports.updateTheUser = async (
 exports.followTheUser = async (theUser, userToFollow) => {
   try {
     return await followingTheUser(theUser, userToFollow);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.unfollowTheUser = async (theUser, userToFollow) => {
+  try {
+    return await unfollowingTheUser(theUser, userToFollow);
   } catch (error) {
     throw new Error(error);
   }

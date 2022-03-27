@@ -3,6 +3,7 @@ const {
   updateTheUser,
   deleteTheUser,
   followTheUser,
+  unfollowTheUser,
   getAllTheUsers,
 } = require("../services/userServices");
 
@@ -44,8 +45,19 @@ exports.followUser = async (req, res) => {
   let theUser = req.user.userLogedIn;
   let userToFollow = req.params.userid;
   try {
-    await followTheUser(theUser, userToFollow);
-    res.status(200).json({ message: "Successfully followed the user" });
+    const user = await followTheUser(theUser, userToFollow);
+    res.status(200).json({ message: "Successfully followed the user", user });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.unfollowUser = async (req, res) => {
+  let theUser = req.user.userLogedIn;
+  let userToFollow = req.params.userid;
+  try {
+    await unfollowTheUser(theUser, userToFollow);
+    res.status(200).json({ message: "Successfully unfollowed the user" });
   } catch (error) {
     res.status(500).json(error);
   }

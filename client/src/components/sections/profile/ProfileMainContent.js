@@ -6,9 +6,12 @@ import PropTypes from "prop-types"
 import { useParams } from "react-router-dom"
 import i18n, { t } from "i18next"
 import dayjs from "dayjs"
-import localeNl from "dayjs/locale/nl"
 import Dashcard from "../../core/dashcard/Dashcard"
-import { updateUser, getUserProfile } from "../../../redux/actions/userActions"
+import {
+  updateUser,
+  getUserProfile,
+  followThisUser,
+} from "../../../redux/actions/userActions"
 import Button from "../../core/Button"
 import fileUploadHandler from "../../../middleware/UploadFile"
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
@@ -61,7 +64,10 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
     (item) => item?.owner?._id === userProfile._id
   )
 
+  const checkFollowers = () => user?.followings.includes(userId)
+
   useEffect(() => {
+    checkFollowers()
     dispatch(getUserProfile(userId))
   }, [dispatch, userId, showEditForm])
 
@@ -122,13 +128,23 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
           </div>
         ) : (
           <div className="p-3">
-            <Button
-              buttonName="Follow user"
-              buttonStyle="btnPrimaryStyle"
-              onClick={() => {
-                console.log("follow user")
-              }}
-            />
+            {checkFollowers() ? (
+              <Button
+                buttonName="Unfollow user"
+                buttonStyle="btnPrimaryStyle"
+                onClick={() => {
+                  console.log("unfollow")
+                }}
+              />
+            ) : (
+              <Button
+                buttonName="Follow user"
+                buttonStyle="btnPrimaryStyle"
+                onClick={() => {
+                  dispatch(followThisUser(userId))
+                }}
+              />
+            )}
           </div>
         )}
       </div>

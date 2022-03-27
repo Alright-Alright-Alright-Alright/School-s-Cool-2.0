@@ -27,3 +27,8 @@ export const getUserProfileService = (user) =>
   service
     .get(`/profile/${user}`, configHeaders())
     .then((response) => response.data)
+
+export const followUser = (userToFollow) =>
+  service
+    .put(`/${userToFollow}/follow`, configHeaders())
+    .then((response) => response.data)
