@@ -23,10 +23,6 @@ function MainTopicsContent() {
     setShowModal(!showModal)
   }
 
-  useEffect(() => {
-    dispatch(getAlltopics())
-  }, [dispatch])
-
   const topicsMemo = useMemo(() => topics, [topics])
 
   const checkIfIsPrivate = () => {
@@ -49,6 +45,11 @@ function MainTopicsContent() {
       return topic.isPrivate === false
     })
   }
+
+  useEffect(() => {
+    dispatch(getAlltopics())
+    checkIfIsPrivate()
+  }, [dispatch])
 
   let filterRule
   switch (filter) {
