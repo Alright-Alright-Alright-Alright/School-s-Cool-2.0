@@ -26,14 +26,16 @@ const CustomChatList = ({
       <button type="button" onClick={handleCloseModal}>
         <Icon iconName="close" />
       </button>
-      <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
-        <div className="flex justify-between py-3 text-white">
-          <p className="text-lg pl-4"> Current Chats</p>
+      <div className=" h-1/2 bg-pink">
+        <div className="w-full bg-grey-medium rounded-r-full rounded-bl-full">
+          <div className="flex justify-between py-3 text-white">
+            <p className="text-lg pl-4"> Current Chats</p>
+          </div>
         </div>
+        {children}
       </div>
-      {children}
       <div>
-        <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
+        <div className="w-full h-1/2 bg-grey-medium rounded-r-full rounded-bl-full">
           <div className="flex justify-between py-3 text-white">
             <p className="text-lg pl-4"> Other users</p>
           </div>

@@ -44,10 +44,10 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedpassword = await bcrypt.hash(password, salt);
     const user = await newUser(firstName, lastName, email, hashedpassword);
-    // const chatToken = await chatSignupToken(firstName);
+    const chatToken = await chatSignupToken(user._id);
 
     // await Promise.all({ user, chatToken });
-    res.status(201).json({ user });
+    res.status(201).json({ user, chatToken });
 
     // await newUser(firstName, lastName, email, password).chatSignupToken(firstname);
     // res.status(200).json({ message: "Registration sucessfull, please login" });
@@ -91,9 +91,10 @@ exports.login = async (req, res) => {
         expiresIn: "1h",
       });
     }
-    res.status(200).json({ user, accessToken });
-    // const chatToken = await chatLoginToken(email);
-    // console.log(chatToken);
+    const chatToken = await chatLoginToken(user._id);
+
+    res.status(200).json({ user, accessToken, chatToken });
+
   } catch (error) {
     res.status(403).json({ message: error.message });
   }

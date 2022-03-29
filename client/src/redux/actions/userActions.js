@@ -33,6 +33,7 @@ export const loginUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
+      console.log(response);
       localStorage.setItem("user", JSON.stringify(response.user));
       setAuthorizationHeader(response.accessToken);
       dispatch({ type: CLEAR_ERRORS });

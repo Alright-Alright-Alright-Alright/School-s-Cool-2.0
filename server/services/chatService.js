@@ -6,10 +6,12 @@ const api_secret = process.env.STREAM_API_SECRET;
 const app_id = process.env.STREAM_APP_ID;
 
 const chatSignupToken = async (userId) => {
+    const userIdString = userId.toString();
+
     try {
         const serverClient = connect(api_key, api_secret,app_id);
         
-        const userToken = await serverClient.createToken(userId);
+        const userToken = await serverClient.createToken(userIdString);
         return userToken;
 
     } catch (e) {
@@ -17,15 +19,16 @@ const chatSignupToken = async (userId) => {
     }
 };
 
-const chatLoginToken = async (email) => {
+const chatLoginToken = async (userId) => {
+    const userIdString = userId.toString();
     try {
         const serverClient = connect(api_key, api_secret, app_id);
         const client = StreamChat.getInstance(api_key, api_secret);
 
-        const { users } = await client.queryUsers({ email: email });
-        console.log(users)
+        const { users } = await client.queryUsers({ id: userId });
+        // console.log(users)
 
-        const token = serverClient.createUserToken(email);
+        const token = serverClient.createUserToken(userIdString);
         
         // return { token, fullName: users[0].fullName, username, userId: users[0].id};
         return { token };

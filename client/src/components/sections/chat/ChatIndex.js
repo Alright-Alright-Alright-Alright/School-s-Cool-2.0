@@ -19,6 +19,7 @@ import {
   Thread,
   useMessageContext,
   Window,
+  ChannelSearch,
 } from "stream-chat-react"
 import { useSelector } from "react-redux"
 import ChatUserList from "./ChatUserList"
@@ -66,9 +67,11 @@ const ChatIndex = ({ handleShowModal }) => {
   const [chatClient, setChatClient] = useState(null)
   const [users, setUsers] = useState(null)
   const currentUser = useSelector((state) => state.user.singleUser)
+  const chatToken = useSelector((state) => state.user.chatToken)
 
   const id = currentUser?._id
   const name = currentUser?.firstName
+  const image = currentUser?.imageUrl
 
   const filters = { type: "messaging", members: { $in: [id] } }
   const sort = { last_message_at: -1 }
@@ -96,7 +99,20 @@ const ChatIndex = ({ handleShowModal }) => {
   }
 
   const CustomList = (props) => {
-    const { children, error, loading, LoadingErrorIndicator } = props
+    const {
+      children,
+      error,
+      loading,
+      LoadingErrorIndicator,
+      showChannelSearch,
+      onMessageNew,
+    } = props
+
+    console.log(children.props?.children)
+
+    // const channel = children.channel("messaging", "test")
+
+    // console.log(channel)
 
     if (error) {
       return <LoadingErrorIndicator type="connection" />
@@ -107,23 +123,26 @@ const ChatIndex = ({ handleShowModal }) => {
     }
 
     return (
-      <div>
+      <div className="h-full">
         <button type="button" onClick={handleCloseModal}>
           <Icon iconName="close" />
         </button>
-        <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
-          <div className="flex justify-between py-3 text-white">
-            <p className="text-lg px-4"> Current Chats</p>
-          </div>
-        </div>
-        {children}
-        <div>
-          <div className="w-full bg-grey-medium h-dashcardtitle rounded-r-full rounded-bl-full">
-            <div className="flex justify-between py-3 text-white">
-              <p className="text-lg px-4"> Other users</p>
+        <ChannelSearch />
+        <div className="h-full">
+          <div className="h-1/2 overflow-auto">
+            <div className="w-full bg-grey-medium rounded-r-full rounded-bl-full">
+              <div className="flex justify-between py-3 text-white">
+                <p className="text-lg px-4"> Current Chats</p>
+              </div>
             </div>
+            {children}
           </div>
-          <div className=" overflow-scroll max-h-64">
+          <div className=" h-2/5 overflow-auto mb-3">
+            <div className="w-full bg-grey-medium rounded-r-full rounded-bl-full">
+              <div className="flex justify-between py-3 text-white">
+                <p className="text-lg px-4"> Other users</p>
+              </div>
+            </div>
             {users.users.map((user) => (
               <UserItem user={user} createChannel={createChannel} />
             ))}
@@ -137,7 +156,9 @@ const ChatIndex = ({ handleShowModal }) => {
     const initChat = async () => {
       const client = new StreamChat(STREAM_API)
 
-      await client.connectUser({ id, name }, client.devToken(id))
+      // await client.connectUser({ id, name, image }, client.devToken(id))
+
+      await client.connectUser({ id, name, image }, chatToken)
 
       const allUsers = await client.queryUsers(
         { id: { $ne: client.userID } },
@@ -157,19 +178,43 @@ const ChatIndex = ({ handleShowModal }) => {
     return <LoadingIndicator />
   }
 
+  const customOnMessageNew = async (setChannels, event) => {
+    const eventChannel = event.channel
+
+    const client = new StreamChat(STREAM_API)
+
+    await client.connectUser({ id, name, image }, client.devToken(id))
+
+    // If the channel isn't frozen, then don't add it to the list.
+    if (!eventChannel?.id || !eventChannel.frozen) return
+
+    try {
+      const newChannel = client.channel(eventChannel.type, eventChannel.id)
+      await newChannel.watch()
+      setChannels((channels) => [newChannel, ...channels])
+      console.log(newChannel)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Chat client={chatClient} theme="messaging light">
       <ChannelList
+        allowNewMessagesFromUnfilteredChannels
+        showChannelSearch
         filters={filters}
         sort={sort}
-        List={CustomList}
-        LoadingErrorIndicator={() => (
-          <CustomErrorIndicator
-            text="Loading Error - check your connection."
-            type="connection"
-          />
-        )}
-        LoadingIndicator={CustomLoadingIndicator}
+        // onChannelUpdated={(channel) => console.log(channel)}
+        // onMessageNew={customOnMessageNew}
+        // List={CustomList}
+        // LoadingErrorIndicator={() => (
+        //   <CustomErrorIndicator
+        //     text="Loading Error - check your connection."
+        //     type="connection"
+        //   />
+        // )}
+        // LoadingIndicator={CustomLoadingIndicator}
       />
       <Channel>
         <Window>
