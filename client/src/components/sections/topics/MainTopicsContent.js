@@ -45,12 +45,14 @@ function MainTopicsContent() {
           topicsCurrentUserCanSee.push(item)
         }
       })
-    return topicsCurrentUserCanSee.sort((a, b) => a.createdAt - b.createdAt)
+    return topicsCurrentUserCanSee.sort(
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    )
   }
 
   useEffect(() => {
     dispatch(getAlltopics())
-    checkIfIsPrivate()
   }, [dispatch])
 
   let filterRule
