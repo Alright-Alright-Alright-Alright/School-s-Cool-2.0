@@ -29,34 +29,44 @@ function ActivityFeed() {
   const activitiesMemo = useMemo(() => allActivities, [allActivities])
 
   const checkIfIsPrivate = () => {
+    const activitiesCurrentUserCanSee = []
+
+    activitiesMemo.forEach((activity) => {
+      if (activity?.topic?.isPrivate === false) {
+        activitiesCurrentUserCanSee.push(activity)
+      }
+    })
     const privateTopics = activitiesMemo.filter(
       (activity) => activity?.topic?.isPrivate === true
     )
+    privateTopics.map((activity) =>
+      activity.topic.members.forEach((member) => {
+        if (member === user._id) {
+          activitiesCurrentUserCanSee.push(activity)
+        }
+      })
+    )
+
+    activitiesMemo.forEach((activity) => {
+      if (activity?.event?.isPrivate === false) {
+        activitiesCurrentUserCanSee.push(activity)
+      }
+    })
     const privateEvents = activitiesMemo.filter(
       (activity) => activity?.event?.isPrivate === true
     )
-    const privateTopicsMembers = privateTopics
-      .map((topic) =>
-        topic.topic.members.map((member) => member === user._id && true)
-      )
-      .flat(Infinity)
-    const privateEventsMembers = privateEvents
-      .map((event) =>
-        event?.event?.members.map((member) => member === user._id && true)
-      )
-      .flat(Infinity)
-    return activitiesMemo.filter(
-      (post) =>
-        post?.topic?.isPrivate === false ||
-        post?.event?.isPrivate === false ||
-        (post?.topic?.isPrivate === true &&
-          post?.topic?.owner._id === user._id) ||
-        (post?.event?.isPrivate === true &&
-          post?.event?.owner._id === user._id) ||
-        post?.comments?.owner?._id === user._id ||
-        privateTopicsMembers.includes(true) ||
-        privateEventsMembers.includes(true)
+    privateEvents.map((activity) =>
+      activity.event.members.forEach((member) => {
+        if (member === user._id) {
+          activitiesCurrentUserCanSee.push(activity)
+        }
+      })
     )
+    activitiesCurrentUserCanSee.sort(
+      (a, b) =>
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    )
+    return activitiesCurrentUserCanSee
   }
 
   const shownActivities = filter ? followedActivities : checkIfIsPrivate()
