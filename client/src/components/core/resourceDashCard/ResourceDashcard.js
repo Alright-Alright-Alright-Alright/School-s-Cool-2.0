@@ -27,7 +27,7 @@ export default function ResourceDashcard({
         listItemName={item?.title}
         listItemLikes={item?.likedBy}
         listItemComments={item?.comments}
-        resourceDashCardData={resourceDashCardData}
+        id={item?._id}
       />
     ))
 
