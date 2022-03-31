@@ -29,12 +29,14 @@ export const setAuthorizationHeader = (token) => {
 };
 
 export const loginUser = (userData) => async (dispatch) => {
-
   dispatch({ type: LOADING_UI });
   login(userData)
     .then((response) => {
-      console.log(response);
       localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem(
+        "chatToken",
+        JSON.stringify(response.chatToken.token)
+      );
       setAuthorizationHeader(response.accessToken);
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SET_AUTHENTICATED, payload: response });
@@ -45,8 +47,7 @@ export const loginUser = (userData) => async (dispatch) => {
         payload: err.response.data.message,
       });
     });
-  }
-
+};
 
 export const registerUser = (registerNewUser) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -66,9 +67,11 @@ export const registerUser = (registerNewUser) => (dispatch) => {
 export const loggedInUser = () => (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("user"));
-  dispatch({ type: LOADING_UI });
-  dispatch({ type: CLEAR_ERRORS });
-  dispatch({ type: SET_USERLOGGED_IN, payload: user });  
+    const chatToken = JSON.parse(localStorage.getItem("chatToken"));
+
+    dispatch({ type: LOADING_UI });
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({ type: SET_USERLOGGED_IN, payload: { user, chatToken } });
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -80,6 +83,7 @@ export const loggedInUser = () => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("user");
   localStorage.removeItem("Authorization");
+  localStorage.removeItem("chatToken");
   dispatch({ type: SET_UNAUTHENTICATED });
 };
 
@@ -99,14 +103,11 @@ export const getAllTheUsers = () => (dispatch) => {
 
 export const updateUser = (userData) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
-  console.log(userData)
   try {
-    console.log(userData)
     const updatedUser = await updateUserService(userData);
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: UPDATE_USER, payload: updatedUser });
   } catch (error) {
-    console.log(error)
     dispatch({
       type: SET_ERRORS,
       payload: error.response,
@@ -129,10 +130,10 @@ export const getUserProfile = (user) => async (dispatch) => {
   }
 };
 
-export const forgetAction = ( email ) => async (dispatch) => {
+export const forgetAction = (email) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
   try {
-    const sucessMessage = await forgot( email );
+    const sucessMessage = await forgot(email);
     dispatch({ type: CLEAR_ERRORS });
     dispatch({ type: SET_SUCCESS, payload: sucessMessage });
   } catch (error) {
@@ -143,16 +144,21 @@ export const forgetAction = ( email ) => async (dispatch) => {
   }
 };
 
-export const newPasswordAction = ( newPassword, confirmPassword, token ) => async (dispatch) => {
-  dispatch({ type: LOADING_UI });
-  try {
-    const sucessMessage = await newPasswordService( newPassword, confirmPassword, token );
-    dispatch({ type: CLEAR_ERRORS });
-    dispatch({ type: SET_SUCCESS, payload: sucessMessage });
-  } catch (error) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: error.response,
-    });
-  }
-};
+export const newPasswordAction =
+  (newPassword, confirmPassword, token) => async (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    try {
+      const sucessMessage = await newPasswordService(
+        newPassword,
+        confirmPassword,
+        token
+      );
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({ type: SET_SUCCESS, payload: sucessMessage });
+    } catch (error) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response,
+      });
+    }
+  };

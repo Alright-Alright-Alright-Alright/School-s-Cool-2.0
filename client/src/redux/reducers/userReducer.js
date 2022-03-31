@@ -36,8 +36,9 @@ const userReducer = (state = initialState, action) => {
     case LEAVE_COURSE:
       return {
         ...state,
-        singleUser: action.payload,
+        singleUser: action.payload.user,
         isLoggedIn: true,
+        chatToken: action.payload.chatToken,
       }
     case SET_USER_PROFILE:
       return {

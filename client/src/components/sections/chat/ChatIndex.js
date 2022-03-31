@@ -80,6 +80,10 @@ const ChatIndex = ({ handleShowModal }) => {
     handleShowModal()
   }
 
+  const setSelectedUsers = (setUser) => {
+    console.log(setUser)
+  }
+
   const createChannel = async (event) => {
     // event.preventDefault()
     try {
@@ -207,7 +211,9 @@ const ChatIndex = ({ handleShowModal }) => {
         sort={sort}
         // onChannelUpdated={(channel) => console.log(channel)}
         // onMessageNew={customOnMessageNew}
-        // List={CustomList}
+        List={(props) => (
+          <ChatUserList {...props} setSelectedUsers={setSelectedUsers} />
+        )}
         // LoadingErrorIndicator={() => (
         //   <CustomErrorIndicator
         //     text="Loading Error - check your connection."
@@ -216,6 +222,7 @@ const ChatIndex = ({ handleShowModal }) => {
         // )}
         // LoadingIndicator={CustomLoadingIndicator}
       />
+
       <Channel>
         <Window>
           <ChannelHeader />

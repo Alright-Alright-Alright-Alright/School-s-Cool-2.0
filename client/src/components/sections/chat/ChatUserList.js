@@ -8,12 +8,15 @@ import { Avatar, useChatContext } from "stream-chat-react"
 // import { InviteIcon } from "../assets"
 
 const ListContainer = ({ children }) => (
-  <div className="user-list__container bg-yellow max-h-80">
-    <div className="user-list__header">
-      <p>User</p>
-      <p>Invite</p>
+  <div className="">
+    <div className="h-1/2 overflow-auto">
+      <div className="w-full bg-grey-medium rounded-r-full rounded-bl-full">
+        <div className="flex justify-between py-3 text-white">
+          <p className="text-lg px-4"> Current Chats</p>
+        </div>
+      </div>
+      {children}
     </div>
-    {children}
   </div>
 )
 
@@ -33,10 +36,10 @@ const UserItem = ({ user, setSelectedUsers }) => {
   }
 
   return (
-    <div className="user-item__wrapper" onClick={handleSelect}>
-      <div className="user-item__name-wrapper">
+    <div className="flex" onClick={handleSelect}>
+      <div className="flex">
         <Avatar image={user.image} name={user.name || user.id} size={32} />
-        <p className="user-item__name">{user.name || user.id}</p>
+        <p className="">{user.name || user.id}</p>
       </div>
       {selected ? <h1>invite</h1> : <div className="user-item__invite-empty" />}
     </div>
@@ -100,14 +103,29 @@ const UserList = ({ setSelectedUsers }) => {
       {loading ? (
         <div className="user-list__message">Loading users...</div>
       ) : (
-        users?.map((user, i) => (
-          <UserItem
-            index={i}
-            key={user.id}
-            user={user}
-            setSelectedUsers={setSelectedUsers}
-          />
-        ))
+        <div className="h-full">
+          <button type="button" onClick={() => console.log("handleCloseModal")}>
+            {/* <Icon iconName="close" /> */}
+          </button>
+          {/* <ChannelSearch /> */}
+          <div className="h-full">
+            <div className=" h-2/5 overflow-auto mb-3">
+              <div className="w-full bg-grey-medium rounded-r-full rounded-bl-full">
+                <div className="flex justify-between py-3 text-white">
+                  <p className="text-lg px-4"> Other users</p>
+                </div>
+              </div>
+              {users?.map((user, i) => (
+                <UserItem
+                  index={i}
+                  key={user.id}
+                  user={user}
+                  setSelectedUsers={setSelectedUsers}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </ListContainer>
   )
