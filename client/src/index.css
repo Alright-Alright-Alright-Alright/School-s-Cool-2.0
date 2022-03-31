@@ -27,6 +27,7 @@
   display: none;
 }
 
+/* REACT PDF */
 .react-pdf__Document span {
   display: none;
  }
@@ -51,7 +52,6 @@
  }
 
  /* CALENDAR */
-
 .react-calendar {
   width: 250px;
   color: #757575;
