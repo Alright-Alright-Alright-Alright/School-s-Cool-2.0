@@ -24,13 +24,7 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
   }, [dispatch, params.topicId])
 
   return (
-    <div className="static">
-      {UI.errors && <p>{UI.errors.message}</p>}
-      <RichTextToolbar />
-      {/* <TopicHeaderCard
-        onClick={createNewPost}
-        postBody={(e) => setPostBody(e)}
-      /> */}
+    <div>
       {showModal && (
         <TopicModal
           editModal={editModal}
@@ -38,15 +32,24 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
           singleTopic={topic}
         />
       )}
-      {posts?.map((post) => (
-        <Post
-          key={post?._id}
-          post={post}
-          parentId={params.topicId}
-          comments={post?.comments}
-          // onDeletePost={handleDeletePost}
-        />
-      ))}
+      <div className={`static filter ${showModal && "blur-md"}`}>
+        {UI.errors && <p>{UI.errors.message}</p>}
+        <RichTextToolbar />
+        {/* <TopicHeaderCard
+        onClick={createNewPost}
+        postBody={(e) => setPostBody(e)}
+      /> */}
+
+        {posts?.map((post) => (
+          <Post
+            key={post?._id}
+            post={post}
+            parentId={params.topicId}
+            comments={post?.comments}
+            // onDeletePost={handleDeletePost}
+          />
+        ))}
+      </div>
     </div>
   )
 }
