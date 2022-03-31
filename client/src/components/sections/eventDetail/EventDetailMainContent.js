@@ -40,13 +40,6 @@ function EventDetailMainContent({
 
   return (
     <div>
-      {UI.errors && <p>{UI.errors.message}</p>}
-
-      <EventDescriptionCard event={event} user={user} />
-      <EventHeaderCard
-        onClick={createNewPost}
-        postBody={(e) => setPostBody(e)}
-      />
       {showModal && (
         <EditEventModal
           editModal={editModal}
@@ -54,14 +47,24 @@ function EventDetailMainContent({
           event={event}
         />
       )}
-      {posts?.map((post) => (
-        <Post
-          key={post._id}
-          post={post}
-          parentId={params.eventId}
-          comments={post?.comments}
+      <div className={`filter ${showModal && "blur-md"}`}>
+        {UI.errors && <p>{UI.errors.message}</p>}
+
+        <EventDescriptionCard event={event} user={user} />
+        <EventHeaderCard
+          onClick={createNewPost}
+          postBody={(e) => setPostBody(e)}
         />
-      ))}
+
+        {posts?.map((post) => (
+          <Post
+            key={post._id}
+            post={post}
+            parentId={params.eventId}
+            comments={post?.comments}
+          />
+        ))}
+      </div>
     </div>
   )
 }
