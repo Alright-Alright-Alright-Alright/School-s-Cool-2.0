@@ -24,11 +24,11 @@ function Button({ buttonName, buttonStyle, buttonSubmit, onClick, disabled }) {
   return (
     <button
       type={buttonSubmit ? "submit" : "button"}
-      className={`${styles[buttonStyle]}`}
+      className={`${styles[buttonStyle]} w-full`}
       onClick={onClick}
       disabled={disabled}
     >
-      <p className="ml-5 mr-5 mt-2 mb-2 text-base">{buttonName}</p>
+      <p className="ml-5 mr-5 mt-2 mb-2 text-center text-base">{buttonName}</p>
     </button>
   )
 }
