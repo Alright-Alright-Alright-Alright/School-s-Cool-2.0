@@ -88,7 +88,7 @@ function ActivityFeed() {
             {t("activity_feed")}
           </h1>
         </div>
-        <div className="space-x-4 md:place-content-between text-center pr-3">
+        <div className="flex pl-3 lg:pl-0 space-x-4 md:place-content-between text-center pr-3">
           <Button
             buttonName={t("button_all_activity_feed")}
             buttonStyle={filter ? "btnPrimaryStyle" : "btnSecondaryStyle"}
