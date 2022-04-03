@@ -99,7 +99,7 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-4/6  rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-auto lg:w-1/5 h-auto rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
           <div className="h-2/5 flex flex-col px-8 justify-around">
@@ -146,7 +146,7 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="flex justify-between px-8">
+          <div className="flex justify-between px-8 pt-2">
             <Link to="/login">
               <Button
                 buttonName={t("auth.login_register_back_to_login")}
