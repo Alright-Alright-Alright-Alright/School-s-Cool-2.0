@@ -30,10 +30,21 @@ const MobileTable = ({ library, selected, setSelected, user }) => {
                   <img
                     src={singleFile.fileUrl}
                     alt="file preview"
-                    className="rounded-md "
+                    className="rounded-md object-cover"
                   />
                 )}
-                <p className="font-semibold text-lg py-2">{singleFile.title}</p>
+                <div className="flex items-center">
+                  <p className="font-semibold text-lg py-2">
+                    {singleFile.title}
+                  </p>
+                  <p className="text-md text-grey-medium_light italic">
+                    .
+                    {singleFile.fileUrl.slice(
+                      singleFile.fileUrl.length - 3,
+                      singleFile.fileUrl.length
+                    )}
+                  </p>
+                </div>
               </div>
               <div className="font-semibold items-center flex">
                 <img
