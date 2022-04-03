@@ -35,8 +35,8 @@ const EventCards = ({ event }) => {
 
   return (
     <div className="flex flex-col justify-between w-full bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
-      <section className="flex justify-between border-b-2 border-grey-light mx-5">
-        <div className="flex-col w-1/2 pr-3 justify-between">
+      <section className="flex flex-col-reverse lg:flex-row justify-between border-b-2 border-grey-light mx-5">
+        <div className="flex-col lg:w-1/2 pr-3 justify-between">
           <div className="">
             <div className="py-5 flex">
               {join ? (
@@ -81,7 +81,7 @@ const EventCards = ({ event }) => {
             </div>
           </div>
 
-          <div className="flex flex-wrap h-28 justify-start items-end">
+          <div className="flex flex-wrap lg:h-28 justify-start items-end pb-3">
             {event?.tags.map((tag) => (
               <span
                 key={tag}
@@ -93,7 +93,7 @@ const EventCards = ({ event }) => {
           </div>
         </div>
 
-        <div className="flex justify-end w-1/2 my-5 ">
+        <div className="flex justify-end lg:w-1/2 my-5 ">
           <Link to={`/events/${event?._id}`} className=" w-full h-48 ">
             <img
               src={event?.bannerImage}
@@ -104,7 +104,7 @@ const EventCards = ({ event }) => {
         </div>
       </section>
 
-      <section className="flex justify-between items-center p-5">
+      <section className="flex justify-between items-center p-3">
         <div>
           <Button
             buttonName={t("events.button_more_info")}

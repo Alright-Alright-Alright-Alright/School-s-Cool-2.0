@@ -26,29 +26,33 @@ function MainTopicsContent() {
   const topicsMemo = useMemo(() => topics, [topics])
 
   const checkIfIsPrivate = () => {
+    const topicsCurrentUserCanSee = []
+    topicsMemo.forEach((topic) => {
+      if (topic.isPrivate === false) {
+        topicsCurrentUserCanSee.push(topic)
+      }
+    })
     const privateTopics = topicsMemo.filter(
       (member) => member.isPrivate === true
     )
-    const privateTopicsMembers = privateTopics
+    privateTopics
       .map((topic) =>
-        topic.members.map((member) => member._id === user._id && true)
+        topic.members.map((member) => member._id === user._id && topic)
       )
       .flat(Infinity)
-
-    return topicsMemo.filter((topic) => {
-      if (
-        (topic.owner === user._id && topic.isPrivate === true) ||
-        privateTopicsMembers.includes(true)
-      ) {
-        return true
-      }
-      return topic.isPrivate === false
-    })
+      .forEach((item) => {
+        if (typeof item === "object") {
+          topicsCurrentUserCanSee.push(item)
+        }
+      })
+    return topicsCurrentUserCanSee.sort(
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    )
   }
 
   useEffect(() => {
     dispatch(getAlltopics())
-    checkIfIsPrivate()
   }, [dispatch])
 
   let filterRule

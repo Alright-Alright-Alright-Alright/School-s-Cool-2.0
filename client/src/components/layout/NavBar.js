@@ -132,15 +132,15 @@ function NavBar() {
   return (
     <nav className="flex justify-between bg-grey-super_light shadow-md sticky top-0 z-50 p-5">
       <div>
-        <div className="flex-shrink-0 hidden md:block">
+        <div className="flex-shrink-0 hidden lg:block">
           <Link to="/home">{fullLogo}</Link>
         </div>
-        <div className="flex-shrink-0 md:hidden">
+        <div className="flex-shrink-0 lg:hidden">
           <Link to="/home">{smallLogo}</Link>
         </div>
       </div>
       <div className="flex items-center">
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <div className="ml-10 flex items-center space-x-20">
             {navItems.map((item) => (
               <Link
@@ -155,25 +155,10 @@ function NavBar() {
         </div>
       </div>
       <div className="flex justify-around items-center">
-        <div className="w-3/4 hidden md:block">
-          {/* <div className="flex place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight ">
-            <input
-              className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-60"
-              type="text"
-              placeholder="What are you looking for?"
-            />
-
-            <svg
-              className="fill-current text-grey-darker h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
-            </svg>
-          </div> */}
+        <div className="w-3/4 hidden lg:block">
           <SearchBar placeholder={t("search_bar_placeholder")} />
         </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <button
             type="button"
             className="flex items-center"
@@ -238,7 +223,7 @@ function NavBar() {
           )}
         </div>
       </div>
-      <div className="md:hidden flex items-center text-right">
+      <div className="lg:hidden flex items-center text-right">
         {!isOpen && (
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link to={`/profile/${user?._id}`}>
@@ -294,7 +279,7 @@ function NavBar() {
             )}
           </button>
           {isOpen && (
-            <div className="md:hidden" id="mobile-menu">
+            <div className="lg:hidden" id="mobile-menu">
               <div className="px-2 pb-3 space-y-1 sm:px-3">
                 {navItems.map((item) => (
                   <Link
