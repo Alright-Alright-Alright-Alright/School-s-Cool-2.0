@@ -35,10 +35,17 @@ const LibraryContentRight = ({ singleFile }) => {
               <img
                 src={singleFile.fileUrl}
                 alt="file preview"
-                className="w-1/4 h-1/5 rounded-md"
+                className="w-1/4 h-1/5 rounded-md object-cover"
               />
             )}
             <p className="pl-4 font-semibold text-lg">{singleFile.title}</p>
+            <p className="text-md text-grey-medium_light italic">
+              .
+              {singleFile.fileUrl.slice(
+                singleFile.fileUrl.length - 3,
+                singleFile.fileUrl.length
+              )}
+            </p>
           </div>
           <div className="font-semibold items-center flex">
             <img
