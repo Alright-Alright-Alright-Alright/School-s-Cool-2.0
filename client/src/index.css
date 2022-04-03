@@ -16,11 +16,11 @@
 
 #toogle-switch::after {
   content: "";
-  @apply h-6 w-6 rounded-full bg-grey-dark absolute left-0 top-0 transform scale-95 duration-200
+  @apply h-6 w-6 rounded-full bg-grey-dark absolute left-0 top-0 transform scale-95 duration-200;
 }
 
 #toogle-switch:checked::after {
-  @apply transform scale-95 translate-x-6
+  @apply transform scale-95 translate-x-6;
 }
 
 .scrollBar::-webkit-scrollbar {
@@ -30,28 +30,28 @@
 /* REACT PDF */
 .react-pdf__Document span {
   display: none;
- }
- 
- .react-pdf__Page__canvas {
-   margin: 0 auto;
-   max-width: 65px !important;
-   height: 80px !important;
-   padding-bottom: 3px;
- }
- 
- .react-pdf__Page__annotations {
-   display: none;
- }
- 
- .annotationLayer {
-   display: none;
- }
- 
- .react-pdf__Page__textContent {
-   display: none;
- }
+}
 
- /* CALENDAR */
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+  max-width: 65px !important;
+  height: 80px !important;
+  padding-bottom: 3px;
+}
+
+.react-pdf__Page__annotations {
+  display: none;
+}
+
+.annotationLayer {
+  display: none;
+}
+
+.react-pdf__Page__textContent {
+  display: none;
+}
+
+/* CALENDAR */
 .react-calendar {
   width: 250px;
   color: #757575;
@@ -62,7 +62,7 @@
 }
 
 .react-calendar__month-view__weekdays {
-  display: none !important
+  display: none !important;
 }
 
 /* .react-calendar__month-view__days__day--neighboringMonth {
@@ -87,7 +87,7 @@
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: #DE2F6E;
+  color: #de2f6e;
 }
 .react-calendar__month-view__days__day--neighboringMonth {
   color: #d6dadd;
@@ -123,7 +123,7 @@
   background: #a9d4ff;
 }
 .react-calendar__tile--active {
-  background: #27A8DF;
+  background: #27a8df;
   color: white;
 }
 .react-calendar__tile--active:enabled:hover,
