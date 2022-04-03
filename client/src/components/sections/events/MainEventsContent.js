@@ -44,7 +44,7 @@ const MainEventsContent = ({ events }) => {
 
   return (
     <div className="max-w-sm	lg:max-w-full">
-      <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2  pr-2 lg:px-5">
+      <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2 pr-2 lg:px-5">
         <button
           className="flex text-lg items-center pb-3 lg:pb-0"
           type="button"
@@ -54,7 +54,7 @@ const MainEventsContent = ({ events }) => {
           <p className="pl-3">{t("events.button_new_event")}</p>
         </button>
 
-        <div className="flex overflow-x-auto space-x-3 max-w-xl">
+        <div className="flex overflow-x-auto space-x-3 lg:space-x-2 max-w-xl">
           <div className="pb-3 lg:pb-0">
             <Button
               buttonName={t("events.button_all_events")}
