@@ -54,7 +54,7 @@ const MainEventsContent = ({ events }) => {
           <p className="pl-3">{t("events.button_new_event")}</p>
         </button>
 
-        <div className="flex overflow-x-auto space-x-4 max-w-sm">
+        <div className="flex overflow-x-auto space-x-3 max-w-xl">
           <div className="pb-3 lg:pb-0">
             <Button
               buttonName={t("events.button_all_events")}
