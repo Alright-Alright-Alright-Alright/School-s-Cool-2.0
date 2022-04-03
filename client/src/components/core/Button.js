@@ -24,7 +24,7 @@ function Button({ buttonName, buttonStyle, buttonSubmit, onClick, disabled }) {
   return (
     <button
       type={buttonSubmit ? "submit" : "button"}
-      className={`${styles[buttonStyle]} w-auto`}
+      className={`${styles[buttonStyle]}`}
       onClick={onClick}
       disabled={disabled}
     >
