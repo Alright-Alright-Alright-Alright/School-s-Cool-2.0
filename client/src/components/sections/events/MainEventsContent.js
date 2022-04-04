@@ -46,7 +46,7 @@ const MainEventsContent = ({ events }) => {
     <div className="max-w-sm	lg:max-w-full">
       <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2 pr-2 lg:px-5">
         <button
-          className="flex text-lg items-center pb-3 lg:pb-0"
+          className="flex text-lg items-center pb-3 lg:pb-0 pl-3 lg:pl-0"
           type="button"
           onClick={handleShowModal}
         >
