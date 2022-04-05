@@ -10,9 +10,13 @@ import {
   getUserFilesFromLibrary,
 } from "../../../redux/actions/libraryActions"
 
-const LibraryContentLeft = ({ library, handleShowModal }) => {
+const LibraryContentLeft = ({
+  library,
+  handleShowModal,
+  theCategoryToColor,
+  setTheCategoryToColor,
+}) => {
   const dispatch = useDispatch()
-  const [theCategoryToColor, setTheCategoryToColor] = useState("")
   const { t } = useTranslation()
 
   const handleFilter = (item) => {

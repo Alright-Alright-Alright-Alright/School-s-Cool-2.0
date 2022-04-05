@@ -2,16 +2,21 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react"
+import React from "react"
 import { useDispatch } from "react-redux"
 import Button from "../../core/Button"
 import LibraryItem from "../../core/library/LibraryItem"
 import LibraryModal from "../../core/library/LibraryModal"
 import { filterLibraryBySubject } from "../../../redux/actions/libraryActions"
 
-const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
+const MainLibraryContent = ({
+  library,
+  showModal,
+  handleShowModal,
+  theCategoryToColor,
+  setTheCategoryToColor,
+}) => {
   const dispatch = useDispatch()
-  const [theCategoryToColor, setTheCategoryToColor] = useState("")
 
   const handleFilter = (item) => {
     dispatch(filterLibraryBySubject(item))
@@ -25,7 +30,6 @@ const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
     )
     const subjects = arr.map((item) => (
       <span key={item} className="pr-3">
-        {console.log(item)}
         {theCategoryToColor === item ? (
           <Button
             buttonName={item}
