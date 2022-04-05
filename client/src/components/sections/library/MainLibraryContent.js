@@ -11,6 +11,13 @@ import { filterLibraryBySubject } from "../../../redux/actions/libraryActions"
 
 const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
   const dispatch = useDispatch()
+  const [theCategoryToColor, setTheCategoryToColor] = useState("")
+
+  const handleFilter = (item) => {
+    dispatch(filterLibraryBySubject(item))
+    setTheCategoryToColor(item)
+  }
+
   const uniqueBySubject = () => {
     const arr = []
     library.map(
@@ -18,11 +25,20 @@ const MainLibraryContent = ({ library, showModal, handleShowModal }) => {
     )
     const subjects = arr.map((item) => (
       <span key={item} className="pr-3">
-        <Button
-          buttonName={item}
-          buttonStyle="btnLibraryStyle"
-          onClick={() => dispatch(filterLibraryBySubject(item))}
-        />
+        {console.log(item)}
+        {theCategoryToColor === item ? (
+          <Button
+            buttonName={item}
+            buttonStyle="btnLibraryStyleActive"
+            onClick={() => handleFilter(item)}
+          />
+        ) : (
+          <Button
+            buttonName={item}
+            buttonStyle="btnLibraryStyle"
+            onClick={() => handleFilter(item)}
+          />
+        )}
       </span>
     ))
     return subjects

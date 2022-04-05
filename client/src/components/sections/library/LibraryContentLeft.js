@@ -12,7 +12,7 @@ import {
 
 const LibraryContentLeft = ({ library, handleShowModal }) => {
   const dispatch = useDispatch()
-  const [theCategoryToColor, setTheCategoryToColor] = useState(false)
+  const [theCategoryToColor, setTheCategoryToColor] = useState("")
   const { t } = useTranslation()
 
   const handleFilter = (item) => {
