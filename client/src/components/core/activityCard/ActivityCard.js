@@ -126,7 +126,7 @@ function ActivityCard({ activity, commentFather }) {
       <div className="flex justify-end items-center pt-1 pr-3 space-x-2">
         <div className="flex">
           <Icon iconName="file" />
-          <span>00</span>
+          <span>{activity[activityType]?.resources?.length}</span>
         </div>
         <div className="flex">
           {/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */}
