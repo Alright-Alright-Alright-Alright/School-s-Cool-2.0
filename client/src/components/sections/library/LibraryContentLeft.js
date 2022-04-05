@@ -10,24 +10,28 @@ import {
   getUserFilesFromLibrary,
 } from "../../../redux/actions/libraryActions"
 
-const LibraryContentLeft = ({ library, handleShowModal }) => {
+const LibraryContentLeft = ({
+  library,
+  handleShowModal,
+  theCategoryToColor,
+  setTheCategoryToColor,
+}) => {
   const dispatch = useDispatch()
-  const [color, setColor] = useState(false)
   const { t } = useTranslation()
 
   const handleFilter = (item) => {
     dispatch(filterLibraryByCategory(item))
-    setColor(true)
+    setTheCategoryToColor(item)
   }
 
   const handleMyFiles = () => {
     dispatch(getUserFilesFromLibrary())
-    setColor(false)
+    setTheCategoryToColor("")
   }
 
   const getFiles = () => {
     dispatch(getAllFilesFromLibrary())
-    setColor(false)
+    setTheCategoryToColor("")
   }
 
   const uniqueCatergories = () => {
@@ -35,16 +39,20 @@ const LibraryContentLeft = ({ library, handleShowModal }) => {
     library.map(
       (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
     )
+
     const categories = arr.map((item) => (
       <div
         key={item}
-        className={`text-xl py-2 hover:text-pink ${color && "text-pink"}`}
+        className={`text-xl py-2 hover:text-pink ${
+          theCategoryToColor === item && "text-pink"
+        }`}
       >
         <button type="button" onClick={() => handleFilter(item)}>
           {item}
         </button>
       </div>
     ))
+
     return categories
   }
 

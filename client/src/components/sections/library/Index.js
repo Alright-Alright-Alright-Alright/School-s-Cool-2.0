@@ -12,6 +12,7 @@ const Index = () => {
   const singleFile = useSelector((state) => state.library.singleFile)
   const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
+  const [theCategoryToColor, setTheCategoryToColor] = useState("")
 
   const handleShowModal = () => {
     setShowModal(!showModal)
@@ -31,12 +32,16 @@ const Index = () => {
             library={libraryMemo}
             showModal={showModal}
             handleShowModal={handleShowModal}
+            setTheCategoryToColor={setTheCategoryToColor}
+            theCategoryToColor={theCategoryToColor}
           />
         }
         contentLeft={
           <LibraryContentLeft
             library={libraryMemo}
             handleShowModal={handleShowModal}
+            setTheCategoryToColor={setTheCategoryToColor}
+            theCategoryToColor={theCategoryToColor}
           />
         }
         contentRight={

@@ -22,6 +22,7 @@ import {
 
 const initialState = {
   allFiles: [],
+  filteredFiles: [],
   singleFile: null,
 }
 
@@ -33,6 +34,7 @@ const libraryReducer = (state = initialState, action) => {
         allFiles: action.payload.sort(
           (a, b) => b.likedBy.length - a.likedBy.length
         ),
+        filteredFiles: [],
       }
     case GET_FILE:
       return {
@@ -52,14 +54,14 @@ const libraryReducer = (state = initialState, action) => {
     case FILTER_CATEGORY:
       return {
         ...state,
-        allFiles: state.allFiles.filter(
+        filteredFiles: state.allFiles.filter(
           (file) => file.category === action.payload
         ),
       }
     case FILTER_SUBJECT:
       return {
         ...state,
-        allFiles: state.allFiles.filter(
+        filteredFiles: state.allFiles.filter(
           (file) => file.subject === action.payload
         ),
       }

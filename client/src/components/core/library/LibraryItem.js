@@ -19,6 +19,7 @@ import MobileTable from "./MobileTable"
 
 const libraryItem = ({ library, showModal }) => {
   const user = useSelector((state) => state.user.singleUser)
+  const filteredLibrary = useSelector((state) => state.library.filteredFiles)
   const [tableRowClicked, setTableRowClicked] = useState([])
   const [selected, setSelected] = useState([])
   const { t } = useTranslation()
@@ -34,9 +35,13 @@ const libraryItem = ({ library, showModal }) => {
   }
 
   const isItprivate = () =>
-    library.filter((item) =>
-      user._id === item.owner._id ? item : item.isPrivate === false
-    )
+    filteredLibrary?.length > 0
+      ? filteredLibrary?.filter((item) =>
+          user._id === item.owner._id ? item : item.isPrivate === false
+        )
+      : library.filter((item) =>
+          user._id === item.owner._id ? item : item.isPrivate === false
+        )
 
   return (
     <div className={` w-full font-sans filter ${showModal && "blur-md"}`}>
