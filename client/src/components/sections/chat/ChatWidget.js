@@ -33,8 +33,6 @@
 //   const [messages, setMessages] = useState(null)
 //   const currentUser = useSelector((state) => state.user.singleUser)
 
-//   console.log(currentUser)
-
 //   // Create client variable from StreamChat using the api
 //   const client = new StreamChat(STREAM_API)
 //   //   const { id, name } = user
@@ -60,8 +58,6 @@
 
 //     const channelWatch = await channel.current.watch()
 //     setMessages(channelWatch.messages)
-//     console.log(channelWatch)
-
 //     return async () => {
 //       await channelWatch.stopWatching()
 //     }
@@ -82,8 +78,6 @@
 
 //     const channelWatch = await channel.current.watch()
 //     setMessages(channelWatch.messages)
-
-//     console.log(channelWatch)
 
 //     return async () => {
 //       await channelWatch.stopWatching()
@@ -128,8 +122,6 @@
 //     )
 //     // addResponseMessage("Welcome to this chat!")
 //   }, [messages])
-
-//   console.log(messages)
 
 //   return (
 //     <div className="Chatwidget">

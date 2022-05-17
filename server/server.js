@@ -10,7 +10,7 @@ const cors = require("cors");
 mongoose
   .connect(process.env.DATABASE_URL)
   .then((x) => {
-    console.log(
+    console.info(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     );
   })
@@ -66,5 +66,5 @@ app.use("/api", jwtAuthorization, chatRoutes);
 
 //Server =====================================
 app.listen(process.env.PORT, () =>
-  console.log(`Server started at port: ${process.env.PORT}`)
+  console.info(`Server started at port: ${process.env.PORT}`)
 );

@@ -85,7 +85,6 @@ exports.login = async (req, res) => {
       accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
         expiresIn: "7d",
       });
-      // console.log('remember for 7 days')
     } else {
       accessToken = JWT.sign({ userLogedIn }, process.env.JWT_SECRETORKEY, {
         expiresIn: "1h",
@@ -93,7 +92,6 @@ exports.login = async (req, res) => {
     }
     res.status(200).json({ user, accessToken });
     // const chatToken = await chatLoginToken(email);
-    // console.log(chatToken);
   } catch (error) {
     res.status(403).json({ message: error.message });
   }

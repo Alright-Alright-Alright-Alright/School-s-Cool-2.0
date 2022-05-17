@@ -15,7 +15,6 @@ import {
   joinEventService,
   leaveEventService,
   editEventService,
-  deleteEventService,
 } from "../services/eventsService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -110,8 +109,7 @@ export const deleteEvent = (eventId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   try {
-    const eventDeleted = await deleteEventService(eventId)
-    console.log(eventDeleted)
+    // const eventDeleted = await deleteEventService(eventId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_EVENT, payload: eventId })
   } catch (error) {

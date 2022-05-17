@@ -91,7 +91,7 @@ const ChatIndex = ({ handleShowModal }) => {
       //   setSelectedUsers([client.userID])
       //   setActiveChannel(newChannel)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 

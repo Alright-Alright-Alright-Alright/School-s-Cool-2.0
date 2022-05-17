@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     if (!token || jwt.decode(token.replace("Bearer ", ""))?.exp < now) {
       dispatch(logoutUser())
-      console.log("token expired!")
+      console.info("token expired!")
       navigate("/login")
     } else {
       dispatch(loggedInUser())
@@ -49,7 +49,7 @@ function App() {
   }, [dispatch, token, loggedIn, navigate, currentTime, now])
 
   const errorHandler = (error, errorInfo) => {
-    console.log("Logging", error, errorInfo)
+    console.error("Logging", error, errorInfo)
   }
 
   return (

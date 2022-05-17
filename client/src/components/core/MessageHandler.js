@@ -3,7 +3,6 @@
 import React from "react"
 
 const MessageHandler = ({ error, success }) => (
-  // console.log(error)
   <div className="w-full flex justify-center">
     <p
       className={`${

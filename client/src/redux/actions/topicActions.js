@@ -19,7 +19,6 @@ import {
   inviteForTopicService,
   removeInviteForTopicService,
   editTopicService,
-  deleteTopicService,
 } from "../services/topicService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -147,8 +146,7 @@ export const deleteTopic = (topicId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   try {
-    const topicDeleted = await deleteTopicService(topicId)
-    console.log(topicDeleted)
+    // const topicDeleted = await deleteTopicService(topicId)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_TOPIC, payload: topicId })
   } catch (error) {

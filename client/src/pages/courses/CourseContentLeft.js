@@ -7,8 +7,8 @@ import {
   getAllCourses,
   joinCourse,
   leaveCourse,
-} from "../../../redux/actions/courseActions"
-import Icon from "../../core/Icon"
+} from "../../redux/actions/courseActions"
+import Icon from "../../components/core/Icon"
 
 function CourseContentLeft({ setCourseId }) {
   const [filter, setFilter] = useState("All courses")

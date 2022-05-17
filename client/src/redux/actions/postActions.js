@@ -109,7 +109,6 @@ export const submitComment =
 
 export const deleteComment = (commentId, id) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  console.log(commentId, id)
   try {
     const deleteCommentDb = await deleteCommentService({
       commentId,

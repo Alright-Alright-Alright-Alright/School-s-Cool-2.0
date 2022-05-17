@@ -1,13 +1,14 @@
-/* eslint-disable no-unused-vars */
 import React from "react"
-import Main from "../../layout/Main"
 import CourseMainContent from "./CourseMainContent"
 import CourseContentLeft from "./CourseContentLeft"
+import Main from "../../components/layout/Main"
 
-const CoursesIndex = () => (
-  <>
+function Courses() {
+  return (
     <Main contentLeft={<CourseContentLeft />} main={<CourseMainContent />} />
-  </>
-)
+  )
+}
 
-export default CoursesIndex
+Courses.propTypes = {}
+
+export default Courses

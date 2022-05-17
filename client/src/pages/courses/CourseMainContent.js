@@ -6,12 +6,12 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link, useParams } from "react-router-dom"
-import Icon from "../../core/Icon"
+import Icon from "../../components/core/Icon"
 import {
   getAllCourses,
   joinCourse,
   leaveCourse,
-} from "../../../redux/actions/courseActions"
+} from "../../redux/actions/courseActions"
 
 function CourseMainContent() {
   const courses = useSelector((state) => state.courses.allCourses)

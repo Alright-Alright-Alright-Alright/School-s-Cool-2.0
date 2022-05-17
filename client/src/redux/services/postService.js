@@ -50,7 +50,7 @@ export const deletePostService = async (postId, parentId) => {
     )
     return deletingPost
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

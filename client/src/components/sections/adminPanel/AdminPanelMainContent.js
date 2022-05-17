@@ -64,9 +64,7 @@ function AdminPanelMainContent() {
     setEditUserId(null)
   }
 
-  const handleDeleteClick = (userId) => {
-    console.log(userId)
-  }
+  const handleDeleteClick = () => {}
 
   const sortUsers = (filter) => {
     if (filter === "firstName") {
