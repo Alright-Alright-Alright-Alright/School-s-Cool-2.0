@@ -3,12 +3,12 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { t } from "i18next"
-import Icon from "../Icon"
-import ResourceDashCardListItem from "./ResourceDashCardListItem"
-import DropDownMenu from "../DropDownMenu"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { t } from "i18next";
+import Icon from "../Icon";
+import ResourceDashCardListItem from "./ResourceDashCardListItem";
+import DropDownMenu from "../DropDownMenu";
 // import data from "../../../data/dashcardDropdownMenu.json"
 
 export default function ResourceDashcard({
@@ -17,7 +17,7 @@ export default function ResourceDashcard({
   resourceDashCardStyle,
   dropdownMenuData,
 }) {
-  const [expandDashCard, setExpandDashCard] = useState(false)
+  const [expandDashCard, setExpandDashCard] = useState(false);
 
   const firstThreeItems = resourceDashCardData
     .slice(0, 3)
@@ -29,7 +29,7 @@ export default function ResourceDashcard({
         listItemComments={item?.comments}
         id={item?._id}
       />
-    ))
+    ));
 
   const allItems = resourceDashCardData.map((item) => (
     <ResourceDashCardListItem
@@ -39,7 +39,7 @@ export default function ResourceDashcard({
       listItemComments={item?.comments}
       resourceDashCardData={resourceDashCardData}
     />
-  ))
+  ));
 
   const noDataPlaceholder = (
     <>
@@ -49,7 +49,7 @@ export default function ResourceDashcard({
         </p>
       </div>
     </>
-  )
+  );
 
   const showAllDashCardData = (
     <>
@@ -74,13 +74,13 @@ export default function ResourceDashcard({
         )}
       </div>
     </>
-  )
+  );
 
   return (
     <>
-      <div className="flex flex-col relative w-full shadow-lg rounded-bl-3xl rounded-br-3xl bg-white rounded-r-3xl">
+      <div className="flex flex-col relative w-full shadow-lg rounded-bl-xl rounded-br-xl bg-white rounded-r-xl">
         <div
-          className={`w-full ${resourceDashCardStyle} h-dashcardtitle rounded-r-full rounded-bl-full`}
+          className={`w-full ${resourceDashCardStyle} h-dashcardtitle rounded-r-xl rounded-bl-xl`}
         >
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4 pb-3">{resourceDashCardTitle}</p>
@@ -95,13 +95,13 @@ export default function ResourceDashcard({
           : showAllDashCardData}
       </div>
     </>
-  )
+  );
 }
 
 ResourceDashcard.defaultProps = {
   resourceDashCardData: [],
   // users: [],
-}
+};
 
 ResourceDashcard.propTypes = {
   resourceDashCardData: PropTypes.array.isRequired,
@@ -109,4 +109,4 @@ ResourceDashcard.propTypes = {
   resourceDashCardStyle: PropTypes.string.isRequired,
   // users: PropTypes.array.isRequired,
   dropdownMenuData: PropTypes.object.isRequired,
-}
+};
