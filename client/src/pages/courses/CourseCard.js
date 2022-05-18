@@ -7,7 +7,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../components/core/Icon";
 
-const CourseCard = ({ id, joined, topics, image, members, completed }) => {
+const CourseCard = ({
+  id,
+  joined,
+  topics,
+  image,
+  members,
+  completed,
+  title,
+}) => {
   return (
     <div className="flex flex-col justify-between h-72 bg-white hover:shadow-md rounded-br-xl rounded-bl-xl rounded-tr-xl">
       <Link to={id}>
@@ -19,7 +27,7 @@ const CourseCard = ({ id, joined, topics, image, members, completed }) => {
           />
         </section>
         <section className="border-b-2 border-grey-light ml-3 mr-3 h-12 flex items-center">
-          <h1 className="text-lg">{topics.title}</h1>
+          <h1 className="text-lg">{title}</h1>
         </section>
       </Link>
       <section>

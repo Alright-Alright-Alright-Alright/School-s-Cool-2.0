@@ -7,7 +7,7 @@ function CourseMainContent() {
   return (
     <main className="p-6 flex flex-col space-y-6">
       <h1 className="bg-grey-dark text-white p-8 rounded-b-xl rounded-tr-xl w-full text-lg">
-        Hi $user, ready to learn?
+        Hi Sebastiaan, ready to learn?
       </h1>
       <section className="grid grid-cols-4 gap-8">
         {courses.map((course) => (
@@ -18,6 +18,7 @@ function CourseMainContent() {
             topics={course.lessons.length}
             members={course.members}
             completed={course.completed}
+            title={course.title}
           />
         ))}
       </section>

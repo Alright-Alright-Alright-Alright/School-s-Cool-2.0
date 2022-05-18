@@ -16,7 +16,7 @@ function Navigation(props) {
   return (
     <div className="flex gap-x-8 m-auto mt-12 justify-center">
       <Link to={prevLoc}>
-        <ChevronLeftIcon className="w-8 h-w-8 text-grey-medium_light" />
+        <ChevronLeftIcon className="w-8 h-w-8 text-sky" />
       </Link>
       <ul className="flex">
         {Array.from(Array(pageCount).keys()).map((index) => (
@@ -34,7 +34,7 @@ function Navigation(props) {
         ))}
       </ul>
       <Link to={nextLoc}>
-        <ChevronRightIcon className="w-8 h-w-8 text-grey-medium_light" />
+        <ChevronRightIcon className="w-8 h-w-8 text-sky" />
       </Link>
     </div>
   );

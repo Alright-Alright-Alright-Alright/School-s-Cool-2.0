@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { CheckIcon } from "@heroicons/react/solid";
+import Navigation from "./Navigation";
 
 function Option(props) {
   const { children, selected, index, onClick, submitted, isAnswer } = props;
@@ -49,7 +50,7 @@ Option.propTypes = {
 };
 
 function Multiplechoice(props) {
-  const { item } = props;
+  const { item, currentPage, pageCount } = props;
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -79,13 +80,18 @@ function Multiplechoice(props) {
         ))}
       </ul>
       <br />
-      <button
-        disabled={submitted || selectedIndex === null}
-        type="button"
-        onClick={checkAnswer}
-      >
-        Check
-      </button>
+      {submitted ? (
+        <Navigation currentPage={currentPage} pageCount={pageCount} />
+      ) : (
+        <button
+          disabled={submitted || selectedIndex === null}
+          type="button"
+          onClick={checkAnswer}
+          className="bg-sky text-white rounded-md px-4 py-2 hover:bg-sky-dark float-right"
+        >
+          Check
+        </button>
+      )}
     </main>
   );
 }
@@ -94,6 +100,8 @@ Multiplechoice.propTypes = {
   item: PropTypes.objectOf({
     image: PropTypes.string.isRequired,
   }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
 };
 
 export default Multiplechoice;

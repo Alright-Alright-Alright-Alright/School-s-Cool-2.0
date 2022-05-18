@@ -7,14 +7,26 @@ import { useParams } from "react-router-dom";
 import courses from "../../data/mocks/courses";
 import Infographic from "./Infographic";
 import Multiplechoice from "./Multiplechoice";
-import Navigation from "./Navigation";
 
-function Module({ item }) {
+function Module({ item, currentPage, pageCount }) {
   switch (item.type) {
     case "infographic":
-      return <Infographic item={item} />;
+      return (
+        <Infographic
+          item={item}
+          currentPage={currentPage}
+          pageCount={pageCount}
+        />
+      );
     case "multiplechoice":
-      return <Multiplechoice item={item} key={item._id} />;
+      return (
+        <Multiplechoice
+          item={item}
+          key={item._id}
+          currentPage={currentPage}
+          pageCount={pageCount}
+        />
+      );
     default:
       throw new Error(`${item.type} is not a valid component type`);
   }
@@ -24,6 +36,8 @@ Module.propTypes = {
   item: PropTypes.objectOf({
     type: PropTypes.string,
   }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
 };
 
 function LessonRouter() {
@@ -38,11 +52,14 @@ function LessonRouter() {
     <main className="p-6">
       <section>
         <h1 className="bg-grey-dark text-white p-8 rounded-b-xl rounded-tr-xl w-full text-lg">
-          {lesson.title}
+          {`${course.title} - ${lesson.title}`}
         </h1>
       </section>
-      <Module item={item} />
-      <Navigation currentPage={currentPage} pageCount={lesson.items.length} />
+      <Module
+        item={item}
+        currentPage={currentPage}
+        pageCount={lesson.items.length}
+      />
     </main>
   );
 }

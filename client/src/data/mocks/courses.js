@@ -1,4 +1,5 @@
 import image from "./assets/preview.png";
+import ethicsImage from "./assets/Ethics-Blog-760x550-760x550.png";
 import lorem from "./lorem";
 import slide1 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-01.jpg";
 import slide2 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-02.jpg";
@@ -106,7 +107,7 @@ export default [
     title: "Ethics",
     likedBy: "42",
     comments: "42",
-    image,
+    image: ethicsImage,
     lessons: [
       { _id: 1, completed: true, duration: "1h 15m 0s" },
       { _id: 2, completed: false, duration: "1h 15m 0s" },
@@ -134,6 +135,21 @@ export default [
   {
     _id: "4",
     title: "History",
+    likedBy: "42",
+    comments: "42",
+    image,
+    lessons: [
+      { _id: 1, completed: false, duration: "1h 15m 0s" },
+      { _id: 2, completed: false, duration: "1h 15m 0s" },
+      { _id: 3, completed: false, duration: "1h 15m 0s" },
+    ],
+    members: "42",
+    completed: false,
+    lorem,
+  },
+  {
+    _id: "5",
+    title: "Geography",
     likedBy: "42",
     comments: "42",
     image,
