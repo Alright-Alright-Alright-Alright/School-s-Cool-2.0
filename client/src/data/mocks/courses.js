@@ -1,4 +1,5 @@
 import image from "./assets/preview.png";
+import lorem from "./lorem";
 
 export default [
   {
@@ -7,9 +8,10 @@ export default [
     likedBy: "42",
     comments: "42",
     image,
-    topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
+    lessons: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
     completed: true,
+    lorem,
   },
   {
     _id: "2",
@@ -17,9 +19,10 @@ export default [
     likedBy: "42",
     comments: "42",
     image,
-    topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
+    lessons: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
     completed: false,
+    lorem,
   },
   {
     _id: "3",
@@ -27,9 +30,10 @@ export default [
     likedBy: "42",
     comments: "42",
     image,
-    topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
+    lessons: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
     completed: false,
+    lorem,
   },
   {
     _id: "4",
@@ -37,8 +41,9 @@ export default [
     likedBy: "42",
     comments: "42",
     image,
-    topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
+    lessons: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
     completed: false,
+    lorem,
   },
 ];

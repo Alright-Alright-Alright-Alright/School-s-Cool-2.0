@@ -15,7 +15,7 @@ function CourseMainContent() {
             key={course._id}
             id={course._id}
             image={course.image}
-            topics={course.topics.length}
+            topics={course.lessons.length}
             members={course.members}
             completed={course.completed}
           />
