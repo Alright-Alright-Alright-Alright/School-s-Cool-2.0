@@ -3,6 +3,8 @@ import lorem from "./lorem";
 import slide1 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-01.jpg";
 import slide2 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-02.jpg";
 import slide3 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-03.jpg";
+import slide4 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-04.jpg";
+import slide5 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-05.jpg";
 
 export default [
   {
@@ -29,6 +31,14 @@ export default [
           {
             type: "infographic",
             image: slide3,
+          },
+          {
+            type: "infographic",
+            image: slide4,
+          },
+          {
+            type: "infographic",
+            image: slide5,
           },
         ],
       },
