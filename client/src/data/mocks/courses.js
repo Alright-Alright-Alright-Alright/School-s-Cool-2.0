@@ -29,6 +29,32 @@ export default [
             image: slide2,
           },
           {
+            _id: "52435",
+            type: "multiplechoice",
+            question: "What is the disadvantage of decision trees?",
+            options: [
+              "Factor analysis",
+              "Decision trees are robust to outliers",
+              "Decision trees are prone to be overfit",
+              "All of the above",
+            ],
+            answer: 2,
+          },
+          {
+            _id: "232131",
+            type: "multiplechoice",
+            question:
+              " What is the most significant phase in a genetic algorithm?",
+            options: [
+              "Selection",
+              "Mutation",
+              "Crossover",
+              "Fitness function",
+              "None of the above",
+            ],
+            answer: 3,
+          },
+          {
             type: "infographic",
             image: slide3,
           },

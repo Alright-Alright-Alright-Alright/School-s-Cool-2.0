@@ -15,6 +15,9 @@ module.exports = {
         DEFAULT: "#DE2F6E",
         light: "#FEF2F7",
       },
+      green: {
+        DEFAULT: "#16a34a",
+      },
       sky: {
         DEFAULT: "#27A8DF",
         light: "#E2F1FC",

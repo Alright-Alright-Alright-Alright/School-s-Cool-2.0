@@ -4,9 +4,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import courses from "../../data/mocks/courses";
 import Infographic from "./Infographic";
+import Multiplechoice from "./Multiplechoice";
 import Navigation from "./Navigation";
 
 function Module({ item }) {
@@ -14,7 +14,7 @@ function Module({ item }) {
     case "infographic":
       return <Infographic item={item} />;
     case "multiplechoice":
-      return <p>multiplechoice</p>;
+      return <Multiplechoice item={item} key={item._id} />;
     default:
       throw new Error(`${item.type} is not a valid component type`);
   }
