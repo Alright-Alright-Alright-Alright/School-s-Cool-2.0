@@ -51,9 +51,7 @@ function CourseOverview() {
         </ul>
       </section>
       <section>
-        {course.lessons.map((lesson) => (
-          <LessonOverview lesson={lesson} />
-        ))}
+        <LessonOverview />
       </section>
     </main>
   );

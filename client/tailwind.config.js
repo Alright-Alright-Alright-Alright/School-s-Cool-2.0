@@ -18,6 +18,7 @@ module.exports = {
       sky: {
         DEFAULT: "#27A8DF",
         light: "#E2F1FC",
+        dark: "#0284c7",
       },
       yellow: {
         DEFAULT: "#F5A70F",
@@ -103,4 +104,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};
