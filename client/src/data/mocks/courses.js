@@ -1,5 +1,8 @@
 import image from "./assets/preview.png";
 import lorem from "./lorem";
+import slide1 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-01.jpg";
+import slide2 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-02.jpg";
+import slide3 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-03.jpg";
 
 export default [
   {
@@ -10,39 +13,52 @@ export default [
     image,
     lessons: [
       {
-        _id: 1,
+        _id: "1",
         completed: true,
         duration: "1h 15m 0s",
         title: "Introduction",
-        items: 8,
+        items: [
+          {
+            type: "infographic",
+            image: slide1,
+          },
+          {
+            type: "infographic",
+            image: slide2,
+          },
+          {
+            type: "infographic",
+            image: slide3,
+          },
+        ],
       },
       {
-        _id: 2,
+        _id: "2",
         completed: true,
-        duration: "1h 15m 0s",
+        duration: "0h 0m 0s",
         title: "Gathering data",
-        items: 8,
+        items: [],
       },
       {
-        _id: 3,
+        _id: "3",
         completed: false,
-        duration: "1h 15m 0s",
+        duration: "0h 0m 0s",
         title: "Feature extraction",
-        items: 8,
+        items: [],
       },
       {
-        _id: 4,
+        _id: "4",
         completed: false,
-        duration: "1h 15m 0s",
+        duration: "0h 0m 0s",
         title: "AWS",
-        items: 8,
+        items: [],
       },
       {
-        _id: 5,
+        _id: "5",
         completed: false,
-        duration: "1h 15m 0s",
+        duration: "0h 0m 0s",
         title: "Azure",
-        items: 8,
+        items: [],
       },
     ],
     members: "42",

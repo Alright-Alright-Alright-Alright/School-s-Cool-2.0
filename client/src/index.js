@@ -23,6 +23,7 @@ import Library from "./pages/Library";
 import Courses from "./pages/courses";
 import Events from "./pages/Events";
 import Course from "./pages/course";
+import Lesson from "./pages/lesson";
 import EventDetailsPage from "./pages/EventDetailsPage";
 import ScrollToTop from "./hooks/ScrollToTop";
 import NotFound from "./pages/NotFound";
@@ -69,6 +70,10 @@ ReactDOM.render(
             <Route path="library" element={<Library />} />
             <Route path="courses" element={<Courses />} />
             <Route path="courses/:courseId" element={<Course />} />
+            <Route
+              path="courses/:courseId/lessons/:lessonId/item/:itemIndex"
+              element={<Lesson />}
+            />
             <Route path="events" element={<Events />} />
             <Route path="events/:eventId" element={<EventDetailsPage />} />
             <Route path="profile/:userId" element={<Profile />} />

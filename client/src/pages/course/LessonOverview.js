@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   CheckCircleIcon as CheckCircleIconOutline,
   ClockIcon,
@@ -12,7 +12,8 @@ import { CheckCircleIcon as CheckCircleIconSolid } from "@heroicons/react/solid"
 import courses from "../../data/mocks/courses";
 
 function ListItem(props) {
-  const { children, type, duration, completed, onClick, index, items } = props;
+  const { children, duration, completed, index, items, lessonId, courseId } =
+    props;
   return (
     <div className="w-full py-3 px-4 text-left grid grid-cols-3 rounded-md shadow-sm bg-white">
       <div className="flex">
@@ -20,13 +21,12 @@ function ListItem(props) {
         {children}
       </div>
       <div className="flex flex-row-reverse gap-x-4 col-span-2">
-        <button
-          type="button"
+        <Link
           className="bg-sky rounded-md text-white py-1 px-4 hover:bg-sky-dark"
-          onClick={onClick}
+          to={`/courses/${courseId}/lessons/${lessonId}/item/0`}
         >
-          <p>Start</p>
-        </button>
+          Start
+        </Link>
         <span className="flex gap-x-2 w-32">
           {completed ? (
             <CheckCircleIconSolid className="h-5 w-5 text-sky" />
@@ -55,13 +55,13 @@ function ListItem(props) {
 }
 
 ListItem.propTypes = {
-  type: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  onClick: PropTypes.func.isRequired,
   duration: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
   items: PropTypes.number.isRequired,
+  lessonId: PropTypes.number.isRequired,
+  courseId: PropTypes.number.isRequired,
 };
 
 function LessonOverview() {
@@ -76,8 +76,10 @@ function LessonOverview() {
             <ListItem
               completed={lesson.completed}
               duration={lesson.duration}
-              items={lesson.items}
+              items={lesson.items.length}
               index={index}
+              lessonId={lesson._id}
+              courseId={params.courseId}
             >
               {lesson.title}
             </ListItem>
