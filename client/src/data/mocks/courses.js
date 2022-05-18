@@ -1,5 +1,8 @@
 import image from "./assets/preview.png";
+import historyImage from "./assets/whystudyhistory.jpg";
 import ethicsImage from "./assets/Ethics-Blog-760x550-760x550.png";
+import geographyImage from "./assets/171720729-58b9d1473df78c353c38c2b1.jpg";
+import mathImages from "./assets/math-curriculum.webp";
 import lorem from "./lorem";
 import slide1 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-01.jpg";
 import slide2 from "./assets/Machine Learning Infographics by Slidesgo-geconverteerd-02.jpg";
@@ -122,7 +125,7 @@ export default [
     title: "Math",
     likedBy: "42",
     comments: "42",
-    image,
+    image: mathImages,
     lessons: [
       { _id: 1, completed: false, duration: "1h 15m 0s" },
       { _id: 2, completed: false, duration: "1h 15m 0s" },
@@ -137,7 +140,7 @@ export default [
     title: "History",
     likedBy: "42",
     comments: "42",
-    image,
+    image: historyImage,
     lessons: [
       { _id: 1, completed: false, duration: "1h 15m 0s" },
       { _id: 2, completed: false, duration: "1h 15m 0s" },
@@ -152,7 +155,7 @@ export default [
     title: "Geography",
     likedBy: "42",
     comments: "42",
-    image,
+    image: geographyImage,
     lessons: [
       { _id: 1, completed: false, duration: "1h 15m 0s" },
       { _id: 2, completed: false, duration: "1h 15m 0s" },
