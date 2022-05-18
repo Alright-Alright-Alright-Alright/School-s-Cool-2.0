@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import courses from "../../data/mocks/courses";
 import Infographic from "./Infographic";
 import Multiplechoice from "./Multiplechoice";
+import Summary from "./Summary";
 
 function Module({ item, currentPage, pageCount }) {
   switch (item.type) {
@@ -27,6 +28,9 @@ function Module({ item, currentPage, pageCount }) {
           pageCount={pageCount}
         />
       );
+    case "summary": {
+      return <Summary />;
+    }
     default:
       throw new Error(`${item.type} is not a valid component type`);
   }
