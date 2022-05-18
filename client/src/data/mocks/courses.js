@@ -1,4 +1,4 @@
-import image from "./mockAssets/preview.png";
+import image from "./assets/preview.png";
 
 export default [
   {
@@ -9,6 +9,7 @@ export default [
     image,
     topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
+    completed: true,
   },
   {
     _id: "2",
@@ -18,6 +19,7 @@ export default [
     image,
     topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
+    completed: false,
   },
   {
     _id: "3",
@@ -27,6 +29,7 @@ export default [
     image,
     topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
+    completed: false,
   },
   {
     _id: "4",
@@ -36,5 +39,6 @@ export default [
     image,
     topics: [{ _id: 1 }, { _id: 2 }, { _id: 3 }],
     members: "42",
+    completed: false,
   },
 ];

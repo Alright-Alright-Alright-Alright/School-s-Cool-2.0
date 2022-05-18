@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-import React, { Suspense } from "react"
-import ReactDOM from "react-dom"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import "./index.css"
-import { Provider } from "react-redux"
-import i18next from "i18next"
-import { initReactI18next } from "react-i18next"
-import HttpApi from "i18next-http-backend"
-import LanguageDetector from "i18next-browser-languagedetector"
-import Loader from "./components/core/Loader"
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./index.css";
+import { Provider } from "react-redux";
+import i18next from "i18next";
+import { initReactI18next } from "react-i18next";
+import HttpApi from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
+import Loader from "./components/core/Loader";
 
-import App from "./App"
+import App from "./App";
 // import Topics from "./routes/topics"
-import store from "./redux/store"
-import Home from "./pages/Home"
+import store from "./redux/store";
+import Home from "./pages/Home";
 // import TopicIndex from "./pages/TopicOverview"
-import TopicDetailPage from "./pages/TopicDetailPage"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Topics from "./pages/Topics"
-import Library from "./pages/Library"
-import Courses from "./pages/courses"
-import Events from "./pages/Events"
-import CourseDetailPage from "./pages/CourseDetailPage"
-import EventDetailsPage from "./pages/EventDetailsPage"
-import ScrollToTop from "./hooks/ScrollToTop"
-import NotFound from "./pages/NotFound"
-import Profile from "./pages/Profile"
-import NewPassword from "./pages/NewPassword"
-import ForgotPassword from "./pages/ForgotPassword"
-import AdminPanel from "./pages/AdminPanel"
-import Faq from "./pages/Faq"
+import TopicDetailPage from "./pages/TopicDetailPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Topics from "./pages/Topics";
+import Library from "./pages/Library";
+import Courses from "./pages/courses";
+import Events from "./pages/Events";
+import Course from "./pages/course";
+import EventDetailsPage from "./pages/EventDetailsPage";
+import ScrollToTop from "./hooks/ScrollToTop";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import NewPassword from "./pages/NewPassword";
+import ForgotPassword from "./pages/ForgotPassword";
+import AdminPanel from "./pages/AdminPanel";
+import Faq from "./pages/Faq";
 
 i18next
   .use(HttpApi)
@@ -49,7 +49,7 @@ i18next
     backend: {
       loadPath: "/assets/locales/{{lng}}/translation.json",
     },
-  })
+  });
 
 ReactDOM.render(
   <Suspense fallback={<Loader />}>
@@ -68,7 +68,7 @@ ReactDOM.render(
             <Route path="topics/:topicId" element={<TopicDetailPage />} />
             <Route path="library" element={<Library />} />
             <Route path="courses" element={<Courses />} />
-            <Route path="courses/:courseId" element={<CourseDetailPage />} />
+            <Route path="courses/:courseId" element={<Course />} />
             <Route path="events" element={<Events />} />
             <Route path="events/:eventId" element={<EventDetailsPage />} />
             <Route path="profile/:userId" element={<Profile />} />
@@ -81,4 +81,4 @@ ReactDOM.render(
     </Provider>
   </Suspense>,
   document.getElementById("root")
-)
+);

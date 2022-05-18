@@ -7,7 +7,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../components/core/Icon";
 
-const CourseCard = ({ id, joined, topics, image, members }) => {
+const CourseCard = ({ id, joined, topics, image, members, completed }) => {
   return (
     <div className="flex flex-col justify-between h-72 bg-white hover:shadow-md rounded-br-xl rounded-bl-xl rounded-tr-xl">
       <Link to={id}>
@@ -49,7 +49,11 @@ const CourseCard = ({ id, joined, topics, image, members }) => {
               <button type="button" onClick={() => {}}>
                 <Icon
                   iconName="follow"
-                  iconStyle="fill-inactive text-grey-dark"
+                  iconStyle={
+                    completed
+                      ? "fill-active text-grey-dark"
+                      : "fill-inactive text-grey-dark"
+                  }
                 />
               </button>
             )}

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react";
-import courses from "./mocks/courses";
+import courses from "../../data/mocks/courses";
 import CourseCard from "./CourseCard";
 
 function CourseMainContent() {
@@ -17,6 +17,7 @@ function CourseMainContent() {
             image={course.image}
             topics={course.topics.length}
             members={course.members}
+            completed={course.completed}
           />
         ))}
       </section>
