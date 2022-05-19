@@ -11,8 +11,8 @@ function Comment({ comment, id }) {
   const user = useSelector((state) => state.user.singleUser)
   const dispatch = useDispatch()
   return (
-    <div className="flex px-5 pb-1 pt-3 items-center">
-      <div className="flex items-center w-1/7 pr-10">
+    <div className="lg:flex px-5 pb-1 pt-3 items-center">
+      <div className="flex items-center w-1/7 lg:pr-10">
         <img
           className="w-10 h-10 rounded-full mr-2"
           src={`${comment?.owner?.imageUrl}`}
