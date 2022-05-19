@@ -12,13 +12,20 @@ function Comment({ comment, id }) {
   const dispatch = useDispatch()
   return (
     <div className="flex px-5 pb-1 pt-3 items-center">
-      <img
-        className="w-10 h-10 rounded-full mr-2"
-        src={`${comment?.owner?.imageUrl}`}
-        alt="profile"
-      />
+      <div className="flex items-center w-1/7 pr-10">
+        <img
+          className="w-10 h-10 rounded-full mr-2"
+          src={`${comment?.owner?.imageUrl}`}
+          alt="profile"
+        />
+        <p className="text-sm text-grey-medium">
+          {comment?.owner?.firstName} {comment?.owner?.lastName}
+        </p>
+      </div>
       <div className="flex justify-between bg-grey-super_light w-full rounded-full items-center p-2">
-        <p className="text-sm text-grey-dark pl-1">{comment?.body}</p>
+        <p className="text-sm text-grey-dark pl-1 font-semibold">
+          {comment?.body}
+        </p>
         {user?._id === comment?.owner?._id || user?.role === "ADMIN" ? (
           <button
             type="button"
