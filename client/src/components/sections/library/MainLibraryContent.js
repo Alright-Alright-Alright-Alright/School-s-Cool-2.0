@@ -3,7 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Button from "../../core/Button"
 import LibraryItem from "../../core/library/LibraryItem"
 import LibraryModal from "../../core/library/LibraryModal"
@@ -17,6 +17,7 @@ const MainLibraryContent = ({
   setTheCategoryToColor,
 }) => {
   const dispatch = useDispatch()
+  const filteredLibrary = useSelector((state) => state.library.filteredFiles)
 
   const handleFilter = (item) => {
     dispatch(filterLibraryBySubject(item))
@@ -25,24 +26,27 @@ const MainLibraryContent = ({
 
   const uniqueBySubject = () => {
     const arr = []
-    library.map(
-      (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
-    )
+
+    if (filteredLibrary?.length > 0) {
+      filteredLibrary?.map(
+        (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
+      )
+    } else {
+      library.map(
+        (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
+      )
+    }
     const subjects = arr.map((item) => (
       <span key={item} className="pr-3">
-        {theCategoryToColor === item ? (
-          <Button
-            buttonName={item}
-            buttonStyle="btnLibraryStyleActive"
-            onClick={() => handleFilter(item)}
-          />
-        ) : (
-          <Button
-            buttonName={item}
-            buttonStyle="btnLibraryStyle"
-            onClick={() => handleFilter(item)}
-          />
-        )}
+        <Button
+          buttonName={item}
+          buttonStyle={
+            theCategoryToColor === item
+              ? "btnLibraryStyleActive"
+              : "btnLibraryStyle"
+          }
+          onClick={() => handleFilter(item)}
+        />
       </span>
     ))
     return subjects
