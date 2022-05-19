@@ -18,6 +18,7 @@ const MainLibraryContent = ({
 }) => {
   const dispatch = useDispatch()
   const filteredLibrary = useSelector((state) => state.library.filteredFiles)
+
   const handleFilter = (item) => {
     dispatch(filterLibraryBySubject(item))
     setTheCategoryToColor(item)
