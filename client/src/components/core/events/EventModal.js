@@ -122,7 +122,7 @@ const Modal = ({ handleShowModal }) => {
             locale="nl"
             dateFormat="dd/MM/yyyy"
             className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
-            minDate={new Date()}
+            minDate={startDate}
           />
         </section>
         <section className="">
