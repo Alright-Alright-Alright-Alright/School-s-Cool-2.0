@@ -65,7 +65,10 @@ const EventCards = ({ event }) => {
                   {dayjs(event?.dateStart).format("MMM DD, YYYY")}
                 </p>
                 <p className="text-sm text-grey-medium_light">
-                  {dayjs(event?.dateEnd).format("MMM DD, YYYY")}
+                  {event.dateStart !== event.dateEnd
+                    ? dayjs(event?.dateEnd).format("MMM DD, YYYY")
+                    : null}
+                  {/* {dayjs(event?.dateEnd).format("MMM DD, YYYY")} */}
                 </p>
               </div>
               <p className="text-sm text-grey-medium_light">
