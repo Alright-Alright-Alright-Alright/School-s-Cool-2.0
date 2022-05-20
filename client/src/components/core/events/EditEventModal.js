@@ -156,7 +156,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
               withPortal
               locale="nl"
               timeCaption="Time"
-              dateFormat="hh:mm"
+              dateFormat="HH:mm"
               className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
             />
           </div>
