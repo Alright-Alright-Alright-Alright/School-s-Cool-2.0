@@ -40,7 +40,7 @@ exports.forgetPasswordService = async (email) => {
     sendEmailService(
       email,
       "Password Reset",
-      `<h4>Hey buddy,</h4> <br/>
+      `<h4>Hello,</h4> <br/>
         <h4>You requested us to reset your password, please, click <a href="${process.env.CORS_ALLOWED}/new-password/${forgetPasswordToken}">here</a> to set a new one.</h4><br/>
         <h5>Best Regards, <br/>
         School's Cool</h5>`

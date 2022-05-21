@@ -146,14 +146,7 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="flex justify-between px-8 pt-2">
-            <Link to="/login">
-              <Button
-                buttonName={t("auth.login_register_back_to_login")}
-                buttonSubmit
-                buttonStyle="btnPrimaryStyle"
-              />
-            </Link>
+          <div className="flex justify-end px-8 pt-2">
             <Button
               buttonName={t("auth.login_register")}
               buttonSubmit
@@ -161,6 +154,12 @@ const RegisterForm = () => {
             />
           </div>
           {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          <p className="text-sm text-center py-2">
+            Already have an account?{" "}
+            <Link to="/login" className="underline text-yellow">
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </div>
