@@ -99,31 +99,37 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-auto lg:w-1/5 h-auto rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-auto lg:w-fit h-auto rounded-2xl flex flex-col justify-around py-6 space-y-3"
         >
           <div className="flex justify-center">{logo}</div>
           <div className="h-2/5 flex flex-col px-8 justify-around">
-            <label className="text-sm my-2">
-              {t("auth.login_register_first_name")}:
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={chooseFirstName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
+            <div className="flex space-x-2">
+              <div className="flex flex-col">
+                <label className="text-sm my-2">
+                  {t("auth.login_register_first_name")}:
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={firstName}
+                  onChange={chooseFirstName}
+                  className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
+                />
+              </div>
 
-            <label className="text-sm my-2">
-              {t("auth.login_register_last_name")}:
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={chooseLastName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
+              <div className="flex flex-col">
+                <label className="text-sm my-2">
+                  {t("auth.login_register_last_name")}:
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={lastName}
+                  onChange={chooseLastName}
+                  className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
+                />
+              </div>
+            </div>
 
             <label className="text-sm my-2">Email: </label>
             <input
