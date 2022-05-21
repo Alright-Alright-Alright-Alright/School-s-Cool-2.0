@@ -28,6 +28,7 @@ const Modal = ({ handleShowModal }) => {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [startTime, setStartTime] = useState(null)
+  const [error, setError] = useState("")
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
@@ -47,7 +48,11 @@ const Modal = ({ handleShowModal }) => {
   }
 
   const chooseBannerImage = (e) => {
-    setBannerImage(e.target.files[0])
+    if (e.target.files[0].type.includes("image")) {
+      setBannerImage(e.target.files[0])
+    } else {
+      setError("This file type is not allowed as a cover picture")
+    }
   }
 
   const chooseLocation = (e) => {
@@ -90,6 +95,7 @@ const Modal = ({ handleShowModal }) => {
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
+        {error && <MessageHandler error={error} />}
         <section className="flex justify-between border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"

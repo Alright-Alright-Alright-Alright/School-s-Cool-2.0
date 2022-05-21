@@ -50,7 +50,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
     if (e.target.files[0].type.includes("image")) {
       setBannerImage(e.target.files[0])
     } else {
-      setError("This file type is not allowed as a profile picture")
+      setError("This file type is not allowed as a cover picture")
     }
   }
 
