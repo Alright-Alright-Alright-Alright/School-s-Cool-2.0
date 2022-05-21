@@ -99,31 +99,37 @@ const RegisterForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-auto lg:w-1/5 h-auto rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-auto lg:w-fit h-auto rounded-2xl flex flex-col justify-around py-6 space-y-3"
         >
           <div className="flex justify-center">{logo}</div>
-          <div className="h-2/5 flex flex-col px-8 justify-around">
-            <label className="text-sm my-2">
-              {t("auth.login_register_first_name")}:
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={chooseFirstName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
+          <div className="h-2/5 flex flex-col px-5 justify-around">
+            <div className="flex space-x-2">
+              <div className="flex flex-col">
+                <label className="text-sm my-2">
+                  {t("auth.login_register_first_name")}:
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={firstName}
+                  onChange={chooseFirstName}
+                  className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
+                />
+              </div>
 
-            <label className="text-sm my-2">
-              {t("auth.login_register_last_name")}:
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={chooseLastName}
-              className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-            />
+              <div className="flex flex-col">
+                <label className="text-sm my-2">
+                  {t("auth.login_register_last_name")}:
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={lastName}
+                  onChange={chooseLastName}
+                  className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
+                />
+              </div>
+            </div>
 
             <label className="text-sm my-2">Email: </label>
             <input
@@ -146,14 +152,7 @@ const RegisterForm = () => {
               required
             />
           </div>
-          <div className="flex justify-between px-8 pt-2">
-            <Link to="/login">
-              <Button
-                buttonName={t("auth.login_register_back_to_login")}
-                buttonSubmit
-                buttonStyle="btnPrimaryStyle"
-              />
-            </Link>
+          <div className="flex justify-end px-5 pt-2">
             <Button
               buttonName={t("auth.login_register")}
               buttonSubmit
@@ -161,6 +160,12 @@ const RegisterForm = () => {
             />
           </div>
           {UI.errors && <p className="text-center">{UI.errors.message}</p>}
+          <p className="text-sm text-center py-2">
+            Already have an account?{" "}
+            <Link to="/login" className="underline text-yellow">
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </div>

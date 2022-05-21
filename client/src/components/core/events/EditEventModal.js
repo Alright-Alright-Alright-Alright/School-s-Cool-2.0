@@ -13,6 +13,7 @@ import Icon from "../Icon"
 import "react-datepicker/dist/react-datepicker.css"
 import TagsInput from "../TagsInput"
 import MessageHandler from "../MessageHandler"
+import Button from "../Button"
 
 registerLocale("nl", nl)
 
@@ -155,7 +156,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
               withPortal
               locale="nl"
               timeCaption="Time"
-              dateFormat="hh:mm"
+              dateFormat="HH:mm"
               className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
             />
           </div>
@@ -217,6 +218,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
             nameRight={t("events.modal_private_toggle_new_event")}
             toogle={() => setPrivacy(!privacy)}
           />
+          <Button buttonName="Save" buttonStyle="btnEventStyle" buttonSubmit />
         </section>
         <div className="flex">
           <button
