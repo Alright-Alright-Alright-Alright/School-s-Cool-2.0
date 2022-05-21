@@ -123,25 +123,27 @@ const LoginForm = () => {
               <input type="checkbox" value={remember} onChange={rememberMe} />
               <label className="text-sm">Remember me</label>
             </div>
-            <p className="text-sm flex justify-end">
-              <Link to="/forgot">{t("auth.login_forgot_password")}</Link>
-            </p>
           </div>
-          <div className="flex justify-between lg:px-8 px-5">
+          <div className="flex justify-end px-8">
             <Button
               buttonName="Log in"
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />
-            <Link to="/register">
-              <Button
-                buttonName={t("auth.login_register")}
-                buttonSubmit
-                buttonStyle="btnPrimaryStyle"
-              />
-            </Link>
+          </div>
+          <div>
+            <p className="text-sm text-center">
+              <Link to="/forgot">{t("auth.login_forgot_password")}</Link>
+            </p>
           </div>
           {UI.errors && <MessageHandler error={UI.errors} />}
+          <p className="text-sm text-center py-2">
+            Don&apos;t have an account?{" "}
+            <Link to="/register" className="underline text-yellow">
+              {" "}
+              {t("auth.login_register")}
+            </Link>
+          </p>
         </form>
       </div>
     </div>
