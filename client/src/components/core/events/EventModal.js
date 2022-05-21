@@ -184,7 +184,7 @@ const Modal = ({ handleShowModal }) => {
         </section>
 
         <section className="py-3 mx-5">
-          <input
+          <textarea
             type="text"
             placeholder={t("events.modal_description_new_event")}
             className="w-full placeholder-grey-medium_light text-base h-10"
