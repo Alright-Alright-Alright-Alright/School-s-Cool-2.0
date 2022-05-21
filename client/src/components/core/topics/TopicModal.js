@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 import React, { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -24,6 +25,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   const [privacy, setPrivacy] = useState(
     singleTopic ? singleTopic.isPrivate : false
   )
+  const [error, setError] = useState("")
   const [confirmDelete, setConfirmDelete] = useState(false)
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
@@ -45,7 +47,11 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
   }
 
   const chooseBannerImage = (e) => {
-    setBannerImage(e.target.files[0])
+    if (e.target.files[0].type.includes("image")) {
+      setBannerImage(e.target.files[0])
+    } else {
+      setError("This file type is not allowed as a profile picture")
+    }
   }
 
   const chooseCategory = (e) => {
@@ -226,6 +232,7 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
           onSubmit={handleFormSubmit}
         >
           {UI.errors && <MessageHandler error={UI.errors} />}
+          {error && <MessageHandler error={error} />}
           <section className="flex justify-between px-1 border-b-2 border-grey-super_light py-3 mx-5">
             <input
               required
