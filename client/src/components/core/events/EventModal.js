@@ -168,7 +168,7 @@ const Modal = ({ handleShowModal }) => {
             >
               <span className="text-base pr-3 ">
                 {bannerImage
-                  ? "File successfully uploaded"
+                  ? "Succesvol Geüpload"
                   : t("events.modal_cover_image_new_event")}
               </span>
               <Icon iconName="add" iconStyle="fill-inactive text-sky" />
