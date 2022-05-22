@@ -1,3 +1,5 @@
+const flowbite = require("flowbite/plugin");
+
 module.exports = {
   purge: {
     content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
@@ -106,5 +108,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [flowbite],
 };

@@ -1,5 +1,5 @@
-import React from "react"
-import Accordion from "../../core/Accordion"
+import React from "react";
+import Accordion from "../../core/Accordion";
 
 const accordionData = [
   {
@@ -32,19 +32,19 @@ const accordionData = [
     content:
       "You can create an event by clicking on the 'Create Event' button on the top right corner of the screen. You can also create an event by clicking on the 'Create Event' button on the top right corner of the screen. You can also create an event by clicking on the 'Create Event' button on the top right corner of the screen.",
   },
-]
+];
 
 function FaqMainContent() {
   return (
     <div>
       <div>
-        <h1 className=" text-xl text-center p-3">Frequently Asked Questions</h1>
+        <h1 className="text-xl my-6">Frequently Asked Questions</h1>
       </div>
       {accordionData.map(({ title, content }) => (
         <Accordion title={title} content={content} />
       ))}
     </div>
-  )
+  );
 }
 
-export default FaqMainContent
+export default FaqMainContent;

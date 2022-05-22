@@ -1,75 +1,75 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Link } from "react-router-dom"
-import { getSingleFile } from "../../redux/actions/libraryActions"
-import { searching, notSearching } from "../../redux/actions/searchBarAction"
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getSingleFile } from "../../redux/actions/libraryActions";
+import { searching, notSearching } from "../../redux/actions/searchBarAction";
 
 function SearchBar({ placeholder }) {
-  const [filteredData, setFilteredData] = useState([])
-  const [wordEntered, setWordEntered] = useState("")
-  const dispatch = useDispatch()
-  const urlPath = window.location.pathname
-  const topics = useSelector((state) => state.topics.allTopics)
-  const events = useSelector((state) => state.events.allEvents)
-  const library = useSelector((state) => state.library.allFiles)
-  const courses = useSelector((state) => state.courses.allcourses)
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
+  const dispatch = useDispatch();
+  const urlPath = window.location.pathname;
+  const topics = useSelector((state) => state.topics.allTopics);
+  const events = useSelector((state) => state.events.allEvents);
+  const library = useSelector((state) => state.library.allFiles);
+  const courses = useSelector((state) => state.courses.allcourses);
 
   const whereToSearch = () => {
-    let data = []
-    if (urlPath.includes("topics")) data = topics
-    if (urlPath.includes("events")) data = events
-    if (urlPath.includes("library")) data = library
+    let data = [];
+    if (urlPath.includes("topics")) data = topics;
+    if (urlPath.includes("events")) data = events;
+    if (urlPath.includes("library")) data = library;
     if (urlPath.includes("home") || urlPath.includes("profile"))
-      data = [...library, ...topics, ...events]
-    return data
-  }
+      data = [...library, ...topics, ...events];
+    return data;
+  };
 
   const handleFilter = (event) => {
-    const searchWord = event.target.value
+    const searchWord = event.target.value;
 
-    setWordEntered(searchWord)
+    setWordEntered(searchWord);
     const newFilter = whereToSearch().filter((value) => {
-      const tag = value.tags?.join(" ").toLowerCase().split(" ")
+      const tag = value.tags?.join(" ").toLowerCase().split(" ");
       return (
         value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
         tag?.includes(searchWord.toLowerCase())
-      )
-    })
+      );
+    });
 
     if (searchWord === "") {
-      setFilteredData([])
+      setFilteredData([]);
     } else {
-      setFilteredData(newFilter)
+      setFilteredData(newFilter);
     }
-  }
+  };
 
   const clearInput = () => {
-    setFilteredData([])
-    setWordEntered("")
-  }
+    setFilteredData([]);
+    setWordEntered("");
+  };
 
   const whenLibrary = (id) => {
-    dispatch(getSingleFile(id))
-    clearInput()
-  }
+    dispatch(getSingleFile(id));
+    clearInput();
+  };
 
   useEffect(() => {
-    whereToSearch()
-    return wordEntered ? dispatch(searching()) : dispatch(notSearching())
-  }, [urlPath, wordEntered])
+    whereToSearch();
+    return wordEntered ? dispatch(searching()) : dispatch(notSearching());
+  }, [urlPath, wordEntered]);
 
   return (
     <div>
-      <div className="flex items-center place-content-between border-2 border-grey-light rounded-r-full rounded-l-full py-2 px-4 text-grey-darker leading-tight text-base m-0">
+      <div className="flex items-center border-2 border-grey-light rounded-md px-4 py-1 text-grey-darker leading-tight text-base w-full">
         <input
           type="search"
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
-          className="focus:outline-none bg-grey-super_light focus:border-teal-500 w-56"
+          className="outline-none bg-grey-super_light focus:border-teal-500 border-none w-52 text-md px-0"
         />
         <div>
           {filteredData.length === 0 && (
@@ -84,7 +84,7 @@ function SearchBar({ placeholder }) {
         </div>
       </div>
       {filteredData.length !== 0 && (
-        <div className="absolute bg-grey-super_light w-64 shadow-2xl pl-2 rounded-xl">
+        <div className="absolute bg-grey-super_light w-64 shadow-2xl rounded-xl">
           {filteredData.slice(0, 15).map((value) =>
             value.collectionName === "library" ? (
               <Link
@@ -104,10 +104,10 @@ function SearchBar({ placeholder }) {
                 onClick={clearInput}
               >
                 <p className="py-2 relative">
-                  {value.title}{" "}
+                  {value.title}
                   <span className="text-sm text-grey-medium">
                     at {value.collectionName}
-                  </span>{" "}
+                  </span>
                 </p>
               </Link>
             )
@@ -115,7 +115,7 @@ function SearchBar({ placeholder }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;
