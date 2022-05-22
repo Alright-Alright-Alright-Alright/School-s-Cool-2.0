@@ -2,6 +2,7 @@
 import React from "react";
 import courses from "../../data/mocks/courses";
 import CourseCard from "./CourseCard";
+import AddCourseCard from "./AddCourseCard";
 
 function CourseMainContent() {
   return (
@@ -21,6 +22,7 @@ function CourseMainContent() {
             title={course.title}
           />
         ))}
+        <AddCourseCard />
       </section>
     </main>
   );
