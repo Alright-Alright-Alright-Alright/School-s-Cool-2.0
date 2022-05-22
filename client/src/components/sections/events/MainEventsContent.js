@@ -44,18 +44,18 @@ const MainEventsContent = ({ events }) => {
 
   return (
     <div className="max-w-sm	lg:max-w-full">
-      <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2  pr-2 lg:px-5">
+      <div className="flex flex-col lg:flex-row flex-wrap lg:pt-5 justify-evenly lg:justify-between space-x-2 lg:px-5">
         <button
-          className="flex text-lg items-center pb-3 lg:pb-0"
+          className="flex text-lg items-center pb-3 pl-6 lg:pb-0 lg:pl-0"
           type="button"
           onClick={handleShowModal}
         >
           <Icon iconName="add" iconStyle="fill-inactive text-sky" />
-          <p className="pl-3">{t("events.button_new_event")}</p>
+          <p className="pl-2">{t("events.button_new_event")}</p>
         </button>
 
-        <div className="flex overflow-x-auto space-x-3 max-w-xl">
-          <div className="pb-3 lg:pb-0">
+        <div className="flex flex-wrap gap-1 lg:gap-0 pl-5 justify-start lg:space-x-3 lg:flex-nowrap max-w-xl">
+          <div className="">
             <Button
               buttonName={t("events.button_all_events")}
               buttonStyle="btnEventStyle"
@@ -76,6 +76,7 @@ const MainEventsContent = ({ events }) => {
               onClick={() => setFilter("My events")}
             />
           </div>
+
           <div className="pb-3 lg:pb-0">
             <Button
               buttonName={t("events.button_past_events")}
