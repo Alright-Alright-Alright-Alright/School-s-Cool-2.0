@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Main from "../../components/layout/Main";
+import Previews from "./Previews";
 
 function EditCourse() {
-  return <Main contentLeft={null} main={<p>Lets edit a course</p>} />;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  return (
+    <Main
+      contentLeft={
+        <Previews selected={selectedIndex} setSelected={setSelectedIndex} />
+      }
+      main={<p>Lets edit a course</p>}
+    />
+  );
 }
 
 EditCourse.propTypes = {};
