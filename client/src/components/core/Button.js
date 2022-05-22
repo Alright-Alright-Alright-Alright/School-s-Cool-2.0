@@ -29,7 +29,7 @@ function Button({ buttonName, buttonStyle, buttonSubmit, onClick, disabled }) {
       onClick={onClick}
       disabled={disabled}
     >
-      <p className="ml-5 mr-5 mt-2 mb-2 text-center text-base">{buttonName}</p>
+      <p className="mx-4 my-2 text-center text-base">{buttonName}</p>
     </button>
   )
 }

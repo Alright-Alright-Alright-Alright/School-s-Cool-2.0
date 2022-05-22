@@ -54,7 +54,7 @@ const MainLibraryContent = ({
 
   return (
     <div className="h-screen mt-8">
-      <div className="pb-8 space-x-2 lg:space-x-3 lg:pl-0 pl-5">
+      <div className="pb-8 flex flex-wrap gap-2 lg:gap-0 justify-start lg:space-x-3 lg:pl-0 pl-5">
         {uniqueBySubject()}
       </div>
       {showModal && (
