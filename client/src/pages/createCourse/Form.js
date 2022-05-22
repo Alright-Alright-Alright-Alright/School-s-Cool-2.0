@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
-function Content() {
+function Form() {
   return (
     <div className="p-6">
       <form>
@@ -38,17 +40,19 @@ function Content() {
           type="file"
           accept="image/*"
         />
-        <button
-          type="button"
-          className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
-        >
-          <p>Cursus Aanmaken</p>
-        </button>
+        <Link to={`/courses/edit/${uuidv4()}`}>
+          <button
+            type="button"
+            className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
+          >
+            <p>Volgende</p>
+          </button>
+        </Link>
       </form>
     </div>
   );
 }
 
-Content.propTypes = {};
+Form.propTypes = {};
 
-export default Content;
+export default Form;

@@ -31,7 +31,8 @@ import Profile from "./pages/Profile";
 import NewPassword from "./pages/NewPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import AdminPanel from "./pages/AdminPanel";
-import CourseBuilder from "./pages/courseBuilder";
+import CreateCourse from "./pages/createCourse";
+import EditCourse from "./pages/editCourse";
 import Faq from "./pages/Faq";
 
 i18next
@@ -70,7 +71,8 @@ ReactDOM.render(
             <Route path="topics/:topicId" element={<TopicDetailPage />} />
             <Route path="library" element={<Library />} />
             <Route path="courses" element={<Courses />} />
-            <Route path="courses/create" element={<CourseBuilder />} />
+            <Route path="courses/create" element={<CreateCourse />} />
+            <Route path="courses/edit/:courseId" element={<EditCourse />} />
             <Route path="courses/:courseId" element={<Course />} />
             <Route
               path="courses/:courseId/lessons/:lessonId/item/:itemIndex"
