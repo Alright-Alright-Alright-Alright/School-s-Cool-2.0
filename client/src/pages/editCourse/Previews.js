@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 function EditCourse(props) {
   const { selected, setSelected, slides, moveSlideDown, moveSlideUp } = props;
   return (
-    <section className="p-6 border-r-2 border-grey-medium_light">
+    <section className="p-6 border-r-2 border-grey-medium_light max-h-full overflow-scroll">
       <ul className="flex items-center flex-col gap-4 max-h-screen overflow-scroll scrollBar max-w-xs">
         {slides.map((slide, index) => (
           <li className="flex gap-2">
             {/* Up/down buttons */}
             {index === selected && (
-              <div className="flex flex-col justify-items-center absolute p-2 -mt-5">
+              <div className="flex flex-col justify-around">
                 <button
                   type="button"
                   className={`bg-sky bg-light rounded-md py-2 px-4 hover:shadow-md float-right mt-8 ${

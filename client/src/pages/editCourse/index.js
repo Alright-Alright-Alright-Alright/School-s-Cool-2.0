@@ -33,8 +33,8 @@ function EditCourse() {
   };
 
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
+    <div className="grid grid-cols-12 ">
+      <div className="col-span-2 max-h-screen -mt-24 pt-24">
         <Previews
           selected={selectedIndex}
           setSelected={setSelectedIndex}
@@ -43,7 +43,7 @@ function EditCourse() {
           moveSlideDown={moveSlideDown}
         />
       </div>
-      <div className="col-span-10">
+      <div className="col-span-10 max-h-screen -mt-24 pt-24">
         <Panel item={list[selectedIndex]} />
       </div>
     </div>
