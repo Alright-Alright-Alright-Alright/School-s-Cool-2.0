@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Main from "../../components/layout/Main";
 import Previews from "./Previews";
+import Panel from "./Panel";
 
 import slide1 from "../../data/mocks/assets/Machine Learning Infographics by Slidesgo-geconverteerd-01.jpg";
 import slide2 from "../../data/mocks/assets/Machine Learning Infographics by Slidesgo-geconverteerd-02.jpg";
@@ -33,8 +33,8 @@ function EditCourse() {
   };
 
   return (
-    <Main
-      contentLeft={
+    <div className="grid grid-cols-12">
+      <div className="col-span-2">
         <Previews
           selected={selectedIndex}
           setSelected={setSelectedIndex}
@@ -42,9 +42,11 @@ function EditCourse() {
           moveSlideUp={moveSlideUp}
           moveSlideDown={moveSlideDown}
         />
-      }
-      main={<p className="overflow-hidden">Lets edit a course</p>}
-    />
+      </div>
+      <div className="col-span-10">
+        <Panel item={list[selectedIndex]} />
+      </div>
+    </div>
   );
 }
 
