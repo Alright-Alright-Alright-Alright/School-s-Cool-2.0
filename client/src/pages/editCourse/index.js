@@ -4,12 +4,11 @@ import update from "immutability-helper";
 import { v4 as uuidv4 } from "uuid";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
-import items from "./items";
 import Upload from "./Upload";
 
 function EditCourse() {
   const [selectedCard, setSelectedCard] = useState(0);
-  const [cards, setCards] = useState(items);
+  const [cards, setCards] = useState([]);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -49,8 +48,8 @@ function EditCourse() {
             setUploadDialogOpen={setUploadDialogOpen}
           />
         </div>
-        <div className="col-span-10 p-6 w-full">
-          <Panel item={cards[selectedCard]} />
+        <div className="col-span-10 w-full">
+          {cards.length ? <Panel item={cards[selectedCard]} /> : null}
         </div>
       </div>
     </>

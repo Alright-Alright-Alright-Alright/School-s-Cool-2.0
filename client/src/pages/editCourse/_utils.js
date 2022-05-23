@@ -26,7 +26,7 @@ const convertPdfToImages = async (file) => {
   const canvas = document.createElement("canvas");
   for (let i = 0; i < pdf.numPages; i += 1) {
     const page = await pdf.getPage(i + 1);
-    const viewport = page.getViewport({ scale: 1 });
+    const viewport = page.getViewport({ scale: 1.5 });
     const context = canvas.getContext("2d");
     canvas.height = viewport.height;
     canvas.width = viewport.width;

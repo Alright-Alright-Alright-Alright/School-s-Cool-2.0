@@ -13,7 +13,16 @@ import utils from "./_utils";
 export default function Upload(props) {
   const { showModal, setShowModal, addItems } = props;
 
-  const handleUpload = async (e) => {
+  const handleImageUpload = async (e) => {
+    if (e?.target?.files?.length) {
+      const newFiles = Array.from(e.target.files);
+      const objectUrl = URL.createObjectURL(newFiles[0]);
+      addItems([objectUrl]);
+      setShowModal(false);
+    }
+  };
+
+  const handlePdfUpload = async (e) => {
     if (e?.target?.files?.length) {
       const newFiles = Array.from(e.target.files);
       const pdf = newFiles[0];
@@ -53,13 +62,21 @@ export default function Upload(props) {
                   </button>
 
                   {/* Upload Image */}
-                  <button
-                    type="button"
-                    className="flex gap-2 bg-pink rounded-md text-white px-4 py-2 items-center hover:shadow-md"
-                  >
-                    <PhotographIcon className="w-5 h-5" />
-                    Image
-                  </button>
+                  <div className="overflow-hidden relative w-64">
+                    <button
+                      type="button"
+                      className="bg-pink rounded-md hover:bg-blue-light text-white font-bold py-2 px-4 w-full inline-flex items-center"
+                    >
+                      <PhotographIcon className="w-5 h-5" />
+                      <span className="ml-2">Image</span>
+                    </button>
+                    <input
+                      className="cursor-pointer absolute block py-2 px-4 w-full opacity-0 pin-r pin-t -mt-12"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                  </div>
 
                   {/* Upload Powerpoint / PDF */}
                   <div className="overflow-hidden relative w-64">
@@ -74,7 +91,7 @@ export default function Upload(props) {
                       className="cursor-pointer absolute block py-2 px-4 w-full opacity-0 pin-r pin-t -mt-12"
                       type="file"
                       accept="pdf/*"
-                      onChange={handleUpload}
+                      onChange={handlePdfUpload}
                     />
                   </div>
                 </div>

@@ -6,12 +6,7 @@ function Panel(props) {
   const { item } = props;
   return (
     <div className="max-w-6xl mx-auto">
-      <img
-        alt="A slide"
-        src={item.image}
-        className="border-2 rounded-md border-sky mx-auto"
-      />
-      <div className="flex justify-start mt-4 gap-2">
+      <div className="flex justify-end gap-2">
         <button
           type="button"
           className="flex gap-2 bg-sky rounded-md text-white px-4 py-2 items-center hover:shadow-md"
@@ -27,6 +22,11 @@ function Panel(props) {
           Editor afsluiten
         </button>
       </div>
+      <img
+        alt="A slide"
+        src={item.image}
+        className="border-2 rounded-md border-sky mx-auto mt-16"
+      />
     </div>
   );
 }
