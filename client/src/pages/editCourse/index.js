@@ -9,14 +9,18 @@ function EditCourse() {
   const [cards, setCards] = useState(items);
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
-    setCards((prevCards) =>
+    setCards((prevCards) => {
       update(prevCards, {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, prevCards[dragIndex]],
         ],
-      })
-    );
+      });
+
+      if (dragIndex === selectedCard) {
+        setSelectedCard(hoverIndex);
+      }
+    });
   }, []);
 
   return (
@@ -27,6 +31,7 @@ function EditCourse() {
           setSelectedCard={setSelectedCard}
           cards={cards}
           moveCard={moveCard}
+          selectedCard={selectedCard}
         />
       </div>
       <div className="col-span-10 p-6">

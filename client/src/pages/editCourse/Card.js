@@ -77,7 +77,7 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
           alt="A slide"
           src={image}
           className={`box-border rounded-md border-sky  ${
-            index === selected ? "opacity-100 border-3" : "opacity-50 border-2"
+            selected ? "opacity-100 border-3" : "opacity-50 border-2"
           }`}
         />
       </button>
