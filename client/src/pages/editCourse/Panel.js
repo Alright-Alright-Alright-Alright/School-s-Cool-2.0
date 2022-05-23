@@ -7,7 +7,7 @@ function Panel(props) {
     <div className="p-16 pt-12">
       <img
         alt="A slide"
-        src={item}
+        src={item.image}
         className="border-2 rounded-md border-sky m-auto"
       />
     </div>
