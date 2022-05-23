@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useCallback } from "react";
 import update from "immutability-helper";
+import { v4 as uuidv4 } from "uuid";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import items from "./items";
@@ -22,9 +23,21 @@ function EditCourse() {
     );
   }, []);
 
+  const addItems = (images) => {
+    const newItems = images.map((image) => ({
+      id: uuidv4(),
+      image,
+    }));
+    setCards((oldItem) => [...oldItem, ...newItems]);
+  };
+
   return (
     <>
-      <Upload showModal={uploadDialogOpen} setShowModal={setUploadDialogOpen} />
+      <Upload
+        showModal={uploadDialogOpen}
+        setShowModal={setUploadDialogOpen}
+        addItem={addItems}
+      />
       <div className="p-6 grid grid-cols-12">
         <div className="col-span-2" style={{ height: "85vh" }}>
           <PreviewList

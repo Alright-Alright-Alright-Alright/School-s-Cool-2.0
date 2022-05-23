@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-string-refs */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -5,9 +8,20 @@ import {
   PhotographIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/solid";
+import utils from "./_utils";
 
 export default function Upload(props) {
-  const { showModal, setShowModal } = props;
+  const { showModal, setShowModal, addItems } = props;
+
+  const handleUpload = async (e) => {
+    if (e?.target?.files?.length) {
+      const newFiles = Array.from(e.target.files);
+      const pdf = newFiles[0];
+      const images = await utils.convertPdfToImages(pdf);
+      addItems(images);
+    }
+  };
+
   return (
     <>
       {showModal ? (
@@ -27,7 +41,7 @@ export default function Upload(props) {
                     type="button"
                   />
                 </div>
-                {/* body */}
+                {/* Upload Multiple choice */}
                 <div className="relative p-6 grid grid-cols-1 gap-2">
                   <button
                     type="button"
@@ -36,20 +50,32 @@ export default function Upload(props) {
                     <QuestionMarkCircleIcon className="w-5 h-5" />
                     Multiple Choice Question
                   </button>
+
+                  {/* Upload Image */}
                   <button
                     type="button"
-                    className="flex gap-2 bg-yellow rounded-md text-white px-4 py-2 items-center hover:shadow-md"
+                    className="flex gap-2 bg-pink rounded-md text-white px-4 py-2 items-center hover:shadow-md"
                   >
                     <PhotographIcon className="w-5 h-5" />
                     Image
                   </button>
-                  <button
-                    type="button"
-                    className="flex gap-2 bg-green rounded-md text-white px-4 py-2 items-center hover:shadow-md"
-                  >
-                    <PresentationChartBarIcon className="w-5 h-5" />
-                    Powerpoint
-                  </button>
+
+                  {/* Upload Powerpoint / PDF */}
+                  <div className="overflow-hidden relative w-64">
+                    <button
+                      type="button"
+                      className="bg-green rounded-md hover:bg-blue-light text-white font-bold py-2 px-4 w-full inline-flex items-center"
+                    >
+                      <PresentationChartBarIcon className="w-5 h-5" />
+                      <span className="ml-2">Upload Powerpoint (PDF)</span>
+                    </button>
+                    <input
+                      className="cursor-pointer absolute block py-2 px-4 w-full opacity-0 pin-r pin-t -mt-12"
+                      type="file"
+                      accept="pdf/*"
+                      onChange={handleUpload}
+                    />
+                  </div>
                 </div>
                 {/* footer */}
                 <div className="flex items-center justify-end p-4 border-t border-solid border-slate-200 rounded-b">
@@ -74,4 +100,5 @@ export default function Upload(props) {
 Upload.propTypes = {
   showModal: PropTypes.bool.isRequired,
   setShowModal: PropTypes.func.isRequired,
+  addItems: PropTypes.func.isRequired,
 };
