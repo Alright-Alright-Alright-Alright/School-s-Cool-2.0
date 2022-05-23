@@ -19,6 +19,7 @@ export default function Upload(props) {
       const pdf = newFiles[0];
       const images = await utils.convertPdfToImages(pdf);
       addItems(images);
+      setShowModal(false);
     }
   };
 

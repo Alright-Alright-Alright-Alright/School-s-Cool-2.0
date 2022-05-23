@@ -36,7 +36,7 @@ function EditCourse() {
       <Upload
         showModal={uploadDialogOpen}
         setShowModal={setUploadDialogOpen}
-        addItem={addItems}
+        addItems={addItems}
       />
       <div className="p-6 grid grid-cols-12">
         <div className="col-span-2" style={{ height: "85vh" }}>

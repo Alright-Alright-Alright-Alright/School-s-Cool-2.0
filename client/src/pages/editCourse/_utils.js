@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
-import * as pdfjs from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
+import * as pdfjs from "pdfjs-dist/legacy/build/pdf";
+import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.entry";
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -24,7 +24,7 @@ const convertPdfToImages = async (file) => {
   const data = await readFileData(file);
   const pdf = await pdfjs.getDocument(data).promise;
   const canvas = document.createElement("canvas");
-  for (let i = 0; i < pdf.numPages; i++) {
+  for (let i = 0; i < pdf.numPages; i += 1) {
     const page = await pdf.getPage(i + 1);
     const viewport = page.getViewport({ scale: 1 });
     const context = canvas.getContext("2d");
