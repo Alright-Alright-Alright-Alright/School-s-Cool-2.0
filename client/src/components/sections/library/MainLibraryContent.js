@@ -18,6 +18,7 @@ const MainLibraryContent = ({
 }) => {
   const dispatch = useDispatch()
   const filteredLibrary = useSelector((state) => state.library.filteredFiles)
+
   const handleFilter = (item) => {
     dispatch(filterLibraryBySubject(item))
     setTheCategoryToColor(item)
@@ -36,7 +37,7 @@ const MainLibraryContent = ({
       )
     }
     const subjects = arr.map((item) => (
-      <span key={item} className="pr-3">
+      <span key={item}>
         <Button
           buttonName={item}
           buttonStyle={
@@ -53,7 +54,9 @@ const MainLibraryContent = ({
 
   return (
     <div className="h-screen mt-8">
-      <div className="pb-8">{uniqueBySubject()}</div>
+      <div className="pb-8 flex flex-wrap gap-2 lg:gap-0 justify-start lg:space-x-3 lg:pl-0 pl-5">
+        {uniqueBySubject()}
+      </div>
       {showModal && (
         <div className="relative">
           <LibraryModal handleShowModal={handleShowModal} />

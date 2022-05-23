@@ -28,6 +28,7 @@ const Modal = ({ handleShowModal }) => {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [startTime, setStartTime] = useState(null)
+  const [error, setError] = useState("")
   const hiddenFileInput = useRef(null)
   const UI = useSelector((state) => state.UI)
   const { t } = useTranslation()
@@ -47,7 +48,11 @@ const Modal = ({ handleShowModal }) => {
   }
 
   const chooseBannerImage = (e) => {
-    setBannerImage(e.target.files[0])
+    if (e.target.files[0].type.includes("image")) {
+      setBannerImage(e.target.files[0])
+    } else {
+      setError("This file type is not allowed as a cover picture")
+    }
   }
 
   const chooseLocation = (e) => {
@@ -90,6 +95,7 @@ const Modal = ({ handleShowModal }) => {
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors.data.message} />}
+        {error && <MessageHandler error={error} />}
         <section className="flex justify-between border-b-2 border-grey-super_light py-3 mx-5">
           <input
             type="text"
@@ -122,7 +128,7 @@ const Modal = ({ handleShowModal }) => {
             locale="nl"
             dateFormat="dd/MM/yyyy"
             className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
-            minDate={new Date()}
+            minDate={startDate}
           />
         </section>
         <section className="">
@@ -140,7 +146,7 @@ const Modal = ({ handleShowModal }) => {
               withPortal
               locale="nl"
               timeCaption="Time"
-              dateFormat="hh:mm"
+              dateFormat="HH:mm"
               className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
             />
           </div>
@@ -162,7 +168,7 @@ const Modal = ({ handleShowModal }) => {
             >
               <span className="text-base pr-3 ">
                 {bannerImage
-                  ? "File successfully uploaded"
+                  ? "Succesvol Geüpload"
                   : t("events.modal_cover_image_new_event")}
               </span>
               <Icon iconName="add" iconStyle="fill-inactive text-sky" />
@@ -178,7 +184,7 @@ const Modal = ({ handleShowModal }) => {
         </section>
 
         <section className="py-3 mx-5">
-          <input
+          <textarea
             type="text"
             placeholder={t("events.modal_description_new_event")}
             className="w-full placeholder-grey-medium_light text-base h-10"

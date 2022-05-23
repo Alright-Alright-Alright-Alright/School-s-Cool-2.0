@@ -102,7 +102,7 @@ exports.forgetPassword = async (req, res) => {
   try {
     const email = req.body.email;
     await forgetPasswordService(email);
-    res.json({ message: "Check your email buddy" });
+    res.json({ message: "Controleer je e-mail voor het opnieuw instellen van je wachtwoord." });
   } catch (error) {
     res.status(422).json({ message: error.message });
   }
