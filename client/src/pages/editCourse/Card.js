@@ -6,7 +6,15 @@ import { useDrag, useDrop } from "react-dnd";
 import { PlusIcon } from "@heroicons/react/solid";
 import { ItemTypes } from "./ItemTypes";
 
-function Card({ id, image, selected, index, moveCard, onClick }) {
+function Card({
+  id,
+  image,
+  selected,
+  index,
+  moveCard,
+  onClick,
+  setUploadDialogOpen,
+}) {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -87,6 +95,7 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
         className={`w-full h-4 bg-sky text-white rounded-md hover:shadow-md ${
           !selected && "hidden"
         }`}
+        onClick={() => setUploadDialogOpen(true)}
       >
         <PlusIcon className="h-3 w-3 m-auto" />
       </button>

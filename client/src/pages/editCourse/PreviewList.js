@@ -5,7 +5,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "./Card";
 
 function PreviewList(props) {
-  const { cards, moveCard, setSelectedCard, selectedCard } = props;
+  const {
+    cards,
+    moveCard,
+    setSelectedCard,
+    selectedCard,
+    setUploadDialogOpen,
+  } = props;
 
   const renderCard = useCallback(
     (card, index) => (
@@ -18,9 +24,10 @@ function PreviewList(props) {
         image={card.image}
         onClick={setSelectedCard}
         selected={selectedCard === index}
+        setUploadDialogOpen={setUploadDialogOpen}
       />
     ),
-    [selectedCard, moveCard, setSelectedCard]
+    [selectedCard, moveCard, setSelectedCard, setUploadDialogOpen]
   );
 
   return (
@@ -37,6 +44,7 @@ PreviewList.propTypes = {
   moveCard: PropTypes.func.isRequired,
   setSelectedCard: PropTypes.func.isRequired,
   selectedCard: PropTypes.number.isRequired,
+  setUploadDialogOpen: PropTypes.func.isRequired,
 };
 
 export default PreviewList;

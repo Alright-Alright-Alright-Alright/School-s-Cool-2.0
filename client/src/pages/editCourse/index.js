@@ -4,10 +4,12 @@ import update from "immutability-helper";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import items from "./items";
+import Upload from "./Upload";
 
 function EditCourse() {
   const [selectedCard, setSelectedCard] = useState(0);
   const [cards, setCards] = useState(items);
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setCards((prevCards) =>
@@ -21,20 +23,24 @@ function EditCourse() {
   }, []);
 
   return (
-    <div className="p-6 grid grid-cols-12">
-      <div className="col-span-2" style={{ height: "85vh" }}>
-        <PreviewList
-          selected={selectedCard}
-          setSelectedCard={setSelectedCard}
-          cards={cards}
-          moveCard={moveCard}
-          selectedCard={selectedCard}
-        />
+    <>
+      <Upload showModal={uploadDialogOpen} setShowModal={setUploadDialogOpen} />
+      <div className="p-6 grid grid-cols-12">
+        <div className="col-span-2" style={{ height: "85vh" }}>
+          <PreviewList
+            selected={selectedCard}
+            setSelectedCard={setSelectedCard}
+            cards={cards}
+            moveCard={moveCard}
+            selectedCard={selectedCard}
+            setUploadDialogOpen={setUploadDialogOpen}
+          />
+        </div>
+        <div className="col-span-10 p-6 w-full">
+          <Panel item={cards[selectedCard]} />
+        </div>
       </div>
-      <div className="col-span-10 p-6 w-full">
-        <Panel item={cards[selectedCard]} />
-      </div>
-    </div>
+    </>
   );
 }
 
