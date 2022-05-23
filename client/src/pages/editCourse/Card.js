@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { PlusIcon } from "@heroicons/react/solid";
 import { ItemTypes } from "./ItemTypes";
 
 function Card({ id, image, selected, index, moveCard, onClick }) {
@@ -68,7 +69,7 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
     <li
       ref={ref}
       style={{ opacity }}
-      className="cursor-pointer mb-2 hover:shadow-md"
+      className="mb-2"
       data-handler-id={handlerId}
       type="button"
     >
@@ -76,10 +77,18 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
         <img
           alt="A slide"
           src={image}
-          className={`box-border rounded-md border-sky  ${
+          className={`hover:shadow-md cursor-pointer box-border rounded-md border-sky  ${
             selected ? "opacity-100 border-3" : "opacity-50 border-2"
           }`}
         />
+      </button>
+      <button
+        type="button"
+        className={`w-full h-4 bg-sky text-white rounded-md hover:shadow-md ${
+          !selected && "hidden"
+        }`}
+      >
+        <PlusIcon className="h-3 w-3 m-auto" />
       </button>
     </li>
   );

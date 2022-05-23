@@ -25,7 +25,7 @@ function PreviewList(props) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <ul className="max-h-full overflow-y-scroll">
+      <ul className="max-h-full overflow-y-scroll pl-2 pr-2">
         {cards.map((card, i) => renderCard(card, i))}
       </ul>
     </DndProvider>
