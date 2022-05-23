@@ -20,12 +20,14 @@ function PreviewList(props) {
         selected={selectedCard === index}
       />
     ),
-    [selectedCard]
+    [selectedCard, moveCard, setSelectedCard]
   );
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="">{cards.map((card, i) => renderCard(card, i))}</div>
+      <ul className="max-h-full overflow-y-scroll">
+        {cards.map((card, i) => renderCard(card, i))}
+      </ul>
     </DndProvider>
   );
 }

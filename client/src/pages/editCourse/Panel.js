@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 function Panel(props) {
   const { item } = props;
   return (
-    <div className="p-16 pt-12">
+    <div>
       <img
         alt="A slide"
         src={item.image}
-        className="border-2 rounded-md border-sky m-auto"
+        className="max-w-6xl border-2 rounded-md border-sky m-auto"
       />
     </div>
   );

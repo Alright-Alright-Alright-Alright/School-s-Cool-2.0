@@ -65,7 +65,7 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div
+    <li
       ref={ref}
       style={{ opacity }}
       className="cursor-pointer mb-2 hover:shadow-md"
@@ -81,7 +81,7 @@ function Card({ id, image, selected, index, moveCard, onClick }) {
           }`}
         />
       </button>
-    </div>
+    </li>
   );
 }
 

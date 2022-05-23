@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useCallback } from "react";
 import update from "immutability-helper";
 import PreviewList from "./PreviewList";
@@ -20,8 +21,8 @@ function EditCourse() {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 ">
-      <div className="col-span-2 p-6">
+    <div className="p-6 grid grid-cols-12">
+      <div className="col-span-2" style={{ height: "85vh" }}>
         <PreviewList
           selected={selectedCard}
           setSelectedCard={setSelectedCard}
@@ -30,7 +31,7 @@ function EditCourse() {
           selectedCard={selectedCard}
         />
       </div>
-      <div className="col-span-10 p-6">
+      <div className="col-span-10 p-6 w-full">
         <Panel item={cards[selectedCard]} />
       </div>
     </div>
