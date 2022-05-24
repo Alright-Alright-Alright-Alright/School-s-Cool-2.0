@@ -8,6 +8,7 @@ import {
   PhotographIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/solid";
+import { v4 as uuidv4 } from "uuid";
 import utils from "./_utils";
 
 export default function Upload(props) {
@@ -17,7 +18,15 @@ export default function Upload(props) {
     if (e?.target?.files?.length) {
       const newFiles = Array.from(e.target.files);
       const objectUrl = URL.createObjectURL(newFiles[0]);
-      addItems([objectUrl], "infographic");
+      addItems([
+        {
+          type: "infographic",
+          content: {
+            image: objectUrl,
+          },
+          id: uuidv4(),
+        },
+      ]);
       setShowModal(false);
     }
   };
@@ -27,9 +36,25 @@ export default function Upload(props) {
       const newFiles = Array.from(e.target.files);
       const pdf = newFiles[0];
       const images = await utils.convertPdfToImages(pdf);
-      addItems(images, "infographic");
+      const items = images.map((image) => ({
+        id: uuidv4(),
+        content: { image },
+        type: "infographic",
+      }));
+      addItems(items);
       setShowModal(false);
     }
+  };
+
+  const handleMultipleChoiceUpload = () => {
+    addItems([
+      {
+        id: uuidv4(),
+        type: "multiplechoice",
+        content: {},
+      },
+    ]);
+    setShowModal(false);
   };
 
   return (
@@ -56,6 +81,7 @@ export default function Upload(props) {
                   <button
                     type="button"
                     className="flex gap-2 bg-sky rounded-md text-white px-4 py-2 items-center hover:shadow-md"
+                    onClick={handleMultipleChoiceUpload}
                   >
                     <QuestionMarkCircleIcon className="w-5 h-5" />
                     Multiple Choice Question

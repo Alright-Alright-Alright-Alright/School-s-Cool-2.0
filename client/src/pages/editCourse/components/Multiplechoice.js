@@ -1,14 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 
 export function Panel(props) {
   const { item } = props;
+  console.log(item);
   return (
-    <img
-      alt="A slide"
-      src={item.content.image}
-      className="border-2 rounded-md border-sky mx-auto mt-16"
-    />
+    <div>
+      <p>multiple choiceeee</p>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+      </ul>
+    </div>
   );
 }
 
@@ -19,21 +25,18 @@ Panel.propTypes = {
 };
 
 export function Preview(props) {
-  const { item, selected } = props;
+  const { selected } = props;
   return (
-    <img
-      alt="A slide"
-      src={item.content.image}
-      className={`hover:shadow-md cursor-pointer box-border rounded-md border-sky  ${
+    <div
+      className={`h-full w-full text-sky mx-auto bg-grey-light rounded-md  ${
         selected ? "opacity-100 border-3" : "opacity-50 border-2"
       }`}
-    />
+    >
+      <QuestionMarkCircleIcon className="h-10 w-10 text-sky mx-auto" />
+    </div>
   );
 }
 
 Preview.propTypes = {
-  item: PropTypes.objectOf({
-    image: PropTypes.string.isRequired,
-  }).isRequired,
   selected: PropTypes.bool.isRequired,
 };

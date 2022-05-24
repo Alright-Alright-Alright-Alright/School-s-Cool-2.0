@@ -8,7 +8,7 @@ import { ItemTypes } from "./ItemTypes";
 
 function Card({
   id,
-  image,
+  children,
   selected,
   index,
   moveCard,
@@ -81,14 +81,12 @@ function Card({
       data-handler-id={handlerId}
       type="button"
     >
-      <button type="button" onClick={() => onClick(index)}>
-        <img
-          alt="A slide"
-          src={image}
-          className={`hover:shadow-md cursor-pointer box-border rounded-md border-sky  ${
-            selected ? "opacity-100 border-3" : "opacity-50 border-2"
-          }`}
-        />
+      <button
+        type="button"
+        onClick={() => onClick(index)}
+        className="w-full h-32"
+      >
+        {children}
       </button>
       <button
         type="button"

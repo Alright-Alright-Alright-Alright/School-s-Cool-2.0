@@ -22,14 +22,8 @@ function EditCourse() {
     );
   }, []);
 
-  const addItems = (images, type) => {
-    const newItems = images.map((image) => ({
-      id: uuidv4(),
-      image,
-      type,
-    }));
+  const addItems = (newItems) =>
     setCards((oldItem) => [...oldItem, ...newItems]);
-  };
 
   return (
     <>

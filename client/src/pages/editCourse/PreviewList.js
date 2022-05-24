@@ -4,6 +4,30 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { PlusIcon } from "@heroicons/react/solid";
 import Card from "./Card";
+import { Preview as InfographicPreview } from "./components/Infographic";
+import { Preview as MultiplechoicePreview } from "./components/Multiplechoice";
+
+function Module(props) {
+  const { item, selected } = props;
+  switch (item.type) {
+    case "infographic":
+      return <InfographicPreview item={item} selected={selected} />;
+    case "multiplechoice":
+      return <MultiplechoicePreview selected={selected} />;
+    // case "summary": {
+    //   return <Summary />;
+    // }
+    default:
+      throw new Error(`${item.type} is not a valid component type`);
+  }
+}
+
+Module.propTypes = {
+  item: PropTypes.objectOf({
+    type: PropTypes.string,
+  }).isRequired,
+  selected: PropTypes.bool.isRequired,
+};
 
 function PreviewList(props) {
   const {
@@ -18,15 +42,15 @@ function PreviewList(props) {
     (card, index) => (
       <Card
         key={card.id}
-        index={index}
         id={card.id}
-        text={card.text}
+        index={index}
         moveCard={moveCard}
-        image={card.image}
         onClick={setSelectedCard}
         selected={selectedCard === index}
         setUploadDialogOpen={setUploadDialogOpen}
-      />
+      >
+        <Module item={card} selected={selectedCard === index} />
+      </Card>
     ),
     [selectedCard, moveCard, setSelectedCard, setUploadDialogOpen]
   );

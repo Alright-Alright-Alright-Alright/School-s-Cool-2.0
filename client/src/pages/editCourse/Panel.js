@@ -1,22 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { SaveIcon, LogoutIcon } from "@heroicons/react/solid";
-import Infographic from "./components/infographic";
+import { Panel as InfographicPanel } from "./components/Infographic";
+import { Panel as MultiplechoicePanel } from "./components/Multiplechoice";
 
 function Module(props) {
   const { item } = props;
   switch (item.type) {
     case "infographic":
-      return <Infographic item={item} />;
-    // case "multiplechoice":
-    //   return (
-    //     <Multiplechoice
-    //       item={item}
-    //       key={item._id}
-    //       currentPage={currentPage}
-    //       pageCount={pageCount}
-    //     />
-    //   );
+      return <InfographicPanel item={item} />;
+    case "multiplechoice":
+      return <MultiplechoicePanel item={item} />;
     // case "summary": {
     //   return <Summary />;
     // }
