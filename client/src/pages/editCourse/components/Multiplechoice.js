@@ -28,11 +28,12 @@ export function Preview(props) {
   const { selected } = props;
   return (
     <div
-      className={`h-full w-full text-sky mx-auto bg-grey-light rounded-md  ${
+      className={`h-full w-full text-sky mx-auto bg-grey-super_light rounded-md border-sky  ${
         selected ? "opacity-100 border-3" : "opacity-50 border-2"
       }`}
     >
-      <QuestionMarkCircleIcon className="h-10 w-10 text-sky mx-auto" />
+      <QuestionMarkCircleIcon className="h-10 w-10 text-sky mx-auto mt-8" />
+      <p>Multiple choice</p>
     </div>
   );
 }
