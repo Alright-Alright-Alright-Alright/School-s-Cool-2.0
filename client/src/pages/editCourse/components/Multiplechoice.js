@@ -7,7 +7,7 @@ export function Panel() {
     type: "multiplechoice",
     id: 1,
     content: {
-      question: "Whats the answer?",
+      question: "Type in your question here",
       options: ["option 1", "option 2", "option 3"],
       answer: 2,
     },
@@ -62,7 +62,7 @@ export function Panel() {
       />
       <ul>
         {item.content.options.map((option, index) => (
-          <li className="ml-2 flex gap-2">
+          <li className="ml-4 flex gap-2">
             <input
               type="text"
               value={option}
