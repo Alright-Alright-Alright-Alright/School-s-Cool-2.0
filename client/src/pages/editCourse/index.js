@@ -22,10 +22,11 @@ function EditCourse() {
     );
   }, []);
 
-  const addItems = (images) => {
+  const addItems = (images, type) => {
     const newItems = images.map((image) => ({
       id: uuidv4(),
       image,
+      type,
     }));
     setCards((oldItem) => [...oldItem, ...newItems]);
   };

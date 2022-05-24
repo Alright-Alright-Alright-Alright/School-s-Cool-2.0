@@ -17,7 +17,7 @@ export default function Upload(props) {
     if (e?.target?.files?.length) {
       const newFiles = Array.from(e.target.files);
       const objectUrl = URL.createObjectURL(newFiles[0]);
-      addItems([objectUrl]);
+      addItems([objectUrl], "infographic");
       setShowModal(false);
     }
   };
@@ -27,7 +27,7 @@ export default function Upload(props) {
       const newFiles = Array.from(e.target.files);
       const pdf = newFiles[0];
       const images = await utils.convertPdfToImages(pdf);
-      addItems(images);
+      addItems(images, "infographic");
       setShowModal(false);
     }
   };

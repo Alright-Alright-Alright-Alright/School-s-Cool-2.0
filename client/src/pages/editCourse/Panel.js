@@ -1,6 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { SaveIcon, LogoutIcon } from "@heroicons/react/solid";
+import Infographic from "./components/infographic";
+
+function Module(props) {
+  const { item } = props;
+  switch (item.type) {
+    case "infographic":
+      return <Infographic item={item} />;
+    // case "multiplechoice":
+    //   return (
+    //     <Multiplechoice
+    //       item={item}
+    //       key={item._id}
+    //       currentPage={currentPage}
+    //       pageCount={pageCount}
+    //     />
+    //   );
+    // case "summary": {
+    //   return <Summary />;
+    // }
+    default:
+      throw new Error(`${item.type} is not a valid component type`);
+  }
+}
+
+Module.propTypes = {
+  item: PropTypes.objectOf({
+    type: PropTypes.string,
+  }).isRequired,
+};
 
 function Panel(props) {
   const { item } = props;
@@ -22,11 +51,7 @@ function Panel(props) {
           Editor afsluiten
         </button>
       </div>
-      <img
-        alt="A slide"
-        src={item.image}
-        className="border-2 rounded-md border-sky mx-auto mt-16"
-      />
+      <Module item={item} />
     </div>
   );
 }
