@@ -109,6 +109,66 @@ const deleteEventFromDb = async (eventId) => {
   }
 };
 
+const addUserToEventDb = async (eventId, user) => {
+  try {
+    return await Event.findByIdAndUpdate(
+      eventId,
+      {
+        $push: { attendees: user },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("attendees", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const takeOutUserFromEventDb = async (eventId, user) => {
+  try {
+    return await Event.findByIdAndUpdate(
+      eventId,
+      {
+        $pull: { attendees: user },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("attendees", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllEventsDb,
   createEventDb,
@@ -117,4 +177,6 @@ module.exports = {
   userJoinEventDb,
   userLeaveEventDb,
   deleteEventFromDb,
+  addUserToEventDb,
+  takeOutUserFromEventDb,
 };
