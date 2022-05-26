@@ -6,6 +6,8 @@ import {
   LEAVE_EVENT,
   EDIT_EVENT,
   DELETE_EVENT,
+  INVITE_FOR_EVENT,
+  REMOVE_EVENT_INVITE,
 } from "../types/events"
 
 import {
@@ -16,6 +18,8 @@ import {
   leaveEventService,
   editEventService,
   deleteEventService,
+  inviteForEventService,
+  removeInviteForEventService,
 } from "../services/eventsService"
 
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui"
@@ -114,6 +118,36 @@ export const deleteEvent = (eventId) => async (dispatch) => {
     console.log(eventDeleted)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: DELETE_EVENT, payload: eventId })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const inviteForEvent = (eventId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+  console.log(eventId, userId)
+  try {
+    const inviteForEventDb = await inviteForEventService(eventId, userId)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: INVITE_FOR_EVENT, payload: inviteForEventDb })
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    })
+  }
+}
+
+export const removeEventInvite = (eventId, userId) => async (dispatch) => {
+  dispatch({ type: LOADING_UI })
+
+  try {
+    const removeInviteDb = await removeInviteForEventService(eventId, userId)
+    dispatch({ type: CLEAR_ERRORS })
+    dispatch({ type: REMOVE_EVENT_INVITE, payload: removeInviteDb })
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

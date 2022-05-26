@@ -6,6 +6,8 @@ const {
   joinEventService,
   leaveEventService,
   deleteEventService,
+  inviteForEventService,
+  removeInviteFromEventService
 } = require("../services/eventService");
 
 const getAllEvents = async (req, res, next) => {
@@ -125,6 +127,30 @@ const deleteEvent = async (req, res, next) => {
   }
 };
 
+const inviteForEvent = async (req, res, next) => {
+  const { userId } = req.body;
+  const eventId = req.params.eventId;
+  
+  try {
+    const event = await inviteForEventService(eventId, userId);
+    return res.status(201).json(event);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
+const removeInviteFromEvent = async (req, res, next) => {
+  const { userId } = req.body;
+  const eventId = req.params.eventId;
+  
+  try {
+    const event = await removeInviteFromEventService(eventId, userId);
+    return res.status(201).json(event);
+  } catch (e) {
+    res.status(500).json({ message: e.message }) && next(e);
+  }
+};
+
 module.exports = {
   getAllEvents,
   createNewEvent,
@@ -133,4 +159,6 @@ module.exports = {
   joinEvent,
   leaveEvent,
   deleteEvent,
+  inviteForEvent,
+  removeInviteFromEvent
 };

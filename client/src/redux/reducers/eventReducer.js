@@ -7,6 +7,8 @@ import {
   LEAVE_EVENT,
   EDIT_EVENT,
   DELETE_EVENT,
+  INVITE_FOR_EVENT,
+  REMOVE_EVENT_INVITE,
 } from "../types/events"
 
 const initialState = {
@@ -44,6 +46,13 @@ const eventReducer = (state = initialState, action) => {
           (event) => event._id !== action.payload
         ),
       }
+    case INVITE_FOR_EVENT:
+    case REMOVE_EVENT_INVITE:
+      return {
+        ...state,
+        singleEvent: action.payload,
+      }
+
     default:
       return state
   }
