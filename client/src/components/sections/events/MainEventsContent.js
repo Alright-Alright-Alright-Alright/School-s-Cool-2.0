@@ -20,6 +20,32 @@ const MainEventsContent = ({ events }) => {
     setShowModal(!showModal)
   }
 
+  const checkIfIsPrivate = () => {
+    const eventsCurrentUserCanSee = []
+    events.forEach((event) => {
+      if (event.isPrivate === false) {
+        eventsCurrentUserCanSee.push(event)
+      }
+    })
+    const privateEvents = events.filter(
+      (attendee) => attendee.isPrivate === true
+    )
+    privateEvents
+      .map((event) =>
+        event.members.map((member) => member._id === user._id && event)
+      )
+      .flat(Infinity)
+      .forEach((item) => {
+        if (typeof item === "object") {
+          eventsCurrentUserCanSee.push(item)
+        }
+      })
+    return eventsCurrentUserCanSee.sort(
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    )
+  }
+
   let filterRule
   switch (filter) {
     case "All events":
@@ -40,7 +66,7 @@ const MainEventsContent = ({ events }) => {
       filterRule = (item) => new Date(item.dateEnd) >= new Date()
   }
 
-  const filteredEvents = events.filter(filterRule)
+  const filteredEvents = checkIfIsPrivate().filter(filterRule)
 
   return (
     <div className="max-w-sm	lg:max-w-full">
