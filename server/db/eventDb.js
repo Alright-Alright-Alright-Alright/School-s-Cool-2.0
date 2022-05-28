@@ -19,7 +19,8 @@ const createEventDb = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   try {
     return await Event.create({
@@ -32,6 +33,7 @@ const createEventDb = async (
       location,
       bannerImage,
       tags,
+      isPrivate,
     });
   } catch (e) {
     throw new Error(e.message);
@@ -57,7 +59,8 @@ const updateEventDb = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   try {
     return await Event.findByIdAndUpdate(
@@ -71,6 +74,7 @@ const updateEventDb = async (
         location,
         bannerImage,
         tags,
+        isPrivate,
       },
       { new: true }
     )
