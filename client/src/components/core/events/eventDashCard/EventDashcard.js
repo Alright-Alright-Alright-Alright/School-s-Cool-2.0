@@ -50,7 +50,7 @@ export default function EventDashcard({
             </div>
           </div>
         </div>
-        <div className="flex-col pl-4 pr-4 max-h-96 overflow-y-auto">
+        <div className="flex-col pl-4 pr-4 max-h-96 overflow-y-auto scrollBar">
           <div className="divide-y-2 divide-primary">
             {expandDashCard ? allItems : firstThreeItems}
             <div />
