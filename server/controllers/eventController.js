@@ -7,7 +7,7 @@ const {
   leaveEventService,
   deleteEventService,
   inviteForEventService,
-  removeInviteFromEventService
+  removeInviteFromEventService,
 } = require("../services/eventService");
 
 const getAllEvents = async (req, res, next) => {
@@ -29,8 +29,10 @@ const createNewEvent = async (req, res, next) => {
     location,
     bannerImage,
     tags,
+    isPrivate,
   } = req.body;
-  const _id  = req.user.userLogedIn;
+  const _id = req.user.userLogedIn;
+
   try {
     if (!title) {
       throw new Error("Please write a title for the Event");
@@ -46,7 +48,8 @@ const createNewEvent = async (req, res, next) => {
         description,
         location,
         bannerImage,
-        tags
+        tags,
+        isPrivate
       );
       res.status(201).json(event);
     }
@@ -76,7 +79,9 @@ const updateEvent = async (req, res, next) => {
     location,
     bannerImage,
     tags,
+    isPrivate
   } = req.body;
+  
   try {
     const updatedEvent = await updateEventService(
       eventId,
@@ -87,7 +92,8 @@ const updateEvent = async (req, res, next) => {
       description,
       location,
       bannerImage,
-      tags
+      tags,
+      isPrivate
     );
     return res.status(201).json(updatedEvent);
   } catch (e) {
@@ -130,7 +136,7 @@ const deleteEvent = async (req, res, next) => {
 const inviteForEvent = async (req, res, next) => {
   const { userId } = req.body;
   const eventId = req.params.eventId;
-  
+
   try {
     const event = await inviteForEventService(eventId, userId);
     return res.status(201).json(event);
@@ -142,7 +148,7 @@ const inviteForEvent = async (req, res, next) => {
 const removeInviteFromEvent = async (req, res, next) => {
   const { userId } = req.body;
   const eventId = req.params.eventId;
-  
+
   try {
     const event = await removeInviteFromEventService(eventId, userId);
     return res.status(201).json(event);
@@ -160,5 +166,5 @@ module.exports = {
   leaveEvent,
   deleteEvent,
   inviteForEvent,
-  removeInviteFromEvent
+  removeInviteFromEvent,
 };
