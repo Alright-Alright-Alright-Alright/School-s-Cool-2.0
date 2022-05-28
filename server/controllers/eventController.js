@@ -8,6 +8,7 @@ const {
   deleteEventService,
   inviteForEventService,
   removeInviteFromEventService,
+
 } = require("../services/eventService");
 
 const getAllEvents = async (req, res, next) => {
@@ -136,7 +137,6 @@ const deleteEvent = async (req, res, next) => {
 const inviteForEvent = async (req, res, next) => {
   const { userId } = req.body;
   const eventId = req.params.eventId;
-
   try {
     const event = await inviteForEventService(eventId, userId);
     return res.status(201).json(event);
@@ -148,7 +148,6 @@ const inviteForEvent = async (req, res, next) => {
 const removeInviteFromEvent = async (req, res, next) => {
   const { userId } = req.body;
   const eventId = req.params.eventId;
-
   try {
     const event = await removeInviteFromEventService(eventId, userId);
     return res.status(201).json(event);
