@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useCallback } from "react";
 import update from "immutability-helper";
-import { v4 as uuidv4 } from "uuid";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import Upload from "./Upload";
@@ -32,7 +31,7 @@ function EditCourse() {
         setShowModal={setUploadDialogOpen}
         addItems={addItems}
       />
-      <div className="p-6 grid grid-cols-12">
+      <div className="p-6 grid grid-cols-12 bg-grey-super_light">
         <div className="col-span-2" style={{ height: "85vh" }}>
           <PreviewList
             selected={selectedCard}
@@ -44,7 +43,9 @@ function EditCourse() {
           />
         </div>
         <div className="col-span-10 w-full">
-          {cards.length ? <Panel item={cards[selectedCard]} /> : null}
+          {cards.length ? (
+            <Panel item={cards[selectedCard]} key={selectedCard} />
+          ) : null}
         </div>
       </div>
     </>

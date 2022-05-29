@@ -1,6 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { QuestionMarkCircleIcon, TrashIcon } from "@heroicons/react/solid";
+import {
+  QuestionMarkCircleIcon,
+  TrashIcon,
+  CheckIcon,
+  PlusIcon,
+} from "@heroicons/react/solid";
 
 export function Panel() {
   const [item, setItem] = useState({
@@ -52,31 +58,65 @@ export function Panel() {
     });
   };
 
+  const setAnswer = (newAnswerIndex) => {
+    setItem((old) => {
+      const newContent = { ...old.content };
+      newContent.answer = newAnswerIndex;
+      const newItem = { ...old, content: newContent };
+      return newItem;
+    });
+  };
+
   return (
-    <div>
+    <div className="flex flex-col items-center mt-16">
       <input
         type="text"
         value={item.content.question}
         onChange={(e) => updateQuestion(e.target.value)}
-        className="mb-4 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 grey-medium leading-tight focus:outline-none focus:bg-white focus:border-sky"
+        placeholder="Type a question here"
+        className="mb-4 w-96 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 grey-medium leading-tight focus:outline-none focus:bg-white focus:border-sky "
       />
-      <ul>
+      <ul className="flex flex-col gap-y-2">
         {item.content.options.map((option, index) => (
-          <li className="ml-4 flex gap-2">
-            <input
-              type="text"
-              value={option}
-              onChange={(e) => update(index, e.target.value)}
-              className="mb-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 grey-medium leading-tight focus:outline-none focus:bg-white focus:border-sky"
-            />
-            <button type="button" onClick={() => removeAnswer(index)}>
-              <TrashIcon className="w-5 h-5 text-grey-medium hover:text-red-800" />
+          <li className="flex gap-4 items-center">
+            <button
+              onClick={() => setAnswer(index)}
+              type="button"
+              className="flex items-center gap-2 rounded-md bg-white shadow-sm py-3 px-4 cursor-pointer"
+            >
+              {index === item.content.answer ? (
+                <CheckIcon className="w-5 h-5 rounded-sm border-2 border-grey-dark" />
+              ) : (
+                <div className="w-5 h-5 rounded-sm border-2 border-grey-dark" />
+              )}
+              <input
+                placeholder="Type an answer here"
+                type="text"
+                value={option}
+                onChange={(e) => update(index, e.target.value)}
+                className="w-72 appearance-none focus:border-none border-none rounded grey-medium leading-tight focus:outline-none focus:bg-white focus:border-sky"
+              />
+            </button>
+            <button
+              type="button"
+              onClick={() => removeAnswer(index)}
+              className="rounded-md bg-red-600 h-9 w-9 p-2 hover:bg-red-700 hover:shadow-md"
+            >
+              <TrashIcon className="w-5 h-5 text-white" />
             </button>
           </li>
         ))}
       </ul>
-      <button type="button" onClick={add}>
-        + add answer
+      <button
+        type="button"
+        onClick={add}
+        className={`bg-sky rounded-md text-white hover:shadow-md px-4 py-2 flex gap-2 mt-6 ${
+          item.content.options.length >= 6 ? "bg-grey-medium" : ""
+        }`}
+        disabled={item.content.options.length >= 6}
+      >
+        <PlusIcon className="w-5 h-5" />
+        add answer
       </button>
     </div>
   );

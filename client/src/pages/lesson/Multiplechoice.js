@@ -30,7 +30,7 @@ function Option(props) {
         {submitted ? (
           <p className="w-5" />
         ) : selected ? (
-          <CheckIcon className="w-5 h-5  rounded-sm border-2 border-grey-dark" />
+          <CheckIcon className="w-5 h-5 rounded-sm border-2 border-grey-dark" />
         ) : (
           <div className="w-5 h-5 rounded-sm border-2 border-grey-dark" />
         )}
