@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
@@ -10,6 +11,7 @@ import {
   getAllFilesFromLibrary,
   getUserFilesFromLibrary,
 } from "../../../redux/actions/libraryActions";
+import Dropdown from "../../Dropdown";
 
 const LibraryContentLeft = ({
   library,
@@ -21,6 +23,7 @@ const LibraryContentLeft = ({
   const { t } = useTranslation();
 
   const handleFilter = (item) => {
+    console.log(item);
     dispatch(filterLibraryByCategory(item));
     setTheCategoryToColor(item);
   };
@@ -35,59 +38,49 @@ const LibraryContentLeft = ({
     setTheCategoryToColor("");
   };
 
-  const uniqueCatergories = () => {
-    const arr = [];
+  const categories = React.useMemo(() => {
+    const uniqueCategories = [];
     library.map(
-      (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
+      (item) =>
+        uniqueCategories.indexOf(item.category) === -1 &&
+        uniqueCategories.push(item.category)
     );
 
-    const categories = arr.map((item) => (
-      <div
-        key={item}
-        className={`text-xl py-2 hover:text-pink ${
-          theCategoryToColor === item && "text-pink"
-        }`}
-      >
-        <button type="button" onClick={() => handleFilter(item)}>
-          {item}
-        </button>
-      </div>
-    ));
+    const categories = uniqueCategories.map((item) => ({
+      label: item,
+      value: item.toLowerCase().replaceAll(" ", "_"),
+      handler: () => handleFilter(item),
+    }));
 
-    categories.push(
-      <div
-        className={`text-xl py-2 hover:text-pink ${
-          theCategoryToColor === "" && "text-pink"
-        }`}
-      >
-        <button type="button" onClick={handleMyFiles}>
-          Mijn bestanden
-        </button>
-      </div>
-    );
+    categories.push({
+      label: "Mijn bestanden",
+      value: "mijn_bestanden",
+      handler: handleMyFiles,
+    });
+
+    categories.push({
+      label: "Alle bestanden",
+      value: "all_files",
+      handler: getFiles,
+    });
 
     return categories;
-  };
+  }, [library, handleFilter, handleMyFiles, getFiles]);
 
   return (
     <div className="pl-5 pt-10">
       <button
         type="button"
-        className="text-lg flex gap-2 bg-sky text-white rounded-md hover:shadow-md px-4 py-2 hover:bg-sky-dark"
+        className="text-lg flex gap-2 bg-sky text-white rounded-sm hover:shadow-md px-4 py-2 hover:bg-sky-dark"
         onClick={handleShowModal}
       >
         <PlusIcon className="h-5" /> <p>{t("library.button_upload_file")}</p>
       </button>
-      <hr className="mt-8 w-52 text-grey-light" />
-      <section className="pt-6">{uniqueCatergories()}</section>
+      <hr className="my-8 w-52 text-grey-light" />
+
+      {/* Filters */}
       <section>
-        <button
-          className="text-xl py-2 hover:text-pink"
-          type="button"
-          onClick={getFiles}
-        >
-          {t("library.button_all_files")}
-        </button>
+        <Dropdown options={categories} label="Filter categorie" />
       </section>
     </div>
   );

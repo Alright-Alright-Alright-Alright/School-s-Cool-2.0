@@ -9,7 +9,7 @@ const Accordion = ({ title, content }) => {
     <div className="w-full py-3">
       <button
         type="button"
-        className="flex z-10 justify-between items-center w-full hover:shadow-md rounded-bl-md rounded-br-md bg-white rounded-r-md"
+        className="flex z-10 justify-between items-center w-full shadow-sm hover:shadow-md rounded-bl-md rounded-br-md bg-white rounded-r-md"
         onClick={() => setIsActive(!isActive)}
       >
         <div className="pl-3 py-3 text-md">{title}</div>

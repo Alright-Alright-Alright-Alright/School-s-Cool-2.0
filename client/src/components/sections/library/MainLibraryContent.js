@@ -136,7 +136,7 @@ const MainLibraryContent = ({
           <LibraryModal handleShowModal={handleShowModal} />
         </div>
       )}
-      <div className={`h-screen mt-8 flex flex-col gap-4 blur-md z-50`}>
+      <div className={`h-screen mt-8 flex flex-col gap-6 blur-md z-50`}>
         {/* Header */}
         <div>
           <div className="flex flex-col">
@@ -162,12 +162,12 @@ const MainLibraryContent = ({
         <ul className="grid grid-cols-12 font-bold text-grey-medium">
           <li className="col-span-5">Name</li>
           <li className="col-span-3">Modified On</li>
-          <li className="col-span-3">Mofidied By</li>
+          <li className="col-span-3">Category</li>
           <li className="col-span-1" />
         </ul>
 
         {/* List of library items */}
-        <ul className="flex flex-col mt-4">
+        <ul className="flex flex-col">
           {library.map((item) => {
             return (
               <LibraryRow

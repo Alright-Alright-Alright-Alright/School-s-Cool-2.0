@@ -36,13 +36,18 @@ const accordionData = [
 
 function FaqMainContent() {
   return (
-    <div>
-      <div>
-        <h1 className="text-xl my-6">Frequently Asked Questions</h1>
+    <div className="flex flex-col gap-4 mt-8">
+      <div className="flex flex-col">
+        <h1 className="font-bold text-grey-dark text-xl">FAQ</h1>
+        <h2 className="font-normal text-grey-medium">
+          Frequently Asked Questions
+        </h2>
       </div>
-      {accordionData.map(({ title, content }) => (
-        <Accordion title={title} content={content} />
-      ))}
+      <ul>
+        {accordionData.map(({ title, content }) => (
+          <Accordion title={title} content={content} />
+        ))}
+      </ul>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Icon from "../Icon";
 import { deleteComment } from "../../../redux/actions/postActions";
+// import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 
 function Comment({ comment, id }) {
   const user = useSelector((state) => state.user.singleUser);

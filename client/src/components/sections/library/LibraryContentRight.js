@@ -4,6 +4,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { t } from "i18next";
+import { ThumbUpIcon as ThumbUpIconActive } from "@heroicons/react/solid";
+import {
+  ThumbUpIcon as ThumbUpIconInactive,
+  ChatIcon,
+} from "@heroicons/react/outline";
 import Icon from "../../core/Icon";
 import {
   iLikedAfile,
@@ -79,26 +84,26 @@ const LibraryContentRight = ({ singleFile }) => {
         </section>
         <hr className="ml-8 w-5/6 text-grey-light" />
         <section className="ml-8 flex items-center">
-          <div className="flex">
+          <div className="flex w-8">
             {singleFile.likedBy.includes(user._id) ? (
               <button
                 type="button"
                 onClick={() => dispatch(iUnlikedAfile(singleFile._id))}
               >
-                <Icon iconName="like" iconStyle="fill-active text-pink" />
+                <ThumbUpIconActive className="h-5" />
               </button>
             ) : (
               <button
                 type="button"
                 onClick={() => dispatch(iLikedAfile(singleFile._id))}
               >
-                <Icon iconName="like" iconStyle="fill-inactive" />
+                <ThumbUpIconInactive className="h-5" />
               </button>
             )}
             <span className="pl-1">{singleFile.likedBy.length}</span>
           </div>
           <div className="flex pl-4">
-            <Icon iconName="message" iconStyle="fill-inactive" />
+            <ChatIcon className="h-5" />
             <span className="pl-1">{singleFile.comments.length}</span>
           </div>
         </section>
