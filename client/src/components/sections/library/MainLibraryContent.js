@@ -3,7 +3,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { DocumentIcon, PhotographIcon, FilmIcon } from "@heroicons/react/solid";
+import {
+  DocumentIcon,
+  PhotographIcon,
+  FilmIcon,
+  DownloadIcon,
+} from "@heroicons/react/solid";
 import { TrashIcon } from "@heroicons/react/outline";
 import { getSingleFile } from "../../../redux/actions/libraryActions";
 import LibraryModal from "../../core/library/LibraryModal";
@@ -89,7 +94,12 @@ const LibraryRow = (props) => {
           {modifiedOn}
         </li>
         <li className="col-span-3 font-normal">{category}y</li>
-        {isHovering && <TrashIcon className="w-5 h-5 text-red-600" />}
+        {isHovering && (
+          <div className="flex gap-4">
+            <DownloadIcon className="w-5 h-5 text-sky" />
+            <TrashIcon className="w-5 h-5 text-red-600" />
+          </div>
+        )}
       </button>
     </ul>
   );
@@ -152,6 +162,9 @@ const MainLibraryContent = (props) => {
               category={item.category}
               fileUrl={item.fileUrl}
               onClick={() => dispatch(getSingleFile(item._id))}
+              onDownload={() => {
+                window.location.href = item.fileUrl;
+              }}
             />
           ))}
         </ul>
