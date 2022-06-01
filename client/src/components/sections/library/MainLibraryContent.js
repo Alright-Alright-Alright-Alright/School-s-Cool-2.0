@@ -33,12 +33,13 @@ RowIcon.propTypes = {
 };
 
 const HighlightedFile = (props) => {
-  const { filename, modifiedOn, fileUrl } = props;
+  const { filename, modifiedOn, fileUrl, onClick } = props;
   return (
     <li>
       <button
         type="button"
         className="grid grid-cols-6 bg-white rounded-sm shadow-sm hover:shadow-md p-4"
+        onClick={onClick}
       >
         <div className="col-span-4 text-left">
           <p className="font-bold text-grey-medium">{filename}</p>
@@ -54,6 +55,7 @@ HighlightedFile.propTypes = {
   filename: PropTypes.string.isRequired,
   fileUrl: PropTypes.string.isRequired,
   modifiedOn: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 const LibraryRow = (props) => {
@@ -128,6 +130,7 @@ const MainLibraryContent = (props) => {
               filename={item.title}
               modifiedOn={item.updatedAt.substring(0, 10)}
               fileUrl={item.fileUrl}
+              onClick={() => dispatch(getSingleFile(item._id))}
             />
           ))}
         </ul>
