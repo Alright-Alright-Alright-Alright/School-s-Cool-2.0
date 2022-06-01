@@ -1,75 +1,75 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useTranslation } from "react-i18next"
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   getAllActivities,
   getFollowedActivities,
-} from "../../../redux/actions/activityActions"
-import ActivityCard from "../../core/activityCard/ActivityCard"
-import Button from "../../core/Button"
-import ActivityCardSkeleton from "../../core/skeleton/ActivityCardSkeleton"
+} from "../../../redux/actions/activityActions";
+import ActivityCard from "../../core/activityCard/ActivityCard";
+import Button from "../../core/Button";
+import ActivityCardSkeleton from "../../core/skeleton/ActivityCardSkeleton";
 
 function ActivityFeed() {
-  const [filter, setFilter] = useState(false)
-  const { t } = useTranslation()
-  const allActivities = useSelector((state) => state.activities.allActivities)
-  const user = useSelector((state) => state.user.singleUser)
+  const [filter, setFilter] = useState(false);
+  const { t } = useTranslation();
+  const allActivities = useSelector((state) => state.activities.allActivities);
+  const user = useSelector((state) => state.user.singleUser);
   const followedActivities = useSelector(
     (state) => state.activities.followedActivities
-  )
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllActivities())
-    dispatch(getFollowedActivities())
-  }, [dispatch])
+    dispatch(getAllActivities());
+    dispatch(getFollowedActivities());
+  }, [dispatch]);
 
-  const activitiesMemo = useMemo(() => allActivities, [allActivities])
+  const activitiesMemo = useMemo(() => allActivities, [allActivities]);
 
   const checkIfIsPrivate = () => {
-    const activitiesCurrentUserCanSee = []
+    const activitiesCurrentUserCanSee = [];
 
     activitiesMemo.forEach((activity) => {
       if (activity?.topic?.isPrivate === false) {
-        activitiesCurrentUserCanSee.push(activity)
+        activitiesCurrentUserCanSee.push(activity);
       }
-    })
+    });
     const privateTopics = activitiesMemo.filter(
       (activity) => activity?.topic?.isPrivate === true
-    )
+    );
     privateTopics.map((activity) =>
       activity.topic.members.forEach((member) => {
         if (member === user._id) {
-          activitiesCurrentUserCanSee.push(activity)
+          activitiesCurrentUserCanSee.push(activity);
         }
       })
-    )
+    );
 
     activitiesMemo.forEach((activity) => {
       if (activity?.event?.isPrivate === false) {
-        activitiesCurrentUserCanSee.push(activity)
+        activitiesCurrentUserCanSee.push(activity);
       }
-    })
+    });
     const privateEvents = activitiesMemo.filter(
       (activity) => activity?.event?.isPrivate === true
-    )
+    );
     privateEvents.map((activity) =>
       activity.event.members.forEach((member) => {
         if (member === user._id) {
-          activitiesCurrentUserCanSee.push(activity)
+          activitiesCurrentUserCanSee.push(activity);
         }
       })
-    )
+    );
     activitiesCurrentUserCanSee.sort(
       (a, b) =>
         new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-    )
-    return activitiesCurrentUserCanSee
-  }
+    );
+    return activitiesCurrentUserCanSee;
+  };
 
-  const shownActivities = filter ? followedActivities : checkIfIsPrivate()
+  const shownActivities = filter ? followedActivities : checkIfIsPrivate();
 
   if (shownActivities.length === 0) {
     return (
@@ -77,11 +77,11 @@ function ActivityFeed() {
         <ActivityCardSkeleton />
         <ActivityCardSkeleton />
       </div>
-    )
+    );
   }
 
   return (
-    <div className="mt-3">
+    <div className="mt-8">
       <div className="sm:flex md:place-content-between pb-3">
         <div>
           <h1 className="text-lg text-center mb-3 md:mb-0 pl-3">
@@ -112,7 +112,7 @@ function ActivityFeed() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default ActivityFeed
+export default ActivityFeed;

@@ -1,22 +1,22 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { useSelector } from "react-redux"
-import { t } from "i18next"
-import Button from "../../Button"
-import Icon from "../../Icon"
-import LibraryModal from "../../library/LibraryModal"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { t } from "i18next";
+import Button from "../../Button";
+import Icon from "../../Icon";
+import LibraryModal from "../../library/LibraryModal";
 
 function EventHeaderCard({ onClick, postBody }) {
-  const user = useSelector((state) => state.user.singleUser)
-  const singleTopic = useSelector((state) => state.topics.singleTopic)
-  const [showModal, setShowModal] = useState(false)
+  const user = useSelector((state) => state.user.singleUser);
+  const singleTopic = useSelector((state) => state.topics.singleTopic);
+  const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
-    setShowModal(!showModal)
-  }
+    setShowModal(!showModal);
+  };
 
   return (
-    <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
+    <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-md m-3">
       <div className="flex justify-between p-3">
         <img
           className="w-10 h-10 rounded-full mr-2"
@@ -53,12 +53,12 @@ function EventHeaderCard({ onClick, postBody }) {
         />
       </div>
     </div>
-  )
+  );
 }
 
 EventHeaderCard.propTypes = {
   onClick: PropTypes.func.isRequired,
   postBody: PropTypes.func.isRequired,
-}
+};
 
-export default EventHeaderCard
+export default EventHeaderCard;

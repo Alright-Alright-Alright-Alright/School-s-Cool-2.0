@@ -62,7 +62,7 @@ function SearchBar({ placeholder }) {
   }, [urlPath, wordEntered]);
 
   return (
-    <div>
+    <div className="">
       <div className="flex items-center border-2 border-grey-light rounded-sm px-4 py-1 text-grey-darker leading-tight text-base w-full">
         <input
           type="search"

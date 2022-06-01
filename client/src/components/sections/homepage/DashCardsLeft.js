@@ -40,7 +40,7 @@ function DashCardsLeft() {
   }
 
   return (
-    <div className="max-w-md px-6 hidden lg:block">
+    <div className="max-w-md px-6 mt-16 hidden lg:block">
       <Dashcard
         dashCardData={topics}
         dashCardTitle="Topics"

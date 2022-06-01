@@ -178,7 +178,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
-                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
+                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
                 placeholder={user?.email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -189,7 +189,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                   name="language"
                   onChange={handleChangeLanguage}
                   value={language}
-                  className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-xl pl-2 my-1"
+                  className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
                 >
                   <option value="en">English</option>
                   <option value="nl">Nederlands</option>

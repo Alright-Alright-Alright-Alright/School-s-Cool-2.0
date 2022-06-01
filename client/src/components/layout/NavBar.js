@@ -63,9 +63,9 @@ function NavBar() {
   return (
     <nav className="grid grid-cols-12 bg-grey-super_light shadow-md sticky top-0 z-50 p-5">
       {/* Large icon left */}
-      <div className="sm:col-span-0 lg:col-span-3">
+      <div className="col-span-0 lg:col-span-3">
         <Link to="/home">
-          <LargeLogo className="sm:hidden" />
+          <LargeLogo />
         </Link>
 
         {/* Hamburger menu on mobile */}
@@ -185,7 +185,7 @@ function NavBar() {
       </div>
 
       {/* Search bar */}
-      <div className="sm:col-span-8 lg:col-span-3 flex justify-around items-center">
+      <div className="flex md:col-span-3 justify-around items-center">
         <SearchBar placeholder={t("search_bar_placeholder")} />
         <div className="hidden lg:block">
           <button
