@@ -1,21 +1,11 @@
-/* eslint-disable react/jsx-curly-brace-presence */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-undef */
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { DocumentIcon, PhotographIcon, FilmIcon } from "@heroicons/react/solid";
 import { TrashIcon } from "@heroicons/react/outline";
-import Button from "../../core/Button";
-import {
-  getSingleFile,
-  filterLibraryBySubject,
-} from "../../../redux/actions/libraryActions";
+import { getSingleFile } from "../../../redux/actions/libraryActions";
 import LibraryModal from "../../core/library/LibraryModal";
 
 const RowIcon = (props) => {
@@ -37,6 +27,11 @@ const RowIcon = (props) => {
   }
 };
 
+RowIcon.propTypes = {
+  fileUrl: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+};
+
 const HighlightedFile = (props) => {
   const { filename, modifiedOn, fileUrl } = props;
   return (
@@ -55,6 +50,12 @@ const HighlightedFile = (props) => {
   );
 };
 
+HighlightedFile.propTypes = {
+  filename: PropTypes.string.isRequired,
+  fileUrl: PropTypes.string.isRequired,
+  modifiedOn: PropTypes.string.isRequired,
+};
+
 const LibraryRow = (props) => {
   const { filename, modifiedOn, category, fileUrl, onClick } = props;
   const [isHovering, setIsHovering] = useState(false);
@@ -67,7 +68,12 @@ const LibraryRow = (props) => {
     setIsHovering(false);
   };
   return (
-    <ul onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <ul
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      onFocus={handleMouseOver}
+      onBlur={handleMouseOut}
+    >
       <button
         onClick={onClick}
         type="button"
@@ -87,47 +93,17 @@ const LibraryRow = (props) => {
   );
 };
 
-const MainLibraryContent = ({
-  library,
-  showModal,
-  handleShowModal,
-  theCategoryToColor,
-  setTheCategoryToColor,
-}) => {
+LibraryRow.propTypes = {
+  filename: PropTypes.string.isRequired,
+  fileUrl: PropTypes.string.isRequired,
+  modifiedOn: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+const MainLibraryContent = (props) => {
+  const { library, showModal, handleShowModal } = props;
   const dispatch = useDispatch();
-  const filteredLibrary = useSelector((state) => state.library.filteredFiles);
-  const handleFilter = (item) => {
-    dispatch(filterLibraryBySubject(item));
-    setTheCategoryToColor(item);
-  };
-
-  const uniqueBySubject = () => {
-    const arr = [];
-
-    if (filteredLibrary?.length > 0) {
-      filteredLibrary?.map(
-        (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
-      );
-    } else {
-      library.map(
-        (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
-      );
-    }
-    const subjects = arr.map((item) => (
-      <span key={item} className="pr-3">
-        <Button
-          buttonName={item}
-          buttonStyle={
-            theCategoryToColor === item
-              ? "btnLibraryStyleActive"
-              : "btnLibraryStyle"
-          }
-          onClick={() => handleFilter(item)}
-        />
-      </span>
-    ));
-    return subjects;
-  };
 
   return (
     <>
@@ -136,7 +112,7 @@ const MainLibraryContent = ({
           <LibraryModal handleShowModal={handleShowModal} />
         </div>
       )}
-      <div className={`h-screen mt-8 flex flex-col gap-6 blur-md z-50`}>
+      <div className="h-screen mt-8 flex flex-col gap-6 blur-md z-50">
         {/* Header */}
         <div>
           <div className="flex flex-col">
@@ -147,15 +123,13 @@ const MainLibraryContent = ({
 
         {/* Recent files */}
         <ul className="flex gap-8 justify-between w-full my-4">
-          {library.slice(0, 3).map((item) => {
-            return (
-              <HighlightedFile
-                filename={item.title}
-                modifiedOn={item.updatedAt.substring(0, 10)}
-                fileUrl={item.fileUrl}
-              />
-            );
-          })}
+          {library.slice(0, 3).map((item) => (
+            <HighlightedFile
+              filename={item.title}
+              modifiedOn={item.updatedAt.substring(0, 10)}
+              fileUrl={item.fileUrl}
+            />
+          ))}
         </ul>
 
         {/* Header of library items */}
@@ -168,21 +142,25 @@ const MainLibraryContent = ({
 
         {/* List of library items */}
         <ul className="flex flex-col">
-          {library.map((item) => {
-            return (
-              <LibraryRow
-                filename={item.title}
-                modifiedOn={item.updatedAt.substring(0, 10)}
-                category={item.category}
-                fileUrl={item.fileUrl}
-                onClick={() => dispatch(getSingleFile(item._id))}
-              />
-            );
-          })}
+          {library.map((item) => (
+            <LibraryRow
+              filename={item.title}
+              modifiedOn={item.updatedAt.substring(0, 10)}
+              category={item.category}
+              fileUrl={item.fileUrl}
+              onClick={() => dispatch(getSingleFile(item._id))}
+            />
+          ))}
         </ul>
       </div>
     </>
   );
+};
+
+MainLibraryContent.propTypes = {
+  library: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showModal: PropTypes.bool.isRequired,
+  handleShowModal: PropTypes.bool.isRequired,
 };
 
 export default MainLibraryContent;
