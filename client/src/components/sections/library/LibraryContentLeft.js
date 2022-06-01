@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useTranslation } from "react-i18next"
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { PlusIcon } from "@heroicons/react/solid";
 import {
   filterLibraryByCategory,
   getAllFilesFromLibrary,
   getUserFilesFromLibrary,
-} from "../../../redux/actions/libraryActions"
+} from "../../../redux/actions/libraryActions";
 
 const LibraryContentLeft = ({
   library,
@@ -16,29 +17,29 @@ const LibraryContentLeft = ({
   theCategoryToColor,
   setTheCategoryToColor,
 }) => {
-  const dispatch = useDispatch()
-  const { t } = useTranslation()
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleFilter = (item) => {
-    dispatch(filterLibraryByCategory(item))
-    setTheCategoryToColor(item)
-  }
+    dispatch(filterLibraryByCategory(item));
+    setTheCategoryToColor(item);
+  };
 
   const handleMyFiles = () => {
-    dispatch(getUserFilesFromLibrary())
-    setTheCategoryToColor("")
-  }
+    dispatch(getUserFilesFromLibrary());
+    setTheCategoryToColor("");
+  };
 
   const getFiles = () => {
-    dispatch(getAllFilesFromLibrary())
-    setTheCategoryToColor("")
-  }
+    dispatch(getAllFilesFromLibrary());
+    setTheCategoryToColor("");
+  };
 
   const uniqueCatergories = () => {
-    const arr = []
+    const arr = [];
     library.map(
       (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
-    )
+    );
 
     const categories = arr.map((item) => (
       <div
@@ -51,43 +52,20 @@ const LibraryContentLeft = ({
           {item}
         </button>
       </div>
-    ))
+    ));
 
-    return categories
-  }
-
-  const add = (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 138 138"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect x="59.7998" width="18.4" height="138" fill="#D32A67" />
-      <rect
-        y="78.2001"
-        width="18.4"
-        height="138"
-        transform="rotate(-90 0 78.2001)"
-        fill="#D32A67"
-      />
-    </svg>
-  )
+    return categories;
+  };
 
   return (
     <div className="pl-5 pt-10">
-      <section className="flex">
-        <span className="pr-2">{add}</span>{" "}
-        <button type="button" className="text-lg" onClick={handleShowModal}>
-          {t("library.button_upload_file")}
-        </button>
-      </section>
-      <section className="pt-2">
-        <button type="button" className="text-lg" onClick={handleMyFiles}>
-          {t("library.button_my_files")}
-        </button>
-      </section>
+      <button
+        type="button"
+        className="text-lg flex gap-2 bg-sky text-white rounded-md hover:shadow-md px-4 py-2 hover:bg-sky-dark"
+        onClick={handleShowModal}
+      >
+        <PlusIcon className="h-5" /> <p>{t("library.button_upload_file")}</p>
+      </button>
       <hr className="mt-8 w-52 text-grey-light" />
       <section className="pt-6">{uniqueCatergories()}</section>
       <section>
@@ -100,7 +78,7 @@ const LibraryContentLeft = ({
         </button>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default LibraryContentLeft
+export default LibraryContentLeft;

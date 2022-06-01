@@ -3,36 +3,36 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-import { useTranslation } from "react-i18next"
-import Icon from "../Icon"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useTranslation } from "react-i18next";
+import Icon from "../Icon";
 import {
   deleteFile,
   getSingleFile,
   getSortedBy,
   sortedByUser,
-} from "../../../redux/actions/libraryActions"
-import MobileTable from "./MobileTable"
+} from "../../../redux/actions/libraryActions";
+import MobileTable from "./MobileTable";
 
 const libraryItem = ({ library, showModal }) => {
-  const user = useSelector((state) => state.user.singleUser)
-  const filteredLibrary = useSelector((state) => state.library.filteredFiles)
-  const [tableRowClicked, setTableRowClicked] = useState([])
-  const [selected, setSelected] = useState([])
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-  dayjs.extend(relativeTime)
+  const user = useSelector((state) => state.user.singleUser);
+  const filteredLibrary = useSelector((state) => state.library.filteredFiles);
+  const [tableRowClicked, setTableRowClicked] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  dayjs.extend(relativeTime);
 
   const downloadFiles = () =>
-    selected.forEach((file) => (window.location.href = file))
+    selected.forEach((file) => (window.location.href = file));
 
   const selectedRow = (id) => {
-    dispatch(getSingleFile(id))
-    setTableRowClicked([id])
-  }
+    dispatch(getSingleFile(id));
+    setTableRowClicked([id]);
+  };
 
   const isItprivate = () =>
     filteredLibrary?.length > 0
@@ -41,7 +41,7 @@ const libraryItem = ({ library, showModal }) => {
         )
       : library.filter((item) =>
           user._id === item.owner._id ? item : item.isPrivate === false
-        )
+        );
 
   return (
     <div className={` w-full font-sans filter ${showModal && "blur-md"}`}>
@@ -150,12 +150,12 @@ const libraryItem = ({ library, showModal }) => {
                           className="pt-1"
                           onClick={() =>
                             setSelected(() => {
-                              const i = selected.indexOf(item.fileUrl)
+                              const i = selected.indexOf(item.fileUrl);
 
                               if (i > -1) {
-                                selected.splice(i, 1)
+                                selected.splice(i, 1);
                               }
-                              return selected
+                              return selected;
                             })
                           }
                         >
@@ -205,7 +205,7 @@ const libraryItem = ({ library, showModal }) => {
         user={user}
       />
     </div>
-  )
-}
+  );
+};
 
-export default libraryItem
+export default libraryItem;

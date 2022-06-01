@@ -1,31 +1,31 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { t } from "i18next"
-import Icon from "../../core/Icon"
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { t } from "i18next";
+import Icon from "../../core/Icon";
 import {
   iLikedAfile,
   iUnlikedAfile,
   getComments,
-} from "../../../redux/actions/libraryActions"
-import Comment from "../../core/comment/Comment"
-import CommentFormLibrary from "../../core/comment/CommentFormLibrary"
-import PdfFile from "../../core/PdfFile"
+} from "../../../redux/actions/libraryActions";
+import Comment from "../../core/comment/Comment";
+import CommentFormLibrary from "../../core/comment/CommentFormLibrary";
+import PdfFile from "../../core/PdfFile";
 
 // eslint-disable-next-line react/prop-types
 const LibraryContentRight = ({ singleFile }) => {
-  const user = useSelector((state) => state.user.singleUser)
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.singleUser);
+  const dispatch = useDispatch();
 
   useEffect(
     () => singleFile?._id && dispatch(getComments(singleFile?._id)),
     [dispatch, singleFile?._id]
-  )
+  );
 
   return singleFile !== null ? (
-    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
+    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-sm rounded-sm ml-12 mt-8 lg:block">
       <div className="h-3/5 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
@@ -128,12 +128,12 @@ const LibraryContentRight = ({ singleFile }) => {
       </div>
     </div>
   ) : (
-    <div className="hidden w-3/4 h-3/5 bg-white shadow-xl rounded-3xl ml-12 mt-8 lg:block">
+    <div className="hidden w-3/4 h-3/5 bg-white shadow-md rounded-md ml-12 mt-8 lg:block">
       <h1 className="h-full text-grey-dark font-semibold flex items-center justify-center text-center">
         {t("library.file_more_info_placeholder")}
       </h1>
     </div>
-  )
-}
+  );
+};
 
-export default LibraryContentRight
+export default LibraryContentRight;
