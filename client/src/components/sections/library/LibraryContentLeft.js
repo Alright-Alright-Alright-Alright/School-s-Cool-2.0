@@ -54,6 +54,18 @@ const LibraryContentLeft = ({
       </div>
     ));
 
+    categories.push(
+      <div
+        className={`text-xl py-2 hover:text-pink ${
+          theCategoryToColor === "" && "text-pink"
+        }`}
+      >
+        <button type="button" onClick={handleMyFiles}>
+          Mijn bestanden
+        </button>
+      </div>
+    );
+
     return categories;
   };
 

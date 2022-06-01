@@ -127,13 +127,7 @@ const LibraryContentRight = ({ singleFile }) => {
         </section>
       </div>
     </div>
-  ) : (
-    <div className="hidden w-3/4 h-3/5 bg-white shadow-md rounded-md ml-12 mt-8 lg:block">
-      <h1 className="h-full text-grey-dark font-semibold flex items-center justify-center text-center">
-        {t("library.file_more_info_placeholder")}
-      </h1>
-    </div>
-  );
+  ) : null;
 };
 
 export default LibraryContentRight;
