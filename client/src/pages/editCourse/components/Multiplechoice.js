@@ -68,7 +68,7 @@ export function Panel() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 gap-12">
+    <div className="flex flex-col items-center mt-24 gap-12">
       <input
         type="text"
         value={item.content.question}
