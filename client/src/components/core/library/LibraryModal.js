@@ -3,85 +3,86 @@
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useRef, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { t } from "i18next"
-import { useParams } from "react-router-dom"
-import fileUploadHandler from "../../../middleware/UploadFile"
-import Button from "../Button"
-import SwitchButton from "../SwitchButton"
-import Icon from "../Icon"
-import { addFileToLibrary } from "../../../redux/actions/libraryActions"
-import { getAlltopics, getOneTopic } from "../../../redux/actions/topicActions"
-import TagsInput from "../TagsInput"
-import MessageHandler from "../MessageHandler"
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { t } from "i18next";
+import { useParams } from "react-router-dom";
+import fileUploadHandler from "../../../middleware/UploadFile";
+import Button from "../Button";
+import SwitchButton from "../SwitchButton";
+import Icon from "../Icon";
+import { addFileToLibrary } from "../../../redux/actions/libraryActions";
+import { getAlltopics, getOneTopic } from "../../../redux/actions/topicActions";
+import TagsInput from "../TagsInput";
+import MessageHandler from "../MessageHandler";
 
 const Modal = ({ handleShowModal, singleTopic }) => {
-  const [title, seTitle] = useState("")
-  const [category, setCategory] = useState("")
-  const [subject, setSubject] = useState("")
-  const [fileUrl, setFilUrl] = useState("")
-  const [imgPreview, setImgPreview] = useState("")
-  const [privacy, setPrivacy] = useState(false)
-  const [tags, setTags] = useState([])
-  const hiddenFileInput = useRef(null)
-  const topics = useSelector((state) => state.topics.allTopics)
-  const UI = useSelector((state) => state.UI)
-  const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
-  const dispatch = useDispatch()
-  const { topicId } = useParams()
+  const [title, seTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [subject, setSubject] = useState("");
+  const [fileUrl, setFilUrl] = useState("");
+  const [imgPreview, setImgPreview] = useState("");
+  const [privacy, setPrivacy] = useState(false);
+  const [tags, setTags] = useState([]);
+  const hiddenFileInput = useRef(null);
+  const topics = useSelector((state) => state.topics.allTopics);
+  const UI = useSelector((state) => state.UI);
+  const selectedTags = (tagsFromInput) => setTags(tagsFromInput);
+  const dispatch = useDispatch();
+  const { topicId } = useParams();
 
   useEffect(() => {
-    dispatch(getAlltopics())
-  }, [dispatch])
+    dispatch(getAlltopics());
+  }, [dispatch]);
 
   const filterCategory = () => {
-    const arr = []
+    const arr = [];
     topics.map(
       (item) => arr.indexOf(item.category) === -1 && arr.push(item.category)
-    )
-    return arr
-  }
+    );
+    return arr;
+  };
 
-  const findFunction = (cat) => topics.filter((topic) => topic.category === cat)
+  const findFunction = (cat) =>
+    topics.filter((topic) => topic.category === cat);
 
   const filterSubject = (cat) => {
-    const arr = []
+    const arr = [];
     findFunction(cat).map(
       (item) => arr.indexOf(item.subject) === -1 && arr.push(item.subject)
-    )
-    return arr
-  }
+    );
+    return arr;
+  };
 
   const handleClick = () => {
-    hiddenFileInput.current.click()
-  }
+    hiddenFileInput.current.click();
+  };
 
   const handleImagePreview = async (img) => {
-    const image = await fileUploadHandler(img)
-    setImgPreview(image)
-  }
+    const image = await fileUploadHandler(img);
+    setImgPreview(image);
+  };
 
   const chooseTitle = (e) => {
-    seTitle(e.target.value)
-  }
+    seTitle(e.target.value);
+  };
 
   const chooseBannerImage = async (e) => {
-    setFilUrl(e.target.files[0])
-    handleImagePreview(e.target.files[0])
-  }
+    setFilUrl(e.target.files[0]);
+    handleImagePreview(e.target.files[0]);
+  };
 
   const chooseCategory = (e) => {
-    setCategory(e.target.value)
-  }
+    setCategory(e.target.value);
+  };
 
   const chooseSubject = (e) => {
-    setSubject(e.target.value)
-  }
+    setSubject(e.target.value);
+  };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    const image = await fileUploadHandler(fileUrl)
+    e.preventDefault();
+    const image = await fileUploadHandler(fileUrl);
     const fileData = {
       title,
       category: singleTopic ? singleTopic.category : category,
@@ -89,22 +90,22 @@ const Modal = ({ handleShowModal, singleTopic }) => {
       fileUrl: image,
       isPrivate: privacy,
       tags,
-    }
+    };
     if (
       fileData.tags.length > 0 &&
       fileData.category.length > 0 &&
       fileData.subject.length > 0
     )
-      handleShowModal()
-    dispatch(addFileToLibrary(fileData))
+      handleShowModal();
+    dispatch(addFileToLibrary(fileData));
 
-    setTimeout(() => topicId && dispatch(getOneTopic(topicId)), 1000)
-  }
+    setTimeout(() => topicId && dispatch(getOneTopic(topicId)), 1000);
+  };
 
   return (
-    <div className="absolute inset-0 flex justify-center pt-12 z-50">
+    <div className="absolute inset-0 flex justify-center mt-12 z-50">
       <form
-        className=" h-80 lg:h-72 w-6/7 rounded-2xl bg-white flex flex-col justify-evenly shadow-2xl"
+        className=" h-80 lg:h-72 w-6/7 rounded-sm bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors} />}
@@ -139,7 +140,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseCategory}
               name="category"
               id=""
-              className="bg-grey-super_light rounded-lg  w-2/7 text-sm py-3 pl-3"
+              className="bg-grey-super_light rounded-sm  w-2/7 text-sm py-3 pl-3"
             >
               <option disabled selected>
                 {t("library.modal_choose_category_new_file")}
@@ -162,7 +163,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseSubject}
               name="subject"
               id=""
-              className=" bg-grey-super_light rounded-lg  w-2/7 text-sm py-2 pl-3 "
+              className=" bg-grey-super_light rounded-sm  w-2/7 text-sm py-2 pl-3 "
             >
               <option disabled selected>
                 {t("library.modal_choose_subject_new_file")}
@@ -214,7 +215,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
         </section>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
