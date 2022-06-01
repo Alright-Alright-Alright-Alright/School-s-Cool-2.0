@@ -76,7 +76,7 @@ function NavBar() {
                 <Link
                   to={item.href}
                   key={item.id}
-                  className={`block mt-4 lg:inline-block lg:mt-0 hover:text-${item.color} `}
+                  className={`block px-2 mt-4 lg:inline-block lg:mt-0 hover:text-${item.color} `}
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   {item.title}
@@ -197,13 +197,13 @@ function NavBar() {
             <img
               alt="profile"
               src={user?.imageUrl}
-              className="rounded-full h-12 object-cover"
+              className="rounded-full h-12 w-12 border-2 border-sky object-cover"
             />
           </button>
           {showDropDown && (
             <div
               id="dropdown"
-              className="w-fit list-none divide-y shadow-xl absolute right-2 top-164 bg-grey-super_light py-3 rounded-tr-xl rounded-b-xl  "
+              className="w-fit list-none divide-y shadow-xl absolute right-2 top-164 bg-grey-super_light py-3 rounded-tr-sm rounded-b-sm  "
             >
               <ul className="py-1" aria-labelledby="dropdownButton">
                 {user?.role === "ADMIN" && (

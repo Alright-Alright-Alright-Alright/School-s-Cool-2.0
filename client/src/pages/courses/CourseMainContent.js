@@ -7,7 +7,7 @@ import AddCourseCard from "./AddCourseCard";
 function CourseMainContent() {
   return (
     <main className="p-6 flex flex-col space-y-6">
-      <h1 className="bg-grey-dark text-white p-8 rounded-b-xl rounded-tr-xl w-full text-lg">
+      <h1 className="bg-grey-dark text-white p-8 rounded-b-md rounded-tr-md w-full text-lg">
         Hi Sebastiaan, ready to learn?
       </h1>
       <section className="grid grid-cols-4 gap-8">

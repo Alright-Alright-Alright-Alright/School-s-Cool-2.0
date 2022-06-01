@@ -1,70 +1,70 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-import ReactHtmlParser from "react-html-parser"
-import { useSelector, useDispatch } from "react-redux"
-import { useTranslation } from "react-i18next"
-import Linkify from "react-linkify"
-import Comment from "../comment/Comment"
-import CommentForm from "../comment/CommentForm"
-import { likePost, unlikePost } from "../../../redux/actions/postActions"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import ReactHtmlParser from "react-html-parser";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import Linkify from "react-linkify";
+import Comment from "../comment/Comment";
+import CommentForm from "../comment/CommentForm";
+import { likePost, unlikePost } from "../../../redux/actions/postActions";
 import {
   getAllActivities,
   getFollowedActivities,
-} from "../../../redux/actions/activityActions"
-import Icon from "../Icon"
+} from "../../../redux/actions/activityActions";
+import Icon from "../Icon";
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 function ActivityCard({ activity, commentFather }) {
-  const [showMoreComments, setShowMoreComments] = useState(false)
-  const { t } = useTranslation()
-  const user = useSelector((state) => state.user.singleUser)
-  const dispatch = useDispatch()
+  const [showMoreComments, setShowMoreComments] = useState(false);
+  const { t } = useTranslation();
+  const user = useSelector((state) => state.user.singleUser);
+  const dispatch = useDispatch();
 
   // Get i18Next locale from cookies
   const localeFromCookies = `; ${document.cookie}`
     .split(`; i18next=`)
     .pop()
-    .split(";")[0]
+    .split(";")[0];
 
   const handleLike = () => {
-    dispatch(likePost(activity._id, user._id))
-    dispatch(getAllActivities())
-    dispatch(getFollowedActivities())
-  }
+    dispatch(likePost(activity._id, user._id));
+    dispatch(getAllActivities());
+    dispatch(getFollowedActivities());
+  };
 
   const handleUnlike = () => {
-    dispatch(unlikePost(activity._id, user._id))
-    dispatch(getAllActivities())
-    dispatch(getFollowedActivities())
-  }
+    dispatch(unlikePost(activity._id, user._id));
+    dispatch(getAllActivities());
+    dispatch(getFollowedActivities());
+  };
 
   const handleSubmitComment = () => {
-    dispatch(getAllActivities())
-    dispatch(getFollowedActivities())
-  }
+    dispatch(getAllActivities());
+    dispatch(getFollowedActivities());
+  };
 
   const firstThreeComments = activity.comments
     .slice(0, 3)
     .map((commentData) => (
       <Comment key={commentData._id} comment={commentData} id={commentFather} />
-    ))
+    ));
 
   const allComments = activity.comments.map((commentData) => (
     <Comment key={commentData._id} comment={commentData} id={commentFather} />
-  ))
+  ));
 
-  const activityType = activity.topic ? "topic" : "event"
+  const activityType = activity.topic ? "topic" : "event";
 
   return (
-    <div className="rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg mx-3 mb-3">
+    <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-md mx-3 mb-3">
       <div className="p-3">
         <Link to={`/${activityType}s/${activity[activityType]?._id}`}>
           <img
-            className="object-cover w-full max-h-40 rounded-bl-2xl rounded-br-2xl rounded-r-2xl"
+            className="object-cover w-full max-h-40 rounded-bl-sm rounded-br-sm rounded-r-sm"
             src={activity[activityType]?.bannerImage}
             alt="banner"
           />
@@ -166,7 +166,7 @@ function ActivityCard({ activity, commentFather }) {
         onSubmitComment={() => handleSubmitComment}
       />
     </div>
-  )
+  );
 }
 
-export default ActivityCard
+export default ActivityCard;

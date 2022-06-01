@@ -43,7 +43,7 @@ const HighlightedFile = (props) => {
     <li>
       <button
         type="button"
-        className="grid grid-cols-6 bg-white rounded-sm shadow-sm hover:shadow-md p-4"
+        className="grid grid-cols-6 bg-white rounded-sm shadow-md hover:shadow-lg p-4"
         onClick={onClick}
       >
         <div className="col-span-4 text-left">
@@ -126,11 +126,9 @@ const MainLibraryContent = (props) => {
       )}
       <div className="h-screen mt-8 flex flex-col gap-6 blur-md z-50">
         {/* Header */}
-        <div>
-          <div className="flex flex-col">
-            <h1 className="font-bold text-grey-dark text-xl">File library</h1>
-            <h2 className="font-normal text-grey-medium">Schoolscool</h2>
-          </div>
+        <div className="flex flex-col">
+          <h1 className="font-bold text-grey-dark text-xl">File library</h1>
+          <h2 className="font-normal text-grey-medium">Schoolscool</h2>
         </div>
 
         {/* Recent files */}

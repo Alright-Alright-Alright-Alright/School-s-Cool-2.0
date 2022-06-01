@@ -2,39 +2,39 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useTranslation } from "react-i18next"
-import AddCard from "../../core/AddCard"
-import TopicCard from "../../core/topics/topicsCards/TopicCard"
-import TopicModal from "../../core/topics/TopicModal"
-import { getAlltopics } from "../../../redux/actions/topicActions"
-import Button from "../../core/Button"
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import AddCard from "../../core/AddCard";
+import TopicCard from "../../core/topics/topicsCards/TopicCard";
+import TopicModal from "../../core/topics/TopicModal";
+import { getAlltopics } from "../../../redux/actions/topicActions";
+import Button from "../../core/Button";
 
 function MainTopicsContent() {
-  const topics = useSelector((state) => state.topics.allTopics)
-  const [filter, setFilter] = useState("All topics")
-  const user = useSelector((state) => state.user.singleUser)
-  const [showModal, setShowModal] = useState(false)
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const topics = useSelector((state) => state.topics.allTopics);
+  const [filter, setFilter] = useState("All topics");
+  const user = useSelector((state) => state.user.singleUser);
+  const [showModal, setShowModal] = useState(false);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const handleShowModal = () => {
-    setShowModal(!showModal)
-  }
+    setShowModal(!showModal);
+  };
 
-  const topicsMemo = useMemo(() => topics, [topics])
+  const topicsMemo = useMemo(() => topics, [topics]);
 
   const checkIfIsPrivate = () => {
-    const topicsCurrentUserCanSee = []
+    const topicsCurrentUserCanSee = [];
     topicsMemo.forEach((topic) => {
       if (topic.isPrivate === false) {
-        topicsCurrentUserCanSee.push(topic)
+        topicsCurrentUserCanSee.push(topic);
       }
-    })
+    });
     const privateTopics = topicsMemo.filter(
       (member) => member.isPrivate === true
-    )
+    );
     privateTopics
       .map((topic) =>
         topic.members.map((member) => member._id === user._id && topic)
@@ -42,38 +42,42 @@ function MainTopicsContent() {
       .flat(Infinity)
       .forEach((item) => {
         if (typeof item === "object") {
-          topicsCurrentUserCanSee.push(item)
+          topicsCurrentUserCanSee.push(item);
         }
-      })
+      });
     return topicsCurrentUserCanSee.sort(
       (a, b) =>
         new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-    )
-  }
+    );
+  };
 
   useEffect(() => {
-    dispatch(getAlltopics())
-  }, [dispatch])
+    dispatch(getAlltopics());
+  }, [dispatch]);
 
-  let filterRule
+  let filterRule;
   switch (filter) {
     case "My topics":
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-      filterRule = (item) => item.owner === user._id
-      break
+      filterRule = (item) => item.owner === user._id;
+      break;
     case "Followed topics":
       filterRule = (item) =>
-        item.members.find((member) => member._id === user._id)
-      break
+        item.members.find((member) => member._id === user._id);
+      break;
     default:
-      filterRule = (item) => item
+      filterRule = (item) => item;
   }
 
-  const filteredTopics = checkIfIsPrivate().filter(filterRule)
+  const filteredTopics = checkIfIsPrivate().filter(filterRule);
 
   return (
-    <div>
-      <div className="flex pt-5 justify-end space-x-2 lg:space-x-3 pr-2 lg:pr-10">
+    <div className="m-8 lg:mx-0">
+      <div className="flex flex-col">
+        <h1 className="font-bold text-grey-dark text-xl">Topics</h1>
+        <h2 className="font-normal text-grey-medium">Schoolscool</h2>
+      </div>
+      <div className="flex pt-5 justify-start space-x-2 lg:space-x-3 pr-2 lg:pr-10">
         <Button
           buttonName={t("topics.button_all_topics")}
           buttonStyle="btnTopicStyle"
@@ -90,10 +94,10 @@ function MainTopicsContent() {
           onClick={() => setFilter("My topics")}
         />
       </div>
-      <div className="">
+      <div>
         {showModal && <TopicModal handleShowModal={handleShowModal} />}
         <div
-          className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
+          className={`flex justify-center md:justify-start flex-wrap gap-7 mt-12 filter ${
             showModal && "blur-md"
           }`}
         >
@@ -109,7 +113,7 @@ function MainTopicsContent() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default MainTopicsContent
+export default MainTopicsContent;

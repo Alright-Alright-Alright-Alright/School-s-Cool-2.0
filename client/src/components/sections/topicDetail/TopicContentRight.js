@@ -1,12 +1,12 @@
 /* eslint-disable react/forbid-prop-types */
-import React from "react"
-import PropTypes from "prop-types"
-import { useTranslation } from "react-i18next"
-import TopicDashcard from "../../core/topics/topicDashCard/TopicDashcard"
-import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json"
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import TopicDashcard from "../../core/topics/topicDashCard/TopicDashcard";
+import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json";
 
 function TopicContentRight({ topic, users }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className="place-items-start max-w-xs hidden lg:block">
       <TopicDashcard
@@ -17,12 +17,12 @@ function TopicContentRight({ topic, users }) {
         dropdownMenuData={dashcardDropdownMenu.topicMembers}
       />
     </div>
-  )
+  );
 }
 
 TopicContentRight.propTypes = {
   topic: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
-}
+};
 
-export default TopicContentRight
+export default TopicContentRight;

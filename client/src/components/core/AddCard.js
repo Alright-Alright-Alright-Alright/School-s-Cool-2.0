@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react"
+import React from "react";
 
 const TopicsCard = ({ cardTitle, color }) => (
-  <div className="flex flex-col justify-center items-center w-48 h-72 bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
+  <div className="flex flex-col justify-center items-center w-72 lg:w-52 h-72 bg-white shadow-md hover:shadow-lg rounded-br-sm rounded-bl-sm rounded-tr-sm">
     <section>
       <svg
         width="138"
@@ -25,6 +25,6 @@ const TopicsCard = ({ cardTitle, color }) => (
       {cardTitle}
     </section>
   </div>
-)
+);
 
-export default TopicsCard
+export default TopicsCard;

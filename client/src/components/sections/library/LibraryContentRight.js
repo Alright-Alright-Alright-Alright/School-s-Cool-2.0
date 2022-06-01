@@ -30,7 +30,7 @@ const LibraryContentRight = ({ singleFile }) => {
   );
 
   return singleFile !== null ? (
-    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-sm rounded-sm ml-12 mt-8 lg:block">
+    <div className="hidden flex-col w-5/6 h-4/6 bg-white shadow-md rounded-sm ml-12 mt-8 lg:block">
       <div className="h-3/5 flex flex-col justify-around">
         <section className="mt-6 ml-8">
           <div className="flex items-center pb-4">
@@ -40,7 +40,7 @@ const LibraryContentRight = ({ singleFile }) => {
               <img
                 src={singleFile.fileUrl}
                 alt="file preview"
-                className="w-1/4 h-1/5 rounded-md object-cover"
+                className="w-1/4 h-1/5 rounded-sm object-cover"
               />
             )}
             <p className="pl-4 font-semibold text-lg">{singleFile.title}</p>
