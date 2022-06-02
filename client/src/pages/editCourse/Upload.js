@@ -7,8 +7,10 @@ import {
   QuestionMarkCircleIcon,
   PhotographIcon,
   PresentationChartBarIcon,
+  ChatAltIcon,
 } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
+
 import utils from "./_utils";
 
 export default function Upload(props) {
@@ -51,6 +53,17 @@ export default function Upload(props) {
       {
         id: uuidv4(),
         type: "multiplechoice",
+        content: {},
+      },
+    ]);
+    setShowModal(false);
+  };
+
+  const handleOpenQuestion = () => {
+    addItems([
+      {
+        id: uuidv4(),
+        type: "open",
         content: {},
       },
     ]);
@@ -105,10 +118,10 @@ export default function Upload(props) {
                   </div>
 
                   {/* Upload Powerpoint / PDF */}
-                  <div className="overflow-hidden relative w-64">
+                  <div className="overflow-hidden relative w-64 w-full">
                     <button
                       type="button"
-                      className="bg-green rounded-md hover:bg-blue-light text-white font-bold py-2 px-4 w-full inline-flex items-center"
+                      className="bg-green w-full rounded-md hover:bg-blue-light text-white font-bold py-2 px-4 w-full inline-flex items-center"
                     >
                       <PresentationChartBarIcon className="w-5 h-5" />
                       <span className="ml-2">Upload Powerpoint (PDF)</span>
@@ -120,6 +133,17 @@ export default function Upload(props) {
                       onChange={handlePdfUpload}
                     />
                   </div>
+
+                  {/* Upload Open question */}
+
+                  <button
+                    type="button"
+                    className="flex gap-2 bg-yellow rounded-md text-white px-4 py-2 items-center hover:shadow-md"
+                    onClick={handleOpenQuestion}
+                  >
+                    <ChatAltIcon className="w-5 h-5" />
+                    Open Question
+                  </button>
                 </div>
                 {/* footer */}
                 <div className="flex items-center justify-end p-4 border-t border-solid border-slate-200 rounded-b">

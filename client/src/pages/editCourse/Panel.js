@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { SaveIcon, LogoutIcon } from "@heroicons/react/solid";
 import { Panel as InfographicPanel } from "./components/Infographic";
 import { Panel as MultiplechoicePanel } from "./components/Multiplechoice";
+import { Panel as OpenQuestionPanel } from "./components/Open";
 
 function Module(props) {
   const { item } = props;
@@ -11,6 +12,8 @@ function Module(props) {
       return <InfographicPanel item={item} />;
     case "multiplechoice":
       return <MultiplechoicePanel item={item} />;
+    case "open":
+      return <OpenQuestionPanel item={item} />;
     // case "summary": {
     //   return <Summary />;
     // }

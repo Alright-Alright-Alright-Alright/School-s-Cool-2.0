@@ -6,6 +6,7 @@ import { PlusIcon } from "@heroicons/react/solid";
 import Card from "./Card";
 import { Preview as InfographicPreview } from "./components/Infographic";
 import { Preview as MultiplechoicePreview } from "./components/Multiplechoice";
+import { Preview as OpenQuestionPreview } from "./components/Open";
 
 function Module(props) {
   const { item, selected } = props;
@@ -14,9 +15,9 @@ function Module(props) {
       return <InfographicPreview item={item} selected={selected} />;
     case "multiplechoice":
       return <MultiplechoicePreview selected={selected} />;
-    // case "summary": {
-    //   return <Summary />;
-    // }
+    case "open": {
+      return <OpenQuestionPreview selected={selected} />;
+    }
     default:
       throw new Error(`${item.type} is not a valid component type`);
   }

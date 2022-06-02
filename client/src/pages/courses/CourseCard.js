@@ -23,7 +23,7 @@ const CourseCard = ({
           <img
             src={image}
             alt="topic_Image"
-            className="object-cover h-48 w-full rounded-tr-xl"
+            className="object-cover h-48 w-full rounded-tr-sm"
           />
         </section>
         <section className="border-b-2 border-grey-light ml-3 mr-3 h-12 flex items-center">
