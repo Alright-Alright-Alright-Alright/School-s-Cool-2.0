@@ -78,7 +78,7 @@ export function Panel() {
       />
       <ul className="flex flex-col gap-y-4">
         {item.content.options.map((option, index) => (
-          <li className="flex gap-6 items-center">
+          <li className="flex gap-4 items-center">
             <button
               onClick={() => setAnswer(index)}
               type="button"
@@ -100,7 +100,7 @@ export function Panel() {
             <button
               type="button"
               onClick={() => removeAnswer(index)}
-              className="rounded-md bg-red-600 h-9 w-9 p-2 hover:bg-red-700 hover:shadow-md"
+              className="rounded-md bg-red-600 h-9 w-9 p-2 hover:bg-red-700 shadow-md hover:shadow-lg"
             >
               <TrashIcon className="w-5 h-5 text-white" />
             </button>
