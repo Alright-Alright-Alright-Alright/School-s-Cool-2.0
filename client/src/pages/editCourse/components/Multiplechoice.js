@@ -74,7 +74,7 @@ export function Panel() {
         value={item.content.question}
         onChange={(e) => updateQuestion(e.target.value)}
         placeholder="Type a question here"
-        className="p-4 shadow-md w-96"
+        className="p-4 shadow-md w-96 rounded-sm"
       />
       <ul className="flex flex-col gap-y-4">
         {item.content.options.map((option, index) => (

@@ -7,11 +7,13 @@ export function Panel(props) {
   return (
     <div className="flex flex-col gap-4 mt-24">
       <input
+        type="text"
         value={item.content.question}
         placeholder="Type hier de vraagstelling..."
         className="p-4 shadow-md"
       />
       <textarea
+        className="bg-grey-light"
         disabled
         rows={5}
         placeholder="Hier kan de gebruiker een antwoord invullen"
