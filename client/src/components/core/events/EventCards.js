@@ -1,40 +1,40 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
-import dayjs from "dayjs"
-import calendar from "dayjs/plugin/calendar"
-import PropTypes from "prop-types"
-import { t } from "i18next"
-import Icon from "../Icon"
-import { joinEvent, leaveEvent } from "../../../redux/actions/eventActions"
-import Button from "../Button"
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
+import PropTypes from "prop-types";
+import { t } from "i18next";
+import Icon from "../Icon";
+import { joinEvent, leaveEvent } from "../../../redux/actions/eventActions";
+import Button from "../Button";
 
 const EventCards = ({ event }) => {
-  const user = useSelector((state) => state.user.singleUser)
-  const [join, setJoin] = useState(false)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  dayjs.extend(calendar)
+  const user = useSelector((state) => state.user.singleUser);
+  const [join, setJoin] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  dayjs.extend(calendar);
 
   // Get i18Next locale from cookies
   const localeFromCookies = `; ${document.cookie}`
     .split(`; i18next=`)
     .pop()
-    .split(";")[0]
+    .split(";")[0];
 
   const joinEventHandler = () => {
-    dispatch(joinEvent(event?._id, user?._id))
-    setJoin(!join)
-  }
+    dispatch(joinEvent(event?._id, user?._id));
+    setJoin(!join);
+  };
 
   const leaveEventHandler = () => {
-    dispatch(leaveEvent(event?._id, user?._id))
-    setJoin(!join)
-  }
+    dispatch(leaveEvent(event?._id, user?._id));
+    setJoin(!join);
+  };
 
   return (
-    <div className="flex flex-col justify-between w-full bg-white shadow-xl rounded-br-3xl rounded-bl-3xl rounded-tr-3xl">
+    <div className="flex flex-col justify-between w-full bg-white shadow-md rounded-br-sm rounded-bl-sm rounded-tr-sm">
       <section className="flex flex-col-reverse lg:flex-row justify-between border-b-2 border-grey-light mx-5">
         <div className="flex-col lg:w-1/2 pr-3 justify-between">
           <div className="">
@@ -85,7 +85,7 @@ const EventCards = ({ event }) => {
             {event?.tags.map((tag) => (
               <span
                 key={tag}
-                className="mr-2 bg-grey-super_light rounded-full px-3 py-1 text-base text-grey-medium"
+                className="mr-2 bg-grey-super_light rounded-sm px-3 py-1 text-base text-grey-medium"
               >
                 {tag}
               </span>
@@ -98,7 +98,7 @@ const EventCards = ({ event }) => {
             <img
               src={event?.bannerImage}
               alt="event_Image"
-              className=" object-cover w-full h-48 rounded-tr-3xl rounded-b-3xl"
+              className=" object-cover w-full h-48 rounded-tr-sm rounded-b-sm"
             />
           </Link>
         </div>
@@ -110,7 +110,7 @@ const EventCards = ({ event }) => {
             buttonName={t("events.button_more_info")}
             buttonStyle="btnEventStyle"
             onClick={() => {
-              navigate(`/events/${event?._id}`)
+              navigate(`/events/${event?._id}`);
             }}
           />
         </div>
@@ -136,11 +136,11 @@ const EventCards = ({ event }) => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 EventCards.propTypes = {
   event: PropTypes.shape.isRequired,
-}
+};
 
-export default EventCards
+export default EventCards;
