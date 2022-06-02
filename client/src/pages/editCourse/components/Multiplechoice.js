@@ -68,21 +68,21 @@ export function Panel() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-24 gap-12">
+    <div className="flex flex-col items-start mt-24 gap-12">
       <input
         type="text"
         value={item.content.question}
         onChange={(e) => updateQuestion(e.target.value)}
         placeholder="Type a question here"
-        className="w-96 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 grey-medium leading-tight focus:outline-none focus:bg-white focus:border-sky "
+        className="p-4 shadow-md w-96"
       />
-      <ul className="flex flex-col gap-y-2">
+      <ul className="flex flex-col gap-y-4">
         {item.content.options.map((option, index) => (
-          <li className="flex gap-4 items-center">
+          <li className="flex gap-6 items-center">
             <button
               onClick={() => setAnswer(index)}
               type="button"
-              className="flex items-center gap-2 rounded-md bg-white shadow-sm py-3 px-4 cursor-pointer"
+              className="flex items-center gap-2 rounded-sm bg-white shadow-md hover:shadow-lg py-3 px-4 cursor-pointer"
             >
               {index === item.content.answer ? (
                 <CheckIcon className="w-5 h-5 rounded-sm border-2 border-grey-dark" />
@@ -110,7 +110,7 @@ export function Panel() {
       <button
         type="button"
         onClick={add}
-        className={`bg-sky rounded-md text-white hover:shadow-md px-4 py-2 flex gap-2 ${
+        className={`bg-sky hover:bg-sky-dark rounded-md text-white hover:shadow-md px-4 py-2 flex gap-2 ${
           item.content.options.length >= 6 ? "bg-grey-medium" : ""
         }`}
         disabled={item.content.options.length >= 6}
