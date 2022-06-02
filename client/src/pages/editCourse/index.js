@@ -21,8 +21,22 @@ function EditCourse() {
     );
   }, []);
 
-  const addItems = (newItems) =>
-    setCards((oldItem) => [...oldItem, ...newItems]);
+  const addItems = (itemsToBeAdded) =>
+    setCards((oldItems) => {
+      const newItems = [];
+      if (!oldItems.length) {
+        return itemsToBeAdded;
+      }
+      oldItems.forEach((item, index) => {
+        newItems.push(item);
+
+        // Add the new items at the right place
+        if (index === selectedCard) {
+          itemsToBeAdded.forEach((e) => newItems.push(e));
+        }
+      });
+      return newItems;
+    });
 
   return (
     <>

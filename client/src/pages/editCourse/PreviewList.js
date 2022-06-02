@@ -39,6 +39,8 @@ function PreviewList(props) {
     setUploadDialogOpen,
   } = props;
 
+  console.log({ selectedCard });
+
   const renderCard = useCallback(
     (card, index) => (
       <Card
