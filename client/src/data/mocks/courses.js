@@ -43,6 +43,7 @@ export default [
               "All of the above",
             ],
             answer: 2,
+            explanation: "Uitleg: het is eenmaal zo",
           },
           {
             _id: "232131",
@@ -57,6 +58,7 @@ export default [
               "None of the above",
             ],
             answer: 3,
+            explanation: "Uitleg: het is eenmaal zo",
           },
           {
             type: "infographic",

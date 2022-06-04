@@ -110,7 +110,7 @@ export function Panel() {
       <button
         type="button"
         onClick={add}
-        className={`bg-sky hover:bg-sky-dark rounded-md text-white hover:shadow-md px-4 py-2 flex gap-2 ${
+        className={`bg-sky hover:bg-sky-dark rounded-sm text-white hover:shadow-md px-4 py-2 flex gap-2 ${
           item.content.options.length >= 6 ? "bg-grey-medium" : ""
         }`}
         disabled={item.content.options.length >= 6}
@@ -118,6 +118,13 @@ export function Panel() {
         <PlusIcon className="w-5 h-5" />
         add answer
       </button>
+
+      {/* Explanation field */}
+      <textarea
+        className="w-96"
+        rows={5}
+        placeholder="Optioneel: voeg een uitleg toe voor het goede antwoord"
+      />
     </div>
   );
 }

@@ -69,7 +69,7 @@ function PreviewList(props) {
         {cards.length ? null : (
           <button
             type="button"
-            className="w-full h-4 bg-sky text-white rounded-md hover:shadow-md"
+            className="w-full h-4 bg-sky text-white text-red rounded-sm shadow-md hover:shadow-lg"
             onClick={() => setUploadDialogOpen(true)}
           >
             <PlusIcon className="h-3 w-3 m-auto" />

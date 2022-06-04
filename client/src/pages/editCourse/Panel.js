@@ -32,17 +32,17 @@ function Panel(props) {
   const { item, key } = props;
   return (
     <div className="max-w-6xl mx-auto" key={key}>
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end gap-4">
         <button
           type="button"
-          className="flex gap-2 bg-green rounded-md text-white px-4 py-2 items-center hover:shadow-md"
+          className="flex gap-4 bg-green rounded-sm text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
         >
           <SaveIcon className="w-5 h-5" />
           Opslaan
         </button>
         <button
           type="button"
-          className="flex gap-2 bg-yellow rounded-md text-white px-4 py-2 items-center hover:shadow-md"
+          className="flex gap-4 bg-yellow rounded-sm text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
         >
           <LogoutIcon className="w-5 h-5" />
           Editor afsluiten
