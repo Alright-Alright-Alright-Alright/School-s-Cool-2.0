@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Trans, withTranslation, useTranslation } from "react-i18next";
-import Icon from "../Icon";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import DashCardListItem from "./DashCardListItem";
 import DropDownMenu from "../DropDownMenu";
 
@@ -74,11 +74,9 @@ function Dashcard({
   };
 
   return (
-    <div className="w-full py-3">
-      <div className="flex relative flex-col w-full shadow-md rounded-bl-sm rounded-br-sm bg-white rounded-r-sm">
-        <div
-          className={`w-full ${dashCardStyle} h-dashcardtitle rounded-r-sm rounded-bl-sm`}
-        >
+    <div className="w-full rounded-t-md shadow-md rounded-md">
+      <div className="flex relative flex-col w-full rounded-md bg-white">
+        <div className={`w-full ${dashCardStyle} h-dashcardtitle rounded-t-md`}>
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4">
               <Trans i18nKey={`dash_card_title_${dashCardTitle.toLowerCase()}`}>
@@ -103,15 +101,16 @@ function Dashcard({
             <div />
           </div>
         </div>
-        <div className="min-h-dashcardrow flex justify-center pt-3">
+        <div className="min-h-dashcardrow flex justify-center my-2">
           <button
             type="button"
             onClick={() => setExpandDashCard(!expandDashCard)}
+            className="rounded-full hover:bg-grey-super_light text-grey-medium"
           >
             {expandDashCard ? (
-              <Icon iconName="collapse" />
+              <ChevronUpIcon className="h-8" />
             ) : (
-              <Icon iconName="expand" />
+              <ChevronDownIcon className="h-8" />
             )}
           </button>
         </div>

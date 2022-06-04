@@ -10,7 +10,7 @@ function Dropdown(props) {
     <>
       <label htmlFor="filter_category">{label}</label>
       <select
-        className="block w-52 mt-2 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-sm shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+        className="block w-52 mt-2 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
         name="animals"
         onChange={(e) => {
           const {

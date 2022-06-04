@@ -105,7 +105,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
   return (
     <div className="absolute inset-0 flex justify-center mt-12 z-50">
       <form
-        className=" h-80 lg:h-72 w-6/7 rounded-sm bg-white flex flex-col justify-evenly shadow-2xl"
+        className=" h-80 lg:h-72 w-6/7 rounded-md bg-white flex flex-col justify-evenly shadow-2xl"
         onSubmit={handleFormSubmit}
       >
         {UI.errors && <MessageHandler error={UI.errors} />}
@@ -140,7 +140,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseCategory}
               name="category"
               id=""
-              className="bg-grey-super_light rounded-sm  w-2/7 text-sm py-3 pl-3"
+              className="bg-grey-super_light rounded-md  w-2/7 text-sm py-3 pl-3"
             >
               <option disabled selected>
                 {t("library.modal_choose_category_new_file")}
@@ -163,7 +163,7 @@ const Modal = ({ handleShowModal, singleTopic }) => {
               onChange={chooseSubject}
               name="subject"
               id=""
-              className=" bg-grey-super_light rounded-sm  w-2/7 text-sm py-2 pl-3 "
+              className=" bg-grey-super_light rounded-md  w-2/7 text-sm py-2 pl-3 "
             >
               <option disabled selected>
                 {t("library.modal_choose_subject_new_file")}

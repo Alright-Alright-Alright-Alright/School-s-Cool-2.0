@@ -203,7 +203,7 @@ function NavBar() {
           {showDropDown && (
             <div
               id="dropdown"
-              className="w-fit list-none divide-y shadow-xl absolute right-2 top-164 bg-grey-super_light py-3 rounded-tr-sm rounded-b-sm  "
+              className="w-fit list-none divide-y shadow-xl absolute right-2 top-164 bg-grey-super_light py-3 rounded-tr-md rounded-b-md  "
             >
               <ul className="py-1" aria-labelledby="dropdownButton">
                 {user?.role === "ADMIN" && (

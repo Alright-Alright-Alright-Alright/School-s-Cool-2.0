@@ -2,9 +2,9 @@ import React from "react";
 
 function ActivityCardSkeleton() {
   return (
-    <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-md m-3 animate-pulse">
+    <div className="rounded-bl-md rounded-br-md rounded-r-md bg-white shadow-md m-3 animate-pulse">
       <div className="p-3">
-        <div className="w-full bg-grey-light h-40 rounded-bl-sm rounded-br-sm rounded-r-sm " />
+        <div className="w-full bg-grey-light h-40 rounded-bl-md rounded-br-md rounded-r-md " />
       </div>
       <div>
         <div className="flex pl-3 pr-3 items-center">

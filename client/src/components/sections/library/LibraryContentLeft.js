@@ -71,7 +71,7 @@ const LibraryContentLeft = ({
     <div className="pl-5 pt-10">
       <button
         type="button"
-        className="text-lg flex gap-2 bg-sky text-white rounded-sm hover:shadow-md px-4 py-2 hover:bg-sky-dark"
+        className="text-lg flex gap-2 bg-sky text-white rounded-md hover:shadow-md px-4 py-2 hover:bg-sky-dark"
         onClick={handleShowModal}
       >
         <PlusIcon className="h-5" /> <p>{t("library.button_upload_file")}</p>

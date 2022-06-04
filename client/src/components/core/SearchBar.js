@@ -63,7 +63,7 @@ function SearchBar({ placeholder }) {
 
   return (
     <div className="">
-      <div className="flex items-center border-2 border-grey-light rounded-sm px-4 py-1 text-grey-darker leading-tight text-base w-full">
+      <div className="flex items-center border-2 border-grey-light rounded-md px-4 py-1 text-grey-darker leading-tight text-base w-full">
         <input
           type="search"
           placeholder={placeholder}
@@ -84,7 +84,7 @@ function SearchBar({ placeholder }) {
         </div>
       </div>
       {filteredData.length !== 0 && (
-        <div className="absolute bg-grey-super_light w-64 shadow-2xl rounded-sm">
+        <div className="absolute bg-grey-super_light w-64 shadow-2xl rounded-md">
           {filteredData.slice(0, 15).map((value) =>
             value.collectionName === "library" ? (
               <Link

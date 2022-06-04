@@ -47,7 +47,7 @@ const MainEventsContent = ({ events }) => {
     <div className="max-w-sm	lg:max-w-full">
       <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2  pr-2 lg:px-5">
         <button
-          className="flex gap-2 bg-sky text-white rounded-sm hover:shadow-md px-4 py-2 hover:bg-sky-dark"
+          className="flex gap-2 bg-sky text-white rounded-md hover:shadow-md px-4 py-2 hover:bg-sky-dark"
           type="button"
           onClick={handleShowModal}
         >

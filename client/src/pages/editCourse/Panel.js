@@ -35,14 +35,14 @@ function Panel(props) {
       <div className="flex justify-end gap-4">
         <button
           type="button"
-          className="flex gap-4 bg-green rounded-sm text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
+          className="flex gap-4 bg-green rounded-md text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
         >
           <SaveIcon className="w-5 h-5" />
           Opslaan
         </button>
         <button
           type="button"
-          className="flex gap-4 bg-yellow rounded-sm text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
+          className="flex gap-4 bg-yellow rounded-md text-white px-4 py-2 items-center shadow-sm hover:shadow-md"
         >
           <LogoutIcon className="w-5 h-5" />
           Editor afsluiten

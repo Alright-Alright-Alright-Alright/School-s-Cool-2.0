@@ -16,7 +16,7 @@ function EventHeaderCard({ onClick, postBody }) {
   };
 
   return (
-    <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-md m-3">
+    <div className="rounded-bl-md rounded-br-md rounded-r-md bg-white shadow-md m-3">
       <div className="flex justify-between p-3">
         <img
           className="w-10 h-10 rounded-full mr-2"

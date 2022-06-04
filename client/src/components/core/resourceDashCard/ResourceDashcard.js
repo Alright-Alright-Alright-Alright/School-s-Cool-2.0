@@ -78,9 +78,9 @@ export default function ResourceDashcard({
 
   return (
     <>
-      <div className="flex flex-col relative w-full shadow-md rounded-bl-sm rounded-br-sm bg-white rounded-r-sm">
+      <div className="flex flex-col relative w-full shadow-md rounded-bl-md rounded-br-md bg-white rounded-r-md">
         <div
-          className={`w-full ${resourceDashCardStyle} h-dashcardtitle rounded-r-sm rounded-bl-sm`}
+          className={`w-full ${resourceDashCardStyle} h-dashcardtitle rounded-r-md rounded-bl-md`}
         >
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4 pb-3">{resourceDashCardTitle}</p>

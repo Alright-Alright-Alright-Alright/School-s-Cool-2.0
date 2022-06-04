@@ -90,7 +90,7 @@ function Card({
       </button>
       <button
         type="button"
-        className={`w-full h-4 bg-sky text-white rounded-sm hover:shadow-md ${
+        className={`w-full h-4 bg-sky text-white rounded-md hover:shadow-md ${
           !selected && "hidden"
         }`}
         onClick={() => setUploadDialogOpen(true)}

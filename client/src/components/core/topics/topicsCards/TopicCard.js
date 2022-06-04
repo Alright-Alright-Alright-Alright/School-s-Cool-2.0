@@ -40,14 +40,14 @@ const TopicCard = ({ topics }) => {
   return (
     <div
       key={topics._id}
-      className="flex flex-col justify-between w-72 lg:w-52 h-72 bg-white shadow-md hover:shadow-lg rounded-br-sm rounded-bl-sm rounded-tr-sm"
+      className="flex flex-col justify-between w-72 lg:w-52 h-72 bg-white shadow-md hover:shadow-lg rounded-br-md rounded-bl-md rounded-tr-md"
     >
       <Link to={`${topics._id}`}>
         <section className="">
           <img
             src={topics.bannerImage}
             alt="topic_Image"
-            className="object-cover h-48 w-full rounded-tr-sm"
+            className="object-cover h-48 w-full rounded-tr-md"
           />
         </section>
         <section className="border-b-2 border-grey-light ml-3 mr-3 h-12 flex items-center">

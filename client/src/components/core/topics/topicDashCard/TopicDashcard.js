@@ -6,6 +6,7 @@
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import Icon from "../../Icon";
 import TopicDashCardListItem from "./TopicDashCardListItem";
 import DropDownMenu from "../../DropDownMenu";
@@ -47,10 +48,10 @@ export default function TopicDashcard({
   ));
 
   return (
-    <div className="w-full py-3">
-      <div className="flex flex-col w-full shadow-md rounded-bl-sm rounded-br-sm bg-white rounded-r-sm">
+    <div className="w-full rounded-md">
+      <div className="flex flex-col w-full shadow-md rounded-md bg-white rounded-r-md">
         <div
-          className={`w-full ${topicDashCardStyle} h-dashcardtitle rounded-r-sm rounded-bl-sm`}
+          className={`w-full ${topicDashCardStyle} h-dashcardtitle rounded-t-md`}
         >
           <div className="flex justify-between pt-3 text-white">
             <p className="text-lg pl-4">{topicDashCardTitle}</p>
@@ -70,15 +71,21 @@ export default function TopicDashcard({
             <div />
           </div>
         </div>
-        <div className="min-h-dashcardrow flex justify-center pt-3">
+        <div className="min-h-dashcardrow flex justify-center my-2">
           <button
             type="button"
             onClick={() => setExpandDashCard(!expandDashCard)}
           >
             {expandDashCard ? (
-              <Icon iconName="collapse" />
+              <ChevronUpIcon
+                className="h-8 text-grey-medium rounded-full hover:bg-grey-super_light"
+                iconName="collapse"
+              />
             ) : (
-              <Icon iconName="expand" />
+              <ChevronDownIcon
+                className="h-8 text-grey-medium rounded-full hover:bg-grey-super_light"
+                iconName="expand"
+              />
             )}
           </button>
         </div>

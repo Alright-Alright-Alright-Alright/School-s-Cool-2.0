@@ -14,12 +14,12 @@ function Comment({ comment, id }) {
   return (
     <div className="flex px-5 pb-1 pt-3 gap-2">
       <img
-        className="w-10 h-10 rounded-full"
+        className="w-10 h-10 rounded-full shadow-sm border-2 border-grey-light"
         src={`${comment?.owner?.imageUrl}`}
         alt="profile"
       />
-      <div className="flex justify-between bg-grey-super_light w-full rounded-md items-center p-2">
-        <p className="text-sm text-grey-dark pl-1">{comment?.body}</p>
+      <div className="flex justify-between w-full rounded-md items-center p-2">
+        <p className="text-base text-grey-dark pl-1">{comment?.body}</p>
         {user?._id === comment?.owner?._id || user?.role === "ADMIN" ? (
           <button
             type="button"

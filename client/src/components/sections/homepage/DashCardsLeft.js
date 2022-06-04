@@ -40,7 +40,7 @@ function DashCardsLeft() {
   }
 
   return (
-    <div className="max-w-md px-6 mt-16 hidden lg:block">
+    <div className="max-w-md px-6 mt-20 hidden lg:flex flex-col gap-8">
       <Dashcard
         dashCardData={topics}
         dashCardTitle="Topics"
@@ -52,13 +52,13 @@ function DashCardsLeft() {
         dashCardTitle="Courses"
         dashCardStyle="bg-yellow"
         dropdownMenuData={dashcardDropdownMenu.courses}
-      />{" "}
+      />
       <Dashcard
         dashCardData={events}
         dashCardTitle="Events"
         dashCardStyle="bg-sky"
         dropdownMenuData={dashcardDropdownMenu.events}
-      />{" "}
+      />
     </div>
   );
 }

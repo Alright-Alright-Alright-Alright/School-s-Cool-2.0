@@ -43,7 +43,7 @@ const HighlightedFile = (props) => {
     <li>
       <button
         type="button"
-        className="grid grid-cols-6 bg-white rounded-sm shadow-md hover:shadow-lg p-4"
+        className="grid grid-cols-6 bg-white rounded-md shadow-md hover:shadow-lg p-4"
         onClick={onClick}
       >
         <div className="col-span-4 text-left">
@@ -84,7 +84,7 @@ const LibraryRow = (props) => {
       <button
         onClick={onClick}
         type="button"
-        className="grid grid-cols-12 font-bold text-grey-medium rounded-sm hover:bg-white hover:shadow-md px-4 py-4 border-b-2 w-full text-left"
+        className="grid grid-cols-12 font-bold text-grey-medium rounded-md hover:bg-white hover:shadow-md px-4 py-4 border-b-2 w-full text-left"
       >
         <li className="col-span-5 flex gap-2 font-normal">
           <RowIcon fileUrl={fileUrl} size={5} />

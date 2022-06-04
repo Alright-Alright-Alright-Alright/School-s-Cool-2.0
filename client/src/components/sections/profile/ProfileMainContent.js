@@ -149,7 +149,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
           </div>
         )}
       </div>
-      <div className="flex bg-white shadow-md rounded-br-sm rounded-bl-sm rounded-tr-sm m-3 p-6 w-full ">
+      <div className="flex bg-white shadow-md rounded-br-md rounded-bl-md rounded-tr-md m-3 p-6 w-full ">
         <div className="flex flex-col items-start w-1/2">
           <p className="border-b-2 border-grey-light w-full my-1">
             {t("profile.user_profile_first_name")}:
@@ -166,19 +166,19 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
           {showEditForm ? (
             <form onSubmit={handleSubmit}>
               <input
-                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
+                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-md pl-2 my-1"
                 placeholder={user?.firstName}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <input
-                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
+                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-md pl-2 my-1"
                 placeholder={user?.lastName}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <input
-                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
+                className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-md pl-2 my-1"
                 placeholder={user?.email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -189,7 +189,7 @@ function ProfileMainContent({ userProfile, topics, courses, events, files }) {
                   name="language"
                   onChange={handleChangeLanguage}
                   value={language}
-                  className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-sm pl-2 my-1"
+                  className="border-b-2 border-grey-light w-full bg-grey-super_light rounded-md pl-2 my-1"
                 >
                   <option value="en">English</option>
                   <option value="nl">Nederlands</option>

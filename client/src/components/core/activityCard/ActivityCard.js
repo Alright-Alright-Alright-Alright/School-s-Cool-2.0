@@ -7,6 +7,7 @@ import ReactHtmlParser from "react-html-parser";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Linkify from "react-linkify";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import Comment from "../comment/Comment";
 import CommentForm from "../comment/CommentForm";
 import { likePost, unlikePost } from "../../../redux/actions/postActions";
@@ -60,11 +61,11 @@ function ActivityCard({ activity, commentFather }) {
   const activityType = activity.topic ? "topic" : "event";
 
   return (
-    <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-md mx-3 mb-3">
+    <div className="rounded-bl-md rounded-br-md rounded-r-md bg-white shadow-md mx-3 mb-3">
       <div className="p-3">
         <Link to={`/${activityType}s/${activity[activityType]?._id}`}>
           <img
-            className="object-cover w-full max-h-40 rounded-bl-sm rounded-br-sm rounded-r-sm"
+            className="object-cover w-full max-h-40 rounded-bl-md rounded-br-md rounded-r-md"
             src={activity[activityType]?.bannerImage}
             alt="banner"
           />
@@ -148,16 +149,16 @@ function ActivityCard({ activity, commentFather }) {
       </div>
       {showMoreComments ? allComments : firstThreeComments}
       {activity.comments.length > 3 && (
-        <div className="flex justify-center pt-3">
+        <div className="flex justify-center mt-2">
           <button
             className="hover:bg-grey-super_light rounded-full p-1 justify-center items-center"
             type="button"
             onClick={() => setShowMoreComments(!showMoreComments)}
           >
             {activity.comments.length > 3 && !showMoreComments ? (
-              <Icon iconName="expand" />
+              <ChevronDownIcon className="h-8" />
             ) : null}
-            {showMoreComments && <Icon iconName="collapse" />}
+            {showMoreComments && <ChevronUpIcon className="h-8" />}
           </button>
         </div>
       )}

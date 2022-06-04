@@ -34,7 +34,7 @@ const EventCards = ({ event }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between w-full bg-white shadow-md rounded-br-sm rounded-bl-sm rounded-tr-sm">
+    <div className="flex flex-col justify-between w-full bg-white shadow-md rounded-br-md rounded-bl-md rounded-tr-md">
       <section className="flex flex-col-reverse lg:flex-row justify-between border-b-2 border-grey-light mx-5">
         <div className="flex-col lg:w-1/2 pr-3 justify-between">
           <div className="">
@@ -85,7 +85,7 @@ const EventCards = ({ event }) => {
             {event?.tags.map((tag) => (
               <span
                 key={tag}
-                className="mr-2 bg-grey-super_light rounded-sm px-3 py-1 text-base text-grey-medium"
+                className="mr-2 bg-grey-super_light rounded-md px-3 py-1 text-base text-grey-medium"
               >
                 {tag}
               </span>
@@ -98,7 +98,7 @@ const EventCards = ({ event }) => {
             <img
               src={event?.bannerImage}
               alt="event_Image"
-              className=" object-cover w-full h-48 rounded-tr-sm rounded-b-sm"
+              className=" object-cover w-full h-48 rounded-tr-md rounded-b-md"
             />
           </Link>
         </div>

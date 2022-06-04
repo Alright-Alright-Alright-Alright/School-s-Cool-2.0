@@ -1,18 +1,18 @@
 /* eslint-disable no-underscore-dangle */
-import React from "react"
-import { Link } from "react-router-dom"
-import { t } from "i18next"
-import PropTypes from "prop-types"
-import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard"
-import data from "../../../data/dashcardDropdownMenu.json"
-import Icon from "../../core/Icon"
+import React from "react";
+import { Link } from "react-router-dom";
+import { t } from "i18next";
+import PropTypes from "prop-types";
+import ResourceDashcard from "../../core/resourceDashCard/ResourceDashcard";
+import data from "../../../data/dashcardDropdownMenu.json";
+import Icon from "../../core/Icon";
 
 function TopicContentLeft({ topic, showEditModal, user }) {
   return (
     <div className="flex flex-col max-w-sm float-right">
       <div className="p-3">
         <img
-          className="rounded-r-3xl rounded-b-3xl object-cover h-72"
+          className="rounded-r-md rounded-b-md object-cover h-72"
           src={topic?.bannerImage}
           alt="placeholder"
           width="400"
@@ -60,13 +60,13 @@ function TopicContentLeft({ topic, showEditModal, user }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 TopicContentLeft.propTypes = {
   topic: PropTypes.shape.isRequired,
   showEditModal: PropTypes.func.isRequired,
   user: PropTypes.shape.isRequired,
-}
+};
 
-export default TopicContentLeft
+export default TopicContentLeft;

@@ -2,7 +2,7 @@
 import React from "react";
 
 const TopicsCard = ({ cardTitle, color }) => (
-  <div className="flex flex-col justify-center items-center w-72 lg:w-52 h-72 bg-white shadow-md hover:shadow-lg rounded-br-sm rounded-bl-sm rounded-tr-sm">
+  <div className="flex flex-col justify-center items-center w-72 lg:w-52 h-72 bg-white shadow-md hover:shadow-lg rounded-br-md rounded-bl-md rounded-tr-md">
     <section>
       <svg
         width="138"

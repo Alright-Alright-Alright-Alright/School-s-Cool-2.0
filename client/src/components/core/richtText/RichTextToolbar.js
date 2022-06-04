@@ -53,7 +53,7 @@ const RichTextToolbar = () => {
 
   return (
     <>
-      <div className="rounded-bl-sm rounded-br-sm rounded-r-sm bg-white shadow-lg m-3">
+      <div className="rounded-bl-md rounded-br-md rounded-r-md bg-white shadow-lg m-3">
         <div className="flex justify-between p-3">
           <div className=" flex items-end">
             <img
@@ -67,7 +67,7 @@ const RichTextToolbar = () => {
               editorState={editorState}
               onEditorStateChange={handleEditorChange}
               wrapperClassName="flex-col "
-              editorClassName=" bg-grey-super_light text-center text-base pl-3 rounded-l-sm rounded-b-sm rounded-r-sm"
+              editorClassName=" bg-grey-super_light text-center text-base pl-3 rounded-l-md rounded-b-md rounded-r-md"
               toolbarClassName="flex"
               placeholder={t("topics.header_card_placeholder")}
               toolbar={{
