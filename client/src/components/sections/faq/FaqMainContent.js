@@ -45,7 +45,7 @@ function FaqMainContent() {
       </div>
       <ul>
         {accordionData.map(({ title, content }) => (
-          <Accordion title={title} content={content} />
+          <Accordion title={title} content={content} key={title} />
         ))}
       </ul>
     </div>

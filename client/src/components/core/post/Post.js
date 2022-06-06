@@ -2,80 +2,80 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-unused-prop-types */
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { Link } from "react-router-dom"
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-import { useSelector, useDispatch } from "react-redux"
-import { t } from "i18next"
-import Comment from "../comment/Comment"
-import CommentForm from "../comment/CommentForm"
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useSelector, useDispatch } from "react-redux";
+import { t } from "i18next";
+import Comment from "../comment/Comment";
+import CommentForm from "../comment/CommentForm";
 import {
   likePost,
   unlikePost,
   deletePost,
   updatePost,
-} from "../../../redux/actions/postActions"
-import Icon from "../Icon"
-import DropDownMenu from "../DropDownMenu"
-import ReadOnlyPostRow from "./ReadOnlyPostRow"
-import EditablePostRow from "./EditablePostRow"
+} from "../../../redux/actions/postActions";
+import Icon from "../Icon";
+import DropDownMenu from "../DropDownMenu";
+import ReadOnlyPostRow from "./ReadOnlyPostRow";
+import EditablePostRow from "./EditablePostRow";
 
 function Post({ post, parentId, comments }) {
-  const [showMoreComments, setShowMoreComments] = useState(false)
-  const [showEditPost, setShowEditPost] = useState(false)
-  const [newPostBody, setNewPostBody] = useState(post.body)
-  const user = useSelector((state) => state.user.singleUser)
-  const dispatch = useDispatch()
+  const [showMoreComments, setShowMoreComments] = useState(false);
+  const [showEditPost, setShowEditPost] = useState(false);
+  const [newPostBody, setNewPostBody] = useState(post.body);
+  const user = useSelector((state) => state.user.singleUser);
+  const dispatch = useDispatch();
 
-  dayjs.extend(relativeTime)
+  dayjs.extend(relativeTime);
 
   // Get i18Next locale from cookies
   const localeFromCookies = `; ${document.cookie}`
     .split(`; i18next=`)
     .pop()
-    .split(";")[0]
+    .split(";")[0];
 
   const handleLike = () => {
-    dispatch(likePost(post._id, user._id))
-  }
+    dispatch(likePost(post._id, user._id));
+  };
 
   const handleUnlike = () => {
-    dispatch(unlikePost(post._id, user._id))
-  }
+    dispatch(unlikePost(post._id, user._id));
+  };
 
   const handleEditPost = (e) => {
-    setNewPostBody(e.target.value)
-  }
+    setNewPostBody(e.target.value);
+  };
 
   const handleSubmitEditPost = () => {
     dispatch(
       updatePost(post._id, {
         body: newPostBody,
       })
-    )
-    setShowEditPost(false)
-  }
+    );
+    setShowEditPost(false);
+  };
 
   const firstThreeComments = comments
     .slice(0, 3)
     .map((commentData) => (
       <Comment key={commentData._id} comment={commentData} id={post._id} />
-    ))
+    ));
 
   const allComments = comments.map((commentData) => (
     <Comment key={commentData._id} comment={commentData} id={post._id} />
-  ))
+  ));
 
   const handleSelectAction = (actionName) => {
     if (actionName === "edit") {
-      setShowEditPost(!showEditPost)
+      setShowEditPost(!showEditPost);
     }
     if (actionName === "delete") {
-      dispatch(deletePost(post._id, parentId))
+      dispatch(deletePost(post._id, parentId));
     }
-  }
+  };
 
   return (
     <div className="relative rounded-bl-2xl rounded-br-2xl rounded-r-2xl bg-white shadow-lg m-3">
@@ -169,19 +169,21 @@ function Post({ post, parentId, comments }) {
       )}
       <CommentForm postId={post._id} />
     </div>
-  )
+  );
 }
 
 Post.defaultProps = {
   parentId: "",
-  onDeletePost: () => {},
-}
+  onDeletePost: () => {
+    return;
+  },
+};
 
 Post.propTypes = {
   parentId: PropTypes.string,
   post: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
   onDeletePost: PropTypes.func,
-}
+};
 
-export default Post
+export default Post;

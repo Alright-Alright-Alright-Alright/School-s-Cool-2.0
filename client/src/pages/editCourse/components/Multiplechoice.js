@@ -78,7 +78,7 @@ export function Panel() {
       />
       <ul className="flex flex-col gap-y-4">
         {item.content.options.map((option, index) => (
-          <li className="flex gap-4 items-center">
+          <li className="flex gap-4 items-center" key={option}>
             <button
               onClick={() => setAnswer(index)}
               type="button"

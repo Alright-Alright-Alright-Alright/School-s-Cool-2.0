@@ -1,25 +1,24 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { t } from "i18next"
-import Button from "../../../core/Button"
-import MessageHandler from "../../../core/MessageHandler"
-import { forgetAction } from "../../../../redux/actions/userActions"
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { t } from "i18next";
+import Button from "../../../core/Button";
+import MessageHandler from "../../../core/MessageHandler";
+import { forgetAction } from "../../../../redux/actions/userActions";
 
 const ForgotPassword = () => {
-  const UI = useSelector((state) => state.UI)
-  const [email, setEmail] = useState("")
-  const dispatch = useDispatch()
+  const UI = useSelector((state) => state.UI);
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
   const chooseEmail = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    dispatch(forgetAction(email))
-  }
+    e.preventDefault();
+    dispatch(forgetAction(email));
+  };
 
   const logo = (
     <svg
@@ -64,7 +63,7 @@ const ForgotPassword = () => {
         fill="#0F2331"
       />
     </svg>
-  )
+  );
 
   return (
     <div className="h-screen flex justify-center items-center">
@@ -97,7 +96,7 @@ const ForgotPassword = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

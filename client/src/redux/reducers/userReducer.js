@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-anonymous-default-export */
+
 import {
   SET_USER,
   SET_AUTHENTICATED,
@@ -12,15 +12,15 @@ import {
   UPDATE_USER,
   FOLLOW_USER,
   UNFOLLOW_USER,
-} from "../types/user"
-import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses"
+} from "../types/user";
+import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses";
 
 const initialState = {
   token: localStorage.getItem("Authorization"),
   singleUser: null,
   users: [],
   isLoggedIn: false,
-}
+};
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,7 +31,7 @@ const userReducer = (state = initialState, action) => {
         singleUser: action.payload.user,
         isLoggedIn: true,
         // chatToken: action.payload.chatToken.token,
-      }
+      };
     case SET_USER:
     case SET_USERLOGGED_IN:
     case JOIN_COURSE:
@@ -42,28 +42,28 @@ const userReducer = (state = initialState, action) => {
         ...state,
         singleUser: action.payload,
         isLoggedIn: true,
-      }
+      };
     case SET_USER_PROFILE:
       return {
         ...state,
         userProfile: action.payload,
-      }
+      };
     case SET_UNAUTHENTICATED:
-      return initialState
+      return initialState;
     case SET_USERS:
       return {
         ...state,
         users: action.payload,
         isLoggedIn: true,
-      }
+      };
     case UPDATE_USER:
       return {
         ...state,
         singleUser: action.payload,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default userReducer
+export default userReducer;

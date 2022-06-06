@@ -1,5 +1,4 @@
 /* eslint-disable arrow-body-style */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */

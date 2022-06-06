@@ -1,57 +1,57 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getAllTheUsers, updateUser } from "../../../redux/actions/userActions"
-import ReadOnlyRow from "../../core/admin/ReadOnlyRow"
-import EditableRow from "../../core/admin/EditableRow"
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllTheUsers, updateUser } from "../../../redux/actions/userActions";
+import ReadOnlyRow from "../../core/admin/ReadOnlyRow";
+import EditableRow from "../../core/admin/EditableRow";
 
 function AdminPanelMainContent() {
-  const allUsers = useSelector((state) => state.user.users.users)
-  const [sortedUsers, setSortedUsers] = useState([])
-  const [toggleSorting, setToggleSorting] = useState(false)
-  const [editUserId, setEditUserId] = useState(null)
+  const allUsers = useSelector((state) => state.user.users.users);
+  const [sortedUsers, setSortedUsers] = useState([]);
+  const [toggleSorting, setToggleSorting] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     firstName: "",
     lastName: "",
     role: "",
     email: "",
-  })
-  const dispatch = useDispatch()
+  });
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllTheUsers())
-  }, [dispatch])
+    dispatch(getAllTheUsers());
+  }, [dispatch]);
 
   const handleCancelClick = () => {
-    setEditUserId(null)
-  }
+    setEditUserId(null);
+  };
 
   const handleEditClick = (event, user) => {
-    event.preventDefault()
-    setEditUserId(user._id)
+    event.preventDefault();
+    setEditUserId(user._id);
     const formValues = {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
       email: user.email,
-    }
-    setEditFormData(formValues)
-  }
+    };
+    setEditFormData(formValues);
+  };
 
   const handleEditFormChange = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const fieldName = event.target.getAttribute("name")
-    const fieldValue = event.target.value
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
 
-    const newFormData = { ...editFormData }
-    newFormData[fieldName] = fieldValue
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
 
-    setEditFormData(newFormData)
-  }
+    setEditFormData(newFormData);
+  };
 
   const handleEditFormSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const editedContact = {
       id: editUserId,
@@ -59,78 +59,80 @@ function AdminPanelMainContent() {
       lastName: editFormData.lastName,
       role: editFormData.role,
       email: editFormData.email,
-    }
-    dispatch(updateUser(editedContact))
-    setEditUserId(null)
-  }
+    };
+    dispatch(updateUser(editedContact));
+    setEditUserId(null);
+  };
 
-  const handleDeleteClick = () => {}
+  const handleDeleteClick = () => {
+    return;
+  };
 
   const sortUsers = (filter) => {
     if (filter === "firstName") {
       if (toggleSorting) {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.firstName < b.firstName) return -1
-            if (a.firstName > b.firstName) return 1
-            return 0
+            if (a.firstName < b.firstName) return -1;
+            if (a.firstName > b.firstName) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       } else {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.firstName > b.firstName) return -1
-            if (a.firstName < b.firstName) return 1
-            return 0
+            if (a.firstName > b.firstName) return -1;
+            if (a.firstName < b.firstName) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       }
     } else if (filter === "lastName") {
       if (toggleSorting) {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.lastName < b.lastName) return -1
-            if (a.lastName > b.lastName) return 1
-            return 0
+            if (a.lastName < b.lastName) return -1;
+            if (a.lastName > b.lastName) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       } else {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.lastName > b.lastName) return -1
-            if (a.lastName < b.lastName) return 1
-            return 0
+            if (a.lastName > b.lastName) return -1;
+            if (a.lastName < b.lastName) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       }
     } else if (filter === "email") {
       if (toggleSorting) {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.email < b.email) return -1
-            if (a.email > b.email) return 1
-            return 0
+            if (a.email < b.email) return -1;
+            if (a.email > b.email) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       } else {
         setSortedUsers(
           allUsers.sort((a, b) => {
-            if (a.email > b.email) return -1
-            if (a.email < b.email) return 1
-            return 0
+            if (a.email > b.email) return -1;
+            if (a.email < b.email) return 1;
+            return 0;
           })
-        )
-        setToggleSorting(!toggleSorting)
+        );
+        setToggleSorting(!toggleSorting);
       }
     } else {
-      setSortedUsers(allUsers)
+      setSortedUsers(allUsers);
     }
-  }
+  };
 
   const sortedUsersList = sortedUsers?.map((user) =>
     editUserId === user._id ? (
@@ -148,7 +150,7 @@ function AdminPanelMainContent() {
         handleDeleteClick={handleDeleteClick}
       />
     )
-  )
+  );
 
   const usersList = allUsers?.map((user) =>
     editUserId === user._id ? (
@@ -166,7 +168,7 @@ function AdminPanelMainContent() {
         handleDeleteClick={handleDeleteClick}
       />
     )
-  )
+  );
 
   return (
     <div>
@@ -223,7 +225,7 @@ function AdminPanelMainContent() {
         </body>
       </div>
     </div>
-  )
+  );
 }
 
-export default AdminPanelMainContent
+export default AdminPanelMainContent;

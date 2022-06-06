@@ -20,6 +20,7 @@ function CourseMainContent() {
             members={course.members}
             completed={course.completed}
             title={course.title}
+            joined={false}
           />
         ))}
         <AddCourseCard />

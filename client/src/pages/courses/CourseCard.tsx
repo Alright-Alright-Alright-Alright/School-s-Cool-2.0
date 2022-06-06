@@ -1,21 +1,25 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-use-before-define */
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Icon from "../../components/core/Icon";
 
-const CourseCard = ({
-  id,
-  joined,
-  topics,
-  image,
-  members,
-  completed,
-  title,
-}) => {
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  joined: PropTypes.bool.isRequired,
+  topics: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  members: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+type componentProps = PropTypes.InferProps<typeof propTypes>;
+
+const CourseCard = (props: componentProps) => {
+  const { id, joined, topics, image, members, completed, title } = props;
+
   return (
     <div className="flex flex-col justify-between h-72 bg-white shadow-md hover:shadow-lg rounded-br-md rounded-bl-md rounded-tr-md">
       <Link to={id}>
@@ -71,5 +75,7 @@ const CourseCard = ({
     </div>
   );
 };
+
+CourseCard.propTypes = propTypes;
 
 export default CourseCard;

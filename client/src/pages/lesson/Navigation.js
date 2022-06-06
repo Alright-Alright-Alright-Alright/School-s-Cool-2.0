@@ -20,7 +20,7 @@ function Navigation(props) {
       </Link>
       <ul className="flex">
         {Array.from(Array(pageCount).keys()).map((index) => (
-          <li>
+          <li key={index}>
             <button type="button">
               <p
                 className={`${

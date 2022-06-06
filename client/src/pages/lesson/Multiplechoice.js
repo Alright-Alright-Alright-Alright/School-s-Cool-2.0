@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { CheckIcon } from "@heroicons/react/solid";
@@ -69,6 +68,7 @@ function Multiplechoice(props) {
       <ul className="flex flex-col gap-y-2">
         {item.options.map((option, index) => (
           <Option
+            key={item.answer}
             selected={index === selectedIndex}
             index={index}
             onClick={onClick}

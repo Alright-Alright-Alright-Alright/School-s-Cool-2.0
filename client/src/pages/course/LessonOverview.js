@@ -72,7 +72,7 @@ function LessonOverview() {
       <h1 className="text-grey-dark font-bold text-xl">Lesson 1</h1>
       <ul className="flex flex-col space-y-3 pt-6">
         {course.lessons.map((lesson, index) => (
-          <ul>
+          <ul key={lesson._id}>
             <ListItem
               completed={lesson.completed}
               duration={lesson.duration}

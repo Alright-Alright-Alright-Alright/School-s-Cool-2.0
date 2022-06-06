@@ -1,45 +1,44 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { t } from "i18next"
-import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
-import { loginUser } from "../../../../redux/actions/userActions"
-import Button from "../../../core/Button"
-import MessageHandler from "../../../core/MessageHandler"
+import { t } from "i18next";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { loginUser } from "../../../../redux/actions/userActions";
+import Button from "../../../core/Button";
+import MessageHandler from "../../../core/MessageHandler";
 
 const LoginForm = () => {
-  const UI = useSelector((state) => state.UI)
-  const user = useSelector((state) => state.user.singleUser)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [remember, setRemember] = useState("")
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const UI = useSelector((state) => state.UI);
+  const user = useSelector((state) => state.user.singleUser);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const userLogin = {
     email,
     password,
     remember,
-  }
+  };
 
   const chooseEmail = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const choosePassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const rememberMe = () => {
-    setRemember(!remember)
-  }
+    setRemember(!remember);
+  };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    dispatch(loginUser(userLogin))
-  }
+    e.preventDefault();
+    dispatch(loginUser(userLogin));
+  };
 
-  useEffect(() => user && setTimeout(() => navigate("/home"), 1500), [user])
+  useEffect(() => user && setTimeout(() => navigate("/home"), 1500), [user]);
 
   const logo = (
     <svg
@@ -84,7 +83,7 @@ const LoginForm = () => {
         fill="#0F2331"
       />
     </svg>
-  )
+  );
 
   return (
     <div className="h-screen flex justify-center items-center">
@@ -145,7 +144,7 @@ const LoginForm = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

@@ -1,6 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-/* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from "react";

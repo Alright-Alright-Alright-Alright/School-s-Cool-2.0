@@ -1,70 +1,69 @@
-/* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker"
-import nl from "date-fns/locale/nl"
-import { useTranslation } from "react-i18next"
-import PropTypes from "prop-types"
-import fileUploadHandler from "../../../middleware/UploadFile"
-import { createNewEvent } from "../../../redux/actions/eventActions"
-import Button from "../Button"
-import SwitchButton from "../SwitchButton"
-import Icon from "../Icon"
-import "react-datepicker/dist/react-datepicker.css"
-import TagsInput from "../TagsInput"
-import MessageHandler from "../MessageHandler"
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import nl from "date-fns/locale/nl";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import fileUploadHandler from "../../../middleware/UploadFile";
+import { createNewEvent } from "../../../redux/actions/eventActions";
+import Button from "../Button";
+import SwitchButton from "../SwitchButton";
+import Icon from "../Icon";
+import "react-datepicker/dist/react-datepicker.css";
+import TagsInput from "../TagsInput";
+import MessageHandler from "../MessageHandler";
 
-registerLocale("nl", nl)
+registerLocale("nl", nl);
 
 const Modal = ({ handleShowModal }) => {
-  const [title, seTitle] = useState("")
-  const [location, setLocation] = useState("")
-  const [description, setDescription] = useState("")
-  const [bannerImage, setBannerImage] = useState("")
-  const [privacy, setPrivacy] = useState(false)
-  const [tags, setTags] = useState([])
-  const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
-  const [startTime, setStartTime] = useState(null)
-  const hiddenFileInput = useRef(null)
-  const UI = useSelector((state) => state.UI)
-  const { t } = useTranslation()
+  const [title, seTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [bannerImage, setBannerImage] = useState("");
+  const [privacy, setPrivacy] = useState(false);
+  const [tags, setTags] = useState([]);
+  const selectedTags = (tagsFromInput) => setTags(tagsFromInput);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const hiddenFileInput = useRef(null);
+  const UI = useSelector((state) => state.UI);
+  const { t } = useTranslation();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    hiddenFileInput.current.click()
-  }
+    hiddenFileInput.current.click();
+  };
 
   const chooseTitle = (e) => {
-    seTitle(e.target.value)
-  }
+    seTitle(e.target.value);
+  };
 
   const chooseDescription = (e) => {
-    setDescription(e.target.value)
-  }
+    setDescription(e.target.value);
+  };
 
   const chooseBannerImage = (e) => {
-    setBannerImage(e.target.files[0])
-  }
+    setBannerImage(e.target.files[0]);
+  };
 
   const chooseLocation = (e) => {
-    setLocation(e.target.value)
-  }
+    setLocation(e.target.value);
+  };
 
   const handleStartDateSelect = (date) => {
-    setStartDate(date)
-  }
+    setStartDate(date);
+  };
 
   const handleEndDateSelect = (date) => {
-    setEndDate(date)
-  }
+    setEndDate(date);
+  };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    const image = await fileUploadHandler(bannerImage)
+    e.preventDefault();
+    const image = await fileUploadHandler(bannerImage);
     const eventData = {
       title,
       description,
@@ -77,11 +76,11 @@ const Modal = ({ handleShowModal }) => {
         "https://cdn.eventplanner.be/imgs/xr10330_test-event-in-hasselt-met-1000-jongeren@2x.jpg",
       isPrivate: privacy,
       tags,
-    }
+    };
     if (eventData.title.length > 0 && eventData.location.length > 0)
-      handleShowModal()
-    dispatch(createNewEvent(eventData))
-  }
+      handleShowModal();
+    dispatch(createNewEvent(eventData));
+  };
 
   return (
     <div className="flex justify-center content-center">
@@ -133,7 +132,7 @@ const Modal = ({ handleShowModal }) => {
               timeIntervals={15}
               selected={startTime}
               onChange={(update) => {
-                setStartTime(update)
+                setStartTime(update);
               }}
               placeholderText={t("events.modal_time_new_event")}
               // placeholderText={t("events.modal_date_new_event")}
@@ -204,11 +203,11 @@ const Modal = ({ handleShowModal }) => {
         </section>
       </form>
     </div>
-  )
-}
+  );
+};
 
 Modal.propTypes = {
   handleShowModal: PropTypes.func.isRequired,
-}
+};
 
-export default Modal
+export default Modal;

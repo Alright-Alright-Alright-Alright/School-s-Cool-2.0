@@ -1,34 +1,33 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
-import Button from "../../../core/Button"
-import MessageHandler from "../../../core/MessageHandler"
-import { newPasswordAction } from "../../../../redux/actions/userActions"
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "../../../core/Button";
+import MessageHandler from "../../../core/MessageHandler";
+import { newPasswordAction } from "../../../../redux/actions/userActions";
 
 const NewPassword = () => {
-  const UI = useSelector((state) => state.UI)
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { token } = useParams()
+  const UI = useSelector((state) => state.UI);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useParams();
   const choosePassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const chooseConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value)
-  }
+    setConfirmPassword(e.target.value);
+  };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault()
-    dispatch(newPasswordAction(password, confirmPassword, token))
+    e.preventDefault();
+    dispatch(newPasswordAction(password, confirmPassword, token));
     setTimeout(() => {
-      navigate("/login")
-    }, 1500)
-  }
+      navigate("/login");
+    }, 1500);
+  };
 
   const logo = (
     <svg
@@ -73,7 +72,7 @@ const NewPassword = () => {
         fill="#0F2331"
       />
     </svg>
-  )
+  );
 
   return (
     <div className="h-screen flex justify-center items-center">
@@ -111,7 +110,7 @@ const NewPassword = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewPassword
+export default NewPassword;

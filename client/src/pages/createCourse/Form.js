@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";

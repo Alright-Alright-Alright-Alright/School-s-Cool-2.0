@@ -7,7 +7,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
-import Icon from "../../Icon";
 import TopicDashCardListItem from "./TopicDashCardListItem";
 import DropDownMenu from "../../DropDownMenu";
 

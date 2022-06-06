@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -26,7 +24,9 @@ function Dropdown(props) {
         }}
       >
         {options.map((option) => (
-          <option value={option.value}>{option.label}</option>
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
         ))}
       </select>
     </>

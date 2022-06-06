@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";

@@ -135,6 +135,7 @@ const MainLibraryContent = (props) => {
         <ul className="flex gap-8 justify-between w-full my-4">
           {library.slice(0, 3).map((item) => (
             <HighlightedFile
+              key={item._id}
               filename={item.title}
               modifiedOn={item.updatedAt.substring(0, 10)}
               fileUrl={item.fileUrl}
@@ -155,6 +156,7 @@ const MainLibraryContent = (props) => {
         <ul className="flex flex-col">
           {library.map((item) => (
             <LibraryRow
+              key={item._id}
               filename={item.title}
               modifiedOn={item.updatedAt.substring(0, 10)}
               category={item.category}

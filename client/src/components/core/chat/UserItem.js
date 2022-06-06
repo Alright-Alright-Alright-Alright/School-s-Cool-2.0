@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from "react"
-import PropTypes from "prop-types"
-import { Avatar } from "stream-chat-react"
+import React from "react";
+import PropTypes from "prop-types";
+import { Avatar } from "stream-chat-react";
 
 function UserItem({ user, createChannel }) {
   return (
@@ -21,12 +19,12 @@ function UserItem({ user, createChannel }) {
         </div>
       </button>
     </div>
-  )
+  );
 }
 
 UserItem.propTypes = {
   user: PropTypes.shape.isRequired,
   createChannel: PropTypes.func.isRequired,
-}
+};
 
-export default UserItem
+export default UserItem;

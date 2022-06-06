@@ -1,9 +1,7 @@
 /* eslint-disable no-shadow */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react"
-import { Avatar, useChatContext } from "stream-chat-react"
+import React, { useEffect, useState } from "react";
+import { Avatar, useChatContext } from "stream-chat-react";
 
 // import { InviteIcon } from "../assets"
 
@@ -15,22 +13,22 @@ const ListContainer = ({ children }) => (
     </div>
     {children}
   </div>
-)
+);
 
 const UserItem = ({ user, setSelectedUsers }) => {
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const handleSelect = () => {
     if (selected) {
       setSelectedUsers((prevUsers) =>
         prevUsers.filter((prevUser) => prevUser !== user.id)
-      )
+      );
     } else {
-      setSelectedUsers((prevUsers) => [...prevUsers, user.id])
+      setSelectedUsers((prevUsers) => [...prevUsers, user.id]);
     }
 
-    setSelected((prevSelected) => !prevSelected)
-  }
+    setSelected((prevSelected) => !prevSelected);
+  };
 
   return (
     <div className="user-item__wrapper" onClick={handleSelect}>
@@ -40,42 +38,42 @@ const UserItem = ({ user, setSelectedUsers }) => {
       </div>
       {selected ? <h1>invite</h1> : <div className="user-item__invite-empty" />}
     </div>
-  )
-}
+  );
+};
 
 const UserList = ({ setSelectedUsers }) => {
-  const { client } = useChatContext()
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [listEmpty, setListEmpty] = useState(false)
-  const [error, setError] = useState(false)
+  const { client } = useChatContext();
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [listEmpty, setListEmpty] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
-      if (loading) return
+      if (loading) return;
 
-      setLoading(true)
+      setLoading(true);
 
       try {
         const response = await client.queryUsers(
           { id: { $ne: client.userID } },
           { id: 1 },
           { limit: 8 }
-        )
+        );
 
         if (response.users.length) {
-          setUsers(response.users)
+          setUsers(response.users);
         } else {
-          setListEmpty(true)
+          setListEmpty(true);
         }
       } catch (error) {
-        setError(true)
+        setError(true);
       }
-      setLoading(false)
-    }
+      setLoading(false);
+    };
 
-    if (client) getUsers()
-  }, [])
+    if (client) getUsers();
+  }, []);
 
   if (error) {
     return (
@@ -84,7 +82,7 @@ const UserList = ({ setSelectedUsers }) => {
           Error loading, please refresh and try again.
         </div>
       </ListContainer>
-    )
+    );
   }
 
   if (listEmpty) {
@@ -92,7 +90,7 @@ const UserList = ({ setSelectedUsers }) => {
       <ListContainer>
         <div className="user-list__message">No users found.</div>
       </ListContainer>
-    )
+    );
   }
 
   return (
@@ -110,7 +108,7 @@ const UserList = ({ setSelectedUsers }) => {
         ))
       )}
     </ListContainer>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

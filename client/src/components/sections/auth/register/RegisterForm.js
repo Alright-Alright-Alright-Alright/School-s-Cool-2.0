@@ -1,53 +1,52 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { t } from "i18next"
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
-import { registerUser } from "../../../../redux/actions/userActions"
-import Button from "../../../core/Button"
+import { t } from "i18next";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { registerUser } from "../../../../redux/actions/userActions";
+import Button from "../../../core/Button";
 
 const RegisterForm = () => {
-  const UI = useSelector((state) => state.UI)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const UI = useSelector((state) => state.UI);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const registerNewUser = {
     firstName,
     lastName,
     email,
     password,
-  }
+  };
 
   const chooseFirstName = (e) => {
-    setFirstName(e.target.value)
-  }
+    setFirstName(e.target.value);
+  };
 
   const chooseLastName = (e) => {
-    setLastName(e.target.value)
-  }
+    setLastName(e.target.value);
+  };
 
   const chooseEmail = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const choosePassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleFormSubmit = (e) => {
-    e.preventDefault()
-    dispatch(registerUser(registerNewUser))
-    setFirstName("")
-    setLastName("")
-    setEmail("")
-    setPassword("")
+    e.preventDefault();
+    dispatch(registerUser(registerNewUser));
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
     // setTimeout(() => navigate("/login"), 1500)
-  }
+  };
 
   const logo = (
     <svg
@@ -92,7 +91,7 @@ const RegisterForm = () => {
         fill="#0F2331"
       />
     </svg>
-  )
+  );
 
   return (
     <div className="h-screen flex justify-center items-center">
@@ -164,7 +163,7 @@ const RegisterForm = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default RegisterForm;
