@@ -12,6 +12,7 @@ import {
 import EventDescriptionCard from "../../core/events/eventDescriptionCard/eventDescriptionCard"
 import Post from "../../core/post/Post"
 import EditEventModal from "../../core/events/EditEventModal"
+import RichTextToolbar from "../../core/richtText/RichTextToolbar"
 
 function EventDetailMainContent({
   event,
@@ -51,11 +52,8 @@ function EventDetailMainContent({
         {UI.errors && <p>{UI.errors.message}</p>}
 
         <EventDescriptionCard event={event} user={user} />
-        <EventHeaderCard
-          onClick={createNewPost}
-          postBody={(e) => setPostBody(e)}
-        />
 
+        <RichTextToolbar buttonStyle="btnEventStyle" colorIcon="text-sky" />
         {posts?.map((post) => (
           <Post
             key={post._id}
