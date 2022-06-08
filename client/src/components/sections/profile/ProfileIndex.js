@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom"
 import Main from "../../layout/Main"
 import ProfileMainContent from "./ProfileMainContent"
 import { getUserProfile } from "../../../redux/actions/userActions"
+import { getAlltopics } from "../../../redux/actions/topicActions"
+import { getAllEvents } from "../../../redux/actions/eventActions"
+import { getAllCourses } from "../../../redux/actions/courseActions"
+import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions"
 
 function ProfileIndex() {
   const userProfile = useSelector((state) => state.user.userProfile)
@@ -17,6 +21,10 @@ function ProfileIndex() {
 
   useEffect(() => {
     dispatch(getUserProfile(userId))
+    dispatch(getAlltopics())
+    dispatch(getAllFilesFromLibrary())
+    dispatch(getAllEvents())
+    dispatch(getAllCourses())
   }, [dispatch, userId])
 
   return (

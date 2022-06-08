@@ -12,6 +12,12 @@ export default function DashCardListItem({
   listItemUsers,
   listItemType,
 }) {
+  // Get i18Next locale from cookies
+  const localeFromCookies = `; ${document.cookie}`
+    .split(`; i18next=`)
+    .pop()
+    .split(";")[0]
+
   return (
     <>
       <div className="pt-3 flex justify-between">
@@ -19,7 +25,9 @@ export default function DashCardListItem({
           <Link to={`/${listItemType}/${linkId}`}>{listItemTitle}</Link>
           {listItemDate && (
             <p className="text-xs text-grey-medium pb-1">
-              {dayjs(listItemDate).format("MMM DD, YYYY")}
+              {dayjs(listItemDate)
+                .locale(localeFromCookies)
+                .format("MMM DD, YYYY")}
             </p>
           )}
         </div>
