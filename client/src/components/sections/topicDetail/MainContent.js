@@ -34,7 +34,7 @@ function MainContent({ topic, showModal, editModal, showEditModal }) {
       )}
       <div className={`static filter ${showModal && "blur-md"}`}>
         {UI.errors && <p>{UI.errors.message}</p>}
-        <RichTextToolbar />
+        <RichTextToolbar buttonStyle="btnTopicStyle" colorIcon="text-aqua" />
         {/* <TopicHeaderCard
         onClick={createNewPost}
         postBody={(e) => setPostBody(e)}

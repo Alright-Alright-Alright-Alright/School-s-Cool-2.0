@@ -128,7 +128,6 @@ export const deleteEvent = (eventId) => async (dispatch) => {
 
 export const inviteForEvent = (eventId, userId) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
-  console.log(eventId, userId)
   try {
     const inviteForEventDb = await inviteForEventService(eventId, userId)
     dispatch({ type: CLEAR_ERRORS })
