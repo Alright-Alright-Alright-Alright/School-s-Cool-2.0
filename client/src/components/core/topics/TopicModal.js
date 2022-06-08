@@ -165,7 +165,11 @@ const Modal = ({ handleShowModal, editModal, singleTopic }) => {
               onClick={handleClick}
               className="flex justify-around items-center w-2/7"
             >
-              <span className="text-sm">Add Cover Image</span>
+              <span className="text-sm">
+                {bannerImage === ""
+                  ? t("topics.modal_cover_image_new_topic")
+                  : "Succesvol Geüpload"}
+              </span>
               <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
             </button>
             <input
