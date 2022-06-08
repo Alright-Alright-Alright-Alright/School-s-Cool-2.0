@@ -89,7 +89,7 @@ const ForgotPassword = () => {
           <div className="flex justify-between px-8">
             <Link to="/login">
               <Button
-                buttonName="Back"
+                buttonName={t("auth.login_register_reset_password_go_back")}
                 buttonSubmit
                 buttonStyle="btnPrimaryStyle"
               />

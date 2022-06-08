@@ -180,6 +180,7 @@
         "login_register_password_confirm": "Confirm password",
         "login_register_button": "Register",
         "login_register_back_to_login": "Or login",
-        "login_register_reset_password": "Reset password"
+        "login_register_reset_password": "Reset password",
+        "login_register_reset_password_go_back": "Back"
     }
   }
