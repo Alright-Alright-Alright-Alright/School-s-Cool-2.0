@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 // MongoDB connection =====================================
 
@@ -20,6 +21,11 @@ mongoose
 
 app.use(express.json());
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 // auth ================================
 app.set("trust proxy", 1); // trust first proxy
 

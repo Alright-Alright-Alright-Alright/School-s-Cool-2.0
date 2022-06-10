@@ -61,6 +61,13 @@ exports.login = async (req, res) => {
   try {
     const { email, password, remember } = req.body;
 
+    console.log(req.body);
+    if (!email || !password) {
+      return res
+        .status(400)
+        .send({ message: "Please provide: email, password" });
+    }
+
     // if (!zohoCheck(email)) {
     //   res.status(400).json({
     //     message: "This email is not registered in Zoho",
