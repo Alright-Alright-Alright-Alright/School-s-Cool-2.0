@@ -9,6 +9,7 @@ const lessonSchema = new Schema(
     description: {
       type: Schema.Types.String,
     },
+    courseId: { type: Schema.Types.ObjectId, ref: "Course" },
     items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   },
   {
