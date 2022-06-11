@@ -174,7 +174,8 @@
         "login_register_password_confirm": "Bevestig wachtwoord",
         "login_register_button": "Registreer",
         "login_register_back_to_login": "Of log in",
-        "login_register_reset_password": "Reset wachtwoord"
+        "login_register_reset_password": "Reset wachtwoord",
+        "login_register_reset_password_go_back": "Terug"
     }
     
   }
