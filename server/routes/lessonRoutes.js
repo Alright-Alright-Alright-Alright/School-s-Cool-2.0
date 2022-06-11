@@ -1,5 +1,5 @@
 const express = require("express");
-const courseRoutes = express.Router();
+const lessonRoutes = express.Router();
 
 const {
   createLesson,
@@ -7,7 +7,7 @@ const {
   getLesson,
 } = require("../controllers/lessonController");
 
-courseRoutes.route("/lessons").post(createLesson);
-courseRoutes.route("/lessons/:id").delete(deleteLesson).get(getLesson);
+lessonRoutes.route("/lessons").post(createLesson);
+lessonRoutes.route("/lessons/:id").delete(deleteLesson).get(getLesson);
 
-module.exports = courseRoutes;
+module.exports = lessonRoutes;

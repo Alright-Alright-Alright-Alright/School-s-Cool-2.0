@@ -45,7 +45,9 @@ const deleteLesson = async (req, res, next) => {
   }
 
   try {
-    await Lesson.deleteOne({ _id: id });
+    const lesson = await Lesson.findById(id);
+    await lesson.deleteOne();
+
     res.status(200).send({ message: "DELETED" });
   } catch (error) {
     res.status(500).send({ message: error.message });

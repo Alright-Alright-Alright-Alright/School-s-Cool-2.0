@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Course = require("./course");
 const { Schema, model } = mongoose;
 
 const lessonSchema = new Schema(
@@ -14,6 +15,25 @@ const lessonSchema = new Schema(
   },
   {
     timestamps: true,
+  }
+);
+
+lessonSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    // 'this' refers to the item being deleted
+    await Course.updateOne(
+      {
+        _id: this.courseId,
+      },
+      {
+        $pull: {
+          lessons: this._id,
+        },
+      }
+    );
+    next();
   }
 );
 

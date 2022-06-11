@@ -73,7 +73,7 @@ const getCourse = async (req, res, next) => {
   }
 
   try {
-    const course = await Course.findById(id);
+    const course = await Course.findOne({ _id: id }).populate("lessons");
     res.status(200).send({ data: course });
   } catch (error) {
     res.status(500).send({ message: error.message });
