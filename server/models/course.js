@@ -14,6 +14,10 @@ const courseSchema = new Schema(
       ref: "Topic",
     },
     lessons: [{ type: Schema.Types.ObjectId, ref: "Lesson" }],
+    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    members: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
