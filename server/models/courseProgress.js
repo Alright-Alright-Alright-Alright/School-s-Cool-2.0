@@ -7,6 +7,10 @@ const courseProgressSchema = new Schema(
       type: Schema.Types.String,
       ref: "User",
     },
+    courseId: {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    },
     started: {
       type: Schema.Types.Boolean,
     },

@@ -1,30 +1,5 @@
-const {
-  joinCourseService,
-  leaveCourseService,
-} = require("../services/courseService");
 const Course = require("../models/course");
-
-const joinCourse = async (req, res, next) => {
-  const user = req.user.userLogedIn;
-  const courseId = req.body.courseId;
-  try {
-    let updatedUser = await joinCourseService(courseId, user);
-    return res.status(201).json(updatedUser);
-  } catch (e) {
-    res.status(500).json({ message: e.message }) && next(e);
-  }
-};
-
-const leaveCourse = async (req, res, next) => {
-  const user = req.user.userLogedIn;
-  const courseId = req.body.courseId;
-  try {
-    let updatedUser = await leaveCourseService(courseId, user);
-    return res.status(201).json(updatedUser);
-  } catch (e) {
-    res.status(500).json({ message: e.message }) && next(e);
-  }
-};
+const CourseProgress = require("../models/courseProgress");
 
 const createCourse = async (req, res, next) => {
   const user = req.user.userLogedIn;
@@ -96,11 +71,54 @@ const deleteCourse = async (req, res, next) => {
   }
 };
 
+const startcourse = async (req, res, next) => {
+  const user = req.user.userLogedIn;
+
+  // Ensure all fields are present
+  const requiredParams = ["courseId"];
+  if (requiredParams.every((field) => field in Object.keys(req.params))) {
+    return res
+      .status(400)
+      .send({ message: `Please provide: ${requiredParams.join(", ")}` });
+  }
+
+  try {
+    // Gather some prerequisites
+    const course = await Course.findById(req.params.courseId);
+    if (!course) {
+      return res.status(404).send({ message: "Course not found" });
+    }
+
+    // Make sure there is not already an attempt
+    const courseProgress = await CourseProgress.findOne({
+      courseId: req.params.courseId,
+      userId: user._id,
+    });
+    if (courseProgress) {
+      return res
+        .status(400)
+        .send({ message: "User has already enrolled in this course" });
+    }
+
+    // Create the attempt
+    const attempt = await CourseProgress.create({
+      userId: user._id,
+      courseId: req.params.courseId,
+      started: true,
+      completed: false,
+    });
+
+    res.status(200).send({ data: attempt });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    next(error);
+  }
+};
+
 module.exports = {
-  joinCourse,
-  leaveCourse,
   createCourse,
   getCourses,
   deleteCourse,
   getCourse,
+  startcourse,
 };
