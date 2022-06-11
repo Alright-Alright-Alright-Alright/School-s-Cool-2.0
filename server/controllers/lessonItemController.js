@@ -37,7 +37,7 @@ const deleteItem = async (req, res, next) => {
   }
 
   try {
-    await Item.deleteOne({ _id: id });
+    await LessonItem.deleteOne({ _id: id });
     res.status(200).send({ message: "DELETED" });
   } catch (error) {
     res.status(500).send({ message: error.message });
