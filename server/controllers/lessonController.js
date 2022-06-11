@@ -53,7 +53,23 @@ const deleteLesson = async (req, res, next) => {
   }
 };
 
+const getLesson = async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) {
+    return res.status(400).send({ message: "Please provide: id" });
+  }
+
+  try {
+    const lesson = await Lesson.findById(id);
+    res.status(200).send({ data: lesson });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    next(error);
+  }
+};
+
 module.exports = {
   createLesson,
   deleteLesson,
+  getLesson,
 };
