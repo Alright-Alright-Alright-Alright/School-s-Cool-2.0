@@ -9,6 +9,7 @@ const itemSchema = new Schema(
     lessonId: Schema.Types.ObjectId,
     content: Schema.Types.Mixed,
     index: Schema.Types.Number,
+    type: Schema.Types.String,
   },
   {
     timestamps: true,

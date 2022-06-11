@@ -62,7 +62,7 @@ const getLesson = async (req, res, next) => {
   }
 
   try {
-    const lesson = await Lesson.findById(id);
+    const lesson = await Lesson.findById(id).populate("items");
     res.status(200).send({ data: lesson });
   } catch (error) {
     res.status(500).send({ message: error.message });
