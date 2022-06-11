@@ -14,13 +14,13 @@ exports.addFile = async (req, res) => {
   const owner = req.user.userLogedIn;
   try {
     if (tags.length < 1) {
-      res.status(400).json({ message: "Please add at least one tag" });
+      res.status(400).json({ message: "Voeg tenminste 1 tag toe" });
       return;
     } else if (isEmpty(category)) {
-      res.status(400).json({ message: "Please choose a category" });
+      res.status(400).json({ message: "Selecteer een categorie" });
       return;
     } else if (isEmpty(subject)) {
-      res.status(400).json({ message: "Please choose a subject" });
+      res.status(400).json({ message: "Selecteer een onderwerp" });
       return;
     } else {
       let file = await createFile(
