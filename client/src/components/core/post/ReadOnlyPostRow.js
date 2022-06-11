@@ -13,6 +13,7 @@ function ReadOnlyPostRow({ postBody }) {
             href={decoratedHref}
             key={key}
             className=" text-sky hover:text-sky-light"
+            id="richtext-post"
           >
             {decoratedText}
           </a>

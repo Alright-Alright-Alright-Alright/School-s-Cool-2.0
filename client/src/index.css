@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  ul, ol {
+  #richtext-post ul, ol {
     list-style: revert;
     list-style-position: inside;
   }
