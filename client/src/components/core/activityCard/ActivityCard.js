@@ -105,7 +105,7 @@ function ActivityCard({ activity, commentFather }) {
           </p>
         </div>
       </div>
-      <div className="">
+      <div className="" id="richtext-post">
         <div className="border-b-2 border-grey-light m-3 pb-3 text-base">
           <Linkify
             componentDecorator={(decoratedHref, decoratedText, key) => (
