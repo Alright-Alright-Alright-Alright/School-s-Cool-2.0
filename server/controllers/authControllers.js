@@ -15,12 +15,12 @@ const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  // if (zohoCheck(email)) {
-  //   res.status(400).json({
-  //     message: "This email is not registered in Zoho",
-  //   });
-  //   return;
-  // }
+  if (zohoCheck(email)) {
+    res.status(400).json({
+      message: "This email is not registered in Zoho",
+    });
+    return;
+  }
 
   if (isEmpty(email, firstName, lastName, password)) {
     res
@@ -61,12 +61,12 @@ exports.login = async (req, res) => {
   try {
     const { email, password, remember } = req.body;
 
-    // if (!zohoCheck(email)) {
-    //   res.status(400).json({
-    //     message: "This email is not registered in Zoho",
-    //   });
-    //   return;
-    // }
+    if (!zohoCheck(email)) {
+      res.status(400).json({
+        message: "This email is not registered in Zoho",
+      });
+      return;
+    }
 
     if (isEmpty(email)) {
       res.status(400).json({ message: "Email must not be empty" });
