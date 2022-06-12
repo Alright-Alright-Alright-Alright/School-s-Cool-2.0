@@ -139,7 +139,7 @@ const updateItem = async (req, res, next) => {
         for await (const item of lesson.items) {
           if (item.index >= newIndex && item.index < oldIndex) {
             item.index += 1;
-            const theItem = await item.save();
+            await item.save();
           }
         }
       }
