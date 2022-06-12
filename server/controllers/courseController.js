@@ -62,6 +62,7 @@ const getCourses = async (req, res, next) => {
   }
 };
 
+// Get a specific course, with details about the user's progress in the lessons
 const getCourse = async (req, res, next) => {
   const id = req.params.id;
   if (!id) {
@@ -69,8 +70,21 @@ const getCourse = async (req, res, next) => {
   }
 
   try {
+    // Get the course and its corresponding lessons
     const course = await Course.findOne({ _id: id }).populate("lessons");
-    res.status(200).send({ data: course });
+
+    // Check if user has joined this course
+    const courseProgress =
+      (await CourseProgress.findOne({
+        course: course._id,
+        user: req.user.userLogedIn,
+      })) || null;
+    const started = !!courseProgress;
+
+    // Combine data and metadata
+    const data = { ...course.toObject(), progress: courseProgress, started };
+
+    res.status(200).send({ data });
   } catch (error) {
     res.status(500).send({ message: error.message });
     next(error);
