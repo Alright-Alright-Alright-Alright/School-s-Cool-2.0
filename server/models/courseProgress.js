@@ -3,11 +3,11 @@ const { Schema, model } = mongoose;
 
 const courseProgressSchema = new Schema(
   {
-    userId: {
+    user: {
       type: Schema.Types.String,
       ref: "User",
     },
-    courseId: {
+    course: {
       type: Schema.Types.ObjectId,
       ref: "Course",
     },

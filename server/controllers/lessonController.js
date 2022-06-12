@@ -4,19 +4,18 @@ const CourseProgress = require("../models/courseProgress");
 const LessonProgress = require("../models/lessonProgress");
 
 const createLesson = async (req, res, next) => {
-  const { courseId, title, description } = req.body;
-
-  if (!title || !description || !courseId) {
+  // Ensure all fields are present
+  const requiredFields = ["title", "description", "courseId"];
+  if (requiredFields.every((field) => field in Object.keys(req.body))) {
     return res
       .status(400)
-      .send({ message: "Please provide: title, description, courseId" });
+      .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
   try {
     const lesson = {
-      title,
-      description,
-      courseId,
+      ...req.body,
+      course: req.body.courseId,
       items: [],
     };
 
@@ -24,7 +23,7 @@ const createLesson = async (req, res, next) => {
     // Add the created lesson to the course to build the relation
     await Course.updateOne(
       {
-        _id: courseId,
+        _id: lesson.courseId,
       },
       {
         $push: {
@@ -41,13 +40,16 @@ const createLesson = async (req, res, next) => {
 };
 
 const deleteLesson = async (req, res, next) => {
-  const id = req.params.id;
-  if (!id) {
-    return res.status(400).send({ message: "Please provide: id" });
+  // Ensure all fields are present
+  const requiredFields = ["id"];
+  if (requiredFields.every((field) => field in Object.keys(req.params))) {
+    return res
+      .status(400)
+      .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
   try {
-    const lesson = await Lesson.findById(id);
+    const lesson = await Lesson.findById(req.params.id);
     await lesson.deleteOne();
 
     res.status(200).send({ message: "DELETED" });
@@ -58,13 +60,16 @@ const deleteLesson = async (req, res, next) => {
 };
 
 const getLesson = async (req, res, next) => {
-  const id = req.params.id;
-  if (!id) {
-    return res.status(400).send({ message: "Please provide: id" });
+  // Ensure all fields are present
+  const requiredFields = ["lessonId"];
+  if (requiredFields.every((field) => field in Object.keys(req.params))) {
+    return res
+      .status(400)
+      .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
   try {
-    const lesson = await Lesson.findById(id).populate("items");
+    const lesson = await Lesson.findById(req.params.lessonId).populate("items");
     res.status(200).send({ data: lesson });
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -73,7 +78,7 @@ const getLesson = async (req, res, next) => {
 };
 
 const startLesson = async (req, res, next) => {
-  const user = req.user.userLogedIn;
+  const userId = req.user.userLogedIn;
 
   // Ensure all fields are present
   const requiredParams = ["lessonId"];
@@ -85,20 +90,21 @@ const startLesson = async (req, res, next) => {
 
   try {
     // Gather some prerequisites
-    const lesson = await Lesson.findById(req.params.lessonId);
+    const lesson = await Lesson.findById(req.params.lessonId).populate(
+      "course"
+    );
     if (!lesson) {
       return res.status(404).send({ message: "Lesson not found" });
     }
 
-    const course = await Course.findById(lesson.courseId);
-    if (!course) {
+    if (!lesson.course) {
       return res.status(404).send({ message: "Course not found" });
     }
 
     // Make sure the user has started the course
     const courseProgress = await CourseProgress.findOne({
-      courseId: course.id,
-      userId: user._id,
+      courseId: lesson.course._id,
+      userId: userId,
     });
 
     if (!courseProgress) {
@@ -109,8 +115,8 @@ const startLesson = async (req, res, next) => {
 
     // Make sure there is not already an attempt
     const lessonProgress = await LessonProgress.findOne({
-      lessonId: req.params.lessonid,
-      userId: user._id,
+      lesson: req.params.lessonId,
+      userId: userId,
     });
     if (lessonProgress) {
       return res
@@ -120,8 +126,9 @@ const startLesson = async (req, res, next) => {
 
     // Create the attempt
     const attempt = await LessonProgress.create({
-      userId: user._id,
-      courseProgressId: courseProgress._id,
+      userId: userId,
+      courseProgress: courseProgress._id,
+      lesson: req.params.lessonId,
       started: true,
       completed: false,
       currentItem: lesson.items.find((item) => item.index === 0), // Set current item to the first item in the lesson

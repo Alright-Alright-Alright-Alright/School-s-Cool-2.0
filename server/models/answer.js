@@ -7,16 +7,19 @@ const answerSchema = new Schema(
       type: Schema.Types.String,
       ref: "User",
     },
-    lessonProgressId: {
-      type: Schema.Types.String,
+    lessonProgress: {
+      type: Schema.Types.ObjectId,
       ref: "LessonProgress",
     },
-    itemId: {
-      type: Schema.Types.String,
+    item: {
+      type: Schema.Types.ObjectId,
       ref: "Item",
     },
     content: {
       type: Schema.Types.Mixed,
+    },
+    score: {
+      type: Schema.Types.Number,
     },
   },
   {

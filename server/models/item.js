@@ -7,7 +7,10 @@ const itemSchema = new Schema(
     title: {
       type: Schema.Types.String,
     },
-    lessonId: Schema.Types.ObjectId,
+    lesson: {
+      type: Schema.Types.ObjectId,
+      ref: "Lesson",
+    },
     content: Schema.Types.Mixed,
     index: Schema.Types.Number,
     type: Schema.Types.String,

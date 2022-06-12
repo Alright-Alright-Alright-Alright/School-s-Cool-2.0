@@ -7,9 +7,13 @@ const lessonProgressSchema = new Schema(
       type: Schema.Types.String,
       ref: "User",
     },
-    courseProgressId: {
+    courseProgress: {
       type: Schema.Types.ObjectId,
       ref: "CourseProgress",
+    },
+    lesson: {
+      type: Schema.Types.ObjectId,
+      ref: "Lesson",
     },
     started: {
       type: Schema.Types.Boolean,

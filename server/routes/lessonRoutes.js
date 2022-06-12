@@ -10,6 +10,6 @@ const {
 
 lessonRoutes.route("/lessons").post(createLesson);
 lessonRoutes.route("/lessons/:lessonId/start").post(startLesson);
-lessonRoutes.route("/lessons/:id").delete(deleteLesson).get(getLesson);
+lessonRoutes.route("/lessons/:lessonId").delete(deleteLesson).get(getLesson);
 
 module.exports = lessonRoutes;
