@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { SaveIcon, LogoutIcon } from "@heroicons/react/solid";
-import { Panel as InfographicPanel } from "./components/Infographic";
+import { Panel as InfographicPanel } from "./components/infographic";
 import { Panel as MultiplechoicePanel } from "./components/Multiplechoice";
 import { Panel as OpenQuestionPanel } from "./components/Open";
 

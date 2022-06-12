@@ -4,7 +4,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { PlusIcon } from "@heroicons/react/solid";
 import Card from "./Card";
-import { Preview as InfographicPreview } from "./components/Infographic";
+import { Preview as InfographicPreview } from "./components/infographic";
 import { Preview as MultiplechoicePreview } from "./components/Multiplechoice";
 import { Preview as OpenQuestionPreview } from "./components/Open";
 
