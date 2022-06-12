@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
@@ -15,7 +16,7 @@ import LibraryModal from "../library/LibraryModal";
 import { createPost, getAllPosts } from "../../../redux/actions/postActions";
 import "./RichTextToolbar.css";
 
-const RichTextToolbar = () => {
+const RichTextToolbar = ({ buttonStyle, colorIcon }) => {
   const singleTopic = useSelector((state) => state.topics.singleTopic);
   const user = useSelector((state) => state.user.singleUser);
   const [editorState, setEditorState] = useState(() =>
@@ -91,7 +92,7 @@ const RichTextToolbar = () => {
         <div className="flex justify-between p-3 relative">
           <div className="flex items-center">
             <button type="button" onClick={handleShowModal} className="flex">
-              <Icon iconName="add" iconStyle="fill-inactive text-aqua" />
+              <Icon iconName="add" iconStyle={`fill-inactive ${colorIcon}`} />
               <p className="pl-3">{t("topics.header_card_add_resource")}</p>
             </button>
             {showModal && (
@@ -102,8 +103,12 @@ const RichTextToolbar = () => {
             )}
           </div>
           <Button
-            buttonName={t("topics.header_card_add_button")}
-            buttonStyle="btnTopicStyle"
+            buttonName={
+              buttonStyle.includes("Topic")
+                ? t("topics.header_card_add_button")
+                : t("events.header_card_add_button")
+            }
+            buttonStyle={buttonStyle}
             buttonSubmit
             onClick={handleSubmit}
           />

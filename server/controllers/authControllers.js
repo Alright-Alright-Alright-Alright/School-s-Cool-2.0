@@ -15,12 +15,12 @@ const { jwtAuthorization } = require("../middleware/JWTmiddleware");
 exports.register = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  // if (zohoCheck(email)) {
-  //   res.status(400).json({
-  //     message: "This email is not registered in Zoho",
-  //   });
-  //   return;
-  // }
+  if (zohoCheck(email)) {
+    res.status(400).json({
+      message: "This email is not registered in Zoho",
+    });
+    return;
+  }
 
   if (isEmpty(email, firstName, lastName, password)) {
     res
@@ -61,19 +61,12 @@ exports.login = async (req, res) => {
   try {
     const { email, password, remember } = req.body;
 
-    console.log(req.body);
-    if (!email || !password) {
-      return res
-        .status(400)
-        .send({ message: "Please provide: email, password" });
+    if (!zohoCheck(email)) {
+      res.status(400).json({
+        message: "This email is not registered in Zoho",
+      });
+      return;
     }
-
-    // if (!zohoCheck(email)) {
-    //   res.status(400).json({
-    //     message: "This email is not registered in Zoho",
-    //   });
-    //   return;
-    // }
 
     if (isEmpty(email)) {
       res.status(400).json({ message: "Email must not be empty" });
@@ -109,7 +102,10 @@ exports.forgetPassword = async (req, res) => {
   try {
     const email = req.body.email;
     await forgetPasswordService(email);
-    res.json({ message: "Check your email buddy" });
+    res.json({
+      message:
+        "Controleer je e-mail voor het opnieuw instellen van je wachtwoord.",
+    });
   } catch (error) {
     res.status(422).json({ message: error.message });
   }

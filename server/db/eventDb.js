@@ -19,7 +19,8 @@ const createEventDb = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   try {
     return await Event.create({
@@ -32,6 +33,7 @@ const createEventDb = async (
       location,
       bannerImage,
       tags,
+      isPrivate,
     });
   } catch (e) {
     throw new Error(e.message);
@@ -57,7 +59,8 @@ const updateEventDb = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   try {
     return await Event.findByIdAndUpdate(
@@ -71,6 +74,7 @@ const updateEventDb = async (
         location,
         bannerImage,
         tags,
+        isPrivate,
       },
       { new: true }
     )
@@ -109,6 +113,66 @@ const deleteEventFromDb = async (eventId) => {
   }
 };
 
+const addUserToEventDb = async (eventId, user) => {
+  try {
+    return await Event.findByIdAndUpdate(
+      eventId,
+      {
+        $push: { attendees: user },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("attendees", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const takeOutUserFromEventDb = async (eventId, user) => {
+  try {
+    return await Event.findByIdAndUpdate(
+      eventId,
+      {
+        $pull: { attendees: user },
+      },
+      { new: true }
+    )
+      .populate("owner", "firstName lastName imageUrl")
+      .populate("attendees", "_id firstName lastName imageUrl")
+      .populate({
+        path: "posts",
+        populate: {
+          path: "owner",
+          select: "firstName, lastName, imageUrl",
+        },
+        populate: {
+          path: "comments",
+          populate: {
+            path: "owner",
+            select: "firstName, lastName, imageUrl",
+          },
+        },
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllEventsDb,
   createEventDb,
@@ -117,4 +181,6 @@ module.exports = {
   userJoinEventDb,
   userLeaveEventDb,
   deleteEventFromDb,
+  addUserToEventDb,
+  takeOutUserFromEventDb,
 };

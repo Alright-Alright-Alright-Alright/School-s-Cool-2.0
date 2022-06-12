@@ -100,6 +100,7 @@
     "button_upload_file": "Voeg bestand toe",
     "button_upload_file_modal_title": "Geef een naam op voor het bestand",
     "button_upload_file_modal_description": "Selecteer een bestand",
+    "button_upload_file_modal_success": "Bestand is geüpload",
     "button_upload_file_modal_button": "Upload bestand",
     "button_upload_file_modal_cancel": "Annuleer",
     "modal_choose_file_name": "Geef een naam op voor het bestand",
@@ -171,6 +172,7 @@
     "login_register_password_confirm": "Bevestig wachtwoord",
     "login_register_button": "Registreer",
     "login_register_back_to_login": "Of log in",
-    "login_register_reset_password": "Reset wachtwoord"
+    "login_register_reset_password": "Reset wachtwoord",
+    "login_register_reset_password_go_back": "Terug"
   }
 }

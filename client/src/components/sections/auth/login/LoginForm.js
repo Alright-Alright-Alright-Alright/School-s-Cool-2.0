@@ -90,12 +90,13 @@ const LoginForm = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-58 lg:w-1/5 h-96 rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-2/3 lg:w-1/5 h-96 rounded-2xl flex flex-col justify-around py-3"
         >
           <div className="flex justify-center">{logo}</div>
-          <div className="lg:h-2/5 flex flex-col px-8 justify-around">
+          <div className="lg:h-2/5 flex flex-col lg:px-8 px-5 justify-around">
             <label className="text-sm my-2">
-              {t("auth.login_register_email")}:
+              {/* {t("auth.login_register_email")}: */}
+              Email:
             </label>
             <input
               type="email"
@@ -103,11 +104,13 @@ const LoginForm = () => {
               checked={email}
               onChange={chooseEmail}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2 mb-2"
-              placeholder={t("auth.login_register_enter_email")}
+              // placeholder={t("auth.login_register_enter_email")}
+              placeholder="Voer een emailadres in"
             />
 
             <label className="text-sm my-2">
-              {t("auth.login_register_password")}:{" "}
+              {/* {t("auth.login_register_password")}:{" "} */}
+              Password
             </label>
             <input
               type="password"
@@ -115,32 +118,37 @@ const LoginForm = () => {
               value={password}
               onChange={choosePassword}
               className="bg-grey-super_light placeholder-grey-medium text-sm rounded-md p-2"
-              placeholder={t("auth.login_register_enter_password")}
+              // placeholder={t("auth.login_register_enter_password")}
+              placeholder="Voer een wachtwoord in"
             />
             <br />
             <div className="flex items-center space-x-1">
               <input type="checkbox" value={remember} onChange={rememberMe} />
-              <label className="text-sm">Remember me</label>
+              <label className="text-sm">Herinner mij</label>
             </div>
-            <p className="text-sm flex justify-end">
-              <Link to="/forgot">{t("auth.login_forgot_password")}</Link>
-            </p>
           </div>
-          <div className="flex justify-between px-8">
+          <div className="flex justify-end px-8">
             <Button
               buttonName="Log in"
               buttonSubmit
               buttonStyle="btnSecondaryStyle"
             />
-            <Link to="/register">
-              <Button
-                buttonName={t("auth.login_register")}
-                buttonSubmit
-                buttonStyle="btnPrimaryStyle"
-              />
-            </Link>
+          </div>
+          <div>
+            <p className="text-sm text-center">
+              {/* <Link to="/forgot">{t("auth.login_forgot_password")}</Link> */}
+              <Link to="/forgot">Wachtwoord vergeten</Link>
+            </p>
           </div>
           {UI.errors && <MessageHandler error={UI.errors} />}
+          <p className="text-sm text-center py-2">
+            Nog geen account?
+            <Link to="/register" className="underline text-yellow">
+              {" "}
+              {/* {t("auth.login_register")} */}
+              Registreer
+            </Link>
+          </p>
         </form>
       </div>
     </div>

@@ -21,6 +21,32 @@ const MainEventsContent = ({ events }) => {
     setShowModal(!showModal);
   };
 
+  const checkIfIsPrivate = () => {
+    const eventsCurrentUserCanSee = [];
+    events.forEach((event) => {
+      if (event.isPrivate === false) {
+        eventsCurrentUserCanSee.push(event);
+      }
+    });
+    const privateEvents = events.filter(
+      (attendee) => attendee.isPrivate === true
+    );
+    privateEvents
+      .map((event) =>
+        event.members.map((member) => member._id === user._id && event)
+      )
+      .flat(Infinity)
+      .forEach((item) => {
+        if (typeof item === "object") {
+          eventsCurrentUserCanSee.push(item);
+        }
+      });
+    return eventsCurrentUserCanSee.sort(
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
+  };
+
   let filterRule;
   switch (filter) {
     case "All events":
@@ -41,11 +67,11 @@ const MainEventsContent = ({ events }) => {
       filterRule = (item) => new Date(item.dateEnd) >= new Date();
   }
 
-  const filteredEvents = events.filter(filterRule);
+  const filteredEvents = checkIfIsPrivate().filter(filterRule);
 
   return (
     <div className="max-w-sm	lg:max-w-full">
-      <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-evenly lg:justify-between space-x-2  pr-2 lg:px-5">
+      <div className="flex flex-col lg:flex-row flex-wrap lg:pt-5 justify-evenly lg:justify-between space-x-2 lg:px-5">
         <button
           className="flex gap-2 bg-sky text-white rounded-md hover:shadow-md px-4 py-2 hover:bg-sky-dark"
           type="button"
@@ -55,8 +81,8 @@ const MainEventsContent = ({ events }) => {
           <p className="pl-3">{t("events.button_new_event")}</p>
         </button>
 
-        <div className="flex overflow-x-auto space-x-3 max-w-xl">
-          <div className="pb-3 lg:pb-0">
+        <div className="flex flex-wrap gap-1 lg:gap-0 pl-5 justify-start lg:space-x-3 lg:flex-nowrap max-w-xl">
+          <div className="">
             <Button
               buttonName={t("events.button_all_events")}
               buttonStyle="btnEventStyle"
@@ -77,6 +103,7 @@ const MainEventsContent = ({ events }) => {
               onClick={() => setFilter("My events")}
             />
           </div>
+
           <div className="pb-3 lg:pb-0">
             <Button
               buttonName={t("events.button_past_events")}

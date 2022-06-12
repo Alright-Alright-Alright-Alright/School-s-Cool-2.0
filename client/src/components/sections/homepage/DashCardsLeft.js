@@ -39,10 +39,31 @@ function DashCardsLeft() {
     );
   }
 
+  const checkIfIsPrivate = () => {
+    const topicsCurrentUserCanSee = []
+    topics.forEach((topic) => {
+      if (topic.isPrivate === false) {
+        topicsCurrentUserCanSee.push(topic)
+      }
+    })
+    const privateTopics = topics.filter((member) => member.isPrivate === true)
+    privateTopics
+      .map((topic) =>
+        topic.members.map((member) => member._id === user._id && topic)
+      )
+      .flat(Infinity)
+      .forEach((item) => {
+        if (typeof item === "object") {
+          topicsCurrentUserCanSee.push(item)
+        }
+      })
+    return topicsCurrentUserCanSee
+  }
+
   return (
     <div className="max-w-md px-6 mt-20 hidden lg:flex flex-col gap-8">
       <Dashcard
-        dashCardData={topics}
+        dashCardData={checkIfIsPrivate()}
         dashCardTitle="Topics"
         dashCardStyle="bg-aqua"
         dropdownMenuData={dashcardDropdownMenu.topics}

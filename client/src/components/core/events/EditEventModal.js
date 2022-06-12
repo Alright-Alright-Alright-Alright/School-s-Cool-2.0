@@ -13,6 +13,7 @@ import Icon from "../Icon"
 import "react-datepicker/dist/react-datepicker.css"
 import TagsInput from "../TagsInput"
 import MessageHandler from "../MessageHandler"
+import Button from "../Button"
 
 registerLocale("nl", nl)
 
@@ -21,7 +22,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
   const [location, setLocation] = useState(event?.location)
   const [description, setDescription] = useState(event?.description)
   const [bannerImage, setBannerImage] = useState("")
-  const [privacy, setPrivacy] = useState(false)
+  const [privacy, setPrivacy] = useState(event ? event.isPrivate : false)
   const [tags, setTags] = useState(event?.tags)
   const selectedTags = (tagsFromInput) => setTags(tagsFromInput)
   const [startDate, setStartDate] = useState(dayjs(event?.dateStart).toDate())
@@ -33,7 +34,6 @@ const EditEventModal = ({ handleShowModal, event }) => {
   const { t } = useTranslation()
   const { eventId } = useParams()
   const navigate = useNavigate()
-
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -155,7 +155,7 @@ const EditEventModal = ({ handleShowModal, event }) => {
               withPortal
               locale="nl"
               timeCaption="Time"
-              dateFormat="hh:mm"
+              dateFormat="HH:mm"
               className="py-3 mx-5 w-52 placeholder-grey-medium_light text-base"
             />
           </div>
@@ -216,7 +216,9 @@ const EditEventModal = ({ handleShowModal, event }) => {
             nameLeft={t("events.modal_public_toggle_new_event")}
             nameRight={t("events.modal_private_toggle_new_event")}
             toogle={() => setPrivacy(!privacy)}
+            privacy={privacy}
           />
+          <Button buttonName="Save" buttonStyle="btnEventStyle" buttonSubmit />
         </section>
         <div className="flex">
           <button

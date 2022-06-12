@@ -62,10 +62,17 @@ const EventCards = ({ event }) => {
             <div>
               <div className="flex justify-start">
                 <p className="text-sm pr-3 text-grey-medium_light">
-                  {dayjs(event?.dateStart).format("MMM DD, YYYY")}
+                  {dayjs(event?.dateStart)
+                    .locale(localeFromCookies)
+                    .format("MMM DD, YYYY")}
                 </p>
                 <p className="text-sm text-grey-medium_light">
-                  {dayjs(event?.dateEnd).format("MMM DD, YYYY")}
+                  {event.dateStart !== event.dateEnd
+                    ? dayjs(event?.dateEnd)
+                        .locale(localeFromCookies)
+                        .format("MMM DD, YYYY")
+                    : null}
+                  {/* {dayjs(event?.dateEnd).format("MMM DD, YYYY")} */}
                 </p>
               </div>
               <p className="text-sm text-grey-medium_light">

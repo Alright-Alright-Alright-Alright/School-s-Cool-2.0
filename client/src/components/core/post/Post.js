@@ -116,7 +116,7 @@ function Post({ post, parentId, comments }) {
           </div>
         </div>
       </div>
-      <div className="">
+      <div className="" id="richtext-post">
         {/* <p className="border-b-2 border-grey-light m-3 pb-3 text-base">
           {ReactHtmlParser(post.body)}
         </p> */}

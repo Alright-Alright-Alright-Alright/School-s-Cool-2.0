@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { t } from "i18next";
+import { Link } from "react-router-dom";
 import Button from "../../../core/Button";
 import MessageHandler from "../../../core/MessageHandler";
 import { forgetAction } from "../../../../redux/actions/userActions";
@@ -70,7 +71,7 @@ const ForgotPassword = () => {
       <div className="w-screen h-screen flex items-center justify-center">
         <form
           onSubmit={handleFormSubmit}
-          className="bg-white shadow-lg w-4/5 lg:w-1/5 h-2/6 rounded-2xl flex flex-col justify-around p-3"
+          className="bg-white shadow-lg w-4/5 lg:w-80 w h-2/6 rounded-2xl flex flex-col justify-around p-3"
         >
           <div className="flex justify-center">{logo}</div>
           <div className="lg:h-2/5 flex flex-col px-8 justify-around">
@@ -85,6 +86,13 @@ const ForgotPassword = () => {
             />
           </div>
           <div className="flex justify-between px-8">
+            <Link to="/login">
+              <Button
+                buttonName={t("auth.login_register_reset_password_go_back")}
+                buttonSubmit
+                buttonStyle="btnPrimaryStyle"
+              />
+            </Link>
             <Button
               buttonName={t("auth.login_register_reset_password")}
               buttonSubmit

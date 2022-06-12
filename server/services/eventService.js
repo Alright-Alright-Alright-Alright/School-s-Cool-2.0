@@ -6,6 +6,8 @@ const {
   userJoinEventDb,
   userLeaveEventDb,
   deleteEventFromDb,
+  addUserToEventDb,
+  takeOutUserFromEventDb,
 } = require("../db/eventDb");
 
 // getting info from controller
@@ -26,7 +28,8 @@ const createEventService = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   // passing info to the DB
   try {
@@ -39,7 +42,8 @@ const createEventService = async (
       description,
       location,
       bannerImage,
-      tags
+      tags,
+      isPrivate
     );
   } catch (e) {
     throw new Error(e.message);
@@ -63,7 +67,8 @@ const updateEventService = async (
   description,
   location,
   bannerImage,
-  tags
+  tags,
+  isPrivate
 ) => {
   try {
     return await updateEventDb(
@@ -75,7 +80,8 @@ const updateEventService = async (
       description,
       location,
       bannerImage,
-      tags
+      tags,
+      isPrivate
     );
   } catch (e) {
     throw new Error(e.message);
@@ -106,6 +112,22 @@ const deleteEventService = async (eventId) => {
   }
 };
 
+const inviteForEventService = async (eventId, user) => {
+  try {
+    return await addUserToEventDb(eventId, user);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const removeInviteFromEventService = async (eventId, user) => {
+  try {
+    return await takeOutUserFromEventDb(eventId, user);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   getAllEventsService,
   createEventService,
@@ -114,4 +136,6 @@ module.exports = {
   joinEventService,
   leaveEventService,
   deleteEventService,
+  inviteForEventService,
+  removeInviteFromEventService,
 };

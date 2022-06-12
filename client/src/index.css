@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  #richtext-post ul, ol {
+    list-style: revert;
+    list-style-position: inside;
+  }
+}
+
 .fill-active {
   --color-bg: currentColor;
   --color-content: theme("colors.grey.super_light");

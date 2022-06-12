@@ -7,8 +7,8 @@ import { t } from "i18next"
 import Button from "../../Button"
 import {
   getOneEvent,
-  joinEvent,
-  leaveEvent,
+  inviteForEvent,
+  removeEventInvite,
 } from "../../../../redux/actions/eventActions"
 
 function EventDescriptionCard({ event, user }) {
@@ -22,10 +22,10 @@ function EventDescriptionCard({ event, user }) {
 
   const handleAttendEvent = () => {
     if (attendEvent) {
-      dispatch(leaveEvent(eventId, user._id))
+      dispatch(removeEventInvite(eventId, user._id))
       setAttendEvent(false)
     } else {
-      dispatch(joinEvent(eventId, user._id))
+      dispatch(inviteForEvent(eventId, user._id))
       setAttendEvent(true)
     }
   }

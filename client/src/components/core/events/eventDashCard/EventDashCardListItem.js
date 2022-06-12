@@ -3,7 +3,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Icon from "../../Icon"
-import { inviteForTopic, removeInvite } from "../../../../redux/actions/topicActions"
+import { inviteForEvent, removeEventInvite } from "../../../../redux/actions/eventActions"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 
@@ -18,11 +18,11 @@ export default function EventDashCardListItem({
   const params = useParams()
 
   const inviteUserHandler = () => {
-    dispatch(inviteForTopic(params.topicId, listItemUserId))
+    dispatch(inviteForEvent(params.eventId, listItemUserId))
   }
 
   const removeInviteHandler = () => {
-    dispatch(removeInvite(params.topicId, listItemUserId))
+    dispatch(removeEventInvite(params.eventId, listItemUserId))
   }
 
 
