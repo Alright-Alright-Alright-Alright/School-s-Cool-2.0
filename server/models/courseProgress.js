@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 const courseProgressSchema = new Schema(
   {
     user: {
-      type: Schema.Types.String,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     course: {

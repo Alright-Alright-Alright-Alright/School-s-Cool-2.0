@@ -32,9 +32,30 @@ const createCourse = async (req, res, next) => {
 };
 
 const getCourses = async (req, res, next) => {
+  const userId = req.user.userLogedIn;
+
   try {
+    // Find all available courses
     const courses = await Course.find();
-    res.status(200).send({ data: courses });
+
+    // Add course progress to each course
+    const courseOverview = [];
+    for await (const course of courses) {
+      const progress = await CourseProgress.findOne({
+        user: userId,
+        course: course._id,
+      });
+      const members = (await CourseProgress.find({ course: course._id }))
+        .length;
+      courseOverview.push({
+        ...course.toObject(),
+        started: progress?.started || false,
+        progress,
+        members,
+      });
+    }
+
+    res.status(200).send({ data: courseOverview });
   } catch (error) {
     res.status(500).send({ message: error.message });
     next(error);
@@ -72,7 +93,7 @@ const deleteCourse = async (req, res, next) => {
 };
 
 const startcourse = async (req, res, next) => {
-  const user = req.user.userLogedIn;
+  const userId = req.user.userLogedIn;
 
   // Ensure all fields are present
   const requiredParams = ["courseId"];
@@ -92,7 +113,7 @@ const startcourse = async (req, res, next) => {
     // Make sure there is not already an attempt
     const courseProgress = await CourseProgress.findOne({
       courseId: req.params.courseId,
-      userId: user._id,
+      user: userId,
     });
     if (courseProgress) {
       return res
@@ -102,8 +123,8 @@ const startcourse = async (req, res, next) => {
 
     // Create the attempt
     const attempt = await CourseProgress.create({
-      userId: user._id,
-      courseId: req.params.courseId,
+      user: userId,
+      course: req.params.courseId,
       started: true,
       completed: false,
     });
