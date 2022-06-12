@@ -97,34 +97,64 @@ const updateItem = async (req, res, next) => {
       .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
-  const lessonItem = await LessonItem.findById(req.body._id);
-  // Ensure item exists
-  if (!lessonItem) {
-    return res.status(404).send();
-  }
-
-  // Ensure lesson id does not change. Not supported
-  if (!lessonItem.lesson.equals(req.body.lesson)) {
-    return res.status(400).send({ message: "Cannot change lesson id" });
-  }
-
-  // Ensure type does not change. Not supported
-  if (lessonItem.type !== req.body.type) {
-    return res.status(400).send({ message: "Cannot change type" });
-  }
-
-  // Ensure ordering does not change, this is handled by a different endpoint
-  if (lessonItem.index !== req.body.index) {
-    return res.status(400).send({ message: "Cannot change index" });
-  }
-
-  const lesson = await Lesson.findById(req.body.lessonId);
-  // Ensure the lesson exists
-  if (!lesson) {
-    return res.status(404).send({ message: "Lesson not found" });
-  }
-
   try {
+    const lessonItem = await LessonItem.findById(req.body._id);
+    // Ensure item exists
+    if (!lessonItem) {
+      return res.status(404).send();
+    }
+
+    // Ensure lesson id does not change. Not supported
+    await lessonItem.populate("lesson");
+    if (!lessonItem.lesson) {
+      return res
+        .status(400)
+        .send({ message: "Lesson item does not belong to a lesson" });
+    }
+
+    if (!lessonItem.lesson._id.equals(req.body.lessonId)) {
+      return res.status(400).send({ message: "Cannot change lesson id" });
+    }
+
+    // Ensure type does not change. Not supported
+    if (lessonItem.type !== req.body.type) {
+      return res.status(400).send({ message: "Cannot change type" });
+    }
+
+    const lesson = await Lesson.findById(req.body.lessonId).populate("items");
+    // Ensure the lesson exists
+    if (!lesson) {
+      return res.status(404).send({ message: "Lesson not found" });
+    }
+
+    const itemToUpdate = lessonItem;
+    const newIndex = req.body.index;
+    const oldIndex = itemToUpdate.index;
+
+    // TODO: refactor this into a swap between indices, instead of shifting everything
+    // If ordering has changed, account for it by updating the index of all subsequent items
+    if (newIndex !== oldIndex) {
+      // If the new index is lower than the old index, move all items between the new index and the old index up by 1
+      if (newIndex < oldIndex) {
+        for await (const item of lesson.items) {
+          if (item.index >= newIndex && item.index < oldIndex) {
+            item.index += 1;
+            const theItem = await item.save();
+          }
+        }
+      }
+
+      // If the new index is higher than the old index, move all items between the new index and the old index down by 1
+      if (newIndex > oldIndex) {
+        for await (const item of lesson.items) {
+          if (item.index <= newIndex && item.index > oldIndex) {
+            item.index -= 1;
+            await item.save();
+          }
+        }
+      }
+    }
+
     const updatedItem = await LessonItem.findByIdAndUpdate(
       req.body._id,
       req.body
