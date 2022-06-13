@@ -9,11 +9,11 @@ function Module(props) {
   const { item, setItem } = props;
   switch (item.type) {
     case "infographic":
-      return <InfographicPanel item={item} />;
+      return <InfographicPanel item={item} setItem={setItem} />;
     case "multiplechoice":
       return <MultiplechoicePanel item={item} setItem={setItem} />;
     case "open":
-      return <OpenQuestionPanel item={item} />;
+      return <OpenQuestionPanel item={item} setItem={setItem} />;
     // case "summary": {
     //   return <Summary />;
     // }

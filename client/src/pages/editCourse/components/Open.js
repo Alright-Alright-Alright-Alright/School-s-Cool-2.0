@@ -3,20 +3,41 @@ import PropTypes from "prop-types";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 
 export function Panel(props) {
-  const { item } = props;
+  const { item, setItem } = props;
+
+  const setQuestion = (e) => {
+    const newItem = { ...item };
+    newItem.content.question = e.target.value;
+    setItem(newItem);
+  };
+
+  const setExplanation = (e) => {
+    const newItem = { ...item };
+    newItem.content.explanation = e.target.value;
+    setItem(newItem);
+  };
+
   return (
     <div className="flex flex-col gap-4 mt-24">
       <input
         type="text"
         value={item.content.question}
         placeholder="Type hier de vraagstelling..."
-        className="p-4 shadow-md"
+        className="p-4 shadow-md rounded-md"
+        onChange={setQuestion}
       />
       <textarea
-        className="bg-grey-light"
+        className="bg-grey-light rounded-md"
         disabled
         rows={5}
         placeholder="Hier kan de gebruiker een antwoord invullen"
+      />
+      <textarea
+        className="rounded-md"
+        rows={5}
+        placeholder="Voeg hier een uitleg toe (optioneel)"
+        onChange={setExplanation}
+        value={item.content.explanation}
       />
     </div>
   );
@@ -28,6 +49,7 @@ Panel.propTypes = {
       question: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  setItem: PropTypes.func.isRequired,
 };
 
 export function Preview(props) {
