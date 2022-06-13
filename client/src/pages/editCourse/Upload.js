@@ -52,7 +52,12 @@ export default function Upload(props) {
       {
         id: uuidv4(),
         type: "multiplechoice",
-        content: {},
+        content: {
+          question: "",
+          options: ["Option 1"],
+          answer: 0,
+          explanation: "",
+        },
       },
     ]);
     setShowModal(false);

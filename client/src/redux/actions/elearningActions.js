@@ -4,7 +4,6 @@ import {
   SET_ONE_COURSE,
   SET_ONE_LESSON,
   SET_COURSES_OVERVIEW,
-  CREATE_COURSE,
 } from "../types/elearning";
 import { SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types/ui";
 import {
@@ -13,6 +12,7 @@ import {
   getLesson as getLessonService,
   getCoursesOverview as getCoursesOverviewService,
   createCourse as createCourseService,
+  createLesson as createLessonService,
 } from "../services/elearningService";
 
 export const getAllCourses = () => async (dispatch) => {
@@ -82,6 +82,22 @@ export const createCourse =
       await createCourseService(title, description, imageUrl);
 
       dispatch({ type: CLEAR_ERRORS });
+    } catch (error) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response,
+      });
+    }
+  };
+
+export const createLesson =
+  (courseId, title, description) => async (dispatch) => {
+    try {
+      dispatch({ type: LOADING_UI });
+      const lessonId = await createLessonService(courseId, title, description);
+
+      dispatch({ type: CLEAR_ERRORS });
+      return lessonId;
     } catch (error) {
       dispatch({
         type: SET_ERRORS,

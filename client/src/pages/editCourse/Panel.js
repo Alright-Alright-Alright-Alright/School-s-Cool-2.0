@@ -6,12 +6,12 @@ import { Panel as MultiplechoicePanel } from "./components/Multiplechoice";
 import { Panel as OpenQuestionPanel } from "./components/Open";
 
 function Module(props) {
-  const { item } = props;
+  const { item, setItem } = props;
   switch (item.type) {
     case "infographic":
       return <InfographicPanel item={item} />;
     case "multiplechoice":
-      return <MultiplechoicePanel item={item} />;
+      return <MultiplechoicePanel item={item} setItem={setItem} />;
     case "open":
       return <OpenQuestionPanel item={item} />;
     // case "summary": {
@@ -26,12 +26,13 @@ Module.propTypes = {
   item: PropTypes.objectOf({
     type: PropTypes.string,
   }).isRequired,
+  setItem: PropTypes.func.isRequired,
 };
 
 function Panel(props) {
-  const { item, key } = props;
+  const { item, setItem } = props;
   return (
-    <div className="max-w-6xl mx-auto" key={key}>
+    <div className="max-w-6xl mx-auto">
       <div className="flex justify-end gap-4">
         <button
           type="button"
@@ -48,14 +49,14 @@ function Panel(props) {
           Editor afsluiten
         </button>
       </div>
-      <Module item={item} />
+      <Module item={item} setItem={setItem} />
     </div>
   );
 }
 
 Panel.propTypes = {
   item: PropTypes.objectOf({}).isRequired,
-  key: PropTypes.string.isRequired,
+  setItem: PropTypes.func.isRequired,
 };
 
 export default Panel;

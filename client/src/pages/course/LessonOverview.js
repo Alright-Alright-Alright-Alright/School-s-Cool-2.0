@@ -87,10 +87,10 @@ function LessonOverview(props) {
         ))}
         {isAdmin ? (
           <li>
-            <Link to={`lessons/add`}>
+            <Link to={`lessons/create`}>
               <button className="p-2 flex gap-2 justify-between text-white bg-sky rounded-md shadow-md hover:shadow-lg">
                 <PlusIcon className="h-5 m-auto" />
-                <p> Add lesson</p>
+                <p> Create lesson</p>
               </button>
             </Link>
           </li>

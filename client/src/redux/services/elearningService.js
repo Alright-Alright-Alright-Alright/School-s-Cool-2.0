@@ -25,7 +25,6 @@ export const getLesson = (id) =>
 
 export const createCourse = (title, description, imageUrl) => {
   const data = new FormData();
-  console.log(imageUrl);
   if (imageUrl) {
     data.append("imageUrl", imageUrl);
   }
@@ -33,8 +32,6 @@ export const createCourse = (title, description, imageUrl) => {
   data.append("description", description);
   const token = store.getState().user.token;
   const url = `${process.env.REACT_APP_API_URL}/courses`;
-  console.log({ token });
-  console.log({ url });
   axios({
     method: "post",
     url,
@@ -44,4 +41,11 @@ export const createCourse = (title, description, imageUrl) => {
       "x-auth-token": token,
     },
   }).then((response) => response.data.data);
+};
+
+export const createLesson = async (courseId, title, description) => {
+  const data = { courseId, title, description };
+
+  const res = await service.post(`/lessons`, data, configHeaders());
+  return res.data.data;
 };

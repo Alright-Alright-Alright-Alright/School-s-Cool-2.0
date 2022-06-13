@@ -21,6 +21,14 @@ function EditCourse() {
     );
   }, []);
 
+  const setItem = (newItem) => {
+    setCards((old) => {
+      const newCards = [...old];
+      newCards[selectedCard] = newItem;
+      return newCards;
+    });
+  };
+
   const addItems = (itemsToBeAdded) =>
     setCards((oldItems) => {
       const newItems = [];
@@ -58,7 +66,11 @@ function EditCourse() {
         </div>
         <div className="col-span-10 w-full">
           {cards.length ? (
-            <Panel item={cards[selectedCard]} key={selectedCard} />
+            <Panel
+              item={cards[selectedCard]}
+              key={selectedCard}
+              setItem={setItem}
+            />
           ) : null}
         </div>
       </div>

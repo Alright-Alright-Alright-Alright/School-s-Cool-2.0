@@ -10,7 +10,6 @@ function CourseBuilder() {
 
   const submit = async (title, description, imageUrl) => {
     await dispatch(createCourse(title, description, imageUrl));
-    console.log("course created");
   };
 
   return <Main contentLeft={<NavMenu />} main={<Form submit={submit} />} />;

@@ -12,3 +12,4 @@ export const LIKE_FILE = "LIKE_FILE";
 export const UNLIKE_FILE = "UNLIKE_FILE";
 export const SUBMIT_COMMENT = "SUBMIT_COMMENT";
 export const CREATE_COURSE = "CREATE_COURSE";
+export const CREATE_LESSON = "CREATE_LESSON";
