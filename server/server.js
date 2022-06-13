@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 
 // MongoDB connection =====================================
 
@@ -20,6 +21,12 @@ mongoose
   });
 
 app.use(express.json());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 app.use(
   bodyParser.urlencoded({

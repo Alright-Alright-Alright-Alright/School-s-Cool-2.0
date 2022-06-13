@@ -1,15 +1,21 @@
 const Course = require("../models/course");
 const CourseProgress = require("../models/courseProgress");
+const { uploadFile } = require("../configs/S3");
 
 const createCourse = async (req, res, next) => {
   const user = req.user.userLogedIn;
-  const { title, description, imageUrl } = req.body;
+  const { title, description } = req.body;
+  const file = req.files.imageUrl; // Plural 'files'... but its always one file..
 
-  if (!title || !description || !imageUrl) {
+  if (!title || !description || !file) {
     return res
       .status(400)
       .send({ message: "Please provide: title, description, imageUrl" });
   }
+
+  file.path = file.tempFilePath;
+  file.originalname = file.name;
+  const imageUrl = await uploadFile(file);
 
   try {
     const course = {
@@ -17,7 +23,7 @@ const createCourse = async (req, res, next) => {
       description,
       likes: [],
       comments: [],
-      imageUrl,
+      imageUrl: imageUrl.Location,
       lessons: [],
       members: [],
       creator: user._id,
@@ -32,6 +38,20 @@ const createCourse = async (req, res, next) => {
 };
 
 const getCourses = async (req, res, next) => {
+  const userId = req.user.userLogedIn;
+
+  try {
+    // Find all available courses
+    const courses = await Course.find();
+
+    res.status(200).send({ data: courses });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    next(error);
+  }
+};
+
+const getCourseOverview = async (req, res, next) => {
   const userId = req.user.userLogedIn;
 
   try {
@@ -156,4 +176,5 @@ module.exports = {
   deleteCourse,
   getCourse,
   startcourse,
+  getCourseOverview,
 };
