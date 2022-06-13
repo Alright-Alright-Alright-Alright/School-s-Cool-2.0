@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function Form() {
+function Form(props) {
+  const { submit } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
@@ -46,22 +48,22 @@ function Form() {
           accept="image/*"
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <Link to={`/courses/edit/${uuidv4()}`}>
-          <button
-            type="button"
-            className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
-            onClick={() => {
-              console.log("onlcicky");
-            }}
-          >
-            <p>Volgende</p>
-          </button>
-        </Link>
+        {/* <Link to={`/courses/edit/${uuidv4()}`}> */}
+        <button
+          type="button"
+          className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
+          onClick={() => submit(title, description, file)}
+        >
+          <p>Volgende</p>
+        </button>
+        {/* </Link> */}
       </form>
     </div>
   );
 }
 
-Form.propTypes = {};
+Form.propTypes = {
+  submit: PropTypes.func.isRequired,
+};
 
 export default Form;

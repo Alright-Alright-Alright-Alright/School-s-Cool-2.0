@@ -3,15 +3,21 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CourseCard from "./CourseCard";
 import AddCourseCard from "./AddCourseCard";
-import { getAllCourses } from "../../redux/actions/elearningActions";
+import { getCoursesOverview } from "../../redux/actions/elearningActions";
+import Loader from "../../components/core/Loader";
 
 function CourseMainContent() {
-  const courses = useSelector((state) => state.elearning.courses);
+  const courses = useSelector((state) => state.elearning.overview);
+  const user = useSelector((state) => state.user.singleUser);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllCourses());
+    dispatch(getCoursesOverview());
   }, [dispatch]);
+
+  if (!user) {
+    return <Loader />;
+  }
 
   return (
     <main className="p-6 flex flex-col space-y-6">
@@ -32,7 +38,7 @@ function CourseMainContent() {
             joined={false}
           />
         ))}
-        <AddCourseCard />
+        {user.role === "ADMIN" ? <AddCourseCard /> : null}
       </section>
     </main>
   );
