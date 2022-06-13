@@ -16,7 +16,6 @@ function EditCourse() {
   const { lessonId } = useParams();
 
   const save = () => {
-    console.log("save");
     dispatch(updateLesson(lessonId, cards));
   };
 
