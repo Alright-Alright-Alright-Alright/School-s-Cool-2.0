@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import update from "immutability-helper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import Upload from "./Upload";
-import { updateLesson } from "../../redux/actions/elearningActions";
+import { updateLesson, getLesson } from "../../redux/actions/elearningActions";
 
 function EditCourse() {
-  const [selectedCard, setSelectedCard] = useState(0);
+  const lesson = useSelector((state) => state.elearning.selectedLesson);
   const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(0);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const dispatch = useDispatch();
   const { lessonId } = useParams();
@@ -55,6 +56,14 @@ function EditCourse() {
       return newItems;
     });
   };
+
+  useEffect(() => {
+    dispatch(getLesson(lessonId));
+  }, [lessonId]);
+
+  useEffect(() => {
+    setCards(lesson.items);
+  }, [lesson]);
 
   return (
     <>

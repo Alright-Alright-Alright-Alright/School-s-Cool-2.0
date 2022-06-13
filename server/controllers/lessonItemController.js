@@ -224,9 +224,8 @@ const submitItem = async (req, res, next) => {
     const { lesson, currentItem } = await lessonProgress.populate(
       "currentItem"
     );
-    console.log(currentItem);
+    // TODO: all of this
     const newIndex = currentItem.index;
-    console.log({ newIndex });
     // If this was the last lesson, complete the course
     // If none of the above, set the current lessonItem to the next one
 

@@ -106,7 +106,6 @@ const updateLesson = async (req, res, next) => {
 
     //  Create new lesson items and store their id's so we can update the lesson after
     const idBuffer = [];
-    console.log(req.body);
     for await (const item of req.body) {
       const newItem = await LessonItem.create(
         _.omit(item, ["_id", "createdAt", "__v"])
