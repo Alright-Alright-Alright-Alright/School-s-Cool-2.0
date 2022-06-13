@@ -2,6 +2,7 @@ const Lesson = require("../models/lesson");
 const Course = require("../models/course");
 const CourseProgress = require("../models/courseProgress");
 const LessonProgress = require("../models/lessonProgress");
+const LessonItem = require("../models/item");
 
 const createLesson = async (req, res, next) => {
   // Ensure all fields are present
@@ -77,6 +78,49 @@ const getLesson = async (req, res, next) => {
   }
 };
 
+// POC endpoint for updating an entire lesson in one go
+const putLesson = async (req, res, next) => {
+  // Ensure all fields are present
+  const requiredFields = ["_id", "title", "description", "course", "items"];
+  if (requiredFields.every((field) => field in Object.keys(req.params))) {
+    return res
+      .status(400)
+      .send({ message: `Please provide: ${requiredFields.join(", ")}` });
+  }
+
+  try {
+    const lesson = await Lesson.findById(req.body._id);
+    if (!lesson) {
+      return res.status(404).send({ message: "Lesson does not exist" });
+    }
+
+    // Delete all old items belonging to this lesson
+    await LessonItem.deleteMany({
+      lesson: lesson._id,
+    });
+
+    //  Create new lesson items and store their id's so we can update the lesson after
+    const idBuffer = [];
+    for await (const item of req.body.items) {
+      const newItem = await LessonItem.create(item);
+      idBuffer.push(newItem._id);
+    }
+
+    // Set the items in the lesson to the newly created ones
+    req.body.items = idBuffer;
+
+    // Update the lesson
+    const updatedLesson = await Lesson.findByIdAndUpdate(
+      req.body._id,
+      req.body
+    );
+    res.status(200).send({ data: updatedLesson });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    next(error);
+  }
+};
+
 const startLesson = async (req, res, next) => {
   const userId = req.user.userLogedIn;
 
@@ -146,4 +190,5 @@ module.exports = {
   deleteLesson,
   getLesson,
   startLesson,
+  putLesson,
 };
