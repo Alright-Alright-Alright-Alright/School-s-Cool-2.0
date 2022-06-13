@@ -15,7 +15,7 @@ function SearchBar({ placeholder }) {
   const topics = useSelector((state) => state.topics.allTopics);
   const events = useSelector((state) => state.events.allEvents);
   const library = useSelector((state) => state.library.allFiles);
-  const courses = useSelector((state) => state.courses.allcourses);
+  const courses = useSelector((state) => state.elearning.courses);
 
   const whereToSearch = () => {
     let data = [];

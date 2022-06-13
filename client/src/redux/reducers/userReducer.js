@@ -13,7 +13,7 @@ import {
   FOLLOW_USER,
   UNFOLLOW_USER,
 } from "../types/user";
-import { JOIN_COURSE, LEAVE_COURSE } from "../types/courses";
+import { JOIN_COURSE, LEAVE_COURSE } from "../types/elearning";
 
 const initialState = {
   token: localStorage.getItem("Authorization"),

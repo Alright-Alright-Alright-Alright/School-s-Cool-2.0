@@ -1,5 +1,5 @@
 import React from "react";
-import CourseMainContent from "./CourseMainContent.tsx";
+import CourseMainContent from "./CourseMainContent";
 import CourseContentLeft from "./CourseContentLeft";
 import Main from "../../components/layout/Main";
 

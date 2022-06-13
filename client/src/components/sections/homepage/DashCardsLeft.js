@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Dashcard from "../../core/dashcard/Dashcard";
 import { getAlltopics } from "../../../redux/actions/topicActions";
 import { getAllEvents } from "../../../redux/actions/eventActions";
-import { getAllCourses } from "../../../redux/actions/courseActions";
+import { getAllCourses } from "../../../redux/actions/elearningActions";
 import { getUserProfile } from "../../../redux/actions/userActions";
 import dashcardDropdownMenu from "../../../data/dashcardDropdownMenu.json";
 import { getAllFilesFromLibrary } from "../../../redux/actions/libraryActions";
@@ -14,10 +14,12 @@ import DashcardSkeleton from "../../core/skeleton/DashCardSkeleton";
 
 function DashCardsLeft() {
   const topics = useSelector((state) => state.topics.allTopics);
-  const courses = useSelector((state) => state.courses.allCourses);
+  const courses = useSelector((state) => state.elearning.courses);
   const events = useSelector((state) => state.events.allEvents);
   const user = useSelector((state) => state.user.singleUser);
   const { t } = useTranslation();
+
+  console.log("here here", courses);
 
   const dispatch = useDispatch();
 
@@ -40,13 +42,13 @@ function DashCardsLeft() {
   }
 
   const checkIfIsPrivate = () => {
-    const topicsCurrentUserCanSee = []
+    const topicsCurrentUserCanSee = [];
     topics.forEach((topic) => {
       if (topic.isPrivate === false) {
-        topicsCurrentUserCanSee.push(topic)
+        topicsCurrentUserCanSee.push(topic);
       }
-    })
-    const privateTopics = topics.filter((member) => member.isPrivate === true)
+    });
+    const privateTopics = topics.filter((member) => member.isPrivate === true);
     privateTopics
       .map((topic) =>
         topic.members.map((member) => member._id === user._id && topic)
@@ -54,11 +56,11 @@ function DashCardsLeft() {
       .flat(Infinity)
       .forEach((item) => {
         if (typeof item === "object") {
-          topicsCurrentUserCanSee.push(item)
+          topicsCurrentUserCanSee.push(item);
         }
-      })
-    return topicsCurrentUserCanSee
-  }
+      });
+    return topicsCurrentUserCanSee;
+  };
 
   return (
     <div className="max-w-md px-6 mt-20 hidden lg:flex flex-col gap-8">

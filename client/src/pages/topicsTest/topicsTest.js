@@ -1,24 +1,24 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getAllTopics } from "../../redux/actions/topicActions"
-import { getAllEvents } from "../../redux/actions/eventActions"
-import { getAllCourses } from "../../redux/actions/courseActions"
-import { loginUser, logoutUser } from "../../redux/actions/userActions"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllTopics } from "../../redux/actions/topicActions";
+import { getAllEvents } from "../../redux/actions/eventActions";
+import { getAllCourses } from "../../redux/actions/elearningActions";
+import { loginUser, logoutUser } from "../../redux/actions/userActions";
 
 // eslint-disable-next-line react/prop-types
 const TopicsTest = () => {
-  const topics = useSelector((state) => state.topics)
-  const user = useSelector((state) => state.user)
-  const UI = useSelector((state) => state.UI)
+  const topics = useSelector((state) => state.topics);
+  const user = useSelector((state) => state.user);
+  const UI = useSelector((state) => state.UI);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const loginNewUser = { email: "dirk@dozijn13.nl", password: "1234567" }
+  const loginNewUser = { email: "dirk@dozijn13.nl", password: "1234567" };
 
   useEffect(() => {
-    dispatch(getAllTopics())
-  }, [dispatch])
+    dispatch(getAllTopics());
+  }, [dispatch]);
 
   // console.log("Inside topicTest", topics)
   // console.log("Inside topicTest user", user)
@@ -46,7 +46,7 @@ const TopicsTest = () => {
         </button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default TopicsTest
+export default TopicsTest;

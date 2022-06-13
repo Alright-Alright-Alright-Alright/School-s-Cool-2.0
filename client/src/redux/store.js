@@ -1,24 +1,24 @@
 /* eslint-disable no-underscore-dangle */
-import { createStore, combineReducers, applyMiddleware, compose } from "redux"
-import thunk from "redux-thunk"
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 
-import coursesReducer from "./reducers/courseReducer"
-import libraryReducer from "./reducers/libraryReducer"
-import topicsReducer from "./reducers/topicReducer"
-import uiReducer from "./reducers/uiReducer"
-import userReducer from "./reducers/userReducer"
-import eventsReducer from "./reducers/eventReducer"
-import postsReducer from "./reducers/postReducer"
-import activitiesReducer from "./reducers/activityReducer"
-import searchBarReducer from "./reducers/searchBarReducer"
+import elearningReducer from "./reducers/elearningReducer";
+import libraryReducer from "./reducers/libraryReducer";
+import topicsReducer from "./reducers/topicReducer";
+import uiReducer from "./reducers/uiReducer";
+import userReducer from "./reducers/userReducer";
+import eventsReducer from "./reducers/eventReducer";
+import postsReducer from "./reducers/postReducer";
+import activitiesReducer from "./reducers/activityReducer";
+import searchBarReducer from "./reducers/searchBarReducer";
 
-const initialState = {}
+const initialState = {};
 
-const middleware = [thunk]
+const middleware = [thunk];
 
 const reducers = combineReducers({
   user: userReducer,
-  courses: coursesReducer,
+  elearning: elearningReducer,
   library: libraryReducer,
   topics: topicsReducer,
   events: eventsReducer,
@@ -26,13 +26,13 @@ const reducers = combineReducers({
   posts: postsReducer,
   activities: activitiesReducer,
   searchBar: searchBarReducer,
-})
+});
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
   initialState,
   composeEnhancers(applyMiddleware(...middleware))
-)
+);
 
-export default store
+export default store;
