@@ -110,10 +110,10 @@ export const createLesson =
 export const updateLesson = (lessonId, items) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_UI });
-    const lessonId = await updateLessonService(lessonId, items);
+    const updatedLesson = await updateLessonService(lessonId, items);
 
     dispatch({ type: CLEAR_ERRORS });
-    return lessonId;
+    return updatedLesson;
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

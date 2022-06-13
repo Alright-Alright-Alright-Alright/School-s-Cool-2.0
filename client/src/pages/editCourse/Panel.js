@@ -14,9 +14,6 @@ function Module(props) {
       return <MultiplechoicePanel item={item} setItem={setItem} />;
     case "open":
       return <OpenQuestionPanel item={item} setItem={setItem} />;
-    // case "summary": {
-    //   return <Summary />;
-    // }
     default:
       throw new Error(`${item.type} is not a valid component type`);
   }

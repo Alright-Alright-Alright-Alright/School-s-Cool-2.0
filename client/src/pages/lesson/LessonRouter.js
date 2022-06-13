@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Infographic from "./Infographic";
 import Multiplechoice from "./Multiplechoice";
 import Summary from "./Summary";
+import Open from "./Open";
 import Loader from "../../components/core/Loader";
 import { getCourse, getLesson } from "../../redux/actions/elearningActions";
 
@@ -32,6 +33,16 @@ function Module({ item, currentPage, pageCount }) {
       );
     case "summary": {
       return <Summary />;
+    }
+    case "open": {
+      return (
+        <Open
+          item={item}
+          key={item._id}
+          currentPage={currentPage}
+          pageCount={pageCount}
+        />
+      );
     }
     default:
       throw new Error(`${item.type} is not a valid component type`);
