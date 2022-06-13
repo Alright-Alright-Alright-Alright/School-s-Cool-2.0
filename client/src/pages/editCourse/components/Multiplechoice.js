@@ -76,6 +76,14 @@ export function Panel(props) {
     setItem(newItem);
   };
 
+  const setExplanation = (e) => {
+    const old = item;
+    const newContent = { ...old.content };
+    newContent.explanation = e.target.value;
+    const newItem = { ...old, content: newContent };
+    setItem(newItem);
+  };
+
   return (
     <div className="flex flex-col items-start mt-24 gap-8">
       <input
@@ -116,6 +124,8 @@ export function Panel(props) {
         className="w-96"
         rows={5}
         placeholder="Optioneel: voeg een uitleg toe voor het goede antwoord"
+        value={item.content.explanation}
+        onChange={setExplanation}
       />
     </div>
   );
