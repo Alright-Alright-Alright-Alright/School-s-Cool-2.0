@@ -64,14 +64,13 @@ ListItem.propTypes = {
   courseId: PropTypes.number.isRequired,
 };
 
-function LessonOverview() {
-  const params = useParams();
-  const course = courses.find((a) => a._id === params.courseId);
+function LessonOverview(props) {
+  const { lessons } = props;
   return (
     <section className="p-6">
       <h1 className="text-grey-dark font-bold text-xl">Lesson 1</h1>
       <ul className="flex flex-col space-y-3 pt-6">
-        {course.lessons.map((lesson, index) => (
+        {lessons.map((lesson, index) => (
           <ul key={lesson._id}>
             <ListItem
               completed={lesson.completed}
@@ -79,7 +78,7 @@ function LessonOverview() {
               items={lesson.items.length}
               index={index}
               lessonId={lesson._id}
-              courseId={params.courseId}
+              courseId={lesson.course}
             >
               {lesson.title}
             </ListItem>
@@ -90,6 +89,8 @@ function LessonOverview() {
   );
 }
 
-LessonOverview.propTypes = {};
+LessonOverview.propTypes = {
+  lessons: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default LessonOverview;

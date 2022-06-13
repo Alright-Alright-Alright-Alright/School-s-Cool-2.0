@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -28,14 +29,14 @@ StyledButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-function CourseOverview() {
-  const params = useParams();
-  const course = courses.find((item) => item._id === params.courseId);
+function CourseOverview(props) {
+  const { course } = props;
+  console.log("debug2", { course });
   return (
     <main>
       <section className="p-6">
-        <h1 className="text-grey-dark font-bold text-xl">{course.title}</h1>
-        <h2 className="text-grey-dark text-base pt-4">{course.lorem}</h2>
+        <h1 className="text-grey-dark font-bold text-xl">{course?.title}</h1>
+        <h2 className="text-grey-dark text-base pt-4">{course?.lorem}</h2>
         <ul className="flex space-x-4 pt-10">
           <li>
             <StyledButton selected>Course</StyledButton>
@@ -52,7 +53,7 @@ function CourseOverview() {
         </ul>
       </section>
       <section>
-        <LessonOverview />
+        <LessonOverview lessons={course.lessons} />
       </section>
     </main>
   );

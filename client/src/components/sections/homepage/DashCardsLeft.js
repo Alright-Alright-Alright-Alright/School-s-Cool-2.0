@@ -19,8 +19,6 @@ function DashCardsLeft() {
   const user = useSelector((state) => state.user.singleUser);
   const { t } = useTranslation();
 
-  console.log("here here", courses);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
