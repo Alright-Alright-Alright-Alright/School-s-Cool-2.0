@@ -3,6 +3,7 @@ const Course = require("../models/course");
 const CourseProgress = require("../models/courseProgress");
 const LessonProgress = require("../models/lessonProgress");
 const LessonItem = require("../models/item");
+const _ = require("lodash");
 
 const createLesson = async (req, res, next) => {
   // Ensure all fields are present
@@ -79,17 +80,21 @@ const getLesson = async (req, res, next) => {
 };
 
 // POC endpoint for updating an entire lesson in one go
-const putLesson = async (req, res, next) => {
+const updateLesson = async (req, res, next) => {
   // Ensure all fields are present
-  const requiredFields = ["_id", "title", "description", "course", "items"];
-  if (requiredFields.every((field) => field in Object.keys(req.params))) {
+  const requiredFields = ["lessonId", "items"];
+  if (
+    requiredFields.every(
+      (field) => field in Object.keys({ ...req.body, ...req.params })
+    )
+  ) {
     return res
       .status(400)
       .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
   try {
-    const lesson = await Lesson.findById(req.body._id);
+    const lesson = await Lesson.findById(req.params.lessonId);
     if (!lesson) {
       return res.status(404).send({ message: "Lesson does not exist" });
     }
@@ -102,18 +107,16 @@ const putLesson = async (req, res, next) => {
     //  Create new lesson items and store their id's so we can update the lesson after
     const idBuffer = [];
     for await (const item of req.body.items) {
-      const newItem = await LessonItem.create(item);
+      const newItem = await LessonItem.create(
+        _.omit(item, ["_id", "createdAt", "__v"])
+      );
       idBuffer.push(newItem._id);
     }
 
-    // Set the items in the lesson to the newly created ones
-    req.body.items = idBuffer;
-
     // Update the lesson
-    const updatedLesson = await Lesson.findByIdAndUpdate(
-      req.body._id,
-      req.body
-    );
+    const updatedLesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
+      items: idBuffer,
+    });
     res.status(200).send({ data: updatedLesson });
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -190,5 +193,5 @@ module.exports = {
   deleteLesson,
   getLesson,
   startLesson,
-  putLesson,
+  updateLesson,
 };

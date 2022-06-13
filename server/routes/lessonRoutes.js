@@ -6,11 +6,15 @@ const {
   deleteLesson,
   getLesson,
   startLesson,
-  putLesson,
+  updateLesson,
 } = require("../controllers/lessonController");
 
-lessonRoutes.route("/lessons").post(createLesson).put(putLesson);
+lessonRoutes.route("/lessons").post(createLesson);
 lessonRoutes.route("/lessons/:lessonId/start").post(startLesson);
-lessonRoutes.route("/lessons/:lessonId").delete(deleteLesson).get(getLesson);
+lessonRoutes
+  .route("/lessons/:lessonId")
+  .get(getLesson)
+  .post(updateLesson)
+  .delete(deleteLesson);
 
 module.exports = lessonRoutes;
