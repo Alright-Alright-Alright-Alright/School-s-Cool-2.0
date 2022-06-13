@@ -49,3 +49,8 @@ export const createLesson = async (courseId, title, description) => {
   const res = await service.post(`/lessons`, data, configHeaders());
   return res.data.data;
 };
+
+export const updateLesson = async (lessonId, items) => {
+  const res = await service.put(`/lessons/${lessonId}`, items, configHeaders());
+  return res.data.data;
+};

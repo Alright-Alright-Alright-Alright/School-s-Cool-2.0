@@ -1,14 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useCallback } from "react";
 import update from "immutability-helper";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import Upload from "./Upload";
+import { updateLesson } from "../../redux/actions/elearningActions";
 
 function EditCourse() {
   const [selectedCard, setSelectedCard] = useState(0);
   const [cards, setCards] = useState([]);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { lessonId } = useParams();
+
+  const save = () => {
+    dispatch(updateLesson(lessonId, cards));
+  };
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setCards((prevCards) =>
@@ -29,7 +38,7 @@ function EditCourse() {
     });
   };
 
-  const addItems = (itemsToBeAdded) =>
+  const addItems = (itemsToBeAdded) => {
     setCards((oldItems) => {
       const newItems = [];
       if (!oldItems.length) {
@@ -45,6 +54,7 @@ function EditCourse() {
       });
       return newItems;
     });
+  };
 
   return (
     <>
@@ -70,6 +80,7 @@ function EditCourse() {
               item={cards[selectedCard]}
               key={selectedCard}
               setItem={setItem}
+              save={save}
             />
           ) : null}
         </div>

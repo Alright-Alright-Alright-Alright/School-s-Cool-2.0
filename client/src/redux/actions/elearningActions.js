@@ -13,6 +13,7 @@ import {
   getCoursesOverview as getCoursesOverviewService,
   createCourse as createCourseService,
   createLesson as createLessonService,
+  updateLesson as updateLessonService,
 } from "../services/elearningService";
 
 export const getAllCourses = () => async (dispatch) => {
@@ -105,3 +106,18 @@ export const createLesson =
       });
     }
   };
+
+export const updateLesson = (lessonId, items) => async (dispatch) => {
+  try {
+    dispatch({ type: LOADING_UI });
+    const lessonId = await updateLessonService(lessonId, items);
+
+    dispatch({ type: CLEAR_ERRORS });
+    return lessonId;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response,
+    });
+  }
+};
