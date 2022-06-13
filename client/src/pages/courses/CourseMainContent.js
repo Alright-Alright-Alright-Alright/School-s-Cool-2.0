@@ -8,8 +8,6 @@ import { getAllCourses } from "../../redux/actions/elearningActions";
 function CourseMainContent() {
   const courses = useSelector((state) => state.elearning.courses);
 
-  console.log("test", { courses });
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCourses());

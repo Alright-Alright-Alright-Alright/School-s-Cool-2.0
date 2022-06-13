@@ -31,7 +31,6 @@ StyledButton.propTypes = {
 
 function CourseOverview(props) {
   const { course } = props;
-  console.log("debug2", { course });
   return (
     <main>
       <section className="p-6">

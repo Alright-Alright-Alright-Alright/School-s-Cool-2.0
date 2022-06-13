@@ -66,14 +66,14 @@ function Multiplechoice(props) {
       <p>{item.question}</p>
       <br />
       <ul className="flex flex-col gap-y-2">
-        {item.options.map((option, index) => (
+        {item.content.options.map((option, index) => (
           <Option
-            key={item.answer}
+            key={item.content.answer}
             selected={index === selectedIndex}
             index={index}
             onClick={onClick}
             submitted={submitted}
-            isAnswer={item.answer === index}
+            isAnswer={item.content.answer === index}
           >
             {option}
           </Option>

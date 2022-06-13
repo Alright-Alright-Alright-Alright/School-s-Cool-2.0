@@ -1,13 +1,15 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import courses from "../../data/mocks/courses";
+import { useSelector, useDispatch } from "react-redux";
 import Infographic from "./Infographic";
 import Multiplechoice from "./Multiplechoice";
 import Summary from "./Summary";
+import Loader from "../../components/core/Loader";
+import { getCourse, getLesson } from "../../redux/actions/elearningActions";
 
 function Module({ item, currentPage, pageCount }) {
   switch (item.type) {
@@ -47,10 +49,20 @@ Module.propTypes = {
 function LessonRouter() {
   const params = useParams();
   const currentPage = Number.parseInt(params.itemIndex, 10);
-  const course = courses.find((course) => course._id === params.courseId);
-  const lesson = course.lessons.find(
-    (lesson) => lesson._id === params.lessonId
-  );
+  const { courseId, lessonId } = useParams();
+  const dispatch = useDispatch();
+  const course = useSelector((state) => state.elearning.selectedCourse);
+  const lesson = useSelector((state) => state.elearning.selectedLesson);
+
+  useEffect(() => {
+    dispatch(getCourse(courseId));
+    dispatch(getLesson(lessonId));
+  }, []);
+
+  if (!course || !lesson) {
+    return <Loader />;
+  }
+
   const item = lesson.items[currentPage];
   return (
     <main className="p-6">

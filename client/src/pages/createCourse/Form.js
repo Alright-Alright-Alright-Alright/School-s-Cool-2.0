@@ -7,8 +7,6 @@ function Form() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
 
-  console.log({ title, description, file });
-
   return (
     <div className="p-6">
       <form>

@@ -9,3 +9,8 @@ export const getCourse = (id) =>
   service
     .get(`/courses/${id}`, configHeaders())
     .then((response) => response.data.data);
+
+export const getLesson = (id) =>
+  service
+    .get(`/lessons/${id}`, configHeaders())
+    .then((response) => response.data.data);

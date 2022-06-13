@@ -23,7 +23,6 @@ const LibraryContentLeft = ({
   const { t } = useTranslation();
 
   const handleFilter = (item) => {
-    console.log(item);
     dispatch(filterLibraryByCategory(item));
     setTheCategoryToColor(item);
   };

@@ -20,10 +20,6 @@ const TopicsTest = () => {
     dispatch(getAllTopics());
   }, [dispatch]);
 
-  // console.log("Inside topicTest", topics)
-  // console.log("Inside topicTest user", user)
-  // console.log("Inside topicTest errors", UI)
-
   return (
     <>
       <h1>Hello, this is a message from the server: {topics.topics.message}</h1>

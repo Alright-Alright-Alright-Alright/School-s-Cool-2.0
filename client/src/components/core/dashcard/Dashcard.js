@@ -41,8 +41,6 @@ function Dashcard({
       filterRule = (item) => item;
   }
 
-  console.log("here", { dashCardData });
-
   const filteredItems = dashCardData.filter(filterRule);
 
   const firstThreeItems = filteredItems
