@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import courses from "../../data/mocks/courses";
@@ -30,6 +31,8 @@ StyledButton.propTypes = {
 };
 
 function CourseOverview(props) {
+  const user = useSelector((state) => state.user.singleUser);
+
   const { course } = props;
   return (
     <main>
@@ -52,7 +55,10 @@ function CourseOverview(props) {
         </ul>
       </section>
       <section>
-        <LessonOverview lessons={course.lessons} />
+        <LessonOverview
+          lessons={course.lessons}
+          isAdmin={user.role === "ADMIN"}
+        />
       </section>
     </main>
   );

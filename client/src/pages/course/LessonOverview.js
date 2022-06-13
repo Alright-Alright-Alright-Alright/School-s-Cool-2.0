@@ -2,14 +2,14 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   CheckCircleIcon as CheckCircleIconOutline,
   ClockIcon,
   DocumentTextIcon,
 } from "@heroicons/react/outline";
 import { CheckCircleIcon as CheckCircleIconSolid } from "@heroicons/react/solid";
-import courses from "../../data/mocks/courses";
+import { PlusIcon } from "@heroicons/react/solid";
 
 function ListItem(props) {
   const { children, duration, completed, index, items, lessonId, courseId } =
@@ -65,13 +65,14 @@ ListItem.propTypes = {
 };
 
 function LessonOverview(props) {
-  const { lessons } = props;
+  const { lessons, isAdmin } = props;
+
   return (
     <section className="p-6">
       <h1 className="text-grey-dark font-bold text-xl">Lesson 1</h1>
       <ul className="flex flex-col space-y-3 pt-6">
         {lessons.map((lesson, index) => (
-          <ul key={lesson._id}>
+          <li key={lesson._id}>
             <ListItem
               completed={lesson.completed}
               duration={lesson.duration}
@@ -82,8 +83,18 @@ function LessonOverview(props) {
             >
               {lesson.title}
             </ListItem>
-          </ul>
+          </li>
         ))}
+        {isAdmin ? (
+          <li>
+            <Link to={`lessons/add`}>
+              <button className="p-2 flex gap-2 justify-between text-white bg-sky rounded-md shadow-md hover:shadow-lg">
+                <PlusIcon className="h-5 m-auto" />
+                <p> Add lesson</p>
+              </button>
+            </Link>
+          </li>
+        ) : null}
       </ul>
     </section>
   );
@@ -91,6 +102,7 @@ function LessonOverview(props) {
 
 LessonOverview.propTypes = {
   lessons: PropTypes.arrayOf(PropTypes.object),
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default LessonOverview;
