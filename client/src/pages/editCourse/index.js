@@ -7,6 +7,7 @@ import PreviewList from "./PreviewList";
 import Panel from "./Panel";
 import Upload from "./Upload";
 import { updateLesson, getLesson } from "../../redux/actions/elearningActions";
+import Loader from "../../components/core/Loader";
 
 function EditCourse() {
   const lesson = useSelector((state) => state.elearning.selectedLesson);
@@ -62,8 +63,13 @@ function EditCourse() {
   }, [lessonId]);
 
   useEffect(() => {
+    if (!lesson) return;
     setCards(lesson.items);
   }, [lesson]);
+
+  if (cards === null) {
+    return <Loader />;
+  }
 
   return (
     <>
