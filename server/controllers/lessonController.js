@@ -4,6 +4,7 @@ const CourseProgress = require("../models/courseProgress");
 const LessonProgress = require("../models/lessonProgress");
 const LessonItem = require("../models/item");
 const _ = require("lodash");
+const { uploadFile } = require("../configs/S3");
 
 const createLesson = async (req, res, next) => {
   // Ensure all fields are present
@@ -93,7 +94,29 @@ const updateLesson = async (req, res, next) => {
       .send({ message: `Please provide: ${requiredFields.join(", ")}` });
   }
 
+  const items = JSON.parse(req.body.items);
+
   try {
+    //  loop over files and upload them one by one, then attach the received file location to the object
+    for await (const key of Object.keys(req.files || [])) {
+      try {
+        const file = req.files[key];
+
+        // Set these properties because the uploadFile function needs them
+        file.path = file.tempFilePath;
+        file.originalname = file.name;
+        const { Location: imageUrl } = await uploadFile(file);
+
+        // Files are index by "file_for_item_${itemIndex}" so we can add the file to the proper item
+        let [_, itemIndex] = key.split("file_for_item_");
+        itemIndex = Number.parseInt(itemIndex);
+        items[itemIndex].content.imageUrl = imageUrl;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // Make sure the lesson exists
     const lesson = await Lesson.findById(req.params.lessonId);
     if (!lesson) {
       return res.status(404).send({ message: "Lesson does not exist" });
@@ -106,7 +129,7 @@ const updateLesson = async (req, res, next) => {
 
     //  Create new lesson items and store their id's so we can update the lesson after
     const idBuffer = [];
-    for await (const item of req.body) {
+    for await (const item of items) {
       const newItem = await LessonItem.create(
         _.omit(item, ["_id", "createdAt", "__v"])
       );

@@ -51,10 +51,27 @@ export const createLesson = async (courseId, title, description) => {
 };
 
 export const updateLesson = async (lessonId, items) => {
-  const res = await service.post(
-    `/lessons/${lessonId}`,
-    items,
-    configHeaders()
-  );
+  const data = new FormData();
+
+  // Add uploaded files to formdata so they are recognized as files in the backend
+  let index = 0;
+  for (const item of items) {
+    if (item.content.file) {
+      try {
+        const file = item.content.file;
+        data.append(`file_for_item_${index}`, file);
+        item.content.file = null;
+        item.content.imageUrl = null;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    index += 1;
+  }
+
+  // Add raw json data
+  data.append("items", JSON.stringify(items));
+
+  const res = await service.post(`/lessons/${lessonId}`, data, configHeaders());
   return res.data.data;
 };

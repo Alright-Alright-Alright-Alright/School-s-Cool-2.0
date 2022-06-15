@@ -24,6 +24,7 @@ export default function Upload(props) {
           type: "infographic",
           content: {
             image: objectUrl,
+            file: newFiles[0],
           },
           id: uuidv4(),
         },
