@@ -37,12 +37,19 @@ export default function Upload(props) {
     if (e?.target?.files?.length) {
       const newFiles = Array.from(e.target.files);
       const pdf = newFiles[0];
-      const images = await utils.convertPdfToImages(pdf);
-      const items = images.map((image) => ({
-        id: uuidv4(),
-        content: { image },
-        type: "infographic",
-      }));
+      const imageBlobs = await utils.convertPdfToImages(pdf);
+      const items = imageBlobs.map((imageBlob) => {
+        const id = uuidv4();
+        const file = new File([imageBlob], `${id}.jpg`);
+        return {
+          id,
+          content: {
+            image: imageBlob,
+            file,
+          },
+          type: "infographic",
+        };
+      });
       addItems(items);
       setShowModal(false);
     }

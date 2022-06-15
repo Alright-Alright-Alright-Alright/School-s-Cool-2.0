@@ -4,9 +4,12 @@ import Navigation from "./Navigation";
 
 function Infographic(props) {
   const { item, currentPage, pageCount } = props;
+  console.log("=====================");
+  console.log(item.content.imageUrl);
+  console.log("=====================");
   return (
     <main className="mt-8">
-      <img src={item.content.image} alt="infographic" className="w-full" />
+      <img src={item.content.imageUrl} alt="infographic" className="w-full" />
       <Navigation currentPage={currentPage} pageCount={pageCount} />
     </main>
   );

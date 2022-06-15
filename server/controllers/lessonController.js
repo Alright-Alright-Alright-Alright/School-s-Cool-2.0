@@ -96,6 +96,8 @@ const updateLesson = async (req, res, next) => {
 
   const items = JSON.parse(req.body.items);
 
+  console.log(req.files);
+
   try {
     //  loop over files and upload them one by one, then attach the received file location to the object
     for await (const key of Object.keys(req.files || [])) {
@@ -133,6 +135,7 @@ const updateLesson = async (req, res, next) => {
       const newItem = await LessonItem.create(
         _.omit(item, ["_id", "createdAt", "__v"])
       );
+      newItem.lesson = lesson._id;
       idBuffer.push(newItem._id);
     }
 

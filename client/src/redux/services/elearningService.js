@@ -61,7 +61,7 @@ export const updateLesson = async (lessonId, items) => {
         const file = item.content.file;
         data.append(`file_for_item_${index}`, file);
         item.content.file = null;
-        item.content.imageUrl = null;
+        item.content.image = null;
       } catch (error) {
         console.error(error);
       }
