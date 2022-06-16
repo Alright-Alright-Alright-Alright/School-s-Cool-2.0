@@ -80,9 +80,10 @@ export const createCourse =
   (title, description, imageUrl) => async (dispatch) => {
     try {
       dispatch({ type: LOADING_UI });
-      await createCourseService(title, description, imageUrl);
+      const courseId = await createCourseService(title, description, imageUrl);
 
       dispatch({ type: CLEAR_ERRORS });
+      return courseId;
     } catch (error) {
       dispatch({
         type: SET_ERRORS,

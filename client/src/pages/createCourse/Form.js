@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function Form(props) {
@@ -48,15 +46,13 @@ function Form(props) {
           accept="image/*"
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <Link to={`/courses/edit/${uuidv4()}`}>
-          <button
-            type="button"
-            className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
-            onClick={() => submit(title, description, file)}
-          >
-            <p>Volgende</p>
-          </button>
-        </Link>
+        <button
+          type="button"
+          className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
+          onClick={() => submit(title, description, file)}
+        >
+          <p>Volgende</p>
+        </button>
       </form>
     </div>
   );

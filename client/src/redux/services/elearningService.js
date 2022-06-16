@@ -23,7 +23,7 @@ export const getLesson = (id) =>
     .get(`/lessons/${id}`, configHeaders())
     .then((response) => response.data.data);
 
-export const createCourse = (title, description, imageUrl) => {
+export const createCourse = async (title, description, imageUrl) => {
   const data = new FormData();
   if (imageUrl) {
     data.append("imageUrl", imageUrl);
@@ -32,7 +32,7 @@ export const createCourse = (title, description, imageUrl) => {
   data.append("description", description);
   const token = store.getState().user.token;
   const url = `${process.env.REACT_APP_API_URL}/courses`;
-  axios({
+  const response = await axios({
     method: "post",
     url,
     data,
@@ -40,7 +40,8 @@ export const createCourse = (title, description, imageUrl) => {
       "Content-Type": "multipart/form-data",
       "x-auth-token": token,
     },
-  }).then((response) => response.data.data);
+  });
+  return response.data.data;
 };
 
 export const createLesson = async (courseId, title, description) => {

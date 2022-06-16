@@ -23,7 +23,7 @@ export default function Upload(props) {
         {
           type: "infographic",
           content: {
-            image: objectUrl,
+            imageUrl: objectUrl,
             file: newFiles[0],
           },
           id: uuidv4(),
@@ -40,12 +40,12 @@ export default function Upload(props) {
       const imageBlobs = await utils.convertPdfToImages(pdf);
       const items = imageBlobs.map((imageBlob) => {
         const id = uuidv4();
-        const file = new File(imageBlob, `${id}.png`);
+        // const file = new File(imageBlob, `${id}.png`);
         return {
           id,
           content: {
             imageUrl: imageBlob,
-            file,
+            file: imageBlob,
           },
           type: "infographic",
         };
@@ -76,7 +76,10 @@ export default function Upload(props) {
       {
         id: uuidv4(),
         type: "open",
-        content: {},
+        content: {
+          question: "",
+          explanation: "",
+        },
       },
     ]);
     setShowModal(false);

@@ -33,7 +33,6 @@ function CreateLessonForm(props) {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        {/* <Link to={`/courses/edit/${uuidv4()}`}> */}
         <button
           type="button"
           className="bg-sky rounded-md text-white py-2 px-4 hover:shadow-md float-right mt-8"
@@ -41,7 +40,6 @@ function CreateLessonForm(props) {
         >
           <p>Submit</p>
         </button>
-        {/* </Link> */}
       </form>
     </div>
   );
