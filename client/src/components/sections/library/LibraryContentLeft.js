@@ -43,11 +43,15 @@ const LibraryContentLeft = ({
     const categories = arr.map((item) => (
       <div
         key={item}
-        className={`text-xl py-2 hover:text-pink ${
+        className={`w-max md:text-lg lg:text-xl py-1 md:py-2 hover:text-pink  ${
           theCategoryToColor === item && "text-pink"
         }`}
       >
-        <button type="button" onClick={() => handleFilter(item)}>
+        <button
+          type="button"
+          className="font-semibold lg:font-normal"
+          onClick={() => handleFilter(item)}
+        >
           {item}
         </button>
       </div>
@@ -76,7 +80,7 @@ const LibraryContentLeft = ({
   )
 
   return (
-    <div className="pl-5 pt-10">
+    <div className="pl-5 pt-3 md:pt-10">
       <section className="flex">
         <span className="pr-2">{add}</span>{" "}
         <button type="button" className="text-lg" onClick={handleShowModal}>
@@ -88,11 +92,13 @@ const LibraryContentLeft = ({
           {t("library.button_my_files")}
         </button>
       </section>
-      <hr className="mt-8 w-52 text-grey-light" />
-      <section className="pt-6">{uniqueCatergories()}</section>
+      <hr className="mt-3 md:mt-8 w-52 text-grey-light" />
+      <section className="flex flex-wrap space-x-3 lg:flex-nowrap lg:flex-col lg:space-x-0 md:pt-6 ">
+        {uniqueCatergories()}
+      </section>
       <section>
         <button
-          className="text-xl py-2 hover:text-pink"
+          className="text-lg lg:text-xl md:text-lg py-2 hover:text-pink"
           type="button"
           onClick={getFiles}
         >

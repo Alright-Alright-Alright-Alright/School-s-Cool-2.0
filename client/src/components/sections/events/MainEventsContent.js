@@ -72,11 +72,11 @@ const MainEventsContent = ({ events }) => {
     <div className="max-w-sm	lg:max-w-full">
       <div className="flex flex-col lg:flex-row flex-wrap lg:pt-5 justify-evenly lg:justify-between space-x-2 lg:px-5">
         <button
-          className="flex text-lg items-center pb-3 pl-6 lg:pb-0 lg:pl-0"
+          className="flex text-lg items-center pb-3 pl-6 lg:pb-0 lg:pl-0 mt-2 md:mt-0"
           type="button"
           onClick={handleShowModal}
         >
-          <Icon iconName="add" iconStyle="fill-inactive text-sky" />
+          <Icon iconName="add" iconStyle="fill-inactive text-sky " />
           <p className="pl-2">{t("events.button_new_event")}</p>
         </button>
 
@@ -114,7 +114,7 @@ const MainEventsContent = ({ events }) => {
       </div>
       {showModal && <EventModal handleShowModal={handleShowModal} />}
       <div
-        className={`flex justify-center sm:justify-evenly flex-wrap gap-7 m-6 filter ${
+        className={`flex justify-center sm:justify-evenly flex-wrap gap-7 mx-6 mb-24 md:m-6 filter ${
           showModal && "blur-md"
         }`}
       >
