@@ -96,8 +96,6 @@ const updateLesson = async (req, res, next) => {
 
   const items = JSON.parse(req.body.items);
 
-  console.log(req.files);
-
   try {
     //  loop over files and upload them one by one, then attach the received file location to the object
     for await (const key of Object.keys(req.files || [])) {

@@ -6,7 +6,7 @@ export function Panel(props) {
   return (
     <img
       alt="A slide"
-      src={item.content.image}
+      src={item.content.imageUrl}
       className="border-2 rounded-md border-sky mx-auto mt-16"
     />
   );
@@ -23,7 +23,7 @@ export function Preview(props) {
   return (
     <img
       alt="A slide"
-      src={item.content.image}
+      src={item.content.imageUrl}
       className={`hover:shadow-md cursor-pointer box-border rounded-md border-sky  ${
         selected ? "opacity-100 border-3" : "opacity-50 border-2"
       }`}

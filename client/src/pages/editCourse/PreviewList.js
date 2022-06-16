@@ -42,8 +42,8 @@ function PreviewList(props) {
   const renderCard = useCallback(
     (card, index) => (
       <Card
-        key={card.id}
-        id={card.id}
+        key={card._id}
+        id={card._id}
         index={index}
         moveCard={moveCard}
         onClick={setSelectedCard}
