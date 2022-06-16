@@ -40,7 +40,7 @@ export default function Upload(props) {
       const imageBlobs = await utils.convertPdfToImages(pdf);
       const items = imageBlobs.map((imageBlob) => {
         const id = uuidv4();
-        const file = new File([imageBlob], `${id}.jpg`);
+        const file = new File(imageBlob, `${id}.png`);
         return {
           id,
           content: {

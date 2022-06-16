@@ -31,7 +31,9 @@ const convertPdfToImages = async (file) => {
     canvas.height = viewport.height;
     canvas.width = viewport.width;
     await page.render({ canvasContext: context, viewport }).promise;
-    images.push(canvas.toDataURL("image/jpg"));
+    images.push(
+      canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
+    );
   }
   canvas.remove();
   return images;
