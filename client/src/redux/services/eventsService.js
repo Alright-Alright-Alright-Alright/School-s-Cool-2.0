@@ -32,12 +32,12 @@ export const deleteEventService = (eventId) =>
     .delete(`/events/${eventId}`, configHeaders())
     .then((response) => response.data)
 
-export const inviteForEventService = (eventId, userId) =>
+export const inviteForEventService = (eventId, user) =>
   service
-    .put(`/events/${eventId}/invite`, { userId })
+    .put(`/events/${eventId}/invite`, { user })
     .then((responseFromAPI) => responseFromAPI.data)
 
-export const removeInviteForEventService = (eventId, userId) =>
+export const removeInviteForEventService = (eventId, user) =>
   service
-    .put(`/events/${eventId}/removeInvite`, { userId })
+    .put(`/events/${eventId}/removeInvite`, { user })
     .then((responseFromAPI) => responseFromAPI.data)

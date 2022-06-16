@@ -8,21 +8,22 @@ import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 
 export default function EventDashCardListItem({
-  listItemFirstName,
-  listItemLastName,
-  listItemUserId,
+  // listItemFirstName,
+  // listItemLastName,
+  // listItemUserId,
+  user,
   eventDashCardData,
 }) {
-
+console.log(user)
   const dispatch = useDispatch()
   const params = useParams()
 
   const inviteUserHandler = () => {
-    dispatch(inviteForEvent(params.eventId, listItemUserId))
+    dispatch(inviteForEvent(params.eventId, user))
   }
 
   const removeInviteHandler = () => {
-    dispatch(removeEventInvite(params.eventId, listItemUserId))
+    dispatch(removeEventInvite(params.eventId, user))
   }
 
 
@@ -31,13 +32,13 @@ export default function EventDashCardListItem({
       <div className="pt-3 flex justify-between">
         <div className="flex-col">
           <p>
-            {listItemFirstName} {listItemLastName}
+            {user?.firstName} {user?.lastName}
           </p>
         </div>
         <div className="flex w-20 pb-1 justify-end">
           <div className="flex ">
             {eventDashCardData?.some(
-              (user) => user.firstName === listItemFirstName
+              (thisUser) => thisUser.firstName === user?.firstName
             ) ? (
               <button type="button" onClick={removeInviteHandler}>
                 <Icon iconName="follow" iconStyle="fill-active text-grey-dark" />

@@ -9,7 +9,7 @@ const {
   addUserToEventDb,
   takeOutUserFromEventDb,
 } = require("../db/eventDb");
-
+const { sendEmailService } = require("../services/emailServices");
 // getting info from controller
 const getAllEventsService = async () => {
   try {
@@ -114,7 +114,15 @@ const deleteEventService = async (eventId) => {
 
 const inviteForEventService = async (eventId, user) => {
   try {
-    return await addUserToEventDb(eventId, user);
+    sendEmailService(
+      user.email,
+      "School's Cool Event Invitation",
+      `<h4>Hello dear ${user.firstName}.</h4><br/>
+        <h4>You were invited to a School's Cool Event, take a look <a href="${process.env.CORS_ALLOWED}/events/${eventId}">here</a></h4><br/>
+        <h5>Best Regards, <br/>
+        School's Cool</h5>`
+    );
+    return await addUserToEventDb(eventId, user._id);
   } catch (error) {
     throw new Error(error);
   }
@@ -122,7 +130,7 @@ const inviteForEventService = async (eventId, user) => {
 
 const removeInviteFromEventService = async (eventId, user) => {
   try {
-    return await takeOutUserFromEventDb(eventId, user);
+    return await takeOutUserFromEventDb(eventId, user._id);
   } catch (error) {
     throw new Error(error);
   }
