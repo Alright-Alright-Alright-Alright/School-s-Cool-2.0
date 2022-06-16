@@ -22,8 +22,7 @@ function CourseMainContent() {
   return (
     <main className="p-6 flex flex-col space-y-6">
       <h1 className="bg-grey-dark text-white p-8 rounded-md w-full text-lg">
-        {/* TODO: Make name dynamic */}
-        Hi Sebastiaan, ready to learn?
+        {` Hi ${user.firstName}, ready to learn?`}
       </h1>
       <section className="grid grid-cols-3 gap-8">
         {courses.map((course) => (
