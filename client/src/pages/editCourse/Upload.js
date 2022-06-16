@@ -44,7 +44,7 @@ export default function Upload(props) {
         return {
           id,
           content: {
-            image: imageBlob,
+            imageUrl: imageBlob,
             file,
           },
           type: "infographic",

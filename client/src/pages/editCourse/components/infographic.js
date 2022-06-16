@@ -20,6 +20,7 @@ Panel.propTypes = {
 
 export function Preview(props) {
   const { item, selected } = props;
+  console.log(item);
   return (
     <img
       alt="A slide"
