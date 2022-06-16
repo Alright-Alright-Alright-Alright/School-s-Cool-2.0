@@ -14,24 +14,24 @@ export default function EventDashcard({
 }) {
   const [expandDashCard, setExpandDashCard] = useState(false)
 
-  const firstThreeItems = users
-    .slice(0, 3)
-    .map((item) => (
-      <EventDashCardListItem
-        key={item?._id}
-        listItemUserId={item?._id}
-        listItemFirstName={item?.firstName}
-        listItemLastName={item?.lastName}
-        eventDashCardData={eventDashCardData}
-      />
-    ))
+  const firstThreeItems = users.slice(0, 3).map((item) => (
+    <EventDashCardListItem
+      key={item?._id}
+      // listItemUserId={item?._id}
+      // listItemFirstName={item?.firstName}
+      // listItemLastName={item?.lastName}
+      user={item}
+      eventDashCardData={eventDashCardData}
+    />
+  ))
 
   const allItems = users.map((item) => (
     <EventDashCardListItem
       key={item?._id}
-      listItemUserId={item?._id}
-      listItemFirstName={item?.firstName}
-      listItemLastName={item?.lastName}
+      // listItemUserId={item?._id}
+      // listItemFirstName={item?.firstName}
+      // listItemLastName={item?.lastName}
+      user={item}
       eventDashCardData={eventDashCardData}
     />
   ))

@@ -126,10 +126,10 @@ export const deleteEvent = (eventId) => async (dispatch) => {
   }
 }
 
-export const inviteForEvent = (eventId, userId) => async (dispatch) => {
+export const inviteForEvent = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
   try {
-    const inviteForEventDb = await inviteForEventService(eventId, userId)
+    const inviteForEventDb = await inviteForEventService(eventId, user)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: INVITE_FOR_EVENT, payload: inviteForEventDb })
   } catch (error) {
@@ -140,11 +140,11 @@ export const inviteForEvent = (eventId, userId) => async (dispatch) => {
   }
 }
 
-export const removeEventInvite = (eventId, userId) => async (dispatch) => {
+export const removeEventInvite = (eventId, user) => async (dispatch) => {
   dispatch({ type: LOADING_UI })
 
   try {
-    const removeInviteDb = await removeInviteForEventService(eventId, userId)
+    const removeInviteDb = await removeInviteForEventService(eventId, user)
     dispatch({ type: CLEAR_ERRORS })
     dispatch({ type: REMOVE_EVENT_INVITE, payload: removeInviteDb })
   } catch (error) {

@@ -135,10 +135,10 @@ const deleteEvent = async (req, res, next) => {
 };
 
 const inviteForEvent = async (req, res, next) => {
-  const { userId } = req.body;
+  const { user } = req.body;
   const eventId = req.params.eventId;
   try {
-    const event = await inviteForEventService(eventId, userId);
+    const event = await inviteForEventService(eventId, user);
     return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
@@ -146,10 +146,10 @@ const inviteForEvent = async (req, res, next) => {
 };
 
 const removeInviteFromEvent = async (req, res, next) => {
-  const { userId } = req.body;
+  const { user } = req.body;
   const eventId = req.params.eventId;
   try {
-    const event = await removeInviteFromEventService(eventId, userId);
+    const event = await removeInviteFromEventService(eventId, user);
     return res.status(201).json(event);
   } catch (e) {
     res.status(500).json({ message: e.message }) && next(e);
