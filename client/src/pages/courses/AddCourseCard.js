@@ -8,7 +8,7 @@ import { PlusIcon } from "@heroicons/react/solid";
 
 const AddCourseCard = () => {
   return (
-    <div className="flex flex-col justify-between h-72 bg-white shadow-md hover:shadow-lg rounded-br-md rounded-bl-md rounded-tr-md">
+    <div className="flex flex-col justify-between h-72 bg-white shadow-md hover:shadow-lg rounded-md">
       <Link to="create">
         <section className="h-48">
           <PlusIcon className="w-24 h-full m-auto text-sky" />

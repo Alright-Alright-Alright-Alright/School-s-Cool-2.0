@@ -21,7 +21,7 @@ const CourseCard = (props: componentProps) => {
   const { id, joined, topics, image, members, completed, title } = props;
 
   return (
-    <div className="flex flex-col justify-between h-72 bg-white shadow-md hover:shadow-lg rounded-br-md rounded-bl-md rounded-tr-md">
+    <div className="flex flex-col justify-between h-72 bg-white shadow-md hover:shadow-lg rounded-md">
       <Link to={id}>
         <section className="">
           <img

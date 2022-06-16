@@ -21,7 +21,7 @@ function CourseMainContent() {
 
   return (
     <main className="p-6 flex flex-col space-y-6">
-      <h1 className="bg-grey-dark text-white p-8 rounded-b-md rounded-tr-md w-full text-lg">
+      <h1 className="bg-grey-dark text-white p-8 rounded-md w-full text-lg">
         {/* TODO: Make name dynamic */}
         Hi Sebastiaan, ready to learn?
       </h1>
